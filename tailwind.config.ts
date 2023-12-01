@@ -12,6 +12,12 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        grid: 'url(/grid.avif)',
+        abstract: 'url(/abstract.jpg)',
+        rotating: 'url(/btc1.gif)',
+      },
+      colors: {
+        btc: '#f2a900',
       },
     },
   },

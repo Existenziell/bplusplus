@@ -4,14 +4,4 @@
 
 :root {
   --btc: #f2a900;
-  --background-start-rgb: 214, 219, 220;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-  }
-}
-
-body {
-
 }

@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import SatoshiIcon from './components/SatoshiIcon'
+import Metrics from './components/Metrics'
 
 export default function Home() {
   const address =
@@ -11,7 +12,7 @@ export default function Home() {
   const handleClick = () => {
     try {
       navigator.clipboard.writeText(address)
-    } catch(e) {
+    } catch (e) {
       console.error(e)
       return
     }
@@ -20,7 +21,7 @@ export default function Home() {
       setShowNotification(false)
     }, 3000)
   }
-  
+
   return (
     <main className='flex min-h-screen bg-grid bg-cover bg-center'>
       {showNotification && (
@@ -32,15 +33,15 @@ export default function Home() {
         <div className='h-full items-center justify-center flex flex-col'>
           <h1 className='text-6xl'>B++</h1>
           <h2 className='text-xl'>Bitcoin Education</h2>
-          <p className='text-xs mb-6'>coming soon...</p>
+          <p className='text-xs'>coming soon...</p>
+          <Metrics />
           <SatoshiIcon />
         </div>
         <div className='text-xs text-center pb-2 overflow-hidden'>
-          Made with &#x1f9e1; by{' '}
+          Made with <span className='text-btc text-lg'>&#9829;</span> by{' '}
           <a className='hover:cursor-pointer' onClick={handleClick}>
             Chris
           </a>
-          <br />
         </div>
       </div>
     </main>

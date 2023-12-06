@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import SatoshiIcon from './components/SatoshiIcon'
 import Metrics from './components/Metrics'
+import Notification from './components/Notification'
+import Footer from './components/Footer'
 
 export default function Home() {
   const address =
@@ -24,11 +26,7 @@ export default function Home() {
 
   return (
     <main className='flex min-h-screen bg-grid bg-cover bg-center'>
-      {showNotification && (
-        <div className='fixed top-0 bg-emerald-400 w-full text-center py-4 transition-all opacity-100'>
-          npub copied to clipboard!
-        </div>
-      )}
+      {showNotification && <Notification text='npub copied to clipboard!' />}
       <div className='w-full items-center justify-between flex flex-col text-zinc-300 overflow-hidden'>
         <div className='h-full items-center justify-center flex flex-col'>
           <h1 className='text-6xl'>B++</h1>
@@ -37,12 +35,7 @@ export default function Home() {
           <Metrics />
           <SatoshiIcon />
         </div>
-        <div className='text-xs text-center pb-2 overflow-hidden'>
-          Made with <span className='text-btc text-lg'>&#9829;</span> by{' '}
-          <a className='hover:cursor-pointer' onClick={handleClick}>
-            Chris
-          </a>
-        </div>
+       <Footer handleClick={handleClick} />
       </div>
     </main>
   )

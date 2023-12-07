@@ -6,6 +6,11 @@
   --btc: #f2a900;
 }
 
+::selection {
+  background: var(--btc);
+  color: rgb(39 39 42);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

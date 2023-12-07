@@ -5,3 +5,16 @@
 :root {
   --btc: #f2a900;
 }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  a:hover {
+    @apply underline;
+  }
+}
+
+@layer components {}
+@layer utilities {}

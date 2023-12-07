@@ -35,7 +35,7 @@ export default function Home() {
           <Metrics />
           <SatoshiIcon />
         </div>
-       <Footer handleClick={handleClick} />
+        <Footer handleClick={handleClick} />
       </div>
     </main>
   )

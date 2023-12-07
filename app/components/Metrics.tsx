@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 const Metrics = () => (
-  <div className='bg-zinc-800 bg-opacity-50 rounded-sm shadow-md px-12 py-4 my-8 w-screen'>
+  <div className='bg-zinc-800 bg-opacity-50 shadow-md px-12 py-4 my-8 w-screen'>
     <div className='text-sm font-mono'>
       <ul className='flex flex-col md:flex-row items-center md:items-end justify-between space-y-4 md:space-y-0'>
         <li className='flex flex-col items-center justify-between md:space-y-2'>

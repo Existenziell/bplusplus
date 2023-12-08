@@ -11,15 +11,19 @@ import React, {
 interface contextProps {
   numberOfCells: number
   showNotification: boolean
+  granularity: string
   setNumberOfCells: Dispatch<SetStateAction<number>>
   setShowNotification: Dispatch<SetStateAction<boolean>>
+  setGranularity: Dispatch<SetStateAction<string>>
 }
 
 const AppContext = createContext<contextProps>({
   numberOfCells: 0,
   showNotification: false,
+  granularity: 'monthly',
   setNumberOfCells: (): number => 0,
   setShowNotification: (): boolean => false,
+  setGranularity: (): string => 'monthly'
 })
 
 export const AppContextProvider = ({
@@ -29,14 +33,17 @@ export const AppContextProvider = ({
 }) => {
   const [numberOfCells, setNumberOfCells] = useState(0)
   const [showNotification, setShowNotification] = useState(false)
+  const [granularity, setGranularity] = useState('monthly')
 
   return (
     <AppContext.Provider
       value={{
         numberOfCells,
         showNotification,
+        granularity,
         setNumberOfCells,
         setShowNotification,
+        setGranularity,
       }}
     >
       {children}

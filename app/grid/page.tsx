@@ -9,7 +9,7 @@ import { Onboarding } from '../components/Onboarding'
 import { getRandomHslColor } from '../utils/getRandomHslColor'
 
 export default function Grid() {
-  const { numberOfCells } = useAppContext()
+  const { numberOfCells, granularity } = useAppContext()
   const [showOnboarding, setShowOnboarding] = useState<boolean>(true)
 
   return (
@@ -21,7 +21,7 @@ export default function Grid() {
           <Display />
           <BackLink href={'/'} />
           <h1 className='text-xl text-center mb-8 mt-16 md:mt-3'>
-            Displaying {numberOfCells} months
+            Displaying {numberOfCells} {granularity === 'monthly' ? 'months' : 'days'}
           </h1>
           <div className='flex flex-wrap'>
             {[...Array(numberOfCells)].map((_, i) => {

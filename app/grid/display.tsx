@@ -1,7 +1,7 @@
-import { useAppContext } from '../context/AppContext'
+import { useDisplayContext } from '../context/DisplayContext'
 
 const Display = () => {
-  const { displayNumber, displayColor, displayLightness } = useAppContext()
+  const { displayNumber, displayColor, displayLightness } = useDisplayContext()
 
   if (!displayNumber || !displayColor) {
     return <></>

@@ -1,4 +1,4 @@
-import { useAppContext } from '../context/AppContext'
+import { useDisplayContext } from '../context/DisplayContext'
 
 export type CellType = {
   number: number
@@ -10,7 +10,7 @@ export type CellType = {
 
 const Cell = ({ number, hsl }: CellType) => {
   const { setDisplayNumber, setDisplayColor, setDisplayLightness } =
-    useAppContext()
+    useDisplayContext()
 
   const handleInteraction = (number: number, color: string) => {
     setDisplayColor(color)

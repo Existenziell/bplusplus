@@ -28,8 +28,9 @@ module.exports = {
   rules: {
     'comma-dangle': 'off',
     'space-before-function-paren': 'off',
-    // '@next/next/no-img-element': 'off',
+    'multiline-ternary': 'off',
     'quotes': 'off',
+    // '@next/next/no-img-element': 'off',
     // 'operator-linebreak': ['off'],
   },
   ignorePatterns: ['coverage.json', '/coverage/*', '/test/*'],

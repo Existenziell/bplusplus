@@ -1,6 +1,7 @@
 import React from 'react'
-import type { Metadata } from 'next'
 import { Ubuntu } from 'next/font/google'
+import { AppContextProvider } from './context/AppContext'
+import type { Metadata } from 'next'
 
 import './globals.css'
 
@@ -18,7 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={ubuntu.className}>{children}</body>
+      <body className={ubuntu.className}>
+        <AppContextProvider>
+          {children}
+        </AppContextProvider>
+      </body>
     </html>
   )
 }

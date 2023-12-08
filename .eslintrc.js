@@ -29,7 +29,7 @@ module.exports = {
     'comma-dangle': 'off',
     'space-before-function-paren': 'off',
     // '@next/next/no-img-element': 'off',
-    // 'quotes': 'off',
+    'quotes': 'off',
     // 'operator-linebreak': ['off'],
   },
   ignorePatterns: ['coverage.json', '/coverage/*', '/test/*'],

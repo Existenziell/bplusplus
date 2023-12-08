@@ -6,6 +6,7 @@ import Metrics from './components/Metrics'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import Link from 'next/link'
 
 export default function Home() {
   const address =
@@ -36,7 +37,9 @@ export default function Home() {
           <h2 className='text-xl'>Bitcoin Education</h2>
           <p className='text-xs'>coming soon...</p>
           <Metrics />
-          <SatoshiIcon />
+          <Link href={'/grid'}>
+            <SatoshiIcon />
+          </Link>
         </div>
         <Footer handleClick={handleClick} />
       </div>

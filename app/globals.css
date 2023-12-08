@@ -21,5 +21,9 @@
   }
 }
 
-@layer components {}
+@layer components {
+  .button {
+    @apply absolute top-2 h-8 px-4 hover:cursor-pointer flex items-center justify-center text-sm bg-pink-700 text-zinc-100 bg-opacity-70 rounded-sm shadow-sm;
+  }
+}
 @layer utilities {}

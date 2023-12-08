@@ -18,9 +18,12 @@ export default function Grid() {
         <Onboarding setShowOnboarding={setShowOnboarding} />
       ) : (
         <>
-          <Display />
           <BackLink href={'/'} />
-          <h1 className='text-xl text-center mb-8 mt-16 md:mt-3'>
+          <Display />
+          <p onClick={() => setShowOnboarding(true)} className='button right-2'>
+            Reset
+          </p>
+          <h1 className='text-xl text-center mb-8 mt-16'>
             Displaying {numberOfCells} {granularity === 'monthly' ? 'months' : 'days'}
           </h1>
           <div className='flex flex-wrap'>

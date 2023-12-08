@@ -5,11 +5,11 @@ export async function getPrice() {
 
   const res = await fetch(
     'https://rest.coinapi.io/v1/exchangerate/BTC/USD',
-    options,
+    options
   )
 
   if (!res.ok) {
-    console.log('Failed to fetch data')
+    console.error('Failed to fetch data')
     return
   }
   const price = await res.json()

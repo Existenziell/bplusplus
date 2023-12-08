@@ -8,22 +8,24 @@ export type CellType = {
   }
 }
 
-const Cell = (props: CellType) => {
-  const { number, hsl } = props
+const Cell = ({ number, hsl }: CellType) => {
+  const { setDisplayNumber, setDisplayColor, setDisplayLightness } =
+    useAppContext()
 
-  const { setDisplayNumber, setDisplayColor } = useAppContext()
-
-  const handleInteraction = (number, color) => {
+  const handleInteraction = (number: number, color: string) => {
     setDisplayColor(color)
     setDisplayNumber(number)
+    setDisplayLightness(hsl.lightness)
   }
 
   return (
     <div
-      className={`${hsl.lightness < 50 ? `text-zinc-100` : `text-zinc-800`} border text-xs h-10 w-10 shadow-sm flex items-center justify-center hover:cursor-pointer`}
+      className={`${
+        hsl.lightness < 50 ? `text-zinc-100` : `text-zinc-800`
+      } border text-xs h-10 w-10 shadow-sm flex items-center justify-center hover:cursor-pointer`}
       style={{ backgroundColor: hsl.value }}
       onClick={() => handleInteraction(number, hsl.value)}
-      >
+    >
       {number}
     </div>
   )

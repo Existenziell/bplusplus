@@ -1,12 +1,12 @@
 'use client'
 
-import Cell from './cell'
-import Display from './display'
+import Cell from '../components/Cell'
+import Display from '../components/Display'
 import { useState } from 'react'
+import { useAppContext } from '../context/AppContext'
 import { BackLink } from '../components/BackLink'
 import { Onboarding } from '../components/Onboarding'
 import { getRandomHslColor } from '../utils/getRandomHslColor'
-import { useAppContext } from '../context/AppContext'
 
 export default function Grid() {
   const { numberOfCells } = useAppContext()

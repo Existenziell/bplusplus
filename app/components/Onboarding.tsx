@@ -14,14 +14,14 @@ export const Onboarding: React.FC<OnboardingProps> = ({
   const { setNumberOfCells } = useAppContext()
   const [birthdate, setBirthdate] = useState<string>('')
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     const day = new Date().getDate()
     const month = new Date().getMonth()
     const year = new Date().getFullYear()
 
     const today = new Date(year, month, day)
     const start = new Date(birthdate.replaceAll('/', ','))
-    const difference = getMonthsBetweenDates(start, today)
+    const difference = await getMonthsBetweenDates(start, today)
 
     setNumberOfCells(difference)
     setShowOnboarding(false)

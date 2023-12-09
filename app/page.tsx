@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Metrics from './components/Metrics'
@@ -16,9 +17,20 @@ export default function Home() {
           <h2 className='text-xl'>Bitcoin Education</h2>
           <p className='text-xs'>coming soon...</p>
           <Metrics />
-          <Link href={'/grid'} aria-label='Link to the Grid'>
-            <SatoshiIcon />
-          </Link>
+          <div className='flex items-center justify-center gap-8'>
+            <Link href={'/history'} aria-label='Link to Botcoin History'>
+              <Image
+                src='/grid.png'
+                alt='Link to Botcoin History'
+                width={60}
+                height={60}
+                className='invert'
+              />
+            </Link>
+            <Link href={'/grid'} aria-label='Link to the Grid'>
+              <SatoshiIcon />
+            </Link>
+          </div>
         </div>
         <Footer />
       </div>

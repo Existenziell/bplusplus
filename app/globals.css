@@ -32,6 +32,38 @@
   .input {
     @apply w-20 bg-gray-50 border text-center text-zinc-900 text-sm rounded-lg border-gray-200 hover:bg-gray-100 focus:outline-none focus:z-10 focus:ring-2 focus:ring-gray-200 p-2.5;
   }
+
+  .card {
+    @apply bg-zinc-800 bg-opacity-70 rounded-sm shadow-md px-6 py-4 mt-10;
+  }
+
+  .card-header {
+    @apply text-2xl mb-4;
+  }
+
+  .card-content {
+    @apply text-sm font-mono;
+  }
+
+  /* History */
+  .table {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .row {
+    display: table-row;
+  }
+  .header {
+    font-weight: bold;
+    background-color: #f2f2f2;
+  }
+  .cell {
+    display: table-cell;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
 }
 
 @layer utilities {}

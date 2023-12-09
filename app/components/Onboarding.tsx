@@ -23,13 +23,13 @@ export const Onboarding: React.FC<OnboardingProps> = ({
   const [birthmonth, setBirthmonth] = useState<number | string>('')
   const [birthday, setBirthday] = useState<number | string>('')
 
-  const handleChoice = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleGranularityChoice = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event
     const granularity = target.value
     setGranularity(granularity)
   }
 
-  const handleSubmit = async (e: FormEvent) => {
+  const calculateDifference = async () => {
     const day = new Date().getDate()
     const month = new Date().getMonth()
     const year = new Date().getFullYear()
@@ -47,7 +47,11 @@ export const Onboarding: React.FC<OnboardingProps> = ({
     } else {
       difference = await getMonthsBetweenDates(start, today)
     }
+    return difference
+  }
 
+  const handleSubmit = async (e: FormEvent) => {
+    const difference = await calculateDifference()
     setNumberOfCells(difference)
     setShowOnboarding(false)
     e.preventDefault()
@@ -101,7 +105,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({
                   id='monthly'
                   type='radio'
                   value='monthly'
-                  onChange={handleChoice}
+                  onChange={handleGranularityChoice}
                   name='granularity'
                   defaultChecked={granularity === 'monthly'}
                   required
@@ -115,7 +119,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({
                   id='daily'
                   type='radio'
                   value='daily'
-                  onChange={handleChoice}
+                  onChange={handleGranularityChoice}
                   name='granularity'
                   defaultChecked={granularity === 'daily'}
                   required

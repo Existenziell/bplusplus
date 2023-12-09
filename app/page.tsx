@@ -16,7 +16,7 @@ export default function Home() {
           <h2 className='text-xl'>Bitcoin Education</h2>
           <p className='text-xs'>coming soon...</p>
           <Metrics />
-          <Link href={'/grid'}>
+          <Link href={'/grid'} aria-label='Link to the Grid'>
             <SatoshiIcon />
           </Link>
         </div>

@@ -20,11 +20,15 @@ export default function Grid() {
         <>
           <BackLink href={'/'} />
           <Display />
-          <p onClick={() => setShowOnboarding(true)} className='button right-2'>
+          <p
+            onClick={() => setShowOnboarding(true)}
+            className='button absolute top-2 right-2'
+          >
             Reset
           </p>
           <h1 className='text-xl text-center mb-8 mt-16'>
-            Displaying {numberOfCells} {granularity === 'monthly' ? 'months' : 'days'}
+            Displaying {numberOfCells}{' '}
+            {granularity === 'monthly' ? 'months' : 'days'}
           </h1>
           <div className='flex flex-wrap'>
             {[...Array(numberOfCells)].map((_, i) => {

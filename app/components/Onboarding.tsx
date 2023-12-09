@@ -56,7 +56,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
   }
 
   return (
-    <div className='fixed top-0 bottom-0 left-0 right-0 bg-opacity-50 bg-grid h-full w-full'>
+    <div className='fixed top-0 bottom-0 left-0 right-0 bg-opacity-50 bg-grid bg-cover bg-center h-full w-full'>
       <div className='flex items-center justify-center h-full'>
         <form
           onSubmit={handleSubmit}

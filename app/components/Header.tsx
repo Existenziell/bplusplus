@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
-import { getPrice } from '../utils/getPrice'
+import { getBitcoinPrice } from '../utils/getBitcoinPrice'
 
 export default async function Header() {
-  const price = await getPrice()
+  const price = await getBitcoinPrice()
   if (!price) return <></>
 
   const usdFormat = new Intl.NumberFormat('en-US', {

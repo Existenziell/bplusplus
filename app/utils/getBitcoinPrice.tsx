@@ -1,4 +1,4 @@
-export async function getPrice() {
+export async function getBitcoinPrice() {
   const options = {
     headers: { 'X-CoinAPI-Key': 'BC53A1E2-7E42-4CB2-871E-BBA59F7DDE5A' },
   }

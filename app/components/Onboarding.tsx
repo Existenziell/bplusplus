@@ -15,9 +15,7 @@ interface OnboardingProps {
   setShowOnboarding: Dispatch<SetStateAction<boolean>>
 }
 
-export const Onboarding: React.FC<OnboardingProps> = ({
-  setShowOnboarding,
-}) => {
+const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
   const { setNumberOfCells, granularity, setGranularity } = useAppContext()
   const [birthyear, setBirthyear] = useState<number | string>('')
   const [birthmonth, setBirthmonth] = useState<number | string>('')
@@ -136,3 +134,5 @@ export const Onboarding: React.FC<OnboardingProps> = ({
     </div>
   )
 }
+
+export default Onboarding

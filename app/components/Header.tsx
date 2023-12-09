@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { getPrice } from '../utils/getPrice'
 
-export default async function Header () {
+export default async function Header() {
   const price = await getPrice()
   if (!price) return <></>
 

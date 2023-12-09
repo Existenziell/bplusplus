@@ -1,4 +1,4 @@
-export function getRandomHslColor () {
+export function getRandomHslColor() {
   const getRandomNumber = (min: number, max: number) =>
     Math.round(Math.random() * (max - min) + min)
   const { hue, saturation, lightness } = {

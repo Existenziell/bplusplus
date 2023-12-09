@@ -1,11 +1,11 @@
 'use client'
 
+import Link from 'next/link'
 import Cell from '../components/Cell'
 import Display from '../components/Display'
+import Onboarding from '../components/Onboarding'
 import { useState } from 'react'
 import { useAppContext } from '../context/AppContext'
-import { BackLink } from '../components/BackLink'
-import { Onboarding } from '../components/Onboarding'
 import { getRandomHslColor } from '../utils/getRandomHslColor'
 
 export default function Grid() {
@@ -18,7 +18,9 @@ export default function Grid() {
         <Onboarding setShowOnboarding={setShowOnboarding} />
       ) : (
         <>
-          <BackLink href={'/'} />
+          <Link href='/' className='button absolute top-2 left-2'>
+            <p>Back</p>
+          </Link>
           <Display />
           <p
             onClick={() => setShowOnboarding(true)}

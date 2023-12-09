@@ -23,7 +23,7 @@ const AppContext = createContext<contextProps>({
   granularity: 'monthly',
   setNumberOfCells: (): number => 0,
   setShowNotification: (): boolean => false,
-  setGranularity: (): string => 'monthly'
+  setGranularity: (): string => 'monthly',
 })
 
 export const AppContextProvider = ({

@@ -16,7 +16,8 @@ interface OnboardingProps {
 }
 
 const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
-  const { setNumberOfCells, granularity, setGranularity } = useAppContext()
+  const { setNumberOfCells, granularity, setGranularity, loading, setLoading } =
+    useAppContext()
   const [birthyear, setBirthyear] = useState<number | string>('')
   const [birthmonth, setBirthmonth] = useState<number | string>('')
   const [birthday, setBirthday] = useState<number | string>('')
@@ -49,10 +50,12 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
   }
 
   const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
     const difference = await calculateDifference()
     setNumberOfCells(difference)
+    setLoading(false)
     setShowOnboarding(false)
-    e.preventDefault()
   }
 
   return (
@@ -73,6 +76,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
               required
               min={1900}
               max={2020}
+              disabled={loading}
             />
             <input
               type='number'
@@ -83,6 +87,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
               required
               min={1}
               max={12}
+              disabled={loading}
             />
             <input
               type='number'
@@ -93,6 +98,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
               required
               min={1}
               max={31}
+              disabled={loading}
             />
           </div>
           <p className='mt-4 mb-2'>Granularity:</p>
@@ -107,6 +113,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
                   name='granularity'
                   defaultChecked={granularity === 'monthly'}
                   required
+                  disabled={loading}
                 />
                 Monthly
               </label>
@@ -121,12 +128,13 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
                   name='granularity'
                   defaultChecked={granularity === 'daily'}
                   required
+                  disabled={loading}
                 />
                 Daily
               </label>
             </div>
           </div>
-          <button type='submit' className='button mt-6'>
+          <button type='submit' className='button mt-6' disabled={loading}>
             Go
           </button>
         </form>

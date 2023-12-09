@@ -74,7 +74,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
               placeholder='YYYY'
               className='w-28 bg-gray-50 border text-center text-zinc-900 text-sm rounded-lg border-gray-200 hover:bg-gray-100 focus:outline-none focus:z-10 focus:ring-2 focus:ring-gray-200 p-2.5'
               required
-              min={1900}
+              min={1800}
               max={2020}
               disabled={loading}
             />

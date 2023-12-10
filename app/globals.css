@@ -4,7 +4,7 @@
 
 :root {
   --btc: #f2a900;
-  --form-control-color: purple;
+  --form-control-color: #f2a900;
 }
 
 ::selection {
@@ -26,7 +26,7 @@
 @layer components {
   
   .button {
-    @apply h-8 px-4 hover:cursor-pointer flex items-center justify-center text-sm bg-fuchsia-800 text-zinc-100 bg-opacity-80 rounded-sm shadow-sm;
+    @apply h-8 px-4 hover:cursor-pointer flex items-center justify-center text-sm bg-btc text-zinc-800 bg-opacity-80 rounded-sm shadow-sm;
   }
   
   .input {

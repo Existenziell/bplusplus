@@ -18,17 +18,17 @@ export default function Home() {
           <p className='text-xs'>coming soon...</p>
           <Metrics />
           <div className='flex items-center justify-center gap-8'>
-            <Link href={'/history'} aria-label='Link to Botcoin History'>
+            <Link href={'/history'} aria-label='Link to Bitcoin History'>
+              <SatoshiIcon />
+            </Link>
+            <Link href={'/grid'} aria-label='Link to the Grid'>
               <Image
                 src='/grid.png'
-                alt='Link to Botcoin History'
+                alt='Image of Bitcoin History'
                 width={60}
                 height={60}
                 className='invert'
               />
-            </Link>
-            <Link href={'/grid'} aria-label='Link to the Grid'>
-              <SatoshiIcon />
             </Link>
           </div>
         </div>

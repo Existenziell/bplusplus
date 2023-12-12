@@ -13,7 +13,7 @@ export default function Grid() {
   const [showOnboarding, setShowOnboarding] = useState<boolean>(true)
 
   return (
-    <main className='min-h-screen w-full font-mono px-4 md:px-8 bg-grid bg-cover bg-center'>
+    <main className='min-h-screen w-full font-mono px-4 md:px-8 bg-zinc-800 border border-black'>
       {showOnboarding ? (
         <Onboarding setShowOnboarding={setShowOnboarding} />
       ) : (
@@ -28,11 +28,11 @@ export default function Grid() {
           >
             Reset
           </p>
-          <h1 className='text-xl text-center mb-8 mt-16'>
+          <h1 className='text-xl text-center text-btc mb-8 mt-16'>
             Displaying {numberOfCells}{' '}
             {granularity === 'monthly' ? 'months' : 'days'}
           </h1>
-          <div className='flex flex-wrap'>
+          <div className='flex flex-wrap gap-1'>
             {[...Array(numberOfCells)].map((_, i) => {
               const hsl = getRandomHslColor()
               const number = i + 1

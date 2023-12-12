@@ -10,6 +10,7 @@ import React, {
 import { useAppContext } from '../../context/AppContext'
 import { getMonthsBetweenDates } from '../../utils/getMonthsBetweenDates'
 import { getDaysBetweenDates } from '../../utils/getDaysBetweenDates'
+import Link from 'next/link'
 
 interface OnboardingProps {
   setShowOnboarding: Dispatch<SetStateAction<boolean>>
@@ -69,6 +70,9 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
 
   return (
     <div className='fixed top-0 bottom-0 left-0 right-0 bg-opacity-50 bg-grid bg-cover bg-center h-full w-full'>
+      <Link href='/' className='button absolute top-2 left-2'>
+        <p>Back</p>
+      </Link>
       <div className='flex items-center justify-center h-full'>
         <form
           onSubmit={handleSubmit}

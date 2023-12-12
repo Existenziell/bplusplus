@@ -1,8 +1,20 @@
 import { Suspense } from 'react'
-import { getBitcoinPrice } from '../utils/getBitcoinPrice'
 
-export default async function Header() {
-  const price = await getBitcoinPrice()
+const getPrice = async () => {
+  const res = await fetch('https://rest.coinapi.io/v1/exchangerate/BTC/USD', {
+    headers: { 'X-CoinAPI-Key': 'BC53A1E2-7E42-4CB2-871E-BBA59F7DDE5A' },
+  })
+
+  if (!res.ok) {
+    console.error('Failed to fetch data')
+    return
+  }
+  const result = await res.json()
+  return result.rate
+}
+
+export default async function BitcoinPrice() {
+  const price = await getPrice()
   if (!price) return <></>
 
   const usdFormat = new Intl.NumberFormat('en-US', {

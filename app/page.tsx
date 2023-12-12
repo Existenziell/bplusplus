@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Header from './components/Header'
+import BitcoinPrice from './components/BitcoinPrice'
 import Footer from './components/Footer'
 import Metrics from './components/Metrics'
 import Notification from './components/Notification'
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className='flex min-h-screen bg-grid bg-cover bg-center'>
       <Notification text='npub copied to clipboard!' />
-      <Header />
+      <BitcoinPrice />
       <div className='w-full items-center justify-between flex flex-col text-zinc-300 overflow-hidden'>
         <div className='h-full items-center justify-center flex flex-col'>
           <h1 className='text-6xl'>B++</h1>

@@ -3,8 +3,8 @@ import Link from 'next/link'
 const Metrics = () => (
   <div className='bg-zinc-800 bg-opacity-50 shadow-md px-12 py-4 my-8 w-screen'>
     <div className='text-sm font-mono'>
-      <ul className='flex flex-col md:flex-row items-center md:items-end justify-between space-y-4 md:space-y-0'>
-        <li className='flex flex-col items-center justify-between md:space-y-2'>
+      <ul className='flex flex-row items-center flex-wrap justify-around gap-6'>
+        <li className='flex flex-col items-center justify-between space-y-2'>
           <Link href='https://bitcoin.org/bitcoin.pdf' passHref legacyBehavior>
             <a
               target='_blank'
@@ -16,11 +16,11 @@ const Metrics = () => (
           </Link>
           <span className='text-xs'>Whitepaper</span>
         </li>
-        <li className='flex flex-col items-center justify-between md:space-y-2'>
+        <li className='flex flex-col items-center justify-betwee space-y-2'>
           <span className='text-xl font-bold text-btc'>BTC</span>
           <span className='text-xs'>Ticker</span>
         </li>
-        <li className='flex flex-col items-center justify-between md:space-y-2'>
+        <li className='flex flex-col items-center justify-between space-y-2'>
           <div className='w-6'>
             <svg xmlSpace='preserve' viewBox='0 0 273.6 360'>
               <path
@@ -32,11 +32,11 @@ const Metrics = () => (
           </div>
           <span className='text-xs'>Symbol</span>
         </li>
-        <li className='flex flex-col items-center justify-between md:space-y-2'>
+        <li className='flex flex-col items-center justify-between space-y-2'>
           <span className='text-btc text-xl font-bold'>#f2a900</span>
           <span className='text-xs'>Hex</span>
         </li>
-        <li className='flex flex-col items-center justify-between md:space-y-2'>
+        <li className='flex flex-col items-center justify-between space-y-2'>
           <Link
             href='https://github.com/bitcoin/bitcoin'
             passHref

@@ -49,6 +49,15 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
     return difference
   }
 
+  const handleRandom = async () => {
+    if (granularity === 'daily') {
+      setNumberOfCells(Math.floor(Math.random() * 30000))
+    } else {
+      setNumberOfCells(Math.floor(Math.random() * 1000))
+    }
+    setShowOnboarding(false)
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -134,9 +143,19 @@ const Onboarding: React.FC<OnboardingProps> = ({ setShowOnboarding }) => {
               </label>
             </div>
           </div>
-          <button type='submit' className='button mt-6' disabled={loading}>
-            Go
-          </button>
+          <div className='flex items-center justify-center mt-6 gap-2'>
+            <button type='submit' className='button' disabled={loading}>
+              Go
+            </button>
+            <button
+              type='button'
+              className='button'
+              disabled={loading}
+              onClick={handleRandom}
+            >
+              Random
+            </button>
+          </div>
         </form>
       </div>
     </div>

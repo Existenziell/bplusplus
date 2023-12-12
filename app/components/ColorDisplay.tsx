@@ -1,6 +1,6 @@
 import { useDisplayContext } from '../context/DisplayContext'
 
-const Display = () => {
+const ColorDisplay = () => {
   const { displayNumber, displayColor, displayLightness } = useDisplayContext()
 
   if (!displayNumber || !displayColor) {
@@ -19,4 +19,4 @@ const Display = () => {
   )
 }
 
-export default Display
+export default ColorDisplay

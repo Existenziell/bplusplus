@@ -7,9 +7,9 @@ import React, {
   SetStateAction,
   useState,
 } from 'react'
-import { useAppContext } from '../context/AppContext'
-import { getMonthsBetweenDates } from '../utils/getMonthsBetweenDates'
-import { getDaysBetweenDates } from '../utils/getDaysBetweenDates'
+import { useAppContext } from '../../context/AppContext'
+import { getMonthsBetweenDates } from '../../utils/getMonthsBetweenDates'
+import { getDaysBetweenDates } from '../../utils/getDaysBetweenDates'
 
 interface OnboardingProps {
   setShowOnboarding: Dispatch<SetStateAction<boolean>>

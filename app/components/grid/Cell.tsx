@@ -1,4 +1,4 @@
-import { useDisplayContext } from '../context/DisplayContext'
+import { useDisplayContext } from '../../context/DisplayContext'
 
 export type CellType = {
   number: number

@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import Cell from '../components/Cell'
-import Display from '../components/Display'
-import Onboarding from '../components/Onboarding'
+import Cell from '../components/grid/Cell'
+import ColorDisplay from '../components/ColorDisplay'
+import Onboarding from '../components/grid/Onboarding'
 import { useState } from 'react'
 import { useAppContext } from '../context/AppContext'
 import { getRandomHslColor } from '../utils/getRandomHslColor'
@@ -13,7 +13,7 @@ export default function Grid() {
   const [showOnboarding, setShowOnboarding] = useState<boolean>(true)
 
   return (
-    <main className='min-h-screen w-full font-mono px-4 md:px-8'>
+    <main className='min-h-screen w-full font-mono px-4 md:px-8 bg-grid bg-cover bg-center'>
       {showOnboarding ? (
         <Onboarding setShowOnboarding={setShowOnboarding} />
       ) : (
@@ -21,7 +21,7 @@ export default function Grid() {
           <Link href='/' className='button absolute top-2 left-2'>
             <p>Back</p>
           </Link>
-          <Display />
+          <ColorDisplay />
           <p
             onClick={() => setShowOnboarding(true)}
             className='button absolute top-2 right-2'

@@ -9,7 +9,7 @@ import SatoshiIcon from './components/icons/SatoshiIcon'
 export default function Home() {
   return (
     <main className='flex min-h-screen bg-grid bg-cover bg-center'>
-      <Notification text='npub copied to clipboard!' />
+      <Notification />
       <BitcoinPrice />
       <div className='w-full items-center justify-between flex flex-col text-zinc-300 overflow-hidden'>
         <div className='h-full items-center justify-center flex flex-col'>

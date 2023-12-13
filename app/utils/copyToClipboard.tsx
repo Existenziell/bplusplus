@@ -1,9 +1,4 @@
-type copyToClipboardProps = {
-  data: string
-  notificationText: string
-  setShowNotification: (value: boolean) => void
-  setNotificationText: (value: string) => void
-}
+import { copyToClipboardProps } from '../types'
 
 export default async function copyToClipboard({
   data,

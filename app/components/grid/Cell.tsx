@@ -1,12 +1,5 @@
+import { CellType } from '@/app/types'
 import { useDisplayContext } from '../../context/DisplayContext'
-
-export type CellType = {
-  number: number
-  hsl: {
-    value: string
-    lightness: number
-  }
-}
 
 const Cell = ({ number, hsl }: CellType) => {
   const { setDisplayNumber, setDisplayColor, setDisplayLightness } =

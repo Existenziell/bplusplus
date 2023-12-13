@@ -4,7 +4,7 @@ import BitcoinPrice from './components/BitcoinPrice'
 import Footer from './components/Footer'
 import Metrics from './components/Metrics'
 import Notification from './components/Notification'
-import SatoshiIcon from './components/SatoshiIcon'
+import SatoshiIcon from './components/icons/SatoshiIcon'
 
 export default function Home() {
   return (

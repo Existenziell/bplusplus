@@ -12,19 +12,18 @@
   color: rgb(39 39 42);
 }
 
-@layer base {
-  
-  html {
-    scroll-behavior: smooth;
-  }
+html {
+  scroll-behavior: smooth;
+}
 
+@layer base {
   a:hover {
     @apply underline;
   }
 }
 
 @layer components {
-  
+
   .button {
     @apply w-20 h-8 px-4 flex items-center justify-center text-sm bg-btc text-zinc-800 bg-opacity-80 rounded-sm shadow-sm hover:cursor-pointer hover:no-underline hover:border hover:border-btc;
   }
@@ -34,41 +33,41 @@
   }
 
   .card {
-    @apply bg-zinc-800 bg-opacity-70 rounded-sm shadow-md px-6 py-4 mt-10;
-  }
-
-  .card-header {
-    @apply text-2xl mb-4;
-  }
-
-  .card-content {
-    @apply text-sm font-mono;
-  }
-
-  /* History */
-  .table {
-    display: table;
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  .row {
-    display: table-row;
-  }
-  .header {
-    font-weight: bold;
-    background-color: #f2f2f2;
-  }
-  .cell {
-    display: table-cell;
-    padding: 8px;
-    border: 1px solid #ddd;
+    @apply bg-zinc-800 bg-opacity-70 rounded-sm shadow-md px-5 py-4 mt-10;
   }
 }
 
 @layer utilities {}
 
 
+/*  
+* History 
+*/
+.table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.row {
+  display: table-row;
+}
+
+.header {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+.cell {
+  display: table-cell;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+
+/*  
+* Radio Buttons 
+*/
 input[type="radio"] {
   appearance: none;
   background-color: #fff;

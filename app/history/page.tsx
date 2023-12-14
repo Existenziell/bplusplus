@@ -62,7 +62,7 @@ export default async function History() {
               <div className='cell'>328,125 BTC</div>
             </div>
           </div>
-          <p className='mb-1'>Total halving events: 32</p>
+          <p className='mb-1 mt-4'>Total halving events: 32</p>
           <p className='mb-1'>All Coins Issued: December 22, 2137</p>
           <p className='mb-1'>
             First transaction: January 12, 2009 (Satoshi Nakamoto sent 10 BTC to

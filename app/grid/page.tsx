@@ -13,7 +13,7 @@ export default function Grid() {
   const [showOnboarding, setShowOnboarding] = useState<boolean>(true)
 
   return (
-    <main className='min-h-screen w-full font-mono px-4 md:px-8 bg-zinc-800'>
+    <main className='min-h-screen w-full font-mono px-4 md:px-8 bg-zinc-800 pb-16'>
       {showOnboarding ? (
         <Onboarding setShowOnboarding={setShowOnboarding} />
       ) : (

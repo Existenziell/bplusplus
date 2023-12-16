@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Metrics from './components/Metrics'
 import Notification from './components/Notification'
 import SatoshiIcon from './components/icons/SatoshiIcon'
+import GraphIcon from './components/icons/GraphIcon'
 
 export default function Home() {
   return (
@@ -29,6 +30,9 @@ export default function Home() {
                 height={60}
                 className='invert'
               />
+            </Link>
+            <Link href={'/graphs'} aria-label='Link to Bitcoin Graphs'>
+              <GraphIcon />
             </Link>
           </div>
         </div>

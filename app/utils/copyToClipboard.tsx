@@ -1,5 +1,7 @@
 import { copyToClipboardProps } from '../types'
 
+let timeoutId: NodeJS.Timeout | null = null
+
 export default async function copyToClipboard({
   data,
   notificationText,
@@ -16,7 +18,11 @@ export default async function copyToClipboard({
   setNotificationText(notificationText)
   setShowNotification(true)
 
-  setTimeout(() => {
+  if (timeoutId) {
+    clearTimeout(timeoutId) // Clear the previous timeout if one exists
+  }
+
+  timeoutId = setTimeout(() => {
     setShowNotification(false)
   }, 3000)
 }

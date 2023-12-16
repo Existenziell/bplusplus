@@ -6,6 +6,7 @@ import Metrics from './components/Metrics'
 import Notification from './components/Notification'
 import SatoshiIcon from './components/icons/SatoshiIcon'
 import GraphIcon from './components/icons/GraphIcon'
+import GridIcon from './components/icons/GridIcon'
 
 export default function Home() {
   return (
@@ -23,13 +24,7 @@ export default function Home() {
               <SatoshiIcon />
             </Link>
             <Link href={'/grid'} aria-label='Link to the Grid'>
-              <Image
-                src='/grid.png'
-                alt='Image of Bitcoin History'
-                width={60}
-                height={60}
-                className='invert'
-              />
+              <GridIcon size='w-[55px]' />
             </Link>
             <Link href={'/graphs'} aria-label='Link to Bitcoin Graphs'>
               <GraphIcon />

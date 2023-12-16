@@ -13,9 +13,10 @@ export default async function Graphs() {
         <Image
           src='/graphs/subsidy-equation.webp'
           alt='Subsidy Equation Graph'
-          width={720}
-          height={410}
-          className='shadow-xl rounded-sm'
+          width={1000}
+          height={564}
+          className='shadow-xl rounded-sm w-auto h-auto'
+          priority
         />
         <h2 className='mt-24 mb-4 text-2xl'>The Bitcoin Citadel</h2>
         <Image
@@ -24,6 +25,7 @@ export default async function Graphs() {
           width={1188}
           height={1078}
           className='shadow-xl rounded-sm'
+          priority
         />
       </div>
     </main>

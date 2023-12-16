@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import BitcoinPrice from './components/BitcoinPrice'
 import Footer from './components/Footer'
 import Metrics from './components/Metrics'

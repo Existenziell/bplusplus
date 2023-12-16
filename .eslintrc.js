@@ -34,4 +34,7 @@ module.exports = {
     // 'operator-linebreak': ['off'],
   },
   ignorePatterns: ['coverage.json', '/coverage/*', '/test/*'],
+  "globals": {
+    "NodeJS": true
+  },
 }

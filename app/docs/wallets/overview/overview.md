@@ -1,0 +1,218 @@
+# Bitcoin Wallet Overview
+
+## What is a Bitcoin Wallet?
+
+A Bitcoin wallet is a software application or device that allows users to store, send, and receive Bitcoin. Despite the name, a wallet doesn't actually "store" Bitcoin—Bitcoin exists only on the blockchain. Instead, a wallet stores the **private keys** needed to access and control Bitcoin addresses.
+
+### Key Concepts
+
+- **Private Key**: Secret cryptographic key that proves ownership of Bitcoin
+- **Public Key**: Derived from private key, used to generate addresses
+- **Address**: Public identifier where Bitcoin can be received (like an account number)
+- **UTXO**: Unspent Transaction Output—the actual "coins" on the blockchain
+- **Seed Phrase**: Human-readable backup of private keys (12-24 words)
+
+## Types of Wallets
+
+### By Storage Location
+
+#### Hot Wallets
+- **Online**: Connected to the internet
+- **Examples**: Mobile apps, web wallets, exchange wallets
+- **Pros**: Easy to use, quick access
+- **Cons**: More vulnerable to hacking
+
+#### Cold Wallets
+- **Offline**: Not connected to the internet
+- **Examples**: Hardware wallets, paper wallets
+- **Pros**: More secure, less vulnerable to attacks
+- **Cons**: Less convenient for frequent transactions
+
+### By Control
+
+#### Custodial Wallets
+- **Third-party control**: Exchange or service holds your keys
+- **Examples**: Coinbase, Binance wallets
+- **Pros**: Easy recovery, user-friendly
+- **Cons**: You don't control your keys ("not your keys, not your coins")
+
+#### Non-Custodial Wallets
+- **Self-custody**: You control your private keys
+- **Examples**: Electrum, Bitcoin Core, hardware wallets
+- **Pros**: Full control, more secure
+- **Cons**: You're responsible for key management
+
+### By Technology
+
+#### Full Node Wallets
+- **Bitcoin Core**: Downloads entire blockchain
+- **Pros**: Maximum privacy, validates all transactions
+- **Cons**: Requires significant storage and bandwidth
+
+#### SPV (Simplified Payment Verification) Wallets
+- **Light clients**: Don't download full blockchain
+- **Pros**: Faster setup, less storage
+- **Cons**: Less privacy, relies on other nodes
+
+#### Hardware Wallets
+- **Physical devices**: Ledger, Trezor, Coldcard
+- **Pros**: Excellent security, keys never leave device
+- **Cons**: Cost, requires physical device
+
+## How Wallets Work
+
+### Key Generation
+
+1. **Random Generation**: Private key is randomly generated (256 bits)
+2. **Public Key Derivation**: Public key derived using elliptic curve cryptography
+3. **Address Creation**: Address generated from public key using hash functions
+4. **Address Types**: P2PKH, P2SH, P2WPKH, P2TR (Taproot)
+
+### Transaction Process
+
+1. **UTXO Selection**: Wallet chooses which UTXOs to spend
+2. **Transaction Creation**: Builds transaction with inputs and outputs
+3. **Signing**: Signs transaction with private key(s)
+4. **Broadcasting**: Sends transaction to Bitcoin network
+5. **Confirmation**: Transaction included in a block
+
+### Address Management
+
+- **HD Wallets**: Hierarchical Deterministic wallets generate addresses from a single seed
+- **Key Derivation**: Uses BIP32/BIP44 standards
+- **Address Reuse**: Generally discouraged for privacy
+- **Change Addresses**: New addresses created for change outputs
+
+## Creating a Wallet
+
+### Software Wallet (Bitcoin Core)
+
+```bash
+# Install Bitcoin Core
+# Download from bitcoin.org
+
+# Start Bitcoin Core (will create wallet.dat)
+bitcoind -daemon
+
+# Create new wallet
+bitcoin-cli createwallet "mywallet"
+
+# Get new address
+bitcoin-cli getnewaddress
+
+# Get wallet info
+bitcoin-cli getwalletinfo
+```
+
+### Software Wallet (Electrum)
+
+1. **Download**: Get Electrum from electrum.org
+2. **Install**: Run installer for your platform
+3. **Create Wallet**: 
+   - Choose "Standard wallet"
+   - Select "Create a new seed"
+   - Save seed phrase securely
+4. **Set Password**: Choose encryption password
+5. **Ready**: Wallet is created and ready to use
+
+### Hardware Wallet
+
+1. **Purchase**: Buy hardware wallet (Ledger, Trezor, etc.)
+2. **Initialize**: Follow device instructions
+3. **Generate Seed**: Device generates 24-word seed phrase
+4. **Backup Seed**: Write down seed phrase (never digital!)
+5. **Set PIN**: Create PIN for device access
+6. **Install Software**: Install companion app (Ledger Live, etc.)
+7. **Connect**: Connect device and create Bitcoin account
+
+### Programmatic Wallet Creation
+
+#### Python (using python-bitcoinlib)
+
+```python
+from bitcoin import *
+
+# Generate private key
+private_key = random_key()
+
+# Derive public key
+public_key = privtopub(private_key)
+
+# Generate address (P2PKH)
+address = pubtoaddr(public_key)
+
+print(f"Private Key: {private_key}")
+print(f"Address: {address}")
+```
+
+#### JavaScript (using bitcoinjs-lib)
+
+```javascript
+const bitcoin = require('bitcoinjs-lib');
+const { randomBytes } = require('crypto');
+
+// Generate key pair
+const keyPair = bitcoin.ECPair.makeRandom();
+
+// Get private key (WIF format)
+const privateKey = keyPair.toWIF();
+
+// Generate address (P2PKH)
+const { address } = bitcoin.payments.p2pkh({ 
+  pubkey: keyPair.publicKey 
+});
+
+console.log('Private Key:', privateKey);
+console.log('Address:', address);
+```
+
+## Wallet Security Best Practices
+
+### Private Key Management
+
+- **Never share**: Never share your private keys or seed phrase
+- **Secure storage**: Store seed phrases offline, physically secure
+- **Multiple backups**: Create multiple backups in different locations
+- **No digital storage**: Never store seed phrases on computers or cloud
+
+### Security Measures
+
+- **Use hardware wallets**: For significant amounts
+- **Enable 2FA**: Where possible (for custodial wallets)
+- **Verify addresses**: Always verify receiving addresses
+- **Test transactions**: Send small amounts first
+- **Keep software updated**: Update wallet software regularly
+
+### Backup Strategies
+
+- **Seed phrase backup**: Write down seed phrase, store securely
+- **Multiple locations**: Keep backups in different physical locations
+- **Test recovery**: Verify you can recover wallet from seed phrase
+- **Encryption**: Encrypt backups if storing digitally (but prefer physical)
+
+## Wallet Features
+
+### Basic Features
+
+- **Send Bitcoin**: Create and broadcast transactions
+- **Receive Bitcoin**: Generate addresses for receiving
+- **View Balance**: Check UTXO balance
+- **Transaction History**: View past transactions
+
+### Advanced Features
+
+- **Multi-signature**: Require multiple signatures (multisig)
+- **Coin Control**: Manually select which UTXOs to spend
+- **Fee Estimation**: Calculate appropriate transaction fees
+- **Replace-by-Fee (RBF)**: Replace unconfirmed transactions
+- **PSBT Support**: Partially Signed Bitcoin Transactions
+
+## Related Topics
+
+- [Coin Selection](/docs/wallets/coin-selection) - How wallets choose UTXOs to spend
+- [Multisig](/docs/wallets/multisig) - Multi-signature wallet concepts
+- [Transaction Creation](/docs/wallets/transactions) - How to create and sign transactions
+
+## Navigation
+
+- [Wallet Development Documentation](/docs/wallets) - Return to Wallets overview

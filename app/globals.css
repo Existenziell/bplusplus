@@ -14,6 +14,14 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 300px; /* Account for sticky header (header + metrics + breadcrumbs) */
+}
+
+/* Responsive scroll padding for smaller screens */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 180px; /* Slightly less on mobile */
+  }
 }
 
 @layer base {
@@ -33,7 +41,7 @@ html {
   }
 
   .card {
-    @apply bg-zinc-800 bg-opacity-70 rounded-sm shadow-md px-5 py-4 mt-10;
+    @apply bg-white dark:bg-zinc-800 bg-opacity-100 rounded-sm shadow-md px-4 sm:px-5 py-3 sm:py-4;
   }
 }
 
@@ -108,4 +116,243 @@ input[type="radio"]:focus {
   display: grid;
   grid-template-columns: 1em auto;
   gap: 0.7em;
+}
+
+/*  
+* Page-level heading styles (outside markdown)
+*/
+h1, h2, h3, h4, h5, h6 {
+  @apply text-zinc-900 dark:text-zinc-100;
+}
+
+/* Remove top margin from first h1 in content area (not header) */
+.container h1:first-of-type,
+.max-w-4xl h1:first-of-type,
+.max-w-7xl h1:first-of-type {
+  @apply mt-0;
+}
+
+/* Handle page-level h1 elements (direct children of content divs, not in header) */
+main > div > div > div > h1:first-child,
+main > div > div > h1:first-child {
+  @apply mt-0;
+}
+
+/*  
+* Markdown Content Styles
+*/
+.markdown-content {
+  @apply text-zinc-800 dark:text-zinc-200;
+}
+
+.markdown-content h1 {
+  @apply text-2xl sm:text-3xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
+}
+
+.markdown-content h1:first-child {
+  @apply mt-0;
+}
+
+.markdown-content h2 {
+  @apply text-xl sm:text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
+}
+
+.markdown-content h3 {
+  @apply text-lg sm:text-xl font-semibold mt-6 mb-3 text-zinc-900 dark:text-zinc-100;
+}
+
+.markdown-content h4 {
+  @apply text-base sm:text-lg font-semibold mt-4 mb-2 text-zinc-900 dark:text-zinc-100;
+}
+
+.markdown-content h5 {
+  @apply text-sm sm:text-base font-semibold mt-4 mb-2 text-zinc-900 dark:text-zinc-100;
+}
+
+.markdown-content h6 {
+  @apply text-xs sm:text-sm font-semibold mt-4 mb-2 text-zinc-900 dark:text-zinc-100;
+}
+
+.markdown-content p {
+  @apply mb-4 leading-7;
+}
+
+/* Glossary links - dashed/dotted underline on hover */
+.markdown-content a[href^="/docs/glossary"] {
+  @apply text-btc hover:text-btc/80 transition-colors;
+  text-decoration: none;
+}
+
+.markdown-content a[href^="/docs/glossary"]:hover {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  @apply mb-4 ml-6;
+}
+
+.markdown-content ul {
+  @apply list-disc;
+}
+
+.markdown-content ol {
+  @apply list-decimal;
+}
+
+.markdown-content li {
+  @apply mb-2;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-btc pl-4 my-4 text-zinc-600 dark:text-zinc-300;
+}
+
+.markdown-content code {
+  @apply bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-sm font-mono text-zinc-900 dark:text-zinc-200;
+}
+
+.markdown-content .inline-code {
+  @apply bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-sm font-mono text-btc;
+}
+
+.markdown-content pre {
+  @apply bg-zinc-100 dark:bg-zinc-900 rounded-lg p-2 sm:p-4 overflow-x-auto mb-4 border border-zinc-300 dark:border-zinc-700 text-xs sm:text-sm text-zinc-900 dark:text-zinc-200;
+}
+
+.markdown-content pre code {
+  @apply bg-transparent p-0 text-sm;
+  color: inherit;
+}
+
+/* Code block wrapper styles */
+.markdown-content .code-block-wrapper {
+  @apply mb-4;
+}
+
+.markdown-content .code-block-wrapper pre {
+  @apply mb-0 rounded-t-none;
+}
+
+.markdown-content .multi-language-code-block {
+  @apply mb-4;
+}
+
+.markdown-content .multi-language-code-block pre {
+  @apply mb-0 rounded-t-none;
+}
+
+.markdown-content table {
+  @apply w-full border-collapse mb-4 overflow-x-auto block;
+}
+
+.markdown-content table th {
+  @apply bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 px-2 sm:px-4 py-2 text-left font-semibold text-xs sm:text-sm text-zinc-900 dark:text-zinc-200;
+}
+
+.markdown-content table td {
+  @apply border border-zinc-300 dark:border-zinc-700 px-2 sm:px-4 py-2 text-xs sm:text-sm text-zinc-900 dark:text-zinc-200;
+}
+
+.markdown-content table tr:nth-child(even) {
+  @apply bg-zinc-100 dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50;
+}
+
+.markdown-content a {
+  @apply text-btc hover:underline;
+}
+
+.markdown-content hr {
+  @apply border-zinc-700 my-8;
+}
+
+.markdown-content img {
+  @apply rounded-lg my-4 max-w-full;
+}
+
+.markdown-content iframe {
+  @apply rounded-lg;
+}
+
+/* Syntax highlighting theme */
+.markdown-content .hljs {
+  @apply bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200;
+}
+
+.markdown-content .hljs-comment,
+.markdown-content .hljs-quote {
+  @apply text-zinc-500 dark:text-zinc-500;
+}
+
+.markdown-content .hljs-keyword,
+.markdown-content .hljs-selector-tag,
+.markdown-content .hljs-subst {
+  @apply text-purple-600 dark:text-purple-400;
+}
+
+.markdown-content .hljs-number,
+.markdown-content .hljs-literal,
+.markdown-content .hljs-variable,
+.markdown-content .hljs-template-variable,
+.markdown-content .hljs-tag .hljs-attr {
+  @apply text-emerald-600 dark:text-emerald-400;
+}
+
+.markdown-content .hljs-string,
+.markdown-content .hljs-doctag {
+  @apply text-yellow-600 dark:text-yellow-400;
+}
+
+.markdown-content .hljs-title,
+.markdown-content .hljs-section,
+.markdown-content .hljs-selector-id {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.markdown-content .hljs-type,
+.markdown-content .hljs-class .hljs-title {
+  @apply text-cyan-600 dark:text-cyan-400;
+}
+
+.markdown-content .hljs-tag,
+.markdown-content .hljs-name,
+.markdown-content .hljs-attribute {
+  @apply text-pink-600 dark:text-pink-400;
+}
+
+.markdown-content .hljs-regexp,
+.markdown-content .hljs-link {
+  @apply text-orange-600 dark:text-orange-400;
+}
+
+.markdown-content .hljs-symbol,
+.markdown-content .hljs-bullet {
+  @apply text-red-600 dark:text-red-400;
+}
+
+.markdown-content .hljs-built_in,
+.markdown-content .hljs-builtin-name {
+  @apply text-indigo-600 dark:text-indigo-400;
+}
+
+.markdown-content .hljs-meta {
+  @apply text-zinc-600 dark:text-zinc-400;
+}
+
+.markdown-content .hljs-deletion {
+  @apply bg-red-100 dark:bg-red-900 bg-opacity-50 dark:bg-opacity-30;
+}
+
+.markdown-content .hljs-addition {
+  @apply bg-green-100 dark:bg-green-900 bg-opacity-50 dark:bg-opacity-30;
+}
+
+.markdown-content .hljs-emphasis {
+  /* italic disabled for testing */
+}
+
+.markdown-content .hljs-strong {
+  @apply font-bold;
 }

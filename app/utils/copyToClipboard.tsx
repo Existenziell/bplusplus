@@ -8,21 +8,43 @@ export default async function copyToClipboard({
   setShowNotification,
   setNotificationText,
 }: copyToClipboardProps) {
-  try {
-    await navigator.clipboard.writeText(data)
-  } catch (e) {
-    console.error(e)
-    return
-  }
-
-  setNotificationText(notificationText)
-  setShowNotification(true)
-
+  // Clear any existing timeout
   if (timeoutId) {
-    clearTimeout(timeoutId) // Clear the previous timeout if one exists
+    clearTimeout(timeoutId)
+    timeoutId = null
   }
 
-  timeoutId = setTimeout(() => {
-    setShowNotification(false)
-  }, 3000)
+  // Hide any existing notification first
+  setShowNotification(false)
+
+  try {
+    // Check if clipboard API is available
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      throw new Error('Clipboard API not available')
+    }
+
+    await navigator.clipboard.writeText(data)
+
+    // Show success notification
+    setNotificationText(notificationText)
+    setShowNotification(true)
+
+    // Auto-hide after 3 seconds
+    timeoutId = setTimeout(() => {
+      setShowNotification(false)
+      timeoutId = null
+    }, 3000)
+  } catch (e) {
+    console.error('Failed to copy to clipboard:', e)
+
+    // Show error notification
+    setNotificationText('Failed to copy')
+    setShowNotification(true)
+
+    // Auto-hide error after 2 seconds
+    timeoutId = setTimeout(() => {
+      setShowNotification(false)
+      timeoutId = null
+    }, 2000)
+  }
 }

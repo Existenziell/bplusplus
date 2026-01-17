@@ -9,45 +9,43 @@ const Metrics = () => {
   const { setShowNotification, setNotificationText } = useAppContext()
 
   return (
-    <div className='bg-zinc-800 bg-opacity-50 shadow-md px-12 py-4 my-8 w-screen'>
-      <div className='text-sm font-mono'>
-        <ul className='flex flex-row items-center flex-wrap justify-around gap-8'>
-          <li className='flex flex-col items-center justify-between space-y-2'>
+    <div className='bg-white dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50 shadow-md px-4 sm:px-8 md:px-12 py-3 md:py-4 mt-2 mt-8'>
+      <div className='text-xs sm:text-sm font-mono text-zinc-800 dark:text-zinc-200'>
+        <ul className='flex flex-row items-center flex-wrap justify-around gap-4 sm:gap-6 md:gap-8'>
+          <li className='flex flex-col items-center justify-between space-y-1 italic'>
             <Link
               href='https://bitcoin.org/bitcoin.pdf'
               target='_blank'
               rel='noopener noreferrer'
-              className='font-bold text-xl text-btc'
+              className='font-bold text-base sm:text-lg md:text-xl text-btc'
               aria-label='Link to Bitcoin Whitepaper'
             >
               Bitcoin
             </Link>
-            <span className='text-xs'>Whitepaper</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Whitepaper</span>
           </li>
-          <li className='flex flex-col items-center justify-betwee space-y-2'>
-            <span
-              className='text-xl font-bold text-btc hover:underline cursor-pointer'
-              onClick={() =>
-                copyToClipboard({
-                  data: 'BTC',
-                  notificationText: 'BTC',
-                  setShowNotification,
-                  setNotificationText,
-                })
-              }
-            >
-              BTC
-            </span>
-            <span className='text-xs'>Ticker</span>
-          </li>
-          <li className='flex flex-col items-center justify-between space-y-2'>
-            <div className='w-6'>
-              <Link
-                href='/denominations'
-                className='font-bold text-xl text-btc'
-                aria-label='Link to Bitcoin Denominations'
+          <li className='flex flex-col items-center justify-betwee space-y-1 italic'>
+          <Link
+                href='https://bitcointicker.co/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='font-bold text-base sm:text-lg md:text-xl text-btc'
+                aria-label='Link to Bitcoin Ticker'
               >
-                <svg xmlSpace='preserve' viewBox='0 0 273.6 360'>
+              BTC
+            </Link>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Ticker</span>
+          </li>
+          <li className='flex flex-col items-center justify-between space-y-1 italic'>
+            <div className='w-5 sm:w-6'>
+              <Link
+                href='https://bitcoin.org'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='font-bold text-base sm:text-lg md:text-xl text-btc'
+                aria-label='Link to Bitcoin Website'
+              >
+                <svg xmlSpace='preserve' viewBox='0 0 273.6 360' className='w-full h-auto'>
                   <path
                     fill='currentColor'
                     className='text-btc'
@@ -56,11 +54,12 @@ const Metrics = () => {
                 </svg>
               </Link>
             </div>
-            <span className='text-xs'>Symbol</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Symbol</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-2'>
-            <span
-              className='text-btc text-xl font-bold hover:underline cursor-pointer'
+          <li className='flex flex-col items-center justify-between space-y-1 italic'>
+              <span
+              className='text-btc text-base sm:text-lg md:text-xl font-bold hover:underline cursor-pointer'
+              aria-label='Copy Bitcoin Hex Value'
               onClick={() =>
                 copyToClipboard({
                   data: hexValue,
@@ -72,18 +71,18 @@ const Metrics = () => {
             >
               {hexValue}
             </span>
-            <span className='text-xs'>Hex</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Hex</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-2'>
+          <li className='flex flex-col items-center justify-between space-y-1 italic'>
             <Link
               href='https://github.com/bitcoin/bitcoin'
               target='_blank'
               rel='noopener noreferrer'
-              className='font-bold text-xl text-btc'
+              className='font-bold text-base sm:text-lg md:text-xl text-btc'
             >
               GitHub
             </Link>
-            <span className='text-xs'>Source Code</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Source Code</span>
           </li>
         </ul>
       </div>

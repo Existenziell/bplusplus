@@ -1,0 +1,28 @@
+import { readFile } from 'fs/promises'
+import { join } from 'path'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import Image from 'next/image'
+
+export default async function SubsidyPage() {
+  const content = await readFile(
+    join(process.cwd(), 'app/docs/bitcoin/subsidy/equation.md'),
+    'utf-8'
+  )
+
+  return (
+    <div>
+      <h1 className="text-5xl font-bold mb-8">The Subsidy Equation</h1>
+      <div className="mb-8">
+        <Image
+          src="/graphs/subsidy-equation.webp"
+          alt="Subsidy Equation Graph"
+          width={1000}
+          height={564}
+          className="shadow-xl rounded-lg w-auto h-auto mb-8"
+          priority
+        />
+      </div>
+      <MarkdownRenderer content={content} />
+    </div>
+  )
+}

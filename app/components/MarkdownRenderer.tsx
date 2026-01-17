@@ -134,26 +134,64 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             )
           },
           p: ({ children, ...props }: any) => {
-            // Check if paragraph contains only a YouTube link
+            // Check if paragraph contains a YouTube embed (set by a component)
             const childrenArray = React.Children.toArray(children)
-            if (childrenArray.length === 1) {
-              const child = childrenArray[0] as any
-              // Check if it's a link element
+
+            // Check if paragraph contains a YouTube embed span
+            for (const child of childrenArray) {
               if (React.isValidElement(child)) {
-                const href = child.props?.href
-                if (href && (href.includes('youtube.com') || href.includes('youtu.be'))) {
-                  const videoId = getYouTubeVideoId(href)
-                  if (videoId) {
-                    // Return embed directly instead of wrapping in p
+                const childProps = child.props as { 'data-youtube-embed'?: string }
+                const videoId = childProps?.['data-youtube-embed']
+
+                if (videoId) {
+                  // Extract text content from other children (excluding the embed)
+                  const otherChildren = childrenArray.filter(c => c !== child)
+                  const otherText = otherChildren.map(extractText).join('').trim()
+
+                  // If paragraph only contains the YouTube embed (or embed + minimal whitespace), return just the embed
+                  if (otherText === '' || childrenArray.length === 1) {
                     return <YouTubeEmbed videoId={videoId} />
                   }
                 }
               }
             }
+
+            // Also check for direct YouTube links (fallback for cases where a component didn't catch it)
+            for (const child of childrenArray) {
+              if (React.isValidElement(child)) {
+                const childProps = child.props as { href?: string }
+                const href = childProps?.href
+
+                if (href && typeof href === 'string' && (href.includes('youtube.com') || href.includes('youtu.be'))) {
+                  const videoId = getYouTubeVideoId(href)
+                  if (videoId) {
+                    const otherChildren = childrenArray.filter(c => c !== child)
+                    const otherText = otherChildren.map(extractText).join('').trim()
+
+                    if (otherText === '' || childrenArray.length === 1) {
+                      return <YouTubeEmbed videoId={videoId} />
+                    }
+                  }
+                }
+              }
+            }
+
             // Default paragraph rendering
             return <p {...props}>{children}</p>
           },
           a: ({ href, children, ...props }: any) => {
+            // YouTube video embeds - check first
+            if (href && typeof href === 'string' && (href.includes('youtube.com') || href.includes('youtu.be'))) {
+              const videoId = getYouTubeVideoId(href)
+              if (videoId) {
+                // Return embed with a marker so p component can detect and replace the paragraph
+                return (
+                  <span data-youtube-embed={videoId} style={{ display: 'block' }}>
+                    <YouTubeEmbed videoId={videoId} />
+                  </span>
+                )
+              }
+            }
             // Internal Next.js links
             if (href?.startsWith('/')) {
               return (
@@ -170,8 +208,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 </a>
               )
             }
-            // YouTube video embeds - return regular link, p component will handle embedding
-            // Don't embed here to avoid nesting issues
             // External links
             return (
               <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
@@ -199,10 +235,10 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           pre: ({ children, ...props }: any) => {
             // In react-markdown, pre contains a code element as its child
             // Extract the code element and its properties
-            const codeElement = React.Children.toArray(children)[0] as any
+            const codeElement = React.Children.toArray(children)[0]
 
-            if (codeElement && (codeElement.type === 'code' || codeElement.props?.className?.includes('language-'))) {
-              const className = codeElement.props?.className || ''
+            if (React.isValidElement(codeElement) && codeElement.type === 'code') {
+              const className = (codeElement.props as { className?: string })?.className || ''
               const match = /language-(\w+)/.exec(className)
               const language = match ? match[1] : ''
 
@@ -210,14 +246,14 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               // This prevents the pre from being wrapped in a p tag
               return (
                 <CodeBlock language={language} className={className} {...props}>
-                  {codeElement.props?.children}
+                  {(codeElement.props as { children?: React.ReactNode })?.children}
                 </CodeBlock>
               )
             }
 
             // Fallback to default pre rendering
             return (
-              <pre className="hljs bg-zinc-900 rounded-lg p-4 overflow-x-auto mb-4 border border-zinc-700" {...props}>
+              <pre className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-lg p-4 overflow-x-auto mb-4 border border-zinc-300 dark:border-zinc-700" {...props}>
                 {children}
               </pre>
             )

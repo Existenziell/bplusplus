@@ -2,7 +2,7 @@
 
 ## Script Types Evolution
 
-Bitcoin's [script](/docs/glossary#script) system has evolved over time, introducing new output types (address formats) that improve security, privacy, and efficiency. Each [script](/docs/glossary#script) type represents a different way to lock and unlock Bitcoin.
+Bitcoin's [script](/docs/glossary#script) system has evolved over time, introducing new output types (address formats) that improve security, privacy, and efficiency. Each script type represents a different way to lock and unlock Bitcoin.
 
 | Script Type | Full Name | Introduced | Block Height | BIP | Description |
 |-------------|-----------|------------|--------------|-----|-------------|
@@ -17,25 +17,25 @@ Bitcoin's [script](/docs/glossary#script) system has evolved over time, introduc
 - **Introduced**: January 3, 2009 ([Genesis Block](/docs/glossary#genesis-block))
 - **Block Height**: 0
 - **Address Format**: Starts with `1` (e.g., `1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa`) - uses [Base58](/docs/glossary#base58) encoding
-- **Description**: The original Bitcoin [script](/docs/glossary#script) type. Funds are locked to a hash of the recipient's public key. The sender must provide the public key and a signature to spend.
-- **Status**: Still widely used, but being gradually replaced by more efficient [script](/docs/glossary#script) types.
+- **Description**: The original Bitcoin script type. Funds are locked to a hash of the recipient's public key. The sender must provide the public key and a signature to spend.
+- **Status**: Still widely used, but being gradually replaced by more efficient script types.
 
 ### P2SH (Pay-to-Script-Hash)
 
 - **Introduced**: April 1, 2012
 - **Block Height**: 173,805
 - **[BIP](/docs/glossary#bip-bitcoin-improvement-proposal)**: [BIP 16](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki)
-- **Address Format**: Starts with `3` (e.g., `3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy`) - uses [Base58](/docs/glossary#base58) encoding
-- **Description**: Allows complex [scripts](/docs/glossary#script) ([multisig](/docs/glossary#multisig-multi-signature), timelocks, etc.) to be represented by a single hash. The actual [script](/docs/glossary#script) is revealed only when spending. Enables [multisig](/docs/glossary#multisig-multi-signature) [wallets](/docs/glossary#wallet) and other advanced features.
-- **Status**: Widely used for [multisig](/docs/glossary#multisig-multi-signature) [wallets](/docs/glossary#wallet) and other complex [scripts](/docs/glossary#script).
+- **Address Format**: Starts with `3` (e.g., `3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy`) - uses Base58 encoding
+- **Description**: Allows complex scripts ([multisig](/docs/glossary#multisig-multi-signature), timelocks, etc.) to be represented by a single hash. The actual script is revealed only when spending. Enables multisig [wallets](/docs/glossary#wallet) and other advanced features.
+- **Status**: Widely used for multisig wallets and other complex scripts.
 
 ### P2WPKH (Pay-to-Witness-Pubkey-Hash)
 
 - **Introduced**: August 24, 2017
 - **Block Height**: 481,824
-- **[BIP](/docs/glossary#bip-bitcoin-improvement-proposal)**: [BIP 141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki) ([Segregated Witness](/docs/glossary#segwit-segregated-witness))
+- **BIP**: [BIP 141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki) ([Segregated Witness](/docs/glossary#segwit-segregated-witness))
 - **Address Format**: [Bech32](/docs/glossary#bech32), starts with `bc1q` (e.g., `bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4`)
-- **Description**: [SegWit](/docs/glossary#segwit-segregated-witness) version of P2PKH. [Witness](/docs/glossary#witness) data (signatures) is moved outside the [transaction](/docs/glossary#transaction), reducing [transaction](/docs/glossary#transaction) size and fees. Provides better scalability and fixes [transaction malleability](/docs/glossary#transaction-malleability).
+- **Description**: SegWit version of P2PKH. [Witness](/docs/glossary#witness) data (signatures) is moved outside the [transaction](/docs/glossary#transaction), reducing transaction size and fees. Provides better scalability and fixes [transaction malleability](/docs/glossary#transaction-malleability).
 - **Status**: Increasingly adopted, offers lower fees than P2PKH.
 
 ### P2WSH (Pay-to-Witness-Script-Hash)
@@ -51,9 +51,9 @@ Bitcoin's [script](/docs/glossary#script) system has evolved over time, introduc
 
 - **Introduced**: November 14, 2021
 - **Block Height**: 709,632
-- **[BIP](/docs/glossary#bip-bitcoin-improvement-proposal)**: [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki) ([Taproot](/docs/glossary#taproot))
+- **BIP**: [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki) ([Taproot](/docs/glossary#taproot))
 - **Address Format**: Bech32m, starts with `bc1p` (e.g., `bc1p5d7rjq7g6rdk2yhzks9smlaqtedr4dekq08ge8ztwac72sfr9rusxg3297`)
-- **Description**: Latest [script](/docs/glossary#script) type. Can represent either a single signature or a [Merkle tree](/docs/glossary#merkle-tree) of [scripts](/docs/glossary#script) ([MAST](/docs/glossary#mast-merkle-abstract-syntax-tree)). Provides better privacy (all [transactions](/docs/glossary#transaction) look the same on-chain) and efficiency. Enables advanced features like [Schnorr signatures](/docs/glossary#schnorr-signature).
+- **Description**: Latest script type. Can represent either a single signature or a [Merkle tree](/docs/glossary#merkle-tree) of scripts ([MAST](/docs/glossary#mast-merkle-abstract-syntax-tree)). Provides better privacy (all transactions look the same on-chain) and efficiency. Enables advanced features like [Schnorr signatures](/docs/glossary#schnorr-signature).
 - **Status**: Modern standard, offering the best privacy and efficiency.
 
 ### Script Type Adoption Timeline

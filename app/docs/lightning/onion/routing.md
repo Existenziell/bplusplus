@@ -31,11 +31,11 @@ Lightning uses the Sphinx protocol (based on Tor's design) adapted for payment r
 ```
 Onion Packet Structure:
 ┌─────────────────────────────────────┐
-│ Layer 1 (for Hop 1)                │
+│ Layer 1 (for Hop 1)                 │
 │  ┌───────────────────────────────┐  │
 │  │ Layer 2 (for Hop 2)           │  │
 │  │  ┌─────────────────────────┐  │  │
-│  │  │ Layer 3 (for Hop 3)      │  │  │
+│  │  │ Layer 3 (for Hop 3)     │  │  │
 │  │  │  ┌───────────────────┐  │  │  │
 │  │  │  │ Payment Data      │  │  │  │
 │  │  │  └───────────────────┘  │  │  │

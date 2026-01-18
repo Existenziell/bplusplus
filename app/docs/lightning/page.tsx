@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import DocCard from '../../components/DocCard'
 
 export default function LightningDocsPage() {
   return (
@@ -9,65 +9,53 @@ export default function LightningDocsPage() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/lightning/basics">Getting Started</Link>
-          </h2>
-          <p className="mb-4">
-            Learn how to set up a Lightning node, open channels, create invoices, and make payments on the Lightning Network.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/lightning/basics" className="hover:text-btc hover:underline">Node setup and configuration</Link></li>
-            <li><Link href="/docs/lightning/basics" className="hover:text-btc hover:underline">Channel opening and management</Link></li>
-            <li><Link href="/docs/lightning/basics" className="hover:text-btc hover:underline">Invoice creation and payment</Link></li>
-            <li><Link href="/docs/lightning/basics" className="hover:text-btc hover:underline">Basic Lightning operations</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Getting Started"
+          href="/docs/lightning/basics"
+          description="Learn how to set up a Lightning node, open channels, create invoices, and make payments on the Lightning Network."
+          links={[
+            { href: '/docs/lightning/basics#node-setup', label: 'Node setup' },
+            { href: '/docs/lightning/basics#opening-channels', label: 'Opening channels' },
+            { href: '/docs/lightning/basics#creating-and-paying-invoices', label: 'Creating and paying invoices' },
+            { href: '/docs/lightning/basics#basic-operations', label: 'Basic operations' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/lightning/routing">Routing & HTLCs</Link>
-          </h2>
-          <p className="mb-4">
-            Understand how payments route through the Lightning Network using Hash Time Locked Contracts (HTLCs) and routing policies.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/lightning/routing" className="hover:text-btc hover:underline">HTLC mechanics</Link></li>
-            <li><Link href="/docs/lightning/routing" className="hover:text-btc hover:underline">Fee calculation</Link></li>
-            <li><Link href="/docs/lightning/routing" className="hover:text-btc hover:underline">Multi-part payments (MPP)</Link></li>
-            <li><Link href="/docs/lightning/routing" className="hover:text-btc hover:underline">TLV encoding</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Routing & HTLCs"
+          href="/docs/lightning/routing"
+          description="Understand how payments route through the Lightning Network using Hash Time Locked Contracts (HTLCs) and routing policies."
+          links={[
+            { href: '/docs/lightning/routing#what-is-an-htlc', label: 'What is an HTLC' },
+            { href: '/docs/lightning/routing#fee-structure', label: 'Fee structure' },
+            { href: '/docs/lightning/routing#what-is-mpp', label: 'Multi-part payments (MPP)' },
+            { href: '/docs/lightning/routing#tlv-encoding-for-mpp', label: 'TLV encoding' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/lightning/channels">Channels</Link>
-          </h2>
-          <p className="mb-4">
-            Learn about payment channels, their lifecycle, funding, closing, and different channel states.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/lightning/channels" className="hover:text-btc hover:underline">Channel lifecycle</Link></li>
-            <li><Link href="/docs/lightning/channels" className="hover:text-btc hover:underline">Funding transactions</Link></li>
-            <li><Link href="/docs/lightning/channels" className="hover:text-btc hover:underline">Channel states</Link></li>
-            <li><Link href="/docs/lightning/channels" className="hover:text-btc hover:underline">Channel closing</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Channels"
+          href="/docs/lightning/channels"
+          description="Learn about payment channels, their lifecycle, funding, closing, and different channel states."
+          links={[
+            { href: '/docs/lightning/channels#channel-lifecycle', label: 'Channel lifecycle' },
+            { href: '/docs/lightning/channels#commitment-transactions', label: 'Commitment transactions' },
+            { href: '/docs/lightning/channels#channel-states', label: 'Channel states' },
+            { href: '/docs/lightning/channels#channel-management', label: 'Channel management' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/lightning/onion">Onion Routing</Link>
-          </h2>
-          <p className="mb-4">
-            Understand how Lightning uses Sphinx onion routing to provide privacy and security for payments.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/lightning/onion" className="hover:text-btc hover:underline">Sphinx protocol</Link></li>
-            <li><Link href="/docs/lightning/onion" className="hover:text-btc hover:underline">Onion packet structure</Link></li>
-            <li><Link href="/docs/lightning/onion" className="hover:text-btc hover:underline">Privacy guarantees</Link></li>
-            <li><Link href="/docs/lightning/onion" className="hover:text-btc hover:underline">Route obfuscation</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Onion Routing"
+          href="/docs/lightning/onion"
+          description="Understand how Lightning uses Sphinx onion routing to provide privacy and security for payments."
+          links={[
+            { href: '/docs/lightning/onion#sphinx-protocol', label: 'Sphinx protocol' },
+            { href: '/docs/lightning/onion#onion-packet-structure', label: 'Onion packet structure' },
+            { href: '/docs/lightning/onion#privacy-guarantees', label: 'Privacy guarantees' },
+            { href: '/docs/lightning/onion#security-properties', label: 'Security properties' },
+          ]}
+        />
       </div>
     </div>
   )

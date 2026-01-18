@@ -2,12 +2,12 @@
 
 ## Overview
 
-[HTLCs](/docs/glossary#htlc-hash-time-locked-contract) are the mechanism that enables [payments](/docs/glossary#payment) to route through the [Lightning Network](/docs/glossary#lightning-network). They ensure that [payments](/docs/glossary#payment) can only be claimed with the correct [preimage](/docs/glossary#preimage), and expire after a certain time.
+[HTLCs](/docs/glossary#htlc-hash-time-locked-contract) are the mechanism that enables payments to route through the [Lightning Network](/docs/glossary#lightning-network). They ensure that payments can only be claimed with the correct [preimage](/docs/glossary#preimage), and expire after a certain time.
 
 ## What is an HTLC?
 
-An [HTLC](/docs/glossary#htlc-hash-time-locked-contract) is a conditional [payment](/docs/glossary#payment) that requires:
-1. **Hash [Preimage](/docs/glossary#preimage)**: Knowledge of a secret (the [preimage](/docs/glossary#preimage)) that hashes to a known value
+An HTLC is a conditional payment that requires:
+1. **Hash Preimage**: Knowledge of a secret (the preimage) that hashes to a known value
 2. **[Time Lock](/docs/glossary#time-lock)**: Expires after a certain [block](/docs/glossary#block) height
 
 ### Basic Structure
@@ -53,8 +53,8 @@ Carol creates HTLC to Dave:
 
 Each hop requires an **expiry delta** ([CLTV](/docs/glossary#cltv-checklocktimeverify) delta) to ensure:
 - If a hop fails, there's time to resolve
-- Each hop has enough time to claim their [HTLC](/docs/glossary#htlc-hash-time-locked-contract)
-- [Preimage](/docs/glossary#preimage) can propagate back through the route
+- Each hop has enough time to claim their HTLC
+- Preimage can propagate back through the route
 
 **Rule**: Each hop's expiry must be earlier than the previous hop's expiry.
 

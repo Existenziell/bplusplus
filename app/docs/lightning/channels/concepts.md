@@ -6,21 +6,21 @@ Payment channels are the fundamental building block of the Lightning Network. Th
 
 ## What is a Payment Channel?
 
-A [payment channel](/docs/glossary#payment-channel) is a 2-of-2 [multisig](/docs/glossary#multisig-multi-signature) address that locks Bitcoin between two parties. The parties can update the [channel](/docs/glossary#channel) balance off-chain without broadcasting to Bitcoin.
+A [payment channel](/docs/glossary#payment-channel) is a 2-of-2 [multisig](/docs/glossary#multisig-multi-signature) address that locks Bitcoin between two parties. The parties can update the channel balance off-chain without broadcasting to Bitcoin.
 
 ### Key Properties
 
-- **2-of-2 [Multisig](/docs/glossary#multisig-multi-signature)**: Both parties must sign to spend
+- **2-of-2 Multisig**: Both parties must sign to spend
 - **Off-Chain Updates**: Balance changes happen off-chain
 - **On-Chain Settlement**: Final state broadcast to Bitcoin
-- **Bidirectional**: [Payments](/docs/glossary#payment) can flow both directions
+- **Bidirectional**: Payments can flow both directions
 
 ## Channel Lifecycle
 
 ### 1. Channel Opening
 
 **[Channel Funding](/docs/glossary#channel-funding) Transaction:**
-- Creates 2-of-2 [multisig](/docs/glossary#multisig-multi-signature) output
+- Creates 2-of-2 multisig output
 - Locks Bitcoin from both parties
 - Broadcast to Bitcoin network
 - Wait for confirmation (typically 1-6 [blocks](/docs/glossary#block))

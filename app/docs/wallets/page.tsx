@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import DocCard from '../../components/DocCard'
 
 export default function WalletsDocsPage() {
   return (
@@ -9,65 +9,53 @@ export default function WalletsDocsPage() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/wallets/overview">Overview</Link>
-          </h2>
-          <p className="mb-4">
-            Introduction to Bitcoin wallets, including what they are, different types, how they work, and how to create one.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/wallets/overview" className="hover:text-btc hover:underline">What is a wallet</Link></li>
-            <li><Link href="/docs/wallets/overview" className="hover:text-btc hover:underline">Wallet types and categories</Link></li>
-            <li><Link href="/docs/wallets/overview" className="hover:text-btc hover:underline">How wallets work</Link></li>
-            <li><Link href="/docs/wallets/overview" className="hover:text-btc hover:underline">Creating wallets</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Overview"
+          href="/docs/wallets/overview"
+          description="Introduction to Bitcoin wallets, including what they are, different types, how they work, and how to create one."
+          links={[
+            { href: '/docs/wallets/overview#what-is-a-bitcoin-wallet', label: 'What is a wallet' },
+            { href: '/docs/wallets/overview#types-of-wallets', label: 'Types of wallets' },
+            { href: '/docs/wallets/overview#how-wallets-work', label: 'How wallets work' },
+            { href: '/docs/wallets/overview#creating-a-wallet', label: 'Creating a wallet' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/wallets/coin-selection">Coin Selection</Link>
-          </h2>
-          <p className="mb-4">
-            Learn about UTXO selection algorithms, fee calculation, and transaction sizing for efficient wallet operations.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/wallets/coin-selection" className="hover:text-btc hover:underline">UTXO selection strategies</Link></li>
-            <li><Link href="/docs/wallets/coin-selection" className="hover:text-btc hover:underline">Fee calculation</Link></li>
-            <li><Link href="/docs/wallets/coin-selection" className="hover:text-btc hover:underline">Transaction sizing</Link></li>
-            <li><Link href="/docs/wallets/coin-selection" className="hover:text-btc hover:underline">Change output creation</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Coin Selection"
+          href="/docs/wallets/coin-selection"
+          description="Learn about UTXO selection algorithms, fee calculation, and transaction sizing for efficient wallet operations."
+          links={[
+            { href: '/docs/wallets/coin-selection#coin-selection-strategies', label: 'Coin selection strategies' },
+            { href: '/docs/wallets/coin-selection#fee-calculation', label: 'Fee calculation' },
+            { href: '/docs/wallets/coin-selection#utxo-characteristics', label: 'UTXO characteristics' },
+            { href: '/docs/wallets/coin-selection#change-output-creation', label: 'Change output creation' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/wallets/multisig">Multisig</Link>
-          </h2>
-          <p className="mb-4">
-            Understand multi-signature concepts, script patterns, and how to create and spend from multisig wallets.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/wallets/multisig" className="hover:text-btc hover:underline">Multisig script patterns</Link></li>
-            <li><Link href="/docs/wallets/multisig" className="hover:text-btc hover:underline">Key management</Link></li>
-            <li><Link href="/docs/wallets/multisig" className="hover:text-btc hover:underline">Spending from multisig</Link></li>
-            <li><Link href="/docs/wallets/multisig" className="hover:text-btc hover:underline">Security considerations</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Multisig"
+          href="/docs/wallets/multisig"
+          description="Understand multi-signature concepts, script patterns, and how to create and spend from multisig wallets."
+          links={[
+            { href: '/docs/wallets/multisig#multisig-script-patterns', label: 'Multisig script patterns' },
+            { href: '/docs/wallets/multisig#key-management', label: 'Key management' },
+            { href: '/docs/wallets/multisig#spending-from-multisig', label: 'Spending from multisig' },
+            { href: '/docs/wallets/multisig#security-considerations', label: 'Security considerations' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/wallets/transactions">Transaction Creation</Link>
-          </h2>
-          <p className="mb-4">
-            Learn how to construct, sign, and broadcast Bitcoin transactions programmatically.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/wallets/transactions" className="hover:text-btc hover:underline">Transaction structure</Link></li>
-            <li><Link href="/docs/wallets/transactions" className="hover:text-btc hover:underline">Input and output creation</Link></li>
-            <li><Link href="/docs/wallets/transactions" className="hover:text-btc hover:underline">Signing transactions</Link></li>
-            <li><Link href="/docs/wallets/transactions" className="hover:text-btc hover:underline">Broadcasting to network</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Transaction Creation"
+          href="/docs/wallets/transactions"
+          description="Learn how to construct, sign, and broadcast Bitcoin transactions programmatically."
+          links={[
+            { href: '/docs/wallets/transactions#transaction-structure', label: 'Transaction structure' },
+            { href: '/docs/wallets/transactions#step-by-step-process', label: 'Step-by-step process' },
+            { href: '/docs/wallets/transactions#signing-process', label: 'Signing process' },
+            { href: '/docs/wallets/transactions#transaction-validation', label: 'Transaction validation' },
+          ]}
+        />
       </div>
     </div>
   )

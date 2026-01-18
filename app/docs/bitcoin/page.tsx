@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import DocCard from '../../components/DocCard'
 
 export default function BitcoinDocsPage() {
   return (
@@ -9,80 +9,65 @@ export default function BitcoinDocsPage() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/bitcoin/script">Script System</Link>
-          </h2>
-          <p className="mb-4">
-            Understand how Bitcoin Script works, including execution flow, opcodes, and common patterns like P2PKH, P2SH, P2WPKH, and P2TR.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/bitcoin/script" className="hover:text-btc hover:underline">Script execution flow</Link></li>
-            <li><Link href="/docs/bitcoin/script" className="hover:text-btc hover:underline">Common opcodes</Link></li>
-            <li><Link href="/docs/bitcoin/script" className="hover:text-btc hover:underline">Locking mechanisms</Link></li>
-            <li><Link href="/docs/bitcoin/script" className="hover:text-btc hover:underline">Transaction validation</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Script System"
+          href="/docs/bitcoin/script"
+          description="Understand how Bitcoin Script works, including execution flow, opcodes, and common patterns like P2PKH, P2SH, P2WPKH, and P2TR."
+          links={[
+            { href: '/docs/bitcoin/script#script-types-evolution', label: 'Script types evolution' },
+            { href: '/docs/bitcoin/script#understanding-p2pkh-script-execution', label: 'P2PKH script execution' },
+            { href: '/docs/bitcoin/script#reasons-to-lock-transactions', label: 'Locking mechanisms' },
+            { href: '/docs/bitcoin/script#key-takeaways', label: 'Key takeaways' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/bitcoin/rpc">RPC Guide</Link>
-          </h2>
-          <p className="mb-4">
-            Comprehensive guide to Bitcoin Core RPC commands for interacting with your node, monitoring status, and managing wallets.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/bitcoin/rpc" className="hover:text-btc hover:underline">Essential RPC commands</Link></li>
-            <li><Link href="/docs/bitcoin/rpc" className="hover:text-btc hover:underline">Wallet management</Link></li>
-            <li><Link href="/docs/bitcoin/rpc" className="hover:text-btc hover:underline">Block and transaction queries</Link></li>
-            <li><Link href="/docs/bitcoin/rpc" className="hover:text-btc hover:underline">ZMQ notifications</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="RPC Guide"
+          href="/docs/bitcoin/rpc"
+          description="Comprehensive guide to Bitcoin Core RPC commands for interacting with your node, monitoring status, and managing wallets."
+          links={[
+            { href: '/docs/bitcoin/rpc#essential-node-information-commands', label: 'Essential node commands' },
+            { href: '/docs/bitcoin/rpc#wallet-commands-if-wallet-is-loaded', label: 'Wallet commands' },
+            { href: '/docs/bitcoin/rpc#transaction-and-block-commands', label: 'Transaction and block commands' },
+            { href: '/docs/bitcoin/rpc#zmq-notifications', label: 'ZMQ notifications' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/bitcoin/blocks">Block Propagation</Link>
-          </h2>
-          <p className="mb-4">
-            Understand how blocks propagate through the Bitcoin network, including the gossip protocol, validation, and orphan block handling.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/bitcoin/blocks" className="hover:text-btc hover:underline">Gossip protocol</Link></li>
-            <li><Link href="/docs/bitcoin/blocks" className="hover:text-btc hover:underline">Block validation</Link></li>
-            <li><Link href="/docs/bitcoin/blocks" className="hover:text-btc hover:underline">Network topology</Link></li>
-            <li><Link href="/docs/bitcoin/blocks" className="hover:text-btc hover:underline">Orphan blocks</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Block Propagation"
+          href="/docs/bitcoin/blocks"
+          description="Understand how blocks propagate through the Bitcoin network, including the gossip protocol, validation, and orphan block handling."
+          links={[
+            { href: '/docs/bitcoin/blocks#block-propagation-flow', label: 'Block propagation flow' },
+            { href: '/docs/bitcoin/blocks#orphan-block-scenarios', label: 'Orphan block scenarios' },
+            { href: '/docs/bitcoin/blocks#network-topology', label: 'Network topology' },
+            { href: '/docs/bitcoin/blocks#propagation-timing', label: 'Propagation timing' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/bitcoin/op-codes">OP Codes</Link>
-          </h2>
-          <p className="mb-4">
-            Comprehensive reference of Bitcoin Script OP codes with explanations, examples, and common usage patterns.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/bitcoin/op-codes" className="hover:text-btc hover:underline">Stack operations</Link></li>
-            <li><Link href="/docs/bitcoin/op-codes" className="hover:text-btc hover:underline">Cryptographic functions</Link></li>
-            <li><Link href="/docs/bitcoin/op-codes" className="hover:text-btc hover:underline">Control flow</Link></li>
-            <li><Link href="/docs/bitcoin/op-codes" className="hover:text-btc hover:underline">Common script patterns</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="OP Codes"
+          href="/docs/bitcoin/op-codes"
+          description="Comprehensive reference of Bitcoin Script OP codes with explanations, examples, and common usage patterns."
+          links={[
+            { href: '/docs/bitcoin/op-codes#stack-operations', label: 'Stack operations' },
+            { href: '/docs/bitcoin/op-codes#cryptographic-operations', label: 'Cryptographic operations' },
+            { href: '/docs/bitcoin/op-codes#control-flow', label: 'Control flow' },
+            { href: '/docs/bitcoin/op-codes#common-script-patterns', label: 'Common script patterns' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/bitcoin/subsidy">Subsidy Equation</Link>
-          </h2>
-          <p className="mb-4">
-            Understand Bitcoin&apos;s block subsidy formula, halving mechanism, and how the 21 million supply cap is mathematically enforced.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li><Link href="/docs/bitcoin/subsidy" className="hover:text-btc hover:underline">Mathematical formula</Link></li>
-            <li><Link href="/docs/bitcoin/subsidy" className="hover:text-btc hover:underline">Halving schedule</Link></li>
-            <li><Link href="/docs/bitcoin/subsidy" className="hover:text-btc hover:underline">Historical halvings</Link></li>
-            <li><Link href="/docs/bitcoin/subsidy" className="hover:text-btc hover:underline">Economic implications</Link></li>
-          </ul>
-        </div>
+        <DocCard
+          title="Subsidy Equation"
+          href="/docs/bitcoin/subsidy"
+          description="Understand Bitcoin's block subsidy formula, halving mechanism, and how the 21 million supply cap is mathematically enforced."
+          links={[
+            { href: '/docs/bitcoin/subsidy#the-equation', label: 'The equation' },
+            { href: '/docs/bitcoin/subsidy#how-it-works', label: 'How it works' },
+            { href: '/docs/bitcoin/subsidy#economic-implications', label: 'Economic implications' },
+            { href: '/docs/bitcoin/subsidy#key-properties', label: 'Key properties' },
+          ]}
+        />
       </div>
     </div>
   )

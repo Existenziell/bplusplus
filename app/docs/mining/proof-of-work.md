@@ -6,15 +6,15 @@ Bitcoin uses a **[proof-of-work](/docs/glossary#proof-of-work-pow)** [consensus]
 
 ## How It Works
 
-1. **Block Construction**: [Miners](/docs/glossary#mining) collect [transactions](/docs/glossary#transaction) from the [mempool](/docs/glossary#mempool-memory-pool) and create a candidate [block](/docs/glossary#block)
-2. **Nonce Search**: [Miners](/docs/glossary#mining) repeatedly [hash](/docs/glossary#hash) the [block header](/docs/glossary#block-header) with different [nonce](/docs/glossary#nonce) values
-3. **Difficulty Target**: The [hash](/docs/glossary#hash) must be below a certain target (set by network [difficulty](/docs/glossary#difficulty))
-4. **Success**: When a [miner](/docs/glossary#mining) finds a valid [hash](/docs/glossary#hash), they broadcast the [block](/docs/glossary#block) to the network
-5. **Reward**: The [miner](/docs/glossary#mining) receives the [block reward](/docs/glossary#block-reward) (currently 3.125 BTC) plus [transaction fees](/docs/glossary#transaction-fee)
+1. **Block Construction**: Miners collect transactions from the [mempool](/docs/glossary#mempool-memory-pool) and create a candidate [block](/docs/glossary#block)
+2. **Nonce Search**: Miners repeatedly [hash](/docs/glossary#hash) the [block header](/docs/glossary#block-header) with different [nonce](/docs/glossary#nonce) values
+3. **Difficulty Target**: The hash must be below a certain target (set by network [difficulty](/docs/glossary#difficulty))
+4. **Success**: When a miner finds a valid hash, they broadcast the block to the network
+5. **Reward**: The miner receives the [block reward](/docs/glossary#block-reward) (currently 3.125 BTC) plus [transaction fees](/docs/glossary#transaction-fee)
 
 ## Mining Difficulty
 
-- **Adjustment**: Every 2016 [blocks](/docs/glossary#block) (~2 weeks), the [difficulty](/docs/glossary#difficulty) adjusts based on network [hash rate](/docs/glossary#hash-rate)
+- **Adjustment**: Every 2016 blocks (~2 weeks), the difficulty adjusts based on network [hash rate](/docs/glossary#hash-rate)
 - **Target**: Maintains ~10 minute average [block time](/docs/glossary#block-time)
 - **Current Network Hash Rate**: ~700 EH/s (exahashes per second)
 - **See Also**: [Difficulty Adjustment](/docs/mining/difficulty) for detailed explanation
@@ -22,19 +22,19 @@ Bitcoin uses a **[proof-of-work](/docs/glossary#proof-of-work-pow)** [consensus]
 ## Technical Details
 
 ### Block Headers
-- **Size**: 80 bytes of [block](/docs/glossary#block) metadata
-- **Components**: Version, previous [block](/docs/glossary#block) [hash](/docs/glossary#hash), [merkle root](/docs/glossary#merkle-root), timestamp, [difficulty target](/docs/glossary#difficulty-target), [nonce](/docs/glossary#nonce)
-- **Hash Function**: [SHA256D](/docs/glossary#sha256d) (double [SHA-256](/docs/glossary#sha-256))
+- **Size**: 80 bytes of block metadata
+- **Components**: Version, previous block hash, [merkle root](/docs/glossary#merkle-root), timestamp, [difficulty target](/docs/glossary#difficulty-target), nonce
+- **Hash Function**: [SHA256D](/docs/glossary#sha256d) (double SHA-256)
 
 ### Nonce Space
 - **Range**: 0 to 4,294,967,295 (2^32 - 1)
-- **Exhaustion**: If all [nonces](/docs/glossary#nonce) fail, [miners](/docs/glossary#mining) change the [coinbase transaction](/docs/glossary#coinbase-transaction) or timestamp
-- **Search Space**: Effectively unlimited through [coinbase](/docs/glossary#coinbase-transaction) modifications
+- **Exhaustion**: If all nonces fail, miners change the [coinbase transaction](/docs/glossary#coinbase-transaction) or timestamp
+- **Search Space**: Effectively unlimited through coinbase modifications
 
 ### Target Difficulty
-- **Network-Wide**: All [miners](/docs/glossary#mining) compete against the same target
-- **Dynamic**: Adjusts every 2016 [blocks](/docs/glossary#block) based on actual vs. target [block time](/docs/glossary#block-time)
-- **Purpose**: Maintains consistent [block](/docs/glossary#block) production rate
+- **Network-Wide**: All miners compete against the same target
+- **Dynamic**: Adjusts every 2016 blocks based on actual vs. target block time
+- **Purpose**: Maintains consistent block production rate
 
 ## Hash Function: SHA256D
 
@@ -73,11 +73,11 @@ This means:
 5. **Economic Incentives**: Why mining is competitive
 
 ### Technical Concepts
-- **[Block Headers](/docs/glossary#block-header)**: 80-byte [block](/docs/glossary#block) metadata
-- **[Coinbase Transactions](/docs/glossary#coinbase-transaction)**: Special reward [transactions](/docs/glossary#transaction)
-- **[Merkle Trees](/docs/glossary#merkle-tree)**: [Transaction](/docs/glossary#transaction) organization
-- **[Nonce](/docs/glossary#nonce) Space**: 4.3 billion possible values
-- **[Difficulty Target](/docs/glossary#difficulty-target)**: Network-wide [mining](/docs/glossary#mining) target
+- **Block Headers**: 80-byte block metadata
+- **Coinbase Transactions**: Special reward transactions
+- **[Merkle Trees](/docs/glossary#merkle-tree)**: Transaction organization
+- **Nonce Space**: 4.3 billion possible values
+- **Difficulty Target**: Network-wide mining target
 
 ## Related Topics
 

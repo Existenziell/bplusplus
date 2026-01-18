@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import DocCard from '../../components/DocCard'
 
 export default function ControversiesPage() {
   return (
@@ -9,50 +9,65 @@ export default function ControversiesPage() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/controversies/op-return">OP_RETURN Debate</Link>
-          </h2>
-          <p className="mb-4">
-            The ongoing debate about OP_RETURN data storage limits, Bitcoin Core v30 changes, and the philosophical divide between &quot;sound money&quot; and &quot;platform&quot; visions.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li>Technical implementation</li>
-            <li>Historical context</li>
-            <li>Community debate</li>
-            <li>Bitcoin Core v30 changes</li>
-          </ul>
-        </div>
+        <DocCard
+          title="OP_RETURN Debate"
+          href="/docs/controversies/op-return"
+          description='The ongoing debate about OP_RETURN data storage limits, Bitcoin Core v30 changes, and the philosophical divide between "sound money" and "platform" visions.'
+          links={[
+            { href: '/docs/controversies/op-return#what-is-op_return', label: 'What is OP_RETURN' },
+            { href: '/docs/controversies/op-return#the-historical-context', label: 'Historical context' },
+            { href: '/docs/controversies/op-return#the-recent-controversy', label: 'The recent controversy' },
+            { href: '/docs/controversies/op-return#the-philosophical-divide', label: 'The philosophical divide' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/controversies/blocksize-wars">Blocksize Wars</Link>
-          </h2>
-          <p className="mb-4">
-            The 2015-2017 controversy over increasing Bitcoin&apos;s block size limit, which led to the Bitcoin Cash hard fork and shaped Bitcoin&apos;s scaling philosophy.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li>Big blockers vs small blockers</li>
-            <li>Bitcoin Cash fork</li>
-            <li>SegWit activation</li>
-            <li>Impact on Bitcoin</li>
-          </ul>
-        </div>
+        <DocCard
+          title="Blocksize Wars"
+          href="/docs/controversies/blocksize-wars"
+          description="The 2015-2017 controversy over increasing Bitcoin's block size limit, which led to the Bitcoin Cash hard fork and shaped Bitcoin's scaling philosophy."
+          links={[
+            { href: '/docs/controversies/blocksize-wars#the-two-sides', label: 'Big blockers vs small blockers' },
+            { href: '/docs/controversies/blocksize-wars#the-outcome', label: 'The outcome' },
+            { href: '/docs/controversies/blocksize-wars#timeline-of-events', label: 'Timeline of events' },
+            { href: '/docs/controversies/blocksize-wars#impact-on-bitcoin', label: 'Impact on Bitcoin' },
+          ]}
+        />
 
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4 text-btc">
-            <Link href="/docs/controversies/energy-consumption">Energy Consumption</Link>
-          </h2>
-          <p className="mb-4">
-            The debate over Bitcoin&apos;s energy consumption, including comparisons with other industries, renewable energy usage, and the role of energy in network security.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-zinc-600 dark:text-zinc-300">
-            <li>Energy as security feature</li>
-            <li>Renewable energy adoption</li>
-            <li>Global energy comparisons</li>
-            <li>Environmental concerns</li>
-          </ul>
-        </div>
+        <DocCard
+          title="Energy Consumption"
+          href="/docs/controversies/energy-consumption"
+          description="The debate over Bitcoin's energy consumption, including comparisons with other industries, renewable energy usage, and the role of energy in network security."
+          links={[
+            { href: '/docs/controversies/energy-consumption#energy-use-as-a-security-feature', label: 'Energy as security feature' },
+            { href: '/docs/controversies/energy-consumption#renewable-energy-usage', label: 'Renewable energy usage' },
+            { href: '/docs/controversies/energy-consumption#energy-consumption-in-context', label: 'Energy consumption in context' },
+            { href: '/docs/controversies/energy-consumption#environmental-concerns', label: 'Environmental concerns' },
+          ]}
+        />
+
+        <DocCard
+          title="Mt. Gox Collapse"
+          href="/docs/controversies/mt-gox"
+          description='The 2014 collapse of the world&apos;s largest Bitcoin exchange, which lost 850,000 BTC and taught the community "not your keys, not your coins."'
+          links={[
+            { href: '/docs/controversies/mt-gox#the-rise-of-mt-gox', label: 'Rise of Mt. Gox' },
+            { href: '/docs/controversies/mt-gox#the-collapse', label: 'The collapse' },
+            { href: '/docs/controversies/mt-gox#lessons-learned', label: 'Lessons learned' },
+            { href: '/docs/controversies/mt-gox#the-ongoing-saga', label: 'The ongoing saga' },
+          ]}
+        />
+
+        <DocCard
+          title='Craig Wright / "Faketoshi"'
+          href="/docs/controversies/craig-wright"
+          description="The ongoing saga of Craig Wright's claim to be Satoshi Nakamoto, his failed proofs, forged documents, and the 2024 UK court ruling against him."
+          links={[
+            { href: '/docs/controversies/craig-wright#the-claim', label: 'The claim' },
+            { href: '/docs/controversies/craig-wright#timeline-of-events', label: 'Timeline of events' },
+            { href: '/docs/controversies/craig-wright#evidence-of-fraud', label: 'Evidence of fraud' },
+            { href: '/docs/controversies/craig-wright#conclusion', label: 'The verdict' },
+          ]}
+        />
       </div>
     </div>
   )

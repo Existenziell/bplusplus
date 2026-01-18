@@ -25,6 +25,31 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' suppressHydrationWarning>
+      <head>
+        {/*
+          Inline script to prevent dark mode flicker on page load.
+          Runs synchronously before paint to apply the correct theme class
+          based on localStorage or system preference.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  var isDark = theme === 'dark' || (theme !== 'light' && systemDark);
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={ubuntu.className}>
         <ThemeProvider>
           <AppContextProvider>{children}</AppContextProvider>

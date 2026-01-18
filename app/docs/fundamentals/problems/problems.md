@@ -73,11 +73,11 @@ Result: 2 BTC created from 1 BTC (inflation)
 
 1. **Public Ledger:**
    - All [transactions](/docs/glossary#transaction) are public
-   - Everyone can see [transaction](/docs/glossary#transaction) history
-   - [Double-spending](/docs/glossary#double-spend) is visible to all
+   - Everyone can see transaction history
+   - Double-spending is visible to all
 
-2. **[Transaction](/docs/glossary#transaction) Ordering:**
-   - [Transactions](/docs/glossary#transaction) are ordered in [blocks](/docs/glossary#block)
+2. **Transaction Ordering:**
+   - Transactions are ordered in [blocks](/docs/glossary#block)
    - Blocks are linked chronologically
    - First transaction in chain is valid
 

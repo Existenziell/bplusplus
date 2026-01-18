@@ -42,6 +42,11 @@ const navItems: NavItem[] = [
       { title: 'Proof-of-Work', href: '/docs/mining/proof-of-work' },
       { title: 'Difficulty Adjustment', href: '/docs/mining/difficulty' },
       { title: 'Economics', href: '/docs/mining/economics' },
+      { title: 'Mempool', href: '/docs/mining/mempool' },
+      { title: 'Block Construction', href: '/docs/mining/block-construction' },
+      { title: 'Mining Pools', href: '/docs/mining/pools' },
+      { title: 'Hardware Evolution', href: '/docs/mining/hardware' },
+      { title: 'Mining Attacks', href: '/docs/mining/attacks' },
     ],
   },
   {
@@ -68,6 +73,7 @@ const navItems: NavItem[] = [
     title: 'Development Tools',
     href: '/docs/development',
     children: [
+      { title: 'Getting Started', href: '/docs/development/getting-started' },
       { title: 'Blockchain Monitoring', href: '/docs/development/monitoring' },
       { title: 'Pool Mining', href: '/docs/development/mining' },
       { title: 'Price Tracking', href: '/docs/development/tools' },
@@ -82,6 +88,7 @@ const navItems: NavItem[] = [
       { title: 'Milestones', href: '/docs/history/milestones' },
       { title: 'Forks', href: '/docs/history/forks' },
       { title: 'Supply Schedule', href: '/docs/history/supply' },
+      { title: 'BIPs', href: '/docs/history/bips' },
     ],
   },
   {
@@ -91,6 +98,8 @@ const navItems: NavItem[] = [
       { title: 'OP_RETURN Debate', href: '/docs/controversies/op-return' },
       { title: 'Blocksize Wars', href: '/docs/controversies/blocksize-wars' },
       { title: 'Energy Consumption', href: '/docs/controversies/energy-consumption' },
+      { title: 'Mt. Gox Collapse', href: '/docs/controversies/mt-gox' },
+      { title: 'Craig Wright', href: '/docs/controversies/craig-wright' },
     ],
   },
   {

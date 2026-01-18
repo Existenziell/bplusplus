@@ -44,11 +44,11 @@ Fee Rate = (Total Input Value - Total Output Value) / Virtual Transaction Size
 
 ### Different Script Types
 
-[UTXOs](/docs/glossary#utxo-unspent-transaction-output) can have different [script](/docs/glossary#script) types, affecting [transaction](/docs/glossary#transaction) size:
+UTXOs can have different [script](/docs/glossary#script) types, affecting transaction size:
 
 1. **[P2PKH](/docs/glossary#p2pkh-pay-to-pubkey-hash) (Legacy)**: ~148 bytes per input
 2. **[P2SH](/docs/glossary#p2sh-pay-to-script-hash)**: ~91 bytes per input
-3. **[P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash) ([SegWit](/docs/glossary#segwit-segregated-witness) v0)**: ~68 bytes per input
+3. **[P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash) (SegWit v0)**: ~68 bytes per input
 4. **[P2TR](/docs/glossary#p2tr-pay-to-taproot) ([Taproot](/docs/glossary#taproot))**: ~58 bytes per input
 
 ### Example UTXOs

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import copyToClipboard from '../utils/copyToClipboard'
 import { useAppContext } from '../context/AppContext'
@@ -7,6 +8,34 @@ import { useAppContext } from '../context/AppContext'
 const Metrics = () => {
   const hexValue = '#f2a900'
   const { setShowNotification, setNotificationText } = useAppContext()
+  const [btcPrice, setBtcPrice] = useState<number | null>(null)
+  const [priceLoading, setPriceLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchPrice = async () => {
+      try {
+        // Use our own API route which caches the price for 60 seconds
+        const response = await fetch('/api/btc-price')
+        const data = await response.json()
+        setBtcPrice(data.price)
+      } catch (error) {
+        console.error('Failed to fetch BTC price:', error)
+      } finally {
+        setPriceLoading(false)
+      }
+    }
+
+    fetchPrice()
+  }, [])
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price)
+  }
 
   return (
     <div className='bg-white dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50 shadow-md px-4 sm:px-8 md:px-12 py-3 md:py-4 mt-2 mt-8'>
@@ -24,17 +53,16 @@ const Metrics = () => {
             </Link>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Whitepaper</span>
           </li>
-          <li className='flex flex-col items-center justify-betwee space-y-1 italic'>
-          <Link
-                href='https://bitcointicker.co/'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='font-bold text-base sm:text-lg md:text-xl text-btc'
-                aria-label='Link to Bitcoin Ticker'
-              >
-              BTC
+          <li className='flex flex-col items-center justify-between space-y-1 italic'>
+            <Link
+              href='https://github.com/bitcoin/bitcoin'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='font-bold text-base sm:text-lg md:text-xl text-btc'
+            >
+              GitHub
             </Link>
-            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Ticker</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Source Code</span>
           </li>
           <li className='flex flex-col items-center justify-between space-y-1 italic'>
             <div className='w-5 sm:w-6'>
@@ -74,15 +102,24 @@ const Metrics = () => {
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Hex</span>
           </li>
           <li className='flex flex-col items-center justify-between space-y-1 italic'>
-            <Link
-              href='https://github.com/bitcoin/bitcoin'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='font-bold text-base sm:text-lg md:text-xl text-btc'
-            >
-              GitHub
+          <Link
+                href='https://bitcointicker.co/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='font-bold text-base sm:text-lg md:text-xl text-btc'
+                aria-label='Link to Bitcoin Ticker'
+              >
+              <span className='font-bold text-base sm:text-lg md:text-xl text-btc'>
+              {priceLoading ? (
+                <span className='animate-pulse'>...</span>
+              ) : btcPrice ? (
+                formatPrice(btcPrice)
+              ) : (
+                '—'
+              )}
+            </span>
             </Link>
-            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Source Code</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>BTC/USD</span>
           </li>
         </ul>
       </div>

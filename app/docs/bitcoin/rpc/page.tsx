@@ -10,7 +10,6 @@ export default async function BitcoinRPCPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">Bitcoin RPC Guide</h1>
       <MarkdownRenderer content={content} />
     </div>
   )

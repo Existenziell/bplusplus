@@ -10,7 +10,6 @@ export default async function MultisigPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">Multisig Wallets</h1>
       <MarkdownRenderer content={content} />
     </div>
   )

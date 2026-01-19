@@ -10,7 +10,6 @@ export default async function BitcoinScriptPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">Bitcoin Script System</h1>
       <MarkdownRenderer content={content} />
     </div>
   )

@@ -19,7 +19,7 @@ export default function DocsLayout({
       {/* Content Area */}
       <div className="container mx-auto px-4 md:px-8 py-4 md:py-8">
         <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-          <div className="hidden md:block md:sticky md:top-52 md:self-start md:max-h-[calc(100vh-12rem)] md:overflow-y-auto">
+          <div className="hidden md:block md:sticky md:top-4 md:self-start md:overflow-y-auto">
             <DocsNavigation />
           </div>
           <div className="flex-1 w-full">

@@ -10,7 +10,6 @@ export default async function ToolsPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">Price Tracking</h1>
       <MarkdownRenderer content={content} />
     </div>
   )

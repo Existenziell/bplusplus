@@ -10,7 +10,6 @@ export default async function LightningBasicsPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">Lightning Network Basics</h1>
       <MarkdownRenderer content={content} />
     </div>
   )

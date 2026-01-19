@@ -1,10 +1,6 @@
+# Blockchain Monitoring
+
 Real-time blockchain monitoring allows you to detect new blocks instantly, track mining pools, analyze transactions, and monitor network activity.
-
-## Useful Resources
-
-- **[mempool.space](https://mempool.space)** - Real-time Bitcoin mempool and block explorer with advanced analytics
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Comprehensive Bitcoin metrics, network statistics, and economic indicators
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Bitcoin Core source code and development resources
 
 ## ZMQ Notifications
 

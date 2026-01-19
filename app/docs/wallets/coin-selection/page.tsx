@@ -10,7 +10,6 @@ export default async function CoinSelectionPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">Coin Selection Algorithms</h1>
       <MarkdownRenderer content={content} />
     </div>
   )

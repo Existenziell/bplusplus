@@ -8,9 +8,9 @@ import { ThemeProvider } from './context/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-const ubuntu = Ubuntu({ 
-  weight: '400', 
-  style: 'normal', 
+const ubuntu = Ubuntu({
+  weight: '400',
+  style: 'normal',
   subsets: ['latin'],
   display: 'swap', // Ensure text is visible while font loads
   preload: true,

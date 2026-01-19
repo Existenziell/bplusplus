@@ -8,7 +8,13 @@ import { ThemeProvider } from './context/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-const ubuntu = Ubuntu({ weight: '400', style: 'normal', subsets: ['latin'] })
+const ubuntu = Ubuntu({ 
+  weight: '400', 
+  style: 'normal', 
+  subsets: ['latin'],
+  display: 'swap', // Ensure text is visible while font loads
+  preload: true,
+})
 
 export const metadata: Metadata = {
   title: 'B++',
@@ -28,6 +34,9 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
+        {/* Preconnect to Vercel Analytics/Speed Insights origins */}
+        <link rel="preconnect" href="https://vitals.vercel-insights.com" />
+        <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
         {/*
           Inline script to prevent dark mode flicker on page load.
           Runs synchronously before paint to apply the correct theme class

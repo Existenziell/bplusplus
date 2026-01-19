@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import './globals.css'
 import { AppContextProvider } from './context/AppContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { Analytics } from '@vercel/analytics/next'
 
 const ubuntu = Ubuntu({ weight: '400', style: 'normal', subsets: ['latin'] })
 
@@ -52,7 +53,10 @@ export default function RootLayout({
       </head>
       <body className={ubuntu.className}>
         <ThemeProvider>
-          <AppContextProvider>{children}</AppContextProvider>
+          <AppContextProvider>
+            {children}
+            <Analytics />
+          </AppContextProvider>
         </ThemeProvider>
       </body>
     </html>

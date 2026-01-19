@@ -5,16 +5,22 @@ import Link from 'next/link'
 import copyToClipboard from '../utils/copyToClipboard'
 import { useAppContext } from '../context/AppContext'
 
-const Metrics = () => {
+interface MetricsProps {
+  initialPrice?: number | null
+}
+
+const Metrics = ({ initialPrice = null }: MetricsProps) => {
   const hexValue = '#f2a900'
   const { setShowNotification, setNotificationText } = useAppContext()
-  const [btcPrice, setBtcPrice] = useState<number | null>(null)
-  const [priceLoading, setPriceLoading] = useState(true)
+  const [btcPrice, setBtcPrice] = useState<number | null>(initialPrice)
+  const [priceLoading, setPriceLoading] = useState(initialPrice === null)
 
+  // Only fetch if we don't have an initial price
   useEffect(() => {
+    if (initialPrice !== null) return
+
     const fetchPrice = async () => {
       try {
-        // Use our own API route which caches the price for 60 seconds
         const response = await fetch('/api/btc-price')
         const data = await response.json()
         setBtcPrice(data.price)
@@ -26,7 +32,7 @@ const Metrics = () => {
     }
 
     fetchPrice()
-  }, [])
+  }, [initialPrice])
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {

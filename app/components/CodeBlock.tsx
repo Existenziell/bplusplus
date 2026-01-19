@@ -1,9 +1,57 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { languageNames } from '../utils/languageNames'
-import hljs from 'highlight.js'
+import type { HLJSApi } from 'highlight.js'
+
+// Dynamic import for highlight.js to reduce initial bundle size
+// Only load when MultiLanguageCodeBlock is used
+let hljsInstance: HLJSApi | null = null
+let hljsPromise: Promise<HLJSApi> | null = null
+
+const getHljs = (): Promise<HLJSApi> => {
+  if (hljsInstance) return Promise.resolve(hljsInstance)
+  if (hljsPromise) return hljsPromise
+
+  hljsPromise = (async () => {
+    const hljsModule = await import('highlight.js/lib/core')
+    const hljs = hljsModule.default
+    // Register only common languages to reduce bundle size
+    const [javascript, typescript, python, rust, go, bash, json, sql] = await Promise.all([
+      import('highlight.js/lib/languages/javascript'),
+      import('highlight.js/lib/languages/typescript'),
+      import('highlight.js/lib/languages/python'),
+      import('highlight.js/lib/languages/rust'),
+      import('highlight.js/lib/languages/go'),
+      import('highlight.js/lib/languages/bash'),
+      import('highlight.js/lib/languages/json'),
+      import('highlight.js/lib/languages/sql'),
+    ])
+    hljs.registerLanguage('javascript', javascript.default)
+    hljs.registerLanguage('js', javascript.default)
+    hljs.registerLanguage('typescript', typescript.default)
+    hljs.registerLanguage('ts', typescript.default)
+    hljs.registerLanguage('python', python.default)
+    hljs.registerLanguage('rust', rust.default)
+    hljs.registerLanguage('go', go.default)
+    hljs.registerLanguage('bash', bash.default)
+    hljs.registerLanguage('shell', bash.default)
+    hljs.registerLanguage('json', json.default)
+    hljs.registerLanguage('sql', sql.default)
+    hljsInstance = hljs
+    return hljs
+  })()
+
+  return hljsPromise
+}
+
+// Escape HTML for fallback rendering
+const escapeHtml = (code: string) =>
+  code
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
 
 interface CodeBlockProps {
   language: string
@@ -37,30 +85,53 @@ interface MultiLanguageCodeBlockProps {
 
 export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProps) {
   const [selectedLang, setSelectedLang] = useState(languages[0]?.lang || 'python')
+  const [highlightedLanguages, setHighlightedLanguages] = useState<
+    { lang: string; highlighted: string; className?: string }[]
+  >([])
 
-  // Memoize highlighted code for all languages
-  const highlightedLanguages = useMemo(() => {
-    return languages.map(({ lang, code, className }) => {
-      let highlighted: string
-      try {
-        // Try to highlight with the specific language
-        const result = hljs.highlight(code, { language: lang, ignoreIllegals: true })
-        highlighted = result.value
-      } catch {
-        // Fallback to auto-detection if language not supported
+  // Load highlight.js and process code asynchronously
+  useEffect(() => {
+    let cancelled = false
+
+    const highlightCode = async () => {
+      const hljs = await getHljs()
+      if (cancelled) return
+
+      const results = languages.map(({ lang, code, className }) => {
+        let highlighted: string
         try {
-          const result = hljs.highlightAuto(code)
+          const result = hljs.highlight(code, { language: lang, ignoreIllegals: true })
           highlighted = result.value
         } catch {
-          // If all else fails, just escape HTML
-          highlighted = code
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
+          try {
+            const result = hljs.highlightAuto(code)
+            highlighted = result.value
+          } catch {
+            highlighted = escapeHtml(code)
+          }
         }
+        return { lang, highlighted, className }
+      })
+
+      if (!cancelled) {
+        setHighlightedLanguages(results)
       }
-      return { lang, highlighted, className }
-    })
+    }
+
+    // Show escaped code immediately, then highlight
+    setHighlightedLanguages(
+      languages.map(({ lang, code, className }) => ({
+        lang,
+        highlighted: escapeHtml(code),
+        className,
+      }))
+    )
+
+    highlightCode()
+
+    return () => {
+      cancelled = true
+    }
   }, [languages])
 
   const selectedCode = highlightedLanguages.find(l => l.lang === selectedLang)

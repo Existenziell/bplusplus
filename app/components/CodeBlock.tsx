@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import type { ReactNode } from 'react'
 import { languageNames } from '../utils/languageNames'
+import hljs from 'highlight.js'
 
 interface CodeBlockProps {
   language: string
@@ -31,13 +32,38 @@ export default function CodeBlock({ language, children, className, ...props }: C
 }
 
 interface MultiLanguageCodeBlockProps {
-  languages: { lang: string; code: ReactNode; className?: string }[]
+  languages: { lang: string; code: string; className?: string }[]
 }
 
 export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProps) {
   const [selectedLang, setSelectedLang] = useState(languages[0]?.lang || 'python')
 
-  const selectedCode = languages.find(l => l.lang === selectedLang)
+  // Memoize highlighted code for all languages
+  const highlightedLanguages = useMemo(() => {
+    return languages.map(({ lang, code, className }) => {
+      let highlighted: string
+      try {
+        // Try to highlight with the specific language
+        const result = hljs.highlight(code, { language: lang, ignoreIllegals: true })
+        highlighted = result.value
+      } catch {
+        // Fallback to auto-detection if language not supported
+        try {
+          const result = hljs.highlightAuto(code)
+          highlighted = result.value
+        } catch {
+          // If all else fails, just escape HTML
+          highlighted = code
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+        }
+      }
+      return { lang, highlighted, className }
+    })
+  }, [languages])
+
+  const selectedCode = highlightedLanguages.find(l => l.lang === selectedLang)
 
   if (languages.length === 0) return null
 
@@ -61,9 +87,10 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
         </div>
       </div>
       <pre className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto border border-zinc-300 dark:border-zinc-700 border-t-0">
-        <code className={selectedCode?.className || ''}>
-          {selectedCode?.code}
-        </code>
+        <code
+          className={`language-${selectedLang} ${selectedCode?.className || ''}`}
+          dangerouslySetInnerHTML={{ __html: selectedCode?.highlighted || '' }}
+        />
       </pre>
     </div>
   )

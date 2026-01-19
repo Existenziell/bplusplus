@@ -1,16 +1,14 @@
-# Bitcoin Script Execution Explained
-
 ## Script Types Evolution
 
 Bitcoin's [script](/docs/glossary#script) system has evolved over time, introducing new output types (address formats) that improve security, privacy, and efficiency. Each script type represents a different way to lock and unlock Bitcoin.
 
 | Script Type | Full Name | Introduced | Block Height | BIP | Description |
-|-------------|-----------|------------|--------------|-----|-------------|
-| **P2PKH** | Pay-to-Pubkey-Hash | January 2009 | 0 (Genesis) | - | Original script type. Uses hash of public key. Addresses start with `1`. |
-| **P2SH** | Pay-to-Script-Hash | April 2012 | 173,805 | [BIP 16](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki) | Allows complex scripts to be represented by a hash. Addresses start with `3`. |
-| **P2WPKH** | Pay-to-Witness-Pubkey-Hash | August 2017 | 481,824 | [BIP 141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki) | SegWit version of P2PKH. Witness data separated from transaction. Addresses start with `bc1q`. |
-| **P2WSH** | Pay-to-Witness-Script-Hash | August 2017 | 481,824 | [BIP 141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki) | SegWit version of P2SH. For complex scripts in witness. Addresses start with `bc1q`. |
-| **P2TR** | Pay-to-Taproot | November 2021 | 709,632 | [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki) | Taproot output type. Single signature or MAST (Merkle Abstract Syntax Tree). Addresses start with `bc1p`. |
+|-------------|-----------|------------|--------------|:---:|-------------|
+| **P2PKH** | Pay-to-Pubkey-Hash | January 2009 | 0 (Genesis) | — | Original script type. Uses hash of public key. Addresses start with `1`. |
+| **P2SH** | Pay-to-Script-Hash | April 2012 | 173,805 | [16](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki) | Allows complex scripts to be represented by a hash. Addresses start with `3`. |
+| **P2WPKH** | Pay-to-Witness-Pubkey-Hash | August 2017 | 481,824 | [141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki) | SegWit version of P2PKH. Witness data separated from transaction. Addresses start with `bc1q`. |
+| **P2WSH** | Pay-to-Witness-Script-Hash | August 2017 | 481,824 | [141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki) | SegWit version of P2SH. For complex scripts in witness. Addresses start with `bc1q`. |
+| **P2TR** | Pay-to-Taproot | November 2021 | 709,632 | [341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki) | Taproot output type. Single signature or MAST (Merkle Abstract Syntax Tree). Addresses start with `bc1p`. |
 
 ### P2PKH (Pay-to-Pubkey-Hash)
 

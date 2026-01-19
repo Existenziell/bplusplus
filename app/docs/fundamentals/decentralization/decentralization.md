@@ -293,7 +293,3 @@ Decentralization is one of Bitcoin's core principles - the distribution of contr
 - [Bitcoin Trilemma](/docs/fundamentals/trilemma) - The scalability-security-decentralization trade-off
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin eliminates trust requirements
 - [Consensus Mechanism](/docs/fundamentals/consensus) - How decentralized consensus works
-
-## Navigation
-
-- [Fundamentals Documentation](/docs/fundamentals) - Return to Fundamentals overview

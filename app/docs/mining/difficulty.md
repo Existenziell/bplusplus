@@ -106,10 +106,51 @@ The difficulty is encoded in the block header's `nBits` field:
 
 ### Adjustment Algorithm
 
+:::code-group
+```rust
+/// Simplified difficulty adjustment
+///
+/// # Arguments
+///
+/// * `old_difficulty` - Previous difficulty value
+/// * `actual_time` - Time in minutes to mine 2016 blocks
+/// * `target_time` - Target time (default: 20160 minutes)
+///
+/// # Returns
+///
+/// New difficulty value
+fn adjust_difficulty(old_difficulty: f64, actual_time: f64, target_time: f64) -> f64 {
+    // Default target_time: 2016 blocks × 10 minutes = 20,160 minutes
+    let target_time = if target_time == 0.0 { 20160.0 } else { target_time };
+    
+    let mut ratio = target_time / actual_time;
+    
+    // Limit adjustment to ±4x
+    ratio = ratio.clamp(0.25, 4.0);
+    
+    old_difficulty * ratio
+}
+
+fn main() {
+    // Example: blocks mined in 18,000 minutes (faster than target)
+    let new_diff = adjust_difficulty(100_000.0, 18_000.0, 20_160.0);
+    println!("New difficulty: {}", new_diff); // ~112,000
+}
+```
+
 ```python
-# Simplified difficulty adjustment
 def adjust_difficulty(old_difficulty, actual_time, target_time=20160):
-    # Target time: 2016 blocks × 10 minutes = 20,160 minutes
+    """
+    Simplified difficulty adjustment.
+    
+    Args:
+        old_difficulty: Previous difficulty value
+        actual_time: Time in minutes to mine 2016 blocks
+        target_time: Target time (2016 blocks × 10 minutes = 20,160 minutes)
+    
+    Returns:
+        New difficulty value
+    """
     ratio = target_time / actual_time
     
     # Limit adjustment to ±4x
@@ -118,6 +159,61 @@ def adjust_difficulty(old_difficulty, actual_time, target_time=20160):
     new_difficulty = old_difficulty * ratio
     return new_difficulty
 ```
+
+```cpp
+#include <algorithm>
+#include <iostream>
+
+/**
+ * Simplified difficulty adjustment.
+ * 
+ * @param old_difficulty Previous difficulty value
+ * @param actual_time Time in minutes to mine 2016 blocks
+ * @param target_time Target time (2016 blocks × 10 minutes = 20,160 minutes)
+ * @return New difficulty value
+ */
+double adjust_difficulty(double old_difficulty, double actual_time, double target_time = 20160.0) {
+    double ratio = target_time / actual_time;
+    
+    // Limit adjustment to ±4x
+    ratio = std::clamp(ratio, 0.25, 4.0);
+    
+    double new_difficulty = old_difficulty * ratio;
+    return new_difficulty;
+}
+
+int main() {
+    // Example: blocks mined in 18,000 minutes (faster than target)
+    double new_diff = adjust_difficulty(100000.0, 18000.0);
+    std::cout << "New difficulty: " << new_diff << std::endl; // ~112,000
+    return 0;
+}
+```
+
+```javascript
+/**
+ * Simplified difficulty adjustment.
+ * 
+ * @param {number} oldDifficulty - Previous difficulty value
+ * @param {number} actualTime - Time in minutes to mine 2016 blocks
+ * @param {number} targetTime - Target time (default: 20160 minutes)
+ * @returns {number} New difficulty value
+ */
+function adjustDifficulty(oldDifficulty, actualTime, targetTime = 20160) {
+    let ratio = targetTime / actualTime;
+    
+    // Limit adjustment to ±4x
+    ratio = Math.max(0.25, Math.min(4.0, ratio));
+    
+    const newDifficulty = oldDifficulty * ratio;
+    return newDifficulty;
+}
+
+// Example: blocks mined in 18,000 minutes (faster than target)
+const newDiff = adjustDifficulty(100_000, 18_000);
+console.log(`New difficulty: ${newDiff}`); // ~112,000
+```
+:::
 
 ### Validation
 
@@ -131,7 +227,3 @@ def adjust_difficulty(old_difficulty, actual_time, target_time=20160):
 - [Proof-of-Work Mechanism](/docs/mining/proof-of-work) - How the mining algorithm works
 - [Mining Economics](/docs/mining/economics) - How difficulty affects profitability
 - [Overview](/docs/mining/overview) - General mining concepts
-
-## Navigation
-
-- [Mining Documentation](/docs/mining) - Return to Mining overview

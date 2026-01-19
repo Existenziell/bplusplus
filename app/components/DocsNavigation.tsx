@@ -120,7 +120,7 @@ export default function DocsNavigation() {
 
   return (
     <nav className="w-full md:w-64 flex-shrink-0 md:pr-8">
-      <div className="md:sticky md:top-4">
+      <div>
         <ul className="space-y-1">
           {navItems.map((item) => {
             const itemActive = isActive(item.href)

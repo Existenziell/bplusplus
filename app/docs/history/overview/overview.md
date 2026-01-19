@@ -47,7 +47,3 @@ After this date, no new Bitcoin will be created through block rewards. Miners wi
 - [Historical Milestones](/docs/history/milestones) - Year-by-year timeline of important events
 - [Protocol Upgrades and Forks](/docs/history/forks) - All soft forks and hard forks in Bitcoin's history
 - [Supply Schedule](/docs/history/supply) - Mathematical explanation of the 21 million BTC cap
-
-## Navigation
-
-- [Bitcoin History](/docs/history) - Return to History overview

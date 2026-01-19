@@ -37,6 +37,205 @@ Output:
   Script: Variable (typically 22-34 bytes)
 ```
 
+### Serializing a Transaction Output
+
+:::code-group
+```rust
+use bech32::{self, FromBase32, ToBase32};
+
+struct Output {
+    value: u64,
+    witness_version: u8,
+    witness_data: Vec<u8>,
+}
+
+impl Output {
+    fn new() -> Self {
+        Self {
+            value: 0,
+            witness_version: 0,
+            witness_data: Vec::new(),
+        }
+    }
+
+    /// Create output from address and value in satoshis
+    fn from_options(addr: &str, value: u64) -> Result<Self, bech32::Error> {
+        let (hrp, data, variant) = bech32::decode(addr)?;
+        
+        let witness_version = data[0].to_u8();
+        let witness_program = Vec::<u8>::from_base32(&data[1..])?;
+        
+        Ok(Self {
+            value,
+            witness_version,
+            witness_data: witness_program,
+        })
+    }
+
+    /// Serialize output for transaction
+    fn serialize(&self) -> Vec<u8> {
+        let mut r = Vec::new();
+        
+        // Value: 8 bytes (little-endian)
+        r.extend_from_slice(&self.value.to_le_bytes());
+        
+        // Script length
+        let script_length = 1 + 1 + self.witness_data.len();
+        r.push(script_length as u8);
+        
+        // Witness version + data length + witness data
+        r.push(self.witness_version);
+        r.push(self.witness_data.len() as u8);
+        r.extend_from_slice(&self.witness_data);
+        
+        r
+    }
+}
+```
+
+```python
+from struct import pack
+from bech32py import bech32
+
+class Output:
+    def __init__(self):
+        self.value = 0
+        self.witness_version = 0
+        self.witness_data = b""
+
+    @classmethod
+    def from_options(cls, addr: str, value: int):
+        """Create output from address and value in satoshis."""
+        self = cls()
+        # Decode bech32 address to get witness version and program
+        hrp, data = bech32.decode(addr)
+        self.witness_version = data[0]
+        # Convert 5-bit values to 8-bit bytes
+        witness_program = bech32.convertbits(data[1:], 5, 8, False)
+        self.witness_data = bytes(witness_program)
+        self.value = value
+        return self
+
+    def serialize(self):
+        """Serialize output for transaction."""
+        r = b""
+        # Value: 8 bytes (little-endian)
+        r += pack("<Q", self.value)
+        # Script length
+        script_length = 1 + 1 + len(self.witness_data)
+        r += pack("<B", script_length)
+        # Witness version + data length + witness data
+        r += pack("<B", self.witness_version)
+        r += pack("<B", len(self.witness_data))
+        r += self.witness_data
+        return r
+```
+
+```cpp
+#include <vector>
+#include <string>
+#include <cstdint>
+#include <bech32.h>  // Assumes a bech32 library
+
+class Output {
+public:
+    uint64_t value = 0;
+    uint8_t witness_version = 0;
+    std::vector<uint8_t> witness_data;
+
+    Output() = default;
+
+    /**
+     * Create output from address and value in satoshis
+     */
+    static Output from_options(const std::string& addr, uint64_t value) {
+        Output self;
+        
+        // Decode bech32 address
+        auto [hrp, data] = bech32::decode(addr);
+        
+        self.witness_version = data[0];
+        // Convert 5-bit to 8-bit values
+        self.witness_data = bech32::convertbits(
+            std::vector<uint8_t>(data.begin() + 1, data.end()),
+            5, 8, false
+        );
+        self.value = value;
+        
+        return self;
+    }
+
+    /**
+     * Serialize output for transaction
+     */
+    std::vector<uint8_t> serialize() const {
+        std::vector<uint8_t> r;
+        
+        // Value: 8 bytes (little-endian)
+        for (int i = 0; i < 8; ++i) {
+            r.push_back(static_cast<uint8_t>((value >> (i * 8)) & 0xFF));
+        }
+        
+        // Script length
+        uint8_t script_length = 1 + 1 + static_cast<uint8_t>(witness_data.size());
+        r.push_back(script_length);
+        
+        // Witness version + data length + witness data
+        r.push_back(witness_version);
+        r.push_back(static_cast<uint8_t>(witness_data.size()));
+        r.insert(r.end(), witness_data.begin(), witness_data.end());
+        
+        return r;
+    }
+};
+```
+
+```javascript
+const bech32 = require('@savingsatoshi/bech32js');
+
+class Output {
+  constructor() {
+    this.value = 0;
+    this.witness_version = 0;
+    this.witness_data = Buffer.alloc(0);
+  }
+
+  static from_options(addr, value) {
+    const self = new this();
+    // Decode bech32 address
+    const decoded = bech32.bech32_decode(addr);
+    const words = decoded[1];
+    
+    self.witness_version = words[0];
+    // Convert 5-bit to 8-bit values
+    const witness_program = bech32.fromWords(words.slice(1));
+    self.witness_data = Buffer.from(witness_program);
+    self.value = value;
+    return self;
+  }
+
+  serialize() {
+    // Value: 8 bytes (little-endian)
+    const valueBuffer = Buffer.alloc(8);
+    const value = BigInt(this.value);
+    valueBuffer.writeUInt32LE(Number(value & 0xffffffffn), 0);
+    valueBuffer.writeUInt32LE(Number((value >> 32n) & 0xffffffffn), 4);
+    
+    // Script length
+    const script_length = 1 + 1 + this.witness_data.length;
+    
+    return Buffer.concat([
+      valueBuffer,
+      Buffer.from([script_length]),
+      Buffer.from([this.witness_version]),
+      Buffer.from([this.witness_data.length]),
+      this.witness_data
+    ]);
+  }
+}
+```
+:::
+
 ## Step-by-Step Process
 
 ### Step 1: Select UTXOs
@@ -64,6 +263,153 @@ bitcoin-cli createrawtransaction \
 - **Inputs**: Array of UTXOs to spend
 - **Outputs**: Destination address and amount
 
+:::code-group
+```rust
+use std::process::Command;
+use serde_json::{json, Value};
+
+fn bcli(cmd: &str) -> Result<String, String> {
+    let args: Vec<&str> = cmd.split_whitespace().collect();
+    let output = Command::new("bitcoin-cli")
+        .arg("-signet")
+        .args(&args)
+        .output()
+        .map_err(|e| e.to_string())?;
+    
+    if output.status.success() {
+        Ok(String::from_utf8_lossy(&output.stdout).trim().to_string())
+    } else {
+        Err(String::from_utf8_lossy(&output.stderr).trim().to_string())
+    }
+}
+
+// Build inputs from selected UTXOs
+let inputs: Vec<Value> = selected_utxos.iter()
+    .map(|utxo| json!({"txid": utxo.txid, "vout": utxo.vout}))
+    .collect();
+
+// Build outputs (payment + change)
+let outputs = json!({
+    destination_address: payment_amount,
+    change_address: change_amount
+});
+
+// Create raw transaction
+let inputs_json = serde_json::to_string(&inputs).unwrap();
+let outputs_json = serde_json::to_string(&outputs).unwrap();
+let unsigned_tx = bcli(&format!("createrawtransaction '{}' '{}'", inputs_json, outputs_json))?;
+```
+
+```python
+import json
+from subprocess import run
+
+def bcli(cmd: str):
+    """Execute bitcoin-cli command."""
+    res = run(
+        ["bitcoin-cli", "-signet"] + cmd.split(" "),
+        capture_output=True, encoding="utf-8"
+    )
+    if res.returncode == 0:
+        return res.stdout.strip()
+    raise Exception(res.stderr.strip())
+
+# Build inputs from selected UTXOs
+inputs = [{"txid": utxo["txid"], "vout": utxo["vout"]} for utxo in selected_utxos]
+
+# Build outputs (payment + change)
+outputs = {
+    destination_address: float(payment_amount),
+    change_address: float(change_amount)
+}
+
+# Create raw transaction
+inputs_json = json.dumps(inputs)
+outputs_json = json.dumps(outputs)
+unsigned_tx = bcli(f"createrawtransaction {inputs_json} {outputs_json}")
+```
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include <array>
+#include <stdexcept>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
+std::string bcli(const std::string& cmd) {
+    std::string full_cmd = "bitcoin-cli -signet " + cmd;
+    std::array<char, 128> buffer;
+    std::string result;
+    
+    FILE* pipe = popen(full_cmd.c_str(), "r");
+    if (!pipe) {
+        throw std::runtime_error("popen() failed");
+    }
+    
+    while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+        result += buffer.data();
+    }
+    
+    int status = pclose(pipe);
+    if (status != 0) {
+        throw std::runtime_error("Command failed: " + result);
+    }
+    
+    // Trim trailing newline
+    if (!result.empty() && result.back() == '\n') {
+        result.pop_back();
+    }
+    return result;
+}
+
+// Build inputs from selected UTXOs
+json inputs = json::array();
+for (const auto& utxo : selected_utxos) {
+    inputs.push_back({{"txid", utxo.txid}, {"vout", utxo.vout}});
+}
+
+// Build outputs (payment + change)
+json outputs = {
+    {destination_address, payment_amount},
+    {change_address, change_amount}
+};
+
+// Create raw transaction
+std::string inputs_json = inputs.dump();
+std::string outputs_json = outputs.dump();
+std::string unsigned_tx = bcli("createrawtransaction '" + inputs_json + "' '" + outputs_json + "'");
+```
+
+```javascript
+const { execSync } = require('child_process');
+
+function bcli(cmd) {
+  const result = execSync(`bitcoin-cli -signet ${cmd}`, { encoding: 'utf-8' });
+  return result.trim();
+}
+
+// Build inputs from selected UTXOs
+const inputs = selectedUtxos.map(utxo => ({
+  txid: utxo.txid,
+  vout: utxo.vout
+}));
+
+// Build outputs (payment + change)
+const outputs = {
+  [destinationAddress]: paymentAmount,
+  [changeAddress]: changeAmount
+};
+
+// Create raw transaction
+const inputsJson = JSON.stringify(inputs);
+const outputsJson = JSON.stringify(outputs);
+const unsignedTx = bcli(`createrawtransaction '${inputsJson}' '${outputsJson}'`);
+```
+:::
+
 ### Step 3: Sign Transaction
 
 ```bash
@@ -85,6 +431,79 @@ bitcoin-cli signrawtransactionwithkey <hex> \
 # Broadcast to network
 bitcoin-cli sendrawtransaction <signed_hex>
 ```
+
+:::code-group
+```rust
+use serde_json::Value;
+
+// Sign the transaction
+let sign_result = bcli(&format!("signrawtransactionwithwallet {}", unsigned_tx))?;
+let signed_data: Value = serde_json::from_str(&sign_result)?;
+
+if !signed_data["complete"].as_bool().unwrap_or(false) {
+    return Err("Transaction signing incomplete".into());
+}
+
+let signed_tx = signed_data["hex"].as_str().unwrap();
+
+// Broadcast transaction (0 = no maxfeerate protection)
+let txid = bcli(&format!("sendrawtransaction {} 0", signed_tx))?;
+println!("Transaction broadcast: {}", txid);
+```
+
+```python
+import json
+
+# Sign the transaction
+sign_result = bcli(f"signrawtransactionwithwallet {unsigned_tx}")
+signed_data = json.loads(sign_result)
+
+if not signed_data.get("complete"):
+    raise Exception("Transaction signing incomplete")
+
+signed_tx = signed_data["hex"]
+
+# Broadcast transaction (0 = no maxfeerate protection)
+txid = bcli(f"sendrawtransaction {signed_tx} 0")
+print(f"Transaction broadcast: {txid}")
+```
+
+```cpp
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
+// Sign the transaction
+std::string sign_result = bcli("signrawtransactionwithwallet " + unsigned_tx);
+json signed_data = json::parse(sign_result);
+
+if (!signed_data.value("complete", false)) {
+    throw std::runtime_error("Transaction signing incomplete");
+}
+
+std::string signed_tx = signed_data["hex"].get<std::string>();
+
+// Broadcast transaction (0 = no maxfeerate protection)
+std::string txid = bcli("sendrawtransaction " + signed_tx + " 0");
+std::cout << "Transaction broadcast: " << txid << std::endl;
+```
+
+```javascript
+// Sign the transaction
+const signResult = bcli(`signrawtransactionwithwallet ${unsignedTx}`);
+const signedData = JSON.parse(signResult);
+
+if (!signedData.complete) {
+  throw new Error('Transaction signing incomplete');
+}
+
+const signedTx = signedData.hex;
+
+// Broadcast transaction (0 = no maxfeerate protection)
+const txid = bcli(`sendrawtransaction ${signedTx} 0`);
+console.log(`Transaction broadcast: ${txid}`);
+```
+:::
 
 ## Fee Calculation
 

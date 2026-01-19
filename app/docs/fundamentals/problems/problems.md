@@ -316,7 +316,3 @@ Bitcoin's genius is combining multiple solutions:
 - [Consensus Mechanism](/docs/fundamentals/consensus) - How Bitcoin reaches agreement
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin eliminates trust requirements
 - [Decentralization](/docs/fundamentals/decentralization) - Why decentralization solves these problems
-
-## Navigation
-
-- [Fundamentals Documentation](/docs/fundamentals) - Return to Fundamentals overview

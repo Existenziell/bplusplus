@@ -284,7 +284,3 @@ Bitcoin uses **Proof-of-Work** as its consensus mechanism:
 - [Bitcoin Trilemma](/docs/fundamentals/trilemma) - How consensus affects scalability and decentralization
 - [Mining: Proof-of-Work](/docs/mining/proof-of-work) - Detailed explanation of mining
 - [Mining: Difficulty Adjustment](/docs/mining/difficulty) - How difficulty maintains consensus
-
-## Navigation
-
-- [Fundamentals Documentation](/docs/fundamentals) - Return to Fundamentals overview

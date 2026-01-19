@@ -14,10 +14,10 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
     <>
       <Notification />
       {/* Sticky Header and Metrics */}
-      <div className="sticky top-0 z-10 bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 pb-4">
+      <div className="sticky top-0 z-10 bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
         <div className="container mx-auto px-4 md:px-8 pt-4">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex-shrink-0 flex items-center gap-2 flex-row">
+          <div className="flex justify-between items-center">
+            <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex">
               <Image
                 src="/icons/satoshi.svg"
                 alt="Satoshi"
@@ -37,7 +37,6 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
             </div>
             <Link href="/" className="text-center hover:opacity-80 transition-opacity no-underline hover:no-underline">
               <h1 className='text-4xl sm:text-5xl md:text-6xl mb-2'>B++</h1>
-              <h2 className='text-xs sm:text-sm md:text-md'>Bitcoin Education</h2>
             </Link>
             <div className="flex-shrink-0">
               <ThemeToggle />

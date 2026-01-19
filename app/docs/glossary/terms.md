@@ -1,9 +1,16 @@
-# Bitcoin Development Glossary
-
 ## A
+
+### 51% Attack
+A theoretical attack where an entity controlling more than 50% of the network's hash rate could potentially double-spend transactions or prevent confirmations. Becomes exponentially more expensive as the network grows.
 
 ### Absolute Time Lock
 A time lock that prevents a transaction from being spent until a specific block height or timestamp. Implemented using OP_CHECKLOCKTIMEVERIFY (CLTV).
+
+### Address
+A public identifier where Bitcoin can be received. Generated from a public key using hash functions. Different types exist: P2PKH (starts with 1), P2SH (starts with 3), P2WPKH/P2WSH (starts with bc1q), P2TR (starts with bc1p).
+
+### Address Reuse
+Using the same Bitcoin address for multiple transactions. Generally discouraged as it reduces privacy by linking transactions together and revealing spending patterns.
 
 ### Anchor Outputs
 A mechanism in Lightning Network that allows channels to be closed with lower fees by using a small "anchor" output that can be used to bump fees via CPFP.
@@ -16,6 +23,9 @@ A peer-to-peer exchange of cryptocurrencies between two parties without the need
 
 ## B
 
+### Batching
+Combining multiple payments into a single transaction to reduce fees. Instead of creating separate transactions, multiple outputs are included in one transaction, sharing the overhead costs.
+
 ### Base58
 An encoding scheme used in Bitcoin addresses. Similar to Base64 but excludes characters that could be confused (0, O, I, l) and includes a checksum.
 
@@ -24,6 +34,9 @@ A checksummed base32 format used for SegWit addresses. Addresses start with `bc1
 
 ### Block
 A collection of transactions grouped together and added to the blockchain. Each block contains a header with proof-of-work and a list of transactions.
+
+### Blockchain
+A distributed, immutable ledger of all Bitcoin transactions. Blocks are cryptographically linked in chronological order, making historical data tamper-evident.
 
 ### Block Header
 The 80-byte metadata at the start of each block. Contains version, previous block hash, merkle root, timestamp, difficulty target, and nonce.
@@ -57,11 +70,20 @@ The first transaction in every block. It has no inputs and creates new Bitcoin a
 ### Coin Selection
 The process of choosing which UTXOs to spend when creating a transaction. Various algorithms exist (largest first, smallest first, branch and bound).
 
+### CoinJoin
+A privacy technique where multiple users combine their transactions into a single transaction, making it difficult to determine which inputs correspond to which outputs. Each participant signs only their own inputs.
+
 ### Commitment Transaction
 In Lightning Network, a transaction that represents the current state of a payment channel. Updated off-chain as payments are made.
 
+### Confirmation
+When a transaction is included in a block that is added to the blockchain. More confirmations (subsequent blocks) increase certainty that the transaction is final. 6 confirmations is widely considered secure for large amounts.
+
 ### Consensus Rules
 The rules that all Bitcoin nodes must follow to maintain consensus. Breaking these rules makes transactions or blocks invalid.
+
+### Censorship Resistance
+The ability to make transactions that cannot be blocked or reversed by any central authority. Achieved through decentralization - no single entity controls which transactions are included in blocks.
 
 ### Change Output
 A transaction output that sends excess funds back to the sender. Created when input value exceeds payment amount plus fees.
@@ -76,6 +98,15 @@ An opcode that locks funds for a relative time period (relative to when the tran
 A block relay protocol that reduces bandwidth by sending only block headers and short transaction IDs, allowing nodes to reconstruct blocks from their mempool.
 
 ## D
+
+### Decentralization
+The distribution of control, decision-making, and infrastructure across many independent participants rather than a single central authority. Bitcoin achieves this through open-source code, distributed mining, and permissionless node operation.
+
+### Derivation Path
+A sequence of indices that specifies how to derive a specific key from a master seed in an HD wallet. Format: `m/purpose'/coin'/account'/change/index`. The apostrophe indicates hardened derivation.
+
+### Descriptors
+A standardized format (BIP 380-386) for describing how to derive addresses and scripts from keys. More expressive than raw keys alone, supporting complex scripts and multiple key types.
 
 ### DATUM
 A mining template format that allows miners to customize transaction ordering and inclusion in blocks. Used by some mining pools to give miners more control over block construction.
@@ -102,11 +133,17 @@ A key exchange protocol used in Lightning Network onion routing to derive shared
 
 ## F
 
+### Fee Bumping
+Techniques to increase the fee of an unconfirmed transaction to speed up confirmation. Methods include RBF (Replace-by-Fee) and CPFP (Child Pays for Parent).
+
 ### Fee Rate
 The fee paid per virtual byte (vByte) of transaction size. Expressed in satoshis per vByte (sat/vB).
 
 ### Force Close
 In Lightning Network, closing a payment channel unilaterally by broadcasting the latest commitment transaction. Requires waiting for a timelock to expire.
+
+### Finality
+The assurance that a transaction cannot be reversed. Bitcoin provides probabilistic finality—more confirmations make reversal exponentially more difficult and expensive, but never mathematically impossible.
 
 ### Fork
 When the blockchain splits into two competing chains. Can be temporary (orphan blocks) or permanent (hard fork).
@@ -133,8 +170,11 @@ A one-way cryptographic function that produces a fixed-size output from any inpu
 ### Hash Rate
 The number of hash calculations per second performed by the Bitcoin network. Currently ~700 EH/s (exahashes per second).
 
+### Hard Fork
+A protocol change that makes previously invalid blocks/transactions valid. Requires all nodes to upgrade. Non-upgraded nodes will reject new blocks, potentially creating a permanent chain split.
+
 ### HD Wallet (Hierarchical Deterministic Wallet)
-A wallet that generates keys from a single seed phrase. Allows backup of all keys with just the seed.
+A wallet that generates keys from a single seed phrase using BIP32. Allows backup of all keys with just the seed and enables organized key derivation paths.
 
 ### HTLC (Hash Time-Locked Contract)
 A conditional payment used in Lightning Network. Requires knowledge of a preimage (hash lock) and expires after a time period (time lock).
@@ -146,6 +186,11 @@ The process of downloading and validating the entire blockchain when first start
 
 ### Input
 A reference to a previous transaction output (UTXO) that is being spent in a new transaction.
+
+## K
+
+### Key Pair
+A cryptographic pair consisting of a private key and its corresponding public key. The private key signs transactions, and the public key verifies signatures and generates addresses.
 
 ## L
 
@@ -175,6 +220,9 @@ A signature aggregation scheme using Schnorr signatures that allows multiple par
 ### MPP (Multi-Part Payment)
 A Lightning payment split across multiple routes. Allows larger payments and improves success rates.
 
+### Miniscript
+A structured subset of Bitcoin Script that is easier to analyze and compose. Enables building complex spending conditions in a predictable, composable way with automatic analysis of spending costs and requirements.
+
 ### Multisig (Multi-Signature)
 A script that requires multiple signatures to spend. Common patterns include 2-of-3 or 3-of-5 signatures.
 
@@ -202,6 +250,9 @@ A destination in a transaction that specifies an amount and a locking script (sc
 
 ## P
 
+### Payjoin
+A privacy technique where the sender and receiver both contribute inputs to a transaction, breaking the common-input-ownership heuristic used by blockchain analysis. Also known as P2EP (Pay-to-Endpoint).
+
 ### P2PKH (Pay-to-Pubkey-Hash)
 The most common legacy Bitcoin script pattern. Locks funds to a hash of a public key.
 
@@ -223,11 +274,17 @@ A 2-of-2 multisig address that locks Bitcoin between two parties, enabling off-c
 ### Preimage
 The original data that produces a specific hash. In Lightning, the payment preimage proves payment was received.
 
+### Private Key
+A 256-bit secret number that allows spending Bitcoin from its associated addresses. Must be kept secure - anyone with the private key can spend the funds. Generated randomly or derived from a seed phrase.
+
 ### Proof-of-Work (PoW)
 The consensus mechanism that secures Bitcoin. Miners must find a hash below a target difficulty.
 
 ### PSBT (Partially Signed Bitcoin Transaction)
 A standardized format for Bitcoin transactions that need multiple signatures. Allows signing in steps.
+
+### Public Key
+A cryptographic key derived from a private key using elliptic curve multiplication. Used to generate addresses and verify signatures. Can be shared publicly without compromising security.
 
 ## R
 
@@ -247,6 +304,9 @@ A protocol for communicating with a Bitcoin node. Used by applications to query 
 
 ### Satoshi
 The smallest unit of Bitcoin. 1 BTC = 100,000,000 satoshis. Named after Satoshi Nakamoto.
+
+### Seed Phrase
+A human-readable backup of a wallet's master key, typically 12-24 words from the BIP39 wordlist. Also called mnemonic phrase or recovery phrase. Allows complete wallet recovery if stored securely.
 
 ### Script
 Bitcoin's programming language. Used to define spending conditions for transaction outputs.
@@ -269,11 +329,23 @@ Double SHA-256 hashing used in Bitcoin. The block header is hashed twice: `SHA25
 ### Schnorr Signature
 A cryptographic signature scheme used in Taproot (BIP 340). More efficient than ECDSA and enables signature aggregation and batch verification.
 
+### Selfish Mining
+An attack strategy where a miner withholds found blocks to gain an unfair advantage. By selectively releasing blocks, an attacker with sufficient hash rate can waste honest miners' work.
+
+### Silent Payments
+A privacy protocol (BIP 352) that allows generating fresh addresses without interaction. The sender derives a unique address from the recipient's public key, preventing address reuse while maintaining a static identifier.
+
+### Soft Fork
+A protocol change that tightens consensus rules, making previously valid blocks/transactions invalid. Backward compatible - non-upgraded nodes will still accept new blocks but may not understand new features.
+
 ### Sphinx Protocol
 The onion routing protocol used in Lightning Network. Provides privacy by encrypting payment data in layers.
 
 ### SPV (Simplified Payment Verification)
 A method for lightweight clients to verify transactions without downloading the full blockchain.
+
+### Sybil Attack
+An attack where a malicious actor creates many fake identities (nodes) to gain disproportionate influence over the network. Bitcoin mitigates this through proof-of-work, which requires real resources to participate.
 
 ## T
 

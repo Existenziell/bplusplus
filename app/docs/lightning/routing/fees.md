@@ -15,6 +15,80 @@ Lightning fees consist of two components:
 Total Fee = Base Fee + (Payment Amount × Proportional Fee / 1,000,000)
 ```
 
+:::code-group
+```rust
+/// Calculate the fee for forwarding an amount through a channel
+/// Fee = base_fee_msat + (amount_msat * proportional_fee_ppm / 1_000_000)
+fn calculate_fee(amount_msat: u64, base_fee_msat: u64, proportional_fee_ppm: u64) -> u64 {
+    base_fee_msat + (amount_msat * proportional_fee_ppm / 1_000_000)
+}
+
+// Example: 100,000 sats with 1000 msat base + 10 ppm
+fn main() {
+    let fee = calculate_fee(100_000_000, 1000, 10);
+    println!("Total fee: {} msat", fee);  // Output: 2000 msat
+}
+```
+
+```python
+def calculate_fee(amount_msat: int, base_fee_msat: int, proportional_fee_ppm: int) -> int:
+    """Calculate the routing fee for forwarding an amount.
+    
+    Args:
+        amount_msat: Amount to forward in millisatoshis
+        base_fee_msat: Fixed fee per HTLC in millisatoshis
+        proportional_fee_ppm: Proportional fee in parts per million
+    
+    Returns:
+        Total fee in millisatoshis (using integer division per BOLT 7)
+    """
+    return base_fee_msat + (amount_msat * proportional_fee_ppm // 1_000_000)
+
+# Example: 100,000 sats with 1000 msat base + 10 ppm
+fee = calculate_fee(100_000_000, 1000, 10)
+print(f"Total fee: {fee} msat")  # Output: 2000 msat
+```
+
+```cpp
+#include <iostream>
+#include <cstdint>
+
+/**
+ * Calculate the fee for forwarding an amount through a channel
+ * Fee = base_fee_msat + (amount_msat * proportional_fee_ppm / 1_000_000)
+ */
+uint64_t calculate_fee(uint64_t amount_msat, uint64_t base_fee_msat, uint64_t proportional_fee_ppm) {
+    return base_fee_msat + (amount_msat * proportional_fee_ppm / 1000000);
+}
+
+// Example: 100,000 sats with 1000 msat base + 10 ppm
+int main() {
+    uint64_t fee = calculate_fee(100000000, 1000, 10);
+    std::cout << "Total fee: " << fee << " msat" << std::endl;  // Output: 2000 msat
+    return 0;
+}
+```
+
+```javascript
+/**
+ * Calculate the fee for forwarding an amount through a channel
+ * Fee = base_fee_msat + (amount_msat * proportional_fee_ppm / 1_000_000)
+ * 
+ * @param {BigInt} amountMsat - Amount to forward in millisatoshis
+ * @param {BigInt} baseFeeMsat - Fixed fee per HTLC in millisatoshis
+ * @param {BigInt} proportionalFeePpm - Proportional fee in parts per million
+ * @returns {BigInt} Total fee in millisatoshis
+ */
+function calculateFee(amountMsat, baseFeeMsat, proportionalFeePpm) {
+    return baseFeeMsat + (amountMsat * proportionalFeePpm / 1_000_000n);
+}
+
+// Example: 100,000 sats with 1000 msat base + 10 ppm
+const fee = calculateFee(100_000_000n, 1000n, 10n);
+console.log(`Total fee: ${fee} msat`);  // Output: 2000 msat
+```
+:::
+
 ### Example
 
 Given:
@@ -115,6 +189,226 @@ Bob's HTLC to Carol: 100,002,000 msat
 Alice's HTLC to Bob: 100,000,000 msat
   (original payment)
 ```
+
+:::code-group
+```rust
+/// Represents a hop in the payment route
+struct Hop {
+    channel_name: String,
+    cltv_delta: u32,
+    base_fee_msat: u64,
+    proportional_fee_ppm: u64,
+}
+
+/// Represents calculated HTLC values for a hop
+struct HtlcHop {
+    channel_name: String,
+    htlc_amount_msat: u64,
+    htlc_expiry: u32,
+}
+
+/// Calculate HTLC values working backwards from destination
+fn calculate_route_backwards(
+    hops: &[Hop],
+    final_amount_msat: u64,
+    min_final_cltv: u32,
+    block_height: u32,
+) -> Vec<HtlcHop> {
+    let mut htlc_hops = Vec::with_capacity(hops.len());
+    
+    // Start with final hop values
+    let mut current_amount = final_amount_msat;
+    let mut current_expiry = block_height + min_final_cltv;
+    
+    // Process hops in reverse order
+    for i in (0..hops.len()).rev() {
+        let hop = &hops[i];
+        
+        htlc_hops.push(HtlcHop {
+            channel_name: hop.channel_name.clone(),
+            htlc_amount_msat: current_amount,
+            htlc_expiry: current_expiry,
+        });
+        
+        // Calculate values for previous hop
+        if i > 0 {
+            let fee = hop.base_fee_msat + 
+                      (current_amount * hop.proportional_fee_ppm / 1_000_000);
+            current_amount += fee;
+            current_expiry += hop.cltv_delta;
+        }
+    }
+    
+    htlc_hops.reverse();
+    htlc_hops
+}
+```
+
+```python
+from dataclasses import dataclass
+from typing import List
+
+@dataclass
+class Hop:
+    channel_name: str
+    cltv_delta: int
+    base_fee_msat: int
+    proportional_fee_ppm: int
+
+@dataclass
+class HtlcHop:
+    channel_name: str
+    htlc_amount_msat: int
+    htlc_expiry: int
+
+def calculate_route_backwards(
+    hops: List[Hop],
+    final_amount_msat: int,
+    min_final_cltv: int,
+    block_height: int
+) -> List[HtlcHop]:
+    """Calculate HTLC values for each hop, working backwards."""
+    htlc_hops = []
+    
+    # Start with final hop values
+    current_amount = final_amount_msat
+    current_expiry = block_height + min_final_cltv
+    
+    # Process hops in reverse order
+    for i in range(len(hops) - 1, -1, -1):
+        hop = hops[i]
+        
+        # Store current values for this hop
+        htlc_hops.append(HtlcHop(
+            channel_name=hop.channel_name,
+            htlc_amount_msat=current_amount,
+            htlc_expiry=current_expiry
+        ))
+        
+        # Calculate values for previous hop (if not first hop)
+        if i > 0:
+            fee = hop.base_fee_msat + (current_amount * hop.proportional_fee_ppm // 1_000_000)
+            current_amount += fee
+            current_expiry += hop.cltv_delta
+    
+    return list(reversed(htlc_hops))
+```
+
+```cpp
+#include <vector>
+#include <string>
+#include <cstdint>
+#include <algorithm>
+
+struct Hop {
+    std::string channel_name;
+    uint32_t cltv_delta;
+    uint64_t base_fee_msat;
+    uint64_t proportional_fee_ppm;
+};
+
+struct HtlcHop {
+    std::string channel_name;
+    uint64_t htlc_amount_msat;
+    uint32_t htlc_expiry;
+};
+
+/**
+ * Calculate HTLC values working backwards from destination
+ */
+std::vector<HtlcHop> calculate_route_backwards(
+    const std::vector<Hop>& hops,
+    uint64_t final_amount_msat,
+    uint32_t min_final_cltv,
+    uint32_t block_height
+) {
+    std::vector<HtlcHop> htlc_hops;
+    htlc_hops.reserve(hops.size());
+    
+    // Start with final hop values
+    uint64_t current_amount = final_amount_msat;
+    uint32_t current_expiry = block_height + min_final_cltv;
+    
+    // Process hops in reverse order
+    for (int i = static_cast<int>(hops.size()) - 1; i >= 0; --i) {
+        const Hop& hop = hops[i];
+        
+        htlc_hops.push_back({
+            hop.channel_name,
+            current_amount,
+            current_expiry
+        });
+        
+        // Calculate values for previous hop
+        if (i > 0) {
+            uint64_t fee = hop.base_fee_msat + 
+                          (current_amount * hop.proportional_fee_ppm / 1000000);
+            current_amount += fee;
+            current_expiry += hop.cltv_delta;
+        }
+    }
+    
+    std::reverse(htlc_hops.begin(), htlc_hops.end());
+    return htlc_hops;
+}
+```
+
+```javascript
+/**
+ * Represents a hop in the payment route
+ * @typedef {Object} Hop
+ * @property {string} channelName
+ * @property {number} cltvDelta
+ * @property {BigInt} baseFeeMsat
+ * @property {BigInt} proportionalFeePpm
+ */
+
+/**
+ * Represents calculated HTLC values for a hop
+ * @typedef {Object} HtlcHop
+ * @property {string} channelName
+ * @property {BigInt} htlcAmountMsat
+ * @property {number} htlcExpiry
+ */
+
+/**
+ * Calculate HTLC values working backwards from destination
+ * @param {Hop[]} hops - Array of hops in the route
+ * @param {BigInt} finalAmountMsat - Final payment amount
+ * @param {number} minFinalCltv - Minimum CLTV for final hop
+ * @param {number} blockHeight - Current block height
+ * @returns {HtlcHop[]} Calculated HTLC values for each hop
+ */
+function calculateRouteBackwards(hops, finalAmountMsat, minFinalCltv, blockHeight) {
+    const htlcHops = [];
+    
+    // Start with final hop values
+    let currentAmount = finalAmountMsat;
+    let currentExpiry = blockHeight + minFinalCltv;
+    
+    // Process hops in reverse order
+    for (let i = hops.length - 1; i >= 0; i--) {
+        const hop = hops[i];
+        
+        htlcHops.push({
+            channelName: hop.channelName,
+            htlcAmountMsat: currentAmount,
+            htlcExpiry: currentExpiry
+        });
+        
+        // Calculate values for previous hop
+        if (i > 0) {
+            const fee = hop.baseFeeMsat + 
+                       (currentAmount * hop.proportionalFeePpm / 1_000_000n);
+            currentAmount += fee;
+            currentExpiry += hop.cltvDelta;
+        }
+    }
+    
+    return htlcHops.reverse();
+}
+```
+:::
 
 ## Integer Division
 

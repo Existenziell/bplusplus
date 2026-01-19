@@ -356,3 +356,18 @@ main > div > div > h1:first-child {
 .markdown-content .hljs-strong {
   @apply font-bold;
 }
+
+/*
+* Glossary Styles
+*/
+.glossary-content h2 {
+  @apply text-4xl sm:text-5xl font-bold mt-12 mb-6 text-btc border-b-2 border-btc pb-3;
+}
+
+.glossary-content h2:first-of-type {
+  @apply mt-4;
+}
+
+.glossary-content h3 {
+  @apply text-base sm:text-lg font-semibold mt-4 mb-2 text-zinc-700 dark:text-zinc-300;
+}

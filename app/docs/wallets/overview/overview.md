@@ -127,7 +127,30 @@ bitcoin-cli getwalletinfo
 
 ### Programmatic Wallet Creation
 
-#### Python (using python-bitcoinlib)
+:::code-group
+```rust
+use bitcoin::{
+    secp256k1::{Secp256k1, rand::rngs::OsRng},
+    Address, Network, PublicKey, PrivateKey,
+};
+
+fn main() {
+    let secp = Secp256k1::new();
+    
+    // Generate key pair
+    let (secret_key, public_key) = secp.generate_keypair(&mut OsRng);
+    
+    // Create private key
+    let private_key = PrivateKey::new(secret_key, Network::Bitcoin);
+    
+    // Create public key and address (P2PKH)
+    let public_key = PublicKey::new(public_key);
+    let address = Address::p2pkh(&public_key, Network::Bitcoin);
+    
+    println!("Private Key (WIF): {}", private_key);
+    println!("Address: {}", address);
+}
+```
 
 ```python
 from bitcoin import *
@@ -145,7 +168,32 @@ print(f"Private Key: {private_key}")
 print(f"Address: {address}")
 ```
 
-#### JavaScript (using bitcoinjs-lib)
+```cpp
+#include <bitcoin/bitcoin.hpp>
+#include <iostream>
+
+int main() {
+    // Generate random private key (256 bits)
+    bc::data_chunk seed(32);
+    bc::pseudo_random_fill(seed);
+    
+    bc::ec_secret secret;
+    std::copy(seed.begin(), seed.end(), secret.begin());
+    
+    // Derive public key
+    bc::ec_compressed public_key;
+    bc::secret_to_public(public_key, secret);
+    
+    // Generate P2PKH address
+    bc::wallet::ec_private private_key(secret, bc::wallet::ec_private::mainnet);
+    bc::wallet::payment_address address(public_key);
+    
+    std::cout << "Private Key (WIF): " << private_key.encoded() << std::endl;
+    std::cout << "Address: " << address.encoded() << std::endl;
+    
+    return 0;
+}
+```
 
 ```javascript
 const bitcoin = require('bitcoinjs-lib');
@@ -165,6 +213,7 @@ const { address } = bitcoin.payments.p2pkh({
 console.log('Private Key:', privateKey);
 console.log('Address:', address);
 ```
+:::
 
 ## Wallet Security Best Practices
 
@@ -212,7 +261,3 @@ console.log('Address:', address);
 - [Coin Selection](/docs/wallets/coin-selection) - How wallets choose UTXOs to spend
 - [Multisig](/docs/wallets/multisig) - Multi-signature wallet concepts
 - [Transaction Creation](/docs/wallets/transactions) - How to create and sign transactions
-
-## Navigation
-
-- [Wallet Development Documentation](/docs/wallets) - Return to Wallets overview

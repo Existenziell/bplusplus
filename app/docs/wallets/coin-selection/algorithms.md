@@ -38,6 +38,91 @@ Fee Rate = (Total Input Value - Total Output Value) / Virtual Transaction Size
 - [Weight units](/docs/glossary#weight-units) / 4
 - Accounts for [witness](/docs/glossary#witness) data differently
 
+### Effective Value
+
+The **effective value** of a UTXO accounts for the cost to spend it:
+
+```
+effective_value = amount - (input_vbytes × fee_rate)
+```
+
+This is critical for coin selection: a small UTXO might have negative effective value at high fee rates.
+
+:::code-group
+```rust
+/// Calculate effective value of a coin at a given fee rate
+/// effective_value = amount - (input_vbytes * fee_rate)
+fn effective_value(coin: &Coin, fee_rate: Decimal) -> Decimal {
+    coin.amount - (input_vbytes(&coin.address) * fee_rate)
+}
+
+// Filter out coins with negative effective value
+let useful_coins: Vec<Coin> = coins
+    .iter()
+    .filter(|c| effective_value(c, fee_rate) > Decimal::ZERO)
+    .cloned()
+    .collect();
+```
+
+```python
+def effective_value(coin: dict, fee_rate: float) -> float:
+    """Calculate effective value of a UTXO at a given fee rate.
+    
+    Args:
+        coin: UTXO with 'amount' and 'address' fields
+        fee_rate: Fee rate in BTC/vB
+    
+    Returns:
+        Effective value (can be negative for dust UTXOs)
+    """
+    spend_cost = input_vbytes(coin['address']) * fee_rate
+    return coin['amount'] - spend_cost
+
+# Example: At 10 sat/vB, filter out negative effective value UTXOs
+fee_rate = 0.0000001  # 10 sat/vB in BTC/vB
+useful_coins = [c for c in coins if effective_value(c, fee_rate) > 0]
+```
+
+```cpp
+#include <vector>
+#include <algorithm>
+
+/**
+ * Calculate effective value of a coin at a given fee rate
+ * effective_value = amount - (input_vbytes * fee_rate)
+ */
+double effective_value(const Coin& coin, double fee_rate) {
+    return coin.amount - (input_vbytes(coin.address) * fee_rate);
+}
+
+// Filter out coins with negative effective value
+std::vector<Coin> useful_coins;
+std::copy_if(coins.begin(), coins.end(), std::back_inserter(useful_coins),
+    [fee_rate](const Coin& c) {
+        return effective_value(c, fee_rate) > 0;
+    });
+```
+
+```javascript
+/**
+ * Calculate effective value of a coin at a given fee rate
+ * effective_value = amount - (input_vbytes * fee_rate)
+ * 
+ * @param {Object} coin - UTXO with 'amount' and 'address' fields
+ * @param {number} feeRate - Fee rate in BTC/vB
+ * @returns {number} Effective value (can be negative for dust UTXOs)
+ */
+function effectiveValue(coin, feeRate) {
+    const spendCost = inputVbytes(coin.address) * feeRate;
+    return coin.amount - spendCost;
+}
+
+// Example: At 10 sat/vB, filter out negative effective value UTXOs
+const feeRate = 0.0000001; // 10 sat/vB in BTC/vB
+const usefulCoins = coins.filter(c => effectiveValue(c, feeRate) > 0);
+```
+:::
+
 ## UTXO Characteristics
 
 ### Different Script Types
@@ -48,6 +133,136 @@ UTXOs can have different [script](/docs/glossary#script) types, affecting transa
 2. **[P2SH](/docs/glossary#p2sh-pay-to-script-hash)**: ~91 bytes per input
 3. **[P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash) (SegWit v0)**: ~68 bytes per input
 4. **[P2TR](/docs/glossary#p2tr-pay-to-taproot) ([Taproot](/docs/glossary#taproot))**: ~58 bytes per input
+
+:::code-group
+```rust
+fn input_vbytes(address: &str) -> Decimal {
+    if address.starts_with("bc1p") || address.starts_with("tb1p") {
+        dec!(57.5)   // Taproot (p2tr)
+    } else if address.starts_with("bc1q") || address.starts_with("tb1q") {
+        dec!(68)     // Native SegWit (p2wpkh)
+    } else if address.starts_with("2") || address.starts_with("3") {
+        dec!(91)     // Nested SegWit (p2sh-p2wpkh)
+    } else {
+        dec!(148)    // Legacy (p2pkh)
+    }
+}
+
+fn output_vbytes(address: &str) -> Decimal {
+    if address.starts_with("bc1p") || address.starts_with("tb1p") {
+        dec!(43)     // Taproot
+    } else if address.starts_with("bc1q") || address.starts_with("tb1q") {
+        dec!(31)     // Native SegWit
+    } else if address.starts_with("2") || address.starts_with("3") {
+        dec!(32)     // P2SH
+    } else {
+        dec!(34)     // Legacy
+    }
+}
+```
+
+```python
+def input_vbytes(address: str) -> float:
+    """Calculate virtual bytes for spending a UTXO based on address type."""
+    if address.startswith(('bc1p', 'tb1p', 'bcrt1p')):
+        return 57.5   # Taproot (p2tr)
+    elif address.startswith(('bc1q', 'tb1q', 'bcrt1q')):
+        return 68.0   # Native SegWit (p2wpkh)
+    elif address.startswith(('2', '3')):
+        return 91.0   # Nested SegWit (p2sh-p2wpkh)
+    else:
+        return 148.0  # Legacy (p2pkh)
+
+def output_vbytes(address: str) -> float:
+    """Calculate virtual bytes for an output based on address type."""
+    if address.startswith(('bc1p', 'tb1p', 'bcrt1p')):
+        return 43.0   # Taproot
+    elif address.startswith(('bc1q', 'tb1q', 'bcrt1q')):
+        return 31.0   # Native SegWit
+    elif address.startswith(('2', '3')):
+        return 32.0   # P2SH
+    else:
+        return 34.0   # Legacy
+```
+
+```cpp
+#include <string>
+
+/**
+ * Calculate virtual bytes for spending a UTXO based on address type.
+ */
+double input_vbytes(const std::string& address) {
+    if (address.rfind("bc1p", 0) == 0 || address.rfind("tb1p", 0) == 0 || 
+        address.rfind("bcrt1p", 0) == 0) {
+        return 57.5;   // Taproot (p2tr)
+    } else if (address.rfind("bc1q", 0) == 0 || address.rfind("tb1q", 0) == 0 || 
+               address.rfind("bcrt1q", 0) == 0) {
+        return 68.0;   // Native SegWit (p2wpkh)
+    } else if (address[0] == '2' || address[0] == '3') {
+        return 91.0;   // Nested SegWit (p2sh-p2wpkh)
+    } else {
+        return 148.0;  // Legacy (p2pkh)
+    }
+}
+
+/**
+ * Calculate virtual bytes for an output based on address type.
+ */
+double output_vbytes(const std::string& address) {
+    if (address.rfind("bc1p", 0) == 0 || address.rfind("tb1p", 0) == 0 || 
+        address.rfind("bcrt1p", 0) == 0) {
+        return 43.0;   // Taproot
+    } else if (address.rfind("bc1q", 0) == 0 || address.rfind("tb1q", 0) == 0 || 
+               address.rfind("bcrt1q", 0) == 0) {
+        return 31.0;   // Native SegWit
+    } else if (address[0] == '2' || address[0] == '3') {
+        return 32.0;   // P2SH
+    } else {
+        return 34.0;   // Legacy
+    }
+}
+```
+
+```javascript
+/**
+ * Calculate virtual bytes for spending a UTXO based on address type.
+ * @param {string} address - Bitcoin address
+ * @returns {number} Virtual bytes required
+ */
+function inputVbytes(address) {
+    if (address.startsWith('bc1p') || address.startsWith('tb1p') || 
+        address.startsWith('bcrt1p')) {
+        return 57.5;   // Taproot (p2tr)
+    } else if (address.startsWith('bc1q') || address.startsWith('tb1q') || 
+               address.startsWith('bcrt1q')) {
+        return 68.0;   // Native SegWit (p2wpkh)
+    } else if (address.startsWith('2') || address.startsWith('3')) {
+        return 91.0;   // Nested SegWit (p2sh-p2wpkh)
+    } else {
+        return 148.0;  // Legacy (p2pkh)
+    }
+}
+
+/**
+ * Calculate virtual bytes for an output based on address type.
+ * @param {string} address - Bitcoin address
+ * @returns {number} Virtual bytes required
+ */
+function outputVbytes(address) {
+    if (address.startsWith('bc1p') || address.startsWith('tb1p') || 
+        address.startsWith('bcrt1p')) {
+        return 43.0;   // Taproot
+    } else if (address.startsWith('bc1q') || address.startsWith('tb1q') || 
+               address.startsWith('bcrt1q')) {
+        return 31.0;   // Native SegWit
+    } else if (address.startsWith('2') || address.startsWith('3')) {
+        return 32.0;   // P2SH
+    } else {
+        return 34.0;   // Legacy
+    }
+}
+```
+:::
 
 ### Example UTXOs
 
@@ -70,6 +285,131 @@ UTXO 3: P2PKH, 0.3 BTC
 1. Sort UTXOs by value (largest first)
 2. Select UTXOs until sum >= payment + estimated fee
 3. Create change output if needed
+
+:::code-group
+```rust
+fn select_largest_first(
+    coins: &[Coin],
+    target: Decimal,
+    fee_rate: Decimal
+) -> Result<(Vec<Coin>, Decimal), String> {
+    // Sort by amount descending
+    let mut sorted: Vec<Coin> = coins.to_vec();
+    sorted.sort_by(|a, b| b.amount.partial_cmp(&a.amount).unwrap());
+    
+    let mut selected: Vec<Coin> = Vec::new();
+    let mut total = Decimal::ZERO;
+    
+    for coin in sorted {
+        selected.push(coin.clone());
+        total += coin.amount;
+        
+        let estimated_fee = estimate_fee(selected.len(), fee_rate);
+        
+        if total >= target + estimated_fee {
+            return Ok((selected, total - target - estimated_fee));
+        }
+    }
+    
+    Err("Insufficient funds".to_string())
+}
+```
+
+```python
+def select_largest_first(coins, target_amount, fee_rate):
+    """Select coins using largest-first greedy algorithm."""
+    # Sort by amount descending
+    sorted_coins = sorted(coins, key=lambda c: c['amount'], reverse=True)
+    
+    selected = []
+    total = Decimal('0')
+    
+    for coin in sorted_coins:
+        selected.append(coin)
+        total += coin['amount']
+        
+        # Estimate fee based on selected inputs
+        estimated_fee = estimate_fee(len(selected), fee_rate)
+        
+        if total >= target_amount + estimated_fee:
+            return selected, total - target_amount - estimated_fee
+    
+    raise ValueError("Insufficient funds")
+```
+
+```cpp
+#include <vector>
+#include <algorithm>
+#include <stdexcept>
+#include <utility>
+
+/**
+ * Select coins using largest-first greedy algorithm.
+ * @return pair of (selected coins, change amount)
+ */
+std::pair<std::vector<Coin>, double> select_largest_first(
+    std::vector<Coin> coins,
+    double target_amount,
+    double fee_rate
+) {
+    // Sort by amount descending
+    std::sort(coins.begin(), coins.end(), [](const Coin& a, const Coin& b) {
+        return a.amount > b.amount;
+    });
+    
+    std::vector<Coin> selected;
+    double total = 0.0;
+    
+    for (const auto& coin : coins) {
+        selected.push_back(coin);
+        total += coin.amount;
+        
+        // Estimate fee based on selected inputs
+        double estimated_fee = estimate_fee(selected.size(), fee_rate);
+        
+        if (total >= target_amount + estimated_fee) {
+            return {selected, total - target_amount - estimated_fee};
+        }
+    }
+    
+    throw std::runtime_error("Insufficient funds");
+}
+```
+
+```javascript
+/**
+ * Select coins using largest-first greedy algorithm.
+ * @param {Array} coins - Array of coin objects with 'amount' property
+ * @param {number} targetAmount - Target amount to reach
+ * @param {number} feeRate - Fee rate for estimation
+ * @returns {Object} Object with 'selected' coins and 'change' amount
+ */
+function selectLargestFirst(coins, targetAmount, feeRate) {
+    // Sort by amount descending
+    const sortedCoins = [...coins].sort((a, b) => b.amount - a.amount);
+    
+    const selected = [];
+    let total = 0;
+    
+    for (const coin of sortedCoins) {
+        selected.push(coin);
+        total += coin.amount;
+        
+        // Estimate fee based on selected inputs
+        const estimatedFee = estimateFee(selected.length, feeRate);
+        
+        if (total >= targetAmount + estimatedFee) {
+            return {
+                selected,
+                change: total - targetAmount - estimatedFee
+            };
+        }
+    }
+    
+    throw new Error('Insufficient funds');
+}
+```
+:::
 
 **Pros:**
 - Simple to implement
@@ -180,6 +520,115 @@ UTXO 3: P2PKH, 0.3 BTC
 Weight = (Base Size × 3) + Total Size
 Virtual Size = Weight / 4
 ```
+
+:::code-group
+```rust
+/// Calculate the total virtual size of a transaction
+/// tx_vsize = 10.5 (overhead) + sum(input_vbytes) + sum(output_vbytes)
+fn calculate_tx_vsize(inputs: &[Coin], output_addresses: &[&str]) -> Decimal {
+    let overhead = dec!(10.5);
+    
+    let input_size: Decimal = inputs.iter()
+        .map(|c| input_vbytes(&c.address))
+        .sum();
+    
+    let output_size: Decimal = output_addresses.iter()
+        .map(|addr| output_vbytes(addr))
+        .sum();
+    
+    // Ceiling the vsize to ensure we don't underestimate
+    (overhead + input_size + output_size).ceil()
+}
+```
+
+```python
+def calculate_tx_vsize(inputs: list, output_addresses: list) -> int:
+    """Calculate virtual size of a transaction.
+    
+    Args:
+        inputs: List of UTXOs to spend
+        output_addresses: List of destination addresses
+    
+    Returns:
+        Virtual size in vbytes (rounded up)
+    """
+    import math
+    
+    # Transaction overhead: ~10.5 vB
+    overhead = 10.5
+    
+    # Sum input sizes based on address types
+    input_size = sum(input_vbytes(coin['address']) for coin in inputs)
+    
+    # Sum output sizes based on address types
+    output_size = sum(output_vbytes(addr) for addr in output_addresses)
+    
+    # Round up to be safe
+    return math.ceil(overhead + input_size + output_size)
+```
+
+```cpp
+#include <vector>
+#include <string>
+#include <cmath>
+#include <numeric>
+
+/**
+ * Calculate the total virtual size of a transaction
+ * tx_vsize = 10.5 (overhead) + sum(input_vbytes) + sum(output_vbytes)
+ */
+int calculate_tx_vsize(
+    const std::vector<Coin>& inputs,
+    const std::vector<std::string>& output_addresses
+) {
+    // Transaction overhead: ~10.5 vB
+    double overhead = 10.5;
+    
+    // Sum input sizes based on address types
+    double input_size = std::accumulate(inputs.begin(), inputs.end(), 0.0,
+        [](double sum, const Coin& coin) {
+            return sum + input_vbytes(coin.address);
+        });
+    
+    // Sum output sizes based on address types
+    double output_size = std::accumulate(output_addresses.begin(), output_addresses.end(), 0.0,
+        [](double sum, const std::string& addr) {
+            return sum + output_vbytes(addr);
+        });
+    
+    // Ceiling the vsize to ensure we don't underestimate
+    return static_cast<int>(std::ceil(overhead + input_size + output_size));
+}
+```
+
+```javascript
+/**
+ * Calculate the total virtual size of a transaction
+ * tx_vsize = 10.5 (overhead) + sum(input_vbytes) + sum(output_vbytes)
+ * 
+ * @param {Array} inputs - List of UTXOs to spend
+ * @param {Array} outputAddresses - List of destination addresses
+ * @returns {number} Virtual size in vbytes (rounded up)
+ */
+function calculateTxVsize(inputs, outputAddresses) {
+    // Transaction overhead: ~10.5 vB
+    const overhead = 10.5;
+    
+    // Sum input sizes based on address types
+    const inputSize = inputs.reduce(
+        (sum, coin) => sum + inputVbytes(coin.address), 0
+    );
+    
+    // Sum output sizes based on address types
+    const outputSize = outputAddresses.reduce(
+        (sum, addr) => sum + outputVbytes(addr), 0
+    );
+    
+    // Ceiling the vsize to ensure we don't underestimate
+    return Math.ceil(overhead + inputSize + outputSize);
+}
+```
+:::
 
 ### Fee Calculation Example
 

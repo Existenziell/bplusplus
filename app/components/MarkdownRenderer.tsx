@@ -6,10 +6,50 @@ import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
-import CodeBlock from './CodeBlock'
+import CodeBlock, { MultiLanguageCodeBlock } from './CodeBlock'
 
 interface MarkdownRendererProps {
   content: string
+}
+
+interface CodeGroupBlock {
+  id: string
+  languages: { lang: string; code: string }[]
+}
+
+// Parse :::code-group blocks and extract code blocks within them
+function parseCodeGroups(content: string): { processedContent: string; codeGroups: CodeGroupBlock[] } {
+  const codeGroups: CodeGroupBlock[] = []
+  let groupCounter = 0
+
+  // Match :::code-group ... ::: blocks
+  const codeGroupRegex = /:::code-group\s*\n([\s\S]*?)\n:::/g
+
+  const processedContent = content.replace(codeGroupRegex, (match, groupContent) => {
+    const groupId = `code-group-${groupCounter++}`
+    const languages: { lang: string; code: string }[] = []
+
+    // Extract individual code blocks from the group
+    const codeBlockRegex = /```(\w+)\s*\n([\s\S]*?)```/g
+    let codeMatch
+
+    while ((codeMatch = codeBlockRegex.exec(groupContent)) !== null) {
+      const lang = codeMatch[1]
+      const code = codeMatch[2].trim()
+      languages.push({ lang, code })
+    }
+
+    if (languages.length > 0) {
+      codeGroups.push({ id: groupId, languages })
+      // Return a placeholder that we'll render as the MultiLanguageCodeBlock
+      return `<div data-code-group-id="${groupId}"></div>`
+    }
+
+    // If no code blocks found, return original content
+    return match
+  })
+
+  return { processedContent, codeGroups }
 }
 
 // Generate slug from text (same as GitHub markdown)
@@ -73,12 +113,35 @@ function YouTubeEmbed({ videoId }: { videoId: string }) {
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
+  // Parse code groups from the content
+  const { processedContent, codeGroups } = parseCodeGroups(content)
+
+  // Create a map for quick lookup of code groups
+  const codeGroupMap = new Map(codeGroups.map(g => [g.id, g]))
+
   return (
     <div className="markdown-content prose prose-invert max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
+          // Handle code group placeholders
+          div: ({ node, children, ...props }: any) => {
+            const codeGroupId = props['data-code-group-id']
+            if (codeGroupId && codeGroupMap.has(codeGroupId)) {
+              const group = codeGroupMap.get(codeGroupId)!
+              return (
+                <MultiLanguageCodeBlock
+                  languages={group.languages.map(({ lang, code }) => ({
+                    lang,
+                    code,
+                    className: `language-${lang}`
+                  }))}
+                />
+              )
+            }
+            return <div {...props}>{children}</div>
+          },
           h1: ({ children, ...props }: any) => {
             const text = extractText(children)
             const id = generateSlug(text)
@@ -260,7 +323,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           },
         }}
       >
-        {content}
+        {processedContent}
       </ReactMarkdown>
     </div>
   )

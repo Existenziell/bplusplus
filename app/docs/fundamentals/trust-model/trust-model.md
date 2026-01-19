@@ -295,7 +295,3 @@ Bitcoin's trust model is fundamentally different from traditional financial syst
 - [Decentralization](/docs/fundamentals/decentralization) - Why decentralization reduces trust needs
 - [Consensus Mechanism](/docs/fundamentals/consensus) - How trustless consensus works
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - Economic trust model
-
-## Navigation
-
-- [Fundamentals Documentation](/docs/fundamentals) - Return to Fundamentals overview

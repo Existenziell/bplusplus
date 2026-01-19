@@ -38,7 +38,7 @@ const Metrics = () => {
   }
 
   return (
-    <div className='bg-white dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50 shadow-md px-4 sm:px-8 md:px-12 py-3 md:py-4 mt-2 mt-8'>
+    <div className='bg-white dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50 shadow-md px-4 sm:px-8 md:px-12 py-3 md:py-4'>
       <div className='text-xs sm:text-sm font-mono text-zinc-800 dark:text-zinc-200'>
         <ul className='flex flex-row items-center flex-wrap justify-around gap-4 sm:gap-6 md:gap-8'>
           <li className='flex flex-col items-center justify-between space-y-1 italic'>
@@ -84,7 +84,7 @@ const Metrics = () => {
             </div>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Symbol</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-1 italic'>
+          <li className='hidden md:flex flex-col items-center justify-between space-y-1 italic'>
               <span
               className='text-btc text-base sm:text-lg md:text-xl font-bold hover:underline cursor-pointer'
               aria-label='Copy Bitcoin Hex Value'

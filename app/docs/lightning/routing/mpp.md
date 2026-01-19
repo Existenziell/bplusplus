@@ -81,6 +81,177 @@ Value (40 bytes):
   8 bytes: total_msat (total payment amount)
 ```
 
+:::code-group
+```rust
+/// Encode TLV for MPP payment data
+/// Format: type (8 bytes) + length (8 bytes) + payment_secret (32 bytes) + total_msat (8 bytes)
+fn encode_mpp_tlv(payment_secret: &[u8; 32], total_msat: u64) -> String {
+    let mut result = String::with_capacity(112); // 16 + 16 + 64 + 16 = 112 hex chars
+    
+    // Type: 8 (uint64, big-endian)
+    for byte in &8u64.to_be_bytes() {
+        result.push_str(&format!("{:02x}", byte));
+    }
+    
+    // Length: 40 (uint64, big-endian)
+    for byte in &40u64.to_be_bytes() {
+        result.push_str(&format!("{:02x}", byte));
+    }
+    
+    // Payment secret: 32 bytes
+    for byte in payment_secret.iter() {
+        result.push_str(&format!("{:02x}", byte));
+    }
+    
+    // Total msat: 8 bytes (uint64, big-endian)
+    for byte in &total_msat.to_be_bytes() {
+        result.push_str(&format!("{:02x}", byte));
+    }
+    
+    result
+}
+
+// Example usage
+fn main() {
+    let payment_secret: [u8; 32] = hex::decode("b3c3965128b05c96d76348158f8f3a1b92e2847172f9adebb400a9e83e62f066")
+        .unwrap()
+        .try_into()
+        .unwrap();
+    let total_msat: u64 = 120_000;
+    let tlv = encode_mpp_tlv(&payment_secret, total_msat);
+    println!("TLV: {}", tlv);
+}
+```
+
+```python
+def encode_mpp_tlv(payment_secret: bytes, total_msat: int) -> str:
+    """Encode TLV for MPP payment data.
+    
+    Args:
+        payment_secret: 32-byte payment secret from invoice
+        total_msat: Total payment amount in millisatoshis
+    
+    Returns:
+        Hex-encoded TLV string
+    """
+    result = ""
+    
+    # Type: 8 (uint64, big-endian)
+    result += (8).to_bytes(8, 'big').hex()
+    
+    # Length: 40 (uint64, big-endian) 
+    result += (40).to_bytes(8, 'big').hex()
+    
+    # Payment secret: 32 bytes
+    result += payment_secret.hex()
+    
+    # Total msat: 8 bytes (uint64, big-endian)
+    result += total_msat.to_bytes(8, 'big').hex()
+    
+    return result
+
+# Example usage
+payment_secret = bytes.fromhex("b3c3965128b05c96d76348158f8f3a1b92e2847172f9adebb400a9e83e62f066")
+total_msat = 120_000
+tlv = encode_mpp_tlv(payment_secret, total_msat)
+print(f"TLV: {tlv}")
+```
+
+```cpp
+#include <iostream>
+#include <string>
+#include <array>
+#include <cstdint>
+#include <iomanip>
+#include <sstream>
+
+/**
+ * Encode TLV for MPP payment data
+ * Format: type (8 bytes) + length (8 bytes) + payment_secret (32 bytes) + total_msat (8 bytes)
+ */
+std::string encode_mpp_tlv(const std::array<uint8_t, 32>& payment_secret, uint64_t total_msat) {
+    std::ostringstream result;
+    result << std::hex << std::setfill('0');
+    
+    // Type: 8 (uint64, big-endian)
+    for (int i = 7; i >= 0; --i) {
+        result << std::setw(2) << ((8ULL >> (i * 8)) & 0xFF);
+    }
+    
+    // Length: 40 (uint64, big-endian)
+    for (int i = 7; i >= 0; --i) {
+        result << std::setw(2) << ((40ULL >> (i * 8)) & 0xFF);
+    }
+    
+    // Payment secret: 32 bytes
+    for (const auto& byte : payment_secret) {
+        result << std::setw(2) << static_cast<int>(byte);
+    }
+    
+    // Total msat: 8 bytes (uint64, big-endian)
+    for (int i = 7; i >= 0; --i) {
+        result << std::setw(2) << ((total_msat >> (i * 8)) & 0xFF);
+    }
+    
+    return result.str();
+}
+
+// Example usage
+int main() {
+    std::array<uint8_t, 32> payment_secret = {
+        0xb3, 0xc3, 0x96, 0x51, 0x28, 0xb0, 0x5c, 0x96,
+        0xd7, 0x63, 0x48, 0x15, 0x8f, 0x8f, 0x3a, 0x1b,
+        0x92, 0xe2, 0x84, 0x71, 0x72, 0xf9, 0xad, 0xeb,
+        0xb4, 0x00, 0xa9, 0xe8, 0x3e, 0x62, 0xf0, 0x66
+    };
+    uint64_t total_msat = 120000;
+    std::string tlv = encode_mpp_tlv(payment_secret, total_msat);
+    std::cout << "TLV: " << tlv << std::endl;
+    return 0;
+}
+```
+
+```javascript
+/**
+ * Encode TLV for MPP payment data
+ * Format: type (8 bytes) + length (8 bytes) + payment_secret (32 bytes) + total_msat (8 bytes)
+ * 
+ * @param {Buffer} paymentSecret - 32-byte payment secret from invoice
+ * @param {BigInt} totalMsat - Total payment amount in millisatoshis
+ * @returns {string} Hex-encoded TLV string
+ */
+function encodeMppTlv(paymentSecret, totalMsat) {
+    let result = '';
+    
+    // Type: 8 (uint64, big-endian)
+    const typeBuffer = Buffer.alloc(8);
+    typeBuffer.writeBigUInt64BE(8n);
+    result += typeBuffer.toString('hex');
+    
+    // Length: 40 (uint64, big-endian)
+    const lengthBuffer = Buffer.alloc(8);
+    lengthBuffer.writeBigUInt64BE(40n);
+    result += lengthBuffer.toString('hex');
+    
+    // Payment secret: 32 bytes
+    result += paymentSecret.toString('hex');
+    
+    // Total msat: 8 bytes (uint64, big-endian)
+    const msatBuffer = Buffer.alloc(8);
+    msatBuffer.writeBigUInt64BE(BigInt(totalMsat));
+    result += msatBuffer.toString('hex');
+    
+    return result;
+}
+
+// Example usage
+const paymentSecret = Buffer.from('b3c3965128b05c96d76348158f8f3a1b92e2847172f9adebb400a9e83e62f066', 'hex');
+const totalMsat = 120000n;
+const tlv = encodeMppTlv(paymentSecret, totalMsat);
+console.log(`TLV: ${tlv}`);
+```
+:::
+
 ### Example
 
 ```

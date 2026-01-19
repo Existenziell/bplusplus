@@ -1,5 +1,3 @@
-# Blockchain Monitoring
-
 Real-time blockchain monitoring allows you to detect new blocks instantly, track mining pools, analyze transactions, and monitor network activity.
 
 ## Useful Resources
@@ -125,37 +123,6 @@ def identify_pool(block):
     # - Pool signatures
     
     return pool_name
-```
-
-### Common Pool Identifiers
-
-- **Antpool**: "AntPool", "Antpool", "ANTPOOL", "antpool.com"
-- **Foundry USA**: "Foundry USA", "FOUNDRY USA", "foundryusa", "FoundryUSA", "Foundry"
-- **F2Pool**: "F2Pool", "F2POOL", "f2pool", "f2pool.com"
-- **ViaBTC**: "ViaBTC", "VIABTC", "viabtc", "viabtc.com"
-- **Binance Pool**: "Binance Pool", "BINANCE POOL", "binancepool", "binance.com", "BinancePool", "Binance"
-- **Braiins Pool** (formerly Slush Pool): "Slush Pool", "SLUSH POOL", "slushpool", "slushpool.com", "SlushPool", "Slush", "Braiins", "BRAIINS"
-- **BTC.com**: "BTC.com", "BTC.COM", "btc.com", "btccom"
-- **MARA Pool**: "MARA Pool", "MARA POOL", "marapool", "marathon", "Marathon Digital", "MaraPool", "MARA"
-- **Luxor**: "Luxor", "LUXOR", "luxor", "luxor.tech"
-
-### Pool Database
-
-Maintain a database of known pools:
-
-```python
-KNOWN_POOLS = {
-    "Antpool": ["AntPool", "Antpool", "ANTPOOL", "antpool.com"],
-    "Foundry USA": ["Foundry USA", "FOUNDRY USA", "foundryusa", "FoundryUSA", "Foundry"],
-    "F2Pool": ["F2Pool", "F2POOL", "f2pool", "f2pool.com"],
-    "ViaBTC": ["ViaBTC", "VIABTC", "viabtc", "viabtc.com"],
-    "Binance Pool": ["Binance Pool", "BINANCE POOL", "binancepool", "binance.com", "BinancePool", "Binance"],
-    "Braiins Pool": ["Slush Pool", "SLUSH POOL", "slushpool", "slushpool.com", "SlushPool", "Slush", "Braiins", "BRAIINS"],
-    "BTC.com": ["BTC.com", "BTC.COM", "btc.com", "btccom"],
-    "MARA Pool": ["MARA Pool", "MARA POOL", "marapool", "marathon", "Marathon Digital", "MaraPool", "MARA"],
-    "Luxor": ["Luxor", "LUXOR", "luxor", "luxor.tech"],
-    # ... more pools
-}
 ```
 
 ## OP_RETURN Analysis
@@ -294,37 +261,3 @@ except Exception as e:
 2. **Batch Operations**: Batch RPC calls when possible
 3. **Connection Pooling**: Reuse connections
 4. **Efficient Parsing**: Parse only needed data
-
-## Common Issues
-
-### ZMQ Not Working
-
-**Problem**: ZMQ notifications not received
-
-**Solutions:**
-- Check Bitcoin Core built with ZMQ
-- Verify ZMQ configuration
-- Check firewall settings
-- Verify port availability
-
-### Missing Blocks
-
-**Problem**: Some blocks not detected
-
-**Solutions:**
-- Use ZMQ for reliability
-- Implement block height tracking
-- Check node sync status
-- Monitor for gaps
-
-## Summary
-
-Blockchain monitoring enables:
-
-- **Real-time detection**: Instant block notifications
-- **Pool identification**: Track mining pools
-- **Transaction analysis**: Monitor mempool and transactions
-- **Statistics**: Track network metrics
-- **OP_RETURN extraction**: Analyze data storage
-
-Understanding blockchain monitoring helps build applications that react to network events in real-time.

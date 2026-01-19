@@ -32,7 +32,25 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 }
 ```
 
-### Python Implementation
+### Code Implementation
+
+:::code-group
+```rust
+/// Calculate block subsidy based on block height.
+///
+/// # Arguments
+///
+/// * `block_height` - Current block height
+///
+/// # Returns
+///
+/// Block subsidy in BTC
+fn get_block_subsidy(block_height: u64) -> f64 {
+    let halvings = block_height / 210_000;
+    let block_subsidy = 50.0 / (2.0_f64.powi(halvings as i32));
+    block_subsidy
+}
+```
 
 ```python
 def get_block_subsidy(block_height):
@@ -50,24 +68,37 @@ def get_block_subsidy(block_height):
     return block_subsidy
 ```
 
-### Rust Implementation
+```cpp
+#include <cstdint>
+#include <cmath>
 
-```rust
-fn get_block_subsidy(block_height: u64) -> f64 {
-    /// Calculate block subsidy based on block height.
-    ///
-    /// # Arguments
-    ///
-    /// * `block_height` - Current block height
-    ///
-    /// # Returns
-    ///
-    /// Block subsidy in BTC
-    let halvings = block_height / 210_000;
-    let block_subsidy = 50.0 / (2.0_f64.powi(halvings as i32));
-    block_subsidy
+/**
+ * Calculate block subsidy based on block height.
+ * 
+ * @param block_height Current block height
+ * @return Block subsidy in BTC
+ */
+double get_block_subsidy(uint64_t block_height) {
+    uint64_t halvings = block_height / 210000;
+    double block_subsidy = 50.0 / std::pow(2.0, static_cast<double>(halvings));
+    return block_subsidy;
 }
 ```
+
+```javascript
+/**
+ * Calculate block subsidy based on block height.
+ * 
+ * @param {number} blockHeight - Current block height
+ * @returns {number} Block subsidy in BTC
+ */
+function getBlockSubsidy(blockHeight) {
+    const halvings = Math.floor(blockHeight / 210000);
+    const blockSubsidy = 50.0 / Math.pow(2, halvings);
+    return blockSubsidy;
+}
+```
+:::
 
 ## How It Works
 
@@ -254,25 +285,40 @@ The subsidy equation creates a **step function** that halves every 210,000 block
 
 ```
 Subsidy (BTC)
-50 │
-   │ ████████████████████████████████████████████
-25 │ ████████████████████████████████
-   │ ████████████████████
-12.5│ ██████████████
-   │ ████████
-6.25│ █████
-   │ ███
-3.125│ ██
-   │ █
-1.56 │ █
-   │
-   └─────────────────────────────────────────────→ Blocks
-    0    210k   420k   630k   840k   1050k
+      │
+50    │████████
+25    │        ████████
+12.5  │                ████████
+6.25  │                        ████████
+3.125 │                                ████████
+1.5625│                                        ████████
+      │
+      └────────────────────────────────────────────────→ Blocks
+       0      210k    420k    630k    840k    1050k
 ```
 
 ## Code Examples
 
 ### Calculate Subsidy for Any Block
+
+:::code-group
+```rust
+fn calculate_subsidy(block_height: u64) -> f64 {
+    let halvings = block_height / 210_000;
+    if halvings >= 64 {
+        return 0.0;
+    }
+    50.0 / 2.0_f64.powi(halvings as i32)
+}
+
+// Examples
+fn main() {
+    println!("{}", calculate_subsidy(0));        // 50.0
+    println!("{}", calculate_subsidy(210_000));  // 25.0
+    println!("{}", calculate_subsidy(840_000));  // 3.125
+    println!("{}", calculate_subsidy(1_050_000)); // 1.5625
+}
+```
 
 ```python
 def calculate_subsidy(block_height):
@@ -285,11 +331,82 @@ def calculate_subsidy(block_height):
 # Examples
 print(calculate_subsidy(0))        # 50.0
 print(calculate_subsidy(210000))   # 25.0
-print(calculate_subsidy(840000))    # 3.125
+print(calculate_subsidy(840000))   # 3.125
 print(calculate_subsidy(1050000))  # 1.5625
 ```
 
+```cpp
+#include <iostream>
+#include <cstdint>
+#include <cmath>
+
+double calculate_subsidy(uint64_t block_height) {
+    uint64_t halvings = block_height / 210000;
+    if (halvings >= 64) {
+        return 0.0;
+    }
+    return 50.0 / std::pow(2.0, static_cast<double>(halvings));
+}
+
+// Examples
+int main() {
+    std::cout << calculate_subsidy(0) << std::endl;        // 50.0
+    std::cout << calculate_subsidy(210000) << std::endl;   // 25.0
+    std::cout << calculate_subsidy(840000) << std::endl;   // 3.125
+    std::cout << calculate_subsidy(1050000) << std::endl;  // 1.5625
+    return 0;
+}
+```
+
+```javascript
+function calculateSubsidy(blockHeight) {
+    const halvings = Math.floor(blockHeight / 210000);
+    if (halvings >= 64) {
+        return 0;
+    }
+    return 50.0 / Math.pow(2, halvings);
+}
+
+// Examples
+console.log(calculateSubsidy(0));        // 50.0
+console.log(calculateSubsidy(210000));   // 25.0
+console.log(calculateSubsidy(840000));   // 3.125
+console.log(calculateSubsidy(1050000));  // 1.5625
+```
+:::
+
 ### Calculate Total Supply Up to Block
+
+:::code-group
+```rust
+fn total_supply_up_to_block(block_height: u64) -> f64 {
+    let mut total = 0.0;
+    let mut current_height: u64 = 0;
+    
+    while current_height <= block_height {
+        let halvings = current_height / 210_000;
+        if halvings >= 64 {
+            break;
+        }
+        
+        let period_start = halvings * 210_000;
+        let period_end = std::cmp::min((halvings + 1) * 210_000, block_height + 1);
+        let blocks_in_period = period_end - period_start;
+        
+        let subsidy = 50.0 / 2.0_f64.powi(halvings as i32);
+        total += blocks_in_period as f64 * subsidy;
+        
+        current_height = period_end;
+    }
+    
+    total
+}
+
+// Example: Total supply calculation
+fn main() {
+    println!("{}", total_supply_up_to_block(840_000)); // ~19,687,500 BTC
+}
+```
 
 ```python
 def total_supply_up_to_block(block_height):
@@ -317,7 +434,86 @@ def total_supply_up_to_block(block_height):
 print(total_supply_up_to_block(840000))  # ~19,687,500 BTC
 ```
 
+```cpp
+#include <iostream>
+#include <cstdint>
+#include <cmath>
+#include <algorithm>
+
+double total_supply_up_to_block(uint64_t block_height) {
+    double total = 0.0;
+    uint64_t current_height = 0;
+    
+    while (current_height <= block_height) {
+        uint64_t halvings = current_height / 210000;
+        if (halvings >= 64) {
+            break;
+        }
+        
+        uint64_t period_start = halvings * 210000;
+        uint64_t period_end = std::min((halvings + 1) * 210000, block_height + 1);
+        uint64_t blocks_in_period = period_end - period_start;
+        
+        double subsidy = 50.0 / std::pow(2.0, static_cast<double>(halvings));
+        total += static_cast<double>(blocks_in_period) * subsidy;
+        
+        current_height = period_end;
+    }
+    
+    return total;
+}
+
+// Example: Total supply calculation
+int main() {
+    std::cout << total_supply_up_to_block(840000) << std::endl; // ~19,687,500 BTC
+    return 0;
+}
+```
+
+```javascript
+function totalSupplyUpToBlock(blockHeight) {
+    let total = 0;
+    let currentHeight = 0;
+    
+    while (currentHeight <= blockHeight) {
+        const halvings = Math.floor(currentHeight / 210000);
+        if (halvings >= 64) {
+            break;
+        }
+        
+        const periodStart = halvings * 210000;
+        const periodEnd = Math.min((halvings + 1) * 210000, blockHeight + 1);
+        const blocksInPeriod = periodEnd - periodStart;
+        
+        const subsidy = 50.0 / Math.pow(2, halvings);
+        total += blocksInPeriod * subsidy;
+        
+        currentHeight = periodEnd;
+    }
+    
+    return total;
+}
+
+// Example: Total supply calculation
+console.log(totalSupplyUpToBlock(840000)); // ~19,687,500 BTC
+```
+:::
+
 ### Find Next Halving Block
+
+:::code-group
+```rust
+fn next_halving_block(current_height: u64) -> u64 {
+    let current_halvings = current_height / 210_000;
+    let next_halving_height = (current_halvings + 1) * 210_000;
+    next_halving_height
+}
+
+// Example
+fn main() {
+    println!("{}", next_halving_block(850_000)); // 1050000
+}
+```
 
 ```python
 def next_halving_block(current_height):
@@ -329,6 +525,35 @@ def next_halving_block(current_height):
 # Example
 print(next_halving_block(850000))  # 1050000
 ```
+
+```cpp
+#include <iostream>
+#include <cstdint>
+
+uint64_t next_halving_block(uint64_t current_height) {
+    uint64_t current_halvings = current_height / 210000;
+    uint64_t next_halving_height = (current_halvings + 1) * 210000;
+    return next_halving_height;
+}
+
+// Example
+int main() {
+    std::cout << next_halving_block(850000) << std::endl; // 1050000
+    return 0;
+}
+```
+
+```javascript
+function nextHalvingBlock(currentHeight) {
+    const currentHalvings = Math.floor(currentHeight / 210000);
+    const nextHalvingHeight = (currentHalvings + 1) * 210000;
+    return nextHalvingHeight;
+}
+
+// Example
+console.log(nextHalvingBlock(850000)); // 1050000
+```
+:::
 
 ## Economic Theory
 

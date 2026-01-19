@@ -229,7 +229,3 @@ Bitcoin chose to optimize for **Security** and **Decentralization**, accepting l
 - [Decentralization](/docs/fundamentals/decentralization) - Why decentralization matters
 - [Consensus Mechanism](/docs/fundamentals/consensus) - How Bitcoin achieves consensus
 - [Lightning Network](/docs/lightning) - Layer 2 scaling solution
-
-## Navigation
-
-- [Fundamentals Documentation](/docs/fundamentals) - Return to Fundamentals overview

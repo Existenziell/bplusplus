@@ -49,7 +49,3 @@ Most miners join mining pools to:
 - [Proof-of-Work Mechanism](/docs/mining/proof-of-work) - How the mining algorithm works
 - [Difficulty Adjustment](/docs/mining/difficulty) - How difficulty adjusts to maintain block times
 - [Mining Economics](/docs/mining/economics) - Block rewards, fees, and profitability
-
-## Navigation
-
-- [Mining Documentation](/docs/mining) - Return to Mining overview

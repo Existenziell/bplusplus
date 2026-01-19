@@ -14,7 +14,9 @@ export default async function GlossaryPage() {
       <p className="text-xl text-zinc-400 mb-8">
         A comprehensive glossary of Bitcoin and Lightning Network development terms.
       </p>
-      <MarkdownRenderer content={content} />
+      <div className="glossary-content">
+        <MarkdownRenderer content={content} />
+      </div>
     </div>
   )
 }

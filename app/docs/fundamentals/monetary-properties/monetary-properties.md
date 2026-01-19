@@ -346,7 +346,3 @@ Bitcoin can be expressed in various units, from the smallest satoshi to larger d
 - [Bitcoin Trilemma](/docs/fundamentals/trilemma) - Trade-offs in Bitcoin design
 - [Decentralization](/docs/fundamentals/decentralization) - How decentralization affects monetary properties
 - [History: Supply Schedule](/docs/history/supply) - How Bitcoin's supply is controlled
-
-## Navigation
-
-- [Fundamentals Documentation](/docs/fundamentals) - Return to Fundamentals overview

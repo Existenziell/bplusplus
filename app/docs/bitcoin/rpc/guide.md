@@ -57,6 +57,307 @@ alias btc='<path-to-bitcoin-cli> -rpcuser=$BITCOIN_RPC_USER -rpcpassword=$BITCOI
 btc <method_name> [parameters]
 ```
 
+## Programmatic RPC Access
+
+For building applications, you can interact with Bitcoin Core RPC programmatically:
+
+:::code-group
+```rust
+use reqwest::blocking::Client;
+use serde::{Deserialize, Serialize};
+use serde_json::{json, Value};
+use std::collections::HashMap;
+
+#[derive(Serialize)]
+struct RpcRequest {
+    jsonrpc: &'static str,
+    id: &'static str,
+    method: String,
+    params: Vec<Value>,
+}
+
+#[derive(Deserialize)]
+struct RpcResponse {
+    result: Option<Value>,
+    error: Option<Value>,
+}
+
+/// Centralized service for Bitcoin node RPC communication
+struct BitcoinRPCService {
+    rpc_url: String,
+    rpc_user: String,
+    rpc_password: String,
+    client: Client,
+}
+
+impl BitcoinRPCService {
+    fn new(rpc_url: &str, rpc_user: &str, rpc_password: &str) -> Self {
+        Self {
+            rpc_url: rpc_url.to_string(),
+            rpc_user: rpc_user.to_string(),
+            rpc_password: rpc_password.to_string(),
+            client: Client::builder()
+                .timeout(std::time::Duration::from_secs(5))
+                .build()
+                .unwrap(),
+        }
+    }
+
+    fn rpc_call(&self, method: &str, params: Vec<Value>) -> Result<Value, Box<dyn std::error::Error>> {
+        let request = RpcRequest {
+            jsonrpc: "1.0",
+            id: "client",
+            method: method.to_string(),
+            params,
+        };
+
+        let response: RpcResponse = self.client
+            .post(&self.rpc_url)
+            .basic_auth(&self.rpc_user, Some(&self.rpc_password))
+            .json(&request)
+            .send()?
+            .json()?;
+
+        Ok(response.result.unwrap_or(Value::Null))
+    }
+
+    // Convenience methods
+    fn get_blockchain_info(&self) -> Result<Value, Box<dyn std::error::Error>> {
+        self.rpc_call("getblockchaininfo", vec![])
+    }
+
+    fn get_block_count(&self) -> Result<Value, Box<dyn std::error::Error>> {
+        self.rpc_call("getblockcount", vec![])
+    }
+
+    fn get_block(&self, block_hash: &str, verbosity: i32) -> Result<Value, Box<dyn std::error::Error>> {
+        self.rpc_call("getblock", vec![json!(block_hash), json!(verbosity)])
+    }
+
+    fn get_mempool_info(&self) -> Result<Value, Box<dyn std::error::Error>> {
+        self.rpc_call("getmempoolinfo", vec![])
+    }
+
+    fn estimate_smart_fee(&self, target_blocks: i32) -> Result<Value, Box<dyn std::error::Error>> {
+        self.rpc_call("estimatesmartfee", vec![json!(target_blocks)])
+    }
+}
+
+// Usage
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let rpc = BitcoinRPCService::new("http://127.0.0.1:8332", "user", "password");
+    let info = rpc.get_blockchain_info()?;
+    println!("Block height: {}", info["blocks"]);
+    Ok(())
+}
+```
+
+```python
+import os
+import requests
+from typing import Dict, Any, Optional, List
+
+class BitcoinRPCService:
+    """Centralized service for Bitcoin node RPC communication."""
+
+    def __init__(self, rpc_url: str, rpc_user: Optional[str] = None, 
+                 rpc_password: Optional[str] = None, cookie_file: Optional[str] = None):
+        self.rpc_url = rpc_url
+        self.rpc_user = rpc_user
+        self.rpc_password = rpc_password
+        self.cookie_file = cookie_file
+        self.timeout = 5
+
+    def rpc_call(self, method: str, params: Optional[List] = None) -> Dict[str, Any]:
+        """Make an RPC call to Bitcoin node."""
+        if params is None:
+            params = []
+
+        payload = {
+            "jsonrpc": "1.0",
+            "id": "monitor",
+            "method": method,
+            "params": params
+        }
+
+        # Prepare authentication
+        auth = None
+        if self.cookie_file and os.path.exists(self.cookie_file):
+            with open(self.cookie_file, 'r') as f:
+                cookie = f.read().strip()
+            if ':' in cookie:
+                username, password = cookie.split(':', 1)
+                auth = (username, password)
+        elif self.rpc_user and self.rpc_password:
+            auth = (self.rpc_user, self.rpc_password)
+
+        response = requests.post(
+            self.rpc_url,
+            json=payload,
+            auth=auth,
+            timeout=self.timeout
+        )
+        return response.json()
+
+    # Convenience methods
+    def get_blockchain_info(self) -> Dict[str, Any]:
+        return self.rpc_call("getblockchaininfo")
+
+    def get_block_count(self) -> Dict[str, Any]:
+        return self.rpc_call("getblockcount")
+
+    def get_block(self, block_hash: str, verbosity: int = 1) -> Dict[str, Any]:
+        return self.rpc_call("getblock", [block_hash, verbosity])
+
+    def get_mempool_info(self) -> Dict[str, Any]:
+        return self.rpc_call("getmempoolinfo")
+
+    def estimate_smart_fee(self, target_blocks: int = 6) -> Dict[str, Any]:
+        return self.rpc_call("estimatesmartfee", [target_blocks])
+
+# Usage
+rpc = BitcoinRPCService("http://127.0.0.1:8332", "user", "password")
+info = rpc.get_blockchain_info()
+print(f"Block height: {info['result']['blocks']}")
+```
+
+```cpp
+#include <iostream>
+#include <string>
+#include <curl/curl.h>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
+/**
+ * Centralized service for Bitcoin node RPC communication
+ */
+class BitcoinRPCService {
+private:
+    std::string rpc_url;
+    std::string rpc_user;
+    std::string rpc_password;
+    
+    static size_t write_callback(void* contents, size_t size, size_t nmemb, std::string* userp) {
+        userp->append((char*)contents, size * nmemb);
+        return size * nmemb;
+    }
+
+public:
+    BitcoinRPCService(const std::string& url, const std::string& user, const std::string& password)
+        : rpc_url(url), rpc_user(user), rpc_password(password) {}
+
+    json rpc_call(const std::string& method, const json& params = json::array()) {
+        CURL* curl = curl_easy_init();
+        std::string response_string;
+        
+        json payload = {
+            {"jsonrpc", "1.0"},
+            {"id", "client"},
+            {"method", method},
+            {"params", params}
+        };
+        
+        std::string post_data = payload.dump();
+        std::string auth = rpc_user + ":" + rpc_password;
+        
+        if (curl) {
+            curl_easy_setopt(curl, CURLOPT_URL, rpc_url.c_str());
+            curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_data.c_str());
+            curl_easy_setopt(curl, CURLOPT_USERPWD, auth.c_str());
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
+            curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
+            
+            struct curl_slist* headers = nullptr;
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+            
+            curl_easy_perform(curl);
+            curl_slist_free_all(headers);
+            curl_easy_cleanup(curl);
+        }
+        
+        return json::parse(response_string);
+    }
+
+    // Convenience methods
+    json get_blockchain_info() { return rpc_call("getblockchaininfo"); }
+    json get_block_count() { return rpc_call("getblockcount"); }
+    json get_block(const std::string& hash, int verbosity = 1) {
+        return rpc_call("getblock", {hash, verbosity});
+    }
+    json get_mempool_info() { return rpc_call("getmempoolinfo"); }
+    json estimate_smart_fee(int target_blocks = 6) {
+        return rpc_call("estimatesmartfee", {target_blocks});
+    }
+};
+
+// Usage
+int main() {
+    BitcoinRPCService rpc("http://127.0.0.1:8332", "user", "password");
+    auto info = rpc.get_blockchain_info();
+    std::cout << "Block height: " << info["result"]["blocks"] << std::endl;
+    return 0;
+}
+```
+
+```javascript
+const axios = require('axios');
+
+class BitcoinRPCService {
+  constructor(rpcUrl, rpcUser, rpcPassword) {
+    this.rpcUrl = rpcUrl;
+    this.auth = { username: rpcUser, password: rpcPassword };
+    this.timeout = 5000;
+  }
+
+  async rpcCall(method, params = []) {
+    const payload = {
+      jsonrpc: '1.0',
+      id: 'client',
+      method: method,
+      params: params
+    };
+
+    const response = await axios.post(this.rpcUrl, payload, {
+      auth: this.auth,
+      timeout: this.timeout,
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    return response.data;
+  }
+
+  // Convenience methods
+  async getBlockchainInfo() {
+    return this.rpcCall('getblockchaininfo');
+  }
+
+  async getBlockCount() {
+    return this.rpcCall('getblockcount');
+  }
+
+  async getBlock(blockHash, verbosity = 1) {
+    return this.rpcCall('getblock', [blockHash, verbosity]);
+  }
+
+  async getMempoolInfo() {
+    return this.rpcCall('getmempoolinfo');
+  }
+
+  async estimateSmartFee(targetBlocks = 6) {
+    return this.rpcCall('estimatesmartfee', [targetBlocks]);
+  }
+}
+
+// Usage
+const rpc = new BitcoinRPCService('http://127.0.0.1:8332', 'user', 'password');
+const info = await rpc.getBlockchainInfo();
+console.log(`Block height: ${info.result.blocks}`);
+```
+:::
+
 ## Essential Node Information Commands
 
 ### 1. Blockchain Information

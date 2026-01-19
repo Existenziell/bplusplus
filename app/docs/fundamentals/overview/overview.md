@@ -147,7 +147,3 @@ Bitcoin cannot be hacked. It can only be adopted.
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin eliminates the need for trust
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - Bitcoin's economic characteristics
 - [Consensus Mechanism](/docs/fundamentals/consensus) - How Bitcoin reaches agreement
-
-## Navigation
-
-- [Fundamentals Documentation](/docs/fundamentals) - Return to Fundamentals overview

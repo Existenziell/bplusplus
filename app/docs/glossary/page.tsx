@@ -10,10 +10,7 @@ export default async function GlossaryPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-4">Bitcoin Development Glossary</h1>
-      <p className="text-xl text-zinc-400 mb-8">
-        A comprehensive glossary of Bitcoin and Lightning Network development terms.
-      </p>
+      <h1 className="text-5xl font-bold mb-12">Bitcoin Glossary</h1>
       <div className="glossary-content">
         <MarkdownRenderer content={content} />
       </div>

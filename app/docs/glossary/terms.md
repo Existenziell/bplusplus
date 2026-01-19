@@ -21,6 +21,9 @@ Specialized hardware designed specifically for Bitcoin mining. ASICs are far mor
 ### Atomic Swap
 A peer-to-peer exchange of cryptocurrencies between two parties without the need for a trusted third party. Uses hash time-locked contracts (HTLCs).
 
+### API (Application Programming Interface)
+How applications communicate with Bitcoin nodes (typically via RPC).
+
 ## B
 
 ### Batching
@@ -53,6 +56,9 @@ The size of a block in bytes. Bitcoin has a 1 MB base block size limit, which ca
 ### Block Time
 The average time between consecutive blocks. Bitcoin targets 10 minutes per block, maintained through difficulty adjustment.
 
+### Block Template
+A structure containing transactions and block header fields that miners use to construct blocks.
+
 ### BOLT (Basis of Lightning Technology)
 Technical specifications for the Lightning Network protocol. BOLT documents define how Lightning nodes communicate and route payments.
 
@@ -79,6 +85,9 @@ In Lightning Network, a transaction that represents the current state of a payme
 ### Confirmation
 When a transaction is included in a block that is added to the blockchain. More confirmations (subsequent blocks) increase certainty that the transaction is final. 6 confirmations is widely considered secure for large amounts.
 
+### Consensus
+Agreement among network participants about the state of the blockchain.
+
 ### Consensus Rules
 The rules that all Bitcoin nodes must follow to maintain consensus. Breaking these rules makes transactions or blocks invalid.
 
@@ -96,6 +105,24 @@ An opcode that locks funds for a relative time period (relative to when the tran
 
 ### Compact Block
 A block relay protocol that reduces bandwidth by sending only block headers and short transaction IDs, allowing nodes to reconstruct blocks from their mempool.
+
+### Channel
+A payment channel between two Lightning nodes. Enables off-chain payments.
+
+### Channel Capacity
+The total amount of Bitcoin locked in a payment channel (sum of both parties' contributions).
+
+### Channel Closing
+The process of finalizing a Lightning payment channel by broadcasting the final state to the Bitcoin blockchain. Can be cooperative or force close.
+
+### Channel Funding
+The process of opening a Lightning payment channel by creating an on-chain transaction that locks Bitcoin in a 2-of-2 multisig address.
+
+### Channel State
+The current balance distribution in a Lightning payment channel. Updated off-chain as payments are made through the channel.
+
+### Cooperative Close
+In Lightning Network, closing a payment channel with both parties' agreement. Fastest and cheapest way to close a channel.
 
 ## D
 
@@ -187,6 +214,9 @@ The process of downloading and validating the entire blockchain when first start
 ### Input
 A reference to a previous transaction output (UTXO) that is being spent in a new transaction.
 
+### Invoice
+A payment request in Lightning Network. Encoded as a BOLT11 string (starts with `lnbc` or `lntb`).
+
 ## K
 
 ### Key Pair
@@ -201,6 +231,9 @@ A second-layer payment protocol built on Bitcoin. Enables instant, low-cost paym
 A field in transactions that prevents the transaction from being included in a block before a certain time or block height.
 
 ## M
+
+### Mainnet
+The production Bitcoin network where real Bitcoin is used.
 
 ### Mempool (Memory Pool)
 The collection of unconfirmed transactions that a node has received but not yet included in a block.
@@ -223,6 +256,9 @@ A Lightning payment split across multiple routes. Allows larger payments and imp
 ### Miniscript
 A structured subset of Bitcoin Script that is easier to analyze and compose. Enables building complex spending conditions in a predictable, composable way with automatic analysis of spending costs and requirements.
 
+### Mining Pool
+A group of miners who combine their hash power and share rewards proportionally.
+
 ### Multisig (Multi-Signature)
 A script that requires multiple signatures to spend. Common patterns include 2-of-3 or 3-of-5 signatures.
 
@@ -230,6 +266,9 @@ A script that requires multiple signatures to spend. Common patterns include 2-o
 
 ### Node
 A computer running Bitcoin software that maintains a copy of the blockchain and validates transactions.
+
+### Node (Lightning)
+A computer running Lightning Network software. Connects to other nodes via payment channels.
 
 ### Nonce
 A number that miners change when trying to find a valid block hash. Part of the proof-of-work process.
@@ -242,6 +281,9 @@ An opcode that creates provably unspendable outputs. Used for storing data on th
 ### OPCODE
 An operation in Bitcoin Script. Examples include OP_CHECKSIG, OP_DUP, OP_HASH160.
 
+### Onion Routing
+A privacy technique where payment data is encrypted in layers. Each hop only knows the previous and next hop.
+
 ### Orphan Block
 A valid block that is not part of the main chain. Occurs when two blocks are found simultaneously.
 
@@ -252,6 +294,9 @@ A destination in a transaction that specifies an amount and a locking script (sc
 
 ### Payjoin
 A privacy technique where the sender and receiver both contribute inputs to a transaction, breaking the common-input-ownership heuristic used by blockchain analysis. Also known as P2EP (Pay-to-Endpoint).
+
+### Peer
+Another Bitcoin node that your node is connected to. Nodes maintain 8-10 outbound and 8-10 inbound connections.
 
 ### P2PKH (Pay-to-Pubkey-Hash)
 The most common legacy Bitcoin script pattern. Locks funds to a hash of a public key.
@@ -271,8 +316,17 @@ A SegWit script pattern for complex scripts, using witness data.
 ### Payment Channel
 A 2-of-2 multisig address that locks Bitcoin between two parties, enabling off-chain transactions.
 
+### Payment Hash
+A hash of the payment preimage. Used in HTLCs to ensure only the recipient can claim payment.
+
+### Payment Preimage
+A random secret that hashes to the payment hash. Revealed by the recipient to claim payment.
+
 ### Preimage
 The original data that produces a specific hash. In Lightning, the payment preimage proves payment was received.
+
+### Propagation
+The process of spreading blocks and transactions through the Bitcoin network.
 
 ### Private Key
 A 256-bit secret number that allows spending Bitcoin from its associated addresses. Must be kept secure - anyone with the private key can spend the funds. Generated randomly or derived from a seed phrase.
@@ -291,14 +345,26 @@ A cryptographic key derived from a private key using elliptic curve multiplicati
 ### RBF (Replace-by-Fee)
 A feature that allows replacing an unconfirmed transaction with a new one paying higher fees.
 
+### Regtest
+A local testing network where you can create blocks instantly. Useful for development.
+
 ### Relative Time Lock
 A time lock that prevents a transaction from being spent until a certain number of blocks have passed since the UTXO was confirmed. Implemented using OP_CHECKSEQUENCEVERIFY (CSV).
+
+### Relay
+The act of forwarding blocks and transactions to other nodes in the network.
 
 ### RIPEMD-160
 A cryptographic hash function used in Bitcoin alongside SHA-256. Used in address generation (SHA256 then RIPEMD-160 of public key).
 
 ### RPC (Remote Procedure Call)
 A protocol for communicating with a Bitcoin node. Used by applications to query blockchain data and create transactions.
+
+### Routing
+The process of finding a path through the Lightning Network from sender to recipient.
+
+### Routing Fee
+The fee charged by Lightning nodes for forwarding payments. Consists of base fee and proportional fee.
 
 ## S
 
@@ -307,6 +373,9 @@ The smallest unit of Bitcoin. 1 BTC = 100,000,000 satoshis. Named after Satoshi 
 
 ### Seed Phrase
 A human-readable backup of a wallet's master key, typically 12-24 words from the BIP39 wordlist. Also called mnemonic phrase or recovery phrase. Allows complete wallet recovery if stored securely.
+
+### Share
+A proof-of-work submission in pool mining that meets pool difficulty (lower than network difficulty).
 
 ### Script
 Bitcoin's programming language. Used to define spending conditions for transaction outputs.
@@ -335,6 +404,9 @@ An attack strategy where a miner withholds found blocks to gain an unfair advant
 ### Silent Payments
 A privacy protocol (BIP 352) that allows generating fresh addresses without interaction. The sender derives a unique address from the recipient's public key, preventing address reuse while maintaining a static identifier.
 
+### Signet
+A test network with additional signature requirements. More realistic than regtest, safer than testnet.
+
 ### Soft Fork
 A protocol change that tightens consensus rules, making previously valid blocks/transactions invalid. Backward compatible - non-upgraded nodes will still accept new blocks but may not understand new features.
 
@@ -344,6 +416,9 @@ The onion routing protocol used in Lightning Network. Provides privacy by encryp
 ### SPV (Simplified Payment Verification)
 A method for lightweight clients to verify transactions without downloading the full blockchain.
 
+### Stratum
+A protocol used for communication between miners and mining pools.
+
 ### Sybil Attack
 An attack where a malicious actor creates many fake identities (nodes) to gain disproportionate influence over the network. Bitcoin mitigates this through proof-of-work, which requires real resources to participate.
 
@@ -351,6 +426,12 @@ An attack where a malicious actor creates many fake identities (nodes) to gain d
 
 ### Taproot
 A Bitcoin protocol upgrade (BIP 341) that improves privacy and efficiency. Uses Schnorr signatures and Merkle trees.
+
+### Testnet
+A public testing network with test Bitcoin. Used for development and testing.
+
+### Time Lock
+A mechanism that prevents funds from being spent until a certain condition is met. Can be absolute (specific time/block) or relative (time since confirmation).
 
 ### TLV (Type-Length-Value)
 A flexible encoding format used in Lightning Network for extensible protocol fields.
@@ -385,6 +466,9 @@ A unit of transaction size used for fee calculation in SegWit. Weight units divi
 ### Wallet
 Software that manages Bitcoin keys and creates transactions. Can be full node, SPV, or custodial.
 
+### Watchtower
+A service in Lightning Network that monitors channels for malicious force close attempts. Helps protect users who go offline from being cheated.
+
 ### Weight Units
 A measure of transaction size used in SegWit. Base transaction data counts as 4 weight units per byte, witness data counts as 1.
 
@@ -395,116 +479,3 @@ Data in SegWit transactions that is separated from the base transaction. Include
 
 ### ZMQ (ZeroMQ)
 A messaging library used for real-time notifications from Bitcoin nodes. Provides instant block and transaction notifications.
-
----
-
-## Lightning Network Terms
-
-### Channel
-A payment channel between two Lightning nodes. Enables off-chain payments.
-
-### Channel Capacity
-The total amount of Bitcoin locked in a payment channel (sum of both parties' contributions).
-
-### Channel Closing
-The process of finalizing a Lightning payment channel by broadcasting the final state to the Bitcoin blockchain. Can be cooperative or force close.
-
-### Channel Funding
-The process of opening a Lightning payment channel by creating an on-chain transaction that locks Bitcoin in a 2-of-2 multisig address.
-
-### Channel State
-The current balance distribution in a Lightning payment channel. Updated off-chain as payments are made through the channel.
-
-### Cooperative Close
-In Lightning Network, closing a payment channel with both parties' agreement. Fastest and cheapest way to close a channel.
-
-### Invoice
-A payment request in Lightning Network. Encoded as a BOLT11 string (starts with `lnbc` or `lntb`).
-
-### Node
-A computer running Lightning Network software. Connects to other nodes via payment channels.
-
-### Onion Routing
-A privacy technique where payment data is encrypted in layers. Each hop only knows the previous and next hop.
-
-### Payment Hash
-A hash of the payment preimage. Used in HTLCs to ensure only the recipient can claim payment.
-
-### Payment Preimage
-A random secret that hashes to the payment hash. Revealed by the recipient to claim payment.
-
-### Routing
-The process of finding a path through the Lightning Network from sender to recipient.
-
-### Routing Fee
-The fee charged by Lightning nodes for forwarding payments. Consists of base fee and proportional fee.
-
-### Time Lock
-A mechanism that prevents funds from being spent until a certain condition is met. Can be absolute (specific time/block) or relative (time since confirmation).
-
-### Watchtower
-A service in Lightning Network that monitors channels for malicious force close attempts. Helps protect users who go offline from being cheated.
-
----
-
-## Development Terms
-
-### API
-Application Programming Interface. How applications communicate with Bitcoin nodes (typically via RPC).
-
-### Consensus
-Agreement among network participants about the state of the blockchain.
-
-### Fork
-A split in the blockchain. Can be soft fork (backward compatible) or hard fork (requires all nodes to upgrade).
-
-### Mainnet
-The production Bitcoin network where real Bitcoin is used.
-
-### Regtest
-A local testing network where you can create blocks instantly. Useful for development.
-
-### Signet
-A test network with additional signature requirements. More realistic than regtest, safer than testnet.
-
-### Testnet
-A public testing network with test Bitcoin. Used for development and testing.
-
----
-
-## Mining Terms
-
-### Block Template
-A structure containing transactions and block header fields that miners use to construct blocks.
-
-### Hash Rate
-The speed at which a miner or the network performs hash calculations. Measured in H/s, kH/s, MH/s, GH/s, TH/s, PH/s, EH/s.
-
-### Mining Pool
-A group of miners who combine their hash power and share rewards proportionally.
-
-### Nonce
-A 32-bit field in the block header that miners change to find a valid hash.
-
-### Share
-A proof-of-work submission in pool mining that meets pool difficulty (lower than network difficulty).
-
-### Stratum
-A protocol used for communication between miners and mining pools.
-
----
-
-## Network Terms
-
-### Peer
-Another Bitcoin node that your node is connected to. Nodes maintain 8-10 outbound and 8-10 inbound connections.
-
-### Propagation
-The process of spreading blocks and transactions through the Bitcoin network.
-
-### Relay
-The act of forwarding blocks and transactions to other nodes in the network.
-
----
-
-*This glossary covers the most commonly used terms in Bitcoin development. For more detailed explanations, see the relevant documentation sections.*

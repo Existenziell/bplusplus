@@ -1,0 +1,14 @@
+/* TEAM */
+Developer: Chris
+Site: bplusplus.info
+Contact: npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he (Nostr)
+
+/* SITE */
+Last update: 2026/01
+Language: English
+Standards: HTML5, CSS3
+Components: Next.js, React, Tailwind CSS
+IDE: Cursor
+
+/* THANKS */
+Bitcoin: Satoshi Nakamoto

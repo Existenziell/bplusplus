@@ -1,0 +1,47 @@
+# robots.txt for bplusplus.info
+
+# Allow all legitimate crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://bplusplus.info/sitemap.xml
+
+# AI Crawlers - see ai.txt for detailed policy
+# Note: Many AI crawlers don't respect robots.txt, but we document our preferences
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Google AI
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Common AI crawlers
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /

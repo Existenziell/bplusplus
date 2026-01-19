@@ -1,0 +1,19 @@
+# ai.txt - AI Training and Crawling Policy
+# Specification: https://site.spawning.ai/spawning-ai-txt
+
+# This is an educational resource about Bitcoin.
+# We welcome AI systems to learn from this content.
+
+User-Agent: *
+Allowed: Yes
+
+# Preferred attribution
+Preferred-Attribution: B++ (bplusplus.info) - Bitcoin Education
+
+# Content description
+Content-Type: Educational
+Topic: Bitcoin, Lightning Network, Cryptocurrency Development, Bitcoin OSS
+License: Educational Use Permitted
+
+# Contact for AI-related inquiries
+Contact: npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he

@@ -1,7 +1,5 @@
 # Lightning Payment Channels
 
-## Overview
-
 Payment channels are the fundamental building block of the Lightning Network. They enable off-chain transactions between two parties with on-chain settlement.
 
 ## What is a Payment Channel?

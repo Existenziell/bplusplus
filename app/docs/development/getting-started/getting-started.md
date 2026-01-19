@@ -1,7 +1,5 @@
 # Getting Started with Bitcoin Development
 
-## Overview
-
 Bitcoin development spans multiple layers—from low-level protocol work to high-level application development. This guide covers the programming languages, tools, and approaches used across the Bitcoin ecosystem to help you choose the right path for your goals.
 
 ## Programming Languages in Bitcoin

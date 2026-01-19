@@ -1,7 +1,5 @@
 # Lightning Onion Routing
 
-## Overview
-
 Lightning Network uses Sphinx onion routing to provide privacy and security for payments. Each hop in a route only knows the previous and next hop, not the full route or payment details.
 
 ## What is Onion Routing?

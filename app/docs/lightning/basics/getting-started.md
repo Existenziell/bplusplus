@@ -1,7 +1,5 @@
 # Lightning Network: Getting Started
 
-## Overview
-
 The Lightning Network is a second-layer payment protocol built on top of Bitcoin. It enables instant, low-cost payments by opening payment channels between nodes.
 
 ## What is the Lightning Network?

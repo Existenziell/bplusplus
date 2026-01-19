@@ -1,7 +1,5 @@
 # What is Bitcoin?
 
-## Overview
-
 Bitcoin is a decentralized digital currency and payment system that operates without a central authority or intermediary. It was created in 2009 by an anonymous person or group using the pseudonym Satoshi Nakamoto.
 
 ## Core Definition

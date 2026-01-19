@@ -1,7 +1,5 @@
 # The Blocksize Wars
 
-## Overview
-
 The Blocksize Wars (2015-2017) were a period of intense debate and conflict within the Bitcoin community over whether to increase Bitcoin's block size limit. This controversy ultimately led to the hard fork that created Bitcoin Cash and fundamentally shaped Bitcoin's development philosophy.
 
 ## The Core Issue

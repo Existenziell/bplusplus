@@ -3,6 +3,19 @@ import Header from './components/Header'
 import DocCard from './components/DocCard'
 
 export default function Home() {
+
+  const quotes = [
+    "Fiat is 'Only the elite can print money'. Crypto is 'Everyone can print money'. Bitcoin is 'No one can print money'",
+    "Bitcoin is a titanic base layer of absolute truth, robust enough to carry the entire world economy on its shoulders.",
+    "Bitcoin is nothing but mathematics and decentralized communication. It requires no army to defend, no borders to enforce, no politicians to maintain.",
+    "Bitcoin is a trust machine. It replaces trust in institutions with mathematical verification.",
+    "Bitcoin is a protocol that allows for free and instant transfers of value across the entire planet. Trustless, Permissionless.",
+    "Nothing in this world is more powerful than an idea. Bitcoin is that idea. It is unstoppable.",
+    "Never ending wars are the consensus mechanism for the FIAT system",
+    "Bitcoin is deflationary money with absolute scarcity. Scarcity will produce beautiful unseen conditions of human interaction, abundance and deflation.",
+    "Bitcoin fixes this!",
+  ]
+  
   return (
     <main className="min-h-screen bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200">
       <Header />
@@ -10,8 +23,8 @@ export default function Home() {
       {/* Content Area */}
       <div className="container mx-auto px-4 md:px-8 py-4 md:py-8">
         <div>
-          <p className="text-xl text-zinc-600 dark:text-zinc-400 mb-12 text-center max-w-4xl mx-auto">
-            Comprehensive guides and explanations of Bitcoin and Lightning Network concepts, code implementations, and development practices.
+          <p className="text-xl text-zinc-600 dark:text-zinc-400 mb-12 text-center max-w-4xl mx-auto italic">
+            &quot;{quotes[Math.floor(Math.random() * quotes.length)]}&quot;
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

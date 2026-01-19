@@ -1,7 +1,5 @@
 # Trust Model
 
-## Overview
-
 Bitcoin's trust model is fundamentally different from traditional financial systems. Instead of requiring trust in intermediaries (banks, payment processors, governments), Bitcoin uses cryptographic proof and economic incentives to create a **trustless** system.
 
 ## Traditional Trust Model

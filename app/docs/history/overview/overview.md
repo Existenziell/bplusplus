@@ -1,7 +1,5 @@
 # Bitcoin History Overview
 
-## Overview
-
 Bitcoin's history spans from its creation in 2009 to its future supply schedule extending into the 22nd century. This document covers key historical events, milestones, and the complete halving schedule.
 
 ## Key Historical Events

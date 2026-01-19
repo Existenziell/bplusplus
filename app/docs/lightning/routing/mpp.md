@@ -1,7 +1,5 @@
 # Multi-Part Payments (MPP)
 
-## Overview
-
 Multi-Part Payments (MPP) allow splitting a single payment across multiple routes. This enables larger payments and improves success rates by utilizing multiple channels.
 
 ## What is MPP?

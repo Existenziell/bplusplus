@@ -1,7 +1,5 @@
 # Bitcoin Historical Milestones
 
-## Overview
-
 This timeline covers major milestones in Bitcoin's history from its creation in 2009 to present day.
 
 ## Historical Milestones

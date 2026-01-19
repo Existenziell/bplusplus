@@ -1,7 +1,5 @@
 # Multisig Wallets
 
-## Overview
-
 Multi-signature (multisig) wallets require multiple signatures to spend funds. This provides enhanced security, shared custody, and flexible access control.
 
 ## What is Multisig?

@@ -1,7 +1,5 @@
 # Monetary Properties
 
-## Overview
-
 Bitcoin exhibits several key monetary properties that make it suitable as both a medium of exchange and a store of value. These properties are derived from Bitcoin's technical design and economic model.
 
 ## The Six Monetary Properties

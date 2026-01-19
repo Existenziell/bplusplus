@@ -1,7 +1,5 @@
 # Decentralization
 
-## Overview
-
 Decentralization is one of Bitcoin's core principles - the distribution of control, decision-making, and infrastructure across many independent participants rather than a single central authority.
 
 ## What is Decentralization?

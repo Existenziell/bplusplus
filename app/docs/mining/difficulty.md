@@ -1,7 +1,5 @@
 # Difficulty Adjustment
 
-## Overview
-
 Bitcoin's difficulty adjustment is a critical mechanism that maintains the network's target block time of approximately 10 minutes. Every 2016 blocks (~2 weeks), the network automatically adjusts the mining difficulty based on the actual time it took to mine the previous 2016 blocks.
 
 ## How Difficulty Adjustment Works

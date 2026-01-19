@@ -1,7 +1,5 @@
 # Mining Pools
 
-## Overview
-
 A **mining pool** is a collective of miners who combine their computational resources to increase their chances of finding blocks. When the pool finds a block, the reward is distributed among participants based on their contributed work.
 
 Solo mining is like playing the lottery—you might wait years for a payout. Pool mining provides regular, predictable income at the cost of sharing rewards.

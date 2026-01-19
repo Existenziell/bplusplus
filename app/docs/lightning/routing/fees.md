@@ -1,7 +1,5 @@
 # Lightning Routing Fees
 
-## Overview
-
 Lightning routing fees are how nodes earn income for forwarding payments. Understanding fee calculation is essential for both routing nodes and payment senders.
 
 ## Fee Structure

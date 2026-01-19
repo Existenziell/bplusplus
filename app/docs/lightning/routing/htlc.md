@@ -1,7 +1,5 @@
 # Hash Time Locked Contracts (HTLCs)
 
-## Overview
-
 [HTLCs](/docs/glossary#htlc-hash-time-locked-contract) are the mechanism that enables payments to route through the [Lightning Network](/docs/glossary#lightning-network). They ensure that payments can only be claimed with the correct [preimage](/docs/glossary#preimage), and expire after a certain time.
 
 ## What is an HTLC?

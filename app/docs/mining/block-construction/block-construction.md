@@ -1,7 +1,5 @@
 # Block Construction
 
-## Overview
-
 Block construction is the process by which miners assemble a new block from pending transactions. This is where the mempool meets the blockchain—miners must decide which transactions to include, how to order them, and how to structure the block for maximum profit while following consensus rules.
 
 ## Anatomy of a Block

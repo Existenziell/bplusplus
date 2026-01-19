@@ -1,7 +1,5 @@
 # Pool Mining Setup and Monitoring
 
-## Overview
-
 Pool mining allows you to contribute hash power to a mining pool and receive proportional rewards. This guide covers setup, monitoring, and optimization.
 
 ## Mining Architecture

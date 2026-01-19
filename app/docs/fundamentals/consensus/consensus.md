@@ -1,7 +1,5 @@
 # Consensus Mechanism
 
-## Overview
-
 Bitcoin uses a **consensus mechanism** to achieve agreement among network participants about which transactions are valid and in what order they occurred. This consensus is reached without a central authority through a combination of cryptographic proof and economic incentives.
 
 ## What is Consensus?

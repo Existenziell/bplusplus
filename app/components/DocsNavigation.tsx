@@ -24,6 +24,18 @@ const navItems: NavItem[] = [
     ],
   },
   {
+    title: 'History',
+    href: '/docs/history',
+    children: [
+      { title: 'Overview', href: '/docs/history/overview' },
+      { title: 'Halvings', href: '/docs/history/halvings' },
+      { title: 'Milestones', href: '/docs/history/milestones' },
+      { title: 'Forks', href: '/docs/history/forks' },
+      { title: 'Supply Schedule', href: '/docs/history/supply' },
+      { title: 'BIPs', href: '/docs/history/bips' },
+    ],
+  },
+  {
     title: 'Bitcoin',
     href: '/docs/bitcoin',
     children: [
@@ -50,16 +62,6 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    title: 'Lightning Network',
-    href: '/docs/lightning',
-    children: [
-      { title: 'Getting Started', href: '/docs/lightning/basics' },
-      { title: 'Routing', href: '/docs/lightning/routing' },
-      { title: 'Channels', href: '/docs/lightning/channels' },
-      { title: 'Onion Routing', href: '/docs/lightning/onion' },
-    ],
-  },
-  {
     title: 'Wallets',
     href: '/docs/wallets',
     children: [
@@ -70,6 +72,16 @@ const navItems: NavItem[] = [
     ],
   },
   {
+    title: 'Lightning Network',
+    href: '/docs/lightning',
+    children: [
+      { title: 'Getting Started', href: '/docs/lightning/basics' },
+      { title: 'Routing', href: '/docs/lightning/routing' },
+      { title: 'Channels', href: '/docs/lightning/channels' },
+      { title: 'Onion Routing', href: '/docs/lightning/onion' },
+    ],
+  },
+  {
     title: 'Development Tools',
     href: '/docs/development',
     children: [
@@ -77,18 +89,6 @@ const navItems: NavItem[] = [
       { title: 'Blockchain Monitoring', href: '/docs/development/monitoring' },
       { title: 'Pool Mining', href: '/docs/development/mining' },
       { title: 'Price Tracking', href: '/docs/development/tools' },
-    ],
-  },
-  {
-    title: 'History',
-    href: '/docs/history',
-    children: [
-      { title: 'Overview', href: '/docs/history/overview' },
-      { title: 'Halvings', href: '/docs/history/halvings' },
-      { title: 'Milestones', href: '/docs/history/milestones' },
-      { title: 'Forks', href: '/docs/history/forks' },
-      { title: 'Supply Schedule', href: '/docs/history/supply' },
-      { title: 'BIPs', href: '/docs/history/bips' },
     ],
   },
   {

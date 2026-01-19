@@ -1,7 +1,5 @@
 # Energy Consumption
 
-## Overview
-
 Bitcoin's energy consumption is one of the most debated topics in the cryptocurrency space. Critics argue that Bitcoin uses too much energy, while supporters point out that energy use is a security feature and that Bitcoin's consumption should be viewed in context with other global energy uses.
 
 ## The Energy Debate

@@ -1,7 +1,5 @@
 # Bitcoin Supply Schedule
 
-## Overview
-
 The total Bitcoin supply is mathematically fixed at 21 million BTC. The supply schedule follows a predictable formula that ensures no more than 21 million Bitcoin will ever be created.
 
 ## Supply Formula

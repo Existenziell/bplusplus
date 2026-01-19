@@ -109,7 +109,7 @@ const Metrics = () => {
                 className='font-bold text-base sm:text-lg md:text-xl text-btc'
                 aria-label='Link to Bitcoin Ticker'
               >
-              <span className='font-bold text-base sm:text-lg md:text-xl text-btc'>
+              <span className='font-bold text-base sm:text-lg md:text-xl text-btc inline-block min-w-[9ch] text-center'>
               {priceLoading ? (
                 <span className='animate-pulse'>...</span>
               ) : btcPrice ? (

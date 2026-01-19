@@ -286,7 +286,6 @@ btc getblockchaininfo | jq '{verificationprogress, initialblockdownload}'
 
 ## 11. ZMQ Notifications
 
-### Overview
 ZeroMQ (ZMQ) provides real-time notifications for blockchain events, enabling instant detection of new blocks and transactions without polling.
 
 ### Configuration

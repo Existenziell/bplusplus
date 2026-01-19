@@ -1,7 +1,5 @@
 # Craig Wright / "Faketoshi"
 
-## Overview
-
 Craig Steven Wright is an Australian computer scientist who has claimed since 2016 to be Satoshi Nakamoto, the pseudonymous creator of Bitcoin. Despite years of assertions, lawsuits, and media appearances, Wright has never provided cryptographic proof of his claim—something the real Satoshi could trivially do by signing a message with Satoshi's known private keys.
 
 The Bitcoin community overwhelmingly rejects Wright's claims, derisively calling him "Faketoshi." His saga has become one of Bitcoin's strangest and most persistent controversies, involving forged documents, failed proofs, billion-dollar lawsuits, and the creation of Bitcoin SV (BSV).

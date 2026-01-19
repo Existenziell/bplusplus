@@ -1,7 +1,5 @@
 # What Problems Did Bitcoin Solve?
 
-## Overview
-
 Bitcoin was created to solve fundamental problems in digital currency and distributed systems. This document explores the key problems that Bitcoin addresses, including the double-spending problem and the Two Generals problem.
 
 ## Distributed Networks

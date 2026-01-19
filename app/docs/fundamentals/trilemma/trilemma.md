@@ -1,7 +1,5 @@
 # The Bitcoin Trilemma
 
-## Overview
-
 The Bitcoin Trilemma describes the fundamental challenge of balancing three critical properties in a blockchain system: **Scalability**, **Security**, and **Decentralization**. The trilemma states that it's difficult to optimize all three simultaneously - improving one often comes at the cost of another.
 
 ## The Three Pillars

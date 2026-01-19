@@ -1,7 +1,5 @@
 # Blockchain Monitoring
 
-## Overview
-
 Real-time blockchain monitoring allows you to detect new blocks instantly, track mining pools, analyze transactions, and monitor network activity.
 
 ## Useful Resources

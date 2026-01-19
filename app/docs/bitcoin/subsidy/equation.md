@@ -1,7 +1,5 @@
 # The Bitcoin Subsidy Equation
 
-## Overview
-
 The Bitcoin block subsidy is the amount of new Bitcoin created with each block. It follows a predictable mathematical formula that halves every 210,000 blocks, creating Bitcoin's fixed supply schedule.
 
 ## The Equation

@@ -1,7 +1,5 @@
 # Bitcoin Network Block Propagation
 
-## Overview
-
 This document explains how blocks propagate through the Bitcoin network, including the gossip protocol, validation process, and orphan block handling.
 
 ## Resources

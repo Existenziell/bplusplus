@@ -79,7 +79,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
                 className='font-bold text-base sm:text-lg md:text-xl text-btc'
                 aria-label='Link to Bitcoin Website'
               >
-                <svg xmlSpace='preserve' viewBox='0 0 273.6 360' className='w-full h-auto'>
+                <svg xmlSpace='preserve' viewBox='0 0 273.6 360' className='w-full h-auto' aria-hidden='true'>
                   <path
                     fill='currentColor'
                     className='text-btc'

@@ -18,6 +18,8 @@ const nextConfig = {
   experimental: {
     // Optimize package imports to reduce bundle size
     optimizePackageImports: ['react-markdown', 'highlight.js'],
+    // Inline critical CSS to reduce render-blocking resources
+    optimizeCss: true,
   },
 
   // Compiler optimizations

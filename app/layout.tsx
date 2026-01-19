@@ -6,6 +6,7 @@ import './globals.css'
 import { AppContextProvider } from './context/AppContext'
 import { ThemeProvider } from './context/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const ubuntu = Ubuntu({ weight: '400', style: 'normal', subsets: ['latin'] })
 
@@ -56,6 +57,7 @@ export default function RootLayout({
           <AppContextProvider>
             {children}
             <Analytics />
+            <SpeedInsights />
           </AppContextProvider>
         </ThemeProvider>
       </body>

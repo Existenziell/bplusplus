@@ -49,10 +49,9 @@ export default function Home() {
               href="/docs/history"
               description="Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete supply schedule."
               links={[
+                { href: '/docs/history/people', label: 'People' },
                 { href: '/docs/history/halvings', label: 'Halvings' },
-                { href: '/docs/history/milestones', label: 'Milestones' },
                 { href: '/docs/history/forks', label: 'Forks' },
-                { href: '/docs/history/bips', label: 'BIPs' },
               ]}
             />
 

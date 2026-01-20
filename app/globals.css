@@ -14,7 +14,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 200px; /* Account for sticky header (header + metrics + breadcrumbs) */
+  scroll-padding-top: 0px; /* Account for sticky header (header + metrics + breadcrumbs) */
 }
 
 /* Responsive scroll padding for smaller screens */
@@ -134,10 +134,12 @@ main > div > div > h1:first-child {
 
 .markdown-content h2 {
   @apply text-xl sm:text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
+  scroll-margin-top: 40px;
 }
 
 .markdown-content h3 {
   @apply text-lg sm:text-xl font-semibold mt-6 mb-3 text-zinc-900 dark:text-zinc-100;
+  scroll-margin-top: 40px;
 }
 
 .markdown-content h4 {
@@ -251,6 +253,11 @@ main > div > div > h1:first-child {
   @apply rounded-md my-4 max-w-full;
 }
 
+/* Profile images for People page - consistent sizing */
+.markdown-content img[src*="/images/people/"] {
+  @apply object-cover rounded-md;
+}
+
 .markdown-content iframe {
   @apply rounded-md;
 }
@@ -349,6 +356,7 @@ main > div > div > h1:first-child {
 
 .glossary-content h3 {
   @apply text-base sm:text-lg font-semibold mt-4 mb-2 text-zinc-700 dark:text-zinc-300;
+  scroll-margin-top: 40px;
 }
 
 /*

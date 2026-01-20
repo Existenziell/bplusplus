@@ -31,9 +31,9 @@ export const docPages: DocPage[] = [
   { path: '/docs/fundamentals/monetary-properties', mdFile: 'app/docs/fundamentals/monetary-properties/monetary-properties.md', title: 'Monetary Properties', section: 'fundamentals' },
 
   // History
-  { path: '/docs/history/overview', mdFile: 'app/docs/history/overview/overview.md', title: 'Overview', section: 'history' },
+  { path: '/docs/history/milestones', mdFile: 'app/docs/history/milestones/overview.md', title: 'Historical Milestones', section: 'history' },
+  { path: '/docs/history/people', mdFile: 'app/docs/history/people/people.md', title: 'People', section: 'history' },
   { path: '/docs/history/halvings', mdFile: 'app/docs/history/halvings.md', title: 'Halvings', section: 'history' },
-  { path: '/docs/history/milestones', mdFile: 'app/docs/history/milestones.md', title: 'Milestones', section: 'history' },
   { path: '/docs/history/forks', mdFile: 'app/docs/history/forks.md', title: 'Forks', section: 'history' },
   { path: '/docs/history/supply', mdFile: 'app/docs/history/supply.md', title: 'Supply Schedule', section: 'history' },
   { path: '/docs/history/bips', mdFile: 'app/docs/history/bips.md', title: 'BIPs', section: 'history' },
@@ -204,7 +204,7 @@ export const routeLabels: Record<string, string> = {
   glossary: 'Glossary',
 
   // Page labels (extracted from path segment to title)
-  overview: 'Overview',
+  milestones: 'Historical Milestones',
   problems: 'Problems Bitcoin Solved',
   trilemma: 'Bitcoin Trilemma',
   decentralization: 'Decentralization',
@@ -213,7 +213,7 @@ export const routeLabels: Record<string, string> = {
   consensus: 'Consensus Mechanism',
   cryptography: 'Cryptography',
   halvings: 'Halvings',
-  milestones: 'Milestones',
+  people: 'People',
   forks: 'Forks',
   supply: 'Supply Schedule',
   bips: 'BIPs',

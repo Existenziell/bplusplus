@@ -36,7 +36,7 @@ Initial excitement quickly faded as researchers found problems with the "evidenc
 
 ### 2016: The Failed Proof
 
-In May 2016, Wright came forward publicly, claiming to be Satoshi in interviews with the BBC and The Economist. He demonstrated a signature verification to several prominent Bitcoin figures, including Gavin Andresen (an early Bitcoin developer).
+In May 2016, Wright came forward publicly, claiming to be Satoshi in interviews with the BBC and The Economist. He demonstrated a signature verification to several prominent Bitcoin figures, including [Gavin Andresen](/docs/history/people#gavin-andresen) (an early Bitcoin developer).
 
 **The problem**: Wright's "proof" was quickly debunked. He had used a signature that was already publicly available on the blockchain, not a new signature proving key access. It was a sleight of hand, not cryptographic proof.
 

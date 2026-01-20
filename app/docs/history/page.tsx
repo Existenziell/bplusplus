@@ -19,12 +19,22 @@ export default function HistoryDocsPage() {
       description={sections.history.description}
     >
       <DocCard
-        title="Overview"
-        href="/docs/history/overview"
-        description="Introduction to Bitcoin's history, from its creation in 2009 to its future supply schedule extending into the 22nd century."
+        title="Historical Milestones"
+        href="/docs/history/milestones"
+        description="Key events in Bitcoin's history, from the Genesis Block in 2009 to present day."
         links={[
-          { href: '/docs/history/overview#overview', label: 'Overview' },
-          { href: '/docs/history/overview#key-historical-events', label: 'Key historical events' },
+          { href: '/docs/history/milestones#bitcoin-launch', label: 'Bitcoin launch' },
+          { href: '/docs/history/milestones#pizza-day', label: 'Pizza Day' },
+        ]}
+      />
+
+      <DocCard
+        title="People"
+        href="/docs/history/people"
+        description="Key figures in Bitcoin's history, from cryptographic pioneers who laid the groundwork to contributors who built and evangelized Bitcoin."
+        links={[
+          { href: '/docs/history/people#cryptographic-pioneers', label: 'Cryptographic pioneers' },
+          { href: '/docs/history/people#bitcoin-era', label: 'Bitcoin era' },
         ]}
       />
 
@@ -35,15 +45,6 @@ export default function HistoryDocsPage() {
         links={[
           { href: '/docs/history/halvings#complete-halving-schedule', label: 'Complete halving schedule' },
           { href: '/docs/history/halvings#key-facts', label: 'Key facts' },
-        ]}
-      />
-
-      <DocCard
-        title="Milestones"
-        href="/docs/history/milestones"
-        description="Major milestones in Bitcoin's history, from the first pizza purchase to major exchange launches and protocol upgrades."
-        links={[
-          { href: '/docs/history/milestones#historical-milestones', label: 'Historical milestones' },
         ]}
       />
 

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import DocCard from './components/DocCard'
@@ -12,6 +13,24 @@ export default function Home() {
       <div className="container mx-auto px-4 md:px-8 py-4 md:py-8">
         <div>
           <QuoteRotator />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+            {['/images/01.jpg', '/images/02.jpg'].map((src, index) => (
+              <div
+                key={index}
+                className="relative aspect-video overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700"
+              >
+                <Image
+                  src={src}
+                  alt={`Bitcoin inspiration ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  priority
+                />
+              </div>
+            ))}
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <DocCard

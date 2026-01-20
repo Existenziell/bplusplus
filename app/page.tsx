@@ -9,29 +9,28 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200">
       <Header />
 
+      {/* Hero Section */}
+      <div className="bg-zinc-100 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700">
+        <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <QuoteRotator />
+            <div className="relative aspect-video overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
+              <Image
+                src="/images/01.jpg"
+                alt="Bitcoin inspiration"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Content Area */}
       <div className="container mx-auto px-4 md:px-8 py-4 md:py-8">
         <div>
-          <QuoteRotator />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-            {['/images/01.jpg', '/images/02.jpg'].map((src, index) => (
-              <div
-                key={index}
-                className="relative aspect-video overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700"
-              >
-                <Image
-                  src={src}
-                  alt={`Bitcoin inspiration ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  priority
-                />
-              </div>
-            ))}
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <DocCard
               title="Fundamentals"

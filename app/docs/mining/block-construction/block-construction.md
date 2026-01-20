@@ -1,6 +1,6 @@
 # Block Construction
 
-Block construction is the process by which miners assemble a new block from pending transactions. This is where the mempool meets the blockchain—miners must decide which transactions to include, how to order them, and how to structure the block for maximum profit while following consensus rules.
+Block construction is the process by which miners assemble a new block from pending transactions. This is where the mempool meets the blockchain. Miners must decide which transactions to include, how to order them, and how to structure the block for maximum profit while following consensus rules.
 
 ## Anatomy of a Block
 
@@ -31,7 +31,7 @@ A Bitcoin block consists of two main parts:
 
 ## The Coinbase Transaction
 
-The coinbase transaction is special—it's the only transaction that creates new bitcoin.
+The coinbase transaction is special: it's the only transaction that creates new bitcoin.
 
 ### Structure
 
@@ -93,7 +93,7 @@ Ancestor fee rate of child = (10×200 + 100×150) / (200 + 150)
                            = 17,000 / 350 = 48.6 sat/vB
 ```
 
-This is how CPFP (Child Pays for Parent) works—the child's high fee pulls the parent along.
+This is how CPFP (Child Pays for Parent) works: the child's high fee pulls the parent along.
 
 ### Block Template Algorithm
 
@@ -123,7 +123,7 @@ Maximum Block Weight = 4,000,000 weight units (4 MWU)
 
 ### Why Weight Matters for Miners
 
-SegWit transactions are "discounted"—their witness data costs less weight. This means:
+SegWit transactions are "discounted" because their witness data costs less weight. This means:
 
 - SegWit transactions can pay lower absolute fees for the same priority
 - Miners can fit more transactions in a block
@@ -209,7 +209,7 @@ This is risky but provides a head start.
 
 ## Extra Nonce
 
-The 4-byte nonce in the header provides only 2³² possibilities—not enough for modern ASICs.
+The 4-byte nonce in the header provides only 2³² possibilities, which is not enough for modern ASICs.
 
 ### Expanding the Search Space
 

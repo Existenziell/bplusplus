@@ -64,11 +64,11 @@ Bitcoin uses a **blockchain** - a distributed ledger that records all transactio
 
 Bitcoin represents something unprecedented: **Element Zero**, consisting only of energy.
 
-**Proof of Work** is the bridge between the physical and digital worlds. Real energy—electricity, computational power, thermodynamic work—is consumed to maintain the digital scarcity of bitcoin. This is not a bug, but a feature. The energy expenditure is what gives bitcoin its unforgeable costliness, anchoring digital value to physical reality in a way no other digital asset can claim.
+**Proof of Work** is the bridge between the physical and digital worlds. Real energy (electricity, computational power, thermodynamic work) is consumed to maintain the digital scarcity of bitcoin. This is not a bug, but a feature. The energy expenditure is what gives bitcoin its unforgeable costliness, anchoring digital value to physical reality in a way no other digital asset can claim.
 
 ### The Currency
 
-Bitcoin is **deflationary money with absolute scarcity**. Only 21 million bitcoin will ever exist—a fixed supply that cannot be inflated, diluted, or manipulated.
+Bitcoin is **deflationary money with absolute scarcity**. Only 21 million bitcoin will ever exist, a fixed supply that cannot be inflated, diluted, or manipulated.
 
 This scarcity will produce conditions of human interaction never before seen in monetary history:
 - **Abundance through deflation**: As productivity increases, the value of saved bitcoin grows
@@ -104,7 +104,7 @@ Bitcoin is a **titanic base layer of absolute truth**, robust enough to carry th
 
 ### The Idea
 
-Bitcoin embodies the idea that a **fixed set of rules can exist** around which entire societies can be built—rules that no government, corporation, or individual can change.
+Bitcoin embodies the idea that a **fixed set of rules can exist** around which entire societies can be built, rules that no government, corporation, or individual can change.
 
 Bitcoin is nothing but **mathematics and decentralized communication**. It requires no army to defend, no borders to enforce, no politicians to maintain.
 
@@ -112,7 +112,7 @@ It unlocks the **true power of human cooperation**: voluntary exchange based on 
 
 ### The Meme
 
-At its core, Bitcoin is nothing but a **meme**—an idea that replicates itself through human minds.
+At its core, Bitcoin is nothing but a **meme**, an idea that replicates itself through human minds.
 
 But nothing in this world is more powerful than an idea whose time has come.
 
@@ -130,7 +130,7 @@ Bitcoin is under **constant attack** from the most sophisticated entities on thi
 
 **And it has never been hacked.**
 
-The network has operated continuously since January 3, 2009, securing hundreds of billions of dollars in value. The only theoretical attack—a 51% attack—would require controlling more computational power than all other miners combined, a feat that grows more impossible as the network expands.
+The network has operated continuously since January 3, 2009, securing hundreds of billions of dollars in value. The only theoretical attack (a 51% attack) would require controlling more computational power than all other miners combined, a feat that grows more impossible as the network expands.
 
 Bitcoin cannot be hacked. It can only be adopted.
 

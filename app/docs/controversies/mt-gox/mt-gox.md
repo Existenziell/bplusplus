@@ -53,7 +53,7 @@ At 2014 prices (~$450/BTC), this was about $450 million. At Bitcoin's 2021 peak 
 
 ### The Official Story
 
-Mt. Gox blamed "transaction malleability"—a known Bitcoin quirk where transaction IDs could be changed before confirmation without invalidating the transaction. The exchange claimed hackers exploited this to steal Bitcoin over time.
+Mt. Gox blamed "transaction malleability", a known Bitcoin quirk where transaction IDs could be changed before confirmation without invalidating the transaction. The exchange claimed hackers exploited this to steal Bitcoin over time.
 
 ### The Reality
 
@@ -78,7 +78,7 @@ Bitcoin's price crashed from ~$850 to under $400 in the months following the col
 
 ### Recovery Efforts
 
-In a twist of fate, 200,000 BTC were later "found" in old Mt. Gox wallets. Combined with Bitcoin's price appreciation, the bankruptcy estate eventually had enough to potentially repay creditors in full—though the legal process has taken years.
+In a twist of fate, 200,000 BTC were later "found" in old Mt. Gox wallets. Combined with Bitcoin's price appreciation, the bankruptcy estate eventually had enough to potentially repay creditors in full, though the legal process has taken years.
 
 Creditor repayments finally began in 2024, over a decade after the collapse.
 
@@ -87,7 +87,7 @@ Creditor repayments finally began in 2024, over a decade after the collapse.
 ### "Not Your Keys, Not Your Coins"
 
 The Mt. Gox collapse became the defining argument for self-custody. When you leave Bitcoin on an exchange:
-- You don't own Bitcoin—you own an IOU
+- You don't own Bitcoin; you own an IOU
 - You trust the exchange's security, competence, and honesty
 - You have no recourse if they fail
 
@@ -129,15 +129,15 @@ Even a decade later, Mt. Gox affects markets:
 
 Mt. Gox represents a pivotal moment in Bitcoin history:
 
-1. **End of Innocence**: Bitcoin's early, naive era ended. The community learned that enthusiasm wasn't enough—security and proper engineering mattered.
+1. **End of Innocence**: Bitcoin's early, naive era ended. The community learned that enthusiasm wasn't enough; security and proper engineering mattered.
 
 2. **Decentralization Validated**: The collapse showed the danger of centralized points of failure, reinforcing Bitcoin's core philosophy.
 
-3. **Culture Defined**: "Not your keys, not your coins" became more than a slogan—it became a core principle of Bitcoin culture.
+3. **Culture Defined**: "Not your keys, not your coins" became more than a slogan. It became a core principle of Bitcoin culture.
 
 4. **Industry Matured**: Surviving exchanges implemented better practices. New exchanges learned from Mt. Gox's failures.
 
-5. **Bitcoin Survived**: Despite losing the dominant exchange, Bitcoin itself continued. The network was unaffected. Only the centralized exchange failed—the decentralized protocol kept running.
+5. **Bitcoin Survived**: Despite losing the dominant exchange, Bitcoin itself continued. The network was unaffected. Only the centralized exchange failed; the decentralized protocol kept running.
 
 ## Conclusion
 

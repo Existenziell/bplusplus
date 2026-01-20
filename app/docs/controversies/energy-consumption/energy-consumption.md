@@ -6,9 +6,9 @@ Bitcoin's energy consumption is one of the most debated topics in the cryptocurr
 
 ### Energy Use Is Not Inherently Bad
 
-Using energy is not a moral failing—it is the signature of civilization.
+Using energy is not a moral failing. It is the signature of civilization.
 
-The Kardashev scale measures a civilization's advancement by its energy consumption. A Type I civilization harnesses all energy available on its planet. A Type II harnesses its star. A Type III harnesses its galaxy. By this measure, using *more* energy is not regression—it is evolution.
+The Kardashev scale measures a civilization's advancement by its energy consumption. A Type I civilization harnesses all energy available on its planet. A Type II harnesses its star. A Type III harnesses its galaxy. By this measure, using *more* energy is not regression. It is evolution.
 
 Every advancement in human history has required more energy: fire, agriculture, industry, computing, space exploration. The question has never been "are we using too much energy?" but rather "are we using energy for things that matter?"
 
@@ -25,7 +25,7 @@ Consider what humanity chooses to spend energy on:
 - **Air conditioning in the US alone**: ~6,500 TWh (50x Bitcoin's consumption)
 - **The global financial system**: ~5,000 TWh maintaining the infrastructure of fiat money
 
-If Bitcoin's energy use is "wasteful," then we must also ask: Is air conditioning wasteful? Are holiday lights? Is the military? These are not questions with objective answers—they are value judgments.
+If Bitcoin's energy use is "wasteful," then we must also ask: Is air conditioning wasteful? Are holiday lights? Is the military? These are not questions with objective answers, they are value judgments.
 
 ### What Bitcoin's Energy Actually Does
 
@@ -40,7 +40,7 @@ The energy expenditure is the cost of removing trust from money. It replaces arm
 
 ### The Real Question
 
-The debate is not about energy—it's about whether you believe Bitcoin is valuable.
+The debate is not about energy, it's about whether you believe Bitcoin is valuable.
 
 If you believe a decentralized, censorship-resistant, inflation-proof monetary system is valuable, then Bitcoin's energy consumption is a bargain. If you don't believe Bitcoin is valuable, no amount of energy would be acceptable.
 

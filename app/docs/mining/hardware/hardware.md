@@ -1,6 +1,6 @@
 # Mining Hardware Evolution
 
-Bitcoin mining hardware has undergone a remarkable evolution—from hobbyists running CPUs on laptops to industrial-scale operations with purpose-built silicon. This progression represents one of the fastest hardware development cycles in computing history, driven by the economic incentives of proof-of-work mining.
+Bitcoin mining hardware has undergone a remarkable evolution, from hobbyists running CPUs on laptops to industrial-scale operations with purpose-built silicon. This progression represents one of the fastest hardware development cycles in computing history, driven by the economic incentives of proof-of-work mining.
 
 ## The Four Eras of Mining Hardware
 
@@ -24,7 +24,7 @@ SHA-256 (Bitcoin's hash function) is computationally simple:
 - No complex branching
 - Highly parallelizable
 
-CPUs can do this, but they're general-purpose—most of their transistors do things irrelevant to hashing.
+CPUs can do this, but they're general-purpose. Most of their transistors do things irrelevant to hashing.
 
 **The End of CPU Mining**
 
@@ -121,7 +121,7 @@ ASIC: Purpose-built silicon
      - Nothing wasted
 ```
 
-Every transistor in an ASIC is dedicated to SHA-256. No graphics processing, no floating point, no cache hierarchy—just hashing.
+Every transistor in an ASIC is dedicated to SHA-256. No graphics processing, no floating point, no cache hierarchy, just hashing.
 
 ## ASIC Evolution
 

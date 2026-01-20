@@ -1,6 +1,6 @@
 # Craig Wright / "Faketoshi"
 
-Craig Steven Wright is an Australian computer scientist who has claimed since 2016 to be Satoshi Nakamoto, the pseudonymous creator of Bitcoin. Despite years of assertions, lawsuits, and media appearances, Wright has never provided cryptographic proof of his claim—something the real Satoshi could trivially do by signing a message with Satoshi's known private keys.
+Craig Steven Wright is an Australian computer scientist who has claimed since 2016 to be Satoshi Nakamoto, the pseudonymous creator of Bitcoin. Despite years of assertions, lawsuits, and media appearances, Wright has never provided cryptographic proof of his claim. This is something the real Satoshi could trivially do by signing a message with Satoshi's known private keys.
 
 The Bitcoin community overwhelmingly rejects Wright's claims, derisively calling him "Faketoshi." His saga has become one of Bitcoin's strangest and most persistent controversies, involving forged documents, failed proofs, billion-dollar lawsuits, and the creation of Bitcoin SV (BSV).
 
@@ -52,7 +52,7 @@ Wright became involved in the Bitcoin Cash (BCH) community after the August 2017
 
 In November 2018, Wright led a contentious hard fork of Bitcoin Cash, creating Bitcoin Satoshi Vision (BSV). The fork was accompanied by threats of a "hash war" to destroy the original BCH chain.
 
-BSV was explicitly designed around Wright's interpretation of Satoshi's "vision"—primarily larger blocks and removing protocol changes. The fork was backed by Calvin Ayre, an online gambling billionaire who has been Wright's primary financial supporter.
+BSV was explicitly designed around Wright's interpretation of Satoshi's "vision", primarily larger blocks and removing protocol changes. The fork was backed by Calvin Ayre, an online gambling billionaire who has been Wright's primary financial supporter.
 
 ### 2019–2023: The Lawsuit Era
 
@@ -157,13 +157,13 @@ The contrast is stark: the real Satoshi has remained silent for 15+ years, while
 
 ## Conclusion
 
-The Craig Wright saga is a bizarre footnote in Bitcoin history—a man who claims to be the creator but cannot prove it, who has forged documents and lost lawsuits, yet continues to assert his identity backed by a wealthy patron.
+The Craig Wright saga is a bizarre footnote in Bitcoin history: a man who claims to be the creator but cannot prove it, who has forged documents and lost lawsuits, yet continues to assert his identity backed by a wealthy patron.
 
 For the Bitcoin community, Wright serves as a useful reminder:
 
 - **Proof of work matters**: Claims require evidence. In Bitcoin, cryptographic proof is king.
 - **Decentralization protects**: Bitcoin has no CEO or founder who can be captured. Even if someone credibly claimed to be Satoshi, they couldn't control the protocol.
-- **The community decides**: Consensus—whether about code or identity—emerges from the network, not from proclamations.
+- **The community decides**: Consensus (whether about code or identity) emerges from the network, not from proclamations.
 
 Craig Wright is not Satoshi Nakamoto. A UK High Court has ruled it. The cryptographic evidence (or lack thereof) proves it. And the Bitcoin community has always known it.
 

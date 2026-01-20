@@ -2,7 +2,7 @@
 
 A **mining pool** is a collective of miners who combine their computational resources to increase their chances of finding blocks. When the pool finds a block, the reward is distributed among participants based on their contributed work.
 
-Solo mining is like playing the lottery—you might wait years for a payout. Pool mining provides regular, predictable income at the cost of sharing rewards.
+Solo mining is like playing the lottery: you might wait years for a payout. Pool mining provides regular, predictable income at the cost of sharing rewards.
 
 ## Why Mining Pools Exist
 
@@ -84,8 +84,8 @@ Different pools use different methods to distribute rewards.
 ### Pay Per Share (PPS)
 
 - **How it works**: Pool pays fixed amount per share, regardless of whether blocks are found
-- **Miner risk**: None—guaranteed payment for work
-- **Pool risk**: High—pool absorbs variance
+- **Miner risk**: None; guaranteed payment for work
+- **Pool risk**: High; pool absorbs variance
 - **Fees**: Higher (2-4%) to compensate pool risk
 
 ```
@@ -103,8 +103,8 @@ Pool takes the gamble
 ### Pay Per Last N Shares (PPLNS)
 
 - **How it works**: When block found, reward distributed based on last N shares
-- **Miner risk**: Medium—payment depends on luck and timing
-- **Pool risk**: Lower—only pays when blocks found
+- **Miner risk**: Medium; payment depends on luck and timing
+- **Pool risk**: Lower; only pays when blocks found
 - **Fees**: Lower (1-2%)
 - **Loyalty rewarded**: Miners who stay connected get better returns
 

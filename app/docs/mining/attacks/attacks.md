@@ -291,7 +291,7 @@ Isolating a node from the real network.
 
 ## Finney Attack
 
-Named after Hal Finney—a race between broadcasting blocks and transactions.
+Named after Hal Finney, this is a race between broadcasting blocks and transactions.
 
 ### How It Works
 
@@ -326,7 +326,7 @@ Attack Bitcoin not for profit, but for destruction.
 
 - Acquire massive hashrate regardless of cost
 - Use it to disrupt the network
-- Not trying to profit—trying to destroy
+- Not trying to profit; trying to destroy
 
 ### Defense
 

@@ -2,14 +2,14 @@
 
 ## What is a Bitcoin Wallet?
 
-A Bitcoin wallet is a software application or device that allows users to store, send, and receive Bitcoin. Despite the name, a wallet doesn't actually "store" Bitcoin—Bitcoin exists only on the blockchain. Instead, a wallet stores the **private keys** needed to access and control Bitcoin addresses.
+A Bitcoin wallet is a software application or device that allows users to store, send, and receive Bitcoin. Despite the name, a wallet doesn't actually "store" Bitcoin. Bitcoin exists only on the blockchain. Instead, a wallet stores the **private keys** needed to access and control Bitcoin addresses.
 
 ### Key Concepts
 
 - **Private Key**: Secret cryptographic key that proves ownership of Bitcoin
 - **Public Key**: Derived from private key, used to generate addresses
 - **Address**: Public identifier where Bitcoin can be received (like an account number)
-- **UTXO**: Unspent Transaction Output—the actual "coins" on the blockchain
+- **UTXO**: Unspent Transaction Output, the actual "coins" on the blockchain
 - **Seed Phrase**: Human-readable backup of private keys (12-24 words)
 
 ## Types of Wallets

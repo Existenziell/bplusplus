@@ -27,7 +27,19 @@ export default function Home() {
             />
 
             <DocCard
-              title="Bitcoin Core"
+              title="History"
+              href="/docs/history"
+              description="Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, and the complete supply schedule."
+              links={[
+                { href: '/docs/history/halvings', label: 'Halvings' },
+                { href: '/docs/history/milestones', label: 'Milestones' },
+                { href: '/docs/history/forks', label: 'Forks' },
+                { href: '/docs/history/bips', label: 'BIPs' },
+              ]}
+            />
+
+            <DocCard
+              title="Bitcoin"
               href="/docs/bitcoin"
               description="Learn about Bitcoin's core concepts including script execution, OP codes, RPC interfaces, and block propagation."
               links={[
@@ -43,10 +55,21 @@ export default function Home() {
               href="/docs/mining"
               description="Learn about proof-of-work, block construction, pool mining, and the economic incentives that secure the Bitcoin network."
               links={[
-                { href: '/docs/mining/proof-of-work', label: 'Proof-of-work mechanism' },
-                { href: '/docs/mining/overview', label: 'Block construction' },
-                { href: '/docs/mining/pools', label: 'Pool mining setup' },
-                { href: '/docs/mining/economics', label: 'Mining economics' },
+                { href: '/docs/mining/proof-of-work', label: 'Proof-of-Work' },
+                { href: '/docs/mining/difficulty', label: 'Difficulty Adjustment' },
+                { href: '/docs/mining/mempool', label: 'Mempool' },
+                { href: '/docs/mining/attacks', label: 'Mining Attacks' },
+              ]}
+            />
+
+            <DocCard
+              title="Wallets"
+              href="/docs/wallets"
+              description="Build Bitcoin wallets with proper coin selection, multisig support, and transaction construction."
+              links={[
+                { href: '/docs/wallets/coin-selection', label: 'Coin Selection' },
+                { href: '/docs/wallets/multisig', label: 'Multisig' },
+                { href: '/docs/wallets/transactions', label: 'Transactions' },
               ]}
             />
 
@@ -55,21 +78,9 @@ export default function Home() {
               href="/docs/lightning"
               description="Understand the Lightning Network protocol, including channel management, routing, HTLCs, and onion routing."
               links={[
-                { href: '/docs/lightning/basics', label: 'Getting Started' },
-                { href: '/docs/lightning/routing', label: 'Routing & HTLCs' },
                 { href: '/docs/lightning/channels', label: 'Channels' },
+                { href: '/docs/lightning/routing', label: 'Routing' },
                 { href: '/docs/lightning/onion', label: 'Onion Routing' },
-              ]}
-            />
-
-            <DocCard
-              title="Wallet Development"
-              href="/docs/wallets"
-              description="Build Bitcoin wallets with proper coin selection, multisig support, and transaction construction."
-              links={[
-                { href: '/docs/wallets/coin-selection', label: 'Coin Selection' },
-                { href: '/docs/wallets/multisig', label: 'Multisig' },
-                { href: '/docs/wallets/transactions', label: 'Transaction Creation' },
               ]}
             />
 
@@ -85,18 +96,6 @@ export default function Home() {
             />
 
             <DocCard
-              title="History"
-              href="/docs/history"
-              description="Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, and the complete supply schedule."
-              links={[
-                { href: '/docs/history/overview', label: 'Overview' },
-                { href: '/docs/history/milestones', label: 'Key Milestones' },
-                { href: '/docs/history/halvings', label: 'Halvings' },
-                { href: '/docs/history/supply', label: 'Supply Schedule' },
-              ]}
-            />
-
-            <DocCard
               title="Controversies"
               href="/docs/controversies"
               description="Major debates and controversies that have shaped Bitcoin's development, including the OP_RETURN debate and Blocksize Wars."
@@ -104,7 +103,6 @@ export default function Home() {
                 { href: '/docs/controversies/op-return', label: 'OP_RETURN Debate' },
                 { href: '/docs/controversies/blocksize-wars', label: 'Blocksize Wars' },
                 { href: '/docs/controversies/mt-gox', label: 'Mt. Gox Collapse' },
-                { href: '/docs/controversies/craig-wright', label: 'Craig Wright / "Faketoshi"' },
               ]}
             />
 

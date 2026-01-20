@@ -22,15 +22,13 @@ export interface NavSection {
 
 // All documentation pages with their metadata
 export const docPages: DocPage[] = [
-  // Fundamentals
+  // Fundamentals (high-level concepts)
   { path: '/docs/fundamentals/overview', mdFile: 'app/docs/fundamentals/overview/overview.md', title: 'What is Bitcoin?', section: 'fundamentals' },
   { path: '/docs/fundamentals/problems', mdFile: 'app/docs/fundamentals/problems/problems.md', title: 'Problems Bitcoin Solved', section: 'fundamentals' },
   { path: '/docs/fundamentals/trilemma', mdFile: 'app/docs/fundamentals/trilemma/trilemma.md', title: 'Bitcoin Trilemma', section: 'fundamentals' },
   { path: '/docs/fundamentals/decentralization', mdFile: 'app/docs/fundamentals/decentralization/decentralization.md', title: 'Decentralization', section: 'fundamentals' },
   { path: '/docs/fundamentals/trust-model', mdFile: 'app/docs/fundamentals/trust-model/trust-model.md', title: 'Trust Model', section: 'fundamentals' },
   { path: '/docs/fundamentals/monetary-properties', mdFile: 'app/docs/fundamentals/monetary-properties/monetary-properties.md', title: 'Monetary Properties', section: 'fundamentals' },
-  { path: '/docs/fundamentals/consensus', mdFile: 'app/docs/fundamentals/consensus/consensus.md', title: 'Consensus Mechanism', section: 'fundamentals' },
-  { path: '/docs/fundamentals/cryptography', mdFile: 'app/docs/fundamentals/cryptography/cryptography.md', title: 'Cryptography', section: 'fundamentals' },
 
   // History
   { path: '/docs/history/overview', mdFile: 'app/docs/history/overview/overview.md', title: 'Overview', section: 'history' },
@@ -40,12 +38,14 @@ export const docPages: DocPage[] = [
   { path: '/docs/history/supply', mdFile: 'app/docs/history/supply.md', title: 'Supply Schedule', section: 'history' },
   { path: '/docs/history/bips', mdFile: 'app/docs/history/bips.md', title: 'BIPs', section: 'history' },
 
-  // Bitcoin
+  // Bitcoin Protocol (deep technical)
+  { path: '/docs/bitcoin/cryptography', mdFile: 'app/docs/bitcoin/cryptography/cryptography.md', title: 'Cryptography', section: 'bitcoin' },
+  { path: '/docs/bitcoin/consensus', mdFile: 'app/docs/bitcoin/consensus/consensus.md', title: 'Consensus Mechanism', section: 'bitcoin' },
   { path: '/docs/bitcoin/script', mdFile: 'app/docs/bitcoin/script/execution.md', title: 'Script System', section: 'bitcoin' },
   { path: '/docs/bitcoin/op-codes', mdFile: 'app/docs/bitcoin/op-codes/codes.md', title: 'OP Codes', section: 'bitcoin' },
-  { path: '/docs/bitcoin/rpc', mdFile: 'app/docs/bitcoin/rpc/guide.md', title: 'RPC Guide', section: 'bitcoin' },
   { path: '/docs/bitcoin/blocks', mdFile: 'app/docs/bitcoin/blocks/propagation.md', title: 'Block Propagation', section: 'bitcoin' },
   { path: '/docs/bitcoin/subsidy', mdFile: 'app/docs/bitcoin/subsidy/equation.md', title: 'Subsidy Equation', section: 'bitcoin' },
+  { path: '/docs/bitcoin/rpc', mdFile: 'app/docs/bitcoin/rpc/guide.md', title: 'RPC Guide', section: 'bitcoin' },
 
   // Mining
   { path: '/docs/mining/overview', mdFile: 'app/docs/mining/overview.md', title: 'Overview', section: 'mining' },
@@ -98,15 +98,15 @@ export const docPages: DocPage[] = [
 export const sections: Record<string, { title: string; description: string }> = {
   fundamentals: {
     title: 'Bitcoin Fundamentals',
-    description: 'Essential concepts and principles that form the foundation of Bitcoin, from high-level overview to core design principles.',
+    description: 'High-level concepts explaining what Bitcoin is, why it matters, and the problems it solves.',
   },
   history: {
     title: 'Bitcoin History',
     description: "Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete supply schedule.",
   },
   bitcoin: {
-    title: 'Bitcoin Core Documentation',
-    description: "Learn about Bitcoin's core concepts including script execution, OP codes, RPC interfaces, and block propagation.",
+    title: 'Bitcoin Protocol',
+    description: 'Deep technical documentation of the Bitcoin protocol, including cryptography, consensus, script system, and RPC interfaces.',
   },
   mining: {
     title: 'Mining Documentation',

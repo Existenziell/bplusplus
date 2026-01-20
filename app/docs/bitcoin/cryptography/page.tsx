@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function CryptographyPage() {
-  const content = await readMarkdown('app/docs/fundamentals/cryptography/cryptography.md')
+  const content = await readMarkdown('app/docs/bitcoin/cryptography/cryptography.md')
 
   return (
     <div>

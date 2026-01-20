@@ -4,10 +4,10 @@ import SectionIndexLayout from '@/app/components/SectionIndexLayout'
 import { sections } from '@/app/utils/navigation'
 
 export const metadata: Metadata = {
-  title: 'Bitcoin Core Documentation | B++',
+  title: 'Bitcoin Protocol | B++',
   description: sections.bitcoin.description,
   openGraph: {
-    title: 'Bitcoin Core Documentation | B++',
+    title: 'Bitcoin Protocol | B++',
     description: sections.bitcoin.description,
   },
 }
@@ -18,6 +18,30 @@ export default function BitcoinDocsPage() {
       title={sections.bitcoin.title}
       description={sections.bitcoin.description}
     >
+      <DocCard
+        title="Cryptography"
+        href="/docs/bitcoin/cryptography"
+        description="The cryptographic foundations of Bitcoin, including hash functions, elliptic curve cryptography, digital signatures, and Merkle trees."
+        links={[
+          { href: '/docs/bitcoin/cryptography#hash-functions', label: 'Hash functions (SHA-256)' },
+          { href: '/docs/bitcoin/cryptography#elliptic-curve-cryptography', label: 'Elliptic curve cryptography' },
+          { href: '/docs/bitcoin/cryptography#digital-signatures', label: 'Digital signatures (ECDSA, Schnorr)' },
+          { href: '/docs/bitcoin/cryptography#merkle-trees', label: 'Merkle trees' },
+        ]}
+      />
+
+      <DocCard
+        title="Consensus Mechanism"
+        href="/docs/bitcoin/consensus"
+        description="How Bitcoin achieves agreement among network participants about transaction validity and blockchain state without a central authority."
+        links={[
+          { href: '/docs/bitcoin/consensus#what-is-consensus', label: 'What is consensus' },
+          { href: '/docs/bitcoin/consensus#bitcoins-consensus-mechanism', label: "Bitcoin's consensus mechanism" },
+          { href: '/docs/bitcoin/consensus#consensus-rules', label: 'Consensus rules' },
+          { href: '/docs/bitcoin/consensus#security-through-consensus', label: 'Security through consensus' },
+        ]}
+      />
+
       <DocCard
         title="Script System"
         href="/docs/bitcoin/script"
@@ -31,14 +55,14 @@ export default function BitcoinDocsPage() {
       />
 
       <DocCard
-        title="RPC Guide"
-        href="/docs/bitcoin/rpc"
-        description="Guide to Bitcoin Core RPC commands for interacting with your node, monitoring status, and managing wallets."
+        title="OP Codes"
+        href="/docs/bitcoin/op-codes"
+        description="Complete reference of Bitcoin Script OP codes with explanations, examples, and common usage patterns."
         links={[
-          { href: '/docs/bitcoin/rpc#essential-node-information-commands', label: 'Essential node commands' },
-          { href: '/docs/bitcoin/rpc#wallet-commands-if-wallet-is-loaded', label: 'Wallet commands' },
-          { href: '/docs/bitcoin/rpc#transaction-and-block-commands', label: 'Transaction and block commands' },
-          { href: '/docs/bitcoin/rpc#zmq-notifications', label: 'ZMQ notifications' },
+          { href: '/docs/bitcoin/op-codes#stack-operations', label: 'Stack operations' },
+          { href: '/docs/bitcoin/op-codes#cryptographic-operations', label: 'Cryptographic operations' },
+          { href: '/docs/bitcoin/op-codes#control-flow', label: 'Control flow' },
+          { href: '/docs/bitcoin/op-codes#common-script-patterns', label: 'Common script patterns' },
         ]}
       />
 
@@ -55,18 +79,6 @@ export default function BitcoinDocsPage() {
       />
 
       <DocCard
-        title="OP Codes"
-        href="/docs/bitcoin/op-codes"
-        description="Reference of Bitcoin Script OP codes with explanations, examples, and common usage patterns."
-        links={[
-          { href: '/docs/bitcoin/op-codes#stack-operations', label: 'Stack operations' },
-          { href: '/docs/bitcoin/op-codes#cryptographic-operations', label: 'Cryptographic operations' },
-          { href: '/docs/bitcoin/op-codes#control-flow', label: 'Control flow' },
-          { href: '/docs/bitcoin/op-codes#common-script-patterns', label: 'Common script patterns' },
-        ]}
-      />
-
-      <DocCard
         title="Subsidy Equation"
         href="/docs/bitcoin/subsidy"
         description="Understand Bitcoin's block subsidy formula, halving mechanism, and how the 21 million supply cap is mathematically enforced."
@@ -75,6 +87,18 @@ export default function BitcoinDocsPage() {
           { href: '/docs/bitcoin/subsidy#how-it-works', label: 'How it works' },
           { href: '/docs/bitcoin/subsidy#economic-implications', label: 'Economic implications' },
           { href: '/docs/bitcoin/subsidy#key-properties', label: 'Key properties' },
+        ]}
+      />
+
+      <DocCard
+        title="RPC Guide"
+        href="/docs/bitcoin/rpc"
+        description="Guide to Bitcoin Core RPC commands for interacting with your node, monitoring status, and managing wallets."
+        links={[
+          { href: '/docs/bitcoin/rpc#essential-node-information-commands', label: 'Essential node commands' },
+          { href: '/docs/bitcoin/rpc#wallet-commands-if-wallet-is-loaded', label: 'Wallet commands' },
+          { href: '/docs/bitcoin/rpc#transaction-and-block-commands', label: 'Transaction and block commands' },
+          { href: '/docs/bitcoin/rpc#zmq-notifications', label: 'ZMQ notifications' },
         ]}
       />
     </SectionIndexLayout>

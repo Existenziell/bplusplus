@@ -57,14 +57,14 @@ export default function Home() {
             />
 
             <DocCard
-              title="Bitcoin"
+              title="Bitcoin Protocol"
               href="/docs/bitcoin"
-              description="Learn about Bitcoin's core concepts including script system, OP codes, RPC guide, and block propagation."
+              description="Deep technical documentation of the Bitcoin protocol, including cryptography, consensus, script system, and RPC interfaces."
               links={[
+                { href: '/docs/bitcoin/cryptography', label: 'Cryptography' },
+                { href: '/docs/bitcoin/consensus', label: 'Consensus' },
                 { href: '/docs/bitcoin/script', label: 'Script System' },
                 { href: '/docs/bitcoin/op-codes', label: 'OP Codes' },
-                { href: '/docs/bitcoin/rpc', label: 'RPC Guide' },
-                { href: '/docs/bitcoin/blocks', label: 'Block Propagation' },
               ]}
             />
 

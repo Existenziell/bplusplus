@@ -88,30 +88,6 @@ export default function FundamentalsDocsPage() {
           { href: '/docs/fundamentals/monetary-properties#additional-properties', label: 'Additional properties' },
         ]}
       />
-
-      <DocCard
-        title="Consensus Mechanism"
-        href="/docs/fundamentals/consensus"
-        description="How Bitcoin achieves agreement among network participants about transaction validity and blockchain state without a central authority."
-        links={[
-          { href: '/docs/fundamentals/consensus#what-is-consensus', label: 'What is consensus' },
-          { href: '/docs/fundamentals/consensus#bitcoins-consensus-mechanism', label: "Bitcoin's consensus mechanism" },
-          { href: '/docs/fundamentals/consensus#consensus-rules', label: 'Consensus rules' },
-          { href: '/docs/fundamentals/consensus#security-through-consensus', label: 'Security through consensus' },
-        ]}
-      />
-
-      <DocCard
-        title="Cryptography"
-        href="/docs/fundamentals/cryptography"
-        description="The cryptographic foundations of Bitcoin, including hash functions, elliptic curve cryptography, digital signatures, and Merkle trees."
-        links={[
-          { href: '/docs/fundamentals/cryptography#hash-functions', label: 'Hash functions (SHA-256)' },
-          { href: '/docs/fundamentals/cryptography#elliptic-curve-cryptography', label: 'Elliptic curve cryptography' },
-          { href: '/docs/fundamentals/cryptography#digital-signatures', label: 'Digital signatures (ECDSA, Schnorr)' },
-          { href: '/docs/fundamentals/cryptography#merkle-trees', label: 'Merkle trees' },
-        ]}
-      />
     </SectionIndexLayout>
   )
 }

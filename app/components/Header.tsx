@@ -56,7 +56,9 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
           <div className="container mx-auto px-4 md:px-8">
             <div className="flex items-center justify-between">
               <Breadcrumbs />
-              <DownloadButton />
+              <div className="hidden md:block">
+                <DownloadButton />
+              </div>
             </div>
           </div>
         </div>

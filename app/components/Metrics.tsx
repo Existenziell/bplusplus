@@ -87,7 +87,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             </span>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>Hex</span>
           </li>
-          
+
           <li className='flex-col items-center justify-between italic w-20 hidden lg:flex'>
           <Link
                 href='https://bitcointicker.co/'

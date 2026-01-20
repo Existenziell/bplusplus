@@ -1,9 +1,9 @@
-import { readFile } from 'fs/promises'
+import { readFileSync } from 'fs'
 import { join } from 'path'
-import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import MarkdownRenderer from '../../../components/MarkdownRenderer'
 
-export default async function BitcoinScriptPage() {
-  const content = await readFile(
+export default function BitcoinScriptPage() {
+  const content = readFileSync(
     join(process.cwd(), 'app/docs/bitcoin/script/execution.md'),
     'utf-8'
   )

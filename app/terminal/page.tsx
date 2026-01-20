@@ -35,6 +35,39 @@ interface OutputLine {
   timestamp: Date
 }
 
+// Startup logs sequence
+const STARTUP_LOGS = [
+  'Bitcoin Core version v28.0 (release build)',
+  'Using the \'arm_shani(1way,2way)\' SHA256 implementation',
+  'Default data directory /home/bitcoin/.bitcoin',
+  'Using data directory /home/bitcoin/.bitcoin',
+  'Config file: /home/bitcoin/.bitcoin/bitcoin.conf',
+  'Using at most 125 automatic connections (1048576 file descriptors available)',
+  'scheduler thread start',
+  'Binding RPC on address 127.0.0.1 port 8332',
+  'Starting HTTP server with 4 worker threads',
+  'Using /16 prefix for IP bucketing',
+  'init message: Loading P2P addresses…',
+  'Loaded 65132 addresses from peers.dat  42ms',
+  'init message: Loading banlist…',
+  'SetNetworkActive: true',
+  'Cache configuration:',
+  '* Using 2.0 MiB for block index database',
+  '* Using 8.0 MiB for chain state database',
+  '* Using 440.0 MiB for in-memory UTXO set',
+  'Script verification uses 10 additional threads',
+  'init message: Loading block index…',
+  'Assuming ancestors of block 00000000000000000002a7c4c1e48d76c5a37902165a270156b7a8d72728a054 have valid signatures.',
+  'Opening LevelDB in /home/bitcoin/.bitcoin/blocks/index',
+  'Opened LevelDB successfully',
+  'init message: Verifying blocks…',
+  'Loaded best chain: hashBestChain=00000000000000000001a5f1b5c6c5e7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3 height=933104 date=2026-01-20T15:43:09Z progress=1.000000',
+  'Block index and chainstate loaded',
+  '',
+  'Bitcoin CLI Terminal ready - Connected to Public Node (mainnet)',
+  'Type \'help\' for available commands.',
+]
+
 export default function TerminalPage() {
   const router = useRouter()
   const [input, setInput] = useState('')
@@ -44,39 +77,6 @@ export default function TerminalPage() {
   const [isLoading, setIsLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const outputRef = useRef<HTMLDivElement>(null)
-
-  // Startup logs sequence
-  const startupLogs = [
-    'Bitcoin Core version v28.0 (release build)',
-    'Using the \'arm_shani(1way,2way)\' SHA256 implementation',
-    'Default data directory /home/bitcoin/.bitcoin',
-    'Using data directory /home/bitcoin/.bitcoin',
-    'Config file: /home/bitcoin/.bitcoin/bitcoin.conf',
-    'Using at most 125 automatic connections (1048576 file descriptors available)',
-    'scheduler thread start',
-    'Binding RPC on address 127.0.0.1 port 8332',
-    'Starting HTTP server with 4 worker threads',
-    'Using /16 prefix for IP bucketing',
-    'init message: Loading P2P addresses…',
-    'Loaded 65132 addresses from peers.dat  42ms',
-    'init message: Loading banlist…',
-    'SetNetworkActive: true',
-    'Cache configuration:',
-    '* Using 2.0 MiB for block index database',
-    '* Using 8.0 MiB for chain state database',
-    '* Using 440.0 MiB for in-memory UTXO set',
-    'Script verification uses 10 additional threads',
-    'init message: Loading block index…',
-    'Assuming ancestors of block 00000000000000000002a7c4c1e48d76c5a37902165a270156b7a8d72728a054 have valid signatures.',
-    'Opening LevelDB in /home/bitcoin/.bitcoin/blocks/index',
-    'Opened LevelDB successfully',
-    'init message: Verifying blocks…',
-    'Loaded best chain: hashBestChain=00000000000000000001a5f1b5c6c5e7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3 height=933104 date=2026-01-20T15:43:09Z progress=1.000000',
-    'Block index and chainstate loaded',
-    '',
-    'Bitcoin CLI Terminal ready - Connected to Public Node (mainnet)',
-    'Type \'help\' for available commands.',
-  ]
 
   // Welcome message on mount with animated startup
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function TerminalPage() {
   ⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⣼⣿⣿⣿
   ⣶⣿⣿⣿⣷⣶⣶⣾⣿⣿⠿⠛⠁
   ⠀⠀⠀⣿⡇⠀⢸⣿⡇
-  ⠀⠀⠀`
+    `
 
     // Start with logo
     setOutput([
@@ -104,8 +104,8 @@ export default function TerminalPage() {
     // Animate startup logs
     let currentIndex = 0
     const interval = setInterval(() => {
-      if (currentIndex < startupLogs.length) {
-        const log = startupLogs[currentIndex]
+      if (currentIndex < STARTUP_LOGS.length) {
+        const log = STARTUP_LOGS[currentIndex]
         setOutput(prev => [
           ...prev,
           {

@@ -1,225 +1,56 @@
 # The Bitcoin Trilemma
 
-The Bitcoin Trilemma describes the fundamental challenge of balancing three critical properties in a blockchain system: **Scalability**, **Security**, and **Decentralization**. The trilemma states that it's difficult to optimize all three simultaneously - improving one often comes at the cost of another.
+The Bitcoin Trilemma describes the challenge of balancing three critical blockchain properties: **Scalability**, **Security**, and **Decentralization**. Optimizing one typically comes at the cost of another.
 
 ## The Three Pillars
 
-### 1. Scalability
-
-**Definition:** The ability to process a large number of transactions quickly and efficiently.
-
-**Metrics:**
-- Transactions per second (TPS)
-- Block size and block time
-- Network throughput
-- Transaction confirmation speed
-
-**Bitcoin's Approach:**
-- **Current:** ~7 transactions per second
-- **Block Size:** 1 MB base (up to ~4 MB with SegWit)
-- **Block Time:** ~10 minutes average
-- **Trade-off:** Prioritizes security and decentralization over high throughput
-
-### 2. Security
-
-**Definition:** The resistance to attacks, censorship, and manipulation.
-
-**Aspects:**
-- Network security (hash rate)
-- Resistance to 51% attacks
-- Immutability of the blockchain
-- Censorship resistance
-- Economic security (cost to attack)
-
-**Bitcoin's Approach:**
-- **High Hash Rate:** ~700+ EH/s (extremely expensive to attack)
-- **Proof-of-Work:** Requires significant computational resources
-- **Distributed Nodes:** Thousands of nodes worldwide
-- **Economic Incentives:** Miners rewarded for honest behavior
-- **Trade-off:** Energy-intensive but highly secure
-
-### 3. Decentralization
-
-**Definition:** The distribution of control and decision-making across many participants.
-
-**Aspects:**
-- Node distribution (geographic and ownership)
-- Mining power distribution
-- Development and governance
-- Resistance to centralization pressures
-- Low barriers to participation
-
-**Bitcoin's Approach:**
-- **Global Nodes:** Thousands of nodes worldwide
-- **Open Participation:** Anyone can run a node
-- **Distributed Mining:** Multiple mining pools
-- **Open Development:** Multiple implementations
-- **Trade-off:** Slower decision-making, but more resilient
+| Property | Definition | Bitcoin's Approach |
+|----------|------------|-------------------|
+| **Scalability** | Ability to process many transactions quickly | ~7 TPS, 1 MB blocks (up to ~4 MB with SegWit), 10-min block time |
+| **Security** | Resistance to attacks and manipulation | 700+ EH/s hash rate, proof-of-work, economic incentives |
+| **Decentralization** | Distribution of control across participants | Thousands of global nodes, open participation, multiple mining pools |
 
 ## The Trade-offs
 
-### Scalability vs Security
-
-**Increasing Scalability:**
-- Larger blocks → More transactions per block
-- Faster blocks → More frequent confirmations
-- **Cost:** Requires more resources (storage, bandwidth, computation)
-- **Risk:** Fewer nodes can participate → Centralization risk
-- **Security Impact:** Reduced node count weakens network security
-
-**Example:**
-- Bitcoin Cash increased block size to 32 MB
-- Result: Fewer nodes, more centralization
-- Trade-off: Higher throughput but reduced decentralization
-
-### Scalability vs Decentralization
-
-**Increasing Scalability:**
-- Larger blocks → Higher storage requirements
-- Faster blocks → More bandwidth needed
-- **Cost:** Higher hardware requirements
-- **Risk:** Only well-funded entities can run nodes
-- **Decentralization Impact:** Fewer participants → More centralization
-
-**Example:**
-- Very large blocks (100+ MB) would require:
-  - Expensive hardware
-  - High bandwidth
-  - Significant storage
-- Result: Only large entities could participate
-- Trade-off: Higher throughput but reduced decentralization
-
-### Security vs Decentralization
-
-**Increasing Security:**
-- More hash rate → Higher security
-- **Cost:** Energy and hardware requirements
-- **Risk:** Mining centralization (fewer, larger miners)
-- **Decentralization Impact:** Mining power concentrates
-
-**Example:**
-- ASIC mining improved security (higher hash rate)
-- Result: Mining became more centralized (fewer participants)
-- Trade-off: Higher security but reduced mining decentralization
+| Trade-off | What Happens | Example |
+|-----------|--------------|---------|
+| **Scalability ↔ Security** | Larger/faster blocks require more resources → fewer nodes can participate → weaker security | Bitcoin Cash's 32 MB blocks resulted in fewer nodes |
+| **Scalability ↔ Decentralization** | Higher hardware requirements → only well-funded entities can run nodes | 100+ MB blocks would exclude most participants |
+| **Security ↔ Decentralization** | Higher hash rate requires expensive ASICs → mining power concentrates | ASIC mining improved security but reduced miner diversity |
 
 ## Bitcoin's Solution
 
-### Layer 1: Base Layer
+### Layer 1: Prioritize Security + Decentralization
 
-Bitcoin prioritizes **Security** and **Decentralization** over scalability:
+Bitcoin intentionally limits base-layer scalability to maintain security and decentralization. The philosophy: the settlement layer should be maximally secure and decentralized.
 
-- **Security:** High hash rate, proof-of-work, economic incentives
-- **Decentralization:** Low barriers to running nodes, global distribution
-- **Scalability:** Limited (~7 TPS) but sufficient for base layer
+### Layer 2: Scale on Top
 
-**Philosophy:** The base layer should be maximally secure and decentralized. Scalability can be achieved through other means.
+Scalability is addressed through Layer 2 solutions that inherit base-layer security:
 
-### Layer 2: Scaling Solutions
-
-Bitcoin addresses scalability through **Layer 2 solutions**:
-
-**Lightning Network:**
-- Off-chain payment channels
-- Millions of transactions per second
-- Low fees, instant payments
-- Maintains base layer security and decentralization
-
-**Other L2 Solutions:**
-- Sidechains (Liquid, Rootstock)
-- State channels
-- Payment channels
-
-**Philosophy:** Keep base layer secure and decentralized, scale on top.
+- **Lightning Network:** Off-chain payment channels enabling millions of TPS with low fees
+- **Sidechains:** Liquid, Rootstock for specific use cases
+- **State/Payment channels:** Direct peer-to-peer transactions
 
 ## Historical Examples
 
-### Bitcoin Cash (2017)
-
-**Change:** Increased block size to 8 MB (later 32 MB)
-
-**Result:**
-- ✅ Higher scalability (more TPS)
-- ❌ Reduced decentralization (fewer nodes)
-- ⚠️ Similar security (but weaker due to lower hash rate)
-
-**Trade-off:** Chose scalability over decentralization
-
-### Segregated Witness (2017)
-
-**Change:** Moved witness data outside base block
-
-**Result:**
-- ✅ Improved scalability (~2x effective capacity)
-- ✅ Maintained decentralization (soft fork, backward compatible)
-- ✅ Maintained security (no consensus changes)
-
-**Trade-off:** Successfully improved scalability without sacrificing security or decentralization
-
-### Lightning Network (2018+)
-
-**Change:** Off-chain payment channels
-
-**Result:**
-- ✅ Massive scalability (millions of TPS)
-- ✅ Maintained base layer security
-- ✅ Maintained base layer decentralization
-- ⚠️ Requires base layer for settlement
-
-**Trade-off:** Achieved scalability through separate layer
-
-## The Trilemma in Practice
-
-### Why Not All Three?
-
-**Technical Limitations:**
-- Larger blocks require more resources
-- Faster blocks reduce security (less time for propagation)
-- More nodes = slower consensus
-- Higher security = higher costs = centralization pressure
-
-**Economic Constraints:**
-- Running nodes costs money
-- Mining requires significant investment
-- Higher requirements = fewer participants
-- Centralization reduces security and decentralization
-
-**Network Effects:**
-- More participants = more security
-- More nodes = more decentralization
-- But more participants = more coordination needed
-- Coordination costs limit scalability
+| Change | Year | Scalability | Security | Decentralization |
+|--------|------|-------------|----------|------------------|
+| **Bitcoin Cash** (8→32 MB blocks) | 2017 | ✅ Higher TPS | ⚠️ Lower hash rate | ❌ Fewer nodes |
+| **SegWit** (witness data separated) | 2017 | ✅ ~2x capacity | ✅ Maintained | ✅ Soft fork compatible |
+| **Lightning Network** | 2018+ | ✅ Millions TPS | ✅ Base layer intact | ✅ Base layer intact |
 
 ## Current State
 
-### Bitcoin's Balance (2024)
+Bitcoin optimizes for **Security** (⭐⭐⭐⭐⭐) and **Decentralization** (⭐⭐⭐⭐), accepting limited base-layer **Scalability** (⭐⭐). This is intentional:
 
-**Security:** ⭐⭐⭐⭐⭐
-- Highest hash rate in cryptocurrency
-- Extremely expensive to attack
-- Strong economic incentives
+- **Base layer** = Settlement layer (high-value, infrequent transactions)
+- **Layer 2** = Payment layer (low-value, frequent transactions)
 
-**Decentralization:** ⭐⭐⭐⭐
-- Thousands of nodes worldwide
-- Multiple mining pools
-- Open development
-- Some mining centralization concerns
-
-**Scalability:** ⭐⭐
-- ~7 TPS on base layer
-- Lightning Network provides scaling
-- Sufficient for base layer purpose
-
-### The Trade-off Choice
-
-Bitcoin chose to optimize for **Security** and **Decentralization**, accepting lower base-layer scalability. This is intentional:
-
-- Base layer = Settlement layer (high-value, infrequent)
-- Layer 2 = Payment layer (low-value, frequent)
-- Separation of concerns = Best of all worlds
+This separation of concerns provides the benefits of all three properties across the stack.
 
 ## Related Topics
 
 - [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview
 - [Decentralization](/docs/fundamentals/decentralization) - Why decentralization matters
-- [Consensus Mechanism](/docs/fundamentals/consensus) - How Bitcoin achieves consensus
 - [Lightning Network](/docs/lightning) - Layer 2 scaling solution

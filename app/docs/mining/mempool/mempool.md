@@ -1,8 +1,8 @@
 # The Mempool
 
-The **mempool** (memory pool) is Bitcoin's waiting room for unconfirmed transactions. When you broadcast a transaction, it doesn't immediately go into a block—it first enters the mempool, where it waits for a miner to include it in the next block.
+The **mempool** (memory pool) is Bitcoin's waiting room for unconfirmed transactions. When you broadcast a transaction, it doesn't immediately go into a block. It first enters the mempool, where it waits for a miner to include it in the next block.
 
-Every full node maintains its own mempool. There is no single, global mempool—each node has its own view of pending transactions, though they generally converge through transaction propagation across the network.
+Every full node maintains its own mempool. There is no single, global mempool; each node has its own view of pending transactions, though they generally converge through transaction propagation across the network.
 
 ## How the Mempool Works
 
@@ -145,7 +145,7 @@ Common in DeFi on other chains, less relevant for Bitcoin's simpler transactions
 
 ## Mempool Tools and Resources
 
-> **Query the mempool yourself!** Try `getmempoolinfo` and `getrawmempool` in the [Bitcoin CLI Terminal](/terminal) — real mainnet data, no setup required.
+> **Query the mempool yourself!** Try `getmempoolinfo` and `getrawmempool` in the [Bitcoin CLI Terminal](/terminal). Real mainnet data, no setup required.
 
 ### Mempool Explorers
 

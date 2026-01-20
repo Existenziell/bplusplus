@@ -2,7 +2,7 @@
 
 This document provides a guide for interacting with your Bitcoin [node](/docs/glossary#node) using both curl and bitcoin-cli commands via [RPC](/docs/glossary#rpc-remote-procedure-call).
 
-> **Try it live!** Test these commands directly in the [Bitcoin CLI Terminal](/terminal) — connected to mainnet, no setup required.
+> **Try it live!** Test these commands directly in the [Bitcoin CLI Terminal](/terminal). Connected to mainnet, no setup required.
 
 ## Quick Command Reference
 

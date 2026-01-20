@@ -48,7 +48,18 @@ export default function NextPageButton() {
   }
 
   return (
-    <div className="mt-12 pt-6 border-t border-zinc-200 dark:border-zinc-700 flex justify-end">
+    <div className="mt-12 pt-6 border-t border-zinc-200 dark:border-zinc-700 flex justify-between">
+      <div className="flex items-center gap-2">
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="var(--btc)"
+          viewBox="0 0 24 24"
+          >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7 -7l7 7" />
+        </svg>
+        <span onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="cursor-pointer inline-flex items-center gap-2 text-btc hover:underline transition-colors">Top</span>
+      </div>
       <Link
         href={nextPage.href}
         className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"

@@ -4,6 +4,7 @@ import Metrics from './Metrics'
 import Notification from './Notification'
 import ThemeToggle from './ThemeToggle'
 import Breadcrumbs from './Breadcrumbs'
+import DownloadButton from './DownloadButton'
 
 interface HeaderProps {
   showBreadcrumbs?: boolean
@@ -51,7 +52,10 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
       {showBreadcrumbs && (
         <div className="sticky top-0 z-10 bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
           <div className="container mx-auto px-4 md:px-8">
-            <Breadcrumbs />
+            <div className="flex items-center justify-between">
+              <Breadcrumbs />
+              <DownloadButton />
+            </div>
           </div>
         </div>
       )}

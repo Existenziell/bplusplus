@@ -269,11 +269,11 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content img {
-  @apply rounded-lg my-4 max-w-full;
+  @apply rounded-md my-4 max-w-full;
 }
 
 .markdown-content iframe {
-  @apply rounded-lg;
+  @apply rounded-md;
 }
 
 /* Syntax highlighting theme */

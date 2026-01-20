@@ -49,19 +49,17 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
     <div className='bg-white dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50 shadow-md px-4 sm:px-8 md:px-12 py-3 md:py-4'>
       <div className='text-xs sm:text-sm font-mono text-zinc-800 dark:text-zinc-200'>
         <ul className='flex flex-row items-center flex-wrap justify-around gap-4 sm:gap-6 md:gap-8'>
-          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
+          <li className='flex flex-col items-center justify-between italic w-20'>
             <Link
-              href='https://bitcoin.org/bitcoin.pdf'
-              target='_blank'
-              rel='noopener noreferrer'
+              href='/whitepaper'
               className='font-bold text-base sm:text-lg md:text-xl text-btc'
               aria-label='Link to Bitcoin Whitepaper'
             >
               Bitcoin
             </Link>
-            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Whitepaper</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>Whitepaper</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
+          <li className='flex flex-col items-center justify-between italic w-20'>
             <Link
               href='https://github.com/bitcoin/bitcoin'
               target='_blank'
@@ -70,9 +68,9 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             >
               GitHub
             </Link>
-            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Source Code</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>Source Code</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
+          <li className='flex flex-col items-center justify-between italic w-20'>
               <span
               className='text-btc text-base sm:text-lg md:text-xl font-bold hover:underline cursor-pointer'
               aria-label='Copy Bitcoin Hex Value'
@@ -87,9 +85,9 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             >
               {hexValue}
             </span>
-            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Hex</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>Hex</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
+          <li className='flex flex-col items-center justify-between italic w-20'>
           <Link
                 href='https://bitcointicker.co/'
                 target='_blank'
@@ -107,9 +105,9 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
               )}
             </span>
             </Link>
-            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>BTC/USD</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>BTC/USD</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
+          <li className='flex flex-col items-center justify-between italic w-20'>
             <span className='font-bold text-base sm:text-lg md:text-xl text-btc inline-block min-w-[9ch] text-center'>
               {priceLoading ? (
                 <span className='animate-pulse'>...</span>
@@ -117,7 +115,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
                 satsPerUSD || '—'
               )}
             </span>
-            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Sats/USD</span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>Sats/USD</span>
           </li>
         </ul>
       </div>

@@ -19,6 +19,9 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
         <div className="bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
           <div className="container mx-auto px-4 md:px-8 pt-4">
             <div className="flex justify-between items-start mb-2">
+              <Link href="/" className="text-center hover:opacity-60 transition-opacity no-underline hover:no-underline">
+                <h1 className='text-4xl sm:text-5xl md:text-6xl text-btc dark:text-btc'>B++</h1>
+              </Link>
               <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex" aria-hidden="true">
                 <Image
                   src="/icons/satoshi-black.svg"
@@ -37,9 +40,6 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
                   priority
                 />
               </div>
-              <Link href="/" className="text-center hover:opacity-60 transition-opacity no-underline hover:no-underline">
-                <h1 className='text-4xl sm:text-5xl md:text-6xl'>B++</h1>
-              </Link>
               <div className="flex-shrink-0">
                 <ThemeToggle />
               </div>

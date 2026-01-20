@@ -37,7 +37,7 @@ export default function QuoteRotator() {
   }, [])
 
   return (
-    <p className="text-xl text-zinc-600 dark:text-zinc-400 mb-8 text-center max-w-4xl mx-auto italic min-h-[4rem] md:min-h-[4rem]">
+    <p className="text-xl text-zinc-600 dark:text-zinc-400 text-center max-w-4xl mx-auto italic min-h-[4rem] md:min-h-[4rem]">
       {quote && <>&quot;{quote}&quot;</>}
     </p>
   )

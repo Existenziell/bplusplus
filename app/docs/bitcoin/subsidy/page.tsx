@@ -17,7 +17,7 @@ export default async function SubsidyPage() {
           alt="Subsidy Equation Graph"
           width={1000}
           height={564}
-          className="shadow-xl rounded-lg w-auto h-auto mb-8"
+          className="shadow-xl rounded-md w-auto h-auto mb-8"
           priority
         />
       </div>

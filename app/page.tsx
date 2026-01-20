@@ -11,12 +11,12 @@ export default function Home() {
 
       {/* Hero Section */}
       <div className="bg-zinc-100 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700">
-        <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">
+        <div className="container mx-auto px-4 md:px-8 py-8 md:py-8">
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <QuoteRotator />
-            <div className="relative aspect-video overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
+            <div className="relative aspect-video overflow-hidden rounded-md border border-zinc-200 dark:border-zinc-700">
               <Image
-                src="/images/01.jpg"
+                src="/images/hope.jpg"
                 alt="Bitcoin inspiration"
                 fill
                 className="object-cover"

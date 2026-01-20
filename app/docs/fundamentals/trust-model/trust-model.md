@@ -282,12 +282,6 @@ Bitcoin's trust model is fundamentally different from traditional financial syst
 - Self-custody when possible
 - Verify, don't trust
 
-## Resources
-
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Open-source code you can verify yourself
-- **[mempool.space](https://mempool.space)** - Verify transactions independently without trusting intermediaries
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Monitor network security and trust metrics
-
 ## Related Topics
 
 - [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview

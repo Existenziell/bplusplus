@@ -304,12 +304,6 @@ Bitcoin's genius is combining multiple solutions:
 - Reaches consensus
 - All through clever combination of existing techniques
 
-## Resources
-
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - See how Bitcoin solves these problems in code
-- **[mempool.space](https://mempool.space)** - Explore the blockchain and see double-spending prevention
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Monitor network consensus and security metrics
-
 ## Related Topics
 
 - [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview

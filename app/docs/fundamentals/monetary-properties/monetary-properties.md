@@ -334,12 +334,6 @@ Bitcoin can be expressed in various units, from the smallest satoshi to larger d
 - Still developing
 - Volatility limits use
 
-## Resources
-
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Track supply metrics, inflation rate, and monetary properties
-- **[mempool.space](https://mempool.space)** - Monitor transaction activity and fee markets
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Monetary policy implementation
-
 ## Related Topics
 
 - [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview

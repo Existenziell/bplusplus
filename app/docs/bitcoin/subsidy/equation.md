@@ -616,10 +616,7 @@ This mathematical formula is fundamental to Bitcoin's monetary policy and ensure
 
 ## Resources
 
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Source code repository
 - **[Bitcoin Core Source: validation.cpp](https://github.com/bitcoin/bitcoin/blob/master/src/validation.cpp)** - Subsidy calculation implementation
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Track supply metrics and halving countdown
-- **[mempool.space](https://mempool.space)** - Block explorer to see subsidy in action
 
 ## References
 

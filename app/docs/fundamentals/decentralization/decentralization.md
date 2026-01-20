@@ -281,12 +281,6 @@ Decentralization is one of Bitcoin's core principles - the distribution of contr
 - **Openness:** Can anyone participate?
 - **Governance:** How are decisions made?
 
-## Resources
-
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Open-source code enabling decentralization
-- **[mempool.space](https://mempool.space)** - Explore network decentralization through block explorer
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Monitor node count and network distribution metrics
-
 ## Related Topics
 
 - [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview

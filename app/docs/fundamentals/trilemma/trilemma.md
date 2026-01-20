@@ -217,12 +217,6 @@ Bitcoin chose to optimize for **Security** and **Decentralization**, accepting l
 - Layer 2 = Payment layer (low-value, frequent)
 - Separation of concerns = Best of all worlds
 
-## Resources
-
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - See how Bitcoin balances the trilemma in code
-- **[mempool.space](https://mempool.space)** - Monitor network scalability and transaction throughput
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Track network metrics and decentralization indicators
-
 ## Related Topics
 
 - [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview

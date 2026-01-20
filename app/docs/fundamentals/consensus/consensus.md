@@ -271,12 +271,6 @@ Bitcoin uses **Proof-of-Work** as its consensus mechanism:
 - Economic incentives prevent attacks
 - Practical Byzantine fault tolerance
 
-## Resources
-
-- **[mempool.space](https://mempool.space)** - Real-time block explorer to see consensus in action
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Network statistics and consensus metrics
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Consensus implementation source code
-
 ## Related Topics
 
 - [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview

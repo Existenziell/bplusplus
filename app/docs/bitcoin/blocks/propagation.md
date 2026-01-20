@@ -2,11 +2,6 @@
 
 This document explains how blocks propagate through the Bitcoin network, including the gossip protocol, validation process, and orphan block handling.
 
-## Resources
-
-- **[mempool.space](https://mempool.space)** - Real-time block explorer and mempool visualization
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Bitcoin Core source code
-
 ## Block Propagation Flow
 
 ### 1. Block Discovery and Initial Broadcast
@@ -212,3 +207,7 @@ Bitcoin's block propagation mechanism is designed to be:
 - **Self-healing**: Orphan blocks are automatically resolved
 
 Understanding this process helps explain why Bitcoin is robust and why your node plays an important role in maintaining network health.
+
+## Resources
+
+- **[mempool.space](https://mempool.space)** - Real-time block explorer and mempool visualization

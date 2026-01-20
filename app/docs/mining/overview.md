@@ -38,12 +38,6 @@ Most miners join mining pools to:
 - **Pool Mining**: Miners combine resources to share rewards
 - **Hash Rate**: Measure of mining power (network: ~700 EH/s)
 
-## Resources
-
-- **[mempool.space](https://mempool.space)** - Real-time mining statistics and block explorer
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Mining metrics, hash rate, and difficulty tracking
-- **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Mining implementation source code
-
 ## Related Topics
 
 - [Proof-of-Work Mechanism](/docs/mining/proof-of-work) - How the mining algorithm works

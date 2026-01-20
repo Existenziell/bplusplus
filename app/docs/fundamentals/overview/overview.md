@@ -20,6 +20,41 @@ Bitcoin uses a **blockchain** - a distributed ledger that records all transactio
 5. **Consensus**: Network agrees on valid blocks
 6. **Immutable**: Once added, blocks cannot be changed
 
+### Addresses & Keys
+
+Bitcoin uses public-key cryptography to secure ownership:
+
+**Private Key:**
+- A 256-bit random number (kept secret)
+- Used to sign transactions and prove ownership
+- Anyone with the private key controls the bitcoin
+
+**Public Key:**
+- Derived mathematically from the private key
+- Can be shared publicly
+- Used to verify signatures
+
+**Address:**
+- A hash of the public key (shorter, safer to share)
+- Where others send bitcoin to you
+- Multiple address formats exist (Legacy, SegWit, Taproot)
+
+The relationship is one-way: private key → public key → address. You cannot reverse-engineer a private key from an address.
+
+### Transaction Lifecycle
+
+1. **Creation**: User constructs a transaction specifying inputs (UTXOs to spend) and outputs (recipient addresses and amounts)
+2. **Signing**: User signs the transaction with their private key, proving ownership of the inputs
+3. **Broadcasting**: Signed transaction is sent to the network
+4. **Mempool**: Transaction waits in the [mempool](/docs/glossary#mempool) (memory pool) of unconfirmed transactions
+5. **Selection**: A miner selects the transaction (typically prioritizing higher fees)
+6. **Inclusion**: Transaction is included in a candidate block
+7. **Mining**: Miner finds valid proof-of-work for the block
+8. **Propagation**: New block spreads across the network
+9. **Confirmation**: Each subsequent block adds another confirmation, increasing security
+
+A transaction with 6 confirmations is generally considered irreversible.
+
 ### Network Participants
 
 **Nodes:**
@@ -96,27 +131,17 @@ Bitcoin is a protocol that allows for **free and instant transfers of value** ac
 
 ### The Network
 
-Bitcoin is a **titanic base layer of absolute truth**, robust enough to carry the entire world economy on its shoulders.
-
 **Miners**: Transform energy into bitcoin. They compete to solve cryptographic puzzles, securing the network and processing transactions. In doing so, they convert raw energy into the most secure monetary network ever created.
 
 **Nodes**: Verify that the network rules were followed. Every node is a server on the Bitcoin network, independently validating every transaction and block. This distributed verification is what makes Bitcoin truly decentralized.
 
 ### The Idea
 
-Bitcoin embodies the idea that a **fixed set of rules can exist** around which entire societies can be built, rules that no government, corporation, or individual can change.
-
-Bitcoin is nothing but **mathematics and decentralized communication**. It requires no army to defend, no borders to enforce, no politicians to maintain.
-
-It unlocks the **true power of human cooperation**: voluntary exchange based on mutually agreed rules that cannot be violated.
-
-### The Meme
-
 At its core, Bitcoin is nothing but a **meme**, an idea that replicates itself through human minds.
 
-But nothing in this world is more powerful than an idea whose time has come.
+Bitcoin embodies the idea that a **fixed set of rules can exist** around which entire societies can be built, rules that no government, corporation, or individual can change.
 
-**Bitcoin is that idea. It is unstoppable.**
+It unlocks the **true power of human cooperation**: voluntary exchange based on mutually agreed rules that cannot be violated.
 
 Once the concept of sound, digital, decentralized money enters someone's mind, it cannot be unseen. It spreads from person to person, generation to generation, border to border.
 
@@ -133,11 +158,6 @@ Bitcoin is under **constant attack** from the most sophisticated entities on thi
 The network has operated continuously since January 3, 2009, securing hundreds of billions of dollars in value. The only theoretical attack (a 51% attack) would require controlling more computational power than all other miners combined, a feat that grows more impossible as the network expands.
 
 Bitcoin cannot be hacked. It can only be adopted.
-
-## Resources
-
-- [Bitcoin GitHub Repository](https://github.com/bitcoin/bitcoin) - Bitcoin Core source code
-- [Bitcoin Whitepaper](https://bitcoin.org/bitcoin.pdf) - Original Bitcoin paper by Satoshi Nakamoto
 
 ## Related Topics
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { navItems, type NavSection } from '@/app/utils/navigation'
@@ -9,9 +9,36 @@ export type { NavSection as NavItem }
 
 export { navItems }
 
+// Find which section contains the current path
+function findActiveSectionHref(pathname: string): string | null {
+  for (const section of navItems) {
+    if (pathname === section.href || pathname.startsWith(section.href + '/')) {
+      return section.href
+    }
+  }
+  return null
+}
+
 export default function DocsNavigation() {
   const pathname = usePathname()
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set())
+
+  // Initialize with the section that contains the current page expanded
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(() => {
+    const activeSection = findActiveSectionHref(pathname)
+    return activeSection ? new Set([activeSection]) : new Set()
+  })
+
+  // Update expanded sections when pathname changes (e.g., navigation)
+  useEffect(() => {
+    const activeSection = findActiveSectionHref(pathname)
+    if (activeSection && !expandedSections.has(activeSection)) {
+      setExpandedSections(prev => {
+        const newSet = new Set(prev)
+        newSet.add(activeSection)
+        return newSet
+      })
+    }
+  }, [pathname, expandedSections])
 
   const isActive = (href: string) => {
     if (pathname === href) return true

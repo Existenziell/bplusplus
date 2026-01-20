@@ -8,11 +8,11 @@ interface DocCardLink {
 interface DocCardProps {
   title: string
   href: string
-  description: string
+  description?: string
   links?: DocCardLink[]
 }
 
-export default function DocCard({ title, href, description, links }: DocCardProps) {
+export default function DocCard({ title, href, description = '', links }: DocCardProps) {
   return (
     <div className="card">
       <h2 className="text-2xl font-bold mb-4 text-btc">

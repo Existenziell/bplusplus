@@ -1,8 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
-import DocCard from '@/app/components/DocCard'
 import QuoteRotator from '@/app/components/QuoteRotator'
+import LiveStats from '@/app/components/LiveStats'
+import HorizontalNav from '@/app/components/HorizontalNav'
 
 export default function Home() {
   return (
@@ -28,115 +30,44 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Content Area */}
-      <div className="container mx-auto px-4 md:px-8 py-4 md:py-8">
-        <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <DocCard
-              title="Fundamentals"
-              href="/docs/fundamentals"
-              description="Essential concepts and principles that form the foundation of Bitcoin, from high-level overview to core design principles."
-              links={[
-                { href: '/docs/fundamentals/overview', label: 'What is Bitcoin?' },
-                { href: '/docs/fundamentals/trilemma', label: 'Bitcoin Trilemma' },
-                { href: '/docs/fundamentals/decentralization', label: 'Decentralization' },
-                { href: '/docs/fundamentals/trust-model', label: 'Trust Model' },
-              ]}
-            />
-
-            <DocCard
-              title="History"
-              href="/docs/history"
-              description="Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete supply schedule."
-              links={[
-                { href: '/docs/history/people', label: 'People' },
-                { href: '/docs/history/halvings', label: 'Halvings' },
-                { href: '/docs/history/forks', label: 'Forks' },
-              ]}
-            />
-
-            <DocCard
-              title="Bitcoin Protocol"
-              href="/docs/bitcoin"
-              description="Deep technical documentation of the Bitcoin protocol, including cryptography, consensus, script system, and RPC interfaces."
-              links={[
-                { href: '/docs/bitcoin/cryptography', label: 'Cryptography' },
-                { href: '/docs/bitcoin/consensus', label: 'Consensus' },
-                { href: '/docs/bitcoin/script', label: 'Script System' },
-                { href: '/docs/bitcoin/op-codes', label: 'OP Codes' },
-              ]}
-            />
-
-            <DocCard
-              title="Mining"
-              href="/docs/mining"
-              description="Learn about proof-of-work, block construction, difficulty adjustment, mempool, and the economic incentives that secure the Bitcoin network."
-              links={[
-                { href: '/docs/mining/proof-of-work', label: 'Proof-of-Work' },
-                { href: '/docs/mining/difficulty', label: 'Difficulty Adjustment' },
-                { href: '/docs/mining/mempool', label: 'Mempool' },
-                { href: '/docs/mining/attacks', label: 'Mining Attacks' },
-              ]}
-            />
-
-            <DocCard
-              title="Wallets"
-              href="/docs/wallets"
-              description="Build Bitcoin wallets with proper coin selection, multisig support, and transaction construction."
-              links={[
-                { href: '/docs/wallets/coin-selection', label: 'Coin Selection' },
-                { href: '/docs/wallets/multisig', label: 'Multisig' },
-                { href: '/docs/wallets/transactions', label: 'Transactions' },
-              ]}
-            />
-
-            <DocCard
-              title="Lightning Network"
-              href="/docs/lightning"
-              description="Understand the Lightning Network protocol, including channel management, routing, HTLCs, and onion routing."
-              links={[
-                { href: '/docs/lightning/channels', label: 'Channels' },
-                { href: '/docs/lightning/routing', label: 'Routing' },
-                { href: '/docs/lightning/onion', label: 'Onion Routing' },
-              ]}
-            />
-
-            <DocCard
-              title="Development Tools"
-              href="/docs/development"
-              description="Tools and techniques for monitoring the blockchain, mining, and tracking Bitcoin prices."
-              links={[
-                { href: '/docs/development/monitoring', label: 'Blockchain Monitoring' },
-                { href: '/docs/development/mining', label: 'Pool Mining' },
-                { href: '/docs/development/tools', label: 'Price Tracking' },
-              ]}
-            />
-
-            <DocCard
-              title="Controversies"
-              href="/docs/controversies"
-              description="Major debates and controversies that have shaped Bitcoin's development."
-              links={[
-                { href: '/docs/controversies/op-return', label: 'OP_RETURN Debate' },
-                { href: '/docs/controversies/blocksize-wars', label: 'Blocksize Wars' },
-                { href: '/docs/controversies/mt-gox', label: 'Mt. Gox Collapse' },
-              ]}
-            />
-
-            <DocCard
-              title="Terminal"
+      {/* Start Reading CTA */}
+      <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">
+            Join me on my quest to learn and master Bitcoin Development
+          </h2>
+          <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+            From fundamental concepts to advanced protocol details. Start with the basics or dive deep into the technical documentation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/docs/fundamentals/overview"
+              className="inline-flex items-center justify-center px-6 py-3 bg-btc text-zinc-900 font-semibold rounded-md hover:bg-btc/90 transition-colors hover:no-underline"
+            >
+              Start Reading
+              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+            <Link
               href="/terminal"
-              description="Interactive bitcoin-cli terminal connected to mainnet. Run RPC commands and explore the blockchain in real-time."
-            />
-
-            <DocCard
-              title="Glossary"
-              href="/docs/glossary"
-              description="A comprehensive glossary of Bitcoin development terms, from ASIC to ZMQ."
-            />
+              className="inline-flex items-center justify-center px-6 py-3 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline"
+            >
+              Try the Terminal
+              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </Link>
           </div>
         </div>
       </div>
+
+      {/* Horizontal Navigation */}
+      <HorizontalNav />
+
+      {/* Live Stats */}
+      <LiveStats />
+
       <Footer />
     </main>
   )

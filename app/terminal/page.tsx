@@ -286,7 +286,6 @@ export default function TerminalPage() {
 
       {/* Content Container */}
       <div className="container mx-auto px-4 md:px-8 py-4 md:py-8">
-        <h1 className="text-xl md:text-2xl font-bold mb-4 text-center">Bitcoin CLI Terminal</h1>
         {/* Terminal Window */}
         <div className="rounded-lg overflow-hidden border border-zinc-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
           {/* Terminal Header */}

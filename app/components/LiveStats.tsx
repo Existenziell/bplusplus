@@ -1,0 +1,249 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import copyToClipboard from '@/app/utils/copyToClipboard'
+
+const BTC_HEX = '#f2a900'
+
+interface BlockchainInfo {
+  blocks: number
+  difficulty: number
+  bestblockhash: string
+}
+
+interface MempoolInfo {
+  size: number
+  bytes: number
+}
+
+interface StatItem {
+  label: string
+  value: string | null
+  href?: string
+  external?: boolean
+  onClick?: () => void
+}
+
+export default function LiveStats() {
+  const [btcPrice, setBtcPrice] = useState<number | null>(null)
+  const [satsPerUSD, setSatsPerUSD] = useState<number>(0)
+  const [blockchainInfo, setBlockchainInfo] = useState<BlockchainInfo | null>(null)
+  const [mempoolInfo, setMempoolInfo] = useState<MempoolInfo | null>(null)
+  const [feeRate, setFeeRate] = useState<number | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch all data in parallel
+        const [priceRes, blockchainRes, mempoolRes, feeRes] = await Promise.all([
+          fetch('/api/btc-price'),
+          fetch('/api/bitcoin-rpc', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ method: 'getblockchaininfo' }),
+          }),
+          fetch('/api/bitcoin-rpc', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ method: 'getmempoolinfo' }),
+          }),
+          fetch('/api/bitcoin-rpc', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ method: 'estimatesmartfee', params: [6] }), // Target 6 blocks (~1 hour)
+          }),
+        ])
+
+        const priceData = await priceRes.json()
+        const blockchainData = await blockchainRes.json()
+        const mempoolData = await mempoolRes.json()
+        const feeData = await feeRes.json()
+
+        if (priceData.price) {
+          setBtcPrice(priceData.price)
+          setSatsPerUSD(Math.round(100000000 / priceData.price))
+        }
+
+        if (blockchainData.result) {
+          setBlockchainInfo(blockchainData.result)
+        }
+
+        if (mempoolData.result) {
+          setMempoolInfo(mempoolData.result)
+        }
+
+        // Fee is returned in BTC/kvB, convert to sat/vB
+        if (feeData.result?.feerate) {
+          const satPerVb = Math.round(feeData.result.feerate * 100000) // BTC/kvB to sat/vB
+          setFeeRate(satPerVb)
+        }
+      } catch (error) {
+        console.error('Failed to fetch stats:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  const formatNumber = (num: number) => {
+    return new Intl.NumberFormat('en-US').format(num)
+  }
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price)
+  }
+
+  const formatDifficulty = (diff: number) => {
+    if (diff >= 1e12) {
+      return `${(diff / 1e12).toFixed(2)}T`
+    }
+    return formatNumber(Math.round(diff))
+  }
+
+  const formatBytes = (bytes: number) => {
+    if (bytes >= 1e6) {
+      return `${(bytes / 1e6).toFixed(1)} MB`
+    }
+    if (bytes >= 1e3) {
+      return `${(bytes / 1e3).toFixed(0)} KB`
+    }
+    return `${bytes} B`
+  }
+
+  const stats: StatItem[] = [
+    {
+      label: 'Block Height',
+      value: blockchainInfo?.blocks ? formatNumber(blockchainInfo.blocks) : null,
+      href: '/docs/mining/block-construction',
+    },
+    {
+      label: 'Fee Rate',
+      value: feeRate ? `${feeRate} sat/vB` : null,
+      href: '/docs/mining/mempool',
+    },
+    {
+      label: 'Difficulty',
+      value: blockchainInfo?.difficulty ? formatDifficulty(blockchainInfo.difficulty) : null,
+      href: '/docs/mining/difficulty',
+    },
+    {
+      label: 'Mempool Txs',
+      value: mempoolInfo?.size ? formatNumber(mempoolInfo.size) : null,
+      href: '/docs/mining/mempool',
+    },
+    {
+      label: 'Mempool Size',
+      value: mempoolInfo?.bytes ? formatBytes(mempoolInfo.bytes) : null,
+      href: '/docs/mining/mempool',
+    },
+  ]
+
+  const infoItems: StatItem[] = [
+    {
+      label: 'Bitcoin',
+      value: 'Whitepaper',
+      href: '/whitepaper',
+    },
+    {
+      label: 'GitHub',
+      value: 'Source Code',
+      href: 'https://github.com/bitcoin/bitcoin',
+      external: true,
+    },
+    {
+      label: 'Hex',
+      value: BTC_HEX,
+      onClick: () => copyToClipboard(BTC_HEX, BTC_HEX),
+    },
+    {
+      label: 'BTC/USD',
+      value: btcPrice ? formatPrice(btcPrice) : null,
+      href: '/docs/development/tools',
+    },
+    {
+      label: 'Sats/USD',
+      value: satsPerUSD ? formatNumber(satsPerUSD) : null,
+      href: '/docs/glossary#satoshi',
+    },
+  ]
+  const StatCard = ({ stat }: { stat: StatItem }) => {
+    const content = (
+      <>
+        <div className="text-xl md:text-2xl font-bold text-btc min-h-[2rem] flex items-center justify-center">
+          {loading && !stat.value ? (
+            <span className="animate-pulse text-zinc-400">...</span>
+          ) : stat.value ? (
+            stat.value
+          ) : (
+            <span className="text-zinc-400">—</span>
+          )}
+        </div>
+        <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 group-hover:text-btc transition-colors">
+          {stat.label}
+        </div>
+      </>
+    )
+
+    const className = "bg-white dark:bg-zinc-800 rounded-md p-4 text-center shadow-sm hover:shadow-md transition-shadow hover:no-underline group"
+
+    if (stat.onClick) {
+      return (
+        <button onClick={stat.onClick} className={`${className} cursor-pointer w-full`}>
+          {content}
+        </button>
+      )
+    }
+
+    if (stat.href) {
+      if (stat.external) {
+        return (
+          <a
+            href={stat.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={className}
+          >
+            {content}
+          </a>
+        )
+      }
+      return (
+        <Link href={stat.href} className={className}>
+          {content}
+        </Link>
+      )
+    }
+
+    return <div className={className}>{content}</div>
+  }
+
+  return (
+    <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">
+      <h3 className="text-lg font-semibold text-center mb-6 text-zinc-700 dark:text-zinc-300">
+        General Info
+      </h3>
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 mb-8">
+        {infoItems.map((item) => (
+          <StatCard key={item.label} stat={item} />
+        ))}
+      </div>
+      <h3 className="text-lg font-semibold text-center my-6 text-zinc-700 dark:text-zinc-300">
+        Live Network Stats
+      </h3>
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4">
+        {stats.map((stat) => (
+          <StatCard key={stat.label} stat={stat} />
+        ))}
+      </div>
+    </div>
+  )
+}

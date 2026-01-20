@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Metrics from '@/app/components/Metrics'
 import ThemeToggle from '@/app/components/ThemeToggle'
 import Breadcrumbs from '@/app/components/Breadcrumbs'
 import DownloadButton from '@/app/components/DownloadButton'
@@ -12,8 +11,7 @@ interface HeaderProps {
 export default function Header({ showBreadcrumbs = false }: HeaderProps) {
   return (
     <>
-      <header>
-        {/* Header and Metrics */}
+      <header className="mb-2 md:mb-4">
         <div className="page-bg">
           <div className="container mx-auto px-4 md:px-8 pt-4">
             <div className="flex justify-between items-start mb-2">
@@ -44,7 +42,6 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
                 <ThemeToggle />
               </div>
             </div>
-            <Metrics />
           </div>
         </div>
       </header>

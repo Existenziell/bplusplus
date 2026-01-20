@@ -47,7 +47,7 @@ export default function Home() {
             <DocCard
               title="History"
               href="/docs/history"
-              description="Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, and the complete supply schedule."
+              description="Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete supply schedule."
               links={[
                 { href: '/docs/history/halvings', label: 'Halvings' },
                 { href: '/docs/history/milestones', label: 'Milestones' },
@@ -59,7 +59,7 @@ export default function Home() {
             <DocCard
               title="Bitcoin"
               href="/docs/bitcoin"
-              description="Learn about Bitcoin's core concepts including script execution, OP codes, RPC interfaces, and block propagation."
+              description="Learn about Bitcoin's core concepts including script system, OP codes, RPC guide, and block propagation."
               links={[
                 { href: '/docs/bitcoin/script', label: 'Script System' },
                 { href: '/docs/bitcoin/op-codes', label: 'OP Codes' },
@@ -71,7 +71,7 @@ export default function Home() {
             <DocCard
               title="Mining"
               href="/docs/mining"
-              description="Learn about proof-of-work, block construction, pool mining, and the economic incentives that secure the Bitcoin network."
+              description="Learn about proof-of-work, block construction, difficulty adjustment, mempool, and the economic incentives that secure the Bitcoin network."
               links={[
                 { href: '/docs/mining/proof-of-work', label: 'Proof-of-Work' },
                 { href: '/docs/mining/difficulty', label: 'Difficulty Adjustment' },

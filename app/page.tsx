@@ -98,7 +98,7 @@ export default function Home() {
             <DocCard
               title="Controversies"
               href="/docs/controversies"
-              description="Major debates and controversies that have shaped Bitcoin's development, including the OP_RETURN debate and Blocksize Wars."
+              description="Major debates and controversies that have shaped Bitcoin's development."
               links={[
                 { href: '/docs/controversies/op-return', label: 'OP_RETURN Debate' },
                 { href: '/docs/controversies/blocksize-wars', label: 'Blocksize Wars' },

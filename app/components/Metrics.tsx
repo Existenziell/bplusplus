@@ -14,6 +14,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
   const { setShowNotification, setNotificationText } = useAppContext()
   const [btcPrice, setBtcPrice] = useState<number | null>(initialPrice)
   const [priceLoading, setPriceLoading] = useState(initialPrice === null)
+  const [satsPerUSD, setSatsPerUSD] = useState<number>(0)
 
   // Only fetch if we don't have an initial price
   useEffect(() => {
@@ -24,6 +25,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
         const response = await fetch('/api/btc-price')
         const data = await response.json()
         setBtcPrice(data.price)
+        setSatsPerUSD(Number((1 / data.price * 100000000).toFixed(0)))
       } catch (error) {
         console.error('Failed to fetch BTC price:', error)
       } finally {
@@ -47,7 +49,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
     <div className='bg-white dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50 shadow-md px-4 sm:px-8 md:px-12 py-3 md:py-4'>
       <div className='text-xs sm:text-sm font-mono text-zinc-800 dark:text-zinc-200'>
         <ul className='flex flex-row items-center flex-wrap justify-around gap-4 sm:gap-6 md:gap-8'>
-          <li className='flex flex-col items-center justify-between space-y-1 italic'>
+          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
             <Link
               href='https://bitcoin.org/bitcoin.pdf'
               target='_blank'
@@ -59,7 +61,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             </Link>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Whitepaper</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-1 italic'>
+          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
             <Link
               href='https://github.com/bitcoin/bitcoin'
               target='_blank'
@@ -70,7 +72,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             </Link>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Source Code</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-1 italic'>
+          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
             <div className='w-5 sm:w-6'>
               <Link
                 href='https://bitcoin.org'
@@ -90,7 +92,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             </div>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Symbol</span>
           </li>
-          <li className='hidden md:flex flex-col items-center justify-between space-y-1 italic'>
+          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
               <span
               className='text-btc text-base sm:text-lg md:text-xl font-bold hover:underline cursor-pointer'
               aria-label='Copy Bitcoin Hex Value'
@@ -107,7 +109,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             </span>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Hex</span>
           </li>
-          <li className='flex flex-col items-center justify-between space-y-1 italic'>
+          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
           <Link
                 href='https://bitcointicker.co/'
                 target='_blank'
@@ -126,6 +128,16 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             </span>
             </Link>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>BTC/USD</span>
+          </li>
+          <li className='flex flex-col items-center justify-between space-y-1 italic w-20'>
+            <span className='font-bold text-base sm:text-lg md:text-xl text-btc inline-block min-w-[9ch] text-center'>
+              {priceLoading ? (
+                <span className='animate-pulse'>...</span>
+              ) : (
+                satsPerUSD || '—'
+              )}
+            </span>
+            <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400'>Sats/USD</span>
           </li>
         </ul>
       </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
-import { languageNames } from '../utils/languageNames'
+import { languageNames } from '@/app/utils/languageNames'
 import type { HLJSApi } from 'highlight.js'
 
 // Dynamic import for highlight.js to reduce initial bundle size

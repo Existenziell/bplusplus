@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function TransactionsPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/wallets/transactions/creation.md'),
-    'utf-8'
-  )
+export default async function WalletTransactionsPage() {
+  const content = await readMarkdown('app/docs/wallets/transactions/creation.md')
 
   return (
     <div>

@@ -1,12 +1,8 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function OPCodesPage() {
-  const content = readFileSync(
-    join(process.cwd(), 'app/docs/bitcoin/op-codes/codes.md'),
-    'utf-8'
-  )
+export default async function OpCodesPage() {
+  const content = await readMarkdown('app/docs/bitcoin/op-codes/codes.md')
 
   return (
     <div>

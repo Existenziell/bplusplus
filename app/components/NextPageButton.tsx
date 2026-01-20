@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { navItems, NavItem } from './DocsNavigation'
+import { navItems, type NavSection } from '@/app/data/navigation'
 
 // Flatten the nav items into a single ordered list of all pages
-function getFlattenedPages(items: NavItem[]): { title: string; href: string }[] {
+function getFlattenedPages(items: NavSection[]): { title: string; href: string }[] {
   const pages: { title: string; href: string }[] = []
 
   for (const item of items) {

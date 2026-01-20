@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
 export default async function EnergyConsumptionPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/controversies/energy-consumption/energy-consumption.md'),
-    'utf-8'
-  )
+  const content = await readMarkdown('app/docs/controversies/energy-consumption/energy-consumption.md')
 
   return (
     <div>

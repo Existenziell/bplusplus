@@ -1,12 +1,8 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function MonetaryPropertiesPage() {
-  const content = readFileSync(
-    join(process.cwd(), 'app/docs/fundamentals/monetary-properties/monetary-properties.md'),
-    'utf-8'
-  )
+export default async function MonetaryPropertiesPage() {
+  const content = await readMarkdown('app/docs/fundamentals/monetary-properties/monetary-properties.md')
 
   return (
     <div>

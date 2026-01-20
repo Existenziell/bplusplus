@@ -1,4 +1,4 @@
-import { copyToClipboardProps } from '../types'
+import { copyToClipboardProps } from '@/app/types'
 
 let timeoutId: NodeJS.Timeout | null = null
 

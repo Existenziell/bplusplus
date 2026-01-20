@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
 export const metadata: Metadata = {
   title: 'Bitcoin Glossary | B++',
@@ -13,10 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function GlossaryPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/glossary/terms.md'),
-    'utf-8'
-  )
+  const content = await readMarkdown('app/docs/glossary/terms.md')
 
   return (
     <div>

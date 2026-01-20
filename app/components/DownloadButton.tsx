@@ -1,73 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-
-// Pages that have downloadable MD content
-const downloadablePaths = new Set([
-  // Fundamentals
-  '/docs/fundamentals/overview',
-  '/docs/fundamentals/problems',
-  '/docs/fundamentals/trilemma',
-  '/docs/fundamentals/decentralization',
-  '/docs/fundamentals/trust-model',
-  '/docs/fundamentals/monetary-properties',
-  '/docs/fundamentals/consensus',
-  '/docs/fundamentals/cryptography',
-
-  // History
-  '/docs/history/overview',
-  '/docs/history/halvings',
-  '/docs/history/milestones',
-  '/docs/history/forks',
-  '/docs/history/supply',
-  '/docs/history/bips',
-
-  // Bitcoin
-  '/docs/bitcoin/script',
-  '/docs/bitcoin/op-codes',
-  '/docs/bitcoin/rpc',
-  '/docs/bitcoin/blocks',
-  '/docs/bitcoin/subsidy',
-
-  // Mining
-  '/docs/mining/overview',
-  '/docs/mining/proof-of-work',
-  '/docs/mining/difficulty',
-  '/docs/mining/economics',
-  '/docs/mining/mempool',
-  '/docs/mining/block-construction',
-  '/docs/mining/pools',
-  '/docs/mining/hardware',
-  '/docs/mining/attacks',
-
-  // Wallets
-  '/docs/wallets/overview',
-  '/docs/wallets/coin-selection',
-  '/docs/wallets/multisig',
-  '/docs/wallets/transactions',
-
-  // Lightning
-  '/docs/lightning/basics',
-  '/docs/lightning/routing',
-  '/docs/lightning/channels',
-  '/docs/lightning/onion',
-
-  // Development
-  '/docs/development/getting-started',
-  '/docs/development/monitoring',
-  '/docs/development/mining',
-  '/docs/development/tools',
-
-  // Controversies
-  '/docs/controversies/op-return',
-  '/docs/controversies/blocksize-wars',
-  '/docs/controversies/energy-consumption',
-  '/docs/controversies/mt-gox',
-  '/docs/controversies/craig-wright',
-
-  // Glossary
-  '/docs/glossary',
-])
+import { downloadablePaths } from '@/app/data/navigation'
 
 export default function DownloadButton() {
   const pathname = usePathname()

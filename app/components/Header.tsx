@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Metrics from './Metrics'
-import Notification from './Notification'
-import ThemeToggle from './ThemeToggle'
-import Breadcrumbs from './Breadcrumbs'
-import DownloadButton from './DownloadButton'
+import Metrics from '@/app/components/Metrics'
+import Notification from '@/app/components/Notification'
+import ThemeToggle from '@/app/components/ThemeToggle'
+import Breadcrumbs from '@/app/components/Breadcrumbs'
+import DownloadButton from '@/app/components/DownloadButton'
 
 interface HeaderProps {
   showBreadcrumbs?: boolean
@@ -16,7 +16,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
       <header>
         <Notification />
         {/* Header and Metrics */}
-        <div className="bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
+        <div className="page-bg">
           <div className="container mx-auto px-4 md:px-8 pt-4">
             <div className="flex justify-between items-start mb-2">
               <Link href="/" className="text-center hover:opacity-60 transition-opacity no-underline hover:no-underline">
@@ -50,7 +50,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
       </header>
       {/* Sticky Breadcrumbs - outside header so it can stick to viewport */}
       {showBreadcrumbs && (
-        <div className="sticky top-0 z-10 bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
+        <div className="sticky top-0 z-10 page-bg">
           <div className="container mx-auto px-4 md:px-8">
             <div className="flex items-center justify-between">
               <Breadcrumbs />

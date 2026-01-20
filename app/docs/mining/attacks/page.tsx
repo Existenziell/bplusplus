@@ -1,12 +1,9 @@
-import { readFileSync } from 'fs'
-import path from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function AttacksPage() {
-  const content = readFileSync(
-    path.join(process.cwd(), 'app/docs/mining/attacks/attacks.md'),
-    'utf-8'
-  )
+export default async function AttacksPage() {
+  const content = await readMarkdown('app/docs/mining/attacks/attacks.md')
+
   return (
     <div>
       <MarkdownRenderer content={content} />

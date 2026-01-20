@@ -1,16 +1,22 @@
 'use client'
 
-import { useAppContext } from '../context/AppContext'
-import copyToClipboard from '../utils/copyToClipboard'
+import { useAppContext } from '@/app/context/AppContext'
+import copyToClipboard from '@/app/utils/copyToClipboard'
 import Link from 'next/link'
 
-export default function Footer () {
+interface Resource {
+  name: string
+  url: string
+  description: string
+}
+
+export default function Footer() {
   const address =
-  'npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he'
+    'npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he'
 
   const { setShowNotification, setNotificationText } = useAppContext()
 
-  const resources = [
+  const resources: Resource[] = [
     { name: 'Bitcoin Dev Project', url: 'https://bitcoindevs.xyz', description: 'Learning & development tools' },
     { name: 'ClarkMoody Dashboard', url: 'https://bitcoin.clarkmoody.com/dashboard/', description: 'Bitcoin analytics dashboard' },
     { name: 'Mempool.space', url: 'https://mempool.space', description: 'Blockchain explorer & mempool' },

@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function BitcoinRPCPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/bitcoin/rpc/guide.md'),
-    'utf-8'
-  )
+export default async function RpcPage() {
+  const content = await readMarkdown('app/docs/bitcoin/rpc/guide.md')
 
   return (
     <div>

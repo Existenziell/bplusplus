@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
 export const metadata: Metadata = {
   title: 'What is Bitcoin? | B++',
@@ -12,11 +11,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function FundamentalsOverviewPage() {
-  const content = readFileSync(
-    join(process.cwd(), 'app/docs/fundamentals/overview/overview.md'),
-    'utf-8'
-  )
+export default async function FundamentalsOverviewPage() {
+  const content = await readMarkdown('app/docs/fundamentals/overview/overview.md')
 
   return (
     <div>

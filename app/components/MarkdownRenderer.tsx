@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
-import CodeBlock, { MultiLanguageCodeBlock } from './CodeBlock'
+import CodeBlock, { MultiLanguageCodeBlock } from '@/app/components/CodeBlock'
 
 interface MarkdownRendererProps {
   content: string

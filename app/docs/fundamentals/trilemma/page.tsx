@@ -1,12 +1,8 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function TrilemmaPage() {
-  const content = readFileSync(
-    join(process.cwd(), 'app/docs/fundamentals/trilemma/trilemma.md'),
-    'utf-8'
-  )
+export default async function TrilemmaPage() {
+  const content = await readMarkdown('app/docs/fundamentals/trilemma/trilemma.md')
 
   return (
     <div>

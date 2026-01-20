@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import DocsNavigation from './DocsNavigation'
+import DocsNavigation from '@/app/components/DocsNavigation'
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false)

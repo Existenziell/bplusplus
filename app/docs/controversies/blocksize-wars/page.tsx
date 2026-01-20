@@ -1,12 +1,8 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function BlocksizeWarsPage() {
-  const content = readFileSync(
-    join(process.cwd(), 'app/docs/controversies/blocksize-wars/blocksize-wars.md'),
-    'utf-8'
-  )
+export default async function BlocksizeWarsPage() {
+  const content = await readMarkdown('app/docs/controversies/blocksize-wars/blocksize-wars.md')
 
   return (
     <div>

@@ -43,35 +43,14 @@ html {
   .card {
     @apply bg-white dark:bg-zinc-800 bg-opacity-100 rounded-sm shadow-md px-4 sm:px-5 py-3 sm:py-4;
   }
+
+  /* Main page background gradient - used across page layouts */
+  .page-bg {
+    @apply bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200;
+  }
 }
 
 @layer utilities {}
-
-
-/*  
-* History 
-*/
-.table {
-  display: table;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.row {
-  display: table-row;
-}
-
-.header {
-  font-weight: bold;
-  background-color: #f2f2f2;
-}
-
-.cell {
-  display: table-cell;
-  padding: 8px;
-  border: 1px solid #ddd;
-}
-
 
 /*  
 * Radio Buttons 

@@ -1,12 +1,8 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function DecentralizationPage() {
-  const content = readFileSync(
-    join(process.cwd(), 'app/docs/fundamentals/decentralization/decentralization.md'),
-    'utf-8'
-  )
+export default async function DecentralizationPage() {
+  const content = await readMarkdown('app/docs/fundamentals/decentralization/decentralization.md')
 
   return (
     <div>

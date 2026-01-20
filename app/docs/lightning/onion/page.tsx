@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function LightningOnionPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/lightning/onion/routing.md'),
-    'utf-8'
-  )
+export default async function OnionRoutingPage() {
+  const content = await readMarkdown('app/docs/lightning/onion/routing.md')
 
   return (
     <div>

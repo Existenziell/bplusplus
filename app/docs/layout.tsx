@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
-import DocsNavigation from '../components/DocsNavigation'
-import MobileNav from '../components/MobileNav'
-import NextPageButton from '../components/NextPageButton'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import DocsNavigation from '@/app/components/DocsNavigation'
+import MobileNav from '@/app/components/MobileNav'
+import NextPageButton from '@/app/components/NextPageButton'
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
 
 // Force static generation for all doc pages - they only read from filesystem
 export const dynamic = 'force-static'
@@ -14,7 +14,7 @@ export default function DocsLayout({
   children: ReactNode
 }) {
   return (
-    <main className="min-h-screen bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200">
+    <main className="min-h-screen page-bg">
       <Header showBreadcrumbs />
 
       {/* Content Area */}

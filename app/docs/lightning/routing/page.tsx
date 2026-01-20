@@ -1,20 +1,10 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
 export default async function LightningRoutingPage() {
-  const htlcContent = await readFile(
-    join(process.cwd(), 'app/docs/lightning/routing/htlc.md'),
-    'utf-8'
-  )
-  const feesContent = await readFile(
-    join(process.cwd(), 'app/docs/lightning/routing/fees.md'),
-    'utf-8'
-  )
-  const mppContent = await readFile(
-    join(process.cwd(), 'app/docs/lightning/routing/mpp.md'),
-    'utf-8'
-  )
+  const htlcContent = await readMarkdown('app/docs/lightning/routing/htlc.md')
+  const feesContent = await readMarkdown('app/docs/lightning/routing/fees.md')
+  const mppContent = await readMarkdown('app/docs/lightning/routing/mpp.md')
 
   return (
     <div>

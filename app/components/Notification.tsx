@@ -1,11 +1,11 @@
 'use client'
 
-import { useAppContext } from '../context/AppContext'
+import { useAppContext } from '@/app/context/AppContext'
 
-const Notification = () => {
+export default function Notification() {
   const { showNotification, notificationText } = useAppContext()
 
-  if (!showNotification) return <></>
+  if (!showNotification) return null
 
   const isError = notificationText === 'Failed to copy'
   const message = isError
@@ -20,4 +20,3 @@ const Notification = () => {
     </div>
   )
 }
-export default Notification

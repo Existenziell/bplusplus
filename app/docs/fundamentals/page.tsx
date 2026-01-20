@@ -1,119 +1,117 @@
 import type { Metadata } from 'next'
-import DocCard from '../../components/DocCard'
+import DocCard from '@/app/components/DocCard'
+import SectionIndexLayout from '@/app/components/SectionIndexLayout'
+import { sections } from '@/app/data/navigation'
 
 export const metadata: Metadata = {
   title: 'Bitcoin Fundamentals | B++',
-  description: 'Essential concepts and principles that form the foundation of Bitcoin, from high-level overview to core design principles.',
+  description: sections.fundamentals.description,
   openGraph: {
     title: 'Bitcoin Fundamentals | B++',
-    description: 'Essential concepts and principles that form the foundation of Bitcoin, from high-level overview to core design principles.',
+    description: sections.fundamentals.description,
   },
 }
 
 export default function FundamentalsDocsPage() {
   return (
-    <div>
-      <h1 className="text-5xl font-bold mb-4">Bitcoin Fundamentals</h1>
-      <p className="text-xl text-zinc-400 mb-12">
-        Essential concepts and principles that form the foundation of Bitcoin, from high-level overview to core design principles.
-      </p>
+    <SectionIndexLayout
+      title={sections.fundamentals.title}
+      description={sections.fundamentals.description}
+    >
+      <DocCard
+        title="What is Bitcoin?"
+        href="/docs/fundamentals/overview"
+        description="High-level introduction to Bitcoin, including what it is, how it works, and what makes it unique."
+        links={[
+          { href: '/docs/fundamentals/overview#core-definition', label: 'Core definition' },
+          { href: '/docs/fundamentals/overview#how-bitcoin-works', label: 'How Bitcoin works' },
+          { href: '/docs/fundamentals/overview#technical-innovation', label: 'Technical innovation' },
+        ]}
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <DocCard
-          title="What is Bitcoin?"
-          href="/docs/fundamentals/overview"
-          description="High-level introduction to Bitcoin, including what it is, how it works, and what makes it unique."
-          links={[
-            { href: '/docs/fundamentals/overview#core-definition', label: 'Core definition' },
-            { href: '/docs/fundamentals/overview#how-bitcoin-works', label: 'How Bitcoin works' },
-            { href: '/docs/fundamentals/overview#technical-innovation', label: 'Technical innovation' },
-          ]}
-        />
+      <DocCard
+        title="Problems Bitcoin Solved"
+        href="/docs/fundamentals/problems"
+        description="Explore the fundamental problems Bitcoin was designed to solve, including the double-spending problem and the Two Generals problem."
+        links={[
+          { href: '/docs/fundamentals/problems#distributed-networks', label: 'Distributed networks' },
+          { href: '/docs/fundamentals/problems#the-double-spending-problem', label: 'Double-spending problem' },
+          { href: '/docs/fundamentals/problems#the-two-generals-problem', label: 'Two Generals problem' },
+          { href: '/docs/fundamentals/problems#other-problems-bitcoin-solved', label: 'Other solved problems' },
+        ]}
+      />
 
-        <DocCard
-          title="Problems Bitcoin Solved"
-          href="/docs/fundamentals/problems"
-          description="Explore the fundamental problems Bitcoin was designed to solve, including the double-spending problem and the Two Generals problem."
-          links={[
-            { href: '/docs/fundamentals/problems#distributed-networks', label: 'Distributed networks' },
-            { href: '/docs/fundamentals/problems#the-double-spending-problem', label: 'Double-spending problem' },
-            { href: '/docs/fundamentals/problems#the-two-generals-problem', label: 'Two Generals problem' },
-            { href: '/docs/fundamentals/problems#other-problems-bitcoin-solved', label: 'Other solved problems' },
-          ]}
-        />
+      <DocCard
+        title="Bitcoin Trilemma"
+        href="/docs/fundamentals/trilemma"
+        description="Understanding the fundamental trade-offs between scalability, security, and decentralization in Bitcoin's design."
+        links={[
+          { href: '/docs/fundamentals/trilemma#the-three-pillars', label: 'The three pillars' },
+          { href: '/docs/fundamentals/trilemma#the-trade-offs', label: 'Trade-offs and solutions' },
+          { href: '/docs/fundamentals/trilemma#bitcoins-solution', label: "Bitcoin's solution" },
+          { href: '/docs/fundamentals/trilemma#historical-examples', label: 'Historical examples' },
+        ]}
+      />
 
-        <DocCard
-          title="Bitcoin Trilemma"
-          href="/docs/fundamentals/trilemma"
-          description="Understanding the fundamental trade-offs between scalability, security, and decentralization in Bitcoin's design."
-          links={[
-            { href: '/docs/fundamentals/trilemma#the-three-pillars', label: 'The three pillars' },
-            { href: '/docs/fundamentals/trilemma#the-trade-offs', label: 'Trade-offs and solutions' },
-            { href: '/docs/fundamentals/trilemma#bitcoins-solution', label: "Bitcoin's solution" },
-            { href: '/docs/fundamentals/trilemma#historical-examples', label: 'Historical examples' },
-          ]}
-        />
+      <DocCard
+        title="Decentralization"
+        href="/docs/fundamentals/decentralization"
+        description="Why decentralization matters, how Bitcoin achieves it, and the threats and benefits of a decentralized system."
+        links={[
+          { href: '/docs/fundamentals/decentralization#what-is-decentralization', label: 'What is decentralization' },
+          { href: '/docs/fundamentals/decentralization#why-decentralization-matters', label: 'Why it matters' },
+          { href: '/docs/fundamentals/decentralization#how-bitcoin-achieves-decentralization', label: 'How Bitcoin achieves it' },
+          { href: '/docs/fundamentals/decentralization#threats-to-decentralization', label: 'Threats to decentralization' },
+        ]}
+      />
 
-        <DocCard
-          title="Decentralization"
-          href="/docs/fundamentals/decentralization"
-          description="Why decentralization matters, how Bitcoin achieves it, and the threats and benefits of a decentralized system."
-          links={[
-            { href: '/docs/fundamentals/decentralization#what-is-decentralization', label: 'What is decentralization' },
-            { href: '/docs/fundamentals/decentralization#why-decentralization-matters', label: 'Why it matters' },
-            { href: '/docs/fundamentals/decentralization#how-bitcoin-achieves-decentralization', label: 'How Bitcoin achieves it' },
-            { href: '/docs/fundamentals/decentralization#threats-to-decentralization', label: 'Threats to decentralization' },
-          ]}
-        />
+      <DocCard
+        title="Trust Model"
+        href="/docs/fundamentals/trust-model"
+        description="How Bitcoin eliminates the need for trust in intermediaries through cryptographic proof and economic incentives."
+        links={[
+          { href: '/docs/fundamentals/trust-model#traditional-trust-model', label: 'Traditional trust model' },
+          { href: '/docs/fundamentals/trust-model#bitcoins-trustless-model', label: "Bitcoin's trustless model" },
+          { href: '/docs/fundamentals/trust-model#trust-assumptions-in-bitcoin', label: 'Trust assumptions in Bitcoin' },
+          { href: '/docs/fundamentals/trust-model#trust-minimization-techniques', label: 'Trust minimization' },
+        ]}
+      />
 
-        <DocCard
-          title="Trust Model"
-          href="/docs/fundamentals/trust-model"
-          description="How Bitcoin eliminates the need for trust in intermediaries through cryptographic proof and economic incentives."
-          links={[
-            { href: '/docs/fundamentals/trust-model#traditional-trust-model', label: 'Traditional trust model' },
-            { href: '/docs/fundamentals/trust-model#bitcoins-trustless-model', label: "Bitcoin's trustless model" },
-            { href: '/docs/fundamentals/trust-model#trust-assumptions-in-bitcoin', label: 'Trust assumptions in Bitcoin' },
-            { href: '/docs/fundamentals/trust-model#trust-minimization-techniques', label: 'Trust minimization' },
-          ]}
-        />
+      <DocCard
+        title="Monetary Properties"
+        href="/docs/fundamentals/monetary-properties"
+        description="The six key monetary properties of Bitcoin: scarcity, divisibility, portability, durability, fungibility, and acceptability."
+        links={[
+          { href: '/docs/fundamentals/monetary-properties#the-six-monetary-properties', label: 'The six properties' },
+          { href: '/docs/fundamentals/monetary-properties#comparison-to-traditional-money', label: 'Comparison to traditional money' },
+          { href: '/docs/fundamentals/monetary-properties#economic-properties', label: 'Economic properties' },
+          { href: '/docs/fundamentals/monetary-properties#additional-properties', label: 'Additional properties' },
+        ]}
+      />
 
-        <DocCard
-          title="Monetary Properties"
-          href="/docs/fundamentals/monetary-properties"
-          description="The six key monetary properties of Bitcoin: scarcity, divisibility, portability, durability, fungibility, and acceptability."
-          links={[
-            { href: '/docs/fundamentals/monetary-properties#the-six-monetary-properties', label: 'The six properties' },
-            { href: '/docs/fundamentals/monetary-properties#comparison-to-traditional-money', label: 'Comparison to traditional money' },
-            { href: '/docs/fundamentals/monetary-properties#economic-properties', label: 'Economic properties' },
-            { href: '/docs/fundamentals/monetary-properties#additional-properties', label: 'Additional properties' },
-          ]}
-        />
+      <DocCard
+        title="Consensus Mechanism"
+        href="/docs/fundamentals/consensus"
+        description="How Bitcoin achieves agreement among network participants about transaction validity and blockchain state without a central authority."
+        links={[
+          { href: '/docs/fundamentals/consensus#what-is-consensus', label: 'What is consensus' },
+          { href: '/docs/fundamentals/consensus#bitcoins-consensus-mechanism', label: "Bitcoin's consensus mechanism" },
+          { href: '/docs/fundamentals/consensus#consensus-rules', label: 'Consensus rules' },
+          { href: '/docs/fundamentals/consensus#security-through-consensus', label: 'Security through consensus' },
+        ]}
+      />
 
-        <DocCard
-          title="Consensus Mechanism"
-          href="/docs/fundamentals/consensus"
-          description="How Bitcoin achieves agreement among network participants about transaction validity and blockchain state without a central authority."
-          links={[
-            { href: '/docs/fundamentals/consensus#what-is-consensus', label: 'What is consensus' },
-            { href: '/docs/fundamentals/consensus#bitcoins-consensus-mechanism', label: "Bitcoin's consensus mechanism" },
-            { href: '/docs/fundamentals/consensus#consensus-rules', label: 'Consensus rules' },
-            { href: '/docs/fundamentals/consensus#security-through-consensus', label: 'Security through consensus' },
-          ]}
-        />
-
-        <DocCard
-          title="Cryptography"
-          href="/docs/fundamentals/cryptography"
-          description="The cryptographic foundations of Bitcoin, including hash functions, elliptic curve cryptography, digital signatures, and Merkle trees."
-          links={[
-            { href: '/docs/fundamentals/cryptography#hash-functions', label: 'Hash functions (SHA-256)' },
-            { href: '/docs/fundamentals/cryptography#elliptic-curve-cryptography', label: 'Elliptic curve cryptography' },
-            { href: '/docs/fundamentals/cryptography#digital-signatures', label: 'Digital signatures (ECDSA, Schnorr)' },
-            { href: '/docs/fundamentals/cryptography#merkle-trees', label: 'Merkle trees' },
-          ]}
-        />
-      </div>
-    </div>
+      <DocCard
+        title="Cryptography"
+        href="/docs/fundamentals/cryptography"
+        description="The cryptographic foundations of Bitcoin, including hash functions, elliptic curve cryptography, digital signatures, and Merkle trees."
+        links={[
+          { href: '/docs/fundamentals/cryptography#hash-functions', label: 'Hash functions (SHA-256)' },
+          { href: '/docs/fundamentals/cryptography#elliptic-curve-cryptography', label: 'Elliptic curve cryptography' },
+          { href: '/docs/fundamentals/cryptography#digital-signatures', label: 'Digital signatures (ECDSA, Schnorr)' },
+          { href: '/docs/fundamentals/cryptography#merkle-trees', label: 'Merkle trees' },
+        ]}
+      />
+    </SectionIndexLayout>
   )
 }

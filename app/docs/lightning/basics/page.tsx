@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
 export default async function LightningBasicsPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/lightning/basics/getting-started.md'),
-    'utf-8'
-  )
+  const content = await readMarkdown('app/docs/lightning/basics/getting-started.md')
 
   return (
     <div>

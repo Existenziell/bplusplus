@@ -1,12 +1,12 @@
 import Image from 'next/image'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import DocCard from './components/DocCard'
-import QuoteRotator from './components/QuoteRotator'
+import Footer from '@/app/components/Footer'
+import Header from '@/app/components/Header'
+import DocCard from '@/app/components/DocCard'
+import QuoteRotator from '@/app/components/QuoteRotator'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200">
+    <main className="min-h-screen page-bg">
       <Header />
 
       {/* Hero Section */}

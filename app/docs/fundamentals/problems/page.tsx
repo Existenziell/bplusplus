@@ -1,12 +1,8 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function ProblemsPage() {
-  const content = readFileSync(
-    join(process.cwd(), 'app/docs/fundamentals/problems/problems.md'),
-    'utf-8'
-  )
+export default async function ProblemsPage() {
+  const content = await readMarkdown('app/docs/fundamentals/problems/problems.md')
 
   return (
     <div>

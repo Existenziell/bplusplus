@@ -1,12 +1,9 @@
-import { readFileSync } from 'fs'
-import path from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function MiningPoolsPage() {
-  const content = readFileSync(
-    path.join(process.cwd(), 'app/docs/mining/pools/pools.md'),
-    'utf-8'
-  )
+export default async function PoolsPage() {
+  const content = await readMarkdown('app/docs/mining/pools/pools.md')
+
   return (
     <div>
       <MarkdownRenderer content={content} />

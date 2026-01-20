@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
 export default async function CoinSelectionPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/wallets/coin-selection/algorithms.md'),
-    'utf-8'
-  )
+  const content = await readMarkdown('app/docs/wallets/coin-selection/algorithms.md')
 
   return (
     <div>

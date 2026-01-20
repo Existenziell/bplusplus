@@ -1,12 +1,9 @@
-import { readFileSync } from 'fs'
-import path from 'path'
-import MarkdownRenderer from '../../../components/MarkdownRenderer'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default function BlockConstructionPage() {
-  const content = readFileSync(
-    path.join(process.cwd(), 'app/docs/mining/block-construction/block-construction.md'),
-    'utf-8'
-  )
+export default async function BlockConstructionPage() {
+  const content = await readMarkdown('app/docs/mining/block-construction/block-construction.md')
+
   return (
     <div>
       <MarkdownRenderer content={content} />

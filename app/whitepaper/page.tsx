@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
 
 export const metadata = {
   title: 'Bitcoin Whitepaper - B++',
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function WhitepaperPage() {
   return (
-    <main className="min-h-screen bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200">
+    <main className="min-h-screen page-bg">
       <Header />
 
       <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">

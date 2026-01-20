@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import copyToClipboard from '../utils/copyToClipboard'
-import { useAppContext } from '../context/AppContext'
+import copyToClipboard from '@/app/utils/copyToClipboard'
+import { useAppContext } from '@/app/context/AppContext'
 
 interface MetricsProps {
   initialPrice?: number | null

@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function BitcoinBlocksPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/bitcoin/blocks/propagation.md'),
-    'utf-8'
-  )
+export default async function BlocksPage() {
+  const content = await readMarkdown('app/docs/bitcoin/blocks/propagation.md')
 
   return (
     <div>

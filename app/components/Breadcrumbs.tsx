@@ -2,46 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { routeLabels } from '@/app/data/navigation'
 
 interface BreadcrumbItem {
   label: string
   href: string
-}
-
-const routeLabels: Record<string, string> = {
-  bitcoin: 'Bitcoin',
-  mining: 'Mining',
-  lightning: 'Lightning Network',
-  wallets: 'Wallets',
-  development: 'Development Tools',
-  history: 'History',
-  controversies: 'Controversies',
-  glossary: 'Glossary',
-  script: 'Script System',
-  'op-codes': 'OP Codes',
-  rpc: 'RPC Guide',
-  blocks: 'Block Propagation',
-  subsidy: 'Subsidy Equation',
-  'proof-of-work': 'Proof-of-Work',
-  economics: 'Economics',
-  troubleshooting: 'Troubleshooting',
-  overview: 'Overview',
-  halvings: 'Halvings',
-  milestones: 'Milestones',
-  forks: 'Forks',
-  supply: 'Supply Schedule',
-  basics: 'Getting Started',
-  routing: 'Routing & HTLCs',
-  channels: 'Channels',
-  onion: 'Onion Routing',
-  'coin-selection': 'Coin Selection',
-  multisig: 'Multisig',
-  transactions: 'Transactions',
-  monitoring: 'Blockchain Monitoring',
-  tools: 'Price Tracking',
-  'op-return': 'OP_RETURN Debate',
-  'blocksize-wars': 'Blocksize Wars',
-  'energy-consumption': 'Energy Consumption',
 }
 
 export default function Breadcrumbs() {

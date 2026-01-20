@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function MiningPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/development/mining/pool-mining.md'),
-    'utf-8'
-  )
+export default async function PoolMiningPage() {
+  const content = await readMarkdown('app/docs/development/mining/pool-mining.md')
 
   return (
     <div>

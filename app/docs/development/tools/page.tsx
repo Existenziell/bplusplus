@@ -1,12 +1,8 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function ToolsPage() {
-  const content = await readFile(
-    join(process.cwd(), 'app/docs/development/tools/price-tracking.md'),
-    'utf-8'
-  )
+export default async function PriceTrackingPage() {
+  const content = await readMarkdown('app/docs/development/tools/price-tracking.md')
 
   return (
     <div>

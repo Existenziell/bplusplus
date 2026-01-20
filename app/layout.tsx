@@ -3,8 +3,8 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import './globals.css'
-import { AppContextProvider } from './context/AppContext'
-import { ThemeProvider } from './context/ThemeContext'
+import { AppContextProvider } from '@/app/context/AppContext'
+import { ThemeProvider } from '@/app/context/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 

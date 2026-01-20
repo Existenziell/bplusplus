@@ -350,3 +350,35 @@ main > div > div > h1:first-child {
 .glossary-content h3 {
   @apply text-base sm:text-lg font-semibold mt-4 mb-2 text-zinc-700 dark:text-zinc-300;
 }
+
+/*
+* Terminal Styles
+*/
+.terminal-output {
+  @apply font-mono text-sm;
+}
+
+.terminal-output pre {
+  @apply whitespace-pre-wrap break-all m-0 p-0 bg-transparent border-none;
+}
+
+/* Terminal JSON syntax highlighting */
+.terminal-output .json-key {
+  @apply text-purple-400;
+}
+
+.terminal-output .json-string {
+  @apply text-yellow-400;
+}
+
+.terminal-output .json-number {
+  @apply text-emerald-400;
+}
+
+.terminal-output .json-boolean {
+  @apply text-cyan-400;
+}
+
+.terminal-output .json-null {
+  @apply text-zinc-500;
+}

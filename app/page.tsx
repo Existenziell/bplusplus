@@ -125,6 +125,12 @@ export default function Home() {
             />
 
             <DocCard
+              title="Terminal"
+              href="/terminal"
+              description="Interactive bitcoin-cli terminal connected to mainnet. Run RPC commands and explore the blockchain in real-time."
+            />
+
+            <DocCard
               title="Glossary"
               href="/docs/glossary"
               description="A comprehensive glossary of Bitcoin development terms, from ASIC to ZMQ."

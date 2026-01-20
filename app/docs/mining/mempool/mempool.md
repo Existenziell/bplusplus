@@ -145,6 +145,8 @@ Common in DeFi on other chains, less relevant for Bitcoin's simpler transactions
 
 ## Mempool Tools and Resources
 
+> **Query the mempool yourself!** Try `getmempoolinfo` and `getrawmempool` in the [Bitcoin CLI Terminal](/terminal) — real mainnet data, no setup required.
+
 ### Mempool Explorers
 
 - **[mempool.space](https://mempool.space)**: Beautiful visualization of mempool and fee estimates

@@ -2,6 +2,8 @@
 
 Real-time blockchain monitoring allows you to detect new blocks instantly, track mining pools, analyze transactions, and monitor network activity.
 
+> **Explore the blockchain live!** Try RPC commands like `getblockchaininfo` and `getmempoolinfo` in the [Bitcoin CLI Terminal](/terminal).
+
 ## ZMQ Notifications
 
 ### What is ZMQ?

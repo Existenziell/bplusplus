@@ -2,6 +2,8 @@
 
 Bitcoin development spans multiple layers—from low-level protocol work to high-level application development. This guide covers the programming languages, tools, and approaches used across the Bitcoin ecosystem to help you choose the right path for your goals.
 
+> **Hands-on learning:** Try Bitcoin RPC commands directly in the [Bitcoin CLI Terminal](/terminal) — no node setup required.
+
 ## Programming Languages in Bitcoin
 
 ### C++ (Bitcoin Core)

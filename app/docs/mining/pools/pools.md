@@ -183,14 +183,15 @@ Mining pools create centralization pressure:
 
 ```
 Top pools control majority of hashrate:
-┌─────────────────────────────────────┐
-│ Foundry USA     ████████████ 30%   │
-│ AntPool         ████████ 20%       │
-│ F2Pool          ██████ 15%         │
-│ ViaBTC          █████ 12%          │
-│ Binance Pool    ████ 10%           │
-│ Others          █████ 13%          │
-└─────────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│ Foundry USA     ████████████████ 31.94%  │
+│ AntPool         ███████ 14.98%           │
+│ F2Pool          ██████ 12.90%            │
+│ ViaBTC          █████ 10.32%             │
+│ SpiderPool      ███ 7.14%                │
+│ MARA Pool       ██ 5.75%                 │
+│ Others          ████████ 16.97%          │
+└──────────────────────────────────────────┘
 ```
 
 **Risks**:

@@ -20,14 +20,14 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
               <Link href="/" className="text-center hover:opacity-60 transition-opacity no-underline hover:no-underline">
                 <h1 className='text-4xl sm:text-5xl md:text-6xl text-btc dark:text-btc'>B++</h1>
               </Link>
-              <Link href="/terminal" className="text-center hover:opacity-60 transition-opacity no-underline hover:no-underline">
-              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex" aria-hidden="true">
+              <Link href="/terminal" className="text-center hover:text-btc transition-opacity no-underline hover:no-underline">
+              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 hover:opacity-80 transition-opacity" aria-hidden="true">
                 <Image
                   src="/icons/satoshi-black.svg"
                   alt=""
                   width={50}
                   height={50}
-                  className="opacity-20 dark:invert"
+                  className="dark:invert"
                   priority
                 />
                 <Image
@@ -35,7 +35,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
                   alt=""
                   width={40}
                   height={40}
-                  className="opacity-20 dark:invert"
+                  className="dark:invert"
                   priority
                 />
                 </div>

@@ -3,15 +3,14 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import copyToClipboard from '@/app/utils/copyToClipboard'
-import { useAppContext } from '@/app/context/AppContext'
 
 interface MetricsProps {
   initialPrice?: number | null
 }
 
-const Metrics = ({ initialPrice = null }: MetricsProps) => {
-  const hexValue = '#f2a900'
-  const { setShowNotification, setNotificationText } = useAppContext()
+const BTC_HEX = '#f2a900'
+
+export default function Metrics({ initialPrice = null }: MetricsProps) {
   const [btcPrice, setBtcPrice] = useState<number | null>(initialPrice)
   const [priceLoading, setPriceLoading] = useState(initialPrice === null)
   const [satsPerUSD, setSatsPerUSD] = useState<number>(0)
@@ -71,40 +70,33 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>Source Code</span>
           </li>
           <li className='flex flex-col items-center justify-between italic w-20'>
-              <span
+            <span
               className='text-btc text-base sm:text-lg md:text-xl font-bold hover:underline cursor-pointer'
               aria-label='Copy Bitcoin Hex Value'
-              onClick={() =>
-                copyToClipboard({
-                  data: hexValue,
-                  notificationText: hexValue,
-                  setShowNotification,
-                  setNotificationText,
-                })
-              }
+              onClick={() => copyToClipboard(BTC_HEX, BTC_HEX)}
             >
-              {hexValue}
+              {BTC_HEX}
             </span>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>Hex</span>
           </li>
 
           <li className='flex-col items-center justify-between italic w-20 hidden lg:flex'>
-          <Link
-                href='https://bitcointicker.co/'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='font-bold text-base sm:text-lg md:text-xl text-btc'
-                aria-label='Link to Bitcoin Ticker'
-              >
+            <Link
+              href='https://bitcointicker.co/'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='font-bold text-base sm:text-lg md:text-xl text-btc'
+              aria-label='Link to Bitcoin Ticker'
+            >
               <span className='font-bold text-base sm:text-lg md:text-xl text-btc inline-block min-w-[9ch] text-center'>
-              {priceLoading ? (
-                <span className='animate-pulse'>...</span>
-              ) : btcPrice ? (
-                formatPrice(btcPrice)
-              ) : (
-                '—'
-              )}
-            </span>
+                {priceLoading ? (
+                  <span className='animate-pulse'>...</span>
+                ) : btcPrice ? (
+                  formatPrice(btcPrice)
+                ) : (
+                  '—'
+                )}
+              </span>
             </Link>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>BTC/USD</span>
           </li>
@@ -123,5 +115,3 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
     </div>
   )
 }
-
-export default Metrics

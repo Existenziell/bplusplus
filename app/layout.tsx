@@ -3,10 +3,10 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import './globals.css'
-import { AppContextProvider } from '@/app/context/AppContext'
 import { ThemeProvider } from '@/app/context/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Notification from '@/app/components/Notification'
 
 const ubuntu = Ubuntu({
   weight: '400',
@@ -102,11 +102,10 @@ export default function RootLayout({
       </head>
       <body className={ubuntu.className}>
         <ThemeProvider>
-          <AppContextProvider>
-            {children}
-            <Analytics />
-            <SpeedInsights />
-          </AppContextProvider>
+          <Notification />
+          {children}
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

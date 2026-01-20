@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { navItems, type NavSection } from '@/app/data/navigation'
+import { navItems, type NavSection } from '@/app/utils/navigation'
 
 export type { NavSection as NavItem }
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import DocCard from '@/app/components/DocCard'
 import SectionIndexLayout from '@/app/components/SectionIndexLayout'
-import { sections } from '@/app/data/navigation'
+import { sections } from '@/app/utils/navigation'
 
 export const metadata: Metadata = {
   title: 'Bitcoin Fundamentals | B++',

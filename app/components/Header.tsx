@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Metrics from '@/app/components/Metrics'
-import Notification from '@/app/components/Notification'
 import ThemeToggle from '@/app/components/ThemeToggle'
 import Breadcrumbs from '@/app/components/Breadcrumbs'
 import DownloadButton from '@/app/components/DownloadButton'
@@ -14,7 +13,6 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
   return (
     <>
       <header>
-        <Notification />
         {/* Header and Metrics */}
         <div className="page-bg">
           <div className="container mx-auto px-4 md:px-8 pt-4">

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 import { existsSync } from 'fs'
-import { pathToMdFile } from '@/app/data/navigation'
+import { pathToMdFile } from '@/app/utils/navigation'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)

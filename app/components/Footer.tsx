@@ -1,8 +1,7 @@
 'use client'
 
-import { useAppContext } from '@/app/context/AppContext'
-import copyToClipboard from '@/app/utils/copyToClipboard'
 import Link from 'next/link'
+import copyToClipboard from '@/app/utils/copyToClipboard'
 
 interface Resource {
   name: string
@@ -10,21 +9,18 @@ interface Resource {
   description: string
 }
 
+const NPUB_ADDRESS = 'npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he'
+
+const resources: Resource[] = [
+  { name: 'Bitcoin Dev Project', url: 'https://bitcoindevs.xyz', description: 'Learning & development tools' },
+  { name: 'ClarkMoody Dashboard', url: 'https://bitcoin.clarkmoody.com/dashboard/', description: 'Bitcoin analytics dashboard' },
+  { name: 'Mempool.space', url: 'https://mempool.space', description: 'Blockchain explorer & mempool' },
+  { name: 'Blockstream.info', url: 'https://blockstream.info', description: 'Blockchain explorer' },
+  { name: 'Bitcoin Optech', url: 'https://bitcoinops.org', description: 'Technical resources' },
+  { name: 'Bitcoin Visuals', url: 'https://bitcoinvisuals.com', description: 'Charts & metrics' },
+]
+
 export default function Footer() {
-  const address =
-    'npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he'
-
-  const { setShowNotification, setNotificationText } = useAppContext()
-
-  const resources: Resource[] = [
-    { name: 'Bitcoin Dev Project', url: 'https://bitcoindevs.xyz', description: 'Learning & development tools' },
-    { name: 'ClarkMoody Dashboard', url: 'https://bitcoin.clarkmoody.com/dashboard/', description: 'Bitcoin analytics dashboard' },
-    { name: 'Mempool.space', url: 'https://mempool.space', description: 'Blockchain explorer & mempool' },
-    { name: 'Blockstream.info', url: 'https://blockstream.info', description: 'Blockchain explorer' },
-    { name: 'Bitcoin Optech', url: 'https://bitcoinops.org', description: 'Technical resources' },
-    { name: 'Bitcoin Visuals', url: 'https://bitcoinvisuals.com', description: 'Charts & metrics' },
-  ]
-
   return (
     <footer className='text-xs text-center pb-4 overflow-hidden border-t border-zinc-300 dark:border-zinc-700 pt-6 mt-8'>
       {/* Resources Section */}
@@ -57,7 +53,7 @@ export default function Footer() {
       {/* Footer Credit */}
       <p
         className='hover:cursor-pointer hover:underline'
-        onClick={() => copyToClipboard({ data: address, notificationText: 'npub', setShowNotification, setNotificationText })}
+        onClick={() => copyToClipboard(NPUB_ADDRESS, 'npub')}
       >
         Made with <span className='text-btc text-lg' aria-hidden='true'>&#9829;</span> by Chris
       </p>

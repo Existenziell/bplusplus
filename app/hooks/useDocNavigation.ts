@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
-import { navItems, downloadablePaths, routeLabels, type NavSection } from '@/app/data/navigation'
+import { navItems, downloadablePaths, routeLabels, type NavSection } from '@/app/utils/navigation'
 
 interface BreadcrumbItem {
   label: string

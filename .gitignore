@@ -4,10 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
+.npm
 .yarn/install-state.gz
 
 # testing
 /coverage
+/logs
 
 # next.js
 /.next/
@@ -27,6 +29,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -34,3 +37,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo

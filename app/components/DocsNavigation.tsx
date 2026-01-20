@@ -88,6 +88,13 @@ export const navItems: NavItem[] = [
     href: '/docs/development',
     children: [
       { title: 'Getting Started', href: '/docs/development/getting-started' },
+      { title: 'Testing & Debugging', href: '/docs/development/testing' },
+      { title: 'PSBT', href: '/docs/development/psbt' },
+      { title: 'Address Generation', href: '/docs/development/addresses' },
+      { title: 'Transaction Construction', href: '/docs/development/transactions' },
+      { title: 'Key Management', href: '/docs/development/keys' },
+      { title: 'Test Networks', href: '/docs/development/testnets' },
+      { title: 'Libraries & SDKs', href: '/docs/development/libraries' },
       { title: 'Blockchain Monitoring', href: '/docs/development/monitoring' },
       { title: 'Pool Mining', href: '/docs/development/mining' },
       { title: 'Price Tracking', href: '/docs/development/tools' },

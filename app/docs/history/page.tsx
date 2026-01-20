@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import DocCard from '../../components/DocCard'
+
+export const metadata: Metadata = {
+  title: 'Bitcoin History | B++',
+  description: "Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete supply schedule.",
+  openGraph: {
+    title: 'Bitcoin History | B++',
+    description: "Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete supply schedule.",
+  },
+}
 
 export default function HistoryDocsPage() {
   return (

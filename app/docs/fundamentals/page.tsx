@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import DocCard from '../../components/DocCard'
+
+export const metadata: Metadata = {
+  title: 'Bitcoin Fundamentals | B++',
+  description: 'Essential concepts and principles that form the foundation of Bitcoin, from high-level overview to core design principles.',
+  openGraph: {
+    title: 'Bitcoin Fundamentals | B++',
+    description: 'Essential concepts and principles that form the foundation of Bitcoin, from high-level overview to core design principles.',
+  },
+}
 
 export default function FundamentalsDocsPage() {
   return (

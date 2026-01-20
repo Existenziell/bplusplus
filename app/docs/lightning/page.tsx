@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import DocCard from '../../components/DocCard'
+
+export const metadata: Metadata = {
+  title: 'Lightning Network Documentation | B++',
+  description: 'Understand the Lightning Network protocol, including channel management, routing, HTLCs, and onion routing.',
+  openGraph: {
+    title: 'Lightning Network Documentation | B++',
+    description: 'Understand the Lightning Network protocol, including channel management, routing, HTLCs, and onion routing.',
+  },
+}
 
 export default function LightningDocsPage() {
   return (

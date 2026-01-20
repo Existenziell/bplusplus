@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import DocCard from '../../components/DocCard'
+
+export const metadata: Metadata = {
+  title: 'Mining Documentation | B++',
+  description: 'Learn about proof-of-work, block construction, pool mining, and the economic incentives that secure the Bitcoin network.',
+  openGraph: {
+    title: 'Mining Documentation | B++',
+    description: 'Learn about proof-of-work, block construction, pool mining, and the economic incentives that secure the Bitcoin network.',
+  },
+}
 
 export default function MiningDocsPage() {
   return (

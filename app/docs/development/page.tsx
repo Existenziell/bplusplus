@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import DocCard from '../../components/DocCard'
+
+export const metadata: Metadata = {
+  title: 'Development Tools Documentation | B++',
+  description: 'Tools and techniques for monitoring the blockchain, mining, and tracking Bitcoin prices.',
+  openGraph: {
+    title: 'Development Tools Documentation | B++',
+    description: 'Tools and techniques for monitoring the blockchain, mining, and tracking Bitcoin prices.',
+  },
+}
 
 export default function DevelopmentDocsPage() {
   return (

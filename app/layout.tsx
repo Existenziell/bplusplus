@@ -35,6 +35,29 @@ export const metadata: Metadata = {
       },
     ],
   },
+  metadataBase: new URL('https://bplusplus.info'),
+  openGraph: {
+    title: 'B++',
+    description: 'Bitcoin Education | Hopium for the masses',
+    url: 'https://bplusplus.info',
+    siteName: 'B++',
+    images: [
+      {
+        url: '/og/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'B++ - Bitcoin Education',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'B++',
+    description: 'Bitcoin Education | Hopium for the masses',
+    images: ['/og/og-image.png'],
+  },
 }
 
 export default function RootLayout({

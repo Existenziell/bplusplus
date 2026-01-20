@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import DocCard from '../../components/DocCard'
+
+export const metadata: Metadata = {
+  title: 'Wallet Development Documentation | B++',
+  description: 'Build Bitcoin wallets with proper coin selection, multisig support, and transaction construction.',
+  openGraph: {
+    title: 'Wallet Development Documentation | B++',
+    description: 'Build Bitcoin wallets with proper coin selection, multisig support, and transaction construction.',
+  },
+}
 
 export default function WalletsDocsPage() {
   return (

@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import DocCard from '../../components/DocCard'
+
+export const metadata: Metadata = {
+  title: 'Bitcoin Controversies | B++',
+  description: "Major debates and controversies that have shaped Bitcoin's development and community.",
+  openGraph: {
+    title: 'Bitcoin Controversies | B++',
+    description: "Major debates and controversies that have shaped Bitcoin's development and community.",
+  },
+}
 
 export default function ControversiesPage() {
   return (

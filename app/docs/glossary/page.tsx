@@ -1,6 +1,16 @@
+import type { Metadata } from 'next'
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+
+export const metadata: Metadata = {
+  title: 'Bitcoin Glossary | B++',
+  description: 'Comprehensive glossary of Bitcoin terms, concepts, and technical vocabulary.',
+  openGraph: {
+    title: 'Bitcoin Glossary | B++',
+    description: 'Comprehensive glossary of Bitcoin terms, concepts, and technical vocabulary.',
+  },
+}
 
 export default async function GlossaryPage() {
   const content = await readFile(

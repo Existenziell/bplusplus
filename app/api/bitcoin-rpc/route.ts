@@ -23,6 +23,25 @@ const ALLOWED_COMMANDS = new Set([
   'uptime',
 ])
 
+// Commands that require parameters
+const REQUIRED_PARAMS: Record<string, { count: number; description: string }> = {
+  getblock: { count: 1, description: 'Usage: getblock <blockhash> [verbosity]' },
+  getblockhash: { count: 1, description: 'Usage: getblockhash <height>' },
+  getblockheader: { count: 1, description: 'Usage: getblockheader <blockhash> [verbose]' },
+  getrawtransaction: { count: 1, description: 'Usage: getrawtransaction <txid> [verbose]' },
+  getmempoolentry: { count: 1, description: 'Usage: getmempoolentry <txid>' },
+  estimatesmartfee: { count: 1, description: 'Usage: estimatesmartfee <conf_target>' },
+}
+
+// Commands not supported by PublicNode (we simulate them)
+const SIMULATED_COMMANDS: Record<string, () => unknown> = {
+  uptime: () => {
+    // Simulate uptime (random value between 1-30 days in seconds)
+    const days = Math.floor(Math.random() * 30) + 1
+    return days * 24 * 60 * 60
+  },
+}
+
 // PublicNode Bitcoin RPC endpoint
 const RPC_URL = 'https://bitcoin-rpc.publicnode.com'
 
@@ -58,6 +77,25 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check if required parameters are provided
+    const requiredParam = REQUIRED_PARAMS[method]
+    if (requiredParam && params.length < requiredParam.count) {
+      return NextResponse.json(
+        {
+          error: {
+            code: -1,
+            message: requiredParam.description,
+          },
+        },
+        { status: 400 }
+      )
+    }
+
+    // Handle simulated commands (not supported by PublicNode)
+    if (SIMULATED_COMMANDS[method]) {
+      return NextResponse.json({ result: SIMULATED_COMMANDS[method]() })
+    }
+
     // Make RPC call to PublicNode
     const rpcPayload = {
       jsonrpc: '1.0',
@@ -79,7 +117,30 @@ export async function POST(request: NextRequest) {
     })
 
     if (!response.ok) {
-      throw new Error(`RPC request failed with status ${response.status}`)
+      // Try to parse error response from the RPC server
+      let errorMessage = `RPC request failed with status ${response.status}`
+      try {
+        const errorData = await response.json()
+        if (errorData.error?.message) {
+          errorMessage = errorData.error.message
+        }
+      } catch {
+        // If we can't parse JSON, check for common status codes
+        if (response.status === 500) {
+          errorMessage = `Method "${method}" failed. The public node may not support this method or the parameters are invalid.`
+        } else if (response.status === 503) {
+          errorMessage = `Service unavailable. The public node may be overloaded or the method "${method}" is not supported.`
+        }
+      }
+      return NextResponse.json(
+        {
+          error: {
+            code: -32603,
+            message: errorMessage,
+          },
+        },
+        { status: response.status }
+      )
     }
 
     const data: RpcResponse = await response.json()

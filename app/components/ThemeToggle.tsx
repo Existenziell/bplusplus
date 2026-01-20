@@ -1,9 +1,26 @@
 'use client'
 
-import { useTheme } from '@/app/context/ThemeContext'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Avoid hydration mismatch by not rendering theme-dependent classes until mounted
+  if (!mounted) {
+    return (
+      <div className="relative inline-flex items-center gap-1 bg-white dark:bg-zinc-800 rounded-lg p-1 border border-zinc-200 dark:border-zinc-700">
+        <div className="px-3 py-1.5 w-10 h-7" />
+        <div className="px-3 py-1.5 w-10 h-7" />
+        <div className="px-3 py-1.5 w-10 h-7" />
+      </div>
+    )
+  }
 
   return (
     <div className="relative inline-flex items-center gap-1 bg-white dark:bg-zinc-800 rounded-lg p-1 border border-zinc-200 dark:border-zinc-700">

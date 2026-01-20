@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import './globals.css'
-import { ThemeProvider } from '@/app/context/ThemeContext'
+import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Notification from '@/app/components/Notification'
@@ -76,32 +76,9 @@ export default function RootLayout({
         {/* Preconnect to Vercel Analytics/Speed Insights origins */}
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
-        {/*
-          Inline script to prevent dark mode flicker on page load.
-          Runs synchronously before paint to apply the correct theme class
-          based on localStorage or system preference.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  var isDark = theme === 'dark' || (theme !== 'light' && systemDark);
-                  if (isDark) {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
       </head>
       <body className={ubuntu.className}>
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Notification />
           {children}
           <Analytics />

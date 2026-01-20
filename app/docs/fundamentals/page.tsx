@@ -101,6 +101,18 @@ export default function FundamentalsDocsPage() {
             { href: '/docs/fundamentals/consensus#security-through-consensus', label: 'Security through consensus' },
           ]}
         />
+
+        <DocCard
+          title="Cryptography"
+          href="/docs/fundamentals/cryptography"
+          description="The cryptographic foundations of Bitcoin, including hash functions, elliptic curve cryptography, digital signatures, and Merkle trees."
+          links={[
+            { href: '/docs/fundamentals/cryptography#hash-functions', label: 'Hash functions (SHA-256)' },
+            { href: '/docs/fundamentals/cryptography#elliptic-curve-cryptography', label: 'Elliptic curve cryptography' },
+            { href: '/docs/fundamentals/cryptography#digital-signatures', label: 'Digital signatures (ECDSA, Schnorr)' },
+            { href: '/docs/fundamentals/cryptography#merkle-trees', label: 'Merkle trees' },
+          ]}
+        />
       </div>
     </div>
   )

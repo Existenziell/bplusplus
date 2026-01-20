@@ -1,7 +1,15 @@
-## A
+## 0-9
 
 ### 51% Attack
 A theoretical attack where an entity controlling more than 50% of the network's hash rate could potentially double-spend transactions or prevent confirmations. Becomes exponentially more expensive as the network grows.
+
+### 2-of-3 Multisig
+A common multisignature configuration requiring 2 signatures from 3 possible signers to spend funds. Often used for security (e.g., user + backup + third party) or shared custody arrangements.
+
+### 21 Million
+The maximum supply of Bitcoin that will ever exist. This hard cap is enforced by the protocol's consensus rules and is achieved through the halving schedule, with the last satoshi expected to be mined around the year 2140.
+
+## A
 
 ### Absolute Time Lock
 A time lock that prevents a transaction from being spent until a specific block height or timestamp. Implemented using OP_CHECKLOCKTIMEVERIFY (CLTV).

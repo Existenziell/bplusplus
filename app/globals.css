@@ -14,13 +14,13 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 300px; /* Account for sticky header (header + metrics + breadcrumbs) */
+  scroll-padding-top: 200px; /* Account for sticky header (header + metrics + breadcrumbs) */
 }
 
 /* Responsive scroll padding for smaller screens */
 @media (max-width: 768px) {
   html {
-    scroll-padding-top: 180px; /* Slightly less on mobile */
+    scroll-padding-top: 100px; /* Slightly less on mobile */
   }
 }
 

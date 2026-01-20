@@ -80,7 +80,7 @@ export default function Breadcrumbs() {
   })
 
   return (
-    <nav className="mb-4 md:mb-6 mt-2" aria-label="Breadcrumb">
+    <nav className="py-2" aria-label="Breadcrumb">
       <ol className="flex items-center flex-wrap space-x-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
         {breadcrumbs.map((crumb, index) => (
           <li key={crumb.href} className="flex items-center">

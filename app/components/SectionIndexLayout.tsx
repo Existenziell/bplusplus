@@ -6,10 +6,6 @@ interface SectionIndexLayoutProps {
   children: ReactNode
 }
 
-/**
- * Reusable layout component for section index pages.
- * Provides consistent structure with title, description, and grid layout.
- */
 export default function SectionIndexLayout({
   title,
   description,

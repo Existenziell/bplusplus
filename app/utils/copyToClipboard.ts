@@ -1,8 +1,5 @@
 import { showNotification } from '@/app/components/Notification'
 
-/**
- * Copy text to clipboard and show a notification.
- */
 export default async function copyToClipboard(text: string, label: string) {
   try {
     // Check if clipboard API is available

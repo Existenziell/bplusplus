@@ -12,16 +12,19 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Path parameter is required' }, { status: 400 })
   }
 
-  const mdFilePath = pathToMdFile[path]
+  // Normalize path - remove trailing slash if present
+  const normalizedPath = path.endsWith('/') ? path.slice(0, -1) : path
+
+  const mdFilePath = pathToMdFile[normalizedPath]
 
   if (!mdFilePath) {
-    return NextResponse.json({ error: 'MD file not found for this path' }, { status: 404 })
+    return NextResponse.json({ error: 'MD file not found for this path', path: normalizedPath }, { status: 404 })
   }
 
   const fullPath = join(process.cwd(), mdFilePath)
 
   if (!existsSync(fullPath)) {
-    return NextResponse.json({ error: 'File not found' }, { status: 404 })
+    return NextResponse.json({ error: 'File not found', fullPath, cwd: process.cwd() }, { status: 404 })
   }
 
   try {

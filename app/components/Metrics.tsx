@@ -87,7 +87,8 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             </span>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>Hex</span>
           </li>
-          <li className='flex flex-col items-center justify-between italic w-20'>
+          
+          <li className='flex-col items-center justify-between italic w-20 hidden lg:flex'>
           <Link
                 href='https://bitcointicker.co/'
                 target='_blank'
@@ -107,7 +108,7 @@ const Metrics = ({ initialPrice = null }: MetricsProps) => {
             </Link>
             <span className='text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 opacity-60'>BTC/USD</span>
           </li>
-          <li className='flex flex-col items-center justify-between italic w-20'>
+          <li className='flex-col items-center justify-between italic w-20 hidden lg:flex'>
             <span className='font-bold text-base sm:text-lg md:text-xl text-btc inline-block min-w-[9ch] text-center'>
               {priceLoading ? (
                 <span className='animate-pulse'>...</span>

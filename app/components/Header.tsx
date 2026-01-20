@@ -44,9 +44,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
                 <ThemeToggle />
               </div>
             </div>
-            <div className="hidden md:block">
-              <Metrics />
-            </div>
+            <Metrics />
           </div>
         </div>
       </header>

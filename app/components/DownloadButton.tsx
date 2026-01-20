@@ -1,13 +1,12 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
-import { downloadablePaths } from '@/app/data/navigation'
+import { useDocNavigation } from '@/app/hooks/useDocNavigation'
 
 export default function DownloadButton() {
-  const pathname = usePathname()
+  const { pathname, isDownloadable } = useDocNavigation()
 
   // Don't show button if current page doesn't have downloadable content
-  if (!downloadablePaths.has(pathname)) {
+  if (!isDownloadable) {
     return null
   }
 

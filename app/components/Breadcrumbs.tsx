@@ -1,48 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { routeLabels } from '@/app/data/navigation'
-
-interface BreadcrumbItem {
-  label: string
-  href: string
-}
+import { useDocNavigation } from '@/app/hooks/useDocNavigation'
 
 export default function Breadcrumbs() {
-  const pathname = usePathname()
+  const { pathname, breadcrumbs } = useDocNavigation()
 
   // Don't show breadcrumbs on homepage
   if (pathname === '/') {
     return null
   }
-
-  // Build breadcrumb items
-  const pathSegments = pathname.split('/').filter(Boolean)
-  const breadcrumbs: BreadcrumbItem[] = [
-    { label: 'Home', href: '/' }
-  ]
-
-  // Build path incrementally
-  let currentPath = ''
-  pathSegments.forEach((segment, index) => {
-    currentPath += `/${segment}`
-
-    // Skip 'docs' segment
-    if (segment === 'docs') {
-      return
-    }
-
-    const label = routeLabels[segment] || segment
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ')
-
-    breadcrumbs.push({
-      label,
-      href: currentPath
-    })
-  })
 
   return (
     <nav className="py-2" aria-label="Breadcrumb">

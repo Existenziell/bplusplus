@@ -10,7 +10,6 @@ export default async function LightningOnionPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">Onion Routing</h1>
       <MarkdownRenderer content={content} />
     </div>
   )

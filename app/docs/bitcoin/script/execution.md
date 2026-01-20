@@ -1,3 +1,6 @@
+# Bitcoin Script
+Bitcoin uses a scripting system for transactions. Script is simple, stack-based (LIFO) and processed from left to right. It is intentionally not Turing-complete, with no loops.
+
 ## Script Types Evolution
 
 Bitcoin's [script](/docs/glossary#script) system has evolved over time, introducing new output types (address formats) that improve security, privacy, and efficiency. Each script type represents a different way to lock and unlock Bitcoin.

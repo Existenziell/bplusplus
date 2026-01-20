@@ -11,7 +11,6 @@ export default async function SubsidyPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">The Subsidy Equation</h1>
       <div className="mb-8">
         <Image
           src="/graphs/subsidy-equation.webp"

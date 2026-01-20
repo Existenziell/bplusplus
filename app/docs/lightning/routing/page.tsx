@@ -18,7 +18,6 @@ export default async function LightningRoutingPage() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold mb-8">Lightning Routing & HTLCs</h1>
       <MarkdownRenderer content={htlcContent} />
       <div className="mt-12">
         <MarkdownRenderer content={feesContent} />

@@ -490,15 +490,3 @@ tests/
 │   └── blocks.json
 └── conftest.py
 ```
-
-## Summary
-
-Effective Bitcoin testing requires:
-
-- **Multiple Networks**: Use regtest, signet, and testnet appropriately
-- **Comprehensive Coverage**: Unit, integration, and end-to-end tests
-- **Debugging Tools**: Master bitcoin-cli and log analysis
-- **Mocking**: Isolate components for reliable tests
-- **CI/CD**: Automate testing in your pipeline
-
-Testing Bitcoin applications thoroughly before mainnet deployment is critical—there's no undo button for real transactions.

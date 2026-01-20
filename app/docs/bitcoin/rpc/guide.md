@@ -1,6 +1,6 @@
 # Bitcoin RPC Commands Reference
 
-This document provides a comprehensive guide for interacting with your Bitcoin [node](/docs/glossary#node) using both curl and bitcoin-cli commands via [RPC](/docs/glossary#rpc-remote-procedure-call).
+This document provides a guide for interacting with your Bitcoin [node](/docs/glossary#node) using both curl and bitcoin-cli commands via [RPC](/docs/glossary#rpc-remote-procedure-call).
 
 ## Quick Command Reference
 
@@ -558,7 +558,7 @@ btc gettxoutsetinfo | jq '{total_amount, transactions, height}'
 ### Block Explorers and Monitoring
 
 - **[mempool.space](https://mempool.space)** - Real-time Bitcoin mempool and block explorer
-- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Comprehensive Bitcoin metrics and analytics
+- **[Clark Moody's Bitcoin Dashboard](https://dashboard.clarkmoody.com)** - Bitcoin metrics and analytics
 - **[Bitcoin Core GitHub](https://github.com/bitcoin/bitcoin)** - Bitcoin Core source code repository
 
 ### Additional Tools

@@ -101,7 +101,7 @@ Dominant in web applications and increasingly in Bitcoin tooling.
 - Frontend interfaces
 
 **Key libraries:**
-- **bitcoinjs-lib**: Comprehensive Bitcoin library
+- **bitcoinjs-lib**: Bitcoin library
 - **bip39/bip32**: Mnemonic and HD derivation
 - **noble-secp256k1**: Cryptographic primitives
 - **bolt11**: Lightning invoice encoding
@@ -323,7 +323,7 @@ bitcoin-cli -regtest generatetoaddress 101 <your-address>
 - **[Bitcoin Developer Reference](https://developer.bitcoin.org/)**: Official documentation
 - **[BIPs](https://github.com/bitcoin/bips)**: Bitcoin Improvement Proposals
 - **[BOLTs](https://github.com/lightning/bolts)**: Lightning specifications
-- **[Learning Bitcoin from the Command Line](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line)**: Comprehensive tutorial
+- **[Learning Bitcoin from the Command Line](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line)**: Command line tutorial
 
 ## Development Workflow
 

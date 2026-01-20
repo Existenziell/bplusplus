@@ -1,6 +1,6 @@
 # Bitcoin OP Codes
 
-Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive list of Bitcoin OP codes with explanations and code examples.
+Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a list of Bitcoin OP codes with explanations and code examples.
 
 ## OP Code Categories
 

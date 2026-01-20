@@ -34,7 +34,7 @@ export default function BitcoinDocsPage() {
         <DocCard
           title="RPC Guide"
           href="/docs/bitcoin/rpc"
-          description="Comprehensive guide to Bitcoin Core RPC commands for interacting with your node, monitoring status, and managing wallets."
+          description="Guide to Bitcoin Core RPC commands for interacting with your node, monitoring status, and managing wallets."
           links={[
             { href: '/docs/bitcoin/rpc#essential-node-information-commands', label: 'Essential node commands' },
             { href: '/docs/bitcoin/rpc#wallet-commands-if-wallet-is-loaded', label: 'Wallet commands' },
@@ -58,7 +58,7 @@ export default function BitcoinDocsPage() {
         <DocCard
           title="OP Codes"
           href="/docs/bitcoin/op-codes"
-          description="Comprehensive reference of Bitcoin Script OP codes with explanations, examples, and common usage patterns."
+          description="Reference of Bitcoin Script OP codes with explanations, examples, and common usage patterns."
           links={[
             { href: '/docs/bitcoin/op-codes#stack-operations', label: 'Stack operations' },
             { href: '/docs/bitcoin/op-codes#cryptographic-operations', label: 'Cryptographic operations' },

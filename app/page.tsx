@@ -127,7 +127,7 @@ export default function Home() {
             <DocCard
               title="Glossary"
               href="/docs/glossary"
-              description="A comprehensive glossary of Bitcoin and Lightning Network development terms, from ASIC to ZMQ."
+              description="A comprehensive glossary of Bitcoin development terms, from ASIC to ZMQ."
             />
           </div>
         </div>

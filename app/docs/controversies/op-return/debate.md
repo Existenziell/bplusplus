@@ -1,6 +1,6 @@
 # The OP_RETURN Debate: Bitcoin as Database vs. Financial Network
 
-A comprehensive analysis of the ongoing debate about OP_RETURN, carrier size limits, and Bitcoin's fundamental purpose.
+An analysis of the ongoing debate about OP_RETURN, carrier size limits, and Bitcoin's fundamental purpose.
 
 ---
 

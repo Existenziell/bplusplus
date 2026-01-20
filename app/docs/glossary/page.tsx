@@ -5,10 +5,10 @@ import MarkdownRenderer from '@/app/components/MarkdownRenderer'
 
 export const metadata: Metadata = {
   title: 'Bitcoin Glossary | B++',
-  description: 'Comprehensive glossary of Bitcoin terms, concepts, and technical vocabulary.',
+  description: 'Glossary of Bitcoin terms, concepts, and technical vocabulary.',
   openGraph: {
     title: 'Bitcoin Glossary | B++',
-    description: 'Comprehensive glossary of Bitcoin terms, concepts, and technical vocabulary.',
+    description: 'Glossary of Bitcoin terms, concepts, and technical vocabulary.',
   },
 }
 

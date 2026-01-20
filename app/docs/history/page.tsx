@@ -51,7 +51,7 @@ export default function HistoryDocsPage() {
         <DocCard
           title="Forks"
           href="/docs/history/forks"
-          description="Comprehensive history of Bitcoin forks, including soft forks, hard forks, and their impact on the network."
+          description="History of Bitcoin forks, including soft forks, hard forks, and their impact on the network."
           links={[
             { href: '/docs/history/forks#understanding-forks', label: 'Understanding forks' },
             { href: '/docs/history/forks#complete-fork-history-table', label: 'Complete fork history' },

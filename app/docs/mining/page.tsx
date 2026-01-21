@@ -68,7 +68,7 @@ export default function MiningDocsPage() {
       <DocCard
         title="Mempool"
         href="/docs/mining/mempool"
-        description="Understand the mempool—Bitcoin's waiting room for unconfirmed transactions, fee markets, and transaction prioritization."
+        description="Understand the mempool: Bitcoin's waiting room for unconfirmed transactions, fee markets, and transaction prioritization."
         links={[
           { href: '/docs/mining/mempool#how-the-mempool-works', label: 'How it works' },
           { href: '/docs/mining/mempool#fee-market-dynamics', label: 'Fee market dynamics' },

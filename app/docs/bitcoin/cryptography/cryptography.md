@@ -2,6 +2,27 @@
 
 Bitcoin relies on several cryptographic primitives to secure transactions, prove ownership, and maintain the integrity of the blockchain. Understanding these cryptographic foundations is essential for grasping how Bitcoin achieves trustless security.
 
+## The Power of Cryptography
+
+Cryptography enables remarkable capabilities that seem almost magical:
+
+- **Prove knowledge without revealing it** - You can prove you know a secret (like a private key) without ever exposing the secret itself. This is how you sign Bitcoin transactions.
+- **Create unforgeable signatures** - Only the holder of a private key can create a valid signature, but anyone can verify it with the corresponding public key.
+- **Commit to data irrevocably** - Hash functions create unique fingerprints that bind you to specific data without revealing it until you choose to.
+- **Verify integrity instantly** - Detect any tampering with data, no matter how large, by comparing small hash values.
+
+These concepts aren't unique to Bitcoin. You encounter cryptography daily:
+
+| Application | Cryptographic Use |
+|-------------|-------------------|
+| **HTTPS/TLS** | Encrypts web traffic, verifies website identity |
+| **PGP/GPG** | Email encryption and digital signatures |
+| **Signal/WhatsApp** | End-to-end encrypted messaging |
+| **SSH** | Secure remote server access |
+| **Password Storage** | Hashing passwords so they're never stored in plain text |
+
+Bitcoin combines these proven cryptographic techniques in a novel way to create a trustless monetary system.
+
 ## Overview
 
 Bitcoin uses cryptography for three main purposes:
@@ -225,6 +246,8 @@ console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
 :::
 
 ## Elliptic Curve Cryptography
+
+![Elliptic Curve Cryptography](/images/ECC.webp)
 
 ### What is ECC?
 
@@ -539,6 +562,8 @@ console.log(`Signature valid: ${isValid}`);
 
 ### Schnorr Signatures
 
+![Schnorr Signature Equations](/images/schnorr-equations.png)
+
 **Schnorr signatures** were introduced with the Taproot upgrade (2021).
 
 **Advantages over ECDSA:**
@@ -589,6 +614,73 @@ aux = tagged_hash("BIP0340/aux", b"random auxiliary data")
 nonce = tagged_hash("BIP0340/nonce", b"nonce derivation input")
 
 print(f"Challenge hash: {challenge.hex()}")
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <array>
+#include <string>
+#include <openssl/sha.h>
+
+using Hash256 = std::array<uint8_t, 32>;
+
+Hash256 sha256(const std::vector<uint8_t>& data) {
+    Hash256 hash;
+    SHA256(data.data(), data.size(), hash.data());
+    return hash;
+}
+
+Hash256 tagged_hash(const std::string& tag, const std::vector<uint8_t>& msg) {
+    // Hash the tag
+    std::vector<uint8_t> tag_bytes(tag.begin(), tag.end());
+    Hash256 tag_hash = sha256(tag_bytes);
+    
+    // Concatenate: tag_hash || tag_hash || msg
+    std::vector<uint8_t> data;
+    data.insert(data.end(), tag_hash.begin(), tag_hash.end());
+    data.insert(data.end(), tag_hash.begin(), tag_hash.end());
+    data.insert(data.end(), msg.begin(), msg.end());
+    
+    return sha256(data);
+}
+
+std::string to_hex(const Hash256& hash) {
+    std::string result;
+    for (uint8_t byte : hash) {
+        char buf[3];
+        snprintf(buf, sizeof(buf), "%02x", byte);
+        result += buf;
+    }
+    return result;
+}
+
+int main() {
+    std::vector<uint8_t> msg = {'s', 'o', 'm', 'e', ' ', 'd', 'a', 't', 'a'};
+    Hash256 challenge = tagged_hash("BIP0340/challenge", msg);
+    std::cout << "Challenge hash: " << to_hex(challenge) << std::endl;
+    return 0;
+}
+```
+
+```javascript
+const crypto = require('crypto');
+
+function taggedHash(tag, msg) {
+    const tagHash = crypto.createHash('sha256').update(tag).digest();
+    return crypto.createHash('sha256')
+        .update(tagHash)
+        .update(tagHash)
+        .update(msg)
+        .digest();
+}
+
+// Example tags used in Bitcoin
+const challenge = taggedHash('BIP0340/challenge', Buffer.from('some data'));
+const aux = taggedHash('BIP0340/aux', Buffer.from('random auxiliary data'));
+const nonce = taggedHash('BIP0340/nonce', Buffer.from('nonce derivation input'));
+
+console.log(`Challenge hash: ${challenge.toString('hex')}`);
 ```
 :::
 
@@ -781,6 +873,54 @@ Hash merkle_root(std::vector<Hash> hashes) {
     return hashes[0];
 }
 ```
+
+```javascript
+const crypto = require('crypto');
+
+function doubleSha256(data) {
+    const first = crypto.createHash('sha256').update(data).digest();
+    return crypto.createHash('sha256').update(first).digest();
+}
+
+function merkleRoot(hashes) {
+    if (hashes.length === 0) return Buffer.alloc(32);
+    if (hashes.length === 1) return hashes[0];
+    
+    // Duplicate last if odd
+    if (hashes.length % 2 === 1) {
+        hashes.push(hashes[hashes.length - 1]);
+    }
+    
+    // Hash pairs
+    const nextLevel = [];
+    for (let i = 0; i < hashes.length; i += 2) {
+        const combined = Buffer.concat([hashes[i], hashes[i + 1]]);
+        nextLevel.push(doubleSha256(combined));
+    }
+    
+    return merkleRoot(nextLevel);
+}
+
+function verifyMerkleProof(txHash, proof, root, index) {
+    let current = txHash;
+    for (const sibling of proof) {
+        if (index % 2 === 0) {
+            current = doubleSha256(Buffer.concat([current, sibling]));
+        } else {
+            current = doubleSha256(Buffer.concat([sibling, current]));
+        }
+        index = Math.floor(index / 2);
+    }
+    return current.equals(root);
+}
+
+// Example: 4 transactions
+const txHashes = [0, 1, 2, 3].map(i => 
+    doubleSha256(Buffer.from(`tx${i}`))
+);
+const root = merkleRoot(txHashes);
+console.log(`Merkle Root: ${root.toString('hex')}`);
+```
 :::
 
 ## Address Encoding
@@ -943,6 +1083,171 @@ print(f"Public Key: {result['public_key']}")
 print(f"P2PKH Address: {result['p2pkh_address']}")
 print(f"P2WPKH Address: {result['p2wpkh_address']}")
 ```
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <array>
+#include <openssl/sha.h>
+#include <openssl/ripemd.h>
+#include <secp256k1.h>
+
+using Hash256 = std::array<uint8_t, 32>;
+using Hash160 = std::array<uint8_t, 20>;
+
+const std::string BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+
+Hash256 sha256(const std::vector<uint8_t>& data) {
+    Hash256 hash;
+    SHA256(data.data(), data.size(), hash.data());
+    return hash;
+}
+
+Hash160 hash160(const std::vector<uint8_t>& data) {
+    Hash256 sha_hash;
+    SHA256(data.data(), data.size(), sha_hash.data());
+    Hash160 ripemd_hash;
+    RIPEMD160(sha_hash.data(), sha_hash.size(), ripemd_hash.data());
+    return ripemd_hash;
+}
+
+std::string base58_encode(const std::vector<uint8_t>& data) {
+    std::vector<uint8_t> digits(data.size() * 138 / 100 + 1);
+    size_t digitslen = 1;
+    for (size_t i = 0; i < data.size(); i++) {
+        uint32_t carry = data[i];
+        for (size_t j = 0; j < digitslen; j++) {
+            carry += (uint32_t)(digits[j]) << 8;
+            digits[j] = carry % 58;
+            carry /= 58;
+        }
+        while (carry) {
+            digits[digitslen++] = carry % 58;
+            carry /= 58;
+        }
+    }
+    std::string result;
+    for (size_t i = 0; i < data.size() && data[i] == 0; i++) {
+        result += '1';
+    }
+    for (size_t i = 0; i < digitslen; i++) {
+        result += BASE58_ALPHABET[digits[digitslen - 1 - i]];
+    }
+    return result;
+}
+
+std::string base58check_encode(uint8_t version, const Hash160& payload) {
+    std::vector<uint8_t> data;
+    data.push_back(version);
+    data.insert(data.end(), payload.begin(), payload.end());
+    
+    auto hash1 = sha256(data);
+    std::vector<uint8_t> hash1_vec(hash1.begin(), hash1.end());
+    auto hash2 = sha256(hash1_vec);
+    
+    data.insert(data.end(), hash2.begin(), hash2.begin() + 4);
+    return base58_encode(data);
+}
+
+int main() {
+    secp256k1_context* ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
+    
+    // Generate random private key (use secure random in production)
+    uint8_t private_key[32];
+    // ... fill with secure random bytes ...
+    
+    // Generate public key
+    secp256k1_pubkey pubkey;
+    secp256k1_ec_pubkey_create(ctx, &pubkey, private_key);
+    
+    // Serialize compressed public key
+    std::vector<uint8_t> public_key(33);
+    size_t pk_len = 33;
+    secp256k1_ec_pubkey_serialize(ctx, public_key.data(), &pk_len, &pubkey, SECP256K1_EC_COMPRESSED);
+    
+    // Generate P2PKH address
+    Hash160 pubkey_hash = hash160(public_key);
+    std::string p2pkh = base58check_encode(0x00, pubkey_hash);
+    
+    std::cout << "P2PKH Address: " << p2pkh << std::endl;
+    
+    secp256k1_context_destroy(ctx);
+    return 0;
+}
+```
+
+```javascript
+const crypto = require('crypto');
+const secp256k1 = require('secp256k1');
+const { bech32 } = require('bech32');
+
+const BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
+function sha256(data) {
+    return crypto.createHash('sha256').update(data).digest();
+}
+
+function hash160(data) {
+    const sha = sha256(data);
+    return crypto.createHash('ripemd160').update(sha).digest();
+}
+
+function base58Encode(buffer) {
+    let num = BigInt('0x' + buffer.toString('hex'));
+    let result = '';
+    while (num > 0n) {
+        result = BASE58_ALPHABET[Number(num % 58n)] + result;
+        num = num / 58n;
+    }
+    for (const byte of buffer) {
+        if (byte === 0) result = '1' + result;
+        else break;
+    }
+    return result;
+}
+
+function base58CheckEncode(version, payload) {
+    const data = Buffer.concat([Buffer.from([version]), payload]);
+    const checksum = sha256(sha256(data)).slice(0, 4);
+    return base58Encode(Buffer.concat([data, checksum]));
+}
+
+function generateAddresses() {
+    // 1. Generate private key
+    let privateKey;
+    do {
+        privateKey = crypto.randomBytes(32);
+    } while (!secp256k1.privateKeyVerify(privateKey));
+    
+    // 2. Get compressed public key
+    const publicKey = Buffer.from(secp256k1.publicKeyCreate(privateKey, true));
+    
+    // 3. Hash160 the public key
+    const pubkeyHash = hash160(publicKey);
+    
+    // 4. Generate P2PKH address (Legacy - starts with '1')
+    const p2pkh = base58CheckEncode(0x00, pubkeyHash);
+    
+    // 5. Generate P2WPKH address (Native SegWit - starts with 'bc1q')
+    const words = bech32.toWords(pubkeyHash);
+    words.unshift(0); // witness version 0
+    const p2wpkh = bech32.encode('bc', words);
+    
+    return {
+        privateKey: privateKey.toString('hex'),
+        publicKey: publicKey.toString('hex'),
+        pubkeyHash: pubkeyHash.toString('hex'),
+        p2pkhAddress: p2pkh,
+        p2wpkhAddress: p2wpkh
+    };
+}
+
+const result = generateAddresses();
+console.log(`Private Key: ${result.privateKey}`);
+console.log(`Public Key: ${result.publicKey}`);
+console.log(`P2PKH Address: ${result.p2pkhAddress}`);
+console.log(`P2WPKH Address: ${result.p2wpkhAddress}`);
+```
 :::
 
 ## Cryptographic Security Assumptions
@@ -996,11 +1301,3 @@ Bitcoin's security relies on these assumptions holding true:
 - **[BIP-340: Schnorr Signatures](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)** - Schnorr signature specification
 - **[SEC 2: Recommended Elliptic Curve Domain Parameters](https://www.secg.org/sec2-v2.pdf)** - secp256k1 specification
 - **[libsecp256k1](https://github.com/bitcoin-core/secp256k1)** - Bitcoin Core's optimized secp256k1 C library
-
-## Related Topics
-
-- [What is Bitcoin?](/docs/fundamentals/what-is-bitcoin) - High-level Bitcoin overview
-- [Trust Model](/docs/fundamentals/trust-model) - How cryptography enables trustlessness
-- [Consensus Mechanism](/docs/fundamentals/consensus) - How cryptographic proofs secure consensus
-- [Script System](/docs/bitcoin/script) - How signatures are verified in Bitcoin Script
-- [Mining: Proof-of-Work](/docs/mining/proof-of-work) - How SHA-256 secures the blockchain

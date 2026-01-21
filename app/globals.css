@@ -359,6 +359,58 @@ main > div > div > h1:first-child {
   scroll-margin-top: 40px;
 }
 
+/* Glossary Accordion Styles */
+.glossary-accordion h2:first-of-type {
+  @apply mt-4;
+}
+
+.glossary-entry {
+  scroll-margin-top: 80px;
+}
+
+/* Hide default marker/arrow on summary */
+.glossary-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Smooth animation for definition reveal */
+.glossary-definition {
+  animation: glossary-fade-in 0.2s ease-out;
+}
+
+@keyframes glossary-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Highlight the active/targeted entry */
+.glossary-entry:target > .glossary-summary,
+.glossary-entry[open] > .glossary-summary {
+  @apply bg-btc/10 dark:bg-btc/20;
+}
+
+/* Entry link styling within definitions */
+.glossary-definition a {
+  @apply text-btc hover:underline;
+}
+
+/* Glossary definition prose styling */
+.glossary-definition a[href^="/docs/glossary"] {
+  text-decoration: none;
+}
+
+.glossary-definition a[href^="/docs/glossary"]:hover {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+}
+
 /*
 * Terminal Styles
 */

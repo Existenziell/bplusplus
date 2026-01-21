@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import GlossaryRenderer from '@/app/components/GlossaryRenderer'
 import { readMarkdown } from '@/app/utils/readMarkdown'
 
 export const metadata: Metadata = {
@@ -17,9 +17,7 @@ export default async function GlossaryPage() {
   return (
     <div>
       <h1 className="text-5xl font-bold mb-12">Bitcoin Glossary</h1>
-      <div className="glossary-content">
-        <MarkdownRenderer content={content} />
-      </div>
+      <GlossaryRenderer content={content} />
     </div>
   )
 }

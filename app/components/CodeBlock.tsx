@@ -18,7 +18,7 @@ const getHljs = (): Promise<HLJSApi> => {
     const hljsModule = await import('highlight.js/lib/core')
     const hljs = hljsModule.default
     // Register only common languages to reduce bundle size
-    const [javascript, typescript, python, rust, go, bash, json, sql] = await Promise.all([
+    const [javascript, typescript, python, rust, go, bash, json, sql, cpp] = await Promise.all([
       import('highlight.js/lib/languages/javascript'),
       import('highlight.js/lib/languages/typescript'),
       import('highlight.js/lib/languages/python'),
@@ -27,6 +27,7 @@ const getHljs = (): Promise<HLJSApi> => {
       import('highlight.js/lib/languages/bash'),
       import('highlight.js/lib/languages/json'),
       import('highlight.js/lib/languages/sql'),
+      import('highlight.js/lib/languages/cpp'),
     ])
     hljs.registerLanguage('javascript', javascript.default)
     hljs.registerLanguage('js', javascript.default)
@@ -39,6 +40,8 @@ const getHljs = (): Promise<HLJSApi> => {
     hljs.registerLanguage('shell', bash.default)
     hljs.registerLanguage('json', json.default)
     hljs.registerLanguage('sql', sql.default)
+    hljs.registerLanguage('cpp', cpp.default)
+    hljs.registerLanguage('c++', cpp.default)
     hljsInstance = hljs
     return hljs
   })()

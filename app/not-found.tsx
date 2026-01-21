@@ -11,7 +11,7 @@ export default function NotFound() {
   return (
     <main className="min-h-screen page-bg flex flex-col">
       <Header />
-      
+
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="text-center max-w-md">
           {/* 404 Number with Bitcoin styling */}
@@ -20,7 +20,7 @@ export default function NotFound() {
             <span className="text-8xl md:text-9xl font-bold text-zinc-300 dark:text-zinc-700">0</span>
             <span className="text-8xl md:text-9xl font-bold text-btc">4</span>
           </div>
-          
+
           {/* Message */}
           <h1 className="text-2xl md:text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">
             Block Not Found
@@ -28,7 +28,7 @@ export default function NotFound() {
           <p className="text-zinc-600 dark:text-zinc-400 mb-8">
             This page doesn&apos;t exist on the blockchain. Perhaps it was orphaned, or maybe it never existed in the first place.
           </p>
-          
+
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -52,7 +52,7 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-      
+
       <Footer />
     </main>
   )

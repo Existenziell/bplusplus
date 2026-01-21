@@ -145,9 +145,6 @@ export default function LiveStats() {
       value: mempoolInfo?.bytes ? formatBytes(mempoolInfo.bytes) : null,
       href: '/docs/mining/mempool',
     },
-  ]
-
-  const infoItems: StatItem[] = [
     {
       label: 'Bitcoin',
       value: 'Whitepaper',
@@ -175,6 +172,7 @@ export default function LiveStats() {
       href: '/docs/glossary#satoshi',
     },
   ]
+
   const StatCard = ({ stat }: { stat: StatItem }) => {
     const content = (
       <>
@@ -234,11 +232,6 @@ export default function LiveStats() {
       <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 mb-4">
         {stats.map((stat) => (
           <StatCard key={stat.label} stat={stat} />
-        ))}
-      </div>
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4">
-        {infoItems.map((item) => (
-          <StatCard key={item.label} stat={item} />
         ))}
       </div>
     </div>

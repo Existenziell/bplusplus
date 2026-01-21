@@ -8,8 +8,14 @@ const nextConfig = {
   reactStrictMode: true,
 
   // Include markdown files in the serverless function bundle for Vercel
-  outputFileTracingIncludes: {
-    '/api/download-md': ['./app/docs/**/*.md'],
+  experimental: {
+    outputFileTracingIncludes: {
+      '/api/download-md': ['./app/docs/**/*.md'],
+    },
+    // Optimize package imports to reduce bundle size
+    optimizePackageImports: ['react-markdown', 'highlight.js'],
+    // Inline critical CSS to reduce render-blocking resources
+    optimizeCss: true,
   },
 
   // Optimize images
@@ -17,14 +23,6 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-  },
-
-  // Enable experimental features for better performance
-  experimental: {
-    // Optimize package imports to reduce bundle size
-    optimizePackageImports: ['react-markdown', 'highlight.js'],
-    // Inline critical CSS to reduce render-blocking resources
-    optimizeCss: true,
   },
 
   // Compiler optimizations

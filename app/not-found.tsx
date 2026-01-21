@@ -41,7 +41,7 @@ export default function NotFound() {
               Back to Genesis
             </Link>
             <Link
-              href="/docs/fundamentals/what-is-bitcoin"
+              href="/docs/fundamentals"
               className="inline-flex items-center justify-center px-6 py-3 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline"
             >
               Start Learning

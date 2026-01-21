@@ -23,14 +23,12 @@ export interface NavSection {
 // All documentation pages with their metadata
 export const docPages: DocPage[] = [
   // Fundamentals (high-level concepts)
-  { path: '/docs/fundamentals/what-is-bitcoin', mdFile: 'app/docs/fundamentals/what-is-bitcoin/overview.md', title: 'What is Bitcoin?', section: 'fundamentals' },
   { path: '/docs/fundamentals/problems', mdFile: 'app/docs/fundamentals/problems/problems.md', title: 'Problems Bitcoin Solved', section: 'fundamentals' },
   { path: '/docs/fundamentals/decentralization', mdFile: 'app/docs/fundamentals/decentralization/decentralization.md', title: 'Decentralization', section: 'fundamentals' },
   { path: '/docs/fundamentals/trust-model', mdFile: 'app/docs/fundamentals/trust-model/trust-model.md', title: 'Trust Model', section: 'fundamentals' },
   { path: '/docs/fundamentals/monetary-properties', mdFile: 'app/docs/fundamentals/monetary-properties/monetary-properties.md', title: 'Monetary Properties', section: 'fundamentals' },
 
   // History
-  { path: '/docs/history/milestones', mdFile: 'app/docs/history/milestones/overview.md', title: 'Historical Milestones', section: 'history' },
   { path: '/docs/history/people', mdFile: 'app/docs/history/people/people.md', title: 'People', section: 'history' },
   { path: '/docs/history/halvings', mdFile: 'app/docs/history/halvings.md', title: 'Halvings', section: 'history' },
   { path: '/docs/history/forks', mdFile: 'app/docs/history/forks.md', title: 'Forks', section: 'history' },
@@ -47,7 +45,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/bitcoin/rpc', mdFile: 'app/docs/bitcoin/rpc/rpc.md', title: 'RPC Commands', section: 'bitcoin' },
 
   // Mining
-  { path: '/docs/mining/what-is-mining', mdFile: 'app/docs/mining/what-is-mining/what-is-mining.md', title: 'What is Bitcoin Mining?', section: 'mining' },
   { path: '/docs/mining/proof-of-work', mdFile: 'app/docs/mining/proof-of-work/proof-of-work.md', title: 'Proof-of-Work', section: 'mining' },
   { path: '/docs/mining/difficulty', mdFile: 'app/docs/mining/difficulty/difficulty.md', title: 'Difficulty Adjustment', section: 'mining' },
   { path: '/docs/mining/economics', mdFile: 'app/docs/mining/economics/economics.md', title: 'Economics', section: 'mining' },
@@ -58,7 +55,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/mining/attacks', mdFile: 'app/docs/mining/attacks/attacks.md', title: 'Mining Attacks', section: 'mining' },
 
   // Wallets
-  { path: '/docs/wallets/what-is-a-wallet', mdFile: 'app/docs/wallets/what-is-a-wallet/what-is-a-wallet.md', title: 'What is a Wallet?', section: 'wallets' },
   { path: '/docs/wallets/hd-wallets', mdFile: 'app/docs/wallets/hd-wallets/hd-wallets.md', title: 'HD Wallets', section: 'wallets' },
   { path: '/docs/wallets/address-types', mdFile: 'app/docs/wallets/address-types/address-types.md', title: 'Address Types', section: 'wallets' },
   { path: '/docs/wallets/coin-selection', mdFile: 'app/docs/wallets/coin-selection/coin-selection.md', title: 'Coin Selection', section: 'wallets' },
@@ -66,7 +62,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/wallets/transactions', mdFile: 'app/docs/wallets/transactions/transactions.md', title: 'Transaction Creation', section: 'wallets' },
 
   // Lightning
-  { path: '/docs/lightning/what-is-lightning', mdFile: 'app/docs/lightning/what-is-lightning/what-is-lightning.md', title: 'What is the Lightning Network?', section: 'lightning' },
   { path: '/docs/lightning/channels', mdFile: 'app/docs/lightning/channels/channels.md', title: 'Channels', section: 'lightning' },
   { path: '/docs/lightning/routing', mdFile: 'app/docs/lightning/routing/fees.md', title: 'Routing & HTLCs', section: 'lightning' },
   { path: '/docs/lightning/onion', mdFile: 'app/docs/lightning/onion/onion.md', title: 'Onion Routing', section: 'lightning' },
@@ -77,7 +72,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/lightning/trampoline', mdFile: 'app/docs/lightning/trampoline/trampoline.md', title: 'Trampoline Routing', section: 'lightning' },
 
   // Development
-  { path: '/docs/development/getting-started', mdFile: 'app/docs/development/getting-started/getting-started.md', title: 'Getting Started', section: 'development' },
   { path: '/docs/development/testing', mdFile: 'app/docs/development/testing/testing.md', title: 'Testing & Debugging', section: 'development' },
   { path: '/docs/development/psbt', mdFile: 'app/docs/development/psbt/psbt.md', title: 'PSBT', section: 'development' },
   { path: '/docs/development/addresses', mdFile: 'app/docs/development/addresses/addresses.md', title: 'Address Generation', section: 'development' },
@@ -210,8 +204,6 @@ export const routeLabels: Record<string, string> = {
   glossary: 'Glossary',
 
   // Page labels (extracted from path segment to title)
-  'what-is-bitcoin': 'What is Bitcoin?',
-  milestones: 'Historical Milestones',
   problems: 'Problems Bitcoin Solved',
   decentralization: 'Decentralization',
   'trust-model': 'Trust Model',
@@ -228,7 +220,6 @@ export const routeLabels: Record<string, string> = {
   rpc: 'RPC Guide',
   blocks: 'Block Propagation',
   subsidy: 'Subsidy Equation',
-  'what-is-mining': 'What is Bitcoin Mining?',
   'proof-of-work': 'Proof-of-Work',
   difficulty: 'Difficulty Adjustment',
   economics: 'Economics',
@@ -242,7 +233,6 @@ export const routeLabels: Record<string, string> = {
   'address-types': 'Address Types',
   multisig: 'Multisig',
   transactions: 'Transaction Creation',
-  'what-is-lightning': 'What is the Lightning Network?',
   channels: 'Channels',
   routing: 'Routing & HTLCs',
   onion: 'Onion Routing',
@@ -251,7 +241,6 @@ export const routeLabels: Record<string, string> = {
   'anchor-outputs': 'Anchor Outputs',
   'zero-conf': 'Zero-Conf Channels',
   trampoline: 'Trampoline Routing',
-  'getting-started': 'Getting Started',
   testing: 'Testing & Debugging',
   psbt: 'PSBT',
   addresses: 'Address Generation',

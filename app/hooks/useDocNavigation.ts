@@ -79,15 +79,13 @@ export function useDocNavigation(): DocNavigationState {
     let previousPage: NextPageInfo | null = null
     let nextPage: NextPageInfo | null = null
 
-    if (!isMainSectionPage) {
-      const currentIndex = flatPages.findIndex(page => page.href === pathname)
-      if (currentIndex !== -1) {
-        if (currentIndex > 0) {
-          previousPage = flatPages[currentIndex - 1]
-        }
-        if (currentIndex < flatPages.length - 1) {
-          nextPage = flatPages[currentIndex + 1]
-        }
+    const currentIndex = flatPages.findIndex(page => page.href === pathname)
+    if (currentIndex !== -1) {
+      if (currentIndex > 0) {
+        previousPage = flatPages[currentIndex - 1]
+      }
+      if (currentIndex < flatPages.length - 1) {
+        nextPage = flatPages[currentIndex + 1]
       }
     }
 

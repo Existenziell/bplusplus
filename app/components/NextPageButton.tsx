@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { useDocNavigation } from '@/app/hooks/useDocNavigation'
 
 export default function NextPageButton() {
-  const { previousPage, nextPage, isMainSectionPage } = useDocNavigation()
+  const { previousPage, nextPage } = useDocNavigation()
 
-  // Don't show on main section pages or if no navigation available
-  if (isMainSectionPage || (!previousPage && !nextPage)) {
+  // Don't show if no navigation available
+  if (!previousPage && !nextPage) {
     return null
   }
 

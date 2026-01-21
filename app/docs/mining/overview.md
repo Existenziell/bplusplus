@@ -1,4 +1,4 @@
-# What is Bitcoin Mining?
+# Bitcoin Mining
 
 Bitcoin mining is the process by which new Bitcoin [transactions](/docs/glossary#transaction) are verified and added to the [blockchain](/docs/glossary#blockchain). Miners compete to solve cryptographic puzzles using computational power, and the first miner to solve the puzzle gets to add the next [block](/docs/glossary#block) to the blockchain and receive a reward.
 

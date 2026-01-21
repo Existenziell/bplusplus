@@ -164,7 +164,7 @@ export default function LiveStats() {
     {
       label: 'BTC/USD',
       value: btcPrice ? formatPrice(btcPrice) : null,
-      href: '/docs/development/tools',
+      href: '/docs/development/price-tracking',
     },
     {
       label: 'Sats/USD',

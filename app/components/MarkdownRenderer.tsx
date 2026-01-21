@@ -1,16 +1,24 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
 import CodeBlock, { MultiLanguageCodeBlock } from '@/app/components/CodeBlock'
+import GlossaryTooltip from '@/app/components/GlossaryTooltip'
 
 interface MarkdownRendererProps {
   content: string
 }
+
+interface GlossaryEntry {
+  term: string
+  definition: string
+}
+
+type GlossaryData = Record<string, GlossaryEntry>
 
 interface CodeGroupBlock {
   id: string
@@ -145,6 +153,16 @@ const remarkPlugins = [remarkGfm]
 const rehypePlugins = [rehypeRaw, rehypeHighlight]
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
+  const [glossaryData, setGlossaryData] = useState<GlossaryData>({})
+
+  // Load glossary data for tooltips
+  useEffect(() => {
+    fetch('/data/glossary.json')
+      .then(res => res.json())
+      .then(data => setGlossaryData(data))
+      .catch(err => console.warn('Failed to load glossary data:', err))
+  }, [])
+
   // Memoize the parsing of code groups - this is expensive regex processing
   const { processedContent, codeGroupMap } = useMemo(() => {
     const { processedContent, codeGroups } = parseCodeGroups(content)
@@ -284,6 +302,14 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           )
         }
       }
+      // Glossary links with tooltip
+      if (href?.startsWith('/docs/glossary#')) {
+        return (
+          <GlossaryTooltip href={href} glossaryData={glossaryData}>
+            {children}
+          </GlossaryTooltip>
+        )
+      }
       // Internal Next.js links
       if (href?.startsWith('/')) {
         return (
@@ -350,7 +376,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         </pre>
       )
     },
-  }), [codeGroupMap])
+  }), [codeGroupMap, glossaryData])
 
   return (
     <div className="markdown-content prose prose-invert max-w-none">

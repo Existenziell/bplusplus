@@ -249,6 +249,9 @@ A transaction-level field (nLockTime) that prevents the transaction from being v
 ### Mainnet
 The production Bitcoin network where real Bitcoin with actual monetary value is transacted, as opposed to test networks used for development. Mainnet addresses start with "1" (legacy), "3" (P2SH), or "bc1" (SegWit/Taproot), distinguishing them from testnet addresses. All consensus rules are fully enforced on mainnet, and transactions are irreversible. When people refer to "Bitcoin" without qualification, they mean mainnet, the network that launched on January 3, 2009, and has operated continuously since.
 
+### Mempool
+The waiting room for unconfirmed Bitcoin transactions. See [Mempool (Memory Pool)](#mempool-memory-pool) for the full definition.
+
 ### Mempool (Memory Pool)
 The collection of valid, unconfirmed transactions that a node has received and is holding in memory, waiting to be included in a block. Each node maintains its own mempool, and they may differ slightly based on when transactions were received and node-specific policies. Miners select transactions from their mempool when constructing blocks, typically prioritizing by fee rate. Mempool size fluctuates with network demand; during busy periods it can grow to hundreds of thousands of transactions, while during quiet times it may nearly empty. Mempool visualization tools help users choose appropriate fee rates.
 
@@ -269,6 +272,12 @@ A Lightning Network feature that allows splitting a large payment into multiple 
 
 ### Miniscript
 A structured language for writing Bitcoin Scripts that is easier to analyze, compose, and reason about than raw Script. Miniscript maps to a subset of valid Bitcoin Script but provides guarantees about spending conditions, costs, and required signatures that would be difficult to determine from raw opcodes. Wallets can automatically analyze Miniscript policies to determine all possible spending paths, compute worst-case transaction sizes for fee estimation, and verify that scripts behave as intended. This makes complex multi-party contracts and time-locked conditions safer to implement and use.
+
+### Miner
+An individual or entity that participates in Bitcoin mining by dedicating computational power to solve proof-of-work puzzles. Miners collect transactions from the mempool, construct candidate blocks, and repeatedly hash block headers searching for a valid hash below the difficulty target. When successful, they broadcast the block to the network and receive the block reward plus transaction fees. Most miners today operate through mining pools to reduce variance in payouts.
+
+### Mining
+The process of adding new blocks to the Bitcoin blockchain through proof-of-work computation. Mining serves two critical functions: processing and validating transactions, and issuing new bitcoin according to the predetermined supply schedule. Miners compete to find a valid block hash, with the winner receiving the block subsidy (currently 3.125 BTC) plus all transaction fees from included transactions. Mining secures the network by making it computationally expensive to rewrite blockchain history.
 
 ### Mining Pool
 A collective of miners who combine their computational power and share block rewards proportionally to each member's contributed work. Pools reduce payout variance: instead of rarely winning large rewards, miners receive frequent smaller payments based on submitted shares. The pool operator constructs blocks and distributes work to members, paying out when blocks are found. While pools provide economic benefits to small miners, their concentration has raised centralization concerns, as large pools could theoretically influence which transactions get mined.

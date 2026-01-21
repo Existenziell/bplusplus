@@ -159,12 +159,14 @@ main > div > div > h1:first-child {
 }
 
 /* Glossary links - dashed/dotted underline on hover */
-.markdown-content a[href^="/docs/glossary"] {
+.markdown-content a[href^="/docs/glossary"],
+.markdown-content .glossary-link {
   @apply text-btc hover:text-btc/80 transition-colors;
   text-decoration: none;
 }
 
-.markdown-content a[href^="/docs/glossary"]:hover {
+.markdown-content a[href^="/docs/glossary"]:hover,
+.markdown-content .glossary-link:hover {
   text-decoration: underline;
   text-decoration-style: dashed;
   text-underline-offset: 3px;

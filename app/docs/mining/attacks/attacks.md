@@ -2,7 +2,7 @@
 
 Bitcoin's [proof-of-work](/docs/glossary#proof-of-work-pow) security model is designed to make attacks economically irrational. However, understanding potential attacks is crucial for appreciating Bitcoin's security properties and the incentives that protect the network.
 
-This section covers theoretical attacks on Bitcoin [mining](/docs/glossary#mining), their costs, and why they generally don't happen.
+This section covers theoretical attacks on Bitcoin mining, their costs, and why they generally don't happen.
 
 ## The 51% Attack
 

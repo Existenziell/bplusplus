@@ -12,7 +12,7 @@ The first mainnet Lightning implementations launched in 2018, including LND (Lig
 
 - **Payment Channels**: Two-party channels that allow unlimited off-chain transactions
 - **Off-Chain Transactions**: Payments settle instantly without blockchain confirmation
-- **HTLCs**: [Hash Time-Locked Contracts](/docs/glossary#htlc) enable trustless multi-hop routing
+- **HTLCs**: [Hash Time-Locked Contracts](/docs/glossary#htlc-hash-time-locked-contract) enable trustless multi-hop routing
 - **Onion Routing**: Privacy-preserving payment routing (similar to Tor)
 - **Instant Settlement**: Payments complete in milliseconds, not minutes
 

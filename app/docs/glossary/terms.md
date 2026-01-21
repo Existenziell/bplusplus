@@ -230,6 +230,9 @@ A payment request in Lightning Network encoded as a BOLT11 string that contains 
 ### Key Pair
 A cryptographic pair consisting of a private key (a 256-bit secret number) and its corresponding public key (derived through elliptic curve multiplication). The private key signs transactions to prove ownership, while the public key allows anyone to verify those signatures without learning the private key. From the public key, Bitcoin addresses are generated through hashing, creating a one-way chain: private key → public key → address. Keeping private keys secret is paramount, as anyone with access can spend the associated funds. Public keys and addresses can be freely shared.
 
+### Keysend
+A Lightning Network payment method that allows sending payments without requiring an invoice from the recipient. Instead of the receiver generating a payment hash and preimage (as with standard invoices), the sender generates the preimage themselves and includes it in the encrypted onion payload. The recipient's node extracts the preimage upon receiving the payment, enabling spontaneous payments to any node whose public key is known. Keysend is useful for tips, donations, streaming payments, and applications where generating invoices would be impractical. It's specified as feature bits 24/25 in the BOLT specifications and is widely supported by major Lightning implementations.
+
 ## L
 
 ### LIFO (Last In, First Out)

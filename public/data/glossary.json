@@ -279,6 +279,10 @@
     "term": "Key Pair",
     "definition": "A cryptographic pair consisting of a private key (a 256-bit secret number) and its corresponding public key (derived through elliptic curve multiplication). The private key signs transactions to prove ownership, while the public key allows anyone to verify those signatures without learning the..."
   },
+  "keysend": {
+    "term": "Keysend",
+    "definition": "A Lightning Network payment method that allows sending payments without requiring an invoice from the recipient. Instead of the receiver generating a payment hash and preimage (as with standard invoices), the sender generates the preimage themselves and includes it in the encrypted onion payload."
+  },
   "lifo-last-in-first-out": {
     "term": "LIFO (Last In, First Out)",
     "definition": "A data structure principle where the most recently added item is the first to be removed, like a stack of plates. Bitcoin Script uses a LIFO stack: operations push data onto the top and pop data from the top. When you push values A, B, C in order, popping retrieves them in reverse: C, B, A."

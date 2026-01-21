@@ -18,7 +18,7 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
   const [isVisible, setIsVisible] = useState(false)
   const [position, setPosition] = useState<'top' | 'bottom'>('top')
   const linkRef = useRef<HTMLAnchorElement>(null)
-  const tooltipRef = useRef<HTMLDivElement>(null)
+  const tooltipRef = useRef<HTMLSpanElement>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Extract the term slug from the href (e.g., /docs/glossary#transaction -> transaction)
@@ -91,12 +91,12 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
       </Link>
 
       {isVisible && (
-        <div
+        <span
           ref={tooltipRef}
           role="tooltip"
           className={`
-            absolute z-50 w-64 sm:w-72 p-2.5 pb-0
-            bg-zinc-100 dark:bg-zinc-800 
+            block absolute z-50 w-64 sm:w-72 p-2.5
+            bg-zinc-100 dark:bg-zinc-800
             border border-zinc-300 dark:border-zinc-600
             rounded-md shadow-lg
             text-xs text-zinc-600 dark:text-zinc-400
@@ -108,9 +108,9 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           onMouseLeave={handleMouseLeave}
         >
           {/* Arrow */}
-          <div
+          <span
             className={`
-              absolute left-1/2 -translate-x-1/2 w-2.5 h-2.5
+              block absolute left-1/2 -translate-x-1/2 w-2.5 h-2.5
               bg-zinc-100 dark:bg-zinc-800
               border-zinc-300 dark:border-zinc-600
               transform rotate-45
@@ -122,15 +122,15 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           />
 
           {/* Content */}
-          <div className="relative">
-            <div className="font-medium text-btc mb-1 text-sm" style={{ lineHeight: 1.2 }}>
+          <span className="relative block">
+            <span className="block font-medium text-btc mb-1 text-sm" style={{ lineHeight: 1.2 }}>
               {entry.term}
-            </div>
-            <p className="text-xs" style={{ lineHeight: 1.3 }}>
+            </span>
+            <span className="block text-xs" style={{ lineHeight: 1.3 }}>
               {entry.definition}
-            </p>
-          </div>
-        </div>
+            </span>
+          </span>
+        </span>
       )}
     </span>
   )

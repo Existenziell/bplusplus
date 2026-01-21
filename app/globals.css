@@ -246,7 +246,12 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content hr {
-  @apply border-zinc-700 my-8;
+  @apply border-zinc-300 dark:border-zinc-700 my-8;
+}
+
+/* Subtle divider for subsections (using custom class via div) */
+.markdown-content .divider-subtle {
+  @apply border-t border-zinc-300 dark:border-zinc-600 my-6 opacity-30;
 }
 
 .markdown-content img {

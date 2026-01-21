@@ -24,6 +24,8 @@ A Bitcoin block consists of two main parts:
 └─────────────────────────────────────────────────┘
 ```
 
+All numeric fields (version, timestamp, difficulty target, nonce) are stored in [little endian](/docs/glossary#little-endian) byte order. The previous block hash and merkle root are stored as-is (32 bytes each).
+
 ### Block Body
 
 - **Coinbase Transaction**: First transaction, creates new bitcoin

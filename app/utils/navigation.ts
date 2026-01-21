@@ -40,7 +40,7 @@ export const docPages: DocPage[] = [
   // Bitcoin Protocol (deep technical)
   { path: '/docs/bitcoin/cryptography', mdFile: 'app/docs/bitcoin/cryptography/cryptography.md', title: 'Cryptography', section: 'bitcoin' },
   { path: '/docs/bitcoin/consensus', mdFile: 'app/docs/bitcoin/consensus/consensus.md', title: 'Consensus Mechanism', section: 'bitcoin' },
-  { path: '/docs/bitcoin/script', mdFile: 'app/docs/bitcoin/script/execution.md', title: 'Script System', section: 'bitcoin' },
+  { path: '/docs/bitcoin/script', mdFile: 'app/docs/bitcoin/script/script.md', title: 'Bitcoin Script', section: 'bitcoin' },
   { path: '/docs/bitcoin/op-codes', mdFile: 'app/docs/bitcoin/op-codes/codes.md', title: 'OP Codes', section: 'bitcoin' },
   { path: '/docs/bitcoin/blocks', mdFile: 'app/docs/bitcoin/blocks/propagation.md', title: 'Block Propagation', section: 'bitcoin' },
   { path: '/docs/bitcoin/subsidy', mdFile: 'app/docs/bitcoin/subsidy/equation.md', title: 'Subsidy Equation', section: 'bitcoin' },

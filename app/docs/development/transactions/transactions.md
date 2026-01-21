@@ -27,6 +27,8 @@ Transaction
 └── Locktime (4 bytes)
 ```
 
+**Byte Order:** Most numeric fields (version, value, locktime, sequence, output index) are encoded in [little endian](/docs/glossary#little-endian). However, transaction IDs (TXIDs) and block hashes are typically *displayed* in big endian (reversed) for readability, even though they're stored internally in little endian. When working with raw transaction data, the `[::-1]` reversal in Python (or equivalent) converts between these formats.
+
 ### Size Calculations
 
 Virtual size (vbytes) = (base_size × 3 + total_size) / 4

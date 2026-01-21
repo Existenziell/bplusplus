@@ -232,6 +232,12 @@ A cryptographic pair consisting of a private key (a 256-bit secret number) and i
 
 ## L
 
+### LIFO (Last In, First Out)
+A data structure principle where the most recently added item is the first to be removed, like a stack of plates. Bitcoin Script uses a LIFO stack: operations push data onto the top and pop data from the top. When you push values A, B, C in order, popping retrieves them in reverse: C, B, A. This stack-based execution model is simple and predictable, contributing to Bitcoin Script's security by making script behavior easy to analyze and verify.
+
+### Little Endian
+A byte ordering format where the least significant byte is stored first (at the lowest memory address). Bitcoin uses little endian for most internal data structures, including transaction version numbers, input/output counts, satoshi amounts, lock times, and sequence numbers. This is the native byte order for x86 processors. However, block hashes and transaction IDs are typically displayed in big endian (reversed) for human readability, which can cause confusion when working with raw Bitcoin data. When parsing or constructing transactions programmatically, developers must be careful to use the correct byte order for each field.
+
 ### Lightning Network
 A second-layer payment protocol built on top of Bitcoin that enables instant, high-volume, low-cost transactions through a network of payment channels. Instead of recording every payment on the blockchain, Lightning users open channels by locking Bitcoin in 2-of-2 multisig addresses, then exchange signed transactions off-chain to update balances. Payments can route through multiple channels, enabling payments to anyone on the network without direct channel connections. Settlement to the Bitcoin blockchain only occurs when channels are opened or closed, dramatically reducing fees and enabling micropayments as small as 1 satoshi.
 

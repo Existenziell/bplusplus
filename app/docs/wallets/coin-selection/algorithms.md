@@ -1,6 +1,6 @@
 # Coin Selection Algorithms
 
-[Coin selection](/docs/glossary#coin-selection) is the process of choosing which [UTXOs](/docs/glossary#utxo-unspent-transaction-output) (Unspent Transaction Outputs) to spend when creating a Bitcoin [transaction](/docs/glossary#transaction). This is a critical [wallet](/docs/glossary#wallet) function that affects [transaction fees](/docs/glossary#transaction-fee), privacy, and efficiency.
+Coin selection is the process of choosing which [UTXOs](/docs/glossary#utxo-unspent-transaction-output) (Unspent Transaction Outputs) to spend when creating a Bitcoin [transaction](/docs/glossary#transaction). This is a critical [wallet](/docs/glossary#wallet) function that affects [transaction fees](/docs/glossary#transaction-fee), privacy, and efficiency.
 
 ## The Challenge
 

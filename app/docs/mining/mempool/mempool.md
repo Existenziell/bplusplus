@@ -1,8 +1,8 @@
 # The Mempool
 
-The **mempool** (memory pool) is Bitcoin's waiting room for unconfirmed transactions. When you broadcast a transaction, it doesn't immediately go into a block. It first enters the mempool, where it waits for a miner to include it in the next block.
+The **[mempool](/docs/glossary#mempool-memory-pool)** (memory pool) is Bitcoin's waiting room for unconfirmed [transactions](/docs/glossary#transaction). When you broadcast a transaction, it doesn't immediately go into a [block](/docs/glossary#block). It first enters the mempool, where it waits for a [miner](/docs/glossary#mining) to include it in the next block.
 
-Every full node maintains its own mempool. There is no single, global mempool; each node has its own view of pending transactions, though they generally converge through transaction propagation across the network.
+Every [full node](/docs/glossary#full-node) maintains its own mempool. There is no single, global mempool; each node has its own view of pending transactions, though they generally converge through transaction propagation across the network.
 
 ## How the Mempool Works
 
@@ -11,7 +11,7 @@ Every full node maintains its own mempool. There is no single, global mempool; e
 1. **Broadcast**: User signs and broadcasts a transaction
 2. **Validation**: Nodes verify the transaction is valid (correct signatures, sufficient funds, proper format)
 3. **Mempool Entry**: Valid transactions enter the node's mempool
-4. **Propagation**: Nodes relay transactions to their peers
+4. **Propagation**: Nodes relay transactions to their [peers](/docs/glossary#peer)
 5. **Selection**: Miners select transactions from their mempool to include in blocks
 6. **Confirmation**: Once included in a block, the transaction leaves the mempool
 
@@ -20,9 +20,293 @@ Every full node maintains its own mempool. There is no single, global mempool; e
 Each node can set its own mempool policies:
 
 - **Size Limit**: Maximum memory allocated to the mempool (default: 300 MB in Bitcoin Core)
-- **Minimum Fee Rate**: Transactions below this rate are rejected
+- **Minimum [Fee Rate](/docs/glossary#fee-rate)**: Transactions below this rate are rejected
 - **Transaction Expiration**: Transactions may be dropped after a period (default: 2 weeks)
 - **Replace-by-Fee**: Whether to accept transaction replacements
+
+## Querying the Mempool
+
+You can query mempool information using Bitcoin Core's [RPC](/docs/glossary#rpc-remote-procedure-call) interface:
+
+:::code-group
+```rust
+use bitcoincore_rpc::{Auth, Client, RpcApi};
+use serde_json::Value;
+
+/// Query mempool information using Bitcoin Core RPC.
+fn query_mempool() -> Result<(), Box<dyn std::error::Error>> {
+    // Connect to Bitcoin Core
+    let client = Client::new(
+        "http://127.0.0.1:8332",
+        Auth::UserPass("rpcuser".to_string(), "rpcpassword".to_string()),
+    )?;
+    
+    // Get mempool info (size, bytes, usage, fees)
+    let mempool_info: Value = client.call("getmempoolinfo", &[])?;
+    println!("Mempool Info:");
+    println!("  Size: {} transactions", mempool_info["size"]);
+    println!("  Bytes: {} bytes", mempool_info["bytes"]);
+    println!("  Memory Usage: {} bytes", mempool_info["usage"]);
+    println!("  Min Fee Rate: {} BTC/kB", mempool_info["mempoolminfee"]);
+    
+    // Get all transaction IDs in mempool
+    let txids: Vec<String> = client.call("getrawmempool", &[false.into()])?;
+    println!("\nTotal transactions: {}", txids.len());
+    
+    // Get detailed mempool with fee information
+    let mempool_verbose: Value = client.call("getrawmempool", &[true.into()])?;
+    
+    // Find highest fee transactions
+    if let Some(obj) = mempool_verbose.as_object() {
+        let mut fees: Vec<(&str, f64)> = obj.iter()
+            .filter_map(|(txid, info)| {
+                info["fees"]["base"].as_f64().map(|fee| (txid.as_str(), fee))
+            })
+            .collect();
+        fees.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+        
+        println!("\nTop 5 highest fee transactions:");
+        for (txid, fee) in fees.iter().take(5) {
+            println!("  {}: {:.8} BTC", &txid[..16], fee);
+        }
+    }
+    
+    Ok(())
+}
+
+fn main() {
+    if let Err(e) = query_mempool() {
+        eprintln!("Error: {}", e);
+    }
+}
+```
+
+```python
+from bitcoinrpc.authproxy import AuthServiceProxy
+import json
+
+def query_mempool():
+    """Query mempool information using Bitcoin Core RPC."""
+    
+    # Connect to Bitcoin Core
+    rpc = AuthServiceProxy("http://rpcuser:rpcpassword@127.0.0.1:8332")
+    
+    # Get mempool info (size, bytes, usage, fees)
+    mempool_info = rpc.getmempoolinfo()
+    print("Mempool Info:")
+    print(f"  Size: {mempool_info['size']} transactions")
+    print(f"  Bytes: {mempool_info['bytes']} bytes")
+    print(f"  Memory Usage: {mempool_info['usage']} bytes")
+    print(f"  Min Fee Rate: {mempool_info['mempoolminfee']} BTC/kB")
+    
+    # Get all transaction IDs in mempool
+    txids = rpc.getrawmempool(False)
+    print(f"\nTotal transactions: {len(txids)}")
+    
+    # Get detailed mempool with fee information
+    mempool_verbose = rpc.getrawmempool(True)
+    
+    # Find highest fee transactions
+    fees = [
+        (txid, info['fees']['base'])
+        for txid, info in mempool_verbose.items()
+    ]
+    fees.sort(key=lambda x: x[1], reverse=True)
+    
+    print("\nTop 5 highest fee transactions:")
+    for txid, fee in fees[:5]:
+        print(f"  {txid[:16]}: {fee:.8f} BTC")
+    
+    # Estimate fee for different confirmation targets
+    print("\nFee Estimates (sat/vB):")
+    for target in [1, 3, 6, 12, 24]:
+        try:
+            estimate = rpc.estimatesmartfee(target)
+            if 'feerate' in estimate:
+                # Convert BTC/kB to sat/vB
+                sat_per_vb = estimate['feerate'] * 100_000
+                print(f"  {target} blocks: {sat_per_vb:.1f} sat/vB")
+        except Exception:
+            pass
+
+if __name__ == "__main__":
+    query_mempool()
+```
+
+```cpp
+#include <iostream>
+#include <curl/curl.h>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
+// Callback for CURL response
+size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp) {
+    userp->append((char*)contents, size * nmemb);
+    return size * nmemb;
+}
+
+/**
+ * Make a JSON-RPC call to Bitcoin Core.
+ */
+json rpc_call(const std::string& method, const json& params = json::array()) {
+    CURL* curl = curl_easy_init();
+    std::string response;
+    
+    json request = {
+        {"jsonrpc", "1.0"},
+        {"id", "cpp"},
+        {"method", method},
+        {"params", params}
+    };
+    
+    std::string request_str = request.dump();
+    
+    curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8332");
+    curl_easy_setopt(curl, CURLOPT_USERPWD, "rpcuser:rpcpassword");
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, request_str.c_str());
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+    
+    curl_easy_perform(curl);
+    curl_easy_cleanup(curl);
+    
+    return json::parse(response)["result"];
+}
+
+/**
+ * Query mempool information using Bitcoin Core RPC.
+ */
+void query_mempool() {
+    // Get mempool info
+    json mempool_info = rpc_call("getmempoolinfo");
+    std::cout << "Mempool Info:" << std::endl;
+    std::cout << "  Size: " << mempool_info["size"] << " transactions" << std::endl;
+    std::cout << "  Bytes: " << mempool_info["bytes"] << " bytes" << std::endl;
+    std::cout << "  Memory Usage: " << mempool_info["usage"] << " bytes" << std::endl;
+    std::cout << "  Min Fee Rate: " << mempool_info["mempoolminfee"] << " BTC/kB" << std::endl;
+    
+    // Get transaction count
+    json txids = rpc_call("getrawmempool", {false});
+    std::cout << "\nTotal transactions: " << txids.size() << std::endl;
+    
+    // Get detailed mempool
+    json mempool_verbose = rpc_call("getrawmempool", {true});
+    
+    // Collect and sort by fee
+    std::vector<std::pair<std::string, double>> fees;
+    for (auto& [txid, info] : mempool_verbose.items()) {
+        fees.emplace_back(txid, info["fees"]["base"].get<double>());
+    }
+    std::sort(fees.begin(), fees.end(),
+              [](auto& a, auto& b) { return a.second > b.second; });
+    
+    std::cout << "\nTop 5 highest fee transactions:" << std::endl;
+    for (int i = 0; i < std::min(5, (int)fees.size()); ++i) {
+        std::cout << "  " << fees[i].first.substr(0, 16) 
+                  << ": " << fees[i].second << " BTC" << std::endl;
+    }
+}
+
+int main() {
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    query_mempool();
+    curl_global_cleanup();
+    return 0;
+}
+```
+
+```javascript
+const http = require('http');
+
+/**
+ * Make a JSON-RPC call to Bitcoin Core.
+ * @param {string} method - RPC method name
+ * @param {Array} params - Method parameters
+ * @returns {Promise<any>} - RPC result
+ */
+function rpcCall(method, params = []) {
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify({
+            jsonrpc: '1.0',
+            id: 'js',
+            method,
+            params
+        });
+        
+        const options = {
+            hostname: '127.0.0.1',
+            port: 8332,
+            path: '/',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + Buffer.from('rpcuser:rpcpassword').toString('base64')
+            }
+        };
+        
+        const req = http.request(options, (res) => {
+            let body = '';
+            res.on('data', chunk => body += chunk);
+            res.on('end', () => {
+                const response = JSON.parse(body);
+                if (response.error) reject(response.error);
+                else resolve(response.result);
+            });
+        });
+        
+        req.on('error', reject);
+        req.write(data);
+        req.end();
+    });
+}
+
+/**
+ * Query mempool information using Bitcoin Core RPC.
+ */
+async function queryMempool() {
+    // Get mempool info
+    const mempoolInfo = await rpcCall('getmempoolinfo');
+    console.log('Mempool Info:');
+    console.log(`  Size: ${mempoolInfo.size} transactions`);
+    console.log(`  Bytes: ${mempoolInfo.bytes} bytes`);
+    console.log(`  Memory Usage: ${mempoolInfo.usage} bytes`);
+    console.log(`  Min Fee Rate: ${mempoolInfo.mempoolminfee} BTC/kB`);
+    
+    // Get all transaction IDs
+    const txids = await rpcCall('getrawmempool', [false]);
+    console.log(`\nTotal transactions: ${txids.length}`);
+    
+    // Get detailed mempool
+    const mempoolVerbose = await rpcCall('getrawmempool', [true]);
+    
+    // Sort by fee
+    const fees = Object.entries(mempoolVerbose)
+        .map(([txid, info]) => ({ txid, fee: info.fees.base }))
+        .sort((a, b) => b.fee - a.fee);
+    
+    console.log('\nTop 5 highest fee transactions:');
+    fees.slice(0, 5).forEach(({ txid, fee }) => {
+        console.log(`  ${txid.slice(0, 16)}: ${fee.toFixed(8)} BTC`);
+    });
+    
+    // Fee estimates
+    console.log('\nFee Estimates (sat/vB):');
+    for (const target of [1, 3, 6, 12, 24]) {
+        try {
+            const estimate = await rpcCall('estimatesmartfee', [target]);
+            if (estimate.feerate) {
+                // Convert BTC/kB to sat/vB
+                const satPerVb = estimate.feerate * 100_000;
+                console.log(`  ${target} blocks: ${satPerVb.toFixed(1)} sat/vB`);
+            }
+        } catch (e) {}
+    }
+}
+
+queryMempool().catch(console.error);
+```
+:::
 
 ## Fee Market Dynamics
 
@@ -33,11 +317,11 @@ The mempool creates a **fee market** where users bid for block space.
 - Transactions pay fees measured in **satoshis per virtual byte (sat/vB)**
 - Miners prioritize higher-fee transactions (more profit per block)
 - When blocks are full, low-fee transactions wait longer
-- Fee rates fluctuate based on demand for block space
+- [Fee rates](/docs/glossary#fee-rate) fluctuate based on demand for block space
 
 ### Fee Estimation
 
-Wallets estimate fees by analyzing the mempool:
+[Wallets](/docs/glossary#wallet) estimate fees by analyzing the mempool:
 
 ```
 Current mempool state:
@@ -60,7 +344,7 @@ When transaction volume exceeds block capacity:
 
 ## Replace-by-Fee (RBF)
 
-**RBF** allows replacing an unconfirmed transaction with a new version paying a higher fee.
+**[RBF](/docs/glossary#rbf-replace-by-fee)** allows replacing an unconfirmed transaction with a new version paying a higher fee.
 
 ### How RBF Works
 
@@ -71,8 +355,8 @@ When transaction volume exceeds block capacity:
 
 ### RBF Use Cases
 
-- **Fee bumping**: Speed up a stuck transaction
-- **Payment updates**: Change the amount or destination before confirmation
+- **[Fee bumping](/docs/glossary#fee-bumping)**: Speed up a stuck transaction
+- **Payment updates**: Change the amount or destination before [confirmation](/docs/glossary#confirmation)
 - **Consolidation**: Combine outputs more efficiently
 
 ### Full RBF vs Opt-in RBF
@@ -82,7 +366,7 @@ When transaction volume exceeds block capacity:
 
 ## Child Pays for Parent (CPFP)
 
-An alternative to RBF for fee bumping.
+An alternative to RBF for [fee bumping](/docs/glossary#fee-bumping).
 
 ### How CPFP Works
 
@@ -93,7 +377,7 @@ An alternative to RBF for fee bumping.
 
 ### CPFP vs RBF
 
-| Aspect | RBF | CPFP |
+| Aspect | RBF | [CPFP](/docs/glossary#cpfp-child-pays-for-parent) |
 |--------|-----|------|
 | Who can bump | Sender only | Sender or recipient |
 | Requires | RBF signaling | Spendable output |
@@ -131,7 +415,7 @@ An attack where someone prevents a transaction from being replaced:
 2. Child is large, making CPFP expensive
 3. Original transaction is "pinned" and hard to bump
 
-This is a concern for Lightning Network and other Layer 2 protocols.
+This is a concern for [Lightning Network](/docs/lightning/basics) and other Layer 2 protocols.
 
 ### Front-Running
 
@@ -172,7 +456,7 @@ Common in DeFi on other chains, less relevant for Bitcoin's simpler transactions
 ### Receiving Transactions
 
 1. **Wait for confirmations**: Unconfirmed transactions can be replaced or dropped
-2. **Check RBF status**: RBF transactions are more easily double-spent before confirmation
+2. **Check RBF status**: RBF transactions are more easily [double-spent](/docs/glossary#double-spend) before confirmation
 3. **Monitor mempool**: Track your incoming transaction's position
 
 ## Technical Details
@@ -189,15 +473,15 @@ Bitcoin Core maintains several structures:
 
 Not all valid transactions are relayed:
 
-- **Dust limit**: Outputs below ~546 sats are non-standard
-- **OP_RETURN size**: Limited to 80 bytes by default (policy, not consensus)
+- **[Dust](/docs/glossary#dust) limit**: Outputs below ~546 sats are non-standard
+- **[OP_RETURN](/docs/glossary#op_return) size**: Limited to 80 bytes by default (policy, not [consensus](/docs/glossary#consensus))
 - **Non-standard scripts**: Some valid scripts aren't relayed
 
 ### Mempool Accept Rules
 
 Transactions must pass:
 
-1. **Consensus rules**: Valid signatures, scripts, amounts
+1. **[Consensus rules](/docs/glossary#consensus-rules)**: Valid signatures, scripts, amounts
 2. **Standardness rules**: Follow common patterns
 3. **Policy rules**: Meet node's minimum fee, size limits
 4. **Package rules**: Ancestor/descendant limits (25 transactions, 101 KB)

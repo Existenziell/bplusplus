@@ -19,13 +19,13 @@ export default function MiningDocsPage() {
       description={sections.mining.description}
     >
       <DocCard
-        title="Overview"
-        href="/docs/mining/overview"
+        title="What is Bitcoin Mining?"
+        href="/docs/mining/what-is-mining"
         description="Introduction to Bitcoin mining, including architecture, key concepts, and how the mining process works."
         links={[
-          { href: '/docs/mining/overview#what-is-bitcoin-mining', label: 'What is Bitcoin mining' },
-          { href: '/docs/mining/overview#how-mining-works', label: 'How mining works' },
-          { href: '/docs/mining/overview#key-concepts', label: 'Key concepts' },
+          { href: '/docs/mining/what-is-mining#how-mining-works', label: 'How mining works' },
+          { href: '/docs/mining/what-is-mining#key-concepts', label: 'Key concepts' },
+          { href: '/docs/mining/what-is-mining#why-mining-matters', label: 'Why mining matters' },
         ]}
       />
 

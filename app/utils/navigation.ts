@@ -47,10 +47,10 @@ export const docPages: DocPage[] = [
   { path: '/docs/bitcoin/rpc', mdFile: 'app/docs/bitcoin/rpc/rpc.md', title: 'RPC Commands', section: 'bitcoin' },
 
   // Mining
-  { path: '/docs/mining/overview', mdFile: 'app/docs/mining/overview.md', title: 'Overview', section: 'mining' },
-  { path: '/docs/mining/proof-of-work', mdFile: 'app/docs/mining/proof-of-work.md', title: 'Proof-of-Work', section: 'mining' },
-  { path: '/docs/mining/difficulty', mdFile: 'app/docs/mining/difficulty.md', title: 'Difficulty Adjustment', section: 'mining' },
-  { path: '/docs/mining/economics', mdFile: 'app/docs/mining/economics.md', title: 'Economics', section: 'mining' },
+  { path: '/docs/mining/what-is-mining', mdFile: 'app/docs/mining/what-is-mining/what-is-mining.md', title: 'What is Bitcoin Mining?', section: 'mining' },
+  { path: '/docs/mining/proof-of-work', mdFile: 'app/docs/mining/proof-of-work/proof-of-work.md', title: 'Proof-of-Work', section: 'mining' },
+  { path: '/docs/mining/difficulty', mdFile: 'app/docs/mining/difficulty/difficulty.md', title: 'Difficulty Adjustment', section: 'mining' },
+  { path: '/docs/mining/economics', mdFile: 'app/docs/mining/economics/economics.md', title: 'Economics', section: 'mining' },
   { path: '/docs/mining/mempool', mdFile: 'app/docs/mining/mempool/mempool.md', title: 'Mempool', section: 'mining' },
   { path: '/docs/mining/block-construction', mdFile: 'app/docs/mining/block-construction/block-construction.md', title: 'Block Construction', section: 'mining' },
   { path: '/docs/mining/pools', mdFile: 'app/docs/mining/pools/pools.md', title: 'Mining Pools', section: 'mining' },
@@ -221,6 +221,7 @@ export const routeLabels: Record<string, string> = {
   rpc: 'RPC Guide',
   blocks: 'Block Propagation',
   subsidy: 'Subsidy Equation',
+  'what-is-mining': 'What is Bitcoin Mining?',
   'proof-of-work': 'Proof-of-Work',
   difficulty: 'Difficulty Adjustment',
   economics: 'Economics',

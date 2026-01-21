@@ -1,6 +1,6 @@
 # Mining Hardware Evolution
 
-Bitcoin mining hardware has undergone a remarkable evolution, from hobbyists running CPUs on laptops to industrial-scale operations with purpose-built silicon. This progression represents one of the fastest hardware development cycles in computing history, driven by the economic incentives of proof-of-work mining.
+Bitcoin [mining](/docs/glossary#mining) hardware has undergone a remarkable evolution, from hobbyists running CPUs on laptops to industrial-scale operations with purpose-built silicon. This progression represents one of the fastest hardware development cycles in computing history, driven by the economic incentives of [proof-of-work](/docs/glossary#proof-of-work-pow) mining.
 
 ## The Four Eras of Mining Hardware
 
@@ -8,17 +8,17 @@ Bitcoin mining hardware has undergone a remarkable evolution, from hobbyists run
 
 **The Beginning**
 
-When Satoshi launched Bitcoin, mining was done on ordinary computer CPUs:
+When [Satoshi](/docs/history/people#satoshi-nakamoto) launched Bitcoin, mining was done on ordinary computer CPUs:
 
 - **Hardware**: Intel/AMD desktop processors
-- **Hashrate**: 1-20 MH/s
+- **[Hashrate](/docs/glossary#hash-rate)**: 1-20 MH/s
 - **Power**: 50-150W
 - **Efficiency**: ~0.1 MH/J
 - **Who mined**: Cypherpunks, early adopters, Satoshi
 
 **Why CPUs Work**
 
-SHA-256 (Bitcoin's hash function) is computationally simple:
+[SHA-256](/docs/glossary#sha-256) (Bitcoin's [hash](/docs/glossary#hash) function) is computationally simple:
 - Bitwise operations (AND, OR, XOR)
 - 32-bit additions
 - No complex branching
@@ -101,7 +101,7 @@ FPGAs were a transitional technology. The efficiency gains made ASICs inevitable
 
 **Application-Specific Integrated Circuits**
 
-ASICs are chips designed to do one thing only: SHA-256 hashing.
+[ASICs](/docs/glossary#asic-application-specific-integrated-circuit) are chips designed to do one thing only: SHA-256 hashing.
 
 - **Hardware**: Custom silicon from Bitmain, MicroBT, Canaan, etc.
 - **Hashrate**: 1 TH/s → 250+ TH/s (2013 → 2024)
@@ -249,7 +249,7 @@ Modern mining farms:
 - Target: 15-25°C ambient
 
 **Networking**
-- Low latency to pools
+- Low latency to [pools](/docs/mining/pools)
 - Redundant connections
 - Monitoring systems
 

@@ -4,10 +4,10 @@ import SectionIndexLayout from '@/app/components/SectionIndexLayout'
 import { sections } from '@/app/utils/navigation'
 
 export const metadata: Metadata = {
-  title: 'Mining Documentation | B++',
+  title: 'Mining | B++',
   description: sections.mining.description,
   openGraph: {
-    title: 'Mining Documentation | B++',
+    title: 'Mining | B++',
     description: sections.mining.description,
   },
 }

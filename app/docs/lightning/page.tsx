@@ -4,10 +4,10 @@ import SectionIndexLayout from '@/app/components/SectionIndexLayout'
 import { sections } from '@/app/utils/navigation'
 
 export const metadata: Metadata = {
-  title: 'Lightning Network Documentation | B++',
+  title: 'Lightning Network | B++',
   description: sections.lightning.description,
   openGraph: {
-    title: 'Lightning Network Documentation | B++',
+    title: 'Lightning Network | B++',
     description: sections.lightning.description,
   },
 }

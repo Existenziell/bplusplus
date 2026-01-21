@@ -109,15 +109,15 @@ export const sections: Record<string, { title: string; description: string }> = 
     description: 'Deep technical documentation of the Bitcoin protocol, including cryptography, consensus, script system, and RPC interfaces.',
   },
   mining: {
-    title: 'Mining Documentation',
+    title: 'Mining',
     description: 'Learn about proof-of-work, block construction, pool mining, and the economic incentives that secure the Bitcoin network.',
   },
   wallets: {
-    title: 'Wallet Development Documentation',
+    title: 'Wallet Development',
     description: 'Build Bitcoin wallets with proper coin selection, multisig support, and transaction construction.',
   },
   lightning: {
-    title: 'Lightning Network Documentation',
+    title: 'Lightning Network',
     description: 'Understand the Lightning Network protocol, including channel management, routing, HTLCs, and onion routing.',
   },
   development: {

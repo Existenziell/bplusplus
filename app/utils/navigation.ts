@@ -41,10 +41,10 @@ export const docPages: DocPage[] = [
   { path: '/docs/bitcoin/cryptography', mdFile: 'app/docs/bitcoin/cryptography/cryptography.md', title: 'Cryptography', section: 'bitcoin' },
   { path: '/docs/bitcoin/consensus', mdFile: 'app/docs/bitcoin/consensus/consensus.md', title: 'Consensus Mechanism', section: 'bitcoin' },
   { path: '/docs/bitcoin/script', mdFile: 'app/docs/bitcoin/script/script.md', title: 'Bitcoin Script', section: 'bitcoin' },
-  { path: '/docs/bitcoin/op-codes', mdFile: 'app/docs/bitcoin/op-codes/codes.md', title: 'OP Codes', section: 'bitcoin' },
-  { path: '/docs/bitcoin/blocks', mdFile: 'app/docs/bitcoin/blocks/propagation.md', title: 'Block Propagation', section: 'bitcoin' },
-  { path: '/docs/bitcoin/subsidy', mdFile: 'app/docs/bitcoin/subsidy/equation.md', title: 'Subsidy Equation', section: 'bitcoin' },
-  { path: '/docs/bitcoin/rpc', mdFile: 'app/docs/bitcoin/rpc/guide.md', title: 'RPC Guide', section: 'bitcoin' },
+  { path: '/docs/bitcoin/op-codes', mdFile: 'app/docs/bitcoin/op-codes/op-codes.md', title: 'OP Codes', section: 'bitcoin' },
+  { path: '/docs/bitcoin/blocks', mdFile: 'app/docs/bitcoin/blocks/blocks.md', title: 'Block Propagation', section: 'bitcoin' },
+  { path: '/docs/bitcoin/subsidy', mdFile: 'app/docs/bitcoin/subsidy/subsidy.md', title: 'Block Subsidy', section: 'bitcoin' },
+  { path: '/docs/bitcoin/rpc', mdFile: 'app/docs/bitcoin/rpc/rpc.md', title: 'RPC Commands', section: 'bitcoin' },
 
   // Mining
   { path: '/docs/mining/overview', mdFile: 'app/docs/mining/overview.md', title: 'Overview', section: 'mining' },

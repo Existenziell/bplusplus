@@ -1,8 +1,8 @@
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
 import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function MonitoringPage() {
-  const content = await readMarkdown('app/docs/development/monitoring/blockchain.md')
+export default async function PriceTrackingPage() {
+  const content = await readMarkdown('app/docs/development/price-tracking/price-tracking.md')
 
   return (
     <div>

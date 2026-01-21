@@ -1,6 +1,6 @@
 # Signet & Testnet Deep Dive
 
-Test networks are essential for Bitcoin development. This guide covers the differences between testnet, signet, and regtest, along with setup instructions and best practices.
+Test networks are essential for Bitcoin development. This guide covers the differences between [testnet](/docs/glossary#testnet), [signet](/docs/glossary#signet), and [regtest](/docs/glossary#regtest), along with setup instructions and best practices.
 
 ## Network Comparison
 
@@ -552,3 +552,9 @@ Each test network serves a purpose:
 - **Testnet**: Real-world simulation before mainnet
 
 Start with regtest for fast iteration, move to signet for integration testing, and use testnet for final validation before deploying to mainnet.
+
+## Related Topics
+
+- [Testing & Debugging](/docs/development/testing) - Testing strategies and techniques
+- [Getting Started](/docs/development/getting-started) - Development setup guide
+- [RPC Commands](/docs/bitcoin/rpc) - Bitcoin Core RPC interface

@@ -1,6 +1,6 @@
 # Key Management & Security
 
-Secure key management is the foundation of Bitcoin security. This guide covers HD wallets, seed phrases, derivation paths, and best practices for handling private keys.
+Secure key management is the foundation of Bitcoin security. This guide covers [HD wallets](/docs/glossary#hd-wallet-hierarchical-deterministic-wallet), [seed phrases](/docs/glossary#seed-phrase), derivation paths, and best practices for handling private keys.
 
 ## HD Wallets (BIP32)
 
@@ -579,3 +579,10 @@ Secure key management requires:
 - **Recovery Testing**: Test recovery before storing significant funds
 
 Never expose private keys, use hardware wallets for significant amounts, and always have tested backup procedures.
+
+## Related Topics
+
+- [Address Generation](/docs/development/addresses) - Creating addresses from keys
+- [HD Wallets](/docs/wallets/hd-wallets) - Hierarchical deterministic wallet concepts
+- [Multisig](/docs/wallets/multisig) - Multi-signature security setups
+- [Cryptography](/docs/bitcoin/cryptography) - Underlying cryptographic primitives

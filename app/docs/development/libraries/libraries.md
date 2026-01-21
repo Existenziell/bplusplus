@@ -531,3 +531,10 @@ Each library has its strengths:
 - **btcd**: Best for Go infrastructure
 
 Choose based on your language preference, use case, and required features. For production wallets, consider BDK for its completeness; for web apps, bitcoinjs-lib remains the standard choice.
+
+## Related Topics
+
+- [Getting Started](/docs/development/getting-started) - Development environment setup
+- [Transaction Construction](/docs/development/transactions) - Using libraries for transactions
+- [PSBT](/docs/development/psbt) - Library support for PSBTs
+- [Testing & Debugging](/docs/development/testing) - Library testing utilities

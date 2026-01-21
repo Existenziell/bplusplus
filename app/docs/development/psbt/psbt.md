@@ -1,6 +1,6 @@
 # Partially Signed Bitcoin Transactions (PSBT)
 
-PSBTs (BIP-174) provide a standardized format for passing unsigned or partially signed transactions between different software and hardware. They're essential for multi-party signing, hardware wallet integration, and air-gapped setups.
+[PSBTs](/docs/glossary#psbt-partially-signed-bitcoin-transaction) (BIP-174) provide a standardized format for passing unsigned or partially signed transactions between different software and hardware. They're essential for multi-party signing, hardware wallet integration, and air-gapped setups.
 
 ## What is PSBT?
 
@@ -466,3 +466,10 @@ PSBTs provide a standardized way to:
 - **Finalize** and extract broadcast-ready transactions
 
 Understanding PSBTs is essential for modern Bitcoin development, especially when working with hardware wallets, multi-signature setups, or any multi-party transaction construction.
+
+## Related Topics
+
+- [Transaction Construction](/docs/development/transactions) - Building transactions from scratch
+- [Key Management](/docs/development/keys) - Managing signing keys
+- [Address Generation](/docs/development/addresses) - Creating and validating addresses
+- [Multisig](/docs/wallets/multisig) - Multi-signature wallet setups

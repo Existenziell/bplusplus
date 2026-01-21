@@ -401,9 +401,9 @@ Start small, use testnet, and build incrementally. The Bitcoin development commu
 
 ## Related Topics
 
-- [Blockchain Monitoring](/docs/development/monitoring) - Monitor blocks and transactions
-- [Pool Mining](/docs/development/mining) - Mining development
-- [Price Tracking](/docs/development/tools) - API integrations
+- [Blockchain Monitoring](/docs/development/blockchain-monitoring) - Monitor blocks and transactions
+- [Pool Mining](/docs/development/pool-mining) - Mining development
+- [Price Tracking](/docs/development/price-tracking) - API integrations
 - [RPC Guide](/docs/bitcoin/rpc) - Bitcoin Core RPC commands
 
 ## Resources

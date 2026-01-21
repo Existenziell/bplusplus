@@ -1,6 +1,6 @@
 # Address Generation & Validation
 
-Bitcoin addresses are human-readable encodings of output scripts. Understanding how to generate, validate, and work with different address types is fundamental to Bitcoin development.
+Bitcoin [addresses](/docs/glossary#address) are human-readable encodings of output scripts. Understanding how to generate, validate, and work with different address types is fundamental to Bitcoin development.
 
 ## Address Types Overview
 
@@ -412,3 +412,10 @@ Understanding Bitcoin addresses requires knowledge of:
 - **Validation**: Checksum verification and format checking
 
 Modern applications should default to Bech32m (Taproot) addresses for the best fee efficiency and privacy features.
+
+## Related Topics
+
+- [Key Management](/docs/development/keys) - Managing private and public keys
+- [Address Types](/docs/wallets/address-types) - Detailed address type comparison
+- [HD Wallets](/docs/wallets/hd-wallets) - Derivation paths and wallet structure
+- [Transaction Construction](/docs/development/transactions) - Using addresses in transactions

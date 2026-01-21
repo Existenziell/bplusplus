@@ -32,37 +32,37 @@ export default function DevelopmentDocsPage() {
 
       <DocCard
         title="Blockchain Monitoring"
-        href="/docs/development/monitoring"
+        href="/docs/development/blockchain-monitoring"
         description="Learn how to monitor the Bitcoin blockchain in real-time using ZMQ notifications, detect new blocks, and identify mining pools."
         links={[
-          { href: '/docs/development/monitoring#zmq-notifications', label: 'ZMQ notifications' },
-          { href: '/docs/development/monitoring#block-detection', label: 'Block detection' },
-          { href: '/docs/development/monitoring#mining-pool-identification', label: 'Mining pool identification' },
-          { href: '/docs/development/monitoring#op_return-analysis', label: 'OP_RETURN analysis' },
+          { href: '/docs/development/blockchain-monitoring#zmq-notifications', label: 'ZMQ notifications' },
+          { href: '/docs/development/blockchain-monitoring#block-detection', label: 'Block detection' },
+          { href: '/docs/development/blockchain-monitoring#mining-pool-identification', label: 'Mining pool identification' },
+          { href: '/docs/development/blockchain-monitoring#op_return-analysis', label: 'OP_RETURN analysis' },
         ]}
       />
 
       <DocCard
         title="Pool Mining"
-        href="/docs/development/mining"
+        href="/docs/development/pool-mining"
         description="Set up and monitor Bitcoin pool mining, including hash rate tracking, share submission, and reward management."
         links={[
-          { href: '/docs/development/mining#mining-software-setup', label: 'Mining software setup' },
-          { href: '/docs/development/mining#monitoring-hash-rate', label: 'Monitoring hash rate' },
-          { href: '/docs/development/mining#pool-configuration', label: 'Pool configuration' },
-          { href: '/docs/development/mining#performance-optimization', label: 'Performance optimization' },
+          { href: '/docs/development/pool-mining#mining-software-setup', label: 'Mining software setup' },
+          { href: '/docs/development/pool-mining#monitoring-hash-rate', label: 'Monitoring hash rate' },
+          { href: '/docs/development/pool-mining#pool-configuration', label: 'Pool configuration' },
+          { href: '/docs/development/pool-mining#performance-optimization', label: 'Performance optimization' },
         ]}
       />
 
       <DocCard
         title="Price Tracking"
-        href="/docs/development/tools"
+        href="/docs/development/price-tracking"
         description="Integrate Bitcoin price data into your applications with API integration, caching strategies, and multi-source fallbacks."
         links={[
-          { href: '/docs/development/tools#api-providers', label: 'API providers' },
-          { href: '/docs/development/tools#caching-strategies', label: 'Caching strategies' },
-          { href: '/docs/development/tools#multi-source-fallbacks', label: 'Multi-source fallbacks' },
-          { href: '/docs/development/tools#rate-limiting', label: 'Rate limiting' },
+          { href: '/docs/development/price-tracking#api-providers', label: 'API providers' },
+          { href: '/docs/development/price-tracking#caching-strategies', label: 'Caching strategies' },
+          { href: '/docs/development/price-tracking#multi-source-fallbacks', label: 'Multi-source fallbacks' },
+          { href: '/docs/development/price-tracking#rate-limiting', label: 'Rate limiting' },
         ]}
       />
     </SectionIndexLayout>

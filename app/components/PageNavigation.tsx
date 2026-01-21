@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useDocNavigation } from '@/app/hooks/useDocNavigation'
 
-export default function NextPageButton() {
+export default function PageNavigation() {
   const { previousPage, nextPage } = useDocNavigation()
 
   // Don't show if no navigation available
@@ -28,7 +28,7 @@ export default function NextPageButton() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="hidden sm:inline">Prev: {previousPage.title}</span>
+            <span className="hidden sm:inline">{previousPage.title}</span>
             <span className="sm:hidden">Prev</span>
           </Link>
         ) : (
@@ -61,7 +61,7 @@ export default function NextPageButton() {
             href={nextPage.href}
             className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
           >
-            <span className="hidden sm:inline">Next: {nextPage.title}</span>
+            <span className="hidden sm:inline">{nextPage.title}</span>
             <span className="sm:hidden">Next</span>
             <svg
               className="w-4 h-4"

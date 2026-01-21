@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import DocsNavigation from '@/app/components/DocsNavigation'
 import MobileNav from '@/app/components/MobileNav'
-import NextPageButton from '@/app/components/NextPageButton'
+import PageNavigation from '@/app/components/PageNavigation'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
@@ -26,7 +26,7 @@ export default function DocsLayout({
           <div className="flex-1 min-w-0">
             <MobileNav />
             {children}
-            <NextPageButton />
+            <PageNavigation />
           </div>
         </div>
       </div>

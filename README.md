@@ -80,7 +80,7 @@ bplusplus/
 │   │   ├── LiveStats.tsx
 │   │   ├── MarkdownRenderer.tsx
 │   │   ├── MobileNav.tsx
-│   │   ├── NextPageButton.tsx
+│   │   ├── PageNavigation.tsx
 │   │   ├── Notification.tsx
 │   │   ├── QuoteRotator.tsx
 │   │   └── ThemeToggle.tsx

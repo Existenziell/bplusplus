@@ -58,7 +58,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/mining/attacks', mdFile: 'app/docs/mining/attacks/attacks.md', title: 'Mining Attacks', section: 'mining' },
 
   // Wallets
-  { path: '/docs/wallets/overview', mdFile: 'app/docs/wallets/overview/overview.md', title: 'Overview', section: 'wallets' },
+  { path: '/docs/wallets/what-is-a-wallet', mdFile: 'app/docs/wallets/what-is-a-wallet/what-is-a-wallet.md', title: 'What is a Wallet?', section: 'wallets' },
   { path: '/docs/wallets/coin-selection', mdFile: 'app/docs/wallets/coin-selection/algorithms.md', title: 'Coin Selection', section: 'wallets' },
   { path: '/docs/wallets/multisig', mdFile: 'app/docs/wallets/multisig/concepts.md', title: 'Multisig', section: 'wallets' },
   { path: '/docs/wallets/transactions', mdFile: 'app/docs/wallets/transactions/creation.md', title: 'Transactions', section: 'wallets' },

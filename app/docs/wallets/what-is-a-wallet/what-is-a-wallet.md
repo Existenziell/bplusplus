@@ -1,6 +1,6 @@
-# Wallet Overview
+# What is a Wallet?
 
-## What is a Bitcoin Wallet?
+## Overview
 
 A Bitcoin wallet is a software application or device that allows users to store, send, and receive Bitcoin. Despite the name, a wallet doesn't actually "store" Bitcoin. Bitcoin exists only on the blockchain. Instead, a wallet stores the **private keys** needed to access and control Bitcoin addresses.
 

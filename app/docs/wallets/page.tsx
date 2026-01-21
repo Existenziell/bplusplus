@@ -19,14 +19,14 @@ export default function WalletsDocsPage() {
       description={sections.wallets.description}
     >
       <DocCard
-        title="Overview"
-        href="/docs/wallets/overview"
+        title="What is a Wallet?"
+        href="/docs/wallets/what-is-a-wallet"
         description="Introduction to Bitcoin wallets, including what they are, different types, how they work, and how to create one."
         links={[
-          { href: '/docs/wallets/overview#what-is-a-bitcoin-wallet', label: 'What is a wallet' },
-          { href: '/docs/wallets/overview#types-of-wallets', label: 'Types of wallets' },
-          { href: '/docs/wallets/overview#how-wallets-work', label: 'How wallets work' },
-          { href: '/docs/wallets/overview#creating-a-wallet', label: 'Creating a wallet' },
+          { href: '/docs/wallets/what-is-a-wallet#overview', label: 'Overview' },
+          { href: '/docs/wallets/what-is-a-wallet#types-of-wallets', label: 'Types of wallets' },
+          { href: '/docs/wallets/what-is-a-wallet#how-wallets-work', label: 'How wallets work' },
+          { href: '/docs/wallets/what-is-a-wallet#creating-a-wallet', label: 'Creating a wallet' },
         ]}
       />
 

@@ -1,8 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { readFile } from 'fs/promises'
-import { join } from 'path'
-import { existsSync } from 'fs'
-import { pathToMdFile } from '@/app/utils/navigation'
+
+// Import the pre-generated markdown content
+// This is generated at build time by scripts/generate-md-content.js
+import mdContent from '@/public/data/md-content.json'
+
+// Type for the imported JSON
+interface MdEntry {
+  content: string
+  filename: string
+}
+
+const mdContentTyped = mdContent as Record<string, MdEntry>
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -15,31 +23,16 @@ export async function GET(request: NextRequest) {
   // Normalize path - remove trailing slash if present
   const normalizedPath = path.endsWith('/') ? path.slice(0, -1) : path
 
-  const mdFilePath = pathToMdFile[normalizedPath]
+  const entry = mdContentTyped[normalizedPath]
 
-  if (!mdFilePath) {
+  if (!entry) {
     return NextResponse.json({ error: 'MD file not found for this path', path: normalizedPath }, { status: 404 })
   }
 
-  const fullPath = join(process.cwd(), mdFilePath)
-
-  if (!existsSync(fullPath)) {
-    return NextResponse.json({ error: 'File not found', fullPath, cwd: process.cwd() }, { status: 404 })
-  }
-
-  try {
-    const content = await readFile(fullPath, 'utf-8')
-
-    // Extract filename from the path
-    const filename = mdFilePath.split('/').pop() || 'document.md'
-
-    return new NextResponse(content, {
-      headers: {
-        'Content-Type': 'text/markdown; charset=utf-8',
-        'Content-Disposition': `attachment; filename="${filename}"`,
-      },
-    })
-  } catch {
-    return NextResponse.json({ error: 'Failed to read file' }, { status: 500 })
-  }
+  return new NextResponse(entry.content, {
+    headers: {
+      'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': `attachment; filename="${entry.filename}"`,
+    },
+  })
 }

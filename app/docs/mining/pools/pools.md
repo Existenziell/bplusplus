@@ -8,10 +8,10 @@ Solo mining is like playing the lottery: you might wait years for a payout. Pool
 
 ### The Variance Problem
 
-Consider a solo miner with 0.001% of total network [hashrate](/docs/glossary#hash-rate):
+Consider a solo miner with 0.001% of total network hashrate:
 
 - **Expected time to find a block**: ~1,000,000 blocks ÷ 0.00001 = 100,000,000 minutes ≈ **190 years**
-- **[Block reward](/docs/glossary#block-reward)**: 3.125 BTC (when you finally find one)
+- **Block reward**: 3.125 BTC (when you finally find one)
 - **Reality**: You might find one tomorrow, or never
 
 This variance is unacceptable for anyone running mining as a business.
@@ -40,7 +40,7 @@ By combining hashpower:
 
 ### Shares vs Blocks
 
-**[Shares](/docs/glossary#share)** are proof that a miner is working:
+**Shares** are proof that a miner is working:
 
 - A share is a [hash](/docs/glossary#hash) that meets a lower [difficulty](/docs/glossary#difficulty) than the network target
 - Easy to find (every few seconds)
@@ -741,7 +741,7 @@ Profit: ~$6/day
 1. **Mining hardware**: [ASICs](/docs/glossary#asic-application-specific-integrated-circuit) for Bitcoin
 2. **Pool account**: Register with chosen pool
 3. **Mining software**: CGMiner, BFGMiner, or manufacturer software
-4. **[Wallet](/docs/glossary#wallet)**: For receiving payouts
+4. **Wallet**: For receiving payouts
 
 ### Basic Configuration
 

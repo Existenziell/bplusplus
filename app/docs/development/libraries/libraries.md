@@ -19,12 +19,12 @@ This guide compares major Bitcoin libraries across languages and provides practi
 
 | Feature | bitcoinjs-lib | rust-bitcoin | BDK | python-bitcoinlib |
 |---------|--------------|--------------|-----|-------------------|
-| Transaction Building | ✓ | ✓ | ✓ | ✓ |
-| PSBT Support | ✓ | ✓ | ✓ | Partial |
-| Taproot | ✓ | ✓ | ✓ | Limited |
-| HD Wallets | Via bip32/bip39 | Via bip32 | ✓ | Via bip32utils |
-| Coin Selection | Manual | Manual | ✓ | Manual |
-| Blockchain Sync | No | No | ✓ | No |
+| [Transaction](/docs/glossary#transaction) Building | ✓ | ✓ | ✓ | ✓ |
+| [PSBT](/docs/glossary#psbt-partially-signed-bitcoin-transaction) Support | ✓ | ✓ | ✓ | Partial |
+| [Taproot](/docs/glossary#taproot) | ✓ | ✓ | ✓ | Limited |
+| [HD Wallets](/docs/glossary#hd-wallet-hierarchical-deterministic-wallet) | Via bip32/bip39 | Via bip32 | ✓ | Via bip32utils |
+| [Coin Selection](/docs/glossary#coin-selection) | Manual | Manual | ✓ | Manual |
+| [Blockchain](/docs/glossary#blockchain) Sync | No | No | ✓ | No |
 
 ## JavaScript/TypeScript
 

@@ -8,7 +8,7 @@ This document explains how [blocks](/docs/glossary#block) propagate through the 
 
 When a miner finds a new block:
 
-1. **Miner solves [proof-of-work](/docs/glossary#proof-of-work-pow) puzzle**: Finds a valid [nonce](/docs/glossary#nonce)
+1. **Miner solves [proof-of-work](/docs/glossary#proof-of-work-pow) puzzle**: Finds a valid nonce
 2. **Creates valid block**: Includes transactions from [mempool](/docs/glossary#mempool-memory-pool)
 3. **Immediately broadcasts**: Sends to all connected [peers](/docs/glossary#peer) (8-10 first-hop nodes)
 4. **First-hop nodes validate**: Each node checks the block
@@ -29,7 +29,7 @@ When a miner finds a new block:
 
 ### 3. Block Validation Process
 
-Each [full node](/docs/glossary#full-node) performs comprehensive validation:
+Each full node performs comprehensive validation:
 
 1. **Header Validation**
    - Proof-of-work meets [difficulty](/docs/glossary#difficulty) target
@@ -54,7 +54,7 @@ Each [full node](/docs/glossary#full-node) performs comprehensive validation:
 
 ## Compact Block Relay (BIP 152)
 
-[Compact blocks](/docs/glossary#compact-block) dramatically reduce propagation bandwidth and latency:
+Compact blocks dramatically reduce propagation bandwidth and latency:
 
 ### How It Works
 
@@ -80,7 +80,7 @@ The receiving node reconstructs the full block using transactions already in its
 
 ## Headers-First Synchronization
 
-New nodes use headers-first sync for efficient [IBD](/docs/glossary#ibd-initial-block-download):
+New nodes use headers-first sync for efficient IBD (Initial Block Download):
 
 1. Download all block headers first (~60 MB total)
 2. Validate the header chain (proof-of-work, timestamps)
@@ -414,7 +414,7 @@ console.log(`Block hash: ${header.hashHex(headerBytes)}`);
 
 ### Simultaneous Block Discovery
 
-Sometimes two miners find blocks at nearly the same time, creating a temporary [fork](/docs/glossary#fork):
+Sometimes two miners find blocks at nearly the same time, creating a temporary fork:
 
 ```
 Block 850,000 (everyone agrees)

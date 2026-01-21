@@ -8,7 +8,7 @@ An analysis of the ongoing debate about OP_RETURN, carrier size limits, and Bitc
 
 ### Basic Function
 
-`OP_RETURN` is a Bitcoin Script opcode that creates **provably unspendable outputs**. When executed, it immediately terminates script execution and marks the transaction as invalid.
+`[OP_RETURN](/docs/glossary#op-return)` is a Bitcoin [Script](/docs/glossary#script) [opcode](/docs/glossary#opcode) that creates **provably unspendable outputs**. When executed, it immediately terminates script execution and marks the [transaction](/docs/glossary#transaction) as invalid.
 
 **Script Pattern:**
 ```
@@ -16,9 +16,9 @@ OP_RETURN <data>
 ```
 
 **Key Characteristics:**
-- Outputs are **unspendable** - they cannot be used as inputs in future transactions
-- Data is **permanently stored** on the blockchain (immutable)
-- Data does **not contribute to UTXO set** - can be pruned by nodes
+- [Outputs](/docs/glossary#output) are **unspendable** - they cannot be used as [inputs](/docs/glossary#input) in future transactions
+- Data is **permanently stored** on the [blockchain](/docs/glossary#blockchain) (immutable)
+- Data does **not contribute to [UTXO set](/docs/glossary#utxo-set)** - can be pruned by [nodes](/docs/glossary#node)
 - Originally limited to **80 bytes** of data per output
 
 ### How It Works Technically
@@ -30,7 +30,7 @@ OP_RETURN <data>
 
 2. **Data Storage:**
    - Data follows `OP_RETURN` in the script
-   - Stored in the transaction output's `scriptPubKey`
+   - Stored in the transaction output's `[scriptPubKey](/docs/glossary#scriptpubkey)`
    - Permanently recorded in blockchain history
 
 3. **UTXO Set Impact:**
@@ -64,10 +64,10 @@ OP_RETURN 48656c6c6f20576f726c64  (hex for "Hello World")
 
 #### Key Technical Points
 
-1. **Policy, Not Consensus:** OP_RETURN limits are **relay policy**, not consensus rules
+1. **Policy, Not [Consensus](/docs/glossary#consensus):** OP_RETURN limits are **relay policy**, not [consensus rules](/docs/glossary#consensus-rules)
    - Nodes can reject transactions as "non-standard"
-   - But if included in a block, they're still valid
-   - Miners can include non-standard transactions if they choose
+   - But if included in a [block](/docs/glossary#block), they're still valid
+   - [Miners](/docs/glossary#miner) can include non-standard transactions if they choose
 
 2. **Cumulative Limit:** The limit applies to **total size** across all OP_RETURN outputs in a transaction
    - Not per-output, but total across all outputs
@@ -96,7 +96,7 @@ OP_RETURN 48656c6c6f20576f726c64  (hex for "Hello World")
 ### 2009-2013: Early Days
 
 - **No OP_RETURN:** Initially, people used other methods to store data
-  - Encoding data in addresses (P2PKH outputs)
+  - Encoding data in addresses ([P2PKH](/docs/glossary#p2pkh-pay-to-pubkey-hash) outputs)
   - Using fake addresses with embedded data
   - These methods bloated the UTXO set
 
@@ -406,7 +406,7 @@ This is the core question that divides the community:
 - Examples: Liquid, Rootstock
 
 **2. Layer 2 Solutions:**
-- Lightning Network (for payments)
+- [Lightning Network](/docs/glossary#lightning-network) (for payments)
 - Other L2s for data storage
 
 **3. Separate Protocols:**

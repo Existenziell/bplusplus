@@ -2,6 +2,8 @@
 
 Bitcoin development spans multiple layers, from low-level protocol work to high-level application development. This guide covers the programming languages, tools, and approaches used across the Bitcoin ecosystem to help you choose the right path for your goals.
 
+> Learn about the [blockchain](/docs/glossary#blockchain), [transactions](/docs/glossary#transaction), and [mining](/docs/glossary#mining) before diving into development.
+
 > **Hands-on learning:** Try Bitcoin RPC commands directly in the [Bitcoin CLI Terminal](/terminal). No node setup required.
 
 ## Programming Languages in Bitcoin
@@ -189,10 +191,10 @@ Building applications that manage keys and create transactions.
 - Handle address types (P2PKH, P2WPKH, P2TR)
 
 **Key concepts:**
-- BIP32 (HD wallets)
-- BIP39 (Mnemonic phrases)
-- BIP44/49/84/86 (Derivation paths)
-- PSBT (Partially Signed Bitcoin Transactions)
+- BIP32 ([HD wallets](/docs/glossary#hd-wallet-hierarchical-deterministic-wallet))
+- BIP39 ([Mnemonic/seed phrases](/docs/glossary#seed-phrase))
+- BIP44/49/84/86 ([Derivation paths](/docs/glossary#derivation-path))
+- [PSBT](/docs/glossary#psbt-partially-signed-bitcoin-transaction) (Partially Signed Bitcoin Transactions)
 
 **Getting started:**
 1. Choose a wallet library (BDK, bitcoinjs-lib, etc.)
@@ -212,7 +214,7 @@ Building on the Lightning Network for instant, low-fee payments.
 
 **Approaches:**
 - **LND + API**: Run lnd, use REST/gRPC API
-- **LDK**: Embed Lightning in your application
+- **LDK**: Embed [Lightning Network](/docs/glossary#lightning-network) in your application
 - **Core Lightning**: Plugin-based development
 - **Eclair**: JVM-based implementation
 
@@ -233,10 +235,10 @@ Working with Bitcoin's scripting system.
 - Implement multisig schemes
 
 **Key concepts:**
-- OP codes and stack operations
-- P2SH and P2WSH
-- Taproot and Tapscript
-- Miniscript for policy compilation
+- [OP codes](/docs/glossary#opcode) and stack operations
+- [P2SH](/docs/glossary#p2sh-pay-to-script-hash) and [P2WSH](/docs/glossary#p2wsh-pay-to-witness-script-hash)
+- [Taproot](/docs/glossary#taproot) and Tapscript
+- [Miniscript](/docs/glossary#miniscript) for policy compilation
 
 **Getting started:**
 1. Learn basic OP codes
@@ -246,7 +248,7 @@ Working with Bitcoin's scripting system.
 
 ## Development Networks
 
-### Mainnet
+### [Mainnet](/docs/glossary#mainnet)
 
 The real Bitcoin network. Use only for production applications.
 
@@ -255,7 +257,7 @@ The real Bitcoin network. Use only for production applications.
 - ~10 minute block times
 - Full transaction fees
 
-### Testnet
+### [Testnet](/docs/glossary#testnet)
 
 Long-running test network. Coins have no value.
 
@@ -268,7 +270,7 @@ Long-running test network. Coins have no value.
 - [coinfaucet.eu/en/btc-testnet/](https://coinfaucet.eu/en/btc-testnet/)
 - [testnet-faucet.mempool.co/](https://testnet-faucet.mempool.co/)
 
-### Signet
+### [Signet](/docs/glossary#signet)
 
 More controlled test network with consistent block production.
 
@@ -281,7 +283,7 @@ More controlled test network with consistent block production.
 - [signet.bc-2.jp/](https://signet.bc-2.jp/)
 - [alt.signetfaucet.com/](https://alt.signetfaucet.com/)
 
-### Regtest
+### [Regtest](/docs/glossary#regtest)
 
 Local, private test network. You control everything.
 

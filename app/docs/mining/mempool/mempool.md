@@ -20,7 +20,7 @@ Every [full node](/docs/glossary#full-node) maintains its own mempool. There is 
 Each node can set its own mempool policies:
 
 - **Size Limit**: Maximum memory allocated to the mempool (default: 300 MB in Bitcoin Core)
-- **Minimum [Fee Rate](/docs/glossary#fee-rate)**: Transactions below this rate are rejected
+- **Minimum Fee Rate**: Transactions below this rate are rejected
 - **Transaction Expiration**: Transactions may be dropped after a period (default: 2 weeks)
 - **Replace-by-Fee**: Whether to accept transaction replacements
 
@@ -321,7 +321,7 @@ The mempool creates a **fee market** where users bid for block space.
 
 ### Fee Estimation
 
-[Wallets](/docs/glossary#wallet) estimate fees by analyzing the mempool:
+Wallets estimate fees by analyzing the mempool:
 
 ```
 Current mempool state:
@@ -355,7 +355,7 @@ When transaction volume exceeds block capacity:
 
 ### RBF Use Cases
 
-- **[Fee bumping](/docs/glossary#fee-bumping)**: Speed up a stuck transaction
+- **Fee bumping**: Speed up a stuck transaction
 - **Payment updates**: Change the amount or destination before [confirmation](/docs/glossary#confirmation)
 - **Consolidation**: Combine outputs more efficiently
 
@@ -473,15 +473,15 @@ Bitcoin Core maintains several structures:
 
 Not all valid transactions are relayed:
 
-- **[Dust](/docs/glossary#dust) limit**: Outputs below ~546 sats are non-standard
-- **[OP_RETURN](/docs/glossary#op_return) size**: Limited to 80 bytes by default (policy, not [consensus](/docs/glossary#consensus))
+- **Dust limit**: Outputs below ~546 sats are non-standard
+- **OP_RETURN size**: Limited to 80 bytes by default (policy, not consensus)
 - **Non-standard scripts**: Some valid scripts aren't relayed
 
 ### Mempool Accept Rules
 
 Transactions must pass:
 
-1. **[Consensus rules](/docs/glossary#consensus-rules)**: Valid signatures, scripts, amounts
+1. **Consensus rules**: Valid signatures, scripts, amounts
 2. **Standardness rules**: Follow common patterns
 3. **Policy rules**: Meet node's minimum fee, size limits
 4. **Package rules**: Ancestor/descendant limits (25 transactions, 101 KB)

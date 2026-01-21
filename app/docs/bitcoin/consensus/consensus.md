@@ -1,6 +1,6 @@
 # Consensus Mechanism
 
-Bitcoin uses a **consensus mechanism** to achieve agreement among network participants about which transactions are valid and in what order they occurred. This consensus is reached without a central authority through a combination of cryptographic proof and economic incentives. The specific mechanism Bitcoin uses is formally known as **Nakamoto Consensus**, named after its pseudonymous creator.
+Bitcoin uses a **[consensus](/docs/glossary#consensus) mechanism** to achieve agreement among network participants about which transactions are valid and in what order they occurred. This consensus is reached without a central authority through a combination of cryptographic proof and economic incentives. The specific mechanism Bitcoin uses is formally known as **Nakamoto Consensus**, named after its pseudonymous creator.
 
 ## The Significance of Consensus
 
@@ -65,7 +65,7 @@ This "unforgeable costliness" (a term coined by [Nick Szabo](/docs/history/peopl
 
 ### How PoW Creates Consensus
 
-Bitcoin uses **Proof-of-Work** (PoW) as its consensus mechanism. Miners compete to solve cryptographic puzzles, with difficulty adjusting to maintain ~10 minute block intervals. The first miner to find a valid solution broadcasts the block, other nodes verify it, and the longest valid chain becomes the accepted truth.
+Bitcoin uses **[Proof-of-Work](/docs/glossary#proof-of-work-pow)** (PoW) as its consensus mechanism. [Miners](/docs/glossary#miner) compete to solve cryptographic puzzles, with [difficulty](/docs/glossary#difficulty) adjusting to maintain ~10 minute block intervals. The first miner to find a valid solution broadcasts the [block](/docs/glossary#block), other [nodes](/docs/glossary#node) verify it, and the longest valid chain becomes the accepted truth.
 
 ### The Consensus Process
 
@@ -80,7 +80,7 @@ Bitcoin uses **Proof-of-Work** (PoW) as its consensus mechanism. Miners compete 
 
 ## Consensus Rules
 
-Nodes validate three layers: **transactions** (valid signatures, unspent inputs, no double-spends), **blocks** (correct structure, valid PoW, all transactions valid), and **chains** (blocks link correctly, longest chain is canonical).
+Nodes validate three layers: **[transactions](/docs/glossary#transaction)** (valid signatures, unspent inputs, no [double-spends](/docs/glossary#double-spend)), **blocks** (correct structure, valid PoW, all transactions valid), and **chains** (blocks link correctly, longest chain is canonical).
 
 ### Consensus Rules vs Policy
 
@@ -95,11 +95,11 @@ Nodes validate three layers: **transactions** (valid signatures, unspent inputs,
 
 ### The Longest Chain Rule
 
-The chain with the most cumulative proof-of-work is considered valid. This simple rule ensures consensus emerges naturally: honest miners extend the longest chain because it's most profitable, attackers need >50% hash rate to create a competing chain, and the network converges on a single history.
+The chain with the most cumulative proof-of-work is considered valid. This simple rule ensures consensus emerges naturally: honest miners extend the longest chain because it's most profitable, attackers need >50% [hash rate](/docs/glossary#hash-rate) to create a competing chain, and the network converges on a single history.
 
 ### Block Confirmations
 
-Each additional block makes transaction reversal exponentially more difficult:
+Each additional block makes transaction reversal exponentially more difficult ([confirmations](/docs/glossary#confirmation)):
 
 | Confirmations | Security Level | Typical Use Case |
 |---------------|----------------|------------------|
@@ -117,7 +117,7 @@ Nodes stay synchronized by constantly sharing and verifying blocks. When tempora
 
 ### 51% Attack
 
-A 51% attack occurs when an entity controls more than half the network's hash rate, enabling them to create a longer chain than honest miners and potentially reverse transactions. However, this attack faces severe practical barriers:
+A [51% attack](/docs/glossary#51-attack) occurs when an entity controls more than half the network's hash rate, enabling them to create a longer chain than honest miners and potentially reverse transactions. However, this attack faces severe practical barriers:
 
 | Barrier | Details |
 |---------|---------|
@@ -129,13 +129,13 @@ A 51% attack occurs when an entity controls more than half the network's hash ra
 
 ### Economic Security
 
-Bitcoin's security is fundamentally economic. Miners receive block rewards + fees for honest behavior, making attacks unprofitable. The cost to attack exceeds any possible gain, and the network can respond by changing the PoW algorithm, rendering attacker hardware worthless.
+Bitcoin's security is fundamentally economic. Miners receive [block rewards](/docs/glossary#block-reward) + fees for honest behavior, making attacks unprofitable. The cost to attack exceeds any possible gain, and the network can respond by changing the PoW algorithm, rendering attacker hardware worthless.
 
 ## Consensus Properties
 
 | Property | Definition | Bitcoin's Implementation |
 |----------|------------|-------------------------|
-| **Finality** | Transactions cannot be reversed | Probabilistic—6+ confirmations is economically final |
+| **[Finality](/docs/glossary#finality)** | Transactions cannot be reversed | Probabilistic—6+ confirmations is economically final |
 | **Liveness** | System continues producing blocks | ~10 min blocks; resilient to node failures |
 | **Safety** | No conflicting states | All nodes agree on single chain; no double-spends |
 

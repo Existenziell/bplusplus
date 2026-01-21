@@ -1,6 +1,6 @@
 # Bitcoin Supply Schedule
 
-The total Bitcoin supply is mathematically fixed at 21 million BTC. The supply schedule follows a predictable formula that ensures no more than 21 million Bitcoin will ever be created.
+The total Bitcoin supply is mathematically fixed at [21 million](/docs/glossary#21-million) BTC. The supply schedule follows a predictable formula that ensures no more than 21 million Bitcoin will ever be created.
 
 ## Supply Formula
 
@@ -13,7 +13,7 @@ Total Supply = 210,000 × 50 × (1 + 1/2 + 1/4 + 1/8 + ...)
 ```
 
 This geometric series ensures that:
-- Each halving period creates 210,000 blocks
+- Each [halving](/docs/glossary#halving) period creates 210,000 [blocks](/docs/glossary#block)
 - Each period creates half the Bitcoin of the previous period
 - The series converges to exactly 21 million BTC
 - After 64 halvings, the subsidy becomes 0
@@ -49,7 +49,7 @@ This geometric series ensures that:
 Once all 21 million Bitcoin have been created (around December 22, 2137):
 
 - **No New Bitcoin**: Block rewards will be 0
-- **Miner Income**: Miners will rely entirely on transaction fees
+- **Miner Income**: [Miners](/docs/glossary#miner) will rely entirely on [transaction fees](/docs/glossary#transaction-fee)
 - **Network Security**: Economic incentives remain through fee collection
 - **Inflation**: Bitcoin becomes deflationary (supply decreases if coins are lost)
 

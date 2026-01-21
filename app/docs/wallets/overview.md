@@ -2,7 +2,7 @@
 
 ## Overview
 
-A Bitcoin wallet is a software application or device that allows users to store, send, and receive Bitcoin. Despite the name, a wallet doesn't actually "store" Bitcoin. Bitcoin exists only on the blockchain. Instead, a wallet stores the **private keys** needed to access and control Bitcoin addresses.
+A Bitcoin wallet is a software application or device that allows users to store, send, and receive Bitcoin. Despite the name, a wallet doesn't actually "store" Bitcoin. Bitcoin exists only on the [blockchain](/docs/glossary#blockchain). Instead, a wallet stores the **[private keys](/docs/glossary#private-key)** needed to access and control Bitcoin [addresses](/docs/glossary#address).
 
 ### Key Concepts
 
@@ -44,12 +44,12 @@ A Bitcoin wallet is a software application or device that allows users to store,
 
 ### By Technology
 
-#### Full Node Wallets
+#### [Full Node](/docs/glossary#full-node) Wallets
 - **Bitcoin Core**: Downloads entire blockchain
 - **Pros**: Maximum privacy, validates all transactions
 - **Cons**: Requires significant storage and bandwidth
 
-#### SPV (Simplified Payment Verification) Wallets
+#### [SPV](/docs/glossary#spv-simplified-payment-verification) (Simplified Payment Verification) Wallets
 - **Light clients**: Don't download full blockchain
 - **Pros**: Faster setup, less storage
 - **Cons**: Less privacy, relies on other nodes
@@ -65,13 +65,13 @@ A Bitcoin wallet is a software application or device that allows users to store,
 
 1. **Random Generation**: Private key is randomly generated (256 bits)
 2. **Public Key Derivation**: Public key derived using elliptic curve cryptography
-3. **Address Creation**: Address generated from public key using hash functions
-4. **Address Types**: P2PKH, P2SH, P2WPKH, P2TR (Taproot)
+3. **Address Creation**: Address generated from public key using [hash](/docs/glossary#hash) functions
+4. **Address Types**: [P2PKH](/docs/glossary#p2pkh-pay-to-pubkey-hash), [P2SH](/docs/glossary#p2sh-pay-to-script-hash), [P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash), [P2TR](/docs/glossary#p2tr-pay-to-taproot) (Taproot)
 
 ### Transaction Process
 
-1. **UTXO Selection**: Wallet chooses which UTXOs to spend
-2. **Transaction Creation**: Builds transaction with inputs and outputs
+1. **UTXO Selection**: Wallet chooses which UTXOs to spend ([coin selection](/docs/glossary#coin-selection))
+2. **[Transaction](/docs/glossary#transaction) Creation**: Builds transaction with [inputs](/docs/glossary#input) and [outputs](/docs/glossary#output)
 3. **Signing**: Signs transaction with private key(s)
 4. **Broadcasting**: Sends transaction to Bitcoin network
 5. **Confirmation**: Transaction included in a block
@@ -79,7 +79,7 @@ A Bitcoin wallet is a software application or device that allows users to store,
 ### Address Management
 
 - **HD Wallets**: Hierarchical Deterministic wallets generate addresses from a single seed
-- **Key Derivation**: Uses BIP32/BIP44 standards
+- **Key Derivation**: Uses BIP32/BIP44 standards with [derivation paths](/docs/glossary#derivation-path)
 - **Address Reuse**: Generally discouraged for privacy
 - **Change Addresses**: New addresses created for change outputs
 
@@ -264,11 +264,11 @@ console.log('Address:', address);
 
 ### Advanced Features
 
-- **Multi-signature**: Require multiple signatures (multisig)
+- **[Multisig](/docs/glossary#multisig-multi-signature)**: Require multiple signatures
 - **Coin Control**: Manually select which UTXOs to spend
-- **Fee Estimation**: Calculate appropriate transaction fees
-- **Replace-by-Fee (RBF)**: Replace unconfirmed transactions
-- **PSBT Support**: Partially Signed Bitcoin Transactions
+- **Fee Estimation**: Calculate appropriate [fee rates](/docs/glossary#fee-rate)
+- **[RBF](/docs/glossary#rbf-replace-by-fee)**: Replace unconfirmed transactions
+- **[PSBT](/docs/glossary#psbt-partially-signed-bitcoin-transaction)**: Partially Signed Bitcoin Transactions
 
 ## Related Topics
 

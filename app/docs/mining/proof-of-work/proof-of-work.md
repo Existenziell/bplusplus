@@ -373,7 +373,7 @@ console.log(`SHA256D hash: ${hash.toString('hex')}`);
 ### Technical Concepts
 - **Block Headers**: 80-byte block metadata
 - **Coinbase Transactions**: Special reward transactions
-- **[Merkle Trees](/docs/glossary#merkle-tree)**: Transaction organization
+- **Merkle Trees**: Transaction organization
 - **Nonce Space**: 4.3 billion possible values
 - **Difficulty Target**: Network-wide mining target
 

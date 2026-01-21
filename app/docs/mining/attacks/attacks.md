@@ -12,7 +12,7 @@ The most discussed attack on Bitcoin: what if someone controls more than half th
 
 With >50% hashrate, an attacker can:
 
-1. **[Double-spend](/docs/glossary#double-spend)**: Reverse their own transactions
+1. **Double-spend**: Reverse their own transactions
 2. **Block transactions**: Prevent specific transactions from confirming
 3. **Empty blocks**: Mine [blocks](/docs/glossary#block) with no transactions (censorship)
 
@@ -21,7 +21,7 @@ With >50% hashrate, an attacker can:
 Even with 51%, an attacker **cannot**:
 
 - **Steal coins**: Can't create valid signatures for others' coins
-- **Change [consensus rules](/docs/glossary#consensus-rules)**: Can't create coins, change block rewards
+- **Change consensus rules**: Can't create coins, change block rewards
 - **Spend anyone's coins**: Only their own (for double-spends)
 - **Modify historical transactions**: Only recent blocks (cost increases with depth)
 
@@ -483,7 +483,7 @@ No successful [51% attack](/docs/glossary#51-attack) on Bitcoin [mainnet](/docs/
 - **Wait for confirmations**: More confirmations = harder to reverse
 - **6 confirmations**: Traditional standard (~1 hour)
 - **Large amounts**: Wait for more confirmations
-- **Economic [finality](/docs/glossary#finality)**: Eventually, attack cost exceeds transaction value
+- **Economic finality**: Eventually, attack cost exceeds transaction value
 
 ## Selfish Mining
 
@@ -493,7 +493,7 @@ A subtle attack where miners can gain unfair advantage with less than 50% hashra
 
 Normal mining: Find a block → immediately broadcast it
 
-[Selfish mining](/docs/glossary#selfish-mining):
+Selfish mining:
 1. Find a block → **keep it secret**
 2. Continue mining on your secret chain
 3. If honest miners catch up, release your block
@@ -564,7 +564,7 @@ An attack by pool miners against their own pool.
 ### Defenses
 
 - **Statistical analysis**: Detect miners who never find blocks
-- **[Stratum](/docs/glossary#stratum) V2**: Better work validation
+- **Stratum V2**: Better work validation
 - **Reputation systems**: Track miner history
 
 ## Fee Sniping
@@ -597,7 +597,7 @@ Attacker mines competing Block N' including the high-fee tx.
 
 ### Prevention
 
-- **[nLockTime](/docs/glossary#locktime)**: Transactions can specify earliest block
+- **nLockTime**: Transactions can specify earliest block
 - **[CLTV](/docs/glossary#cltv-checklocktimeverify)**: Similar lock-time mechanism
 - **Low fees**: Don't create tempting targets
 
@@ -623,7 +623,7 @@ Lightning [channels](/docs/glossary#channel) have time-locked transactions. If t
 ### Defenses
 
 - **Package relay**: Let related transactions propagate together
-- **[Anchor outputs](/docs/glossary#anchor-outputs)**: Pre-planned fee-bumping mechanisms
+- **Anchor outputs**: Pre-planned fee-bumping mechanisms
 - **v3 transactions**: New policy to limit pinning
 
 ## Time-Warp Attack

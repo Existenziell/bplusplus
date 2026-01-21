@@ -16,18 +16,18 @@ Bitcoin's trust model differs fundamentally from traditional finance. Instead of
 
 You trust **mathematics and code** rather than **people and institutions**:
 
-- **Cryptographic proof:** Digital signatures prove ownership; hash functions secure the blockchain
-- **Economic incentives:** Miners profit from honest behavior; attacks are prohibitively expensive
-- **Open verification:** Anyone can run a node and independently verify every transaction
+- **Cryptographic proof:** Digital signatures prove ownership; [hash](/docs/glossary#hash) functions secure the [blockchain](/docs/glossary#blockchain)
+- **Economic incentives:** [Miners](/docs/glossary#miner) profit from honest behavior; attacks are prohibitively expensive
+- **Open verification:** Anyone can run a [node](/docs/glossary#node) and independently verify every [transaction](/docs/glossary#transaction)
 
 ## Trust Assumptions
 
 ### What You Must Trust
 
 - **Protocol correctness:** Bitcoin works as designed
-- **Cryptography:** SHA-256, ECDSA remain secure
-- **Network honesty:** Majority of hash rate follows the rules
-- **Your own security:** You protect your private keys
+- **Cryptography:** [SHA-256](/docs/glossary#sha-256), [ECDSA](/docs/glossary#ecdsa-elliptic-curve-digital-signature-algorithm) remain secure
+- **Network honesty:** Majority of [hash rate](/docs/glossary#hash-rate) follows the rules
+- **Your own security:** You protect your [private keys](/docs/glossary#private-key)
 
 ### What You Don't Need to Trust
 
@@ -35,11 +35,11 @@ Banks, payment processors, governments, other users, miners (economically incent
 
 ## Trust Minimization Techniques
 
-**Run a full node:** Verify all transactions yourself instead of trusting others.
+**Run a [full node](/docs/glossary#full-node):** Verify all transactions yourself instead of trusting others.
 
 **Use open-source software:** Code is publicly auditable with no hidden functionality.
 
-**Self-custody:** Control your own private keys; no third-party can freeze or seize your funds.
+**Self-custody:** Control your own private keys; no third-party can freeze or seize your funds. See [wallets](/docs/glossary#wallet) for more.
 
 ## Trust vs Convenience Spectrum
 

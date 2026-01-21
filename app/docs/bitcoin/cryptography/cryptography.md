@@ -1,6 +1,6 @@
 # Cryptography in Bitcoin
 
-Bitcoin relies on several cryptographic primitives to secure transactions, prove ownership, and maintain the integrity of the blockchain. Understanding these cryptographic foundations is essential for grasping how Bitcoin achieves trustless security.
+Bitcoin relies on several cryptographic primitives to secure [transactions](/docs/glossary#transaction), prove ownership, and maintain the integrity of the [blockchain](/docs/glossary#blockchain). Understanding these cryptographic foundations is essential for grasping how Bitcoin achieves trustless security.
 
 ## The Power of Cryptography
 
@@ -49,7 +49,7 @@ A **cryptographic hash function** takes any input data and produces a fixed-size
 
 ### SHA-256
 
-Bitcoin's primary hash function is **SHA-256** (Secure Hash Algorithm, 256-bit).
+Bitcoin's primary [hash](/docs/glossary#hash) function is **[SHA-256](/docs/glossary#sha-256)** (Secure Hash Algorithm, 256-bit).
 
 **Characteristics:**
 - Output: 256 bits (32 bytes, 64 hex characters)
@@ -67,15 +67,15 @@ SHA-256: 334d016f755cd6dc58c53a86e183882f8ec14f52fb05345887c8a5edd42c87b7
 
 Notice how adding a single character completely changes the output (avalanche effect).
 
-### Double SHA-256 (SHA-256d)
+### Double SHA-256 ([SHA256D](/docs/glossary#sha256d))
 
 Bitcoin often uses **double SHA-256**: `SHA256(SHA256(data))`
 
 **Used for:**
-- Block hashes
-- Transaction IDs (TXIDs)
-- Merkle tree nodes
-- Proof-of-work
+- [Block](/docs/glossary#block) hashes
+- [Transaction IDs](/docs/glossary#transaction-id-txid) (TXIDs)
+- [Merkle tree](/docs/glossary#merkle-tree) nodes
+- [Proof-of-work](/docs/glossary#proof-of-work-pow)
 
 **Why double hashing?**
 - Defense against length-extension attacks
@@ -170,14 +170,14 @@ console.log(`Double SHA-256: ${doubleSha256(message).toString('hex')}`);
 ```
 :::
 
-### RIPEMD-160 and Hash160
+### [RIPEMD-160](/docs/glossary#ripemd-160) and Hash160
 
 **RIPEMD-160** produces a 160-bit (20-byte) hash, used in combination with SHA-256.
 
 **Hash160 = RIPEMD160(SHA256(data))**
 
 **Used for:**
-- Bitcoin addresses (P2PKH, P2SH)
+- Bitcoin [addresses](/docs/glossary#address) ([P2PKH](/docs/glossary#p2pkh-pay-to-pubkey-hash), [P2SH](/docs/glossary#p2sh-pay-to-script-hash))
 - Shorter than SHA-256, reducing address length
 - Still cryptographically secure
 
@@ -260,7 +260,7 @@ console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
 
 ### The secp256k1 Curve
 
-Bitcoin uses the **secp256k1** elliptic curve, defined by the equation:
+Bitcoin uses the **secp256k1** elliptic curve (see [ECDSA](/docs/glossary#ecdsa-elliptic-curve-digital-signature-algorithm)), defined by the equation:
 
 ```
 y² = x³ + 7 (mod p)
@@ -560,11 +560,11 @@ console.log(`Signature valid: ${isValid}`);
 ```
 :::
 
-### Schnorr Signatures
+### [Schnorr Signatures](/docs/glossary#schnorr-signature)
 
 ![Schnorr Signature Equations](/images/schnorr-equations.png)
 
-**Schnorr signatures** were introduced with the Taproot upgrade (2021).
+**Schnorr signatures** were introduced with the [Taproot](/docs/glossary#taproot) upgrade (2021).
 
 **Advantages over ECDSA:**
 - **Simpler** - Mathematically cleaner
@@ -575,7 +575,7 @@ console.log(`Signature valid: ${isValid}`);
 
 **Signature Aggregation:**
 Multiple signatures can be combined into one, enabling:
-- **MuSig** - Multi-signature schemes that look like single signatures
+- **[MuSig](/docs/glossary#musig)** - Multi-signature schemes that look like single signatures
 - **Privacy** - Multi-party transactions appear as single-party
 - **Efficiency** - Reduced transaction size and fees
 
@@ -688,12 +688,12 @@ console.log(`Challenge hash: ${challenge.toString('hex')}`);
 
 When you spend bitcoin:
 
-1. **Construct transaction** with inputs and outputs
+1. **Construct transaction** with [inputs](/docs/glossary#input) and [outputs](/docs/glossary#output)
 2. **Create signature hash** (sighash) of transaction data
 3. **Sign** the sighash with your private key
-4. **Include signature** in transaction's witness/scriptSig
+4. **Include signature** in transaction's [witness](/docs/glossary#witness)/[scriptSig](/docs/glossary#scriptsig)
 5. **Broadcast** transaction to network
-6. **Nodes verify** signature matches public key and transaction
+6. **[Nodes](/docs/glossary#node) verify** signature matches public key and transaction
 
 ## Merkle Trees
 
@@ -715,13 +715,13 @@ A **Merkle tree** (or hash tree) is a data structure that efficiently summarizes
 ### How Bitcoin Uses Merkle Trees
 
 **Block Structure:**
-- Each block contains a **Merkle root** in its header
+- Each block contains a **[Merkle root](/docs/glossary#merkle-root)** in its header
 - Merkle root summarizes all transactions in the block
 - Changing any transaction changes the Merkle root
 
 **Benefits:**
 1. **Efficient verification** - Prove transaction inclusion with O(log n) hashes
-2. **Compact proofs** - SPV nodes don't need full blockchain
+2. **Compact proofs** - [SPV](/docs/glossary#spv-simplified-payment-verification) nodes don't need full blockchain
 3. **Data integrity** - Any tampering is immediately detectable
 
 ### Merkle Proofs (SPV)
@@ -925,7 +925,7 @@ console.log(`Merkle Root: ${root.toString('hex')}`);
 
 ## Address Encoding
 
-### Base58Check
+### [Base58](/docs/glossary#base58)Check
 
 **Base58** encoding uses 58 characters (excluding 0, O, I, l to avoid confusion):
 
@@ -941,9 +941,9 @@ console.log(`Merkle Root: ${root.toString('hex')}`);
 
 **Used for:** Legacy addresses (1..., 3...)
 
-### Bech32 and Bech32m
+### [Bech32](/docs/glossary#bech32) and Bech32m
 
-**Bech32** encoding (BIP-173) is used for SegWit addresses:
+**Bech32** encoding (BIP-173) is used for [SegWit](/docs/glossary#segwit-segregated-witness) addresses:
 
 **Characteristics:**
 - Case-insensitive
@@ -952,8 +952,8 @@ console.log(`Merkle Root: ${root.toString('hex')}`);
 - Prefix: `bc1` for mainnet, `tb1` for testnet
 
 **Address Types:**
-- `bc1q...` - Native SegWit (P2WPKH, P2WSH) - Bech32
-- `bc1p...` - Taproot (P2TR) - Bech32m
+- `bc1q...` - Native SegWit ([P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash), [P2WSH](/docs/glossary#p2wsh-pay-to-witness-script-hash)) - Bech32
+- `bc1p...` - Taproot ([P2TR](/docs/glossary#p2tr-pay-to-taproot)) - Bech32m
 
 **Bech32m** (BIP-350) is a modified version for Taproot addresses with improved error detection.
 

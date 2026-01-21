@@ -1,6 +1,6 @@
 # Bitcoin Halving Schedule
 
-Bitcoin's block reward halves every 210,000 blocks, which occurs approximately every 4 years. This creates a predictable, decreasing inflation rate and ensures the total supply will never exceed 21 million BTC.
+Bitcoin's [block reward](/docs/glossary#block-reward) halves every 210,000 [blocks](/docs/glossary#block), which occurs approximately every 4 years. This creates a predictable, decreasing inflation rate and ensures the total supply will never exceed [21 million](/docs/glossary#21-million) BTC.
 
 ## Complete Halving Schedule
 
@@ -41,7 +41,7 @@ Bitcoin's block reward halves every 210,000 blocks, which occurs approximately e
 | **Halving 32** | ~2136 | 6,720,000 | 0.0000000116415321826934814453125 | 0.002444721758365631103515625 BTC |
 | **Halving 33+** | After 2140 | After 6,930,000 | 0 BTC | 0 BTC |
 
-**Note**: After halving 33, the subsidy becomes effectively 0 (less than 1 satoshi per block). The last Bitcoin will be mined around December 22, 2137.
+**Note**: After halving 33, the subsidy becomes effectively 0 (less than 1 [satoshi](/docs/glossary#satoshi) per block). The last Bitcoin will be mined around December 22, 2137.
 
 ## Key Facts
 

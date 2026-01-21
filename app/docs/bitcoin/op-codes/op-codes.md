@@ -457,7 +457,7 @@ Use cases:
 
 ## Tapscript Opcodes (BIP 342)
 
-[Taproot](/docs/glossary#taproot) introduced new opcodes for Tapscript:
+Taproot introduced new opcodes for Tapscript:
 
 ### OP_CHECKSIGADD
 
@@ -614,7 +614,7 @@ OP_ENDIF
 
 - [Script System](/docs/bitcoin/script): How Bitcoin Script works
 - [OP_RETURN Debate](/docs/controversies/op-return): Controversy about data storage
-- [Taproot](/docs/glossary#taproot): Schnorr signatures and Tapscript
+- [Taproot](/docs/glossary#taproot) - Schnorr signatures and Tapscript
 
 ## Resources
 

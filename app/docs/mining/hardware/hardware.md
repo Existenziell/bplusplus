@@ -11,14 +11,14 @@ Bitcoin [mining](/docs/glossary#mining) hardware has undergone a remarkable evol
 When [Satoshi](/docs/history/people#satoshi-nakamoto) launched Bitcoin, mining was done on ordinary computer CPUs:
 
 - **Hardware**: Intel/AMD desktop processors
-- **[Hashrate](/docs/glossary#hash-rate)**: 1-20 MH/s
+- **Hashrate**: 1-20 MH/s
 - **Power**: 50-150W
 - **Efficiency**: ~0.1 MH/J
 - **Who mined**: Cypherpunks, early adopters, Satoshi
 
 **Why CPUs Work**
 
-[SHA-256](/docs/glossary#sha-256) (Bitcoin's [hash](/docs/glossary#hash) function) is computationally simple:
+[SHA-256](/docs/glossary#sha-256) (Bitcoin's hash function) is computationally simple:
 - Bitwise operations (AND, OR, XOR)
 - 32-bit additions
 - No complex branching
@@ -101,7 +101,7 @@ FPGAs were a transitional technology. The efficiency gains made ASICs inevitable
 
 **Application-Specific Integrated Circuits**
 
-[ASICs](/docs/glossary#asic-application-specific-integrated-circuit) are chips designed to do one thing only: SHA-256 hashing.
+ASICs are chips designed to do one thing only: SHA-256 hashing.
 
 - **Hardware**: Custom silicon from Bitmain, MicroBT, Canaan, etc.
 - **Hashrate**: 1 TH/s → 250+ TH/s (2013 → 2024)

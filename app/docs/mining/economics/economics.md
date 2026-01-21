@@ -4,7 +4,7 @@ Understanding the economics of Bitcoin [mining](/docs/glossary#mining) is essent
 
 ## Block Rewards
 
-The primary revenue source for miners is the [block reward](/docs/glossary#block-reward), which consists of two components:
+The primary revenue source for miners is the block reward, which consists of two components:
 
 | Component | Description | Current Value |
 |-----------|-------------|---------------|
@@ -28,7 +28,7 @@ Electricity is typically the largest ongoing cost for miners:
 
 ### Hardware Costs
 
-- **[ASIC](/docs/glossary#asic-application-specific-integrated-circuit) Purchase**: $2,000-$15,000+ per unit
+- **[ASIC](/docs/glossary#asic-application-specific-integrated-circuit) Purchase**: $2,000–$15,000+ per unit
 - **Depreciation**: Hardware loses value as newer, more efficient models release
 - **Lifespan**: Typically 2-4 years of competitive operation
 - **Maintenance**: Fans, power supplies may need replacement
@@ -370,7 +370,7 @@ console.log(`Break-even rate: $${calc.breakEvenElectricityRate().toFixed(4)}/kWh
 - **See Also**: [Difficulty Adjustment](/docs/mining/difficulty) for detailed explanation
 
 ### Block Rewards
-- **[Halving](/docs/glossary#halving) Schedule**: Every 210,000 blocks (~4 years)
+- **Halving Schedule**: Every 210,000 blocks (~4 years)
 - **Current**: 3.125 BTC per block
 - **Future**: Will decrease to 0 by ~2140
 

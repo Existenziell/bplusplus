@@ -38,7 +38,7 @@ Mining serves two critical functions:
 
 ### The Mining Algorithm
 
-The core of Bitcoin mining is finding a [nonce](/docs/glossary#nonce) that, when combined with the block header data and hashed twice with [SHA-256](/docs/glossary#sha-256), produces a value below the current difficulty target.
+The core of Bitcoin mining is finding a nonce that, when combined with the block header data and hashed twice with [SHA-256](/docs/glossary#sha-256), produces a value below the current difficulty target.
 
 :::code-group
 ```rust
@@ -251,17 +251,17 @@ See [Mining Pools](/docs/mining/pools) for detailed information on pool operatio
 
 | Concept | Description |
 |---------|-------------|
-| **[Proof-of-Work](/docs/glossary#proof-of-work-pow)** | Cryptographic puzzle that miners solve to validate blocks |
-| **[Block Reward](/docs/glossary#block-reward)** | Currently 3.125 BTC per block (after 2024 [halving](/docs/glossary#halving)) |
-| **[Difficulty](/docs/glossary#difficulty)** | Adjusts every 2016 blocks to maintain ~10 minute block times |
-| **[Hash Rate](/docs/glossary#hash-rate)** | Measure of mining power (network: ~700 EH/s) |
+| **Proof-of-Work** | Cryptographic puzzle that miners solve to validate blocks |
+| **Block Reward** | Currently 3.125 BTC per block (after 2024 [halving](/docs/glossary#halving)) |
+| **Difficulty** | Adjusts every 2016 blocks to maintain ~10 minute block times |
+| **Hash Rate** | Measure of mining power (network: ~700 EH/s) |
 | **[Coinbase Transaction](/docs/glossary#coinbase-transaction)** | Special transaction that creates new bitcoin as block reward |
 
 ## Why Mining Matters
 
 ### Network Security
 
-Mining provides Bitcoin's security through [proof-of-work](/docs/glossary#proof-of-work-pow). To attack the network, an adversary would need to control more than 50% of the global hash rate - an astronomically expensive proposition requiring billions of dollars in hardware and electricity. See [Mining Attacks](/docs/mining/attacks) for more on security considerations.
+Mining provides Bitcoin's security through proof-of-work. To attack the network, an adversary would need to control more than 50% of the global hash rate - an astronomically expensive proposition requiring billions of dollars in hardware and electricity. See [Mining Attacks](/docs/mining/attacks) for more on security considerations.
 
 ### Decentralization
 

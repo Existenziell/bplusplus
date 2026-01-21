@@ -28,7 +28,7 @@ All numeric fields (version, timestamp, [difficulty target](/docs/glossary#diffi
 
 ### Block Body
 
-- **[Coinbase Transaction](/docs/glossary#coinbase-transaction)**: First transaction, creates new bitcoin
+- **Coinbase Transaction**: First transaction, creates new bitcoin
 - **Regular Transactions**: Payments selected from the mempool
 
 ## The Coinbase Transaction
@@ -52,7 +52,7 @@ Outputs:
 
 ### Famous Coinbase Messages
 
-- **[Genesis Block](/docs/glossary#genesis-block)**: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
+- **Genesis Block**: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
 - **Block 629999** (pre-halving): "NYTimes 09/Apr/2020 With $2.3T Injection, Fed's Plan Far Exceeds 2008 Rescue"
 
 ### Coinbase Maturity

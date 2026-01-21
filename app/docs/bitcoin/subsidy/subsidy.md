@@ -174,7 +174,7 @@ console.log(`Block 840,000: ${getBlockSubsidy(840000)} BTC`);
 
 ### Example Calculations
 
-**Block 0 ([Genesis Block](/docs/glossary#genesis-block)):**
+**Block 0 (Genesis Block):**
 ```
 halvings = 0 / 210,000 = 0
 subsidy = 50 / (2^0) = 50 BTC
@@ -188,7 +188,7 @@ subsidy = 50 / (2^4) = 3.125 BTC
 
 ## Total Supply
 
-The total Bitcoin supply follows a geometric series that converges to exactly [21 million](/docs/glossary#21-million) BTC:
+The total Bitcoin supply follows a geometric series that converges to exactly 21 million BTC:
 
 ```
 Total Supply = 210,000 blocks × 50 BTC × (1 + 1/2 + 1/4 + 1/8 + ...)
@@ -353,7 +353,7 @@ console.log(`Next halving at block ${nextHeight.toLocaleString()}, ${blocksRemai
 
 ## Block Reward Components
 
-The total [block reward](/docs/glossary#block-reward) consists of two parts:
+The total block reward consists of two parts:
 
 ```
 Total Block Reward = Block Subsidy + Transaction Fees

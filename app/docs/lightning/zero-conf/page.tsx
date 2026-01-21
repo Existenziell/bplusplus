@@ -1,8 +1,8 @@
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
 import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function OnionRoutingPage() {
-  const content = await readMarkdown('app/docs/lightning/onion/onion.md')
+export default async function ZeroConfPage() {
+  const content = await readMarkdown('app/docs/lightning/zero-conf/zero-conf.md')
 
   return (
     <div>

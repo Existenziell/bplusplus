@@ -415,7 +415,7 @@ An attack where someone prevents a transaction from being replaced:
 2. Child is large, making CPFP expensive
 3. Original transaction is "pinned" and hard to bump
 
-This is a concern for [Lightning Network](/docs/lightning/basics) and other Layer 2 protocols.
+This is a concern for [Lightning Network](/docs/lightning/what-is-lightning) and other Layer 2 protocols.
 
 ### Front-Running
 

@@ -1,199 +1,399 @@
-# Hash Time Locked Contracts (HTLCs)
+# Hash Time-Locked Contracts (HTLCs)
 
-HTLCs (Hash Time Locked Contracts) are the mechanism that enables payments to route through the [Lightning Network](/docs/glossary#lightning-network). They ensure that payments can only be claimed with the correct [preimage](/docs/glossary#preimage), and expire after a certain time.
+HTLCs are the mechanism that enables payments to route through the Lightning Network. They ensure that payments can only be claimed with the correct [preimage](/docs/glossary#preimage), and expire after a certain time if unclaimed.
 
 ## What is an HTLC?
 
 An HTLC is a conditional payment that requires:
-1. **Hash Preimage**: Knowledge of a secret (the preimage) that hashes to a known value
-2. **[Time Lock](/docs/glossary#time-lock)**: Expires after a certain [block](/docs/glossary#block) height
 
-### Basic Structure
+1. **Hash Lock**: Knowledge of a secret (preimage) that hashes to a known value
+2. **Time Lock**: Expires after a certain block height ([CLTV](/docs/glossary#cltv-checklocktimeverify))
 
-```
+```text
 HTLC Conditions:
-- If preimage is revealed: Payment goes to recipient
-- If time lock expires: Payment returns to sender
+- If preimage is revealed before expiry → Payment goes to recipient
+- If time lock expires → Payment returns to sender
 ```
 
 ## How HTLCs Work in Lightning
 
 ### Payment Flow
 
-1. **Sender creates HTLC**: Locks funds with hash and expiry
-2. **Route through network**: HTLC propagates through each hop
-3. **Recipient reveals preimage**: When payment is received
-4. **Preimage propagates back**: Each hop claims their HTLC
-5. **HTLCs settle**: All HTLCs in the route are resolved
+1. **Recipient generates preimage**: Random 32-byte secret, shares SHA256 hash
+2. **Sender creates HTLC chain**: Locks funds with hash and decreasing expiries
+3. **HTLCs propagate**: Each hop creates an HTLC to the next
+4. **Recipient reveals preimage**: Claims final HTLC
+5. **Preimage propagates back**: Each hop claims their incoming HTLC
+6. **Settlement complete**: All HTLCs resolved atomically
 
 ### Example Route
 
-```
+```text
 Alice → Bob → Carol → Dave
 
 Alice creates HTLC to Bob:
-  - Amount: 1000 sats + fees
-  - Hash: H(payment_preimage)
-  - Expiry: Block 850000 + 40
+  - Amount: 1000 + 3 sats (fees)
+  - Hash: SHA256(preimage)
+  - Expiry: Block 850,040
 
 Bob creates HTLC to Carol:
-  - Amount: 1000 sats + fees
-  - Hash: H(payment_preimage) (same hash)
-  - Expiry: Block 850000 + 35 (earlier expiry)
+  - Amount: 1000 + 1 sats (fees)  
+  - Hash: SHA256(preimage) [same]
+  - Expiry: Block 850,030 [earlier]
 
 Carol creates HTLC to Dave:
   - Amount: 1000 sats
-  - Hash: H(payment_preimage) (same hash)
-  - Expiry: Block 850000 + 20 (earliest expiry)
+  - Hash: SHA256(preimage) [same]
+  - Expiry: Block 850,020 [earliest]
 ```
 
-### Why Different Expiries?
+### Why Decreasing Expiries?
 
-Each hop requires an **expiry delta** ([CLTV](/docs/glossary#cltv-checklocktimeverify) delta) to ensure:
-- If a hop fails, there's time to resolve
-- Each hop has enough time to claim their HTLC
-- Preimage can propagate back through the route
+Each hop needs an **expiry delta** (CLTV delta) buffer to:
 
-**Rule**: Each hop's expiry must be earlier than the previous hop's expiry.
+- Have time to claim incoming HTLC after learning preimage
+- Handle blockchain congestion
+- Account for clock differences between nodes
 
-## HTLC Properties
+**Rule**: Outgoing HTLC expiry < Incoming HTLC expiry (by at least `cltv_expiry_delta`)
 
-### Security Properties
+## HTLC Script Structure
 
-1. **Atomicity**: Either all HTLCs succeed or all fail
-2. **Timelock**: HTLCs expire if not claimed in time
-3. **Hash Lock**: Only correct preimage can claim payment
-4. **Non-repudiation**: Once preimage is revealed, payment is final
+HTLCs in commitment transactions use this script pattern:
 
-### Economic Properties
-
-1. **Fee Collection**: Each hop collects routing fees
-2. **Liquidity Requirements**: Hops need sufficient channel balance
-3. **Risk Management**: Hops risk funds if route fails
-
-## HTLC States
-
-### In Channel
-
-An HTLC in a channel can be in these states:
-
-1. **Offered**: HTLC offered to peer, waiting for acceptance
-2. **Accepted**: Peer accepted HTLC, waiting for preimage
-3. **Settled**: Preimage revealed, HTLC claimed
-4. **Failed**: HTLC expired or failed, funds returned
-
-### Lifecycle
-
-```
-Offered → Accepted → Settled
-    ↓
-  Failed (if expired or route fails)
-```
-
-## HTLC Failure Modes
-
-### 1. Timeout
-
-If HTLC expires before preimage is revealed:
-- HTLC is removed from channel
-- Funds return to original sender
-- Payment fails
-
-### 2. Route Failure
-
-If any hop in the route fails:
-- All HTLCs in route fail
-- Funds return to sender
-- Payment fails
-
-### 3. Insufficient Liquidity
-
-If a hop doesn't have enough balance:
-- HTLC cannot be created
-- Route fails
-- Payment fails
-
-## Implementation Details
-
-### HTLC in Commitment Transaction
-
-HTLCs are included in channel commitment transactions:
-
-```bitcoin
-# HTLC Output Script
-OP_SHA256 <hash> OP_EQUAL
+```text
+# Offered HTLC (you're offering payment)
+OP_DUP OP_HASH160 <revocation_pubkey_hash> OP_EQUAL
 OP_IF
-  # If preimage matches hash, pay to recipient
-  <recipient_pubkey> OP_CHECKSIG
+    OP_CHECKSIG                           # Revocation path
 OP_ELSE
-  # Otherwise, wait for timelock
-  <expiry_height> OP_CHECKLOCKTIMEVERIFY OP_DROP
-  <sender_pubkey> OP_CHECKSIG
+    <remote_htlc_pubkey> OP_SWAP OP_SIZE 32 OP_EQUAL
+    OP_IF
+        OP_HASH160 <payment_hash> OP_EQUALVERIFY  # Success path
+        2 OP_SWAP <local_htlc_pubkey> 2 OP_CHECKMULTISIG
+    OP_ELSE
+        OP_DROP <cltv_expiry> OP_CHECKLOCKTIMEVERIFY OP_DROP
+        OP_CHECKSIG                       # Timeout path
+    OP_ENDIF
 OP_ENDIF
 ```
 
-### HTLC Timeout Transaction
+## HTLC Verification
 
-If HTLC expires, sender can claim funds:
+:::code-group
+```rust
+use sha2::{Sha256, Digest};
 
-```bitcoin
-# Timeout Transaction
-Input: HTLC output
-Script: <expiry_height> OP_CHECKLOCKTIMEVERIFY OP_DROP <sender_sig>
+/// Represents an HTLC
+struct Htlc {
+    payment_hash: [u8; 32],
+    amount_msat: u64,
+    cltv_expiry: u32,
+}
+
+impl Htlc {
+    /// Verify a preimage against this HTLC's payment hash
+    fn verify_preimage(&self, preimage: &[u8; 32]) -> bool {
+        let mut hasher = Sha256::new();
+        hasher.update(preimage);
+        let hash: [u8; 32] = hasher.finalize().into();
+        hash == self.payment_hash
+    }
+    
+    /// Check if HTLC has expired at given block height
+    fn is_expired(&self, current_height: u32) -> bool {
+        current_height >= self.cltv_expiry
+    }
+    
+    /// Calculate if we have enough time to safely forward
+    fn can_forward(&self, current_height: u32, min_delta: u32) -> bool {
+        self.cltv_expiry > current_height + min_delta
+    }
+}
+
+fn main() {
+    // Example: Create preimage and verify
+    let preimage: [u8; 32] = [0x42; 32];  // In practice, use secure random
+    
+    let mut hasher = Sha256::new();
+    hasher.update(&preimage);
+    let payment_hash: [u8; 32] = hasher.finalize().into();
+    
+    let htlc = Htlc {
+        payment_hash,
+        amount_msat: 1_000_000,
+        cltv_expiry: 850_000,
+    };
+    
+    assert!(htlc.verify_preimage(&preimage));
+    println!("Preimage verified successfully!");
+}
 ```
 
-### HTLC Success Transaction
+```python
+import hashlib
+import secrets
+from dataclasses import dataclass
 
-If preimage is revealed, recipient can claim funds:
+@dataclass
+class Htlc:
+    payment_hash: bytes  # 32 bytes
+    amount_msat: int
+    cltv_expiry: int
+    
+    def verify_preimage(self, preimage: bytes) -> bool:
+        """Verify a preimage against this HTLC's payment hash."""
+        computed_hash = hashlib.sha256(preimage).digest()
+        return computed_hash == self.payment_hash
+    
+    def is_expired(self, current_height: int) -> bool:
+        """Check if HTLC has expired at given block height."""
+        return current_height >= self.cltv_expiry
+    
+    def can_forward(self, current_height: int, min_delta: int = 40) -> bool:
+        """Check if we have enough time to safely forward this HTLC."""
+        return self.cltv_expiry > current_height + min_delta
 
-```bitcoin
-# Success Transaction
-Input: HTLC output
-Script: <preimage> <hash> OP_SHA256 OP_EQUALVERIFY <recipient_sig>
+
+def create_htlc(amount_msat: int, cltv_expiry: int) -> tuple[Htlc, bytes]:
+    """Create an HTLC with a new random preimage."""
+    preimage = secrets.token_bytes(32)
+    payment_hash = hashlib.sha256(preimage).digest()
+    
+    htlc = Htlc(
+        payment_hash=payment_hash,
+        amount_msat=amount_msat,
+        cltv_expiry=cltv_expiry
+    )
+    return htlc, preimage
+
+
+# Example usage
+htlc, preimage = create_htlc(amount_msat=1_000_000, cltv_expiry=850_000)
+
+# Verify the preimage
+assert htlc.verify_preimage(preimage)
+print(f"Payment hash: {htlc.payment_hash.hex()}")
+print(f"Preimage: {preimage.hex()}")
+print("Preimage verified successfully!")
 ```
 
-## Best Practices
+```cpp
+#include <iostream>
+#include <array>
+#include <cstdint>
+#include <cstring>
+#include <openssl/sha.h>
 
-### For Senders
+struct Htlc {
+    std::array<uint8_t, 32> payment_hash;
+    uint64_t amount_msat;
+    uint32_t cltv_expiry;
+    
+    // Verify a preimage against this HTLC's payment hash
+    bool verify_preimage(const std::array<uint8_t, 32>& preimage) const {
+        std::array<uint8_t, 32> computed_hash;
+        SHA256(preimage.data(), preimage.size(), computed_hash.data());
+        return payment_hash == computed_hash;
+    }
+    
+    // Check if HTLC has expired at given block height
+    bool is_expired(uint32_t current_height) const {
+        return current_height >= cltv_expiry;
+    }
+    
+    // Check if we have enough time to safely forward
+    bool can_forward(uint32_t current_height, uint32_t min_delta = 40) const {
+        return cltv_expiry > current_height + min_delta;
+    }
+};
 
-- **Set appropriate expiry**: Give enough time for route
-- **Monitor payment**: Track payment status
-- **Retry on failure**: Try different routes if payment fails
+// Create payment hash from preimage
+std::array<uint8_t, 32> hash_preimage(const std::array<uint8_t, 32>& preimage) {
+    std::array<uint8_t, 32> hash;
+    SHA256(preimage.data(), preimage.size(), hash.data());
+    return hash;
+}
 
-### For Routing Nodes
+int main() {
+    // Create a test preimage
+    std::array<uint8_t, 32> preimage;
+    std::fill(preimage.begin(), preimage.end(), 0x42);
+    
+    // Create HTLC
+    Htlc htlc;
+    htlc.payment_hash = hash_preimage(preimage);
+    htlc.amount_msat = 1000000;
+    htlc.cltv_expiry = 850000;
+    
+    // Verify
+    if (htlc.verify_preimage(preimage)) {
+        std::cout << "Preimage verified successfully!" << std::endl;
+    }
+    
+    // Check expiry
+    uint32_t current_height = 849950;
+    std::cout << "Expired: " << (htlc.is_expired(current_height) ? "Yes" : "No") << std::endl;
+    std::cout << "Can forward: " << (htlc.can_forward(current_height) ? "Yes" : "No") << std::endl;
+    
+    return 0;
+}
+```
 
-- **Set reasonable fees**: Competitive but profitable
-- **Maintain liquidity**: Keep channels balanced
-- **Monitor HTLCs**: Watch for expiring HTLCs
-- **Set expiry deltas**: Ensure enough time for resolution
+```javascript
+const crypto = require('crypto');
+
+class Htlc {
+    /**
+     * @param {Buffer} paymentHash - 32-byte payment hash
+     * @param {bigint} amountMsat - Amount in millisatoshis
+     * @param {number} cltvExpiry - Block height expiry
+     */
+    constructor(paymentHash, amountMsat, cltvExpiry) {
+        this.paymentHash = paymentHash;
+        this.amountMsat = amountMsat;
+        this.cltvExpiry = cltvExpiry;
+    }
+    
+    /**
+     * Verify a preimage against this HTLC's payment hash
+     * @param {Buffer} preimage - 32-byte preimage
+     * @returns {boolean}
+     */
+    verifyPreimage(preimage) {
+        const computedHash = crypto.createHash('sha256').update(preimage).digest();
+        return computedHash.equals(this.paymentHash);
+    }
+    
+    /**
+     * Check if HTLC has expired at given block height
+     * @param {number} currentHeight
+     * @returns {boolean}
+     */
+    isExpired(currentHeight) {
+        return currentHeight >= this.cltvExpiry;
+    }
+    
+    /**
+     * Check if we have enough time to safely forward this HTLC
+     * @param {number} currentHeight
+     * @param {number} minDelta - Minimum CLTV delta (default: 40)
+     * @returns {boolean}
+     */
+    canForward(currentHeight, minDelta = 40) {
+        return this.cltvExpiry > currentHeight + minDelta;
+    }
+}
+
+/**
+ * Create an HTLC with a new random preimage
+ * @param {bigint} amountMsat
+ * @param {number} cltvExpiry
+ * @returns {{htlc: Htlc, preimage: Buffer}}
+ */
+function createHtlc(amountMsat, cltvExpiry) {
+    const preimage = crypto.randomBytes(32);
+    const paymentHash = crypto.createHash('sha256').update(preimage).digest();
+    
+    return {
+        htlc: new Htlc(paymentHash, amountMsat, cltvExpiry),
+        preimage
+    };
+}
+
+// Example usage
+const { htlc, preimage } = createHtlc(1_000_000n, 850_000);
+
+console.log(`Payment hash: ${htlc.paymentHash.toString('hex')}`);
+console.log(`Preimage: ${preimage.toString('hex')}`);
+console.log(`Verified: ${htlc.verifyPreimage(preimage)}`);
+
+const currentHeight = 849_950;
+console.log(`Expired: ${htlc.isExpired(currentHeight)}`);
+console.log(`Can forward: ${htlc.canForward(currentHeight)}`);
+```
+:::
+
+## HTLC States
+
+An HTLC in a channel transitions through these states:
+
+| State | Description | Outcome |
+|-------|-------------|---------|
+| Offered | Sent to peer, awaiting response | → Accepted or Failed |
+| Accepted | Peer acknowledged, awaiting preimage | → Settled or Failed |
+| Settled | Preimage revealed, funds transferred | Complete |
+| Failed | Timeout or error, funds returned | Complete |
+
+```text
+Lifecycle:
+Offered → Accepted → Settled (success)
+    ↓         ↓
+  Failed   Failed (timeout/error)
+```
+
+## HTLC Security Properties
+
+### Atomicity
+
+Either the entire payment succeeds or fails completely:
+
+- All HTLCs in the route share the same payment hash
+- Revealing the preimage settles all HTLCs
+- Timeout returns all funds to senders
+
+### Hash Lock Security
+
+- Preimage must be exactly 32 bytes
+- SHA256 is collision-resistant
+- Only the recipient knows the preimage initially
+
+### Time Lock Security
+
+- CLTV (CheckLockTimeVerify) enforced by Bitcoin consensus
+- Sufficient delta prevents race conditions
+- Allows time for breach detection
 
 ## Common Issues
 
-### HTLC Expiring Too Soon
+### HTLC Timeout
 
-**Problem**: HTLC expires before payment completes
+**Problem**: HTLC expires before payment completes.
 
-**Solution**: 
-- Increase CLTV delta
-- Use faster routes
-- Check network conditions
+**Causes**:
+- Route too long (accumulated CLTV deltas)
+- Slow intermediate nodes
+- Network congestion
 
-### HTLC Stuck
+**Solutions**:
+- Increase `max_cltv_expiry` setting
+- Use shorter routes
+- Retry with different path
 
-**Problem**: HTLC in channel but not resolving
+### Stuck HTLCs
 
-**Solution**:
-- Wait for expiry
-- Force close channel (if necessary)
-- Contact peer
+**Problem**: HTLC neither settles nor fails.
+
+**Causes**:
+- Peer offline
+- Bug in implementation
+- Network partition
+
+**Solutions**:
+- Wait for CLTV expiry
+- Force close channel if necessary
 
 ## Summary
 
-HTLCs are the fundamental building block of Lightning payments:
+HTLCs are the atomic building blocks of Lightning payments:
 
-- **Enable routing**: Payments can route through multiple hops
-- **Provide security**: Hash locks and time locks ensure safety
-- **Enable atomicity**: All-or-nothing payment execution
-- **Support fees**: Each hop can collect routing fees
+- **Hash locks** ensure only the recipient can claim funds
+- **Time locks** enable safe routing through untrusted intermediaries
+- **Decreasing expiries** prevent routing attacks
+- **Atomicity** guarantees all-or-nothing settlement
 
-Understanding HTLCs is essential for understanding how Lightning payments work.
+## Related Topics
+
+- [Routing Fees](/docs/lightning/routing#fee-structure) - How routing fees work
+- [Multi-Part Payments](/docs/lightning/routing#what-is-mpp) - Splitting payments across routes
+- [Onion Routing](/docs/lightning/onion) - Privacy in payment routing

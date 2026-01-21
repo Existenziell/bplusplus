@@ -7,6 +7,11 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
+  // Include markdown files in the serverless function bundle for Vercel
+  outputFileTracingIncludes: {
+    '/api/download-md': ['./app/docs/**/*.md'],
+  },
+
   // Optimize images
   images: {
     formats: ['image/avif', 'image/webp'],

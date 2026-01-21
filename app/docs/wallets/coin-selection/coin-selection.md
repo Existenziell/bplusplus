@@ -1,6 +1,6 @@
-# Coin Selection Algorithms
+# Coin Selection
 
-Coin selection is the process of choosing which [UTXOs](/docs/glossary#utxo-unspent-transaction-output) (Unspent Transaction Outputs) to spend when creating a Bitcoin [transaction](/docs/glossary#transaction). This is a critical [wallet](/docs/glossary#wallet) function that affects [transaction fees](/docs/glossary#transaction-fee), privacy, and efficiency.
+Coin selection is the process of choosing which UTXOs (Unspent Transaction Outputs) to spend when creating a Bitcoin transaction. This is a critical wallet function that affects transaction fees, privacy, and efficiency.
 
 ## The Challenge
 
@@ -33,10 +33,10 @@ Transaction:
 Fee Rate = (Total Input Value - Total Output Value) / Virtual Transaction Size
 ```
 
-**[Virtual Transaction Size (vBytes)](/docs/glossary#vbyte-virtual-byte):**
-- Defined in [BIP](/docs/glossary#bip-bitcoin-improvement-proposal) 141 ([SegWit](/docs/glossary#segwit-segregated-witness))
-- [Weight units](/docs/glossary#weight-units) / 4
-- Accounts for [witness](/docs/glossary#witness) data differently
+**Virtual Transaction Size (vBytes):**
+- Defined in BIP 141 ([SegWit](/docs/glossary#segwit-segregated-witness))
+- Weight units / 4
+- Accounts for witness data differently
 
 ### Effective Value
 
@@ -127,12 +127,14 @@ const usefulCoins = coins.filter(c => effectiveValue(c, feeRate) > 0);
 
 ### Different Script Types
 
-UTXOs can have different [script](/docs/glossary#script) types, affecting transaction size:
+UTXOs can have different script types, affecting transaction size:
 
-1. **[P2PKH](/docs/glossary#p2pkh-pay-to-pubkey-hash) (Legacy)**: ~148 bytes per input
-2. **[P2SH](/docs/glossary#p2sh-pay-to-script-hash)**: ~91 bytes per input
-3. **[P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash) (SegWit v0)**: ~68 bytes per input
-4. **[P2TR](/docs/glossary#p2tr-pay-to-taproot) ([Taproot](/docs/glossary#taproot))**: ~58 bytes per input
+| Type | Address Prefix | Input Size |
+|------|---------------|------------|
+| P2PKH (Legacy) | `1...` | ~148 vB |
+| P2SH | `3...` | ~91 vB |
+| P2WPKH (SegWit) | `bc1q...` | ~68 vB |
+| P2TR ([Taproot](/docs/glossary#taproot)) | `bc1p...` | ~58 vB |
 
 :::code-group
 ```rust
@@ -749,3 +751,10 @@ Coin selection is a critical wallet function:
 - **Change management**: Handle change outputs appropriately
 
 Understanding coin selection helps build efficient and user-friendly Bitcoin wallets.
+
+## Related Topics
+
+- [What is a Wallet?](/docs/wallets/what-is-a-wallet) - Introduction to Bitcoin wallets
+- [Transaction Creation](/docs/wallets/transactions) - How to create and sign transactions
+- [Address Types](/docs/wallets/address-types) - Understanding different Bitcoin address formats
+- [Mempool](/docs/mining/mempool) - How unconfirmed transactions are stored and prioritized

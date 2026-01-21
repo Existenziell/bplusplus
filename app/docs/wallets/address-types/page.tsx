@@ -1,8 +1,8 @@
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
 import { readMarkdown } from '@/app/utils/readMarkdown'
 
-export default async function CoinSelectionPage() {
-  const content = await readMarkdown('app/docs/wallets/coin-selection/coin-selection.md')
+export default async function AddressTypesPage() {
+  const content = await readMarkdown('app/docs/wallets/address-types/address-types.md')
 
   return (
     <div>

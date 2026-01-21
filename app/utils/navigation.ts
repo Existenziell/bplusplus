@@ -59,9 +59,11 @@ export const docPages: DocPage[] = [
 
   // Wallets
   { path: '/docs/wallets/what-is-a-wallet', mdFile: 'app/docs/wallets/what-is-a-wallet/what-is-a-wallet.md', title: 'What is a Wallet?', section: 'wallets' },
-  { path: '/docs/wallets/coin-selection', mdFile: 'app/docs/wallets/coin-selection/algorithms.md', title: 'Coin Selection', section: 'wallets' },
-  { path: '/docs/wallets/multisig', mdFile: 'app/docs/wallets/multisig/concepts.md', title: 'Multisig', section: 'wallets' },
-  { path: '/docs/wallets/transactions', mdFile: 'app/docs/wallets/transactions/creation.md', title: 'Transactions', section: 'wallets' },
+  { path: '/docs/wallets/hd-wallets', mdFile: 'app/docs/wallets/hd-wallets/hd-wallets.md', title: 'HD Wallets', section: 'wallets' },
+  { path: '/docs/wallets/address-types', mdFile: 'app/docs/wallets/address-types/address-types.md', title: 'Address Types', section: 'wallets' },
+  { path: '/docs/wallets/coin-selection', mdFile: 'app/docs/wallets/coin-selection/coin-selection.md', title: 'Coin Selection', section: 'wallets' },
+  { path: '/docs/wallets/multisig', mdFile: 'app/docs/wallets/multisig/multisig.md', title: 'Multisig', section: 'wallets' },
+  { path: '/docs/wallets/transactions', mdFile: 'app/docs/wallets/transactions/transactions.md', title: 'Transaction Creation', section: 'wallets' },
 
   // Lightning
   { path: '/docs/lightning/basics', mdFile: 'app/docs/lightning/basics/getting-started.md', title: 'Getting Started', section: 'lightning' },
@@ -231,8 +233,10 @@ export const routeLabels: Record<string, string> = {
   hardware: 'Hardware Evolution',
   attacks: 'Mining Attacks',
   'coin-selection': 'Coin Selection',
+  'hd-wallets': 'HD Wallets',
+  'address-types': 'Address Types',
   multisig: 'Multisig',
-  transactions: 'Transactions',
+  transactions: 'Transaction Creation',
   basics: 'Getting Started',
   routing: 'Routing & HTLCs',
   channels: 'Channels',

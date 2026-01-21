@@ -1,4 +1,4 @@
-# Bitcoin Transaction Creation
+# Transaction Creation
 
 Creating Bitcoin transactions programmatically involves selecting inputs, creating outputs, calculating fees, signing, and broadcasting. This guide covers the complete process.
 
@@ -702,3 +702,11 @@ Transaction creation involves:
 - **Validation**: Verify transaction is valid
 
 Understanding transaction creation is essential for building Bitcoin wallets and applications.
+
+## Related Topics
+
+- [What is a Wallet?](/docs/wallets/what-is-a-wallet) - Introduction to Bitcoin wallets
+- [Coin Selection](/docs/wallets/coin-selection) - How wallets choose UTXOs to spend
+- [Multisig](/docs/wallets/multisig) - Multi-signature transaction signing
+- [PSBT](/docs/development/psbt) - Partially Signed Bitcoin Transactions standard
+- [Mempool](/docs/mining/mempool) - Where unconfirmed transactions wait

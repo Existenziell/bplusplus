@@ -31,6 +31,30 @@ export default function WalletsDocsPage() {
       />
 
       <DocCard
+        title="HD Wallets"
+        href="/docs/wallets/hd-wallets"
+        description="Hierarchical Deterministic wallets generate all keys from a single seed, enabling organized key management and simple backups."
+        links={[
+          { href: '/docs/wallets/hd-wallets#bip39-mnemonic-seed-phrases', label: 'BIP39 seed phrases' },
+          { href: '/docs/wallets/hd-wallets#bip32-key-derivation', label: 'BIP32 key derivation' },
+          { href: '/docs/wallets/hd-wallets#bip44-multi-account-hierarchy', label: 'BIP44 account structure' },
+          { href: '/docs/wallets/hd-wallets#watch-only-wallets', label: 'Watch-only wallets' },
+        ]}
+      />
+
+      <DocCard
+        title="Address Types"
+        href="/docs/wallets/address-types"
+        description="Understanding different Bitcoin address formats: P2PKH, P2SH, P2WPKH, and P2TR (Taproot) with generation examples."
+        links={[
+          { href: '/docs/wallets/address-types#p2pkh-pay-to-public-key-hash', label: 'P2PKH (Legacy)' },
+          { href: '/docs/wallets/address-types#p2wpkh-native-segwit', label: 'P2WPKH (SegWit)' },
+          { href: '/docs/wallets/address-types#p2tr-pay-to-taproot', label: 'P2TR (Taproot)' },
+          { href: '/docs/wallets/address-types#comparison', label: 'Comparison' },
+        ]}
+      />
+
+      <DocCard
         title="Coin Selection"
         href="/docs/wallets/coin-selection"
         description="Learn about UTXO selection algorithms, fee calculation, and transaction sizing for efficient wallet operations."

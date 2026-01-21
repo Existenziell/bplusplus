@@ -153,18 +153,32 @@ fn main() {
 ```
 
 ```python
-from bitcoin import *
+import secrets
+import hashlib
+from ecdsa import SECP256k1, SigningKey
 
-# Generate private key
-private_key = random_key()
+# Generate random 256-bit private key
+private_key_bytes = secrets.token_bytes(32)
+private_key_hex = private_key_bytes.hex()
 
-# Derive public key
-public_key = privtopub(private_key)
+# Derive public key using secp256k1
+signing_key = SigningKey.from_string(private_key_bytes, curve=SECP256k1)
+verifying_key = signing_key.get_verifying_key()
+public_key_bytes = b'\x04' + verifying_key.to_string()  # Uncompressed
 
-# Generate address (P2PKH)
-address = pubtoaddr(public_key)
+# Generate P2PKH address
+sha256_hash = hashlib.sha256(public_key_bytes).digest()
+ripemd160_hash = hashlib.new('ripemd160', sha256_hash).digest()
+versioned = b'\x00' + ripemd160_hash  # 0x00 = mainnet
 
-print(f"Private Key: {private_key}")
+# Double SHA256 for checksum
+checksum = hashlib.sha256(hashlib.sha256(versioned).digest()).digest()[:4]
+
+# Base58Check encode
+import base58
+address = base58.b58encode(versioned + checksum).decode()
+
+print(f"Private Key: {private_key_hex}")
 print(f"Address: {address}")
 ```
 
@@ -258,6 +272,8 @@ console.log('Address:', address);
 
 ## Related Topics
 
+- [HD Wallets](/docs/wallets/hd-wallets) - Hierarchical deterministic wallet architecture
+- [Address Types](/docs/wallets/address-types) - Understanding different Bitcoin address formats
 - [Coin Selection](/docs/wallets/coin-selection) - How wallets choose UTXOs to spend
 - [Multisig](/docs/wallets/multisig) - Multi-signature wallet concepts
 - [Transaction Creation](/docs/wallets/transactions) - How to create and sign transactions

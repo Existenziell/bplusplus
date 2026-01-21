@@ -1,4 +1,4 @@
-# Bitcoin RPC Commands Reference
+# RPC Commands Reference
 
 This document provides a guide for interacting with your Bitcoin [node](/docs/glossary#node) using both curl and bitcoin-cli commands via [RPC](/docs/glossary#rpc-remote-procedure-call).
 

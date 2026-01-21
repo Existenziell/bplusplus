@@ -1,4 +1,4 @@
-# Bitcoin Wallet Overview
+# Wallet Overview
 
 ## What is a Bitcoin Wallet?
 

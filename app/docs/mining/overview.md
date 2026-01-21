@@ -1,4 +1,4 @@
-# Bitcoin Mining Overview
+# Mining Overview
 
 ## What is Bitcoin Mining?
 

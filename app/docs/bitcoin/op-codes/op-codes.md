@@ -1,4 +1,4 @@
-# Bitcoin OP Codes
+# OP Codes
 
 Bitcoin [Script](/docs/glossary#script) uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive reference of Bitcoin OP codes with explanations and code examples.
 

@@ -95,15 +95,21 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           ref={tooltipRef}
           role="tooltip"
           className={`
-            block absolute z-50 w-64 sm:w-72 p-2.5
+            block fixed z-[9999] w-64 sm:w-72 p-2.5
             bg-zinc-100 dark:bg-zinc-800
             border border-zinc-300 dark:border-zinc-600
             rounded-md shadow-lg
-            text-xs text-zinc-600 dark:text-zinc-400
+            text-xs text-zinc-600 dark:text-zinc-400 font-normal
             transition-opacity duration-150
-            ${position === 'top' ? 'bottom-full mb-2' : 'top-full mt-2'}
-            left-1/2 -translate-x-1/2
           `}
+          style={{
+            left: linkRef.current ? linkRef.current.getBoundingClientRect().left + linkRef.current.getBoundingClientRect().width / 2 : 0,
+            transform: 'translateX(-50%)',
+            ...(position === 'top'
+              ? { bottom: linkRef.current ? window.innerHeight - linkRef.current.getBoundingClientRect().top + 8 : 0 }
+              : { top: linkRef.current ? linkRef.current.getBoundingClientRect().bottom + 8 : 0 }
+            ),
+          }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -122,11 +128,11 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           />
 
           {/* Content */}
-          <span className="relative block">
+          <span className="relative block font-normal">
             <span className="block font-medium text-btc mb-1 text-sm" style={{ lineHeight: 1.2 }}>
               {entry.term}
             </span>
-            <span className="block text-xs" style={{ lineHeight: 1.3 }}>
+            <span className="block text-xs font-normal" style={{ lineHeight: 1.3 }}>
               {entry.definition}
             </span>
           </span>

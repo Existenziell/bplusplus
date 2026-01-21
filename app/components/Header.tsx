@@ -14,11 +14,11 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
       <header className="mb-2 md:mb-4">
         <div className="page-bg">
           <div className="container mx-auto px-4 md:px-8 pt-4">
-            <div className="flex justify-between items-center mb-2">
-              <Link href="/" className="text-center hover:opacity-60 transition-opacity no-underline hover:no-underline">
-                <h1 className='text-4xl sm:text-5xl md:text-6xl text-btc dark:text-btc'>B++</h1>
+            <div className="flex justify-between items-center">
+              <Link href="/" className="text-center">
+                <Image src="/logo/logo.png" alt="B++ Logo" width={60} height={60} />
               </Link>
-              <Link href="/terminal" className="text-center hover:text-btc transition-opacity no-underline hover:no-underline">
+              <Link href="/terminal" className="text-center hover:text-btc transition-opacity">
               <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 hover:opacity-80 transition-opacity" aria-hidden="true">
                 <Image
                   src="/icons/satoshi-black.svg"

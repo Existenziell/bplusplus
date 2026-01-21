@@ -365,7 +365,6 @@ export default function TerminalPage() {
           </form>
         </div>
 
-        {/* Back link */}
         <button
           onClick={() => router.back()}
           className="mt-4 inline-flex items-center gap-2 text-zinc-500 hover:text-btc transition-colors text-sm"
@@ -378,7 +377,7 @@ export default function TerminalPage() {
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          back
+          Back
         </button>
       </div>
 

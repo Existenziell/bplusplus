@@ -999,7 +999,7 @@ Bitcoin's security relies on these assumptions holding true:
 
 ## Related Topics
 
-- [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview
+- [What is Bitcoin?](/docs/fundamentals/what-is-bitcoin) - High-level Bitcoin overview
 - [Trust Model](/docs/fundamentals/trust-model) - How cryptography enables trustlessness
 - [Consensus Mechanism](/docs/fundamentals/consensus) - How cryptographic proofs secure consensus
 - [Script System](/docs/bitcoin/script) - How signatures are verified in Bitcoin Script

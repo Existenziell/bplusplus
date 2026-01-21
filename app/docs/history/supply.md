@@ -57,4 +57,3 @@ Once all 21 million Bitcoin have been created (around December 22, 2137):
 
 - [Halving Schedule](/docs/history/halvings) - Complete halving schedule with dates
 - [Subsidy Equation](/docs/bitcoin/subsidy) - Mathematical formula and implementation
-- [Overview](/docs/history) - Key historical events

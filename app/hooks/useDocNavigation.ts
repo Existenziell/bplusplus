@@ -17,6 +17,7 @@ interface NextPageInfo {
 interface DocNavigationState {
   pathname: string
   breadcrumbs: BreadcrumbItem[]
+  previousPage: NextPageInfo | null
   nextPage: NextPageInfo | null
   isDownloadable: boolean
   isMainSectionPage: boolean
@@ -73,20 +74,27 @@ export function useDocNavigation(): DocNavigationState {
       breadcrumbs.push({ label, href: currentPath })
     })
 
-    // Compute next page
+    // Compute previous and next page
     const isMainSectionPage = mainPageHrefs.has(pathname)
+    let previousPage: NextPageInfo | null = null
     let nextPage: NextPageInfo | null = null
 
     if (!isMainSectionPage) {
       const currentIndex = flatPages.findIndex(page => page.href === pathname)
-      if (currentIndex !== -1 && currentIndex < flatPages.length - 1) {
-        nextPage = flatPages[currentIndex + 1]
+      if (currentIndex !== -1) {
+        if (currentIndex > 0) {
+          previousPage = flatPages[currentIndex - 1]
+        }
+        if (currentIndex < flatPages.length - 1) {
+          nextPage = flatPages[currentIndex + 1]
+        }
       }
     }
 
     return {
       pathname,
       breadcrumbs,
+      previousPage,
       nextPage,
       isDownloadable: downloadablePaths.has(pathname),
       isMainSectionPage,

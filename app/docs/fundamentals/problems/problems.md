@@ -56,9 +56,3 @@ Bitcoin didn't invent new primitives; it combined existing techniques in a novel
 - **Game theory:** Nash equilibrium makes honest behavior profitable
 
 Previous digital currency attempts required central authority and couldn't prevent double-spending. Bitcoin achieves decentralized consensus through this combination, proving that trustless digital money is possible.
-
-## Related Topics
-
-- [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview
-- [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin eliminates trust requirements
-- [Decentralization](/docs/fundamentals/decentralization) - Why decentralization solves these problems

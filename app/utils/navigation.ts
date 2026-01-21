@@ -23,9 +23,8 @@ export interface NavSection {
 // All documentation pages with their metadata
 export const docPages: DocPage[] = [
   // Fundamentals (high-level concepts)
-  { path: '/docs/fundamentals/overview', mdFile: 'app/docs/fundamentals/overview/overview.md', title: 'What is Bitcoin?', section: 'fundamentals' },
+  { path: '/docs/fundamentals/what-is-bitcoin', mdFile: 'app/docs/fundamentals/what-is-bitcoin/overview.md', title: 'What is Bitcoin?', section: 'fundamentals' },
   { path: '/docs/fundamentals/problems', mdFile: 'app/docs/fundamentals/problems/problems.md', title: 'Problems Bitcoin Solved', section: 'fundamentals' },
-  { path: '/docs/fundamentals/trilemma', mdFile: 'app/docs/fundamentals/trilemma/trilemma.md', title: 'Bitcoin Trilemma', section: 'fundamentals' },
   { path: '/docs/fundamentals/decentralization', mdFile: 'app/docs/fundamentals/decentralization/decentralization.md', title: 'Decentralization', section: 'fundamentals' },
   { path: '/docs/fundamentals/trust-model', mdFile: 'app/docs/fundamentals/trust-model/trust-model.md', title: 'Trust Model', section: 'fundamentals' },
   { path: '/docs/fundamentals/monetary-properties', mdFile: 'app/docs/fundamentals/monetary-properties/monetary-properties.md', title: 'Monetary Properties', section: 'fundamentals' },
@@ -147,7 +146,7 @@ export const navItems: NavSection[] = [
     children: docPages.filter(p => p.section === 'history').map(p => ({ title: p.title, href: p.path })),
   },
   {
-    title: 'Bitcoin',
+    title: 'Bitcoin Protocol',
     href: '/docs/bitcoin',
     children: docPages.filter(p => p.section === 'bitcoin').map(p => ({ title: p.title, href: p.path })),
   },
@@ -195,7 +194,7 @@ export const routeLabels: Record<string, string> = {
   // Section labels
   fundamentals: 'Fundamentals',
   history: 'History',
-  bitcoin: 'Bitcoin',
+  bitcoin: 'Bitcoin Protocol',
   mining: 'Mining',
   wallets: 'Wallets',
   lightning: 'Lightning Network',
@@ -204,9 +203,9 @@ export const routeLabels: Record<string, string> = {
   glossary: 'Glossary',
 
   // Page labels (extracted from path segment to title)
+  'what-is-bitcoin': 'What is Bitcoin?',
   milestones: 'Historical Milestones',
   problems: 'Problems Bitcoin Solved',
-  trilemma: 'Bitcoin Trilemma',
   decentralization: 'Decentralization',
   'trust-model': 'Trust Model',
   'monetary-properties': 'Monetary Properties',

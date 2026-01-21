@@ -50,10 +50,3 @@ Banks, payment processors, governments, other users, miners (economically incent
 | **Custodial wallet/exchange** | High | Easy to use, password recovery; you trust the custodian completely |
 
 Bitcoin's philosophy: prefer trust minimization, accept inconvenience for security, verify rather than trust.
-
-## Related Topics
-
-- [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview
-- [Problems Bitcoin Solved](/docs/fundamentals/problems) - How Bitcoin eliminates trust requirements
-- [Decentralization](/docs/fundamentals/decentralization) - Why decentralization reduces trust needs
-- [Monetary Properties](/docs/fundamentals/monetary-properties) - Economic trust model

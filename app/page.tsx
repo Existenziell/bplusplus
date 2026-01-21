@@ -41,7 +41,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/docs/fundamentals/overview"
+              href="/docs/fundamentals/what-is-bitcoin"
               className="inline-flex items-center justify-center px-6 py-3 bg-btc text-zinc-900 font-semibold rounded-md hover:bg-btc/90 transition-colors hover:no-underline"
             >
               Start Reading

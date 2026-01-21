@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function FundamentalsOverviewPage() {
-  const content = await readMarkdown('app/docs/fundamentals/overview/overview.md')
+  const content = await readMarkdown('app/docs/fundamentals/what-is-bitcoin/overview.md')
 
   return (
     <div>

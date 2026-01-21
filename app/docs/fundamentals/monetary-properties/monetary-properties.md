@@ -52,10 +52,3 @@ The satoshi (named after Bitcoin's creator) is the smallest unit. "Stacking sats
 **Medium of Exchange:** Base layer handles ~7 TPS with fees that vary by demand. Lightning Network enables fast, low-fee payments for everyday transactions.
 
 **Unit of Account:** Still developing. Prices are primarily quoted in fiat (USD), though some communities price goods in satoshis.
-
-## Related Topics
-
-- [What is Bitcoin?](/docs/fundamentals/overview) - High-level Bitcoin overview
-- [Bitcoin Trilemma](/docs/fundamentals/trilemma) - Trade-offs in Bitcoin design
-- [Decentralization](/docs/fundamentals/decentralization) - How decentralization affects monetary properties
-- [History: Supply Schedule](/docs/history/supply) - How Bitcoin's supply is controlled

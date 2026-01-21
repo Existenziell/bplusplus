@@ -158,12 +158,3 @@ Bitcoin is under **constant attack** from the most sophisticated entities on thi
 The network has operated continuously since January 3, 2009, securing hundreds of billions of dollars in value. The only theoretical attack (a 51% attack) would require controlling more computational power than all other miners combined, a feat that grows more impossible as the network expands.
 
 Bitcoin cannot be hacked. It can only be adopted.
-
-## Related Topics
-
-- [Problems Bitcoin Solved](/docs/fundamentals/problems) - The fundamental problems Bitcoin addresses
-- [Bitcoin Trilemma](/docs/fundamentals/trilemma) - The fundamental trade-offs in Bitcoin design
-- [Decentralization](/docs/fundamentals/decentralization) - Why decentralization matters
-- [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin eliminates the need for trust
-- [Monetary Properties](/docs/fundamentals/monetary-properties) - Bitcoin's economic characteristics
-- [Consensus Mechanism](/docs/fundamentals/consensus) - How Bitcoin reaches agreement

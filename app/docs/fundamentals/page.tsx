@@ -20,12 +20,12 @@ export default function FundamentalsDocsPage() {
     >
       <DocCard
         title="What is Bitcoin?"
-        href="/docs/fundamentals/overview"
+        href="/docs/fundamentals/what-is-bitcoin"
         description="High-level introduction to Bitcoin, including what it is, how it works, and what makes it unique."
         links={[
-          { href: '/docs/fundamentals/overview#core-definition', label: 'Core definition' },
-          { href: '/docs/fundamentals/overview#how-bitcoin-works', label: 'How Bitcoin works' },
-          { href: '/docs/fundamentals/overview#technical-innovation', label: 'Technical innovation' },
+          { href: '/docs/fundamentals/what-is-bitcoin#core-definition', label: 'Core definition' },
+          { href: '/docs/fundamentals/what-is-bitcoin#how-bitcoin-works', label: 'How Bitcoin works' },
+          { href: '/docs/fundamentals/what-is-bitcoin#technical-innovation', label: 'Technical innovation' },
         ]}
       />
 
@@ -42,25 +42,13 @@ export default function FundamentalsDocsPage() {
       />
 
       <DocCard
-        title="Bitcoin Trilemma"
-        href="/docs/fundamentals/trilemma"
-        description="Understanding the fundamental trade-offs between scalability, security, and decentralization in Bitcoin's design."
-        links={[
-          { href: '/docs/fundamentals/trilemma#the-three-pillars', label: 'The three pillars' },
-          { href: '/docs/fundamentals/trilemma#the-trade-offs', label: 'Trade-offs and solutions' },
-          { href: '/docs/fundamentals/trilemma#bitcoins-solution', label: "Bitcoin's solution" },
-          { href: '/docs/fundamentals/trilemma#historical-examples', label: 'Historical examples' },
-        ]}
-      />
-
-      <DocCard
         title="Decentralization"
         href="/docs/fundamentals/decentralization"
-        description="Why decentralization matters, how Bitcoin achieves it, and the threats and benefits of a decentralized system."
+        description="Why decentralization matters, how Bitcoin achieves it, and the trade-offs between scalability, security, and decentralization."
         links={[
-          { href: '/docs/fundamentals/decentralization#what-is-decentralization', label: 'What is decentralization' },
-          { href: '/docs/fundamentals/decentralization#why-decentralization-matters', label: 'Why it matters' },
+          { href: '/docs/fundamentals/decentralization#what-decentralization-means', label: 'What decentralization means' },
           { href: '/docs/fundamentals/decentralization#how-bitcoin-achieves-decentralization', label: 'How Bitcoin achieves it' },
+          { href: '/docs/fundamentals/decentralization#the-bitcoin-trilemma', label: 'The Bitcoin Trilemma' },
           { href: '/docs/fundamentals/decentralization#threats-to-decentralization', label: 'Threats to decentralization' },
         ]}
       />

@@ -183,10 +183,3 @@ The SEC approved the first spot Bitcoin ETFs in the United States, opening Bitco
 - **Significance**: Last new Bitcoin will be created
 
 After this date, no new Bitcoin will be created through block rewards. Miners will rely entirely on transaction fees for income.
-
-## Related Topics
-
-- [People](/docs/history/people) - Key figures in Bitcoin's history
-- [Halving Schedule](/docs/history/halvings) - Complete halving schedule from 2009 to 2140
-- [Protocol Upgrades and Forks](/docs/history/forks) - All soft forks and hard forks in Bitcoin's history
-- [Supply Schedule](/docs/history/supply) - Mathematical explanation of the 21 million BTC cap

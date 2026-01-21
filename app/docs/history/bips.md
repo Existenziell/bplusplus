@@ -1,8 +1,6 @@
 # Bitcoin Improvement Proposals (BIPs)
 
-[Bitcoin Improvement Proposals](/docs/glossary#bip-bitcoin-improvement-proposal) (BIPs) are the formal mechanism for proposing changes to Bitcoin. They document design decisions, protocol upgrades, and best practices for the Bitcoin ecosystem.
-
-BIPs are modeled after Python Enhancement Proposals (PEPs) and were introduced by Amir Taaki in 2011.
+[Bitcoin Improvement Proposals](/docs/glossary#bip-bitcoin-improvement-proposal) (BIPs) are the formal mechanism for proposing changes to Bitcoin. They document design decisions, protocol upgrades, and best practices for the Bitcoin ecosystem. BIPs are modeled after Python Enhancement Proposals (PEPs) and were introduced by Amir Taaki in 2011.
 
 ## BIP Types
 
@@ -271,5 +269,3 @@ These BIPs define Bitcoin address formats and encoding.
 
 - [Forks](/docs/history/forks) - How BIPs become protocol changes
 - [Script System](/docs/bitcoin/script) - Script-related BIPs in action
-- [SegWit](/docs/glossary#segwit-segregated-witness) - BIP 141 implementation
-- [Taproot](/docs/glossary#taproot) - BIP 341 implementation

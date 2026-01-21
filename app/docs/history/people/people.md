@@ -156,11 +156,3 @@ His other works include:
 Antonopoulos is known for his ability to explain complex technical concepts to general audiences. His YouTube channel and speaking engagements have introduced millions of people to Bitcoin. He has testified before government bodies and advocated for cryptocurrency-friendly policies.
 
 In 2017, after it was revealed he had not held significant Bitcoin despite years of advocacy, the Bitcoin community donated over 100 BTC to him in appreciation of his educational contributions.
-
----
-
-## Related Topics
-
-- [Historical Milestones](/docs/history/milestones) - Bitcoin's history from 2009 to present
-- [BIPs](/docs/history/bips) - Bitcoin Improvement Proposals
-- [Glossary](/docs/glossary) - Bitcoin terminology

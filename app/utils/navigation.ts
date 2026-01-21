@@ -72,6 +72,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/lightning/trampoline', mdFile: 'app/docs/lightning/trampoline/trampoline.md', title: 'Trampoline Routing', section: 'lightning' },
 
   // Development
+  { path: '/docs/development/install-bitcoin', mdFile: 'app/docs/development/install-bitcoin/install-bitcoin.md', title: 'Installing Bitcoin', section: 'development' },
   { path: '/docs/development/testing', mdFile: 'app/docs/development/testing/testing.md', title: 'Testing & Debugging', section: 'development' },
   { path: '/docs/development/psbt', mdFile: 'app/docs/development/psbt/psbt.md', title: 'PSBT', section: 'development' },
   { path: '/docs/development/addresses', mdFile: 'app/docs/development/addresses/addresses.md', title: 'Address Generation', section: 'development' },
@@ -241,6 +242,7 @@ export const routeLabels: Record<string, string> = {
   'anchor-outputs': 'Anchor Outputs',
   'zero-conf': 'Zero-Conf Channels',
   trampoline: 'Trampoline Routing',
+  'install-bitcoin': 'Installing Bitcoin',
   testing: 'Testing & Debugging',
   psbt: 'PSBT',
   addresses: 'Address Generation',

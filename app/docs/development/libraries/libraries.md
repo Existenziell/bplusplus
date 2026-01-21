@@ -2,6 +2,18 @@
 
 This guide compares major Bitcoin libraries across languages and provides practical examples for common development tasks.
 
+:::info Library Versions
+Code examples in this documentation are tested with the following library versions:
+- **bitcoinjs-lib**: v6.x (uses factory pattern for bip32/ecpair)
+- **bip32**: v4.x (requires `tiny-secp256k1` via `BIP32Factory`)
+- **rust-bitcoin**: v0.31.x
+- **BDK**: v0.29.x
+- **python-bitcoinlib**: v0.12.x
+- **bip32utils**: v0.3.x (use `BIP32Key.fromSeed()` for seed-based derivation)
+
+When using different versions, consult each library's migration guides for API changes.
+:::
+
 ## Library Overview
 
 ### By Language

@@ -50,9 +50,9 @@ from mnemonic import Mnemonic
 from bip32utils import BIP32Key
 
 mnemo = Mnemonic("english")
-words = mnemo.generate(256)
+words = mnemo.generate(256)  # 24 words
 seed = mnemo.to_seed(words)
-master = BIP32Key.fromEntropy(seed)
+master = BIP32Key.fromSeed(seed)
 # Derive m/84'/0'/0'/0/0
 key = master.ChildKey(84 + 0x80000000).ChildKey(0x80000000).ChildKey(0x80000000).ChildKey(0).ChildKey(0)
 ```

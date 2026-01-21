@@ -98,23 +98,29 @@ fn parse_hrp(hrp: &str) -> Result<(String, Option<u64>), &'static str> {
                         .trim_start_matches("lntbs")
                         .trim_start_matches("lntb");
     
+    // Amount in millisatoshis: 1 BTC = 100,000,000,000 msat
     let amount_msat = if amount_str.is_empty() {
         None
     } else {
-        // Parse amount with multiplier
-        let (num_str, multiplier) = if amount_str.ends_with('m') {
-            (&amount_str[..amount_str.len()-1], 100_000_000_000u64) // milli-BTC
+        // Parse amount with multiplier (to millisatoshis)
+        // m = milli (10^-3), u = micro (10^-6), n = nano (10^-9), p = pico (10^-12)
+        let (num_str, multiplier, is_pico) = if amount_str.ends_with('m') {
+            (&amount_str[..amount_str.len()-1], 100_000_000u64, false) // milli-BTC
         } else if amount_str.ends_with('u') {
-            (&amount_str[..amount_str.len()-1], 100_000_000u64) // micro-BTC
+            (&amount_str[..amount_str.len()-1], 100_000u64, false) // micro-BTC
         } else if amount_str.ends_with('n') {
-            (&amount_str[..amount_str.len()-1], 100_000u64) // nano-BTC
+            (&amount_str[..amount_str.len()-1], 100u64, false) // nano-BTC
         } else if amount_str.ends_with('p') {
-            (&amount_str[..amount_str.len()-1], 100u64) // pico-BTC
+            (&amount_str[..amount_str.len()-1], 1u64, true) // pico-BTC (0.1 msat)
         } else {
-            (amount_str, 100_000_000_000_000u64) // whole BTC
+            (amount_str, 100_000_000_000u64, false) // whole BTC
         };
         
-        num_str.parse::<u64>().ok().map(|n| n * multiplier)
+        num_str.parse::<u64>().ok().map(|n| {
+            let value = n * multiplier;
+            // For pico, divide by 10 since 1p = 0.1 msat
+            if is_pico { value / 10 } else { value }
+        })
     };
     
     Ok((network.to_string(), amount_msat))
@@ -146,25 +152,34 @@ class ParsedInvoice:
     payee_pubkey: Optional[bytes]
 
 def parse_amount(hrp: str) -> Optional[int]:
-    """Parse amount from human-readable part."""
+    """Parse amount from human-readable part.
+    
+    Returns amount in millisatoshis.
+    1 BTC = 100,000,000 sat = 100,000,000,000 msat
+    """
     # Remove network prefix
     amount_str = hrp.lstrip('lnbcrts')
     
     if not amount_str:
         return None
     
-    # Multipliers in millisatoshis
+    # Multipliers to convert to millisatoshis
+    # m = milli (10^-3), u = micro (10^-6), n = nano (10^-9), p = pico (10^-12)
     multipliers = {
-        'm': 100_000_000_000,    # milli-BTC
-        'u': 100_000_000,        # micro-BTC  
-        'n': 100_000,            # nano-BTC
-        'p': 100,                # pico-BTC (10 msat minimum)
+        'm': 100_000_000,      # milli-BTC: 0.001 BTC = 100,000 sat = 100,000,000 msat
+        'u': 100_000,          # micro-BTC: 0.000001 BTC = 100 sat = 100,000 msat
+        'n': 100,              # nano-BTC: 0.000000001 BTC = 0.1 sat = 100 msat
+        'p': 1,                # pico-BTC: 0.1 msat (must be multiple of 10)
     }
     
     if amount_str[-1] in multipliers:
-        return int(amount_str[:-1]) * multipliers[amount_str[-1]]
+        value = int(amount_str[:-1]) * multipliers[amount_str[-1]]
+        # For pico, divide by 10 since 1p = 0.1 msat
+        if amount_str[-1] == 'p':
+            value = value // 10
+        return value
     else:
-        return int(amount_str) * 100_000_000_000_000  # BTC
+        return int(amount_str) * 100_000_000_000  # BTC to msat
 
 def decode_invoice(invoice: str) -> ParsedInvoice:
     """Decode a BOLT11 invoice string."""
@@ -232,34 +247,41 @@ struct ParsedInvoice {
 
 /**
  * Parse amount from human-readable part
+ * Returns amount in millisatoshis.
+ * 1 BTC = 100,000,000 sat = 100,000,000,000 msat
  */
 std::optional<uint64_t> parse_amount(const std::string& hrp) {
     // Find where the amount starts (after network prefix)
     size_t start = 0;
-    if (hrp.substr(0, 4) == "lnbc") start = 4;
+    if (hrp.substr(0, 6) == "lnbcrt") start = 6;
     else if (hrp.substr(0, 5) == "lntbs") start = 5;
+    else if (hrp.substr(0, 4) == "lnbc") start = 4;
     else if (hrp.substr(0, 4) == "lntb") start = 4;
     else return std::nullopt;
     
     std::string amount_str = hrp.substr(start);
     if (amount_str.empty()) return std::nullopt;
     
-    // Determine multiplier
+    // Determine multiplier (to millisatoshis)
+    // m = milli (10^-3), u = micro (10^-6), n = nano (10^-9), p = pico (10^-12)
     uint64_t multiplier;
+    bool is_pico = false;
     char suffix = amount_str.back();
     
     switch (suffix) {
-        case 'm': multiplier = 100000000000ULL; break;   // milli-BTC
-        case 'u': multiplier = 100000000ULL; break;      // micro-BTC
-        case 'n': multiplier = 100000ULL; break;         // nano-BTC
-        case 'p': multiplier = 100ULL; break;            // pico-BTC
+        case 'm': multiplier = 100000000ULL; break;     // milli-BTC: 100,000,000 msat
+        case 'u': multiplier = 100000ULL; break;        // micro-BTC: 100,000 msat
+        case 'n': multiplier = 100ULL; break;           // nano-BTC: 100 msat
+        case 'p': multiplier = 1ULL; is_pico = true; break; // pico-BTC: 0.1 msat
         default:
-            multiplier = 100000000000000ULL;              // whole BTC
+            multiplier = 100000000000ULL;                // whole BTC: 100,000,000,000 msat
             return std::stoull(amount_str) * multiplier;
     }
     
     std::string num_str = amount_str.substr(0, amount_str.length() - 1);
-    return std::stoull(num_str) * multiplier;
+    uint64_t value = std::stoull(num_str) * multiplier;
+    // For pico, divide by 10 since 1p = 0.1 msat
+    return is_pico ? value / 10 : value;
 }
 
 /**
@@ -302,6 +324,9 @@ const bech32 = require('bech32');
 
 /**
  * Parse amount from human-readable part
+ * Returns amount in millisatoshis.
+ * 1 BTC = 100,000,000 sat = 100,000,000,000 msat
+ * 
  * @param {string} hrp
  * @returns {bigint|null}
  */
@@ -311,22 +336,28 @@ function parseAmount(hrp) {
     
     if (!amountStr) return null;
     
-    // Multipliers in millisatoshis
+    // Multipliers to convert to millisatoshis
+    // m = milli (10^-3), u = micro (10^-6), n = nano (10^-9), p = pico (10^-12)
     const multipliers = {
-        'm': 100_000_000_000n,     // milli-BTC
-        'u': 100_000_000n,         // micro-BTC
-        'n': 100_000n,             // nano-BTC
-        'p': 100n,                 // pico-BTC
+        'm': 100_000_000n,     // milli-BTC: 0.001 BTC = 100,000,000 msat
+        'u': 100_000n,         // micro-BTC: 0.000001 BTC = 100,000 msat
+        'n': 100n,             // nano-BTC: 0.000000001 BTC = 100 msat
+        'p': 1n,               // pico-BTC: 0.1 msat (must be multiple of 10)
     };
     
     const suffix = amountStr.slice(-1);
     if (multipliers[suffix]) {
         const num = BigInt(amountStr.slice(0, -1));
-        return num * multipliers[suffix];
+        let value = num * multipliers[suffix];
+        // For pico, divide by 10 since 1p = 0.1 msat
+        if (suffix === 'p') {
+            value = value / 10n;
+        }
+        return value;
     }
     
-    // No suffix = whole BTC
-    return BigInt(amountStr) * 100_000_000_000_000n;
+    // No suffix = whole BTC (1 BTC = 100,000,000,000 msat)
+    return BigInt(amountStr) * 100_000_000_000n;
 }
 
 /**

@@ -146,6 +146,11 @@ console.log('Mnemonic:', mnemonic);
 mnemonicToSeed(mnemonic).then(seed => {
     console.log('Seed:', seed.toString('hex'));
 });
+
+// Note: When using bip32 for key derivation, use BIP32Factory:
+// const { BIP32Factory } = require('bip32');
+// const ecc = require('tiny-secp256k1');
+// const bip32 = BIP32Factory(ecc);
 ```
 :::
 
@@ -292,8 +297,12 @@ int main() {
 ```
 
 ```javascript
-const bip32 = require('bip32');
+const { BIP32Factory } = require('bip32');
+const ecc = require('tiny-secp256k1');
 const bip39 = require('bip39');
+
+// Initialize bip32 with the elliptic curve library
+const bip32 = BIP32Factory(ecc);
 
 async function deriveKeys(mnemonic) {
     // Convert mnemonic to seed
@@ -434,8 +443,12 @@ void generate_addresses_from_xpub(const std::string& xpub_str, uint32_t count) {
 ```
 
 ```javascript
-const bip32 = require('bip32');
+const { BIP32Factory } = require('bip32');
+const ecc = require('tiny-secp256k1');
 const bitcoin = require('bitcoinjs-lib');
+
+// Initialize bip32 with the elliptic curve library
+const bip32 = BIP32Factory(ecc);
 
 function generateAddressesFromXpub(xpubString, count = 5) {
     const xpub = bip32.fromBase58(xpubString);

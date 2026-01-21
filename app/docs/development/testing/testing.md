@@ -138,8 +138,11 @@ test('creates valid transaction structure', () => {
 import subprocess
 import time
 import json
+import unittest
 
-class RegtestTestCase:
+class RegtestTestCase(unittest.TestCase):
+    """Base test case for Bitcoin regtest integration tests."""
+    
     def setUp(self):
         # Start bitcoind in regtest mode
         subprocess.run(['bitcoind', '-regtest', '-daemon'])
@@ -154,6 +157,7 @@ class RegtestTestCase:
         self.cli('stop')
     
     def cli(self, *args):
+        """Execute bitcoin-cli command and return parsed result."""
         result = subprocess.run(
             ['bitcoin-cli', '-regtest'] + list(args),
             capture_output=True,
@@ -175,8 +179,8 @@ class RegtestTestCase:
         
         # Verify transaction exists
         tx = self.cli('gettransaction', txid)
-        assert tx is not None
-        assert tx['amount'] == 1.0
+        self.assertIsNotNone(tx)
+        self.assertEqual(tx['amount'], 1.0)
 ```
 
 ### Testing Fee Estimation
@@ -292,12 +296,18 @@ Polar provides a one-click Lightning Network for testing.
 ```python
 import grpc
 import lnrpc
+import unittest
 
-class LightningTestCase:
+class LightningTestCase(unittest.TestCase):
+    """Test case for LND Lightning Network integration tests."""
+    
     def setUp(self):
         # Connect to LND
         self.channel = grpc.insecure_channel('localhost:10009')
         self.stub = lnrpc.LightningStub(self.channel)
+    
+    def tearDown(self):
+        self.channel.close()
     
     def test_create_invoice(self):
         # Create invoice
@@ -305,23 +315,26 @@ class LightningTestCase:
         response = self.stub.AddInvoice(request)
         
         # Verify invoice created
-        assert response.payment_request is not None
-        assert response.payment_request.startswith('ln')
+        self.assertIsNotNone(response.payment_request)
+        self.assertTrue(response.payment_request.startswith('ln'))
 ```
 
 ### Core Lightning Testing
 
 ```python
 from pyln.client import LightningRpc
+import unittest
 
-class CLightningTestCase:
+class CLightningTestCase(unittest.TestCase):
+    """Test case for Core Lightning integration tests."""
+    
     def setUp(self):
         self.rpc = LightningRpc("/path/to/lightning-rpc")
     
     def test_get_info(self):
         info = self.rpc.getinfo()
-        assert 'id' in info
-        assert 'alias' in info
+        self.assertIn('id', info)
+        self.assertIn('alias', info)
 ```
 
 ## Mocking and Stubbing

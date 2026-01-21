@@ -13,6 +13,7 @@ const ubuntu = Ubuntu({
   style: 'normal',
   subsets: ['latin'],
   display: 'swap', // Ensure text is visible while font loads
+  variable: '--font-ubuntu',
   preload: true,
 })
 

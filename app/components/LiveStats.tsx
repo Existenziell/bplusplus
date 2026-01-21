@@ -178,7 +178,7 @@ export default function LiveStats() {
   const StatCard = ({ stat }: { stat: StatItem }) => {
     const content = (
       <>
-        <div className="text-xl md:text-2xl font-bold text-btc min-h-[2rem] flex items-center justify-center">
+        <div className="text-sm md:text-xl font-bold text-btc min-h-[2rem] flex items-center justify-center">
           {loading && !stat.value ? (
             <span className="animate-pulse text-zinc-400">...</span>
           ) : stat.value ? (
@@ -187,7 +187,7 @@ export default function LiveStats() {
             <span className="text-zinc-400">—</span>
           )}
         </div>
-        <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 group-hover:text-btc transition-colors">
+        <div className="text-xs text-zinc-500 dark:text-zinc-400 group-hover:text-btc transition-colors">
           {stat.label}
         </div>
       </>
@@ -229,19 +229,16 @@ export default function LiveStats() {
   return (
     <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">
       <h3 className="text-lg font-semibold text-center mb-6 text-zinc-700 dark:text-zinc-300">
-        General Info
-      </h3>
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 mb-8">
-        {infoItems.map((item) => (
-          <StatCard key={item.label} stat={item} />
-        ))}
-      </div>
-      <h3 className="text-lg font-semibold text-center my-6 text-zinc-700 dark:text-zinc-300">
         Live Network Stats
       </h3>
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 mb-4">
         {stats.map((stat) => (
           <StatCard key={stat.label} stat={stat} />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4">
+        {infoItems.map((item) => (
+          <StatCard key={item.label} stat={item} />
         ))}
       </div>
     </div>

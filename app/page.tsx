@@ -31,13 +31,13 @@ export default function Home() {
       </div>
 
       {/* Start Reading CTA */}
-      <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">
+      <div className="container mx-auto px-4 md:px-8 py-8 md:py-8">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">
-            Join me on my quest to learn and master Bitcoin Development
+          <h2 className="text-2xl md:text-3xl font-bold mb-1 text-zinc-900 dark:text-zinc-100">
+            A Developer's Guide to Bitcoin
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 mb-6">
-            From fundamental concepts to advanced protocol details. Start with the basics or dive deep into the technical documentation.
+            From fundamental concepts to advanced protocol implementations.<br />Open source and always free.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

@@ -163,6 +163,7 @@ Bitcoin cannot be hacked. It can only be adopted.
 Dive deeper into the core concepts that make Bitcoin work:
 
 - [Problems Bitcoin Solved](/docs/fundamentals/problems) - The fundamental challenges Bitcoin addresses
+- [Cypherpunk Philosophy](/docs/fundamentals/cypherpunk-philosophy) - The philosophical foundation behind Bitcoin's design
 - [Bitcoin as Timechain](/docs/fundamentals/timechain) - How Bitcoin solves timing in decentralized networks
 - [Decentralization](/docs/fundamentals/decentralization) - Distribution of control across the network
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin minimizes trust requirements

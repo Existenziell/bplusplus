@@ -56,3 +56,7 @@ Bitcoin didn't invent new primitives; it combined existing techniques in a novel
 - **Game theory:** Nash equilibrium makes honest behavior profitable
 
 Previous digital currency attempts required central authority and couldn't prevent double-spending. Bitcoin achieves decentralized consensus through this combination, proving that trustless digital money is possible.
+
+## The Philosophical Foundation
+
+The problems Bitcoin solved were precisely the problems that [cypherpunk philosophy](/docs/fundamentals/cypherpunk-philosophy) had been trying to address for decades. Cypherpunks believed that cryptography could enable individual freedom by eliminating the need to trust institutions. Bitcoin was the first system to successfully implement these cypherpunk ideals, creating a practical solution to problems that had been identified but not solved for over 20 years.

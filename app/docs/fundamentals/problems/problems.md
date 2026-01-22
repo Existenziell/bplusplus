@@ -34,9 +34,45 @@ Alice has 1 BTC, attempts to send it to both Bob and Charlie:
 
 ## The Two Generals Problem
 
-A classic distributed systems problem: two parties must coordinate action over an unreliable channel, but can never achieve certainty because each confirmation requires its own confirmation, creating infinite regress.
+A classic distributed systems problem that demonstrates the impossibility of achieving perfect agreement over an unreliable communication channel.
 
-**Bitcoin's solution:** Accept probabilistic finality instead of perfect certainty. Proof-of-work creates objective ordering, and the longest chain rule causes the network to naturally converge. More confirmations = higher certainty (6 confirmations is generally considered irreversible).
+### The Scenario
+
+Two armies, led by two generals, are positioned on opposite sides of an enemy city. They must coordinate a simultaneous attack to succeed. The only way to communicate is by sending messengers through enemy territory, where they may be captured or killed.
+
+**The dilemma:**
+- General A sends a message: "Attack at dawn"
+- General B receives it and sends back: "Acknowledged, attacking at dawn"
+- General A receives the acknowledgment, but thinks: "How do I know General B received my acknowledgment of their acknowledgment?"
+- This creates infinite regress—each confirmation requires its own confirmation
+
+### Why It's Theoretically Unsolvable
+
+In a system with unreliable communication, perfect certainty is mathematically impossible. No matter how many confirmations are exchanged, there's always a non-zero probability that the last message was lost, leaving one general uncertain about whether coordination was achieved.
+
+### Bitcoin's Solution
+
+Bitcoin sidesteps the impossibility by accepting **probabilistic finality** instead of perfect certainty:
+
+1. **Proof-of-work creates objective ordering:** Blocks are ordered by computational work, not by message acknowledgments
+2. **The longest chain rule:** The network naturally converges on a single history through economic incentives
+3. **Increasing certainty over time:** Each block added makes the previous blocks exponentially harder to reverse
+4. **Practical finality:** While theoretically reversible, 6 confirmations (about 1 hour) is considered effectively irreversible due to the enormous computational cost required
+
+This is fundamentally different from trying to achieve perfect certainty through message acknowledgments—Bitcoin uses economic and cryptographic mechanisms to create convergence without requiring perfect communication.
+
+### Two Generals vs. Byzantine Generals
+
+These are often confused but address different problems:
+
+| Aspect | Two Generals Problem | Byzantine Generals Problem |
+|--------|---------------------|---------------------------|
+| **Core Issue** | Unreliable communication (messages may be lost) | Malicious actors (messages may be corrupted or conflicting) |
+| **Assumption** | All parties are honest but communication is unreliable | Some parties may be malicious and send false information |
+| **Focus** | Achieving agreement despite message loss | Achieving agreement despite malicious behavior |
+| **Bitcoin's Approach** | Probabilistic finality through proof-of-work | Economic security (assumes <50% malicious hash rate) |
+
+**In summary:** The Two Generals Problem is about **unreliable channels**, while the Byzantine Generals Problem is about **unreliable participants**. Bitcoin addresses both: proof-of-work handles unreliable communication through probabilistic finality, while the longest-chain rule and economic incentives handle potentially malicious miners.
 
 [Video: Two Generals Problem Explained](https://www.youtube.com/watch?v=nS9LH5gu65Y)
 

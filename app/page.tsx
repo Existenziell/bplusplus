@@ -53,7 +53,7 @@ export default function Home() {
                 href="/terminal"
                 className="btn-secondary"
               >
-                Try the Terminal
+                Try Terminal
                 <TerminalIcon />
               </Link>
             </div>

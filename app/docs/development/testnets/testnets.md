@@ -606,5 +606,5 @@ Start with regtest for fast iteration, move to signet for integration testing, a
 ## Related Topics
 
 - [Testing & Debugging](/docs/development/testing) - Testing strategies and techniques
-- [Getting Started](/docs/development/getting-started) - Development setup guide
+- [Getting Started](/docs/development) - Development setup guide
 - [RPC Commands](/docs/bitcoin/rpc) - Bitcoin Core RPC interface

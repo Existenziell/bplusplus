@@ -562,7 +562,7 @@ Choose based on your language preference, use case, and required features. For p
 
 ## Related Topics
 
-- [Getting Started](/docs/development/getting-started) - Development environment setup
+- [Getting Started](/docs/development) - Development environment setup
 - [Transaction Construction](/docs/development/transactions) - Using libraries for transactions
 - [PSBT](/docs/development/psbt) - Library support for PSBTs
 - [Testing & Debugging](/docs/development/testing) - Library testing utilities

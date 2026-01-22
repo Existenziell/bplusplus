@@ -696,7 +696,7 @@ Understanding HD wallets is essential for building modern Bitcoin wallet applica
 
 ## Related Topics
 
-- [What is a Wallet?](/docs/wallets/what-is-a-wallet) - Introduction to Bitcoin wallets
+- [What is a Wallet?](/docs/wallets) - Introduction to Bitcoin wallets
 - [Address Types](/docs/wallets/address-types) - Understanding different Bitcoin address formats
 - [Key Management](/docs/development/keys) - Secure key generation and storage
 - [Cryptography](/docs/bitcoin/cryptography) - Elliptic curve cryptography fundamentals

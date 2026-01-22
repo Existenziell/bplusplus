@@ -711,7 +711,7 @@ Attacker mines competing Block N' including the high-fee tx.
 
 ## Transaction Pinning
 
-An attack relevant to Layer 2 protocols like [Lightning](/docs/lightning/what-is-lightning).
+An attack relevant to Layer 2 protocols like [Lightning](/docs/lightning).
 
 ### How It Works
 

@@ -513,7 +513,7 @@ See [Mining Pools](/docs/mining/pools) for detailed information on pool operatio
 
 ## Related Topics
 
-- [What is Bitcoin Mining?](/docs/mining/what-is-mining) - Mining architecture and concepts
+- [What is Bitcoin Mining?](/docs/mining) - Mining architecture and concepts
 - [Proof-of-Work Mechanism](/docs/mining/proof-of-work) - How mining works
 - [Difficulty Adjustment](/docs/mining/difficulty) - How difficulty affects profitability
 - [Mining Pools](/docs/mining/pools) - Pool operations and payout schemes

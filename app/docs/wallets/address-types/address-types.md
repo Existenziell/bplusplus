@@ -867,7 +867,7 @@ Choose the appropriate type based on your use case, required features, and compa
 
 ## Related Topics
 
-- [What is a Wallet?](/docs/wallets/what-is-a-wallet) - Introduction to Bitcoin wallets
+- [What is a Wallet?](/docs/wallets) - Introduction to Bitcoin wallets
 - [HD Wallets](/docs/wallets/hd-wallets) - Hierarchical deterministic key derivation
 - [Coin Selection](/docs/wallets/coin-selection) - How address types affect transaction fees
 - [Address Generation](/docs/development/addresses) - Developer guide to address generation

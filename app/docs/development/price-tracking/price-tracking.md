@@ -573,6 +573,6 @@ Price tracking requires:
 
 ## Related Topics
 
-- [Getting Started](/docs/development/getting-started) - Bitcoin development introduction
+- [Getting Started](/docs/development) - Bitcoin development introduction
 - [Libraries & SDKs](/docs/development/libraries) - HTTP client libraries for each language
 - [Blockchain Monitoring](/docs/development/blockchain-monitoring) - Real-time blockchain data

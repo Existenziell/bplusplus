@@ -984,7 +984,7 @@ Understanding coin selection helps build efficient and user-friendly Bitcoin wal
 
 ## Related Topics
 
-- [What is a Wallet?](/docs/wallets/what-is-a-wallet) - Introduction to Bitcoin wallets
+- [What is a Wallet?](/docs/wallets) - Introduction to Bitcoin wallets
 - [Transaction Creation](/docs/wallets/transactions) - How to create and sign transactions
 - [Address Types](/docs/wallets/address-types) - Understanding different Bitcoin address formats
 - [Mempool](/docs/mining/mempool) - How unconfirmed transactions are stored and prioritized

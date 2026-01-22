@@ -268,4 +268,4 @@ console.log(`New difficulty: ${newDiff}`); // ~112,000
 
 - [Proof-of-Work Mechanism](/docs/mining/proof-of-work) - How the mining algorithm works
 - [Mining Economics](/docs/mining/economics) - How difficulty affects profitability
-- [What is Bitcoin Mining?](/docs/mining/what-is-mining) - General mining concepts
+- [What is Bitcoin Mining?](/docs/mining) - General mining concepts

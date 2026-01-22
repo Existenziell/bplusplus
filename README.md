@@ -164,8 +164,12 @@ bplusplus/
 │   ├── images/                   # Image assets
 │   └── og/                       # Open Graph images
 ├── scripts/                      # Build scripts
+│   ├── analyze-links.js          # Link structure analysis
 │   ├── generate-glossary-data.js
+│   ├── generate-link-visualization.js  # Interactive link visualization
 │   └── generate-md-content.js
+├── link-analysis.json            # Generated link analysis report
+├── link-visualization.html       # Interactive link structure visualization
 ├── next.config.js
 ├── tailwind.config.ts
 ├── tsconfig.json
@@ -194,6 +198,36 @@ The routing is configured in `app/utils/navigation.ts`, which serves as the sing
 | `npm run start` | Start production server |
 | `npm run lint` | Run ESLint |
 | `npm run analyze` | Analyze bundle size |
+
+### Link Analysis Tools
+
+The project includes tools to analyze and visualize the internal link structure of the documentation:
+
+**Analyze Links:**
+```bash
+node scripts/analyze-links.js
+```
+
+This script:
+- Extracts all links from markdown files
+- Categorizes links (internal, glossary, anchor, external)
+- Identifies broken links
+- Finds orphaned pages (pages with no incoming links)
+- Generates statistics and a JSON report (`link-analysis.json`)
+
+**Generate Visualization:**
+```bash
+node scripts/generate-link-visualization.js
+```
+
+This script creates an interactive HTML visualization ([`link-visualization.html`](https://bplusplus.info/link-visualization.html)) that shows:
+- Network graph of all pages and their connections
+- Color-coded nodes by section
+- Node size based on incoming link count
+- Interactive controls (layout switching, section filtering)
+- Click nodes to view details and open pages
+
+To view the visualization, visit [https://bplusplus.info/link-visualization.html](https://bplusplus.info/link-visualization.html) or open the local file in your browser.
 
 ## Contributing
 

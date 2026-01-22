@@ -283,9 +283,11 @@ export default function TerminalPage() {
   return (
     <main className="min-h-screen page-bg flex flex-col">
       <Header />
-
       {/* Content Container */}
       <div className="container mx-auto px-4 md:px-8 py-4 md:py-8 flex-grow">
+        <h1 className="text-2xl md:text-3xl text-center font-bold mb-4 text-zinc-900 dark:text-zinc-100">
+          Bitcoin CLI Terminal
+        </h1>
         {/* Terminal Window */}
         <div className="rounded-lg overflow-hidden border border-zinc-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
           {/* Terminal Header */}

@@ -684,4 +684,4 @@ except Exception as e:
 - [RPC Commands](/docs/bitcoin/rpc) - Bitcoin Core RPC interface
 - [Mempool](/docs/mining/mempool) - Transaction mempool details
 - [Block Construction](/docs/mining/block-construction) - How miners build blocks
-- [Getting Started](/docs/development/getting-started) - Development setup guide
+- [Getting Started](/docs/development) - Development setup guide

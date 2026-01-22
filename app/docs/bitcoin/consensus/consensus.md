@@ -47,7 +47,7 @@ The elegant solution combines cryptographic proof (making fraud detectable) with
 
 ### Proof-of-Work: Digital Gold Mining
 
-The concept of proof-of-work predates Bitcoin. In 1997, **[Adam Back](/docs/history/people#adam-back)** invented [Hashcash](https://en.wikipedia.org/wiki/Hashcash), a proof-of-work system designed to combat email spam. The sender had to perform computational work to send an email — trivial for legitimate users, but prohibitively expensive for spammers sending millions of messages. Satoshi Nakamoto cited Hashcash in the Bitcoin whitepaper and adapted its core mechanism for blockchain consensus.
+The concept of proof-of-work predates Bitcoin. In 1997, **[Adam Back](/docs/history/people#adam-back)** invented [Hashcash](https://en.wikipedia.org/wiki/Hashcash), a proof-of-work system designed to combat email spam. The sender had to perform computational work to send an email: trivial for legitimate users, but prohibitively expensive for spammers sending millions of messages. Satoshi Nakamoto cited Hashcash in the Bitcoin whitepaper and adapted its core mechanism for blockchain consensus.
 
 The intuition behind proof-of-work mirrors **gold mining**. When someone presents you with a gold bar, you don't need to watch them mine it. The gold itself is proof that work was done. Gold cannot be created cheaply; its existence demonstrates that someone expended real resources (time, labor, equipment) to extract it from the earth. This is **implicit proof of work**.
 
@@ -135,7 +135,7 @@ Bitcoin's security is fundamentally economic. Miners receive [block rewards](/do
 
 | Property | Definition | Bitcoin's Implementation |
 |----------|------------|-------------------------|
-| **[Finality](/docs/glossary#finality)** | Transactions cannot be reversed | Probabilistic—6+ confirmations is economically final |
+| **[Finality](/docs/glossary#finality)** | Transactions cannot be reversed | Probabilistic: 6+ confirmations is economically final |
 | **Liveness** | System continues producing blocks | ~10 min blocks; resilient to node failures |
 | **Safety** | No conflicting states | All nodes agree on single chain; no double-spends |
 
@@ -161,4 +161,4 @@ These situations are normal and resolve automatically. The longest chain rule en
 | Track record | 15+ years, battle-tested | Newer, less proven |
 | Failure mode | 51% hash rate attack | "Nothing at stake" problem |
 
-Bitcoin chose PoW because the energy expenditure creates unforgeable costliness—security that cannot be faked or granted by insiders. This aligns with the goal of trustless consensus in an adversarial environment.
+Bitcoin chose PoW because the energy expenditure creates unforgeable costliness: security that cannot be faked or granted by insiders. This aligns with the goal of trustless consensus in an adversarial environment.

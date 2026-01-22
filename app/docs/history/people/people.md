@@ -40,7 +40,7 @@ Back is currently CEO of Blockstream, a Bitcoin infrastructure company he co-fou
 
 Nick Szabo is a computer scientist, legal scholar, and cryptographer who designed Bit Gold in 1998, often called the direct precursor to Bitcoin. Bit Gold proposed a [decentralized](/docs/glossary#decentralization) digital currency where participants would use computational power to solve cryptographic puzzles, with solutions timestamped and published to a distributed registry.
 
-Szabo also coined the term "smart contracts" in 1994, describing self-executing contracts with terms written directly into code—a concept that would later become central to Ethereum and other blockchain platforms.
+Szabo also coined the term "smart contracts" in 1994, describing self-executing contracts with terms written directly into code, a concept that would later become central to Ethereum and other blockchain platforms.
 
 The similarities between Bit Gold and Bitcoin are so striking that many have speculated Szabo is Satoshi Nakamoto, which he has denied. Regardless, his intellectual contributions to the conceptual foundations of cryptocurrency are undeniable.
 
@@ -98,11 +98,11 @@ Hal Finney was a cryptographic pioneer and one of Bitcoin's most important early
 
 Finney was the first person other than Satoshi to run the Bitcoin software, and on January 12, 2009, he received the first Bitcoin [transaction](/docs/glossary#transaction): 10 BTC from Satoshi Nakamoto. He immediately began contributing to the codebase, reporting bugs and suggesting improvements. He famously tweeted "Running bitcoin" on January 10, 2009.
 
-Interestingly, Finney lived just a few blocks from Dorian Satoshi Nakamoto in Temple City, California—a coincidence that fueled speculation when Dorian was mistakenly identified as Bitcoin's creator by Newsweek in 2014.
+Interestingly, Finney lived just a few blocks from Dorian Satoshi Nakamoto in Temple City, California, a coincidence that fueled speculation when Dorian was mistakenly identified as Bitcoin's creator by Newsweek in 2014.
 
 Finney was diagnosed with ALS (Lou Gehrig's disease) in 2009 and continued contributing to Bitcoin until his physical limitations made it impossible. He passed away on August 28, 2014, and was cryopreserved by the Alcor Life Extension Foundation.
 
-The "Finney attack" in Bitcoin is named after him—a type of [double-spend](/docs/glossary#double-spend) attack he described where a [miner](/docs/glossary#miner) pre-mines a transaction and quickly broadcasts a conflicting one.
+The "Finney attack" in Bitcoin is named after him: a type of [double-spend](/docs/glossary#double-spend) attack he described where a [miner](/docs/glossary#miner) pre-mines a transaction and quickly broadcasts a conflicting one.
 
 ---
 

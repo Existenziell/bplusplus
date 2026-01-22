@@ -30,6 +30,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/fundamentals/decentralization', mdFile: 'app/docs/fundamentals/decentralization/decentralization.md', title: 'Decentralization', section: 'fundamentals' },
   { path: '/docs/fundamentals/trust-model', mdFile: 'app/docs/fundamentals/trust-model/trust-model.md', title: 'Trust Model', section: 'fundamentals' },
   { path: '/docs/fundamentals/monetary-properties', mdFile: 'app/docs/fundamentals/monetary-properties/monetary-properties.md', title: 'Monetary Properties', section: 'fundamentals' },
+  { path: '/docs/fundamentals/incentives', mdFile: 'app/docs/fundamentals/incentives/incentives.md', title: 'Incentive Structure', section: 'fundamentals' },
 
   // History
   { path: '/docs/history', mdFile: 'app/docs/history/overview.md', title: 'Bitcoin History', section: 'history' },
@@ -220,6 +221,7 @@ export const routeLabels: Record<string, string> = {
   decentralization: 'Decentralization',
   'trust-model': 'Trust Model',
   'monetary-properties': 'Monetary Properties',
+  incentives: 'Incentive Structure',
   consensus: 'Consensus Mechanism',
   cryptography: 'Cryptography',
   halvings: 'Halvings',

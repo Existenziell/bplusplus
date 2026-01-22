@@ -35,7 +35,7 @@ Banks, payment processors, governments, other users, miners (economically incent
 
 #### The Immaculate Conception: Why Satoshi's Anonymity Matters
 
-Bitcoin's creator, [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto), remains anonymous and disappeared from the project in 2010. This is not a bug—it's a feature. The "immaculate conception" refers to the idea that **not knowing who created Bitcoin is actually beneficial** for the network's trust model.
+Bitcoin's creator, [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto), remains anonymous and disappeared from the project in 2010. This is not a bug; it's a feature. The "immaculate conception" refers to the idea that **not knowing who created Bitcoin is actually beneficial** for the network's trust model.
 
 **Why anonymity strengthens Bitcoin:**
 
@@ -45,7 +45,7 @@ Bitcoin's creator, [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto), re
 - **True decentralization:** With no known founder, Bitcoin truly belongs to no one and everyone. The protocol stands on its own merits, not the reputation of its creator.
 - **Focus on the code:** Attention stays on Bitcoin's technical properties and economic incentives, not on the personality or intentions of its creator.
 
-Satoshi's disappearance was the ultimate act of decentralization: they created the system, proved it worked, and then removed themselves from the equation entirely. Bitcoin doesn't need its creator—it only needs the protocol, the network, and the mathematics that make it work.
+Satoshi's disappearance was the ultimate act of decentralization: they created the system, proved it worked, and then removed themselves from the equation entirely. Bitcoin doesn't need its creator; it only needs the protocol, the network, and the mathematics that make it work.
 
 ## Trust Minimization Techniques
 

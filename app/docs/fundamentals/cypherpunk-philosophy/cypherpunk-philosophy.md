@@ -8,7 +8,7 @@ Cypherpunk is a philosophy and movement that advocates for **privacy and freedom
 
 - **Privacy is a fundamental right** that must be protected through technology, not granted by institutions
 - **Cryptography enables individual sovereignty** by allowing people to communicate and transact without surveillance
-- **Code is law**—mathematical proof is more reliable than trust in institutions
+- **Code is law**: mathematical proof is more reliable than trust in institutions
 - **Decentralization prevents control** by removing single points of failure and authority
 
 The cypherpunk movement emerged in the late 1980s and early 1990s, as the internet was becoming mainstream and governments began discussing encryption regulations. Cypherpunks saw cryptography as a tool for protecting individual rights in the digital age.
@@ -17,7 +17,7 @@ The cypherpunk movement emerged in the late 1980s and early 1990s, as the intern
 
 ### Privacy Through Cryptography
 
-Cypherpunks believe that privacy is essential for an open society, but it cannot be granted by governments or corporations—it must be **enforced through mathematics**. As Eric Hughes wrote in "A Cypherpunk's Manifesto" (1993):
+Cypherpunks believe that privacy is essential for an open society, but it cannot be granted by governments or corporations; it must be **enforced through mathematics**. As Eric Hughes wrote in "A Cypherpunk's Manifesto" (1993):
 
 > "Privacy is necessary for an open society in the electronic age. Privacy is not secrecy. A private matter is something one doesn't want the whole world to know, but a secret matter is something one doesn't want anybody to know. Privacy is the power to selectively reveal oneself to the world."
 
@@ -29,7 +29,7 @@ Bitcoin embodies this principle through:
 
 ### Trust in Code, Not Institutions
 
-Cypherpunks advocate for **trusting mathematics and code** rather than people or institutions. This principle is captured in the phrase "code is law"—the rules are enforced by cryptographic proof, not by human interpretation or enforcement.
+Cypherpunks advocate for **trusting mathematics and code** rather than people or institutions. This principle is captured in the phrase "code is law": the rules are enforced by cryptographic proof, not by human interpretation or enforcement.
 
 Bitcoin implements this through:
 - **Cryptographic proof**: Digital signatures prove ownership mathematically
@@ -79,7 +79,7 @@ Cypherpunks saw censorship as a fundamental threat to freedom. Bitcoin's design 
 
 ### The Cypherpunk Mailing List
 
-In 1992, three mathematicians—Eric Hughes, Timothy May, and John Gilmore—founded the **cypherpunk mailing list**. This became the central forum for discussing cryptography, privacy, and digital cash. The mailing list included:
+In 1992, three mathematicians (Eric Hughes, Timothy May, and John Gilmore) founded the **cypherpunk mailing list**. This became the central forum for discussing cryptography, privacy, and digital cash. The mailing list included:
 - Cryptographers working on privacy technologies
 - Activists concerned about government surveillance
 - Entrepreneurs building digital cash systems
@@ -120,7 +120,7 @@ Timothy May was a physicist and one of the founders of the cypherpunk movement. 
 
 ### Eric Hughes
 
-Eric Hughes co-founded the cypherpunk mailing list and wrote "A Cypherpunk's Manifesto" (1993), which articulated the core principles of the movement. The manifesto's most famous line: **"Cypherpunks write code"**—emphasizing that action through code is more powerful than political advocacy.
+Eric Hughes co-founded the cypherpunk mailing list and wrote "A Cypherpunk's Manifesto" (1993), which articulated the core principles of the movement. The manifesto's most famous line: **"Cypherpunks write code"**, emphasizing that action through code is more powerful than political advocacy.
 
 ### David Chaum
 
@@ -142,7 +142,7 @@ Eric Hughes co-founded the cypherpunk mailing list and wrote "A Cypherpunk's Man
 
 ### Why Satoshi Posted to the Cypherpunk Mailing List
 
-On October 31, 2008, Satoshi Nakamoto announced Bitcoin on the cypherpunk mailing list. This was intentional—Bitcoin was designed for people who shared cypherpunk values. The announcement was met with skepticism from some cypherpunks, but it represented the culmination of decades of cypherpunk research and experimentation.
+On October 31, 2008, Satoshi Nakamoto announced Bitcoin on the cypherpunk mailing list. This was intentional: Bitcoin was designed for people who shared cypherpunk values. The announcement was met with skepticism from some cypherpunks, but it represented the culmination of decades of cypherpunk research and experimentation.
 
 ### Design Decisions Reflecting Cypherpunk Values
 
@@ -164,7 +164,7 @@ Bitcoin provides **pseudonymity** rather than full anonymity. This reflects a cy
 - **Transparency**: All transactions are public (enables verification)
 - **Selective disclosure**: Users can reveal their identity when beneficial
 
-This design allows Bitcoin to be both private and verifiable—a key cypherpunk insight.
+This design allows Bitcoin to be both private and verifiable, a key cypherpunk insight.
 
 ### Open-Source Code
 
@@ -214,7 +214,7 @@ The most famous cypherpunk principle is: **"Cypherpunks write code."** This mean
 - Code can enforce rights that laws cannot guarantee
 - Building systems is more effective than asking for permission
 
-Bitcoin embodies this principle—it doesn't ask for permission or approval. It exists as code running on a distributed network, and no one can stop it.
+Bitcoin embodies this principle: it doesn't ask for permission or approval. It exists as code running on a distributed network, and no one can stop it.
 
 ### Privacy vs. Secrecy
 
@@ -226,7 +226,7 @@ Bitcoin provides privacy (you choose what to reveal) while maintaining transpare
 
 ### Individual Sovereignty
 
-Cypherpunks believe in **individual sovereignty**—the right to control your own:
+Cypherpunks believe in **individual sovereignty**: the right to control your own:
 - Money (without banks)
 - Identity (without governments)
 - Communication (without surveillance)
@@ -259,14 +259,14 @@ While early digital cash attempts failed, Bitcoin succeeded because it combined 
 
 ## Conclusion
 
-Cypherpunk philosophy provided the intellectual and philosophical foundation for Bitcoin. The movement's core principles—privacy through cryptography, trust in code, decentralization, permissionless participation, and censorship resistance—are all embodied in Bitcoin's design.
+Cypherpunk philosophy provided the intellectual and philosophical foundation for Bitcoin. The movement's core principles (privacy through cryptography, trust in code, decentralization, permissionless participation, and censorship resistance) are all embodied in Bitcoin's design.
 
 Understanding cypherpunk philosophy helps explain:
 - **Why Bitcoin was created**: To solve problems cypherpunks had identified for decades
 - **Why it's designed this way**: To embody cypherpunk values
 - **Why it matters**: It enables individual sovereignty and freedom
 
-Bitcoin is not just a technology—it's the practical implementation of a decades-long philosophical movement that believed cryptography could be a tool for individual liberation. As Eric Hughes wrote: "Cypherpunks write code." Bitcoin is that code, running on a global network, providing financial freedom to anyone who chooses to use it.
+Bitcoin is not just a technology; it's the practical implementation of a decades-long philosophical movement that believed cryptography could be a tool for individual liberation. As Eric Hughes wrote: "Cypherpunks write code." Bitcoin is that code, running on a global network, providing financial freedom to anyone who chooses to use it.
 
 ## Further Reading
 

@@ -167,4 +167,5 @@ Dive deeper into the core concepts that make Bitcoin work:
 - [Bitcoin as Timechain](/docs/fundamentals/timechain) - How Bitcoin solves timing in decentralized networks
 - [Decentralization](/docs/fundamentals/decentralization) - Distribution of control across the network
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin minimizes trust requirements
+- [Incentive Structure](/docs/fundamentals/incentives) - How economic incentives shape Bitcoin's security
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - The economic characteristics of Bitcoin

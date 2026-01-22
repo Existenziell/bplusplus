@@ -107,6 +107,7 @@ function getYouTubeVideoId(url: string): string | null {
 function YouTubeEmbed({ videoId }: { videoId: string }) {
   const [isVisible, setIsVisible] = React.useState(false)
   const containerRef = React.useRef<HTMLDivElement>(null)
+  const iframeRef = React.useRef<HTMLIFrameElement>(null)
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -126,17 +127,26 @@ function YouTubeEmbed({ videoId }: { videoId: string }) {
     return () => observer.disconnect()
   }, [])
 
+  // Set credentialless attribute to reduce cookie warnings
+  React.useEffect(() => {
+    if (isVisible && iframeRef.current) {
+      iframeRef.current.setAttribute('credentialless', '')
+    }
+  }, [isVisible])
+
   return (
     <div className="my-6" ref={containerRef}>
       <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
         {isVisible ? (
           <iframe
+            ref={iframeRef}
             className="absolute top-0 left-0 w-full h-full rounded-md"
-            src={`https://www.youtube.com/embed/${videoId}`}
+            src={`https://www.youtube-nocookie.com/embed/${videoId}?modestbranding=1&rel=0`}
             title="YouTube video player"
             loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; picture-in-picture; web-share"
             allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
           />
         ) : (
           <div className="absolute top-0 left-0 w-full h-full rounded-md bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center">

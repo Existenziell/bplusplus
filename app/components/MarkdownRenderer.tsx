@@ -8,6 +8,7 @@ import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
 import CodeBlock, { MultiLanguageCodeBlock } from '@/app/components/CodeBlock'
 import GlossaryTooltip from '@/app/components/GlossaryTooltip'
+import { ExternalLinkIcon } from '@/app/components/Icons'
 
 interface MarkdownRendererProps {
   content: string
@@ -306,8 +307,17 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       }
       // External links
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+        <a 
+          href={href} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="external-link group inline-flex items-center"
+          {...props}
+        >
           {children}
+          <span className="inline-block w-0 group-hover:w-3 overflow-hidden transition-all duration-200 ml-0.5">
+            <ExternalLinkIcon className="opacity-0 group-hover:opacity-70 transition-opacity duration-200" />
+          </span>
         </a>
       )
     },

@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
-import { ArrowRight } from '@/app/components/Icons'
+import { ArrowRight, ExternalLinkIcon } from '@/app/components/Icons'
 
 interface GlossaryRendererProps {
   content: string
@@ -121,8 +121,16 @@ function DefinitionRenderer({ content }: { content: string }) {
             return <a href={href} className="text-btc hover:underline">{children}</a>
           }
           return (
-            <a href={href} target="_blank" rel="noopener noreferrer" className="text-btc hover:underline">
+            <a 
+              href={href} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-btc hover:underline external-link group inline-flex items-center"
+            >
               {children}
+              <span className="inline-block w-0 group-hover:w-3 overflow-hidden transition-all duration-200 ml-0.5">
+                <ExternalLinkIcon className="opacity-0 group-hover:opacity-70 transition-opacity duration-200" />
+              </span>
             </a>
           )
         },

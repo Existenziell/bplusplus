@@ -26,7 +26,6 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
                   width={40}
                   height={40}
                   className="dark:invert"
-                  priority
                 />
                 <Image
                   src="/icons/bitcoin.svg"
@@ -34,7 +33,6 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
                   width={30}
                   height={30}
                   className="dark:invert"
-                  priority
                 />
                 </div>
               </Link>

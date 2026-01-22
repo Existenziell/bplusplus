@@ -81,7 +81,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         {/* Preconnect to Vercel Analytics/Speed Insights origins */}
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />

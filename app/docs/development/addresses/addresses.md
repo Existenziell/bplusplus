@@ -69,6 +69,8 @@ bc1p5d7rjq7g6rdk2yhzks9smlaqtedr4dekq08ge8ztwac72sfr9rusxg3297
 OP_1 <32-byte-x-only-pubkey>
 ```
 
+---
+
 ## Address Comparison
 
 | Type | Prefix | Size | Encoding | Fee Efficiency |
@@ -78,6 +80,8 @@ OP_1 <32-byte-x-only-pubkey>
 | P2WPKH | bc1q | 22 bytes | Bech32 | High |
 | P2WSH | bc1q | 34 bytes | Bech32 | Medium |
 | P2TR | bc1p | 34 bytes | Bech32m | Highest |
+
+---
 
 ## Generating Addresses
 
@@ -176,6 +180,8 @@ func main() {
 }
 ```
 :::
+
+---
 
 ## Validating Addresses
 
@@ -279,6 +285,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Bech32 Encoding Details
 
 ### Bech32 vs Bech32m
@@ -296,6 +304,8 @@ Bech32m (BIP-350):
 ### Why Bech32m?
 
 Bech32 had a weakness where certain error patterns could go undetected. Bech32m fixes this for future witness versions.
+
+---
 
 ## From Script to Address
 
@@ -367,6 +377,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Address Derivation Paths
 
 ### BIP Standards
@@ -433,6 +445,8 @@ async function deriveAddress(mnemonic) {
 }
 ```
 :::
+
+---
 
 ## Multi-Signature Addresses
 
@@ -532,6 +546,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Common Mistakes
 
 ### Address Validation Pitfalls
@@ -546,6 +562,8 @@ Always use consistent network parameters. Never mix mainnet keys with testnet ad
 ### Checksum Errors
 
 Always validate checksums before using an address - all libraries provide validation functions.
+
+---
 
 ## Best Practices
 
@@ -569,6 +587,8 @@ Always validate checksums before using an address - all libraries provide valida
 2. **Verify Derivation Paths**: Ensure consistent paths across wallet imports
 3. **Backup Seeds**: Addresses can be regenerated from seeds
 
+---
+
 ## Summary
 
 Understanding Bitcoin addresses requires knowledge of:
@@ -579,6 +599,8 @@ Understanding Bitcoin addresses requires knowledge of:
 - **Validation**: Checksum verification and format checking
 
 Modern applications should default to Bech32m (Taproot) addresses for the best fee efficiency and privacy features.
+
+---
 
 ## Related Topics
 

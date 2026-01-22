@@ -9,6 +9,8 @@ A common multisignature configuration requiring 2 signatures from 3 possible sig
 ### 21 Million
 The maximum supply of Bitcoin that will ever exist, making it one of the scarcest assets ever created. This hard cap is enforced by the protocol's consensus rules and achieved through the halving schedule, with the last satoshi expected to be mined around the year 2140. The fixed supply creates a deflationary monetary policy that contrasts sharply with traditional fiat currencies, which can be printed without limit. This scarcity is often cited as a key driver of Bitcoin's value proposition as "digital gold" or a store of value.
 
+---
+
 ## A
 
 ### Absolute Time Lock
@@ -31,6 +33,8 @@ A peer-to-peer exchange of cryptocurrencies between two parties without the need
 
 ### API (Application Programming Interface)
 A set of protocols and tools that allow applications to communicate with Bitcoin nodes, typically via JSON-RPC. The Bitcoin Core RPC API provides methods to query blockchain data, create and broadcast transactions, manage wallets, and monitor network status. Developers use these APIs to build wallets, block explorers, payment processors, and other Bitcoin applications. Third-party services also offer REST APIs that provide similar functionality without requiring users to run their own nodes.
+
+---
 
 ## B
 
@@ -72,6 +76,8 @@ The technical specifications that define the Lightning Network protocol, similar
 
 ### BIP (Bitcoin Improvement Proposal)
 A design document that proposes changes, additions, or informational content for the Bitcoin ecosystem, following a structured process for community review. BIPs are categorized as Standards Track (protocol changes), Informational, or Process documents. Notable examples include BIP 16 (P2SH), BIP 32 (HD wallets), BIP 39 (mnemonic seeds), BIP 141 (SegWit), and BIP 341 (Taproot). The BIP process provides a transparent, community-driven approach to Bitcoin development without requiring a central authority to approve changes.
+
+---
 
 ## C
 
@@ -132,6 +138,8 @@ The current balance distribution in a Lightning payment channel, representing ho
 ### Cooperative Close
 The preferred method of closing a Lightning payment channel where both parties agree on the final balance and sign a single closing transaction. Unlike force closes, cooperative closes have no time delays, lower fees (no anchor outputs or penalty mechanisms needed), and settle immediately once confirmed on-chain. Both parties benefit from cooperative closes, so they're used in the vast majority of channel closures. A cooperative close is only impossible when one party is offline, unresponsive, or actively disputing the channel state.
 
+---
+
 ## D
 
 ### Decentralization
@@ -158,6 +166,8 @@ An attempt to spend the same Bitcoin twice by creating two conflicting transacti
 ### Dust
 A transaction output so small that the fee required to spend it would exceed or approach its value, making it economically irrational to use. The dust threshold depends on fee rates but is typically around 546 satoshis for standard outputs and 294 satoshis for SegWit outputs. Dust outputs bloat the UTXO set without providing useful value, so Bitcoin Core rejects transactions that create dust by default. Wallets should avoid creating dust through careful coin selection, and users accumulating many small outputs may need to consolidate during low-fee periods.
 
+---
+
 ## E
 
 ### ECDSA (Elliptic Curve Digital Signature Algorithm)
@@ -165,6 +175,8 @@ The original cryptographic signature algorithm used in Bitcoin, based on the sec
 
 ### ECDH (Elliptic Curve Diffie-Hellman)
 A key exchange protocol that allows two parties to establish a shared secret over an insecure channel using elliptic curve cryptography. In Lightning Network, ECDH is used in onion routing (Sphinx protocol) to derive shared secrets between each hop without revealing them to other nodes in the path. The sender uses each routing node's public key to create encrypted layers, and each node uses its private key to decrypt only its layer and learn the next hop. This enables private, trustless payment routing where no single node learns the full payment path.
+
+---
 
 ## F
 
@@ -186,6 +198,8 @@ A divergence in the blockchain where two or more competing chains temporarily or
 ### Full Node
 A Bitcoin node that independently validates every transaction and block against consensus rules, maintaining a complete copy of the blockchain without trusting any external source. Full nodes download and verify ~600GB+ of historical data during initial sync, then validate new blocks as they arrive. Running a full node provides the highest level of security and privacy, as you verify your own transactions rather than trusting third parties. Full nodes also contribute to network decentralization by rejecting invalid blocks and relaying valid transactions to peers.
 
+---
+
 ## G
 
 ### Genesis Block
@@ -193,6 +207,8 @@ The first block in the Bitcoin blockchain (block height 0), created by Satoshi N
 
 ### Gossip Protocol
 The peer-to-peer mechanism by which Bitcoin nodes share information about new blocks, transactions, and network addresses with their connected peers. When a node receives valid new data, it announces it to peers who haven't seen it yet (avoiding re-broadcasting to the sender). This creates a flooding pattern where information propagates across the network in seconds without any central coordinator. The gossip protocol includes mechanisms to prevent spam and denial-of-service attacks, such as validating data before relay and limiting bandwidth per peer.
+
+---
 
 ## H
 
@@ -214,6 +230,8 @@ A wallet architecture (BIP 32) that generates all keys from a single master seed
 ### HTLC (Hash Time-Locked Contract)
 A conditional payment contract that forms the foundation of Lightning Network and atomic swaps, combining a hash lock with a time lock. The payment can only be claimed by revealing a secret (preimage) that hashes to a known value, and it automatically refunds to the sender if not claimed before the timeout expires. In Lightning, HTLCs chain across multiple channels to enable multi-hop payments. Each node only releases payment upon receiving the preimage from the next hop. This creates trustless routing where either the entire payment succeeds or it fails and refunds atomically.
 
+---
+
 ## I
 
 ### IBD (Initial Block Download)
@@ -225,6 +243,8 @@ A reference to a previous transaction output (UTXO) that is being consumed in a 
 ### Invoice
 A payment request in Lightning Network encoded as a BOLT11 string that contains all information needed to make a payment. Invoices typically start with `lnbc` for mainnet (or `lntb` for testnet), followed by an amount, and include the payment hash, recipient's node public key, expiry time, routing hints, and a signature. They're usually displayed as QR codes for easy mobile scanning. BOLT12 "offers" are a newer standard that enables reusable payment requests and other advanced features not possible with one-time BOLT11 invoices.
 
+---
+
 ## K
 
 ### Key Pair
@@ -232,6 +252,8 @@ A cryptographic pair consisting of a private key (a 256-bit secret number) and i
 
 ### Keysend
 A Lightning Network payment method that allows sending payments without requiring an invoice from the recipient. Instead of the receiver generating a payment hash and preimage (as with standard invoices), the sender generates the preimage themselves and includes it in the encrypted onion payload. The recipient's node extracts the preimage upon receiving the payment, enabling spontaneous payments to any node whose public key is known. Keysend is useful for tips, donations, streaming payments, and applications where generating invoices would be impractical. It's specified as feature bits 24/25 in the BOLT specifications and is widely supported by major Lightning implementations.
+
+---
 
 ## L
 
@@ -246,6 +268,8 @@ A second-layer payment protocol built on top of Bitcoin that enables instant, hi
 
 ### Locktime
 A transaction-level field (nLockTime) that prevents the transaction from being valid until a specified block height or Unix timestamp is reached. When set to a block height (values < 500,000,000) or timestamp (values >= 500,000,000), nodes will not relay or mine the transaction until that condition is met. Locktime enables use cases like post-dated checks, where a transaction is signed now but can't be spent until later. It's also foundational to Lightning Network, where pre-signed transactions with future locktimes serve as backup recovery mechanisms.
+
+---
 
 ## M
 
@@ -288,6 +312,8 @@ A collective of miners who combine their computational power and share block rew
 ### Multisig (Multi-Signature)
 A Bitcoin script pattern requiring multiple cryptographic signatures to authorize spending, providing enhanced security and enabling shared custody arrangements. Common configurations include 2-of-3 (any two of three keyholders can spend), 3-of-5 (majority required), or 2-of-2 (both parties must agree, as used in Lightning channels). Multisig protects against single points of failure: losing one key doesn't lose funds, and compromising one key doesn't enable theft. Pre-Taproot multisig visibly reveals the m-of-n structure on-chain, while Taproot with MuSig can make multisig indistinguishable from single-sig.
 
+---
+
 ## N
 
 ### Node
@@ -298,6 +324,8 @@ A computer running Lightning Network software (such as LND, Core Lightning, Ecla
 
 ### Nonce
 A 32-bit number in the block header that miners increment while searching for a valid proof-of-work hash. When combined with other header fields and hashed, different nonce values produce different hashes. Miners try billions of nonces looking for one that produces a hash below the difficulty target. Since the nonce provides only 4 billion possibilities (2^32), modern miners also vary the extranonce in the coinbase transaction to expand the search space. Finding the right nonce is essentially a lottery where more hash power buys more tickets per second.
+
+---
 
 ## O
 
@@ -315,6 +343,8 @@ A valid block that was mined but is not part of the main chain because another b
 
 ### Output
 A component of a Bitcoin transaction that specifies an amount of Bitcoin and the conditions (locking script or scriptPubKey) required to spend it. Each output represents a new UTXO that can later be used as an input in a future transaction. The locking script typically specifies a public key hash (address) that must provide a valid signature to spend, though more complex conditions are possible. A transaction can have multiple outputs, commonly one for the payment recipient and another returning change to the sender.
+
+---
 
 ## P
 
@@ -366,6 +396,8 @@ A standardized format (BIP 174) for creating, transferring, and signing Bitcoin 
 ### Public Key
 A cryptographic key derived from a private key through one-way elliptic curve multiplication (on the secp256k1 curve), used to verify signatures and generate addresses. Public keys can be safely shared since the mathematical relationship to the private key cannot be reversed. Bitcoin uses two forms: uncompressed (65 bytes, starting with 04) and compressed (33 bytes, starting with 02 or 03), with compressed now standard for efficiency. In Taproot, public keys are further tweaked with 32-byte x-only representation, saving additional space.
 
+---
+
 ## R
 
 ### RBF (Replace-by-Fee)
@@ -391,6 +423,8 @@ The process of finding a path through the Lightning Network's channel graph from
 
 ### Routing Fee
 The fee charged by Lightning nodes for forwarding payments through their channels, compensating them for providing liquidity and taking on channel management costs. Fees consist of two components: a base fee (fixed amount per forwarded payment, often 0-1000 millisatoshis) and a proportional fee (percentage of the payment amount, often 0.0001% to 0.1%). Routing nodes set their own fee policies, and senders choose routes partly based on total fees. Well-connected nodes with good liquidity can earn meaningful income from routing fees, incentivizing network connectivity.
+
+---
 
 ## S
 
@@ -448,6 +482,8 @@ The de facto standard protocol for communication between Bitcoin miners and mini
 ### Sybil Attack
 An attack where a malicious actor creates many fake identities (nodes) to gain disproportionate influence over the network, potentially to eclipse victims from honest nodes or manipulate peer discovery. Bitcoin mitigates Sybil attacks through several mechanisms: proof-of-work means mining power can't be faked, nodes limit connections per IP range, and the economic cost of running many nodes provides some resistance. However, well-resourced attackers can still attempt Sybil attacks, which is why users running their own full nodes and having diverse peer connections matters for security.
 
+---
+
 ## T
 
 ### Taproot
@@ -474,6 +510,8 @@ A unique 256-bit identifier for a transaction, calculated as the SHA256D hash of
 ### Transaction Malleability
 A historical vulnerability where transaction signatures could be modified by third parties without invalidating them, causing the transaction ID to change even though the transaction itself remained valid. This was problematic for protocols that needed to reference unconfirmed transactions by TXID, like Lightning Network channels that reference funding transactions before they confirm. SegWit (BIP 141) fixed malleability by moving signature data to a separate witness structure not included in the TXID calculation. This fix was a prerequisite for Lightning Network's development and security.
 
+---
+
 ## U
 
 ### UTXO (Unspent Transaction Output)
@@ -482,10 +520,14 @@ A transaction output that hasn't been spent yet, representing the actual "coins"
 ### UTXO Set
 The complete database of all unspent transaction outputs at a given point in time, representing the current state of Bitcoin ownership. Full nodes maintain the UTXO set in memory or fast storage for quick transaction validation, checking that referenced inputs exist and aren't already spent. The UTXO set currently contains around 70-100 million entries requiring several gigabytes to store. Keeping the UTXO set manageable is important for node performance, which is why creating dust outputs and unnecessary UTXOs is discouraged. AssumeUTXO allows new nodes to bootstrap quickly with a trusted UTXO set snapshot.
 
+---
+
 ## V
 
 ### vByte (Virtual Byte)
 A unit of transaction size measurement introduced with SegWit, calculated as weight units divided by 4, used for fee calculation and block space accounting. Virtual bytes provide backward compatibility with legacy fee estimation while incorporating SegWit's discount for witness data. A legacy transaction has equal vBytes and actual bytes, while SegWit transactions have fewer vBytes than actual bytes due to the witness discount. Fee rates are typically expressed in satoshis per vByte (sat/vB), and the block limit of 4 million weight units translates to 1 million vBytes maximum per block.
+
+---
 
 ## W
 
@@ -500,6 +542,8 @@ The measurement system introduced by SegWit for calculating transaction size and
 
 ### Witness
 The segregated data structure in SegWit transactions containing signatures, public keys, and other unlocking data that proves authorization to spend inputs. By moving witness data outside the base transaction (and thus outside the TXID calculation), SegWit fixed transaction malleability and enabled the witness discount for fee calculation. The witness is committed to through a separate witness root in the coinbase transaction rather than affecting the main merkle tree. For Taproot (witness version 1), the witness structure includes Schnorr signatures and, for script path spends, the revealed script and merkle proof.
+
+---
 
 ## Z
 

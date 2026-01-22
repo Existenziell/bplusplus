@@ -15,6 +15,8 @@ HTLC Conditions:
 - If time lock expires → Payment returns to sender
 ```
 
+---
+
 ## How HTLCs Work in Lightning
 
 ### Payment Flow
@@ -57,6 +59,8 @@ Each hop needs an **expiry delta** (CLTV delta) buffer to:
 
 **Rule**: Outgoing HTLC expiry < Incoming HTLC expiry (by at least `cltv_expiry_delta`)
 
+---
+
 ## HTLC Script Structure
 
 HTLCs in commitment transactions use this script pattern:
@@ -77,6 +81,8 @@ OP_ELSE
     OP_ENDIF
 OP_ENDIF
 ```
+
+---
 
 ## HTLC Verification
 
@@ -381,6 +387,8 @@ console.log(`Can forward: ${htlc.canForward(currentHeight)}`);
 ```
 :::
 
+---
+
 ## HTLC States
 
 An HTLC in a channel transitions through these states:
@@ -398,6 +406,8 @@ Offered → Accepted → Settled (success)
     ↓         ↓
   Failed   Failed (timeout/error)
 ```
+
+---
 
 ## HTLC Security Properties
 
@@ -420,6 +430,8 @@ Either the entire payment succeeds or fails completely:
 - CLTV (CheckLockTimeVerify) enforced by Bitcoin consensus
 - Sufficient delta prevents race conditions
 - Allows time for breach detection
+
+---
 
 ## Common Issues
 
@@ -450,6 +462,8 @@ Either the entire payment succeeds or fails completely:
 - Wait for CLTV expiry
 - Force close channel if necessary
 
+---
+
 ## Summary
 
 HTLCs are the atomic building blocks of Lightning payments:
@@ -458,6 +472,8 @@ HTLCs are the atomic building blocks of Lightning payments:
 - **Time locks** enable safe routing through untrusted intermediaries
 - **Decreasing expiries** prevent routing attacks
 - **Atomicity** guarantees all-or-nothing settlement
+
+---
 
 ## Related Topics
 

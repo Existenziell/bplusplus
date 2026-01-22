@@ -313,6 +313,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Step-by-Step Process
 
 ### Step 1: Select UTXOs
@@ -689,6 +691,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Fee Calculation
 
 ### Estimating Transaction Size
@@ -730,6 +734,8 @@ Fee Rate: 10 sat/vB
 Fee: 2,500 sats
 ```
 
+---
+
 ## Change Outputs
 
 ### When to Create Change
@@ -746,6 +752,8 @@ bitcoin-cli createrawtransaction \
   '[{"txid":"...", "vout":0}]' \
   '{"<destination>": 0.001, "<change_address>": 0.0005}'
 ```
+
+---
 
 ## Signing Process
 
@@ -770,6 +778,8 @@ Witness: <signature> <public_key>
 4. Continue until M signatures collected
 5. Broadcast fully signed transaction
 
+---
+
 ## Transaction Validation
 
 ### Before Broadcasting
@@ -788,6 +798,8 @@ Witness: <signature> <public_key>
 - **Dust output**: Output below dust threshold
 - **Fee too low**: Fee below minimum
 
+---
+
 ## Best Practices
 
 ### For Developers
@@ -805,6 +817,8 @@ Witness: <signature> <public_key>
 3. **Wait for Confirmation**: Don't assume immediate confirmation
 4. **Backup**: Backup transaction if needed
 5. **Monitor**: Track transaction status
+
+---
 
 ## Common Issues
 
@@ -838,6 +852,8 @@ Witness: <signature> <public_key>
 - Invalid script
 
 **Solution**: Fix issue and recreate transaction
+
+---
 
 ## Advanced Topics
 
@@ -874,6 +890,8 @@ bitcoin-cli walletprocesspsbt <psbt>
 bitcoin-cli finalizepsbt <psbt>
 ```
 
+---
+
 ## Summary
 
 Transaction creation involves:
@@ -886,6 +904,8 @@ Transaction creation involves:
 - **Validation**: Verify transaction is valid
 
 Understanding transaction creation is essential for building Bitcoin wallets and applications.
+
+---
 
 ## Related Topics
 

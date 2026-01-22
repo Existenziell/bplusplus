@@ -13,6 +13,8 @@ Every major Bitcoin controversy teaches us something about decentralized governa
 
 Understanding these battles is essential for anyone who wants to understand Bitcoin's culture and design philosophy.
 
+---
+
 ## The Nature of Bitcoin Debates
 
 Bitcoin controversies tend to follow a pattern:
@@ -24,6 +26,8 @@ Bitcoin controversies tend to follow a pattern:
 5. **Lessons are learned** and absorbed into Bitcoin's culture
 
 These debates are often heated because the stakes are high. Bitcoin is real money used by real people. Changes can't be rolled back. And there's no CEO to make the final call.
+
+---
 
 ## Major Controversies
 
@@ -48,6 +52,8 @@ The catastrophic failure of the world's largest Bitcoin exchange. 850,000 BTC lo
 [**Craig Wright / "Faketoshi"**](/docs/controversies/craig-wright)
 The ongoing saga of a man claiming to be Satoshi Nakamoto. Failed cryptographic proofs, forged documents, and legal battles culminated in a 2024 UK court ruling definitively stating Wright is not Satoshi.
 
+---
+
 ## Learning from Controversy
 
 These debates aren't just historical curiosities. They reveal:
@@ -55,6 +61,8 @@ These debates aren't just historical curiosities. They reveal:
 - **What Bitcoiners value**: decentralization, self-sovereignty, censorship resistance
 - **How Bitcoin evolves**: slowly, carefully, with broad consensus
 - **Why Bitcoin is resilient**: it survives attacks, scams, and internal conflicts
+
+---
 
 ## Antifragile by Design
 

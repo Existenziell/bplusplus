@@ -179,6 +179,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Centralized Price Service
 
 ### Service Architecture
@@ -217,6 +219,8 @@ class BitcoinPriceService:
             self.cache[cache_key] = (price, time.time())
             return price
 ```
+
+---
 
 ## Caching Strategies
 
@@ -366,6 +370,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Rate Limiting
 
 ### Implementing Rate Limits
@@ -402,6 +408,8 @@ class RateLimiter:
 - Use caching to reduce calls
 - Monitor API usage
 
+---
+
 ## Multi-Source Fallbacks
 
 ### Fallback Chain
@@ -437,6 +445,8 @@ def get_price_with_fallback(currency='USD'):
     raise Exception("All price sources failed")
 ```
 
+---
+
 ## Error Handling
 
 ### API Errors
@@ -462,6 +472,8 @@ def get_price_safe(currency='USD'):
         # Handle other errors
         return get_cached_price(currency)
 ```
+
+---
 
 ## Thread Safety
 
@@ -491,6 +503,8 @@ class ThreadSafePriceService:
             return price
 ```
 
+---
+
 ## Best Practices
 
 ### For Developers
@@ -507,6 +521,8 @@ class ThreadSafePriceService:
 2. **Batch Requests**: Request multiple currencies at once
 3. **Connection Pooling**: Reuse HTTP connections
 4. **Async Operations**: Use async/await for I/O
+
+---
 
 ## Common Issues
 
@@ -540,6 +556,8 @@ class ThreadSafePriceService:
 - Retry with exponential backoff
 - Monitor API status
 
+---
+
 ## Summary
 
 Price tracking requires:
@@ -550,6 +568,8 @@ Price tracking requires:
 - **Fallbacks**: Multiple sources for reliability
 - **Error Handling**: Handle all error cases
 - **Thread Safety**: Support concurrent access
+
+---
 
 ## Related Topics
 

@@ -13,6 +13,8 @@ A blockchain is a sequence of blocks, where each block is cryptographically link
 
 Unlike a traditional database where records can be modified or deleted, the blockchain creates a permanent, append-only ledger. Once a block is added to the chain, it becomes part of an unalterable historical record.
 
+---
+
 ## Block Structure and Hash Linking
 
 Each block in Bitcoin contains a header with several fields, including a critical reference to the previous block:
@@ -70,6 +72,8 @@ If an attacker tries to change a transaction in Block N:
 4. Block N+2 becomes invalid (it references invalid Block N+1)
 5. The entire chain from Block N onward breaks
 
+---
+
 ## Immutability Through Chain Structure
 
 The blockchain's immutability comes from the combination of hash linking and proof-of-work:
@@ -105,6 +109,8 @@ Attacker's Chain: Block 100 → Block 101' (modified)
                             to catch up and overtake
 ```
 
+---
+
 ## Chain Verification
 
 Nodes verify the blockchain's integrity by checking:
@@ -132,6 +138,8 @@ The chain structure enables efficient verification:
 - **Headers-first sync**: Nodes can download and verify all block headers (~60 MB) before downloading full blocks
 - **Incremental verification**: Nodes only need to verify new blocks, not re-verify the entire chain
 - **Checkpoint verification**: Nodes can trust known good blocks (checkpoints) and verify from there
+
+---
 
 ## Relationship to Other Bitcoin Concepts
 
@@ -164,6 +172,8 @@ Proof-of-work secures the blockchain:
 - Each block requires computational work to create
 - The chain with the most work is the valid chain
 - Changing history requires redoing all subsequent work
+
+---
 
 ## Practical Implications
 
@@ -203,6 +213,8 @@ The blockchain grows continuously:
 - This creates a trade-off: larger blocks = more transactions but larger blockchain
 - Bitcoin's block size limit balances throughput with node requirements
 
+---
+
 ## Comparison to Traditional Systems
 
 | Aspect | Traditional Database | Bitcoin Blockchain |
@@ -213,6 +225,8 @@ The blockchain grows continuously:
 | **Tampering** | Administrator can modify records | Changing history requires redoing all subsequent work |
 | **Backup** | Need to trust backup integrity | Every node has a complete, verifiable copy |
 | **Audit** | Requires trusting audit logs | The chain itself is the audit trail |
+
+---
 
 ## The Elegance of the Solution
 
@@ -226,6 +240,8 @@ The blockchain structure is elegant because it:
 6. **Prevents tampering**: The cost of changing history grows exponentially
 
 The blockchain isn't just a data structure - it's a mechanism that creates trust through mathematics rather than authority.
+
+---
 
 ## Common Misconceptions
 
@@ -252,6 +268,8 @@ The blockchain is distributed:
 - Thousands of nodes worldwide maintain the chain
 - No single point of failure
 - Network redundancy ensures availability
+
+---
 
 ## Conclusion
 

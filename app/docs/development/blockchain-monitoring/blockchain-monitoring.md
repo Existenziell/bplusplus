@@ -41,6 +41,8 @@ grep -i zmq ~/.bitcoin/debug.log
 bitcoind -h | grep zmq
 ```
 
+---
+
 ## Block Detection
 
 ### Real-Time Block Monitoring with ZMQ
@@ -313,6 +315,8 @@ block = rpc.getblock(block_hash)
 - Transaction count
 - Block size
 
+---
+
 ## Mining Pool Identification
 
 ### Coinbase Transaction Analysis
@@ -335,6 +339,8 @@ def identify_pool(block):
     
     return pool_name
 ```
+
+---
 
 ## OP_RETURN Analysis
 
@@ -400,6 +406,8 @@ function extractOpReturn(tx) {
 - **Asset Protocols**: Counterparty, Omni Layer
 - **Messages**: Encoded messages
 - **Metadata**: Transaction metadata
+
+---
 
 ## Transaction Monitoring
 
@@ -584,6 +592,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Statistics and Logging
 
 ### Block Statistics
@@ -618,6 +628,8 @@ def log_to_csv(stats):
         writer.writerow(stats)
 ```
 
+---
+
 ## Error Handling
 
 ### ZMQ Connection Failures
@@ -646,6 +658,8 @@ except Exception as e:
     # Retry or log error
 ```
 
+---
+
 ## Best Practices
 
 ### For Monitoring Applications
@@ -662,6 +676,8 @@ except Exception as e:
 2. **Batch Operations**: Batch RPC calls when possible
 3. **Connection Pooling**: Reuse connections
 4. **Efficient Parsing**: Parse only needed data
+
+---
 
 ## Related Topics
 

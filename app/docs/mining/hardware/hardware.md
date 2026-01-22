@@ -123,6 +123,8 @@ ASIC: Purpose-built silicon
 
 Every transistor in an ASIC is dedicated to SHA-256. No graphics processing, no floating point, no cache hierarchy, just hashing.
 
+---
+
 ## ASIC Evolution
 
 ### Generation Timeline
@@ -184,6 +186,8 @@ Smaller transistors = less power per hash = better efficiency.
 - Known for immersion cooling
 - Products: Clarke, Bitfury B8
 
+---
+
 ## Efficiency Metrics
 
 ### Joules per Terahash (J/TH)
@@ -223,6 +227,8 @@ Electricity per TH/day: 0.6 × $0.05 = $0.03
 
 Profit per TH/day: $0.08 - $0.03 = $0.05
 ```
+
+---
 
 ## Industrial Mining Operations
 
@@ -269,6 +275,8 @@ Mining gravitates toward cheap power:
 - **Nordic countries**: Hydro, geothermal, cold
 - **Middle East**: UAE, Oman (cheap natural gas)
 
+---
+
 ## Home Mining
 
 ### Is It Viable?
@@ -304,6 +312,8 @@ For most people in most places: marginally, or no.
 - ASIC mining as home heating
 - Heat is a feature, not waste
 
+---
+
 ## The ASIC Trap
 
 ### No Escape
@@ -324,6 +334,8 @@ Some cryptocurrencies tried to resist ASICs:
 - **ASIC-resistant designs**: Often just delays ASICs
 
 Bitcoin's position: ASICs are a feature, not a bug. They represent committed capital that can't be repurposed.
+
+---
 
 ## Future Trends
 
@@ -362,6 +374,8 @@ Large miners building their own chips:
 - **Supply chain control**
 - **Examples**: Bitfury, Intel (briefly), Block/Square (planned)
 
+---
+
 ## Summary
 
 The evolution of mining hardware:
@@ -381,12 +395,16 @@ Key takeaways:
 - **Hardware is expensive** and depreciates quickly
 - **Location matters**: Cheap power wins
 
+---
+
 ## Related Topics
 
 - [Proof-of-Work](/docs/mining/proof-of-work) - What the hardware computes
 - [Mining Economics](/docs/mining/economics) - Profitability analysis
 - [Mining Pools](/docs/mining/pools) - How miners collaborate
 - [Difficulty Adjustment](/docs/mining/difficulty) - How network responds to hashrate
+
+---
 
 ## Resources
 

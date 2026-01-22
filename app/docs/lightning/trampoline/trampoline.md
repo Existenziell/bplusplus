@@ -16,6 +16,8 @@ Standard Lightning routing requires:
 - Battery: Graph sync and pathfinding drain power
 - Time: Initial sync takes minutes
 
+---
+
 ## How Trampoline Works
 
 Instead of full pathfinding, the sender:
@@ -34,6 +36,8 @@ Trampoline Routing:
 Sender → T1 → [?] → T2 → [?] → Recipient
 (Sender only knows trampolines, trampolines find actual hops)
 ```
+
+---
 
 ## Architecture
 
@@ -77,6 +81,8 @@ Trampoline T1 receives:
 4. Recipient receives payment
 ```
 
+---
+
 ## Privacy Trade-offs
 
 ### What Trampolines Learn
@@ -102,6 +108,8 @@ Trampoline T1 receives:
 - Use multiple trampolines
 - Rotate trampoline selection
 - Add dummy hops
+
+---
 
 ## Implementation
 
@@ -139,6 +147,8 @@ T1 pays: route fees to T2
 T2 pays: route fees to recipient
 ```
 
+---
+
 ## Use Cases
 
 ### Mobile Wallets
@@ -175,6 +185,8 @@ IoT Device:
 - No graph maintenance
 ```
 
+---
+
 ## Current Support
 
 ### Phoenix Wallet (ACINQ)
@@ -193,6 +205,8 @@ ACINQ's node implementation supports trampoline.
 
 Limited or experimental support as of 2024.
 
+---
+
 ## Comparison
 
 | Aspect | Standard | Trampoline |
@@ -203,6 +217,8 @@ Limited or experimental support as of 2024.
 | Latency | Higher (compute) | Lower |
 | Fees | Direct | + Trampoline fee |
 | Mobile friendly | No | Yes |
+
+---
 
 ## Security Considerations
 
@@ -229,6 +245,8 @@ Trampolines could:
 - Payment splitting
 - Multiple trampoline chains
 
+---
+
 ## Multi-Trampoline Routes
 
 For better privacy and reliability:
@@ -249,6 +267,8 @@ Sender → T1 → [...] → T2 → [...] → Recipient
 - **Redundancy**: Multiple routing options
 - **Decentralization**: Not dependent on single provider
 
+---
+
 ## Fee Structure
 
 Trampoline fees typically include:
@@ -266,6 +286,8 @@ Route budget: 500 sats max
 
 Total max: 1 sat + 100 sats + 500 sats = 601 sats
 ```
+
+---
 
 ## Future Developments
 
@@ -285,6 +307,8 @@ Potential for specialized trampoline networks:
 - Fee market for pathfinding
 - Quality-of-service differentiation
 
+---
+
 ## Summary
 
 Trampoline routing provides:
@@ -294,6 +318,8 @@ Trampoline routing provides:
 - **Reduced bandwidth**: Minimal data requirements
 - **Battery savings**: Less computation on device
 - **Privacy trade-off**: Trampolines learn more than regular hops
+
+---
 
 ## When to Use Trampoline
 
@@ -308,10 +334,14 @@ Trampoline routing provides:
 - Routing nodes
 - When you need full control over route selection
 
+---
+
 ## Related Topics
 
 - [Onion Routing](/docs/lightning/onion) - Privacy-preserving routing
 - [Routing & HTLCs](/docs/lightning/routing) - Standard routing mechanics
+
+---
 
 ## Resources
 

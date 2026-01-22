@@ -8,6 +8,8 @@ Bitcoin operates in a hostile environment where participants may be anonymous, g
 
 The genius of Bitcoin's design is that it doesn't require participants to be altruistic or trustworthy. Instead, it assumes rational self-interest and structures the system so that **self-interest naturally leads to network security**.
 
+---
+
 ## Core Principle: Honesty is Profitable
 
 Bitcoin's incentive structure follows a simple principle: **honest behavior is more profitable than dishonest behavior**. This creates a Nash equilibrium where rational actors choose to follow the rules because doing so maximizes their expected value.
@@ -17,6 +19,8 @@ Bitcoin's incentive structure follows a simple principle: **honest behavior is m
 | **Miner** | Mine valid blocks, follow consensus rules | Attempt to double-spend or include invalid transactions | Honest mining earns block rewards; dishonest blocks are rejected |
 | **Node** | Validate all transactions and blocks | Accept invalid transactions | Invalid blocks are rejected by network; node loses credibility |
 | **User** | Pay appropriate fees, use valid addresses | Attempt double-spending | Double-spend fails; user loses transaction fees |
+
+---
 
 ## Miner Incentives
 
@@ -73,6 +77,8 @@ As block subsidies decrease through [halvings](/docs/glossary#halving), transact
 
 This transition ensures miners remain incentivized to secure the network even after all 21 million bitcoin are mined.
 
+---
+
 ## Node Incentives
 
 [Full nodes](/docs/glossary#full-node) validate all transactions and blocks, maintaining network integrity. Unlike miners, nodes don't receive direct financial rewards, yet thousands of nodes operate worldwide.
@@ -98,6 +104,8 @@ Running a node has costs (hardware, electricity, bandwidth) but provides value:
 - **Altruistic value**: Supporting the Bitcoin network
 
 The fact that thousands of individuals choose to run nodes demonstrates that the benefits (both personal and collective) outweigh the costs.
+
+---
 
 ## User Incentives
 
@@ -132,6 +140,8 @@ Attempting to double-spend is economically irrational:
 
 For typical users, the cost of double-spending far exceeds any potential gain.
 
+---
+
 ## Developer Incentives
 
 Bitcoin's open-source development model creates unique incentives for developers.
@@ -162,6 +172,8 @@ Developers are incentivized to improve Bitcoin because:
 - **Reputation**: Successful contributions build professional reputation
 - **Ideology**: Many developers believe in Bitcoin's mission
 - **Career**: Bitcoin expertise is valuable in the industry
+
+---
 
 ## Game Theory and Nash Equilibrium
 
@@ -202,6 +214,8 @@ For Bitcoin, this inequality holds because:
 - Success probability is low (requires >50% hash rate)
 - Potential gain is limited (can only reverse recent transactions)
 
+---
+
 ## Incentive Alignment Across Participants
 
 Bitcoin's incentives align all participants toward network security:
@@ -224,6 +238,8 @@ Bitcoin's incentive structure creates positive feedback loops:
 5. **Adoption → Value**: More users increase Bitcoin's value
 
 This creates a **virtuous cycle** where network security and value reinforce each other.
+
+---
 
 ## Long-Term Incentive Sustainability
 
@@ -251,6 +267,8 @@ Bitcoin's core rules are difficult to change, ensuring:
 - Participants can rely on long-term incentives
 - No single entity can change the rules
 
+---
+
 ## Comparison with Traditional Systems
 
 | Aspect | Traditional Systems | Bitcoin |
@@ -267,11 +285,15 @@ Bitcoin's incentive-based model is more resilient because it doesn't depend on:
 - Institutional trust
 - Geographic jurisdiction
 
+---
+
 ## Conclusion
 
 Bitcoin's incentive structure is the foundation of its security and functionality. By making honesty more profitable than dishonesty, Bitcoin creates a system where rational self-interest naturally leads to network security. This elegant design allows Bitcoin to operate without central authority, legal enforcement, or trusted intermediaries, relying instead on mathematics, cryptography, and economic incentives.
 
 Understanding incentives is essential for understanding Bitcoin because **incentives explain why Bitcoin works**, not just how it works. Every aspect of Bitcoin's design (from proof-of-work to the fee market to consensus rules) is shaped by the need to align participant incentives toward network security.
+
+---
 
 ## Related Topics
 

@@ -46,6 +46,8 @@ If you believe a decentralized, censorship-resistant, inflation-proof monetary s
 
 This is why the energy debate is ultimately unproductive. It disguises a subjective value judgment as an objective technical criticism. Those who oppose Bitcoin will always say it uses "too much" energy. Those who understand it will recognize that the energy is precisely what makes it work.
 
+---
+
 ## Energy Use as a Security Feature
 
 Bitcoin's [proof-of-work](/docs/glossary#proof-of-work-pow) mechanism requires significant computational resources, which translates to energy consumption. This is by design:
@@ -53,6 +55,8 @@ Bitcoin's [proof-of-work](/docs/glossary#proof-of-work-pow) mechanism requires s
 - **Attack Cost**: To attack Bitcoin, an attacker would need to control more than 50% of the network's [hash rate](/docs/glossary#hash-rate), requiring enormous energy investment (see [51% attack](/docs/glossary#51-attack))
 - **Economic Security**: The cost of energy creates a real economic barrier to attacks
 - **Decentralization**: High energy costs prevent any single entity from controlling the network
+
+---
 
 ## Renewable Energy Usage
 
@@ -64,6 +68,8 @@ Bitcoin mining has increasingly moved toward renewable energy sources:
 - **Grid Balancing**: Mining can help balance renewable energy grids by consuming excess power
 
 According to the Bitcoin Mining Council (Q4 2021), Bitcoin mining used approximately 58.5% renewable energy.
+
+---
 
 ## Energy Consumption in Context
 
@@ -106,6 +112,8 @@ To understand Bitcoin's energy consumption, it's helpful to compare it with othe
 
 3. **Perspective**: US holiday lights alone consume more energy (~200 TWh) than Bitcoin's entire network (~100-150 TWh).
 
+---
+
 ## Energy Efficiency Trends
 
 Bitcoin mining has become more energy-efficient over time:
@@ -115,6 +123,8 @@ Bitcoin mining has become more energy-efficient over time:
 - **Hash Rate Efficiency**: More hash power per unit of energy consumed
 - **[Mining Pool](/docs/glossary#mining-pool) Optimization**: Better coordination reduces wasted computation
 
+---
+
 ## The Value Proposition
 
 Supporters argue that Bitcoin's energy consumption is justified by the value it provides:
@@ -123,6 +133,8 @@ Supporters argue that Bitcoin's energy consumption is justified by the value it 
 - **Store of Value**: Provides a decentralized alternative to traditional monetary systems
 - **Network Security**: Energy consumption directly translates to network security
 - **Global Access**: Provides financial services to unbanked populations
+
+---
 
 ## Environmental Concerns
 
@@ -140,6 +152,8 @@ The environmental impact depends on the energy sources used:
 - **Carbon Offsets**: Some mining operations purchase carbon offsets
 - **Efficiency Improvements**: Ongoing hardware and operational efficiency gains
 - **Location Optimization**: Mining operations moving to areas with excess renewable energy
+
+---
 
 ## Future Outlook
 
@@ -159,6 +173,8 @@ The long-term sustainability of Bitcoin's energy consumption depends on:
 - **Network Growth**: How Bitcoin's energy consumption scales with adoption
 - **Regulatory Environment**: How governments regulate mining energy use
 
+---
+
 ## Conclusion
 
 While Bitcoin does consume significant energy, it's important to view this consumption in context:
@@ -168,11 +184,15 @@ While Bitcoin does consume significant energy, it's important to view this consu
 - Mining increasingly uses renewable energy sources
 - The value provided by Bitcoin may justify its energy use
 
+---
+
 ## Related Topics
 
 - [Proof-of-Work](/docs/mining/proof-of-work) - How Bitcoin's consensus mechanism works
 - [Mining Economics](/docs/mining/economics) - Economic incentives in Bitcoin mining
 - [Blocksize Wars](/docs/controversies/blocksize-wars) - Another major Bitcoin controversy
+
+---
 
 ## Resources
 

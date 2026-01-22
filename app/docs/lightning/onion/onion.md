@@ -13,6 +13,8 @@ Onion routing encrypts data in layers, like an onion. Each hop peels off one lay
 - **Source Hiding**: Sender identity is hidden from all hops
 - **Path Hiding**: Full route is never revealed
 
+---
+
 ## Sphinx Protocol
 
 Lightning uses the Sphinx protocol (adapted from Tor's design) for payment routing. It provides:
@@ -40,6 +42,8 @@ Onion Packet Structure:
 Total: 1366 bytes
 ```
 
+---
+
 ## Onion Packet Components
 
 | Field | Size | Description |
@@ -57,6 +61,8 @@ Each decrypted layer contains:
 - **Amount to Forward**: Variable - HTLC amount for next hop
 - **Outgoing CLTV**: 4 bytes - Expiry for outgoing HTLC
 - **Padding**: Variable - Random data to maintain fixed size
+
+---
 
 ## Shared Secret Derivation
 
@@ -309,6 +315,8 @@ function deriveMuKey(sharedSecret) {
 ```
 :::
 
+---
+
 ## Encryption Process
 
 ### Layer Construction (Sender)
@@ -344,6 +352,8 @@ Each hop performs:
 6. Blind ephemeral public key for next hop
 7. Forward modified packet
 
+---
+
 ## Privacy Guarantees
 
 ### Information Visibility
@@ -372,6 +382,8 @@ An intermediate hop knows only:
 - Total payment amount
 - Their position in the route
 
+---
+
 ## Fixed Packet Size
 
 All onion packets are exactly 1366 bytes regardless of route length:
@@ -379,6 +391,8 @@ All onion packets are exactly 1366 bytes regardless of route length:
 - Prevents traffic analysis based on packet size
 - Unused space filled with random padding
 - Maximum 20 hops supported
+
+---
 
 ## Security Properties
 
@@ -400,6 +414,8 @@ All onion packets are exactly 1366 bytes regardless of route length:
 - Duplicate packets rejected
 - Prevents payment replay attacks
 
+---
+
 ## Common Failure Modes
 
 ### HMAC Mismatch
@@ -417,6 +433,8 @@ If version byte is not 0, packet is rejected.
 
 Malformed packets are rejected immediately.
 
+---
+
 ## Summary
 
 Onion routing provides Lightning's privacy layer:
@@ -427,11 +445,15 @@ Onion routing provides Lightning's privacy layer:
 - **Fixed size**: Route length hidden
 - **Forward secrecy**: Past payments stay private
 
+---
+
 ## Related Topics
 
 - [Routing & HTLCs](/docs/lightning/routing) - Payment routing mechanics
 - [Trampoline Routing](/docs/lightning/trampoline) - Delegated pathfinding
 - [Invoices (BOLT11)](/docs/lightning/invoices) - Payment request format
+
+---
 
 ## Resources
 

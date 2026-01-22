@@ -127,6 +127,8 @@ Proportional Fee = 100,000,000 × 10 / 1,000,000 = 1000 msat
 Total Fee = 1000 + 1000 = 2000 msat (2 sats)
 ```
 
+---
+
 ## Routing Policy
 
 Each node advertises a **routing policy** that specifies:
@@ -149,6 +151,8 @@ This means:
 - 1000 msat base fee per HTLC
 - 10 ppm proportional fee
 - Requires 40 block expiry delta
+
+---
 
 ## Fee Calculation Along a Route
 
@@ -190,6 +194,8 @@ Amount to Dave: 100,002,000 + 52,001 = 100,054,001 msat
 ```
 
 **Total Fee Paid**: 54,001 msat (54 sats)
+
+---
 
 ## HTLC Amount Calculation
 
@@ -512,6 +518,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Integer Division
 
 **Important**: Lightning uses **integer division** for fee calculation (as per BOLT 7).
@@ -533,6 +541,8 @@ But if payment was 999,999 msat:
 999,999 × 3 / 1,000,000 = 2.999997 msat
 Integer division: 2 msat (rounded down)
 ```
+
+---
 
 ## Fee Economics
 
@@ -564,6 +574,8 @@ Integer division: 2 msat (rounded down)
 - Use direct channels when possible
 - Consider payment splitting (MPP)
 
+---
+
 ## Fee Limits
 
 ### Maximum Fees
@@ -579,6 +591,8 @@ Some nodes set minimum fees to:
 - Cover operational costs
 - Discourage spam
 - Ensure profitability
+
+---
 
 ## Fee Discovery
 
@@ -598,6 +612,8 @@ Nodes can update their fees:
 
 Changes take effect immediately for new payments.
 
+---
+
 ## Best Practices
 
 ### For Routing Nodes
@@ -613,6 +629,8 @@ Changes take effect immediately for new payments.
 2. **Direct Channels**: Use direct channels to avoid fees
 3. **Payment Size**: Larger payments pay more in proportional fees
 4. **Route Optimization**: Balance fees vs. success probability
+
+---
 
 ## Common Issues
 
@@ -635,6 +653,8 @@ Changes take effect immediately for new payments.
 - Verify policy values
 - Account for all hops
 - Include base and proportional fees
+
+---
 
 ## Summary
 

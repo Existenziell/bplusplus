@@ -28,6 +28,8 @@ A **hard fork** **loosens** the consensus rules (or changes them incompatibly). 
 
 **Example**: Bitcoin Cash increased the [block size](/docs/glossary#block-size) limit from 1 MB to 8 MB. Old nodes reject these larger blocks as invalid, guaranteeing a chain split.
 
+---
+
 ## Complete Fork History Table
 
 | Date | Block Height | Type | Name | BIP(s) | Description | Status |
@@ -44,6 +46,8 @@ A **hard fork** **loosens** the consensus rules (or changes them incompatibly). 
 | **2017-08-24** | 481,824 | Soft Fork | Segregated Witness (SegWit) | [BIP 141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki), [BIP 143](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki), [BIP 144](https://github.com/bitcoin/bips/blob/master/bip-0144.mediawiki), [BIP 148](https://github.com/bitcoin/bips/blob/master/bip-0148.mediawiki) | Separated witness data, fixed malleability | ✅ Active |
 | **2018-11-15** | 556,766 | Hard Fork | Bitcoin SV | - | Bitcoin Cash fork, increased to 128 MB blocks | 🔀 Split Chain |
 | **2021-11-14** | 709,632 | Soft Fork | Taproot | [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki), [BIP 342](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki), [BIP 340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki) | Schnorr signatures, improved privacy | ✅ Active |
+
+---
 
 ## Activation Mechanisms
 
@@ -72,6 +76,8 @@ Hard forks typically require:
 - Or acceptance of chain split
 - Coordination among miners and nodes
 
+---
+
 ## Fork Statistics
 
 ### Soft Fork Adoption
@@ -90,6 +96,8 @@ Hard forks typically require:
 |------|----------------|-----------|----------------|
 | Bitcoin Cash | Bitcoin (BTC) | Bitcoin Cash (BCH) | Both chains active |
 | Bitcoin SV | Bitcoin Cash (BCH) | Bitcoin SV (BSV) | Both chains active |
+
+---
 
 ## Timeline Visualization
 
@@ -127,6 +135,8 @@ Hard forks typically require:
      │ Future upgrades...
 ```
 
+---
+
 ## Key Takeaways
 
 1. **Soft Forks are Preferred**: All major protocol upgrades since 2012 have been soft forks
@@ -134,6 +144,8 @@ Hard forks typically require:
 3. **Chain Splits**: Hard forks always create splits; soft forks can also split the chain if contentious (e.g., via UASF)
 4. **Activation Methods**: Different activation mechanisms (BIP 9, IsSuperMajority, UASF) with varying risks
 5. **Gradual Adoption**: New features take time to reach full adoption
+
+---
 
 ## Potential Future Soft Forks
 
@@ -143,6 +155,8 @@ Hard forks typically require:
 - **Ephemeral Anchors**: Lightning Network improvements
 
 For more details on script types and their evolution, see [Script System](/docs/bitcoin/script).
+
+---
 
 ## References
 

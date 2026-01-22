@@ -13,6 +13,8 @@ In any distributed system, especially one handling financial transactions, the o
 
 Traditional systems solve this with **centralized time sources**: banks use synchronized clocks, databases use timestamps from authoritative servers, and payment processors rely on trusted time services. But in a decentralized system, there is no central authority to provide trusted time.
 
+---
+
 ## The Problem: No Synchronized Clocks
 
 In a distributed network without central coordination, nodes face several timing challenges:
@@ -28,6 +30,8 @@ A dishonest node could manipulate its clock to create timestamps that favor its 
 
 ### No Authority
 There's no trusted time server that all nodes can query. Even if there were, trusting a single source would violate Bitcoin's decentralized design.
+
+---
 
 ## Bitcoin's Solution: Proof-of-Work as Time
 
@@ -86,6 +90,8 @@ The difficulty adjustment is what makes "approximately every 10 minutes" actuall
 
 For technical details on how difficulty adjustment works, see the [Difficulty Adjustment](/docs/mining/difficulty) page.
 
+---
+
 ## The Blockchain as Timechain
 
 The blockchain is fundamentally a **timechain**: a cryptographically secured sequence of events ordered by proof-of-work. This temporal structure enables several critical functions:
@@ -110,6 +116,8 @@ The timechain ensures that if Alice tries to spend the same UTXO twice, only the
 
 All nodes agree on the same sequence of blocks (the longest valid chain), which means they agree on the same ordering of all transactions. This creates a **shared temporal reality** across the entire network without any central coordination.
 
+---
+
 ## Why This Is Essential
 
 The timechain property is fundamental to Bitcoin's operation:
@@ -124,6 +132,8 @@ The timechain property is fundamental to Bitcoin's operation:
 
 Without the timechain, Bitcoin couldn't function as a decentralized payment system. The ability to order events trustlessly is what makes everything else possible.
 
+---
+
 ## Comparison to Traditional Systems
 
 | Aspect | Traditional Systems | Bitcoin (Timechain) |
@@ -133,6 +143,8 @@ Without the timechain, Bitcoin couldn't function as a decentralized payment syst
 | **Manipulation** | Time server can be compromised | Requires >50% hash rate to manipulate |
 | **Synchronization** | All nodes sync to central source | Nodes independently verify block sequence |
 | **Failure Mode** | Single point of failure | Distributed: no single point of failure |
+
+---
 
 ## The Elegance of the Solution
 
@@ -147,6 +159,8 @@ Bitcoin's timechain solution is elegant because it:
 
 The timechain isn't a separate feature; it's an emergent property of how Bitcoin achieves consensus. By solving the consensus problem, Bitcoin also solved the timing problem.
 
+---
+
 ## Practical Implications
 
 Understanding Bitcoin as a timechain helps explain:
@@ -157,6 +171,8 @@ Understanding Bitcoin as a timechain helps explain:
 - **Why timestamps are flexible:** They're hints, not commands: the real ordering comes from proof-of-work
 - **Why time-locks work:** Block height and consensus timestamps provide reliable temporal reference
 - **Why reorganization is rare:** Changing order requires redoing massive amounts of work
+
+---
 
 ## Conclusion
 

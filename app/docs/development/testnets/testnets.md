@@ -13,6 +13,8 @@ Test networks are essential for Bitcoin development. This guide covers the diffe
 | Controlled | No | No | Yes | Yes |
 | Best For | Production | Integration | Testing | Unit tests |
 
+---
+
 ## Testnet (Testnet3)
 
 ### Overview
@@ -65,6 +67,8 @@ Issues with Testnet:
 - May have long periods with no blocks
 - Reorgs more common than mainnet
 ```
+
+---
 
 ## Signet
 
@@ -135,6 +139,8 @@ signetchallenge=5121...your_challenge...51ae
 [signet]
 rpcport=38332
 ```
+
+---
 
 ## Regtest (Regression Test)
 
@@ -238,6 +244,8 @@ node.generate(1)  # Confirm transaction
 node.stop()
 ```
 
+---
+
 ## Lightning Network Testing
 
 ### Polar (Recommended)
@@ -293,6 +301,8 @@ lightning-cli --network=regtest newaddr
 lightning-cli --network=regtest connect <node_id>@localhost:9735
 lightning-cli --network=regtest fundchannel <node_id> 100000
 ```
+
+---
 
 ## Automated Testing Setup
 
@@ -387,6 +397,8 @@ jobs:
         run: npm test
 ```
 
+---
+
 ## Network-Specific Code
 
 ### Selecting Network
@@ -476,6 +488,8 @@ function getNetwork(type) {
 | Signet | 38332 |
 | Regtest | 18443 |
 
+---
+
 ## Testing Scenarios
 
 ### Testing RBF (Replace-By-Fee)
@@ -531,6 +545,8 @@ def test_mempool_eviction(node):
     # Some low-fee txs may be evicted if mempool is full
 ```
 
+---
+
 ## Best Practices
 
 ### Development Workflow
@@ -573,6 +589,8 @@ DO:
 ✓ Configure networks via environment variables
 ```
 
+---
+
 ## Summary
 
 Each test network serves a purpose:
@@ -582,6 +600,8 @@ Each test network serves a purpose:
 - **Testnet**: Real-world simulation before mainnet
 
 Start with regtest for fast iteration, move to signet for integration testing, and use testnet for final validation before deploying to mainnet.
+
+---
 
 ## Related Topics
 

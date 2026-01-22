@@ -13,6 +13,8 @@ A **UTXO** is a transaction output that hasn't been spent yet. It represents the
 - **Consumption**: When a UTXO is spent, it's completely consumed and removed from the [UTXO set](/docs/glossary#utxo-set)
 - **Creation**: Every transaction creates new UTXOs as outputs
 
+---
+
 ## UTXO vs Account-Based Systems
 
 Bitcoin's UTXO model differs fundamentally from traditional account-based systems:
@@ -32,6 +34,8 @@ Bitcoin's UTXO model differs fundamentally from traditional account-based system
 - **Better privacy**: Each UTXO is independent; transactions don't automatically link
 - **Parallel processing**: Multiple transactions can be validated simultaneously
 - **Clear ownership**: No ambiguity about what can be spent
+
+---
 
 ## The UTXO Lifecycle
 
@@ -56,6 +60,8 @@ New Outputs Created (become new UTXOs)
 3. **Spending**: A transaction input references a UTXO (by transaction ID and output index)
 4. **Consumption**: The UTXO is consumed—it can never be spent again
 5. **New UTXOs**: The transaction creates new outputs, which become new UTXOs
+
+---
 
 ## Understanding the Relationships
 
@@ -124,6 +130,8 @@ Transaction
 └── Locktime
 ```
 
+---
+
 ## Practical Examples
 
 ### Simple Transaction Flow
@@ -187,6 +195,8 @@ Change outputs are crucial to understand:
 - Change creates a new UTXO back to an address you control
 
 **Privacy Consideration**: Change outputs can reveal that you're the sender, as they typically go back to addresses you control. Advanced wallets use techniques to make change less obvious.
+
+---
 
 ## The UTXO Set
 
@@ -290,6 +300,8 @@ Bitcoin nodes provide RPC commands to query UTXO set information:
 
 See the [RPC Commands](/docs/bitcoin/rpc#9-utxo-set-information) documentation for details.
 
+---
+
 ## Privacy Implications
 
 The UTXO model has important privacy characteristics:
@@ -313,6 +325,8 @@ The UTXO model has important privacy characteristics:
 - Consider [CoinJoin](/docs/glossary#coinjoin) for better privacy
 - Avoid address reuse
 
+---
+
 ## Common Misconceptions
 
 ### "I have a balance in my address"
@@ -335,6 +349,8 @@ The UTXO model has important privacy characteristics:
 
 **Reality**: The blockchain contains all historical transactions. The UTXO set is a derived database containing only unspent outputs. It's much smaller than the full blockchain.
 
+---
+
 ## Why This Matters
 
 Understanding the UTXO model is essential because:
@@ -346,6 +362,8 @@ Understanding the UTXO model is essential because:
 5. **Node Operation**: Running a node requires understanding UTXO set management
 
 The UTXO model is not just a technical detail—it's fundamental to how Bitcoin works. Every transaction, every wallet, every node interacts with the UTXO model. Understanding it deeply will make you a better Bitcoin user, developer, or node operator.
+
+---
 
 ## Related Topics
 

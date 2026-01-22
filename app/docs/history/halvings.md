@@ -18,6 +18,8 @@ This geometric series ensures that:
 - The series converges to exactly 21 million BTC
 - After 32 halvings, the subsidy becomes effectively 0
 
+---
+
 ## Complete Halving Schedule
 
 | Event | Date | Block Height | Block Reward (BTC) | Total BTC Created in Period |
@@ -59,6 +61,8 @@ This geometric series ensures that:
 
 **Note**: After halving 33, the subsidy becomes effectively 0 (less than 1 [satoshi](/docs/glossary#satoshi) per block). The last Bitcoin will be mined around December 22, 2137.
 
+---
+
 ## Key Facts
 
 - **Total Supply**: Exactly 21,000,000 BTC
@@ -70,6 +74,8 @@ This geometric series ensures that:
 - **Block Height at Completion**: ~6,930,000
 - **All Coins Issued**: December 22, 2137 (estimated)
 
+---
+
 ## After All Coins Are Issued
 
 Once all 21 million Bitcoin have been created (around December 22, 2137):
@@ -78,6 +84,8 @@ Once all 21 million Bitcoin have been created (around December 22, 2137):
 - **Miner Income**: [Miners](/docs/glossary#miner) will rely entirely on [transaction fees](/docs/glossary#transaction-fee)
 - **Network Security**: Economic incentives remain through fee collection
 - **Inflation**: Bitcoin becomes deflationary (supply decreases if coins are lost)
+
+---
 
 ## Related Topics
 

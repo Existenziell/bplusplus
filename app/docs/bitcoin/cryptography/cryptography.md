@@ -23,6 +23,8 @@ These concepts aren't unique to Bitcoin. You encounter cryptography daily:
 
 Bitcoin combines these proven cryptographic techniques in a novel way to create a trustless monetary system.
 
+---
+
 ## Overview
 
 Bitcoin uses cryptography for three main purposes:
@@ -30,6 +32,8 @@ Bitcoin uses cryptography for three main purposes:
 1. **Ownership & Authentication** - Proving you own bitcoin without revealing your private key
 2. **Integrity** - Ensuring data hasn't been tampered with
 3. **Proof-of-Work** - Securing the blockchain through computational work
+
+---
 
 ## Hash Functions
 
@@ -299,6 +303,8 @@ console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
 ```
 :::
 
+---
+
 ## Elliptic Curve Cryptography
 
 ![Elliptic Curve Cryptography](/images/ECC.webp)
@@ -492,6 +498,8 @@ Finding `k` requires solving the **Elliptic Curve Discrete Logarithm Problem (EC
 - 256-bit private key = ~128 bits of security
 - Would take billions of years with current technology
 - Quantum computers could theoretically break this (see future considerations)
+
+---
 
 ## Digital Signatures
 
@@ -847,6 +855,8 @@ When you spend bitcoin:
 5. **Broadcast** transaction to network
 6. **[Nodes](/docs/glossary#node) verify** signature matches public key and transaction
 
+---
+
 ## Merkle Trees
 
 ### What is a Merkle Tree?
@@ -1147,6 +1157,8 @@ const root = merkleRoot(txHashes);
 console.log(`Merkle Root: ${root.toString('hex')}`);
 ```
 :::
+
+---
 
 ## Address Encoding
 
@@ -1534,6 +1546,8 @@ console.log(`P2WPKH Address: ${result.p2wpkhAddress}`);
 ```
 :::
 
+---
+
 ## Cryptographic Security Assumptions
 
 ### What Bitcoin Assumes
@@ -1564,6 +1578,8 @@ Bitcoin's security relies on these assumptions holding true:
 - Post-quantum signature schemes being researched
 - Soft fork could add quantum-resistant signatures
 
+---
+
 ## Summary
 
 | Cryptographic Primitive | Purpose in Bitcoin |
@@ -1577,6 +1593,8 @@ Bitcoin's security relies on these assumptions holding true:
 | Merkle Trees | Transaction summarization, SPV proofs |
 | Base58Check | Legacy address encoding |
 | Bech32/Bech32m | SegWit/Taproot address encoding |
+
+---
 
 ## Resources
 

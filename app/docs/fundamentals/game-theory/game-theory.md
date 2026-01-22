@@ -13,6 +13,8 @@ Traditional financial systems rely on legal enforcement, trusted authorities, an
 
 Game theory provides the framework to understand how Bitcoin achieves security and consensus in this hostile environment. By structuring incentives correctly, Bitcoin creates games where **honesty is the dominant strategy**—the most profitable choice for rational actors.
 
+---
+
 ## Game Theory Basics
 
 A **game** in game theory consists of:
@@ -41,6 +43,8 @@ A **dominant strategy** is one that yields the best outcome regardless of what o
 | **Node** | Validate honestly | Maintains network security; invalid blocks harm everyone |
 | **User** | Use network honestly | Transactions confirm; double-spends fail and waste fees |
 
+---
+
 ## The Prisoner's Dilemma
 
 The **Prisoner's Dilemma** is a classic game theory problem where two players must choose between cooperation and defection. The dilemma: each player's dominant strategy (defect) leads to a worse outcome for both than if they cooperated.
@@ -66,6 +70,8 @@ Bitcoin's incentive structure **reverses the payoffs** so that cooperation (hone
 
 By making honest behavior more profitable than attacks, Bitcoin transforms a potential prisoner's dilemma into a **coordination game** where cooperation is the rational choice.
 
+---
+
 ## Coordination Without Authority
 
 Bitcoin achieves coordination among thousands of independent participants without a central authority. This is a **coordination game**: multiple players benefit from choosing the same strategy.
@@ -90,6 +96,8 @@ This creates a **focal point**—a natural choice that all participants converge
 | **How to prevent forks?** | Miners build on longest chain (most profitable) |
 
 The longest chain rule creates a **self-enforcing coordination mechanism** where rational actors naturally converge on the same choice.
+
+---
 
 ## Games in Bitcoin
 
@@ -139,6 +147,8 @@ This creates a **competitive market** where:
 - Cheating risks exclusion from the pool
 - Honest contribution provides steady income
 
+---
+
 ## Attack Deterrence
 
 Game theory explains why attacks on Bitcoin are economically irrational. The game-theoretic structure makes attacks unprofitable:
@@ -172,6 +182,8 @@ Bitcoin's game theory works over **long time horizons**:
 
 This creates a **repeated game** where defection (attacking) is punished not just immediately, but through long-term network responses like changing the proof-of-work algorithm.
 
+---
+
 ## Game Theory and Network Security
 
 Game theory provides the theoretical foundation for Bitcoin's security:
@@ -189,6 +201,8 @@ This is why Bitcoin can operate **without**:
 
 Instead, Bitcoin relies on **mathematical incentives** that make security the rational choice.
 
+---
+
 ## Conclusion
 
 Game theory explains why Bitcoin works. By structuring incentives so that honest behavior is the most profitable strategy, Bitcoin creates a system where:
@@ -199,6 +213,8 @@ Game theory explains why Bitcoin works. By structuring incentives so that honest
 - **Consensus is achieved** through natural convergence
 
 Understanding game theory is essential for understanding Bitcoin because it explains **why** the network remains secure, not just **how** the protocol works. Every aspect of Bitcoin's design—from proof-of-work to the fee market to consensus rules—is shaped by game-theoretic principles that align participant incentives toward network security.
+
+---
 
 ## Related Topics
 

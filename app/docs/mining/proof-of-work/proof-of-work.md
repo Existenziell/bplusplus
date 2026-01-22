@@ -10,12 +10,16 @@ Bitcoin uses a **proof-of-work** [consensus](/docs/glossary#consensus) mechanism
 4. **Success**: When a miner finds a valid hash, they broadcast the block to the network
 5. **Reward**: The miner receives the [block reward](/docs/glossary#block-reward) (currently 3.125 BTC) plus [transaction fees](/docs/glossary#transaction-fee)
 
+---
+
 ## Mining Difficulty
 
 - **Adjustment**: Every 2016 blocks (~2 weeks), the difficulty adjusts based on network [hash rate](/docs/glossary#hash-rate)
 - **Target**: Maintains ~10 minute average [block time](/docs/glossary#block-time)
 - **Current Network Hash Rate**: ~700 EH/s (exahashes per second)
 - **See Also**: [Difficulty Adjustment](/docs/mining/difficulty) for detailed explanation
+
+---
 
 ## Technical Details
 
@@ -33,6 +37,8 @@ Bitcoin uses a **proof-of-work** [consensus](/docs/glossary#consensus) mechanism
 - **Network-Wide**: All miners compete against the same target
 - **Dynamic**: Adjusts every 2016 blocks based on actual vs. target block time
 - **Purpose**: Maintains consistent block production rate
+
+---
 
 ## Hash Function: SHA256D
 
@@ -426,6 +432,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Mining Process Flow
 
 ```
@@ -439,6 +447,8 @@ func main() {
    ├─ Yes → Broadcast Block → Receive Reward
    └─ No → Increment Nonce → Repeat from Step 3
 ```
+
+---
 
 ## Educational Value
 
@@ -455,6 +465,8 @@ func main() {
 - **Merkle Trees**: Transaction organization
 - **Nonce Space**: 4.3 billion possible values
 - **Difficulty Target**: Network-wide mining target
+
+---
 
 ## Related Topics
 

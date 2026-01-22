@@ -26,6 +26,8 @@ Instead of cryptographic proof, Wright has offered:
 - **Private demonstrations**: To a few individuals, later disputed
 - **Legal threats**: Against anyone who publicly denies his claim
 
+---
+
 ## Timeline of Events
 
 ### 2015: Initial Leaks
@@ -75,6 +77,8 @@ In the COPA v. Wright trial, UK High Court Justice Mellor delivered a comprehens
 
 The judge didn't mince words, describing Wright's claims as "a lie" and his evidence as fabricated.
 
+---
+
 ## Evidence of Fraud
 
 ### Forged Documents
@@ -102,6 +106,8 @@ Wright has made statements about Bitcoin that reveal misunderstandings a creator
 - Made claims about the protocol that are demonstrably false
 - Shown unfamiliarity with aspects of Bitcoin's design that Satoshi would know intimately
 
+---
+
 ## Community Response
 
 ### Bitcoin Community
@@ -119,6 +125,8 @@ A small community of BSV supporters continues to believe Wright is Satoshi. BSV 
 - Declining market cap and relevance
 - Delistings from major exchanges (citing fraud concerns around Wright)
 - Isolation from the broader cryptocurrency ecosystem
+
+---
 
 ## Why Does It Matter?
 
@@ -145,6 +153,8 @@ A successful Wright legal campaign could have chilling effects on Bitcoin develo
 
 Wright's saga damages Bitcoin's reputation with mainstream audiences who don't understand the nuances. Headlines about "Satoshi suing developers" or "Bitcoin founder" create confusion.
 
+---
+
 ## The Real Satoshi
 
 While Wright is not Satoshi, the real Satoshi's identity remains unknown. Key facts:
@@ -154,6 +164,8 @@ While Wright is not Satoshi, the real Satoshi's identity remains unknown. Key fa
 - **Cryptographic proof pending**: Anyone with access to Satoshi's keys could prove it instantly
 
 The contrast is stark: the real Satoshi has remained silent for 15+ years, while Wright can't stop claiming the title without ever providing proof.
+
+---
 
 ## Conclusion
 
@@ -167,11 +179,15 @@ For the Bitcoin community, Wright serves as a useful reminder:
 
 Craig Wright is not Satoshi Nakamoto. A UK High Court has ruled it. The cryptographic evidence (or lack thereof) proves it. And the Bitcoin community has always known it.
 
+---
+
 ## Related Topics
 
 - [Mt. Gox Collapse](/docs/controversies/mt-gox) - Exchange disaster that shaped Bitcoin culture
 - [Blocksize Wars](/docs/controversies/blocksize-wars) - The scaling debate that led to Bitcoin Cash
 - [OP_RETURN Debate](/docs/controversies/op-return) - Data storage controversy
+
+---
 
 ## Resources
 

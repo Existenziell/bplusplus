@@ -15,6 +15,8 @@ The primary revenue source for miners is the block reward, which consists of two
 - **Next Halving**: ~2028 (reward will be 1.5625 BTC)
 - **Total Reward**: Block subsidy + transaction fees
 
+---
+
 ## Cost Analysis
 
 ### Electricity Costs
@@ -39,6 +41,8 @@ Electricity is typically the largest ongoing cost for miners:
 - **Facility**: Rent, construction, or space allocation
 - **Internet**: Reliable, low-latency connection
 - **Personnel**: Monitoring and maintenance staff (for larger operations)
+
+---
 
 ## Profitability Calculation
 
@@ -460,6 +464,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Mining Profitability Factors
 
 ### Network [Hash Rate](/docs/glossary#hash-rate)
@@ -482,6 +488,8 @@ func main() {
 - **Variable**: Depends on network congestion
 - **Current Average**: 0.1-1+ BTC per block
 - **Future**: Will become primary miner income as subsidies decrease
+
+---
 
 ## Pool Mining Economics
 
@@ -507,6 +515,8 @@ func main() {
 
 See [Mining Pools](/docs/mining/pools) for detailed information on pool operations.
 
+---
+
 ## Individual vs Pool Mining
 
 ### Solo Mining
@@ -520,6 +530,8 @@ See [Mining Pools](/docs/mining/pools) for detailed information on pool operatio
 - **Reduced Variance**: Share rewards with other miners
 - **Lower Barrier**: Don't need massive hash rate
 - **Best For**: Most miners
+
+---
 
 ## Related Topics
 

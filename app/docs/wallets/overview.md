@@ -12,6 +12,8 @@ A Bitcoin wallet is a software application or device that allows users to store,
 - **UTXO**: Unspent Transaction Output, the actual "coins" on the blockchain
 - **Seed Phrase**: Human-readable backup of private keys (12-24 words)
 
+---
+
 ## Types of Wallets
 
 ### By Storage Location
@@ -59,6 +61,8 @@ A Bitcoin wallet is a software application or device that allows users to store,
 - **Pros**: Excellent security, keys never leave device
 - **Cons**: Cost, requires physical device
 
+---
+
 ## How Wallets Work
 
 ### Key Generation
@@ -82,6 +86,8 @@ A Bitcoin wallet is a software application or device that allows users to store,
 - **Key Derivation**: Uses BIP32/BIP44 standards with [derivation paths](/docs/glossary#derivation-path)
 - **Address Reuse**: Generally discouraged for privacy
 - **Change Addresses**: New addresses created for change outputs
+
+---
 
 ## Creating a Wallet
 
@@ -266,6 +272,8 @@ console.log('Address:', address);
 ```
 :::
 
+---
+
 ## Wallet Security Best Practices
 
 ### Private Key Management
@@ -290,6 +298,8 @@ console.log('Address:', address);
 - **Test recovery**: Verify you can recover wallet from seed phrase
 - **Encryption**: Encrypt backups if storing digitally (but prefer physical)
 
+---
+
 ## Wallet Features
 
 ### Basic Features
@@ -306,6 +316,8 @@ console.log('Address:', address);
 - **Fee Estimation**: Calculate appropriate [fee rates](/docs/glossary#fee-rate)
 - **[RBF](/docs/glossary#rbf-replace-by-fee)**: Replace unconfirmed transactions
 - **[PSBT](/docs/glossary#psbt-partially-signed-bitcoin-transaction)**: Partially Signed Bitcoin Transactions
+
+---
 
 ## Related Topics
 

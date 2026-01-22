@@ -25,6 +25,8 @@ By combining hashpower:
 - **Reduced variance**: Pool finds blocks frequently
 - **Small miner viability**: Even small operations can profit
 
+---
+
 ## How Mining Pools Work
 
 ### Basic Flow
@@ -712,6 +714,8 @@ Miner B: 3.125 × (500,000 / 1,600,000) = 0.977 BTC
 Miner C: 3.125 × (100,000 / 1,600,000) = 0.195 BTC
 ```
 
+---
+
 ## Payout Schemes
 
 Different pools use different methods to distribute rewards.
@@ -760,6 +764,8 @@ Your 50,000 shares = 5% of reward
 - **How it works**: Recent shares weighted more heavily
 - **Benefit**: Discourages pool hopping
 - **Complexity**: Harder to understand and verify
+
+---
 
 ## Pool Protocols
 
@@ -810,6 +816,8 @@ Matt Corallo's proposal that influenced Stratum V2:
 - Pool only provides coinbase and validates shares
 - Never widely adopted, but ideas live on
 
+---
+
 ## Centralization Concerns
 
 Mining pools create centralization pressure:
@@ -857,6 +865,8 @@ Attempts to remove pool operators:
 - Uses DAG structure for share tracking
 - Still experimental
 
+---
+
 ## Choosing a Pool
 
 Factors to consider:
@@ -888,6 +898,8 @@ Factors to consider:
 - Gives you more control
 - Better for network decentralization
 - Still being adopted
+
+---
 
 ## Pool Economics
 
@@ -925,6 +937,8 @@ Electricity: ~$12/day (varies widely)
 Profit: ~$6/day
 ```
 
+---
+
 ## Setting Up Pool Mining
 
 ### Requirements
@@ -952,6 +966,8 @@ Tertiary: pool3.example.com:3333
 
 If primary fails, automatically switch to secondary.
 
+---
+
 ## Summary
 
 Mining pools solve the variance problem:
@@ -970,12 +986,16 @@ The future is moving toward:
 - **Decentralized pools**: No central operator
 - **Transaction selection**: Miners choosing what to include
 
+---
+
 ## Related Topics
 
 - [Mining Economics](/docs/mining/economics) - Profitability calculations
 - [Block Construction](/docs/mining/block-construction) - How blocks are built
 - [Proof-of-Work](/docs/mining/proof-of-work) - The mining algorithm
 - [Hardware Evolution](/docs/mining/hardware) - Mining equipment history
+
+---
 
 ## Resources
 

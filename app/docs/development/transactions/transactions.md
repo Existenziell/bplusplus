@@ -18,6 +18,8 @@ Understanding the complete lifecycle of a transaction helps contextualize the co
 
 A transaction with 6 confirmations is generally considered irreversible.
 
+---
+
 ## Transaction Structure
 
 ### Components
@@ -48,6 +50,8 @@ Transaction
 ### Size Calculations
 
 Virtual size (vbytes) = (base_size × 3 + total_size) / 4
+
+---
 
 ## Building Transactions
 
@@ -183,6 +187,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Input Selection
 
 ### Coin Selection Algorithms
@@ -289,6 +295,8 @@ function knapsack(utxos: UTXO[], target: number): UTXO[] {
 }
 ```
 
+---
+
 ## Fee Estimation
 
 ### Fee Rate Sources
@@ -358,6 +366,8 @@ function estimateFee(
 }
 ```
 
+---
+
 ## Replace-By-Fee (RBF)
 
 ### Enabling RBF
@@ -414,6 +424,8 @@ function bumpFee(originalTx: Transaction, newFeeRate: number): Psbt {
 }
 ```
 
+---
+
 ## Child-Pays-For-Parent (CPFP)
 
 ### Creating CPFP Transaction
@@ -454,6 +466,8 @@ function createCPFPTransaction(
   return psbt;
 }
 ```
+
+---
 
 ## Transaction Batching
 
@@ -532,6 +546,8 @@ Single transaction to 10 recipients:
 - 10 fee payments
 ```
 
+---
+
 ## Time Locks
 
 ### Absolute Time Lock (nLockTime)
@@ -591,6 +607,8 @@ function createCSVLocked(blocks: number): Psbt {
   return psbt;
 }
 ```
+
+---
 
 ## Broadcasting Transactions
 
@@ -685,6 +703,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Error Handling
 
 ### Common Errors
@@ -717,6 +737,8 @@ async function safebroadcast(txHex: string): Promise<string> {
 }
 ```
 
+---
+
 ## Best Practices
 
 ### Transaction Construction
@@ -741,6 +763,8 @@ async function safebroadcast(txHex: string): Promise<string> {
 3. **Consolidate UTXOs**: During low-fee periods, consolidate small UTXOs
 4. **Avoid Unnecessary Outputs**: Minimize output count when possible
 
+---
+
 ## Summary
 
 Transaction construction involves:
@@ -752,6 +776,8 @@ Transaction construction involves:
 - **Broadcasting**: Submitting to the network
 
 Understanding these fundamentals enables building robust Bitcoin applications that handle funds safely and efficiently.
+
+---
 
 ## Related Topics
 

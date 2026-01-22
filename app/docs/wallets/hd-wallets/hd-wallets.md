@@ -12,6 +12,8 @@ HD wallets, defined in [BIP32](/docs/glossary#bip-bitcoin-improvement-proposal),
 - Watch-only wallets using extended public keys
 - Deterministic key generation across devices
 
+---
+
 ## BIP39: Mnemonic Seed Phrases
 
 BIP39 defines how to generate human-readable seed phrases from random entropy.
@@ -193,6 +195,8 @@ func main() {
 }
 ```
 :::
+
+---
 
 ## BIP32: Key Derivation
 
@@ -443,6 +447,8 @@ func main() {
 ```
 :::
 
+---
+
 ## BIP44: Multi-Account Hierarchy
 
 BIP44 defines a standard account structure for HD wallets.
@@ -469,6 +475,8 @@ m / purpose' / coin_type' / account' / change / address_index
 | BIP49 | 49' | P2SH-P2WPKH (Nested SegWit) | 3... |
 | BIP84 | 84' | P2WPKH (Native SegWit) | bc1q... |
 | BIP86 | 86' | P2TR (Taproot) | bc1p... |
+
+---
 
 ## Watch-Only Wallets
 
@@ -633,6 +641,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Security Best Practices
 
 ### Seed Phrase Storage
@@ -660,11 +670,15 @@ Exposing an xpub reveals:
 
 **Never share xpubs publicly** unless intentional (e.g., donation addresses).
 
+---
+
 ## Gap Limit
 
 The gap limit determines how many unused addresses to scan before stopping. Default is typically 20.
 
 **Important for wallet recovery:** If you used addresses beyond the gap limit without using intermediate addresses, those funds may not appear in a recovered wallet.
+
+---
 
 ## Summary
 
@@ -677,6 +691,8 @@ HD wallets provide:
 - **Security**: Hardened derivation protects account-level keys
 
 Understanding HD wallets is essential for building modern Bitcoin wallet applications.
+
+---
 
 ## Related Topics
 

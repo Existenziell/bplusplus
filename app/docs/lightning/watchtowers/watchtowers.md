@@ -10,6 +10,8 @@ Lightning channels rely on both parties being able to detect and respond to chea
 
 **The Solution**: Watchtowers monitor the blockchain for you and broadcast penalty transactions automatically.
 
+---
+
 ## How Watchtowers Work
 
 ### Registration
@@ -43,6 +45,8 @@ Counterparty → Blockchain: Old commitment transaction
 Watchtower → Blockchain: Penalty transaction (claims funds)
 ```
 
+---
+
 ## Breach Hint Structure
 
 Breach hints allow watchtowers to detect breaches without knowing channel details:
@@ -55,6 +59,8 @@ Breach Hint:
 ```
 
 The locator is derived from the commitment transaction ID. When a watchtower sees a transaction matching a locator, it can decrypt and broadcast the penalty.
+
+---
 
 ## Privacy Considerations
 
@@ -78,6 +84,8 @@ encrypted_blob = AES_CTR(penalty_tx, encryption_key)
 ```
 
 Watchtowers cannot read the blob until they see the actual breach transaction on-chain.
+
+---
 
 ## Watchtower Implementations
 
@@ -127,6 +135,8 @@ teosd --btc_network=mainnet
 # (implementation specific)
 ```
 
+---
+
 ## Watchtower Economics
 
 ### Costs
@@ -151,6 +161,8 @@ For users:
 | Recovery percentage | Tower keeps % of penalty funds |
 | Subscription | Monthly/yearly flat fee |
 
+---
+
 ## Backup Strategies
 
 Watchtowers complement but don't replace proper backups:
@@ -173,6 +185,8 @@ Watchtowers complement but don't replace proper backups:
 2. **Static Channel Backups (SCB)**: For disaster recovery
 3. **Regular node backups**: Full database backups
 4. **Monitoring**: Alerts for extended downtime
+
+---
 
 ## Watchtower Selection
 
@@ -200,6 +214,8 @@ Trust Spectrum:
 └── Commercial towers (contractual)
 ```
 
+---
+
 ## Protocol Variants
 
 ### BOLT Draft (Original)
@@ -225,6 +241,8 @@ Alternative approach where signing is done remotely:
 - Signer validates all transactions
 - Can refuse to sign old states
 - Eliminates need for breach monitoring
+
+---
 
 ## Common Issues
 
@@ -255,6 +273,8 @@ Alternative approach where signing is done remotely:
 - Use encrypted blobs (tower can't read until breach)
 - Watchtower only acts on actual old commitment txids
 
+---
+
 ## Setup Example (LND)
 
 Complete setup for watchtower protection:
@@ -279,6 +299,8 @@ lncli wtclient towers
 lncli wtclient stats
 ```
 
+---
+
 ## Summary
 
 Watchtowers provide:
@@ -288,6 +310,8 @@ Watchtowers provide:
 - **Privacy preservation**: Encrypted hints protect channel details
 - **Decentralized security**: Multiple towers reduce single points of failure
 
+---
+
 ## Best Practices
 
 1. **Use multiple watchtowers** from different operators
@@ -296,10 +320,14 @@ Watchtowers provide:
 4. **Combine with backups** for comprehensive protection
 5. **Monitor tower connections** to ensure they're active
 
+---
+
 ## Related Topics
 
 - [Channels](/docs/lightning/channels) - Channel security and force close
 - [Anchor Outputs](/docs/lightning/anchor-outputs) - Fee bumping for penalties
+
+---
 
 ## Resources
 

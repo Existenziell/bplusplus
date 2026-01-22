@@ -52,6 +52,8 @@ Each full node performs comprehensive validation:
    - Builds on valid previous block
    - Maintains blockchain integrity
 
+---
+
 ## Compact Block Relay (BIP 152)
 
 Compact blocks dramatically reduce propagation bandwidth and latency:
@@ -78,6 +80,8 @@ The receiving node reconstructs the full block using transactions already in its
 | Low bandwidth | Request-based, saves bandwidth | Default for most peers |
 | High bandwidth | Pushed immediately | Selected fast peers (up to 3) |
 
+---
+
 ## Headers-First Synchronization
 
 New nodes use headers-first sync for efficient IBD (Initial Block Download):
@@ -89,6 +93,8 @@ New nodes use headers-first sync for efficient IBD (Initial Block Download):
 
 This allows nodes to verify they're on the correct chain before downloading gigabytes of block data.
 
+---
+
 ## Erlay Protocol
 
 Erlay (BIP 330) improves transaction relay efficiency:
@@ -96,6 +102,8 @@ Erlay (BIP 330) improves transaction relay efficiency:
 - **Set reconciliation**: Nodes exchange transaction set differences instead of full announcements
 - **40% bandwidth reduction**: For transaction relay
 - **Better connectivity**: Enables more peer connections without bandwidth increase
+
+---
 
 ## Monitoring Block Propagation
 
@@ -530,6 +538,8 @@ console.log(`Block hash: ${header.hashHex(headerBytes)}`);
 ```
 :::
 
+---
+
 ## Orphan Block Scenarios
 
 ### Simultaneous Block Discovery
@@ -573,6 +583,8 @@ Time 0:14    Orphaned transactions return to mempool
 - Network automatically converges on longest chain
 - This is why exchanges wait for 6 [confirmations](/docs/glossary#confirmation)
 
+---
+
 ## Propagation Timing
 
 ### Typical Network Performance
@@ -600,6 +612,8 @@ Time 0:14    Orphaned transactions return to mempool
 - Geographic distance from miners
 - Firewall restrictions
 
+---
+
 ## Network Topology
 
 ### Typical Node Connections
@@ -617,6 +631,8 @@ A typical Bitcoin node has:
 | Inbound | Peers to you | Serve data | 125 |
 | Block-relay-only | Outbound | Blocks only (privacy) | 2 |
 | Feeler | Temporary | Test new peers | 1-2 |
+
+---
 
 ## Security Considerations
 
@@ -645,6 +661,8 @@ If a node doesn't validate, it could spread invalid blocks and harm the network.
 - Relay blocks quickly (help the network)
 - Stay connected (receive updates)
 
+---
+
 ## Key Metrics
 
 | Metric | Target | Description |
@@ -655,6 +673,8 @@ If a node doesn't validate, it could spread invalid blocks and harm the network.
 | Validation time | <1s | Time to validate a block |
 | Orphan rate | <1% | Percentage of blocks orphaned |
 
+---
+
 ## Summary
 
 Bitcoin's block propagation mechanism is designed to be:
@@ -664,6 +684,8 @@ Bitcoin's block propagation mechanism is designed to be:
 - **Secure**: Every node validates every block
 - **Efficient**: Compact blocks reduce bandwidth by 90%
 - **Self-healing**: Orphan blocks are automatically resolved
+
+---
 
 ## Resources
 

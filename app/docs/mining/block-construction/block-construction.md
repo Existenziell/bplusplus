@@ -31,6 +31,8 @@ All numeric fields (version, timestamp, [difficulty target](/docs/glossary#diffi
 - **Coinbase Transaction**: First transaction, creates new bitcoin
 - **Regular Transactions**: Payments selected from the mempool
 
+---
+
 ## The Coinbase Transaction
 
 The coinbase transaction is special: it's the only transaction that creates new bitcoin.
@@ -58,6 +60,8 @@ Outputs:
 ### Coinbase Maturity
 
 Coinbase outputs cannot be spent until 100 blocks have passed. This prevents issues if the block is [orphaned](/docs/glossary#orphan-block).
+
+---
 
 ## Transaction Selection
 
@@ -107,6 +111,8 @@ Bitcoin Core's `getblocktemplate` uses this approach:
 4. **Respect limits**: Stay within weight and sigop limits
 5. **Update calculations**: Recalculate fee rates as transactions are added
 
+---
+
 ## Block Weight and SegWit
 
 Since [SegWit](/docs/glossary#segwit-segregated-witness) (2017), blocks use **weight** instead of raw size:
@@ -130,6 +136,8 @@ SegWit transactions are "discounted" because their [witness](/docs/glossary#witn
 - SegWit transactions can pay lower absolute fees for the same priority
 - Miners can fit more transactions in a block
 - More fees collected overall
+
+---
 
 ## Constructing the Merkle Root
 
@@ -700,6 +708,8 @@ console.log(`Proof valid: ${isValid}`);
 ```
 :::
 
+---
+
 ## The Block Template
 
 When a miner requests work, they receive a **[block template](/docs/glossary#block-template)**:
@@ -731,6 +741,8 @@ Miners should update their template:
 - **When a new block arrives**: Previous block hash changes
 - **When transactions confirm**: Remove now-invalid transactions
 
+---
+
 ## Empty Blocks
 
 Sometimes miners produce **empty blocks** (only coinbase transaction):
@@ -751,6 +763,8 @@ Some pools practice "SPV mining":
 
 This is risky but provides a head start.
 
+---
+
 ## Extra Nonce
 
 The 4-byte nonce in the header provides only 2³² possibilities, which is not enough for modern [ASICs](/docs/glossary#asic-application-specific-integrated-circuit).
@@ -769,6 +783,8 @@ Search space:
 - Extra nonce: 4-8 bytes → 2³²-2⁶⁴ combinations
 - Combined: Effectively unlimited
 ```
+
+---
 
 ## Block Propagation Incentives
 
@@ -791,6 +807,8 @@ A private relay network for miners:
 - Uses forward error correction
 - Optimized routing
 - Reduces orphan risk from slow propagation
+
+---
 
 ## Practical Example
 
@@ -824,6 +842,8 @@ Building a block step by step:
 6. Mine (search for valid nonce)
 ```
 
+---
+
 ## Summary
 
 Block construction is where mining meets economics:
@@ -840,12 +860,16 @@ Miners balance:
 - Updating templates (fresh transactions)
 - Starting quickly (after new block found)
 
+---
+
 ## Related Topics
 
 - [Mempool](/docs/mining/mempool) - Where transactions wait
 - [Proof-of-Work](/docs/mining/proof-of-work) - Finding valid blocks
 - [Mining Economics](/docs/mining/economics) - Revenue and costs
 - [Mining Pools](/docs/mining/pools) - Collaborative mining
+
+---
 
 ## Resources
 

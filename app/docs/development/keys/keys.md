@@ -134,6 +134,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Seed Phrases (BIP39)
 
 ### Mnemonic Generation and Validation
@@ -223,6 +225,8 @@ const entropy = randomBytes(32); // 256 bits
 const secureMnemonic = bip39.entropyToMnemonic(entropy);
 ```
 
+---
+
 ## Derivation Paths
 
 ### Standard Paths (BIPs)
@@ -297,6 +301,8 @@ function deriveAllAddressTypes(root: BIP32Interface) {
 }
 ```
 
+---
+
 ## Extended Keys (xpub/xprv)
 
 ### Exporting Extended Keys
@@ -334,6 +340,8 @@ function convertXpubToZpub(xpub: string): string {
   return bs58check.encode(converted);
 }
 ```
+
+---
 
 ## Secure Key Storage
 
@@ -431,6 +439,8 @@ class LedgerWallet implements HardwareWallet {
 }
 ```
 
+---
+
 ## Multi-Signature Setup
 
 ### Creating Multisig Wallet
@@ -490,6 +500,8 @@ Benefits:
 - No single point of failure
 ```
 
+---
+
 ## Backup Strategies
 
 ### Seed Phrase Backup
@@ -537,6 +549,8 @@ const shares = splitSeed(mnemonic, 3, 2);
 // Give shares[2] to location C
 // Any 2 shares can recover the seed
 ```
+
+---
 
 ## Security Best Practices
 
@@ -589,6 +603,8 @@ function securityCheck(): string[] {
   return warnings;
 }
 ```
+
+---
 
 ## Recovery Procedures
 
@@ -658,6 +674,8 @@ async function scanForUsedAddresses(
 }
 ```
 
+---
+
 ## Summary
 
 Secure key management requires:
@@ -669,6 +687,8 @@ Secure key management requires:
 - **Recovery Testing**: Test recovery before storing significant funds
 
 Never expose private keys, use hardware wallets for significant amounts, and always have tested backup procedures.
+
+---
 
 ## Related Topics
 

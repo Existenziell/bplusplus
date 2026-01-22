@@ -13,6 +13,8 @@ Every line of Bitcoin's protocol was carefully designed to create a system that 
 
 The protocol transforms raw energy and mathematics into digital scarcity, creating something that has never existed before: a form of money that cannot be debased, confiscated, or counterfeited.
 
+---
+
 ## Core Components
 
 ### Cryptography
@@ -39,11 +41,35 @@ Blocks are the fundamental units of Bitcoin's ledger. [Block propagation](/docs/
 
 The [subsidy equation](/docs/bitcoin/subsidy) mathematically guarantees Bitcoin's fixed supply. Starting at 50 BTC per block and halving every 210,000 blocks, this creates a predictable, disinflationary monetary policy that will asymptotically approach 21 million coins.
 
+---
+
+## Network Participants
+
+**Nodes:**
+- [Full nodes](/docs/glossary#full-node): Store complete blockchain, validate all transactions
+- Light nodes: Store minimal data, rely on full nodes
+- Mining nodes: Create new blocks, secure the network
+
+**Miners:**
+- Verify transactions
+- Create new blocks
+- Secure the network through [proof-of-work](/docs/glossary#proof-of-work-pow)
+- Receive [block rewards](/docs/glossary#block-reward) and fees
+
+**Users:**
+- Send and receive bitcoin
+- Control their private keys
+- Participate in the network
+
+---
+
 ## Interacting with Bitcoin
 
 ### RPC Interface
 
 The [RPC (Remote Procedure Call)](/docs/bitcoin/rpc) interface is how applications communicate with a Bitcoin node. It provides commands for querying blockchain state, constructing transactions, managing wallets, and monitoring network activity.
+
+---
 
 ## The Elegance of Simplicity
 
@@ -56,6 +82,8 @@ What makes the Bitcoin protocol remarkable is not its complexity, but its simpli
 - **Difficulty adjustment** maintains stable block times
 
 Together, these simple building blocks create an unstoppable monetary network that has operated continuously since January 3, 2009.
+
+---
 
 ## Explore the Protocol
 

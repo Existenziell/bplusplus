@@ -24,6 +24,8 @@ As Bitcoin matured, these functions became increasingly specialized:
 
 > Bitcoin Core still includes wallet functionality (optional since v0.21.0) but removed the graphical miner long ago. The `generatetoaddress` RPC command remains for regtest mining.
 
+---
+
 ## Installation Methods
 
 ### Method 1: Download Pre-built Binaries (Recommended)
@@ -87,6 +89,8 @@ make -j$(nproc)
 sudo make install
 ```
 
+---
+
 ## Components
 
 After installation, you have access to several executables:
@@ -99,6 +103,8 @@ After installation, you have access to several executables:
 | `bitcoin-tx` | Transaction utility |
 | `bitcoin-util` | Utility commands |
 | `bitcoin-wallet` | Wallet utility (offline operations) |
+
+---
 
 ## Basic Configuration
 
@@ -121,6 +127,8 @@ rpcpassword=yoursecurepassword
 # Transaction index (required for some applications)
 # txindex=1
 ```
+
+---
 
 ## Running Bitcoin Core
 
@@ -164,6 +172,8 @@ bitcoin-cli getmempoolinfo
 bitcoin-cli stop
 ```
 
+---
+
 ## Development Setup
 
 For Bitcoin development, use regtest mode for instant block generation:
@@ -184,6 +194,8 @@ bitcoin-cli -regtest getbalance
 
 See [Test Networks](/docs/development/testnets) for more on regtest, testnet, and signet.
 
+---
+
 ## Alternative Implementations
 
 While Bitcoin Core is the reference implementation, alternatives exist:
@@ -196,6 +208,8 @@ While Bitcoin Core is the reference implementation, alternatives exist:
 | [libbitcoin](https://libbitcoin.info/) | C++ | Modular implementation |
 
 > Running alternative implementations helps decentralize development, but ensure they maintain consensus compatibility.
+
+---
 
 ## System Requirements
 
@@ -213,12 +227,16 @@ While Bitcoin Core is the reference implementation, alternatives exist:
 - Any modern computer works with regtest
 - SSD recommended for faster sync
 
+---
+
 ## Related Topics
 
 - [Test Networks](/docs/development/testnets) - Development environments
 - [RPC Commands](/docs/bitcoin/rpc) - Interacting with Bitcoin Core
 - [Libraries & SDKs](/docs/development/libraries) - Development tools
 - [Hardware Evolution](/docs/mining/hardware) - How mining separated from nodes
+
+---
 
 ## Resources
 

@@ -16,6 +16,8 @@ A multisig wallet requires M-of-N signatures:
 - **3-of-5**: Three of five parties must sign (corporate)
 - **M-of-N**: Flexible configuration
 
+---
+
 ## Multisig Script Patterns
 
 ### Legacy Multisig (P2SH)
@@ -60,6 +62,8 @@ OP_0 <scripthash>
 - More efficient
 - Better privacy
 - More complex implementation
+
+---
 
 ## Creating Multisig Wallets
 
@@ -369,6 +373,8 @@ console.log('Redeem Script:', multisig.redeemScript.toString('hex'));
 ```
 :::
 
+---
+
 ## Spending from Multisig
 
 ### Step 1: Create Transaction
@@ -405,6 +411,8 @@ bitcoin-cli signrawtransactionwithkey <partially_signed_hex> \
 bitcoin-cli sendrawtransaction <fully_signed_hex>
 ```
 
+---
+
 ## Key Management
 
 ### Key Storage
@@ -422,6 +430,8 @@ bitcoin-cli sendrawtransaction <fully_signed_hex>
 2. **Paper Wallets**: Offline storage
 3. **Encrypted Storage**: Encrypted files
 4. **Custodial**: Third-party custody (less secure)
+
+---
 
 ## Use Cases
 
@@ -453,6 +463,8 @@ bitcoin-cli sendrawtransaction <fully_signed_hex>
 - **Use case**: Shared family funds
 - **Benefit**: Prevents single person control
 
+---
+
 ## Security Considerations
 
 ### Advantages
@@ -476,6 +488,8 @@ bitcoin-cli sendrawtransaction <fully_signed_hex>
 3. **Key Distribution**: Don't store all keys together
 4. **Regular Testing**: Test spending process
 5. **Documentation**: Document key locations and recovery
+
+---
 
 ## Implementation Details
 
@@ -503,6 +517,8 @@ OP_2 <pubkey1> <pubkey2> <pubkey3> OP_3 OP_CHECKMULTISIG
 - **2-of-3 P2SH**: ~250-300 bytes
 - **2-of-3 P2WSH**: ~200-250 bytes (witness)
 - **Fees**: Higher fees due to size
+
+---
 
 ## Common Issues
 
@@ -534,6 +550,8 @@ OP_2 <pubkey1> <pubkey2> <pubkey3> OP_3 OP_CHECKMULTISIG
 - Plan signing sessions
 - Use hardware wallets for convenience
 
+---
+
 ## Summary
 
 Multisig wallets provide:
@@ -545,6 +563,8 @@ Multisig wallets provide:
 - **Corporate Use**: Suitable for organizations
 
 Understanding multisig is essential for building secure Bitcoin wallets and managing funds with multiple parties.
+
+---
 
 ## Related Topics
 

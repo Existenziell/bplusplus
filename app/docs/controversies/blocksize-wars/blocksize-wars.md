@@ -18,6 +18,8 @@ Bitcoin's block size was limited to **1 MB** (set by Satoshi Nakamoto in 2010). 
 
 This seemingly simple question divided the community into two camps with fundamentally different visions for Bitcoin's future.
 
+---
+
 ## The Two Sides
 
 ### Big Blockers
@@ -57,6 +59,8 @@ This seemingly simple question divided the community into two camps with fundame
 - Bitcoin Core developers
 - Most [node](/docs/glossary#node) operators
 - [Decentralization](/docs/glossary#decentralization)-focused community
+
+---
 
 ## Timeline of Events
 
@@ -102,6 +106,8 @@ This seemingly simple question divided the community into two camps with fundame
 - 8 MB block size limit
 - Separate blockchain from Bitcoin
 - Permanent chain split
+
+---
 
 ## Key Arguments
 
@@ -149,6 +155,8 @@ This seemingly simple question divided the community into two camps with fundame
    - [Miners](/docs/glossary#miner) need fees after [halvings](/docs/glossary#halving)
    - Fee market is important
 
+---
+
 ## Technical Details
 
 ### Block Size Limits
@@ -187,6 +195,8 @@ Segregated Witness (SegWit) was the compromise solution:
 - Average fee: Very low (<$0.01)
 - Full node count: ~1,000-2,000
 
+---
+
 ## The Outcome
 
 ### Bitcoin (BTC) Won
@@ -217,6 +227,8 @@ Segregated Witness (SegWit) was the compromise solution:
 - Different development path
 - Still active but smaller community
 
+---
+
 ## Lessons Learned
 
 ### 1. Hard Forks Are Risky
@@ -239,6 +251,8 @@ Segregated Witness (SegWit) was the compromise solution:
 - Multiple approaches can coexist
 - Innovation continues
 
+---
+
 ## Impact on Bitcoin
 
 ### Positive Outcomes
@@ -255,6 +269,8 @@ Segregated Witness (SegWit) was the compromise solution:
 3. **Confusion**: Users confused about different Bitcoin versions
 4. **Delayed Scaling**: Took years to resolve
 
+---
+
 ## Current Status
 
 ### Bitcoin (BTC)
@@ -268,6 +284,8 @@ Segregated Witness (SegWit) was the compromise solution:
 - **Scaling**: On-chain only
 - **Philosophy**: Big blocks, low fees
 - **Status**: Separate cryptocurrency
+
+---
 
 ## Related Topics
 

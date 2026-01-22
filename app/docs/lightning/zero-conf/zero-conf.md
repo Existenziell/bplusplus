@@ -12,6 +12,8 @@ Standard Lightning channel opening requires:
 
 **Impact**: Users must wait before they can send or receive payments through the new channel.
 
+---
+
 ## How Zero-Conf Works
 
 Zero-conf channels allow immediate use by accepting unconfirmed funding:
@@ -33,6 +35,8 @@ Zero-conf requires trusting the channel funder:
 - **Single-funded**: The funder could double-spend before confirmation
 - **Dual-funded**: More complex trust considerations
 - **Receiving side trust**: Recipient trusts funder won't double-spend
+
+---
 
 ## Use Cases
 
@@ -71,6 +75,8 @@ Instant setup for mobile users:
 4. Seamless first-time experience
 ```
 
+---
+
 ## Trust Model
 
 ### Who Trusts Whom?
@@ -94,6 +100,8 @@ Attack Vector:
 ```
 
 **Mitigation**: Only accept zero-conf from trusted parties (typically LSPs opening TO users).
+
+---
 
 ## Implementation
 
@@ -131,6 +139,8 @@ Alias SCID: Randomly generated
             (works before confirmation)
 ```
 
+---
+
 ## Feature Negotiation
 
 Zero-conf requires both peers to support:
@@ -151,6 +161,8 @@ Channel Type Bits:
 - 50: option_zeroconf (zero-conf request)
 - 44: option_scid_alias (required for zero-conf)
 ```
+
+---
 
 ## Limitations
 
@@ -184,6 +196,8 @@ Unconfirmed: Limit HTLCs to small amounts
 Confirmed: Full channel capacity available
 ```
 
+---
+
 ## Security Considerations
 
 ### Double-Spend Attack
@@ -216,6 +230,8 @@ Replace-By-Fee can replace the funding tx:
 
 **Mitigation**: Ensure funding tx is not RBF-signaling (nSequence).
 
+---
+
 ## Best Practices
 
 ### For LSPs
@@ -243,6 +259,8 @@ Implementation Checklist:
 □ Handle confirmation failures gracefully
 ```
 
+---
+
 ## Flow Diagram
 
 ```text
@@ -267,6 +285,8 @@ User                    LSP
   │   Full functionality │
 ```
 
+---
+
 ## Comparison
 
 | Aspect | Standard | Zero-Conf |
@@ -277,6 +297,8 @@ User                    LSP
 | Double-spend risk | None | Yes |
 | Best for | Peer-to-peer | LSP services |
 
+---
+
 ## Summary
 
 Zero-conf channels provide:
@@ -285,6 +307,8 @@ Zero-conf channels provide:
 - **Better UX**: Seamless onboarding experience
 - **LSP friendly**: Perfect for liquidity providers
 - **Trust trade-off**: Speed in exchange for trust assumption
+
+---
 
 ## When to Use Zero-Conf
 
@@ -298,10 +322,14 @@ Zero-conf channels provide:
 - Large channel amounts
 - When you're the one providing value upfront
 
+---
+
 ## Related Topics
 
 - [Channels](/docs/lightning/channels) - Channel lifecycle
 - [Anchor Outputs](/docs/lightning/anchor-outputs) - Modern channel format
+
+---
 
 ## Resources
 

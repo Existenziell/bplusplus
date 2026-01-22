@@ -592,6 +592,8 @@ No successful [51% attack](/docs/glossary#51-attack) on Bitcoin [mainnet](/docs/
 - **Large amounts**: Wait for more confirmations
 - **Economic finality**: Eventually, attack cost exceeds transaction value
 
+---
+
 ## Selfish Mining
 
 A subtle attack where miners can gain unfair advantage with less than 50% hashrate.
@@ -645,6 +647,8 @@ Below this threshold, the strategy loses money compared to honest mining.
 - **Timestamp analysis**: Detect anomalous block timing
 - **Pool monitoring**: Watch for suspicious behavior
 
+---
+
 ## Block Withholding Attack
 
 An attack by pool miners against their own pool.
@@ -673,6 +677,8 @@ An attack by pool miners against their own pool.
 - **Statistical analysis**: Detect miners who never find blocks
 - **Stratum V2**: Better work validation
 - **Reputation systems**: Track miner history
+
+---
 
 ## Fee Sniping
 
@@ -708,6 +714,8 @@ Attacker mines competing Block N' including the high-fee tx.
 - **[CLTV](/docs/glossary#cltv-checklocktimeverify)**: Similar lock-time mechanism
 - **Low fees**: Don't create tempting targets
 
+---
+
 ## Transaction Pinning
 
 An attack relevant to Layer 2 protocols like [Lightning](/docs/lightning/what-is-lightning).
@@ -732,6 +740,8 @@ Lightning [channels](/docs/glossary#channel) have time-locked transactions. If t
 - **Package relay**: Let related transactions propagate together
 - **Anchor outputs**: Pre-planned fee-bumping mechanisms
 - **v3 transactions**: New policy to limit pinning
+
+---
 
 ## Time-Warp Attack
 
@@ -765,6 +775,8 @@ Attack:
 - Easily detected
 - Could be fixed with [soft fork](/docs/glossary#soft-fork)
 
+---
+
 ## Eclipse Attack
 
 Isolating a node from the real network.
@@ -789,6 +801,8 @@ Isolating a node from the real network.
 - **Manual peering**: Add known-good peers
 - **Outbound connections**: Prioritize connections you initiate
 
+---
+
 ## Finney Attack
 
 Named after [Hal Finney](/docs/history/people#hal-finney-1956-2014), this is a race between broadcasting blocks and transactions.
@@ -811,6 +825,8 @@ Named after [Hal Finney](/docs/history/people#hal-finney-1956-2014), this is a r
 
 - **Wait for confirmations**: Even 1 confirmation defeats this
 - **Don't accept 0-conf**: For significant amounts
+
+---
 
 ## Goldfinger Attack
 
@@ -844,6 +860,8 @@ This attack requires:
 - Sustained attack (one-time disruption isn't fatal)
 - Facing legal consequences in every jurisdiction
 
+---
+
 ## Summary
 
 Bitcoin's mining attacks show why the security model works:
@@ -867,12 +885,16 @@ Most attacks require:
 
 Honest mining is almost always more profitable than attacking.
 
+---
+
 ## Related Topics
 
 - [Proof-of-Work](/docs/mining/proof-of-work) - The security mechanism
 - [Mining Economics](/docs/mining/economics) - Why honest mining pays
 - [Difficulty Adjustment](/docs/mining/difficulty) - How network responds
 - [Consensus Mechanism](/docs/bitcoin/consensus) - How Bitcoin achieves agreement
+
+---
 
 ## Resources
 

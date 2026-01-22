@@ -230,6 +230,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Halving Schedule
 
 | Halving | Block Height | Date | Subsidy | Total Mined |
@@ -256,6 +258,8 @@ halvings = 840,000 / 210,000 = 4
 subsidy = 50 / (2^4) = 3.125 BTC
 ```
 
+---
+
 ## Total Supply
 
 The total Bitcoin supply follows a geometric series that converges to exactly 21 million BTC:
@@ -274,6 +278,8 @@ The limit arises from:
 - Geometric series sum: 50 × 210,000 × 2 = 21,000,000
 
 After approximately 64 halvings (around year 2140), the subsidy drops below 1 [satoshi](/docs/glossary#satoshi) and becomes zero.
+
+---
 
 ## Utility Functions
 
@@ -473,6 +479,8 @@ console.log(`Next halving at block ${nextHeight.toLocaleString()}, ${blocksRemai
 ```
 :::
 
+---
+
 ## Block Reward Components
 
 The total block reward consists of two parts:
@@ -490,6 +498,8 @@ Total Block Reward = Block Subsidy + Transaction Fees
 | 2024-2028 | 3.125 BTC | Variable | Growing |
 
 As the subsidy decreases, transaction fees become increasingly important for [mining](/docs/glossary#mining-pool) economics and network security.
+
+---
 
 ## Inflation Rate
 
@@ -514,6 +524,8 @@ Example (2024):
 | 2024-2028 | ~0.8% |
 | After 2032 | < 0.5% |
 
+---
+
 ## Key Properties
 
 ### Predictability
@@ -531,6 +543,8 @@ Example (2024):
 - Current: Mix of subsidy and fees
 - Future: Security must come from [fee market](/docs/glossary#transaction-fee)
 
+---
+
 ## Visual Representation
 
 ```
@@ -546,6 +560,8 @@ Subsidy (BTC)
       └────────────────────────────────────────────────→ Blocks
        0      210k    420k    630k    840k    1050k
 ```
+
+---
 
 ## Resources
 

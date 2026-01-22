@@ -11,6 +11,8 @@ No single entity controls Bitcoin. Control is distributed across thousands of [n
 - **Open participation:** Anyone can run a node, mine, or contribute to development
 - **Consensus-driven changes:** Protocol changes require broad agreement
 
+---
+
 ## Why It Matters
 
 Decentralization enables Bitcoin's core properties:
@@ -21,6 +23,8 @@ Decentralization enables Bitcoin's core properties:
 | **Resilience** | Single point of failure; can be shut down | Global network with redundant infrastructure |
 | **Trust** | Must trust the central authority | Trust the protocol and code, not people |
 | **Control** | Authority controls your money | You control your private keys |
+
+---
 
 ## How Bitcoin Achieves Decentralization
 
@@ -35,6 +39,8 @@ Bitcoin has ~15,000-20,000 reachable [full nodes](/docs/glossary#full-node) spre
 ### Development
 
 Bitcoin has multiple implementations (Bitcoin Core, Bitcoin Knots, etc.) and an open development process. Changes go through the [BIP](/docs/glossary#bip-bitcoin-improvement-proposal) (Bitcoin Improvement Proposal) process and require community [consensus](/docs/glossary#consensus). No single developer or team controls the protocol.
+
+---
 
 ## The Bitcoin Trilemma
 
@@ -85,6 +91,8 @@ Bitcoin optimizes for **Security** and **Decentralization**, accepting limited b
 
 This separation of concerns provides the benefits of all three properties across the stack.
 
+---
+
 ## Threats to Decentralization
 
 | Area | Risk | Mitigation |
@@ -92,6 +100,8 @@ This separation of concerns provides the benefits of all three properties across
 | **Mining** | Pool consolidation, geographic concentration, ASIC manufacturer influence | Miners can switch pools; competitive market; global distribution |
 | **Nodes** | Growing blockchain size, higher hardware requirements | Pruning, light clients, ongoing optimization |
 | **Development** | Single implementation dominance, few core developers | Multiple implementations, open BIP process, fork ability |
+
+---
 
 ## Measuring Decentralization
 

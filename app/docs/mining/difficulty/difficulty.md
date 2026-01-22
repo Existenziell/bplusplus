@@ -22,6 +22,8 @@ Where:
 - **If blocks were mined too slow** (more than 2 weeks): Difficulty decreases
 - **Maximum adjustment**: ±4x per period (prevents extreme swings)
 
+---
+
 ## Why Difficulty Adjustment Exists
 
 ### Maintaining Block Time
@@ -43,6 +45,8 @@ Where:
 - **Consistent Block Times**: Users know confirmation times
 - **Network Health**: Prevents too-fast or too-slow block creation
 
+---
+
 ## Historical Difficulty Adjustments
 
 ### Early Bitcoin (2009-2012)
@@ -60,6 +64,8 @@ Where:
 - **Adjustments**: More stable, smaller percentage changes
 - **Network**: Mature, large hash rate
 
+---
+
 ## Difficulty Metrics
 
 ### Current Network Stats
@@ -74,6 +80,8 @@ The difficulty target is calculated from the block header:
 - **Target Hash**: Maximum hash value that's considered valid
 - **Lower Target**: Higher difficulty (harder to find valid hash)
 - **Higher Target**: Lower difficulty (easier to find valid hash)
+
+---
 
 ## Impact on Miners
 
@@ -94,6 +102,8 @@ When network hash rate decreases:
 - **Difficulty increases**: Reduce profitability (unless hash rate increases)
 - **Difficulty decreases**: Increase profitability (if hash rate stays same)
 - **Long-term trend**: Difficulty generally increases over time
+
+---
 
 ## Technical Details
 
@@ -251,6 +261,8 @@ console.log(`New difficulty: ${newDiff}`); // ~112,000
 - **Block height**: Must be multiple of 2016
 - **Genesis block**: Block 0, no adjustment
 - **First adjustment**: Block 2016
+
+---
 
 ## Related Topics
 

@@ -48,6 +48,8 @@ bitcoind -testnet -daemon
 bitcoin-cli -testnet getblockchaininfo
 ```
 
+---
+
 ## Unit Testing Strategies
 
 ### Testing Address Generation
@@ -214,6 +216,8 @@ func TestTransactionConstruction(t *testing.T) {
 ```
 :::
 
+---
+
 ## Integration Testing
 
 ### Testing with Regtest
@@ -286,6 +290,8 @@ def test_fee_estimation(self):
     assert 'feerate' in fee_rate
     assert fee_rate['feerate'] > 0
 ```
+
+---
 
 ## Debugging Techniques
 
@@ -365,6 +371,8 @@ bitcoin-cli decoderawtransaction <raw_tx>
 bitcoin-cli gettxout <prev_txid> <vout>
 ```
 
+---
+
 ## Testing Lightning Applications
 
 ### Using Polar
@@ -423,6 +431,8 @@ class CLightningTestCase(unittest.TestCase):
         self.assertIn('alias', info)
 ```
 
+---
+
 ## Mocking and Stubbing
 
 ### Mocking RPC Calls
@@ -468,6 +478,8 @@ class TestAPIIntegration:
         assert data['height'] == 100000
 ```
 
+---
+
 ## Test Data Generation
 
 ### Creating Test Transactions
@@ -505,6 +517,8 @@ def generate_test_keypair():
     
     return private_key, public_key
 ```
+
+---
 
 ## Continuous Integration
 
@@ -548,6 +562,8 @@ jobs:
         bitcoin-cli -regtest stop
 ```
 
+---
+
 ## Best Practices
 
 ### Testing Checklist
@@ -589,6 +605,8 @@ tests/
 │   └── blocks.json
 └── conftest.py
 ```
+
+---
 
 ## Related Topics
 

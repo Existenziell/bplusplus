@@ -13,6 +13,8 @@ A payment channel is a 2-of-2 [multisig](/docs/glossary#multisig-multi-signature
 - **On-Chain Settlement**: Final state broadcast to Bitcoin when closing
 - **Bidirectional**: Payments can flow in both directions
 
+---
+
 ## Channel Lifecycle
 
 ### 1. Channel Opening
@@ -62,6 +64,8 @@ Update Process:
 | Force Close | Unilateral broadcast | Slow (timelock) | Higher |
 | Breach/Penalty | Punish cheating attempt | Varies | Attacker loses all |
 
+---
+
 ## Commitment Transactions
 
 Each commitment transaction represents the current channel state:
@@ -91,6 +95,8 @@ When the channel state updates:
 2. Exchange signatures
 3. Exchange revocation secrets for old state
 4. Old commitments become toxic (broadcasting = penalty)
+
+---
 
 ## Channel Balance Queries
 
@@ -244,6 +250,8 @@ getChannelBalances().then(balance => {
 ```
 :::
 
+---
+
 ## Channel Capacity and Liquidity
 
 ### Total Capacity
@@ -272,6 +280,8 @@ For routing payments, liquidity must exist in the payment direction:
 
 New nodes often struggle with inbound liquidity since opening channels only provides outbound.
 
+---
+
 ## Channel Types
 
 ### Public Channels
@@ -287,6 +297,8 @@ New nodes often struggle with inbound liquidity since opening channels only prov
 - Only known to the two parties
 - Can still be used with route hints
 - Better privacy for end users
+
+---
 
 ## Channel Security
 
@@ -305,6 +317,8 @@ Force-closed channels have timelocks (typically 144-2016 blocks) that give the c
 ### Watchtowers
 
 Third-party services that monitor the blockchain for breach attempts when your node is offline. See [Watchtowers](/docs/lightning/watchtowers) for details.
+
+---
 
 ## Common Issues
 
@@ -333,6 +347,8 @@ Third-party services that monitor the blockchain for breach attempts when your n
 - Open larger channel
 - Find alternative route
 
+---
+
 ## Summary
 
 Payment channels enable:
@@ -342,6 +358,8 @@ Payment channels enable:
 - **Privacy**: Off-chain activity not visible on blockchain
 - **Scalability**: Unlimited payments per channel
 - **Security**: Cryptographic enforcement via commitment/revocation
+
+---
 
 ## Related Topics
 

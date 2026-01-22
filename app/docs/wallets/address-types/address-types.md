@@ -12,6 +12,8 @@ Bitcoin has evolved through several address formats, each offering different fea
 | P2WSH | `bc1q` | `bc1qrp33g0q...` | 2017 (BIP141) |
 | P2TR | `bc1p` | `bc1p5cyxnux...` | 2021 (BIP341) |
 
+---
+
 ## P2PKH (Pay-to-Public-Key-Hash)
 
 The original Bitcoin address format, also known as "legacy" addresses.
@@ -201,6 +203,8 @@ func main() {
 - **Input size**: ~148 vB
 - **Output size**: 34 vB
 - **Script type**: Standard pay-to-pubkey-hash
+
+---
 
 ## P2SH (Pay-to-Script-Hash)
 
@@ -395,6 +399,8 @@ func main() {
 - **Output size**: 32 vB
 - **Script type**: Pay-to-script-hash
 
+---
+
 ## P2WPKH (Native SegWit)
 
 Introduced with [SegWit](/docs/glossary#segwit-segregated-witness) in BIP141, P2WPKH provides significant fee savings.
@@ -581,6 +587,8 @@ func main() {
 - **Output size**: 31 vB
 - **Encoding**: Bech32
 
+---
+
 ## P2WSH (Pay-to-Witness-Script-Hash)
 
 P2WSH is the SegWit version of P2SH, used for complex scripts like multisig.
@@ -598,6 +606,8 @@ witness: <data...> <witnessScript>
 - **Input size**: Variable (depends on witness script)
 - **Output size**: 43 vB
 - **Encoding**: Bech32
+
+---
 
 ## P2TR (Pay-to-Taproot)
 
@@ -794,6 +804,8 @@ func main() {
 - **Output size**: 43 vB
 - **Encoding**: Bech32m
 
+---
+
 ## Comparison
 
 ### Transaction Size and Fees
@@ -814,6 +826,8 @@ func main() {
 | Privacy | Low | Medium | Medium | High |
 | Script flexibility | No | Yes | Limited | High |
 | Encoding | Base58 | Base58 | Bech32 | Bech32m |
+
+---
 
 ## Best Practices
 
@@ -836,6 +850,8 @@ Always validate addresses before sending:
 - Verify checksum (Base58Check or Bech32)
 - Confirm network (mainnet vs testnet)
 
+---
+
 ## Summary
 
 Bitcoin address types have evolved to provide:
@@ -846,6 +862,8 @@ Bitcoin address types have evolved to provide:
 - **P2TR**: Taproot, lowest fees and best privacy
 
 Choose the appropriate type based on your use case, required features, and compatibility needs.
+
+---
 
 ## Related Topics
 

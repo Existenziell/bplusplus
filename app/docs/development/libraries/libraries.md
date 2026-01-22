@@ -38,6 +38,8 @@ When using different versions, consult each library's migration guides for API c
 | [Coin Selection](/docs/glossary#coin-selection) | Manual | Manual | ✓ | Manual |
 | [Blockchain](/docs/glossary#blockchain) Sync | No | No | ✓ | No |
 
+---
+
 ## JavaScript/TypeScript
 
 ### bitcoinjs-lib
@@ -128,6 +130,8 @@ const signature = await secp.schnorr.sign(message, privateKey);
 // Verify
 const isValid = await secp.schnorr.verify(signature, message, publicKey);
 ```
+
+---
 
 ## Rust
 
@@ -282,6 +286,8 @@ use lightning::ln::channelmanager::ChannelManager;
 // - ChainMonitor: Monitors on-chain events
 ```
 
+---
+
 ## Python
 
 ### python-bitcoinlib
@@ -364,6 +370,8 @@ address_key = external.ChildKey(0)            # address_index
 print(f"Address: {address_key.Address()}")
 ```
 
+---
+
 ## Go
 
 ### btcd/btcutil
@@ -420,6 +428,8 @@ func connectToLND() {
     fmt.Println("Payment request:", invoice.PaymentRequest)
 }
 ```
+
+---
 
 ## Common Tasks
 
@@ -500,6 +510,8 @@ def is_valid_address(address):
         return False
 ```
 
+---
+
 ## Choosing a Library
 
 ### Decision Matrix
@@ -533,6 +545,8 @@ def is_valid_address(address):
 - Pros: Easy to learn, great for scripts
 - Cons: Slower, less complete Taproot support
 
+---
+
 ## Summary
 
 Each library has its strengths:
@@ -543,6 +557,8 @@ Each library has its strengths:
 - **btcd**: Best for Go infrastructure
 
 Choose based on your language preference, use case, and required features. For production wallets, consider BDK for its completeness; for web apps, bitcoinjs-lib remains the standard choice.
+
+---
 
 ## Related Topics
 

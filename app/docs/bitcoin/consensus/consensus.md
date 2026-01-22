@@ -36,12 +36,16 @@ Bitcoin assumes the network contains adversaries. Its consensus mechanism must f
 
 The elegant solution combines cryptographic proof (making fraud detectable) with economic incentives (making honesty more profitable than cheating). This creates a system where rational actors are naturally aligned toward honest behavior, and irrational attackers face prohibitive costs.
 
+---
+
 ## What Nodes Agree On
 
 **Consensus** means all honest participants agree on:
 - Which transactions are valid and their ordering
 - The current state of the blockchain (who owns what)
 - Which blocks form the canonical chain
+
+---
 
 ## How Bitcoin Achieves Consensus
 
@@ -78,6 +82,8 @@ Bitcoin uses **[Proof-of-Work](/docs/glossary#proof-of-work-pow)** (PoW) as its 
 | 5. Verify | Nodes independently validate block | Ensure rule compliance |
 | 6. Extend | Miners build on longest valid chain | Reach consensus |
 
+---
+
 ## Consensus Rules
 
 Nodes validate three layers: **[transactions](/docs/glossary#transaction)** (valid signatures, unspent inputs, no [double-spends](/docs/glossary#double-spend)), **blocks** (correct structure, valid PoW, all transactions valid), and **chains** (blocks link correctly, longest chain is canonical).
@@ -90,6 +96,8 @@ Nodes validate three layers: **[transactions](/docs/glossary#transaction)** (val
 | Violation | Block/transaction rejected | May still be relayed by others |
 | Examples | 21M supply cap, block size limit | Minimum relay fee, mempool size |
 | Changes | Requires fork | Can change locally anytime |
+
+---
 
 ## Achieving Consensus
 
@@ -113,6 +121,8 @@ Each additional block makes transaction reversal exponentially more difficult ([
 
 Nodes stay synchronized by constantly sharing and verifying blocks. When temporary forks occur (e.g., two blocks found simultaneously), the network automatically resolves by accepting whichever chain becomes longest (typically within the next block).
 
+---
+
 ## Security Through Consensus
 
 ### 51% Attack
@@ -131,6 +141,8 @@ A [51% attack](/docs/glossary#51-attack) occurs when an entity controls more tha
 
 Bitcoin's security is fundamentally economic. Miners receive [block rewards](/docs/glossary#block-reward) + fees for honest behavior, making attacks unprofitable. The cost to attack exceeds any possible gain, and the network can respond by changing the PoW algorithm, rendering attacker hardware worthless.
 
+---
+
 ## Consensus Properties
 
 | Property | Definition | Bitcoin's Implementation |
@@ -138,6 +150,8 @@ Bitcoin's security is fundamentally economic. Miners receive [block rewards](/do
 | **[Finality](/docs/glossary#finality)** | Transactions cannot be reversed | Probabilistic: 6+ confirmations is economically final |
 | **Liveness** | System continues producing blocks | ~10 min blocks; resilient to node failures |
 | **Safety** | No conflicting states | All nodes agree on single chain; no double-spends |
+
+---
 
 ## Consensus Challenges
 
@@ -150,6 +164,8 @@ Bitcoin's security is fundamentally economic. Miners receive [block rewards](/do
 | **Stale block** | Valid block orphaned by longer chain | Transactions return to mempool |
 
 These situations are normal and resolve automatically. The longest chain rule ensures eventual consistency without human intervention: a critical property for a trustless system.
+
+---
 
 ## Comparison with Other Mechanisms
 

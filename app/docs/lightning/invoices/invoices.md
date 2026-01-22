@@ -22,6 +22,8 @@ Breakdown:
 └── 9qxpqysgq...  ← Signature
 ```
 
+---
+
 ## Human-Readable Part
 
 ### Network Prefixes
@@ -45,6 +47,8 @@ Breakdown:
 
 Note: Pico amounts must be multiples of 10 (minimum resolution is 1 millisatoshi).
 
+---
+
 ## Data Part Fields
 
 The data section uses tagged fields in TLV (Type-Length-Value) format:
@@ -61,6 +65,8 @@ The data section uses tagged fields in TLV (Type-Length-Value) format:
 | `f` | Fallback Address | On-chain fallback |
 | `r` | Route Hints | Private channel routing info |
 | `9` | Feature Bits | Supported features |
+
+---
 
 ## Parsing Invoices
 
@@ -483,6 +489,8 @@ console.log(`Amount: ${parsed.amountMsat / 1000n} sats`);
 ```
 :::
 
+---
+
 ## Creating Invoices
 
 Using `lncli`:
@@ -501,6 +509,8 @@ lncli addinvoice --amt=25000 --private
 lncli addinvoice --memo="Donation"
 ```
 
+---
+
 ## Invoice Expiry
 
 Invoices have a default expiry of 1 hour (3600 seconds). After expiry:
@@ -518,6 +528,8 @@ Common expiry values:
 | Subscription | 24 hours | 86400 |
 | Donation | 7 days | 604800 |
 
+---
+
 ## Route Hints
 
 Private channels require route hints to be payable:
@@ -533,6 +545,8 @@ Route Hint Structure:
 
 Route hints tell the sender how to reach a node through private/unannounced channels.
 
+---
+
 ## Payment Secret (s field)
 
 The payment secret (added in BOLT11 amendment):
@@ -541,6 +555,8 @@ The payment secret (added in BOLT11 amendment):
 - Prevents payment probing attacks
 - Required for [Multi-Part Payments (MPP)](/docs/lightning/routing#what-is-mpp)
 - Proves payer has the actual invoice
+
+---
 
 ## Feature Bits
 
@@ -552,6 +568,8 @@ The `9` field encodes supported features:
 | 14/15 | Payment secret required |
 | 16/17 | Basic MPP |
 | 24/25 | Keysend |
+
+---
 
 ## Common Patterns
 
@@ -573,6 +591,8 @@ lncli addinvoice --amt=1000000 --fallback_addr=bc1q...
 
 If Lightning payment fails, payer can use on-chain address.
 
+---
+
 ## Validation Checklist
 
 When receiving an invoice, verify:
@@ -582,6 +602,8 @@ When receiving an invoice, verify:
 3. **Amount is acceptable** (if specified)
 4. **Features are supported** by your node
 5. **Signature is valid** (proves invoice authenticity)
+
+---
 
 ## Summary
 
@@ -593,11 +615,15 @@ BOLT11 invoices provide:
 - **Route hints** for private channel payments
 - **Payment secrets** for security and MPP support
 
+---
+
 ## Related Topics
 
 - [Multi-Part Payments](/docs/lightning/routing#what-is-mpp) - Splitting large payments
 - [Channels](/docs/lightning/channels) - Where payments flow
 - [HTLCs](/docs/lightning/routing#what-is-an-htlc) - Payment mechanism
+
+---
 
 ## Resources
 

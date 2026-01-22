@@ -11,6 +11,8 @@ Before Bitcoin, decentralized digital currency faced seemingly insurmountable pr
 - **Byzantine failures:** Some participants may be malicious or send conflicting information
 - **Timing:** No synchronized clocks or central time source to order events (see [Bitcoin as Timechain](/docs/fundamentals/timechain) for how this is solved)
 
+---
+
 ## The Double-Spending Problem
 
 [Double-spending](/docs/glossary#double-spend) occurs when the same digital currency unit is spent more than once. Unlike physical cash, digital information can be perfectly copied; without protection, the same coin could be sent to multiple recipients simultaneously, destroying the currency's value.
@@ -28,6 +30,8 @@ Alice has 1 BTC, attempts to send it to both Bob and Charlie:
 
 [Video: Double Spending Problem Explained](https://www.youtube.com/watch?v=yBwDGby1yZA)
 
+---
+
 ## The Two Generals Problem
 
 A classic distributed systems problem: two parties must coordinate action over an unreliable channel, but can never achieve certainty because each confirmation requires its own confirmation, creating infinite regress.
@@ -35,6 +39,8 @@ A classic distributed systems problem: two parties must coordinate action over a
 **Bitcoin's solution:** Accept probabilistic finality instead of perfect certainty. Proof-of-work creates objective ordering, and the longest chain rule causes the network to naturally converge. More confirmations = higher certainty (6 confirmations is generally considered irreversible).
 
 [Video: Two Generals Problem Explained](https://www.youtube.com/watch?v=nS9LH5gu65Y)
+
+---
 
 ## Other Problems Solved
 
@@ -46,6 +52,8 @@ A classic distributed systems problem: two parties must coordinate action over a
 | **Cross-Border Payments** | Slow (days), expensive, requires intermediaries | Minutes to hours, lower fees, works 24/7, same currency globally |
 | **Financial Inclusion** | Billions unbanked, high barriers, geographic restrictions | Anyone with internet access can participate; no account required |
 
+---
+
 ## The Innovation
 
 Bitcoin didn't invent new primitives; it combined existing techniques in a novel way:
@@ -56,6 +64,8 @@ Bitcoin didn't invent new primitives; it combined existing techniques in a novel
 - **Game theory:** Nash equilibrium makes honest behavior profitable
 
 Previous digital currency attempts required central authority and couldn't prevent double-spending. Bitcoin achieves decentralized consensus through this combination, proving that trustless digital money is possible.
+
+---
 
 ## The Philosophical Foundation
 

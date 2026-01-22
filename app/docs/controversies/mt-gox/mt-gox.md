@@ -19,6 +19,8 @@ By 2013, Mt. Gox was:
 
 This concentration of power in a single exchange was a ticking time bomb.
 
+---
+
 ## The Collapse
 
 ### Warning Signs
@@ -49,6 +51,8 @@ The total loss was approximately:
 
 At 2014 prices (~$450/BTC), this was about $450 million. At Bitcoin's 2021 peak (~$69,000/BTC), the lost coins would have been worth over $58 billion.
 
+---
+
 ## What Happened?
 
 ### The Official Story
@@ -66,6 +70,8 @@ Investigations revealed a more damning picture:
 
 In 2015, Mark Karpelès was arrested in Japan on charges of embezzlement and data manipulation (though not directly for the Bitcoin theft). He was eventually convicted of data manipulation but acquitted of embezzlement.
 
+---
+
 ## The Aftermath
 
 ### Victims
@@ -81,6 +87,8 @@ Bitcoin's price crashed from ~$850 to under $400 in the months following the col
 In a twist of fate, 200,000 BTC were later "found" in old Mt. Gox wallets. Combined with Bitcoin's price appreciation, the bankruptcy estate eventually had enough to potentially repay creditors in full, though the legal process has taken years.
 
 Creditor repayments finally began in 2024, over a decade after the collapse.
+
+---
 
 ## Lessons Learned
 
@@ -108,6 +116,8 @@ Mt. Gox operated in a regulatory gray zone. Its collapse prompted:
 - Licensing requirements in many jurisdictions
 - Debates about consumer protection vs. Bitcoin's permissionless ethos
 
+---
+
 ## The Ongoing Saga
 
 ### Bankruptcy Proceedings
@@ -125,6 +135,8 @@ Even a decade later, Mt. Gox affects markets:
 - The "Mt. Gox Bitcoin" is tracked as a potential market-moving event
 - Each distribution milestone makes headlines
 
+---
+
 ## Historical Significance
 
 Mt. Gox represents a pivotal moment in Bitcoin history:
@@ -139,17 +151,23 @@ Mt. Gox represents a pivotal moment in Bitcoin history:
 
 5. **Bitcoin Survived**: Despite losing the dominant exchange, Bitcoin itself continued. The network was unaffected. Only the centralized exchange failed; the decentralized protocol kept running.
 
+---
+
 ## Conclusion
 
 Mt. Gox is the ghost that haunts every Bitcoin exchange. Its collapse cost early adopters billions of dollars and years of legal limbo. But it also taught the Bitcoin community invaluable lessons about the importance of self-custody, the dangers of centralization, and the difference between trusting Bitcoin the protocol and trusting businesses built on top of it.
 
 When you hear Bitcoiners say "not your keys, not your coins," they're speaking the language of Mt. Gox survivors.
 
+---
+
 ## Related Topics
 
 - [Blocksize Wars](/docs/controversies/blocksize-wars) - Another major Bitcoin controversy
 - [Energy Consumption](/docs/controversies/energy-consumption) - The energy debate
 - [OP_RETURN Debate](/docs/controversies/op-return) - Data storage on Bitcoin
+
+---
 
 ## Resources
 

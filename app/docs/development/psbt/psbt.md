@@ -20,6 +20,8 @@ PSBT provides:
 - **Partial Signatures**: Multiple parties can sign independently
 - **Hardware Wallet Support**: Works with air-gapped devices
 
+---
+
 ## PSBT Structure
 
 ### Components
@@ -51,6 +53,8 @@ PSBT
 4. **Combiner**: Merges multiple PSBTs
 5. **Finalizer**: Completes the transaction
 6. **Extractor**: Extracts the final transaction
+
+---
 
 ## Creating PSBTs
 
@@ -170,6 +174,8 @@ const psbtBase64 = psbt.toBase64();
 ```
 :::
 
+---
+
 ## Signing PSBTs
 
 ### Single Signature
@@ -270,6 +276,8 @@ const finalTx = psbt2.extractTransaction();
 console.log(finalTx.toHex());
 ```
 
+---
+
 ## Combining PSBTs
 
 When multiple parties sign the same PSBT independently:
@@ -302,6 +310,8 @@ const finalTx = combined.extractTransaction();
 # Combine multiple PSBTs
 bitcoin-cli combinepsbt '["psbt1_base64", "psbt2_base64"]'
 ```
+
+---
 
 ## Finalizing PSBTs
 
@@ -350,6 +360,8 @@ psbt.finalizeInput(0, (inputIndex, input, script) => {
   };
 });
 ```
+
+---
 
 ## PSBT Workflow Examples
 
@@ -406,6 +418,8 @@ const psbtBase64 = psbt.toBase64();
 // Coordinator combines and broadcasts
 ```
 
+---
+
 ## PSBT Version 2 (BIP-370)
 
 PSBT v2 introduces improvements for interactive protocols:
@@ -425,6 +439,8 @@ PSBT v2 introduces improvements for interactive protocols:
 - Payjoin
 - Multi-round signing protocols
 - Interactive transaction construction
+
+---
 
 ## Error Handling
 
@@ -483,6 +499,8 @@ function validatePsbt(psbt: Psbt): boolean {
 }
 ```
 
+---
+
 ## Best Practices
 
 ### For PSBT Creators
@@ -506,6 +524,8 @@ function validatePsbt(psbt: Psbt): boolean {
 3. **Test on Testnet**: Always test the integration first
 4. **Handle Rejections**: User may reject on device
 
+---
+
 ## Summary
 
 PSBTs provide a standardized way to:
@@ -517,6 +537,8 @@ PSBTs provide a standardized way to:
 - **Finalize** and extract broadcast-ready transactions
 
 Understanding PSBTs is essential for modern Bitcoin development, especially when working with hardware wallets, multi-signature setups, or any multi-party transaction construction.
+
+---
 
 ## Related Topics
 

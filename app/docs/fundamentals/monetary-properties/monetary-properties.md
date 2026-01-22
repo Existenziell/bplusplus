@@ -13,6 +13,8 @@ Bitcoin exhibits key monetary properties that make it suitable as both a medium 
 | **Fungibility** | All units interchangeable | Technically fungible, though blockchain analysis can trace history |
 | **Acceptability** | Others willing to accept as payment | Growing adoption among millions of users and thousands of merchants |
 
+---
+
 ## Denominations
 
 | Denomination | Symbol | Value in BTC |
@@ -24,6 +26,8 @@ Bitcoin exhibits key monetary properties that make it suitable as both a medium 
 
 The satoshi (named after Bitcoin's creator) is the smallest unit. "Stacking sats" has become common terminology for accumulating bitcoin in small amounts.
 
+---
+
 ## Additional Properties
 
 **Verifiability:** Digital signatures prove ownership cryptographically. Anyone can verify transactions on the public blockchain, and counterfeiting is mathematically impossible.
@@ -31,6 +35,8 @@ The satoshi (named after Bitcoin's creator) is the smallest unit. "Stacking sats
 **Programmability:** Bitcoin [Script](/docs/glossary#script) enables conditional [transactions](/docs/glossary#transaction): [time locks](/docs/glossary#time-lock) ([CLTV](/docs/glossary#cltv-checklocktimeverify), [CSV](/docs/glossary#csv-checksequenceverify)), [multisignature](/docs/glossary#multisig-multi-signature) requirements, and basic smart contracts.
 
 **Censorship Resistance:** No central authority can block transactions. The global, permissionless network makes shutdown impractical.
+
+---
 
 ## Comparison to Traditional Money
 
@@ -44,6 +50,8 @@ The satoshi (named after Bitcoin's creator) is the smallest unit. "Stacking sats
 | **Censorship** | Accounts can be frozen | Physical seizure possible | Resistant (no central control) |
 | **Volatility** | Low (developed countries) | Low | High (currently) |
 | **Acceptance** | Universal (within jurisdiction) | Limited | Growing |
+
+---
 
 ## Economic Functions
 

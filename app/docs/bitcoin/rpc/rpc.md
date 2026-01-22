@@ -36,6 +36,8 @@ btc getwalletinfo | jq '{walletname, txcount, balance}'
 btc listwallets
 ```
 
+---
+
 ## RPC Configuration
 
 ### bitcoin.conf Setup
@@ -66,6 +68,8 @@ export BITCOIN_RPC_PASSWORD="your_password"
 export BITCOIN_RPC_PORT="8332"
 ```
 
+---
+
 ## Basic RPC Structure
 
 ```bash
@@ -75,6 +79,8 @@ alias btc='bitcoin-cli -rpcuser=$BITCOIN_RPC_USER -rpcpassword=$BITCOIN_RPC_PASS
 # Then use simple commands
 btc <method_name> [parameters]
 ```
+
+---
 
 ## Programmatic RPC Access
 
@@ -620,6 +626,8 @@ func main() {
 ```
 :::
 
+---
+
 ## Essential Node Information Commands
 
 ### 1. Blockchain Information
@@ -682,6 +690,8 @@ btc getrawtransaction <txid> true
 btc getmempoolentry <txid>
 ```
 
+---
+
 ## Wallet Commands
 
 ### 6. Wallet Information
@@ -718,6 +728,8 @@ btc -rpcwallet=<walletname> listtransactions "*" 100
 # Get balance from specific wallet
 btc -rpcwallet=<walletname> getbalance
 ```
+
+---
 
 ## Advanced Diagnostic Commands
 
@@ -759,6 +771,8 @@ btc getpeerinfo
 btc getnetworkinfo | jq '{connections, connections_in, connections_out}'
 ```
 
+---
+
 ## 11. ZMQ Notifications
 
 [ZeroMQ](/docs/glossary#zmq-zeromq) provides real-time notifications for blockchain events, enabling instant detection of new blocks and transactions without polling.
@@ -788,6 +802,8 @@ grep -i zmq ~/.bitcoin/debug.log
 # Check Bitcoin help for ZMQ options
 bitcoind -h | grep zmq
 ```
+
+---
 
 ## Troubleshooting
 
@@ -831,6 +847,8 @@ tail -f ~/.bitcoin/debug.log
 grep -i error ~/.bitcoin/debug.log | tail -10
 ```
 
+---
+
 ## JSON Output Formatting
 
 To make the output more readable, pipe through `jq`:
@@ -842,6 +860,8 @@ To make the output more readable, pipe through `jq`:
 
 btc getblockchaininfo | jq '{blocks, verificationprogress}'
 ```
+
+---
 
 ## Resources
 

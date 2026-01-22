@@ -24,6 +24,8 @@ Each node can set its own mempool policies:
 - **Transaction Expiration**: Transactions may be dropped after a period (default: 2 weeks)
 - **Replace-by-Fee**: Whether to accept transaction replacements
 
+---
+
 ## Querying the Mempool
 
 You can query mempool information using Bitcoin Core's [RPC](/docs/glossary#rpc-remote-procedure-call) interface:
@@ -431,6 +433,8 @@ queryMempool().catch(console.error);
 ```
 :::
 
+---
+
 ## Fee Market Dynamics
 
 The mempool creates a **fee market** where users bid for block space.
@@ -465,6 +469,8 @@ When transaction volume exceeds block capacity:
 3. **Low-fee eviction**: Nodes drop lowest-fee transactions when mempool is full
 4. **Backlog clears**: Eventually, transaction volume decreases and the mempool empties
 
+---
+
 ## Replace-by-Fee (RBF)
 
 **[RBF](/docs/glossary#rbf-replace-by-fee)** allows replacing an unconfirmed transaction with a new version paying a higher fee.
@@ -487,6 +493,8 @@ When transaction volume exceeds block capacity:
 - **Opt-in RBF**: Only transactions that signal RBF can be replaced (current default)
 - **Full RBF**: Any unconfirmed transaction can be replaced (controversial, increasingly adopted)
 
+---
+
 ## Child Pays for Parent (CPFP)
 
 An alternative to RBF for [fee bumping](/docs/glossary#fee-bumping).
@@ -505,6 +513,8 @@ An alternative to RBF for [fee bumping](/docs/glossary#fee-bumping).
 | Who can bump | Sender only | Sender or recipient |
 | Requires | RBF signaling | Spendable output |
 | Efficiency | More efficient | Uses extra block space |
+
+---
 
 ## Mempool Visualization
 
@@ -528,6 +538,8 @@ Fee Rate (sat/vB)
       Transaction Volume (by size)
 ```
 
+---
+
 ## Mempool Sniping and Games
 
 ### Transaction Pinning
@@ -550,6 +562,8 @@ Watching the mempool to exploit pending transactions:
 
 Common in DeFi on other chains, less relevant for Bitcoin's simpler transactions.
 
+---
+
 ## Mempool Tools and Resources
 
 > **Query the mempool yourself!** Try `getmempoolinfo` and `getrawmempool` in the [Bitcoin CLI Terminal](/terminal). Real mainnet data, no setup required.
@@ -567,6 +581,8 @@ Common in DeFi on other chains, less relevant for Bitcoin's simpler transactions
 - Transaction propagation status
 - Historical congestion patterns
 
+---
+
 ## Implications for Users
 
 ### Sending Transactions
@@ -581,6 +597,8 @@ Common in DeFi on other chains, less relevant for Bitcoin's simpler transactions
 1. **Wait for confirmations**: Unconfirmed transactions can be replaced or dropped
 2. **Check RBF status**: RBF transactions are more easily [double-spent](/docs/glossary#double-spend) before confirmation
 3. **Monitor mempool**: Track your incoming transaction's position
+
+---
 
 ## Technical Details
 
@@ -609,6 +627,8 @@ Transactions must pass:
 3. **Policy rules**: Meet node's minimum fee, size limits
 4. **Package rules**: Ancestor/descendant limits (25 transactions, 101 KB)
 
+---
+
 ## Summary
 
 The mempool is the heartbeat of Bitcoin's transaction processing:
@@ -624,11 +644,15 @@ Understanding the mempool helps you:
 - Understand network congestion
 - Make informed timing decisions
 
+---
+
 ## Related Topics
 
 - [Mining Economics](/docs/mining/economics) - How miners profit from fees
 - [Block Construction](/docs/mining/block-construction) - How miners select transactions
 - [Proof-of-Work](/docs/mining/proof-of-work) - The mining process
+
+---
 
 ## Resources
 

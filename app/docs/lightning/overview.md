@@ -8,6 +8,8 @@ The Lightning Network was proposed in 2015 by Joseph Poon and Thaddeus Dryja in 
 
 The first mainnet Lightning implementations launched in 2018, including LND (Lightning Labs), c-lightning/CLN (Blockstream), and Eclair (ACINQ).
 
+---
+
 ## Key Concepts
 
 - **Payment Channels**: Two-party channels that allow unlimited off-chain transactions
@@ -16,12 +18,16 @@ The first mainnet Lightning implementations launched in 2018, including LND (Lig
 - **Onion Routing**: Privacy-preserving payment routing (similar to Tor)
 - **Instant Settlement**: Payments complete in milliseconds, not minutes
 
+---
+
 ## How It Works
 
 1. **Open Channel**: Two parties lock Bitcoin in a 2-of-2 [multisig](/docs/glossary#multisig-multi-signature) address
 2. **Update Balance**: Parties exchange signed [commitment transactions](/docs/glossary#commitment-transaction) to update the channel balance
 3. **Route Payments**: Payments can route through multiple channels using HTLCs
 4. **Close Channel**: Final state is broadcast to the Bitcoin blockchain
+
+---
 
 ## Scalability
 
@@ -31,6 +37,8 @@ The Lightning Network can theoretically handle millions of transactions per seco
 - Channels can be reused for unlimited payments
 - Network capacity grows with each new channel
 - Fees are minimal (typically < 1 satoshi)
+
+---
 
 ## Trade-offs
 
@@ -109,6 +117,8 @@ lncli newaddress p2wkh
 
 Send Bitcoin to this address and wait for confirmation (typically 3-6 blocks for safety).
 
+---
+
 ## Opening Channels
 
 ### Connect to a Peer
@@ -139,6 +149,8 @@ lncli listchannels
 lncli pendingchannels
 ```
 
+---
+
 ## Creating and Paying Invoices
 
 ### Create an Invoice
@@ -162,6 +174,8 @@ lncli payinvoice <bolt11_invoice>
 lncli listpayments
 lncli trackpayment <payment_hash>
 ```
+
+---
 
 ## Node Operations
 
@@ -187,6 +201,8 @@ lncli channelbalance
 lncli listpeers
 ```
 
+---
+
 ## Troubleshooting
 
 ### Channel Not Opening
@@ -207,6 +223,8 @@ lncli listpeers
 - Verify ZMQ ports match configuration
 - Review LND logs: `tail -f ~/.lnd/logs/bitcoin/mainnet/lnd.log`
 
+---
+
 ## Best Practices
 
 ### Security
@@ -223,11 +241,15 @@ lncli listpeers
 - Monitor channel health regularly
 - Close inactive or problematic channels
 
+---
+
 ## Next Steps
 
 - Learn about [Payment Channels](/docs/lightning/channels)
 - Understand [Routing and HTLCs](/docs/lightning/routing)
 - Explore [Onion Routing](/docs/lightning/onion) for privacy
+
+---
 
 ## Resources
 

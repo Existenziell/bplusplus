@@ -153,6 +153,8 @@ client := lnrpc.NewLightningClient(conn)
 info, _ := client.GetInfo(ctx, &lnrpc.GetInfoRequest{})
 ```
 
+---
+
 ## Development Approaches
 
 ### 1. Full Node Development
@@ -244,6 +246,8 @@ Working with Bitcoin's scripting system.
 3. Use miniscript for complex policies
 4. Test on signet
 
+---
+
 ## Development Networks
 
 ### [Mainnet](/docs/glossary#mainnet)
@@ -299,6 +303,8 @@ bitcoind -regtest -daemon
 bitcoin-cli -regtest generatetoaddress 101 <your-address>
 ```
 
+---
+
 ## Essential Tools
 
 ### Block Explorers
@@ -326,6 +332,8 @@ bitcoin-cli -regtest generatetoaddress 101 <your-address>
 - **[BIPs](https://github.com/bitcoin/bips)**: Bitcoin Improvement Proposals
 - **[BOLTs](https://github.com/lightning/bolts)**: Lightning specifications
 - **[Learning Bitcoin from the Command Line](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line)**: Command line tutorial
+
+---
 
 ## Development Workflow
 
@@ -363,6 +371,8 @@ Only after thorough testing:
 - Monitor transactions
 - Have rollback plans
 
+---
+
 ## Common Pitfalls
 
 ### Security
@@ -385,6 +395,8 @@ Only after thorough testing:
 - **Wait for confirmations**: 6 blocks for high-value transactions
 - **Don't trust unconfirmed**: Zero-conf can be double-spent
 
+---
+
 ## Summary
 
 Bitcoin development offers many paths:
@@ -399,12 +411,16 @@ Bitcoin development offers many paths:
 
 Start small, use testnet, and build incrementally. The Bitcoin development community is welcoming; ask questions and contribute back.
 
+---
+
 ## Related Topics
 
 - [Blockchain Monitoring](/docs/development/blockchain-monitoring) - Monitor blocks and transactions
 - [Pool Mining](/docs/development/pool-mining) - Mining development
 - [Price Tracking](/docs/development/price-tracking) - API integrations
 - [RPC Guide](/docs/bitcoin/rpc) - Bitcoin Core RPC commands
+
+---
 
 ## Resources
 

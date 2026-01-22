@@ -12,6 +12,8 @@ Bitcoin's trust model differs fundamentally from traditional finance. Instead of
 | **Reversibility** | Chargebacks, reversals possible | Final after confirmation |
 | **Privacy** | Intermediaries see all transactions | Pseudonymous, no identity required |
 
+---
+
 ## What "Trustless" Really Means
 
 You trust **mathematics and code** rather than **people and institutions**. This principle comes directly from [cypherpunk philosophy](/docs/fundamentals/cypherpunk-philosophy), which advocates for "trust code, not people":
@@ -19,6 +21,8 @@ You trust **mathematics and code** rather than **people and institutions**. This
 - **Cryptographic proof:** Digital signatures prove ownership; [hash](/docs/glossary#hash) functions secure the [blockchain](/docs/glossary#blockchain)
 - **Economic incentives:** [Miners](/docs/glossary#miner) profit from honest behavior; attacks are prohibitively expensive
 - **Open verification:** Anyone can run a [node](/docs/glossary#node) and independently verify every [transaction](/docs/glossary#transaction)
+
+---
 
 ## Trust Assumptions
 
@@ -47,6 +51,8 @@ Bitcoin's creator, [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto), re
 
 Satoshi's disappearance was the ultimate act of decentralization: they created the system, proved it worked, and then removed themselves from the equation entirely. Bitcoin doesn't need its creator; it only needs the protocol, the network, and the mathematics that make it work.
 
+---
+
 ## Trust Minimization Techniques
 
 **Run a [full node](/docs/glossary#full-node):** Verify all transactions yourself instead of trusting others.
@@ -54,6 +60,8 @@ Satoshi's disappearance was the ultimate act of decentralization: they created t
 **Use open-source software:** Code is publicly auditable with no hidden functionality.
 
 **Self-custody:** Control your own private keys; no third-party can freeze or seize your funds. See [wallets](/docs/glossary#wallet) for more.
+
+---
 
 ## Trust vs Convenience Spectrum
 

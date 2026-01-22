@@ -21,6 +21,8 @@ Route 3: Alice → Fred → George → Dave (100,000 sats)
 Total: 500,000 sats
 ```
 
+---
+
 ## Why Use MPP?
 
 ### Benefits
@@ -36,6 +38,8 @@ Total: 500,000 sats
 - **Unbalanced Channels**: When direct channels are one-sided
 - **Network Congestion**: When single routes are unreliable
 - **Optimization**: Split to minimize fees or maximize speed
+
+---
 
 ## How MPP Works
 
@@ -65,6 +69,8 @@ More advanced: split based on:
 - Fee optimization
 - Success probability
 - Route quality
+
+---
 
 ## TLV Encoding for MPP
 
@@ -317,6 +323,8 @@ Value: b3c3965128b05c96d76348158f8f3a1b92e2847172f9adebb400a9e83e62f066000000000
 - **Same values**: All paths use same payment_secret and total_msat
 - **Other hops**: NULL TLV for non-final hops
 
+---
+
 ## MPP Implementation
 
 ### Step 1: Simple Route
@@ -357,6 +365,8 @@ Values [40 bytes]:
   8 bytes: total_msat (uint64, big-endian)
 ```
 
+---
+
 ## Payment Secret
 
 The payment secret (also called payment_address) is:
@@ -365,6 +375,8 @@ The payment secret (also called payment_address) is:
 - **Verification**: Recipient verifies all parts use same secret
 - **Security**: Prevents payment mixing attacks
 
+---
+
 ## Total Amount
 
 The total_msat field specifies:
@@ -372,6 +384,8 @@ The total_msat field specifies:
 - **Verification**: Recipient verifies sum matches invoice
 - **Same for all parts**: All parts include the same total
 - **8 bytes**: uint64 in big-endian format
+
+---
 
 ## Example: 3-Path MPP
 
@@ -406,6 +420,8 @@ All three paths include the same TLV in their final hop:
 TLV: 00000000000000080000000000000028b3c3965128b05c96d76348158f8f3a1b92e2847172f9adebb400a9e83e62f0660000000000000078
 ```
 
+---
+
 ## Verification
 
 ### Recipient Verification
@@ -424,6 +440,8 @@ The sender verifies:
 3. **Correct amounts**: Sum equals invoice amount
 4. **Preimages match**: All preimages are the same
 
+---
+
 ## Best Practices
 
 ### For Senders
@@ -439,6 +457,8 @@ The sender verifies:
 2. **Verify Totals**: Ensure sum matches invoice
 3. **Check Secrets**: Verify all parts use same secret
 4. **Timeout Handling**: Handle partial payments
+
+---
 
 ## Common Issues
 
@@ -469,6 +489,8 @@ The sender verifies:
 - Verify calculation
 - Check fee inclusion
 - Ensure correct splitting
+
+---
 
 ## Summary
 

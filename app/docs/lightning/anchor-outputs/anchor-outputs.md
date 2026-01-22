@@ -14,6 +14,8 @@ In original Lightning channels, commitment transaction fees were set at channel 
 
 **Critical Issue**: A force-close during a fee spike could leave your commitment transaction unconfirmed, potentially allowing your counterparty to claim funds via timelock expiry.
 
+---
+
 ## How Anchor Outputs Work
 
 Anchor outputs solve this by:
@@ -38,6 +40,8 @@ Fee Bumping:
 │   └── Fee: Whatever needed for confirmation
 ```
 
+---
+
 ## Anchor Output Structure
 
 Each anchor output is exactly 330 satoshis with this script:
@@ -57,6 +61,8 @@ This means:
 - Large enough to be non-dust
 - Small enough to not waste significant funds
 - Both parties get an anchor (660 sats total)
+
+---
 
 ## CPFP Fee Bumping
 
@@ -82,6 +88,8 @@ effective_rate = package_fee / package_size
 
 You need the effective rate to meet current mempool minimums.
 
+---
+
 ## Channel Types
 
 Lightning supports multiple channel types negotiated at open:
@@ -101,6 +109,8 @@ The latest format (anchors_zero_fee_htlc_tx) also removes fees from HTLC transac
 - They can be fee-bumped via CPFP when broadcast
 - Maximum flexibility for fee management
 
+---
+
 ## Reserve Requirements
 
 Anchor channels require keeping a UTXO reserve for fee bumping:
@@ -113,6 +123,8 @@ Recommended reserve:
 ```
 
 **Warning**: Without reserve UTXOs, you cannot fee-bump your commitment transaction!
+
+---
 
 ## Implementation (LND)
 
@@ -152,6 +164,8 @@ lncli listunspent
 lncli wallet estimatefee --conf_target=6
 ```
 
+---
+
 ## Migration
 
 ### Upgrading Existing Channels
@@ -175,6 +189,8 @@ lncli listchannels | jq '.channels[] | {chan_id, commitment_type}'
 # - "SCRIPT_ENFORCED_LEASE" - Liquidity lease channels
 ```
 
+---
+
 ## Trade-offs
 
 ### Advantages
@@ -190,6 +206,8 @@ lncli listchannels | jq '.channels[] | {chan_id, commitment_type}'
 - **Slightly larger transactions**: Two extra outputs (660 sats)
 - **Complexity**: More transaction types to handle
 - **UTXO management**: Need to ensure reserves exist
+
+---
 
 ## Common Issues
 
@@ -217,6 +235,8 @@ lncli listchannels | jq '.channels[] | {chan_id, commitment_type}'
 
 **Reality**: This is by design for cleanup. If you need to bump fees, do it within 16 blocks of broadcast.
 
+---
+
 ## Best Practices
 
 1. **Maintain UTXO reserve**: Keep 50,000+ sats in on-chain wallet per channel
@@ -224,6 +244,8 @@ lncli listchannels | jq '.channels[] | {chan_id, commitment_type}'
 3. **Use anchor channels**: Default for new channels
 4. **Automate fee bumping**: Configure automatic bump on stuck transactions
 5. **Test force close**: Verify fee bumping works on testnet first
+
+---
 
 ## Example: Emergency Fee Bump
 
@@ -243,6 +265,8 @@ watch -n 30 'bitcoin-cli getmempoolentry <commitment_txid>'
 lncli pendingchannels | jq '.waiting_close_channels'
 ```
 
+---
+
 ## Summary
 
 Anchor outputs provide:
@@ -252,11 +276,15 @@ Anchor outputs provide:
 - **Stuck transaction prevention**: Always confirmable with enough fee
 - **Modern standard**: Default for new Lightning channels
 
+---
+
 ## Related Topics
 
 - [Channels](/docs/lightning/channels) - Channel lifecycle and force close
 - [Watchtowers](/docs/lightning/watchtowers) - Automated breach response
 - [Zero-Conf Channels](/docs/lightning/zero-conf) - Instant channel opening
+
+---
 
 ## Resources
 

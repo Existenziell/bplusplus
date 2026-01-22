@@ -14,6 +14,8 @@ Select UTXOs such that:
 - Fee rate >= required minimum fee rate
 - Transaction is valid and efficient
 
+---
+
 ## Transaction Requirements
 
 ### Basic Structure
@@ -190,6 +192,8 @@ func main() {
 ```
 :::
 
+---
+
 ## UTXO Characteristics
 
 ### Different Script Types
@@ -345,6 +349,8 @@ UTXO 3: P2PKH, 0.3 BTC
 - Using UTXO 1: Smaller transaction (SegWit)
 - Using UTXO 3: Larger transaction (Legacy)
 - Same fee rate = different absolute fees
+
+---
 
 ## Coin Selection Strategies
 
@@ -626,6 +632,8 @@ func main() {
 - May not be optimal
 - Could select inefficient combination
 
+---
+
 ## Fee Calculation
 
 ### Estimating Transaction Size
@@ -857,6 +865,8 @@ Fee: 250 sats
 Change: 1.7 - 1.0 - 0.0000025 = 0.6999975 BTC
 ```
 
+---
+
 ## Change Output Creation
 
 ### When to Create Change
@@ -878,6 +888,8 @@ Dust outputs are uneconomical to spend:
 1. **Create change**: If amount > dust threshold
 2. **Donate to miner**: If amount < dust threshold
 3. **Increase payment**: If change would be dust
+
+---
 
 ## Implementation Considerations
 
@@ -904,6 +916,8 @@ Before finalizing transaction:
 3. **Validate fee**: Ensure fee rate meets target
 4. **Check size**: Ensure transaction is valid size
 
+---
+
 ## Best Practices
 
 ### For Wallet Developers
@@ -920,6 +934,8 @@ Before finalizing transaction:
 2. **Use SegWit**: Prefer SegWit addresses
 3. **Monitor fees**: Be aware of current fee rates
 4. **Batch payments**: Combine multiple payments when possible
+
+---
 
 ## Common Issues
 
@@ -950,6 +966,8 @@ Before finalizing transaction:
 - Increase payment amount
 - Select different UTXOs
 
+---
+
 ## Summary
 
 Coin selection is a critical wallet function:
@@ -961,6 +979,8 @@ Coin selection is a critical wallet function:
 - **Change management**: Handle change outputs appropriately
 
 Understanding coin selection helps build efficient and user-friendly Bitcoin wallets.
+
+---
 
 ## Related Topics
 

@@ -10,57 +10,34 @@ Bitcoin is a decentralized digital currency and payment system that operates wit
 >   
 > **Important:** The website bitcoin.com promotes Bitcoin Cash (BCH), not Bitcoin (BTC). Despite its name, it is not the official Bitcoin website and does not represent the Bitcoin (BTC) network.
 
-## How Bitcoin Works
+---
 
-### The Blockchain
+## Core Components
 
-Bitcoin uses a **[blockchain](/docs/fundamentals/blockchain)** - a distributed ledger that records all transactions:
+Bitcoin consists of several key components that work together to create a decentralized monetary system:
 
-1. **Transactions**: Users send bitcoin to addresses
-2. **Verification**: Network [nodes](/docs/glossary#node) verify [transactions](/docs/glossary#transaction)
-3. **Grouping**: Transactions are grouped into [blocks](/docs/glossary#block)
-4. **Mining**: [Miners](/docs/glossary#mining) compete to add blocks to the chain
-5. **Consensus**: Network agrees on valid blocks
-6. **Immutable**: Once added, blocks cannot be changed
+**Blockchain:**
+- The [distributed ledger](/docs/fundamentals/blockchain) that records all transactions in cryptographically linked blocks, creating an immutable history that all network participants can verify.
 
-### Addresses & Keys
+**Cryptography:**
+- The mathematical foundation of Bitcoin. [Elliptic curve cryptography](/docs/bitcoin/cryptography) enables unforgeable digital signatures, while hash functions provide data integrity and mining security.
 
-Bitcoin uses public-key cryptography to secure ownership:
+**Consensus Mechanism:**
+- Bitcoin's [consensus mechanism](/docs/bitcoin/consensus) allows thousands of nodes worldwide to agree on a single transaction history without central coordination, using proof-of-work and economic incentives.
 
-**Private Key:**
-- A 256-bit random number (kept secret)
-- Used to sign transactions and prove ownership
-- Anyone with the private key controls the bitcoin
+**Script:**
+- [Bitcoin Script](/docs/bitcoin/script) is a simple programming language that defines spending conditions, enabling features like multi-signature wallets and time-locked transactions.
 
-**Public Key:**
-- Derived mathematically from the private key
-- Can be shared publicly
-- Used to verify signatures
+**OP Codes:**
+- The [instruction set](/docs/bitcoin/op-codes) that powers Bitcoin Script, with each opcode performing specific operations for transaction validation and program execution.
 
-**Address:**
-- A hash of the public key (shorter, safer to share)
-- Where others send bitcoin to you
-- Multiple address formats exist (Legacy, SegWit, Taproot)
+**Block Structure:**
+- [Blocks](/docs/bitcoin/blocks) are the fundamental units of Bitcoin's ledger, organizing transactions and enabling efficient verification through Merkle trees.
 
-The relationship is one-way: private key → public key → address. You cannot reverse-engineer a private key from an address.
+**Economic Rules:**
+- The [subsidy equation](/docs/bitcoin/subsidy) mathematically guarantees Bitcoin's fixed supply, creating a predictable monetary policy that approaches 21 million coins.
 
-### Network Participants
-
-**Nodes:**
-- [Full nodes](/docs/glossary#full-node): Store complete blockchain, validate all transactions
-- Light nodes: Store minimal data, rely on full nodes
-- Mining nodes: Create new blocks, secure the network
-
-**Miners:**
-- Verify transactions
-- Create new blocks
-- Secure the network through [proof-of-work](/docs/glossary#proof-of-work-pow)
-- Receive [block rewards](/docs/glossary#block-reward) and fees
-
-**Users:**
-- Send and receive bitcoin
-- Control their private keys
-- Participate in the network
+---
 
 ## Technical Innovation
 
@@ -81,6 +58,8 @@ The relationship is one-way: private key → public key → address. You cannot 
 - Compact block structure
 - Enables [SPV](/docs/glossary#spv-simplified-payment-verification) (Simplified Payment Verification)
 - Cryptographic integrity
+
+---
 
 ## The Many Faces of Bitcoin
 
@@ -147,6 +126,8 @@ Bitcoin is under **constant attack** from the most sophisticated entities on thi
 The network has operated continuously since January 3, 2009, securing hundreds of billions of dollars in value. The only theoretical attack (a 51% attack) would require controlling more computational power than all other miners combined, a feat that grows more impossible as the network expands.
 
 Bitcoin cannot be hacked. It can only be adopted.
+
+---
 
 ## Explore Bitcoin Fundamentals
 

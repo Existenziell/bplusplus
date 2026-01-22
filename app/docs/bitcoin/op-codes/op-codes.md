@@ -14,6 +14,8 @@ The instruction set for Bitcoin. Bitcoin [Script](/docs/glossary#script) uses a 
 | Time Locks | Transaction timing | OP_CLTV, OP_CSV |
 | Disabled | Removed for security | OP_MUL, OP_CAT |
 
+---
+
 ## Script Execution Example
 
 :::code-group
@@ -430,6 +432,8 @@ console.log('Result:', interp.stack);  // [1] = true
 ```
 :::
 
+---
+
 ## Stack Operations
 
 | OP Code | Hex | Function |
@@ -463,6 +467,8 @@ OP_ROT:
   After:  [B, C, A]
 ```
 
+---
+
 ## Arithmetic Operations
 
 | OP Code | Hex | Function | Status |
@@ -483,6 +489,8 @@ OP_ROT:
 
 > **Note**: OP_MUL, OP_DIV, OP_MOD, OP_LSHIFT, and OP_RSHIFT were disabled early in Bitcoin's history to prevent potential denial-of-service attacks through expensive computations.
 
+---
+
 ## Comparison Operations
 
 | OP Code | Hex | Function |
@@ -496,6 +504,8 @@ OP_ROT:
 | OP_MIN | 0xa3 | min(a, b) |
 | OP_MAX | 0xa4 | max(a, b) |
 | OP_WITHIN | 0xa5 | min <= x < max |
+
+---
 
 ## Cryptographic Operations
 
@@ -511,6 +521,8 @@ OP_ROT:
 | OP_CHECKMULTISIG | 0xae | Verify [multisig](/docs/glossary#multisig-multi-signature) |
 | OP_CHECKMULTISIGVERIFY | 0xaf | OP_CHECKMULTISIG + OP_VERIFY |
 
+---
+
 ## Bitwise Operations (Disabled)
 
 | OP Code | Hex | Function | Status |
@@ -521,6 +533,8 @@ OP_ROT:
 | OP_INVERT | 0x83 | Bitwise NOT | **Disabled** |
 
 These were disabled to prevent potential vulnerabilities in early Bitcoin.
+
+---
 
 ## Control Flow
 
@@ -543,6 +557,8 @@ OP_ELSE
     <execute if false>
 OP_ENDIF
 ```
+
+---
 
 ## Time Lock Operations
 
@@ -576,6 +592,8 @@ Use cases:
 - Escrow with timeout
 - Revocable transactions
 
+---
+
 ## Push Operations
 
 | OP Code | Hex | Function |
@@ -587,6 +605,8 @@ Use cases:
 | OP_PUSHDATA1 | 0x4c | Next byte is length |
 | OP_PUSHDATA2 | 0x4d | Next 2 bytes are length |
 | OP_PUSHDATA4 | 0x4e | Next 4 bytes are length |
+
+---
 
 ## Tapscript Opcodes (BIP 342)
 
@@ -616,6 +636,8 @@ Codes `0x50, 0x62, 0x89-0x8a, 0x8d-0x8e, 0x95-0x99, 0xbb-0xfe`
 
 Reserved for future upgrades. Any script containing these immediately succeeds, allowing soft fork upgrades.
 
+---
+
 ## Disabled Opcodes
 
 These opcodes were disabled for security reasons:
@@ -639,6 +661,8 @@ These opcodes were disabled for security reasons:
 | OP_RSHIFT | 0x99 | Security concerns |
 
 > **OP_CAT Revival**: There is ongoing discussion about re-enabling OP_CAT with proper limits, as it would enable new use cases like covenants.
+
+---
 
 ## Common Script Patterns
 
@@ -686,6 +710,8 @@ OP_ELSE
 OP_ENDIF
 ```
 
+---
+
 ## Script Limits
 
 | Limit | Value | Purpose |
@@ -698,6 +724,8 @@ OP_ENDIF
 | Max Tapscript size | No limit* | Weight-based limits apply |
 
 *Tapscript has no explicit size limit but is constrained by block weight.
+
+---
 
 ## OP Code Quick Reference
 
@@ -743,11 +771,15 @@ OP_ENDIF
 | 0xb2 | OP_CSV | Relative timelock | Active |
 | 0xba | OP_CHECKSIGADD | Tapscript multisig | Active |
 
+---
+
 ## Related Topics
 
 - [Script System](/docs/bitcoin/script): How Bitcoin Script works
 - [OP_RETURN Debate](/docs/controversies/op-return): Controversy about data storage
 - [Taproot](/docs/glossary#taproot) - Schnorr signatures and Tapscript
+
+---
 
 ## Resources
 

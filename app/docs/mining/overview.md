@@ -18,11 +18,15 @@ The analogy runs deeper:
 
 This parallel was intentional. [Satoshi Nakamoto](/docs/history/people) designed Bitcoin to be "digital gold" - a scarce, hard money that requires real-world cost to produce, preventing arbitrary inflation.
 
+---
+
 ## What Mining Does
 
 Mining serves two critical functions:
 1. **Transaction Processing**: Validating and confirming transactions
 2. **Currency Issuance**: Creating new bitcoin according to the predetermined [supply schedule](/docs/history/halvings)
+
+---
 
 ## How Mining Works
 
@@ -311,6 +315,8 @@ Most miners join [mining pools](/docs/glossary#mining-pool) to:
 
 See [Mining Pools](/docs/mining/pools) for detailed information on pool operations and payout schemes.
 
+---
+
 ## Key Concepts
 
 | Concept | Description |
@@ -320,6 +326,8 @@ See [Mining Pools](/docs/mining/pools) for detailed information on pool operatio
 | **Difficulty** | Adjusts every 2016 blocks to maintain ~10 minute block times |
 | **Hash Rate** | Measure of mining power (network: ~700 EH/s) |
 | **[Coinbase Transaction](/docs/glossary#coinbase-transaction)** | Special transaction that creates new bitcoin as block reward |
+
+---
 
 ## Why Mining Matters
 
@@ -338,6 +346,8 @@ Mining enforces Bitcoin's fixed [supply schedule](/docs/history/halvings). The p
 - Block rewards halve every 210,000 blocks
 - No entity can create bitcoin outside the rules
 
+---
+
 ## Mining Today
 
 ### Current Statistics (2024)
@@ -354,6 +364,8 @@ Modern Bitcoin mining is dominated by:
 - **Industrial Operations**: Large-scale facilities with thousands of ASICs
 - **Mining Pools**: Collectives that combine hash power
 - **Home Miners**: Hobbyists and those with cheap electricity
+
+---
 
 ## Related Topics
 

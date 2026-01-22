@@ -17,6 +17,8 @@ Pool [mining](/docs/glossary#mining) allows you to contribute [hash rate](/docs/
 Bitcoin Node → Mining Software → Mining Pool → Rewards
 ```
 
+---
+
 ## Mining Software Setup
 
 ### CPU Mining (cpuminer-opt)
@@ -52,6 +54,8 @@ cd cpuminer-opt
 - **Password**: Pool password (often `x` for default)
 - **Threads**: Number of CPU threads to use
 
+---
+
 ## Pool Configuration
 
 ### Choosing a Pool
@@ -80,6 +84,8 @@ cd cpuminer-opt
 - Keep full block reward
 - Very low probability
 
+---
+
 ## Monitoring Hash Rate
 
 ### Real-Time Monitoring
@@ -107,6 +113,8 @@ Hash Rate = Total Hashes / Time
 ```
 85,230 hashes in 1 second = 85.23 kH/s
 ```
+
+---
 
 ## Share Submission
 
@@ -141,6 +149,8 @@ A share is a [proof-of-work](/docs/glossary#proof-of-work-pow) submission that:
 - Invalid proof-of-work
 - Doesn't count toward rewards
 
+---
+
 ## Reward Calculation
 
 ### Proportional Rewards
@@ -167,6 +177,8 @@ Your share: 3.125 BTC × 0.000001% = 0.00003125 BTC
 - Daily or weekly payouts
 - Minimum 0.001 BTC
 - After 100+ confirmations
+
+---
 
 ## Performance Optimization
 
@@ -198,6 +210,8 @@ Leave 1-2 cores for system
 - Reduce threads if overheating
 - Improve ventilation
 - Consider stopping if too hot
+
+---
 
 ## Troubleshooting
 
@@ -243,6 +257,8 @@ Leave 1-2 cores for system
 - Test network connection
 - Check pool status
 
+---
+
 ## Security Considerations
 
 ### Wallet Security
@@ -260,6 +276,8 @@ Leave 1-2 cores for system
 - Verify pool website
 - Use secure connections (SSL/TLS)
 - Monitor payouts
+
+---
 
 ## Educational Value
 
@@ -279,6 +297,8 @@ Leave 1-2 cores for system
 - **Difficulty Target**: Network-wide target
 - **Block Rewards**: Miner compensation
 
+---
+
 ## Expected Results
 
 ### Realistic Expectations
@@ -296,6 +316,8 @@ Leave 1-2 cores for system
 - Pool rewards are minimal
 - Focus on learning, not profit
 
+---
+
 ## Summary
 
 Pool mining provides:
@@ -307,6 +329,8 @@ Pool mining provides:
 - **Technical Understanding**: Deep dive into proof-of-work
 
 Understanding pool mining helps explain Bitcoin's security model and economic incentives.
+
+---
 
 ## Related Topics
 

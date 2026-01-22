@@ -13,6 +13,8 @@ Cypherpunk is a philosophy and movement that advocates for **privacy and freedom
 
 The cypherpunk movement emerged in the late 1980s and early 1990s, as the internet was becoming mainstream and governments began discussing encryption regulations. Cypherpunks saw cryptography as a tool for protecting individual rights in the digital age.
 
+---
+
 ## Core Principles
 
 ### Privacy Through Cryptography
@@ -75,6 +77,8 @@ Cypherpunks saw censorship as a fundamental threat to freedom. Bitcoin's design 
 - **Cryptographic proof** prevents false claims of invalidity
 - **Economic incentives** align miners toward including all valid transactions
 
+---
+
 ## Historical Context
 
 ### The Cypherpunk Mailing List
@@ -112,6 +116,8 @@ Several cypherpunks attempted to create digital cash systems:
 
 While these early attempts failed commercially or technically, they established the intellectual foundation that Bitcoin would build upon.
 
+---
+
 ## Key Figures
 
 ### Timothy May
@@ -137,6 +143,8 @@ Eric Hughes co-founded the cypherpunk mailing list and wrote "A Cypherpunk's Man
 ### Wei Dai
 
 [Wei Dai](/docs/history/people#wei-dai) proposed b-money (1998), a theoretical system for anonymous, distributed electronic cash. Satoshi Nakamoto cited b-money in the Bitcoin whitepaper and personally emailed Wei Dai before Bitcoin's launch.
+
+---
 
 ## How Cypherpunk Philosophy Influenced Bitcoin
 
@@ -176,6 +184,8 @@ Bitcoin is open-source, allowing anyone to:
 
 This transparency is essential for trust in code rather than trust in institutions.
 
+---
+
 ## Connection to Bitcoin Fundamentals
 
 ### Trust Model
@@ -204,6 +214,8 @@ The [problems Bitcoin solved](/docs/fundamentals/problems) were precisely the pr
 - **Central control**: Cypherpunks wanted decentralized systems
 
 Bitcoin was the first system to solve all these problems simultaneously.
+
+---
 
 ## The Cypherpunk Legacy
 
@@ -234,6 +246,8 @@ Cypherpunks believe in **individual sovereignty**: the right to control your own
 
 Bitcoin enables financial sovereignty by giving individuals direct control over their money through private keys.
 
+---
+
 ## Modern Relevance
 
 ### Why These Principles Still Matter
@@ -257,6 +271,8 @@ Bitcoin represents the most successful implementation of cypherpunk philosophy:
 
 While early digital cash attempts failed, Bitcoin succeeded because it combined cypherpunk principles with economic incentives and game theory.
 
+---
+
 ## Conclusion
 
 Cypherpunk philosophy provided the intellectual and philosophical foundation for Bitcoin. The movement's core principles (privacy through cryptography, trust in code, decentralization, permissionless participation, and censorship resistance) are all embodied in Bitcoin's design.
@@ -267,6 +283,8 @@ Understanding cypherpunk philosophy helps explain:
 - **Why it matters**: It enables individual sovereignty and freedom
 
 Bitcoin is not just a technology; it's the practical implementation of a decades-long philosophical movement that believed cryptography could be a tool for individual liberation. As Eric Hughes wrote: "Cypherpunks write code." Bitcoin is that code, running on a global network, providing financial freedom to anyone who chooses to use it.
+
+---
 
 ## Further Reading
 

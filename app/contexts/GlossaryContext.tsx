@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, ReactNode } from 'react'
+import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react'
 
 interface GlossaryEntry {
   term: string
@@ -37,17 +37,24 @@ function getGlossaryData(): GlossaryData {
   return {}
 }
 
-const glossaryData = getGlossaryData()
-
 const GlossaryContext = createContext<GlossaryContextType>({
-  glossaryData,
-  isLoading: false,
+  glossaryData: {},
+  isLoading: true,
 })
 
 export function GlossaryProvider({ children }: { children: ReactNode }) {
-  // Glossary data is inlined in HTML, no loading needed
+  const [glossaryData, setGlossaryData] = useState<GlossaryData>({})
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Only read glossary data on client after mount to avoid hydration mismatch
+    const data = getGlossaryData()
+    setGlossaryData(data)
+    setIsLoading(false)
+  }, [])
+
   return (
-    <GlossaryContext.Provider value={{ glossaryData, isLoading: false }}>
+    <GlossaryContext.Provider value={{ glossaryData, isLoading }}>
       {children}
     </GlossaryContext.Provider>
   )

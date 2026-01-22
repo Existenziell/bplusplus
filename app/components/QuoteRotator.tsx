@@ -44,7 +44,8 @@ function shuffleArray<T>(array: T[]): T[] {
 
 function QuoteRotator() {
   const [quote, setQuote] = useState<string>('')
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const remainingQuotes = useRef<string[]>([])
 
   const getNextQuote = () => {
@@ -55,7 +56,11 @@ function QuoteRotator() {
   }
 
   useEffect(() => {
+    // Only run on client to avoid hydration mismatch
+    setIsMounted(true)
     setQuote(getNextQuote())
+    setIsVisible(true)
+    
     const interval = setInterval(() => {
       setIsVisible(false)
       setTimeout(() => {
@@ -65,6 +70,19 @@ function QuoteRotator() {
     }, 8000)
     return () => clearInterval(interval)
   }, [])
+
+  // Don't render quote until mounted to avoid hydration mismatch
+  if (!isMounted) {
+    return (
+      <blockquote
+        className="text-xl text-secondary text-center max-w-4xl mx-auto italic min-h-[4rem] md:min-h-[4rem]"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        &nbsp;
+      </blockquote>
+    )
+  }
 
   return (
     <blockquote

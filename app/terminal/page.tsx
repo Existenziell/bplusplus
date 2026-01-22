@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import LiveStats from '../components/LiveStats'
-import { HomeIcon } from '../components/Icons'
+import { HomeIcon, CopyIcon } from '../components/Icons'
 import Link from 'next/link'
+import copyToClipboard from '@/app/utils/copyToClipboard'
 
 // Available commands with descriptions
 const COMMANDS: Record<string, string> = {
@@ -33,9 +34,10 @@ const COMMANDS: Record<string, string> = {
 }
 
 interface OutputLine {
-  type: 'command' | 'result' | 'error' | 'info' | 'logo' | 'log'
+  type: 'command' | 'result' | 'error' | 'info' | 'logo' | 'log' | 'usage'
   content: string
   timestamp: Date
+  copyableCommand?: string // For example usage lines that can be copied
 }
 
 // Startup logs sequence
@@ -78,8 +80,11 @@ export default function TerminalPage() {
   const [commandHistory, setCommandHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [isLoading, setIsLoading] = useState(false)
+  const [exampleBlockHash, setExampleBlockHash] = useState<string>('')
+  const [exampleTxId, setExampleTxId] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
   const outputRef = useRef<HTMLDivElement>(null)
+  const lastTabPressRef = useRef<number>(0)
 
   // Welcome message on mount with animated startup
   useEffect(() => {
@@ -126,12 +131,59 @@ export default function TerminalPage() {
     return () => clearInterval(interval)
   }, [])
 
+  // Fetch example values for error messages
+  useEffect(() => {
+    const fetchExamples = async () => {
+      try {
+        // Fetch best block hash for examples
+        const blockHashResponse = await fetch('/api/bitcoin-rpc', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ method: 'getbestblockhash', params: [] }),
+        })
+        const blockHashData = await blockHashResponse.json()
+        if (blockHashData.result) {
+          setExampleBlockHash(blockHashData.result)
+        }
+
+        // Try to get a transaction ID from mempool for examples
+        const mempoolResponse = await fetch('/api/bitcoin-rpc', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ method: 'getrawmempool', params: [] }),
+        })
+        const mempoolData = await mempoolResponse.json()
+        if (mempoolData.result && Array.isArray(mempoolData.result) && mempoolData.result.length > 0) {
+          setExampleTxId(mempoolData.result[0])
+        }
+      } catch (error) {
+        // Silently fail - examples will just be empty
+        console.error('Failed to fetch examples:', error)
+      }
+    }
+
+    // Fetch examples after a short delay to not interfere with startup
+    const timeout = setTimeout(fetchExamples, 2000)
+    return () => clearTimeout(timeout)
+  }, [])
+
   // Auto-scroll to bottom
   useEffect(() => {
     if (outputRef.current) {
       outputRef.current.scrollTop = outputRef.current.scrollHeight
     }
   }, [output])
+
+  // Keep input focused after command execution completes
+  useEffect(() => {
+    // Refocus when loading state changes from true to false (command finished)
+    if (!isLoading && inputRef.current && document.activeElement !== inputRef.current) {
+      // Use requestAnimationFrame to ensure focus happens after React's render
+      requestAnimationFrame(() => {
+        inputRef.current?.focus()
+      })
+    }
+  }, [isLoading])
 
   // Focus input on click anywhere in terminal (but not when selecting text)
   const handleOutputClick = () => {
@@ -140,6 +192,146 @@ export default function TerminalPage() {
     if (!selection || selection.toString().length === 0) {
       inputRef.current?.focus()
     }
+  }
+
+  // Find matching commands based on current input
+  const findMatchingCommands = (inputText: string): string[] => {
+    const trimmed = inputText.trim().toLowerCase()
+    if (!trimmed) return Object.keys(COMMANDS)
+
+    // Extract the first word (command name) from input
+    const commandPrefix = trimmed.split(/\s+/)[0]
+
+    return Object.keys(COMMANDS).filter(cmd =>
+      cmd.toLowerCase().startsWith(commandPrefix)
+    )
+  }
+
+  // Handle autocomplete
+  const handleAutocomplete = (showAll: boolean = false) => {
+    const trimmed = input.trim()
+    const matches = findMatchingCommands(trimmed)
+
+    if (matches.length === 0) {
+      // No matches - show error
+      setOutput(prev => [
+        ...prev,
+        {
+          type: 'error',
+          content: `No commands found matching "${trimmed}"`,
+          timestamp: new Date(),
+        },
+      ])
+      return
+    }
+
+    if (matches.length === 1) {
+      // Single match - autocomplete
+      const match = matches[0]
+      const inputParts = trimmed.split(/\s+/)
+      if (inputParts.length === 1) {
+        // Only command name, no args - complete it
+        setInput(match)
+      } else {
+        // Has args - complete just the command name
+        const args = inputParts.slice(1).join(' ')
+        setInput(`${match} ${args}`)
+      }
+    } else {
+      // Multiple matches
+      if (showAll) {
+        // Double tab - show all matches
+        const matchList = matches.map(cmd => `  ${cmd.padEnd(20)} ${COMMANDS[cmd]}`).join('\n')
+        setOutput(prev => [
+          ...prev,
+          {
+            type: 'info',
+            content: `Possible completions:\n${matchList}`,
+            timestamp: new Date(),
+          },
+        ])
+      } else {
+        // Single tab with multiple matches - find common prefix
+        const commonPrefix = matches.reduce((prefix, cmd) => {
+          let i = 0
+          while (i < prefix.length && i < cmd.length && prefix[i].toLowerCase() === cmd[i].toLowerCase()) {
+            i++
+          }
+          return prefix.substring(0, i)
+        })
+
+        if (commonPrefix.length > trimmed.split(/\s+/)[0].length) {
+          // Complete to common prefix
+          const inputParts = trimmed.split(/\s+/)
+          const args = inputParts.slice(1).join(' ')
+          setInput(args ? `${commonPrefix} ${args}` : commonPrefix)
+        } else {
+          // No common prefix - show matches on next tab
+          const matchList = matches.map(cmd => `  ${cmd.padEnd(20)} ${COMMANDS[cmd]}`).join('\n')
+          setOutput(prev => [
+            ...prev,
+            {
+              type: 'info',
+              content: `Possible completions:\n${matchList}`,
+              timestamp: new Date(),
+            },
+          ])
+        }
+      }
+    }
+  }
+
+  // Check if a command requires parameters
+  const commandRequiresParams = (method: string): boolean => {
+    const desc = COMMANDS[method]
+    return desc ? desc.includes('Usage:') : false
+  }
+
+  // Extract usage information from command description
+  const getUsageInfo = (method: string): string | null => {
+    const desc = COMMANDS[method]
+    if (!desc) return null
+
+    const usageMatch = desc.match(/Usage:\s*(.+)/)
+    if (!usageMatch) return null
+
+    // Remove the command name from the usage string if it's there
+    let usage = usageMatch[1]
+    // If usage starts with the method name, remove it
+    if (usage.toLowerCase().startsWith(method.toLowerCase())) {
+      usage = usage.substring(method.length).trim()
+    }
+    return usage
+  }
+
+  // Generate example command with actual values
+  const generateExample = (method: string, usage: string): string => {
+    let example = usage
+
+    // Replace placeholders with actual examples
+    if (example.includes('<blockhash>')) {
+      const blockHash = exampleBlockHash || '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f' // Genesis block as fallback
+      example = example.replace('<blockhash>', blockHash)
+    }
+
+    if (example.includes('<height>')) {
+      example = example.replace('<height>', '800000')
+    }
+
+    if (example.includes('<txid>')) {
+      const txId = exampleTxId || 'f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16' // First Bitcoin transaction as fallback
+      example = example.replace('<txid>', txId)
+    }
+
+    if (example.includes('<conf_target>')) {
+      example = example.replace('<conf_target>', '6')
+    }
+
+    // Remove optional parameters if they're not in the example
+    example = example.replace(/\s*\[verbose\]/g, '')
+    example = example.replace(/\s*\[verbosity\]/g, '')
+
+    return example
   }
 
   // Parse command and arguments
@@ -206,6 +398,48 @@ export default function TerminalPage() {
       return
     }
 
+    // Check if command requires parameters and validate
+    if (commandRequiresParams(method) && params.length === 0) {
+      const usage = getUsageInfo(method)
+      const example = usage ? generateExample(method, usage) : null
+
+      // Output error code and message in red
+      setOutput(prev => [
+        ...prev,
+        {
+          type: 'error',
+          content: `error code: -1\nerror message:`,
+          timestamp: new Date(),
+        },
+      ])
+
+      // Output usage in green
+      setOutput(prev => [
+        ...prev,
+        {
+          type: 'usage',
+          content: `Usage: ${method} ${usage || '<parameters>'}`,
+          timestamp: new Date(),
+        },
+      ])
+
+      // Output example in green if available
+      if (example) {
+        const fullCommand = `${method} ${example}`
+        setOutput(prev => [
+          ...prev,
+          {
+            type: 'usage',
+            content: `Example usage: ${fullCommand}`,
+            timestamp: new Date(),
+            copyableCommand: fullCommand,
+          },
+        ])
+      }
+
+      return
+    }
+
     // Make API call
     setIsLoading(true)
     try {
@@ -255,6 +489,10 @@ export default function TerminalPage() {
     if (!isLoading && input.trim()) {
       executeCommand(input)
       setInput('')
+      // Refocus input after submission
+      setTimeout(() => {
+        inputRef.current?.focus()
+      }, 0)
     }
   }
 
@@ -277,6 +515,27 @@ export default function TerminalPage() {
         setHistoryIndex(-1)
         setInput('')
       }
+    } else if (e.key === 'Tab') {
+      e.preventDefault()
+      const now = Date.now()
+      const timeSinceLastTab = now - lastTabPressRef.current
+      const isDoubleTab = timeSinceLastTab < 300 // 300ms window for double tab
+
+      lastTabPressRef.current = now
+
+      if (isDoubleTab) {
+        // Double tab - show all matches
+        handleAutocomplete(true)
+      } else {
+        // Single tab - try to autocomplete
+        handleAutocomplete(false)
+      }
+    } else if (e.key === 'Enter') {
+      // Ensure input stays focused after Enter (form submission)
+      // The handleSubmit will handle the actual submission
+      setTimeout(() => {
+        inputRef.current?.focus()
+      }, 0)
     } else if (e.key === 'l' && e.ctrlKey) {
       e.preventDefault()
       setOutput([])
@@ -332,6 +591,23 @@ export default function TerminalPage() {
               )}
               {line.type === 'info' && (
                 <pre className="text-zinc-400 whitespace-pre-wrap">{line.content}</pre>
+              )}
+              {line.type === 'usage' && (
+                <div className="flex items-center gap-2 group">
+                  <pre className="text-emerald-400 whitespace-pre-wrap flex-1">{line.content}</pre>
+                  {line.copyableCommand && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        copyToClipboard(line.copyableCommand!, 'Command')
+                      }}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-zinc-800 rounded"
+                      title="Copy command"
+                    >
+                      <CopyIcon className="w-3.5 h-3.5 text-emerald-400" />
+                    </button>
+                  )}
+                </div>
               )}
             </div>
             ))}

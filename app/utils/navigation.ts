@@ -91,8 +91,8 @@ export const docPages: DocPage[] = [
   { path: '/docs/lightning/watchtowers', mdFile: 'app/docs/lightning/watchtowers/watchtowers.md', title: 'Watchtowers', section: 'lightning' },
   { path: '/docs/lightning/anchor-outputs', mdFile: 'app/docs/lightning/anchor-outputs/anchor-outputs.md', title: 'Anchor Outputs', section: 'lightning' },
 
-  // Development Infrastructure
-  { path: '/docs/development', mdFile: 'app/docs/development/overview.md', title: 'Development Infrastructure', section: 'development' },
+  // Setup & Infrastructure
+  { path: '/docs/development', mdFile: 'app/docs/development/overview.md', title: 'Setup & Infrastructure', section: 'development' },
   { path: '/docs/development/install-bitcoin', mdFile: 'app/docs/development/install-bitcoin/install-bitcoin.md', title: 'Installing Bitcoin', section: 'development' },
   { path: '/docs/development/testing', mdFile: 'app/docs/development/testing/testing.md', title: 'Testing & Debugging', section: 'development' },
   { path: '/docs/development/testnets', mdFile: 'app/docs/development/testnets/testnets.md', title: 'Test Networks', section: 'development' },
@@ -161,7 +161,7 @@ export const sections: Record<string, { title: string; description: string }> = 
     description: 'Understand the Lightning Network protocol, including channel management, routing, HTLCs, and onion routing.',
   },
   development: {
-    title: 'Development Infrastructure',
+    title: 'Setup & Infrastructure',
     description: 'Setup and infrastructure for Bitcoin development, including installation, testing, test networks, libraries, node architecture, and Bitcoin Core internals.',
   },
   'bitcoin-development': {
@@ -200,7 +200,7 @@ export const navItems: NavSection[] = [
     children: docPages.filter(p => p.section === 'bitcoin' && p.path !== '/docs/bitcoin').map(p => ({ title: p.title, href: p.path })),
   },
   {
-    title: 'Development Infrastructure',
+    title: 'Setup & Infrastructure',
     href: '/docs/development',
     children: docPages.filter(p => p.section === 'development' && p.path !== '/docs/development').map(p => ({ title: p.title, href: p.path })),
   },
@@ -257,7 +257,7 @@ export const routeLabels: Record<string, string> = {
   mining: 'Mining',
   wallets: 'Wallets',
   lightning: 'Lightning Network',
-  development: 'Development Infrastructure',
+  development: 'Setup & Infrastructure',
   'bitcoin-development': 'Bitcoin Development',
   controversies: 'Controversies',
   advanced: 'Advanced Topics',

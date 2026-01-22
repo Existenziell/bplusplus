@@ -67,5 +67,5 @@ Always verify current implementation status and security considerations before u
 - [Bitcoin Protocol](/docs/bitcoin) - Core protocol documentation
 - [Lightning Network](/docs/lightning) - Standard Lightning features
 - [Wallets](/docs/wallets) - Privacy techniques and smart contracts
-- [Development Infrastructure](/docs/development) - Setup and infrastructure for Bitcoin development
+- [Setup & Infrastructure](/docs/development) - Setup and infrastructure for Bitcoin development
 - [Bitcoin Development](/docs/bitcoin-development) - Practical development tasks

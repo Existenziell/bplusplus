@@ -1,4 +1,4 @@
-# Development Infrastructure
+# Setup & Infrastructure
 
 This section covers the setup and infrastructure needed for Bitcoin development: installing Bitcoin Core, testing and debugging, working with test networks, choosing libraries, understanding node architecture, and exploring Bitcoin Core internals.
 

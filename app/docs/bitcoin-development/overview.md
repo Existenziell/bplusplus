@@ -2,7 +2,7 @@
 
 This section covers practical Bitcoin development tasks—the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more.
 
-> **Prerequisites:** Before diving into these topics, make sure you're familiar with [Development Infrastructure](/docs/development) topics like installing Bitcoin, testing, and using libraries.
+> **Prerequisites:** Before diving into these topics, make sure you're familiar with [Setup & Infrastructure](/docs/development) topics like installing Bitcoin, testing, and using libraries.
 
 ---
 
@@ -113,7 +113,7 @@ Common Bitcoin script patterns and templates for building smart contracts and ad
 
 These development tasks integrate with:
 
-- **[Development Infrastructure](/docs/development)**: Setup, testing, libraries
+- **[Setup & Infrastructure](/docs/development)**: Setup, testing, libraries
 - **[Wallet Development](/docs/wallets)**: HD wallets, coin selection, multisig
 - **[Bitcoin Protocol](/docs/bitcoin)**: Script system, transaction structure, RPC
 - **[Mining](/docs/mining)**: Block construction, mempool, fees
@@ -184,7 +184,7 @@ broadcast(final_tx)
 
 ## Related Topics
 
-- [Development Infrastructure](/docs/development) - Setup, testing, libraries, node architecture
+- [Setup & Infrastructure](/docs/development) - Setup, testing, libraries, node architecture
 - [Wallet Development](/docs/wallets) - HD wallets, coin selection, multisig
 - [Bitcoin Protocol](/docs/bitcoin) - Script system, RPC, transaction structure
 - [UTXO Model](/docs/fundamentals/utxos) - Understanding UTXOs for transaction building

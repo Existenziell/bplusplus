@@ -7,6 +7,15 @@ import { pathToMdFile, docPages, sections } from '@/app/utils/navigation'
 // Force static generation for all doc pages - they only read from filesystem
 export const dynamic = 'force-static'
 
+// Generate static params for all doc pages at build time
+export async function generateStaticParams() {
+  return docPages.map((page) => {
+    // Remove '/docs/' prefix and split into slug array
+    const slug = page.path.replace('/docs/', '').split('/').filter(Boolean)
+    return { slug }
+  })
+}
+
 interface PageProps {
   params: {
     slug: string[]
@@ -15,6 +24,13 @@ interface PageProps {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  // Handle case where slug might be undefined or empty
+  if (!params?.slug || !Array.isArray(params.slug) || params.slug.length === 0) {
+    return {
+      title: 'Page Not Found | B++',
+    }
+  }
+
   const path = `/docs/${params.slug.join('/')}`
   const page = docPages.find(p => p.path === path)
 
@@ -41,6 +57,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function DocPage({ params }: PageProps) {
+  // Handle case where slug might be undefined or empty
+  if (!params?.slug || !Array.isArray(params.slug) || params.slug.length === 0) {
+    notFound()
+  }
+
   // Reconstruct the path from slug segments
   const path = `/docs/${params.slug.join('/')}`
 
@@ -53,11 +74,17 @@ export default async function DocPage({ params }: PageProps) {
   }
 
   // Read and render the markdown content
-  const content = await readMarkdown(mdFile)
+  try {
+    const content = await readMarkdown(mdFile)
 
-  return (
-    <div>
-      <MarkdownRenderer content={content} />
-    </div>
-  )
+    return (
+      <div>
+        <MarkdownRenderer content={content} />
+      </div>
+    )
+  } catch (error) {
+    // Log error in production for debugging
+    console.error(`Error reading markdown file ${mdFile}:`, error)
+    notFound()
+  }
 }

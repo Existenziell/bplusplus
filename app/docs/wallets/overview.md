@@ -209,25 +209,6 @@ int main() {
 }
 ```
 
-```javascript
-const bitcoin = require('bitcoinjs-lib');
-const { randomBytes } = require('crypto');
-
-// Generate key pair
-const keyPair = bitcoin.ECPair.makeRandom();
-
-// Get private key (WIF format)
-const privateKey = keyPair.toWIF();
-
-// Generate address (P2PKH)
-const { address } = bitcoin.payments.p2pkh({ 
-  pubkey: keyPair.publicKey 
-});
-
-console.log('Private Key:', privateKey);
-console.log('Address:', address);
-```
-
 ```go
 package main
 
@@ -263,6 +244,25 @@ func main() {
 	fmt.Printf("Private Key: %s\n", wif.String())
 	fmt.Printf("Address: %s\n", addr.EncodeAddress())
 }
+```
+
+```javascript
+const bitcoin = require('bitcoinjs-lib');
+const { randomBytes } = require('crypto');
+
+// Generate key pair
+const keyPair = bitcoin.ECPair.makeRandom();
+
+// Get private key (WIF format)
+const privateKey = keyPair.toWIF();
+
+// Generate address (P2PKH)
+const { address } = bitcoin.payments.p2pkh({ 
+  pubkey: keyPair.publicKey 
+});
+
+console.log('Private Key:', privateKey);
+console.log('Address:', address);
 ```
 :::
 

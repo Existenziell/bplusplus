@@ -240,6 +240,73 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"crypto/rand"
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+)
+
+// HTLC represents a Hash Time-Locked Contract
+type HTLC struct {
+	PaymentHash [32]byte
+	AmountMsat  uint64
+	CLTVExpiry  uint32
+}
+
+// VerifyPreimage verifies a preimage against this HTLC's payment hash
+func (h *HTLC) VerifyPreimage(preimage [32]byte) bool {
+	hash := sha256.Sum256(preimage[:])
+	return hash == h.PaymentHash
+}
+
+// IsExpired checks if HTLC has expired at given block height
+func (h *HTLC) IsExpired(currentHeight uint32) bool {
+	return currentHeight >= h.CLTVExpiry
+}
+
+// CanForward checks if we have enough time to safely forward this HTLC
+func (h *HTLC) CanForward(currentHeight uint32, minDelta uint32) bool {
+	if minDelta == 0 {
+		minDelta = 40
+	}
+	return h.CLTVExpiry > currentHeight+minDelta
+}
+
+// CreateHTLC creates an HTLC with a new random preimage
+func CreateHTLC(amountMsat uint64, cltvExpiry uint32) (*HTLC, [32]byte, error) {
+	var preimage [32]byte
+	if _, err := rand.Read(preimage[:]); err != nil {
+		return nil, [32]byte{}, err
+	}
+
+	paymentHash := sha256.Sum256(preimage[:])
+	htlc := &HTLC{
+		PaymentHash: paymentHash,
+		AmountMsat:  amountMsat,
+		CLTVExpiry:  cltvExpiry,
+	}
+
+	return htlc, preimage, nil
+}
+
+func main() {
+	// Example usage
+	htlc, preimage, _ := CreateHTLC(1_000_000, 850_000)
+
+	fmt.Printf("Payment hash: %s\n", hex.EncodeToString(htlc.PaymentHash[:]))
+	fmt.Printf("Preimage: %s\n", hex.EncodeToString(preimage[:]))
+	fmt.Printf("Verified: %v\n", htlc.VerifyPreimage(preimage))
+
+	currentHeight := uint32(849_950)
+	fmt.Printf("Expired: %v\n", htlc.IsExpired(currentHeight))
+	fmt.Printf("Can forward: %v\n", htlc.CanForward(currentHeight, 40))
+}
+```
+
 ```javascript
 const crypto = require('crypto');
 
@@ -311,69 +378,6 @@ console.log(`Verified: ${htlc.verifyPreimage(preimage)}`);
 const currentHeight = 849_950;
 console.log(`Expired: ${htlc.isExpired(currentHeight)}`);
 console.log(`Can forward: ${htlc.canForward(currentHeight)}`);
-```
-
-```go
-package main
-
-import (
-	"crypto/rand"
-	"crypto/sha256"
-	"encoding/hex"
-	"fmt"
-)
-
-// HTLC represents a Hash Time-Locked Contract
-type HTLC struct {
-	PaymentHash [32]byte
-	AmountMsat  uint64
-	CLTVExpiry  uint32
-}
-
-// VerifyPreimage verifies a preimage against this HTLC's payment hash
-func (h *HTLC) VerifyPreimage(preimage [32]byte) bool {
-	hash := sha256.Sum256(preimage[:])
-	return hash == h.PaymentHash
-}
-
-// IsExpired checks if HTLC has expired at given block height
-func (h *HTLC) IsExpired(currentHeight uint32) bool {
-	return currentHeight >= h.CLTVExpiry
-}
-
-// CanForward checks if we have enough time to safely forward this HTLC
-func (h *HTLC) CanForward(currentHeight uint32, minDelta uint32) bool {
-	return h.CLTVExpiry > currentHeight+minDelta
-}
-
-// CreateHTLC creates an HTLC with a new random preimage
-func CreateHTLC(amountMsat uint64, cltvExpiry uint32) (*HTLC, [32]byte) {
-	var preimage [32]byte
-	rand.Read(preimage[:])
-
-	paymentHash := sha256.Sum256(preimage[:])
-
-	htlc := &HTLC{
-		PaymentHash: paymentHash,
-		AmountMsat:  amountMsat,
-		CLTVExpiry:  cltvExpiry,
-	}
-
-	return htlc, preimage
-}
-
-func main() {
-	// Example usage
-	htlc, preimage := CreateHTLC(1_000_000, 850_000)
-
-	fmt.Printf("Payment hash: %s\n", hex.EncodeToString(htlc.PaymentHash[:]))
-	fmt.Printf("Preimage: %s\n", hex.EncodeToString(preimage[:]))
-	fmt.Printf("Verified: %v\n", htlc.VerifyPreimage(preimage))
-
-	currentHeight := uint32(849_950)
-	fmt.Printf("Expired: %v\n", htlc.IsExpired(currentHeight))
-	fmt.Printf("Can forward: %v\n", htlc.CanForward(currentHeight, 40))
-}
 ```
 :::
 

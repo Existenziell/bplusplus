@@ -152,23 +152,6 @@ int main() {
 }
 ```
 
-```javascript
-const crypto = require('crypto');
-
-function sha256(data) {
-  return crypto.createHash('sha256').update(data).digest();
-}
-
-function doubleSha256(data) {
-  return sha256(sha256(data));
-}
-
-// Example
-const message = Buffer.from('Hello');
-console.log(`SHA-256: ${sha256(message).toString('hex')}`);
-console.log(`Double SHA-256: ${doubleSha256(message).toString('hex')}`);
-```
-
 ```go
 package main
 
@@ -194,6 +177,23 @@ func main() {
 	fmt.Printf("SHA-256: %s\n", hex.EncodeToString(SHA256(message)[:]))
 	fmt.Printf("Double SHA-256: %s\n", hex.EncodeToString(DoubleSHA256(message)[:]))
 }
+```
+
+```javascript
+const crypto = require('crypto');
+
+function sha256(data) {
+  return crypto.createHash('sha256').update(data).digest();
+}
+
+function doubleSha256(data) {
+  return sha256(sha256(data));
+}
+
+// Example
+const message = Buffer.from('Hello');
+console.log(`SHA-256: ${sha256(message).toString('hex')}`);
+console.log(`Double SHA-256: ${doubleSha256(message).toString('hex')}`);
 ```
 :::
 
@@ -258,19 +258,6 @@ std::vector<uint8_t> hash160(const std::vector<uint8_t>& data) {
 }
 ```
 
-```javascript
-const crypto = require('crypto');
-
-function hash160(data) {
-  const sha256Hash = crypto.createHash('sha256').update(data).digest();
-  return crypto.createHash('ripemd160').update(sha256Hash).digest();
-}
-
-// Hash a public key
-const publicKey = Buffer.from('02b4632d08485ff1df2db55b9dafd23347d1c47a457072a1e87be26896549a8737', 'hex');
-console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
-```
-
 ```go
 package main
 
@@ -296,6 +283,19 @@ func main() {
 	hash160 := Hash160(publicKey)
 	fmt.Printf("Hash160: %s\n", hex.EncodeToString(hash160))
 }
+```
+
+```javascript
+const crypto = require('crypto');
+
+function hash160(data) {
+  const sha256Hash = crypto.createHash('sha256').update(data).digest();
+  return crypto.createHash('ripemd160').update(sha256Hash).digest();
+}
+
+// Hash a public key
+const publicKey = Buffer.from('02b4632d08485ff1df2db55b9dafd23347d1c47a457072a1e87be26896549a8737', 'hex');
+console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
 ```
 :::
 
@@ -427,25 +427,6 @@ int main() {
 }
 ```
 
-```javascript
-const { randomBytes } = require('crypto');
-const secp256k1 = require('secp256k1');
-
-// Generate random private key
-let privateKey;
-do {
-  privateKey = randomBytes(32);
-} while (!secp256k1.privateKeyVerify(privateKey));
-
-// Derive public key
-const publicKeyCompressed = secp256k1.publicKeyCreate(privateKey, true);    // 33 bytes
-const publicKeyUncompressed = secp256k1.publicKeyCreate(privateKey, false); // 65 bytes
-
-console.log(`Private Key: ${privateKey.toString('hex')}`);
-console.log(`Public Key (compressed): ${Buffer.from(publicKeyCompressed).toString('hex')}`);
-console.log(`Public Key (uncompressed): ${Buffer.from(publicKeyUncompressed).toString('hex')}`);
-```
-
 ```go
 package main
 
@@ -474,6 +455,25 @@ func main() {
 	fmt.Printf("Public Key (compressed): %s\n", hex.EncodeToString(publicKeyCompressed))
 	fmt.Printf("Public Key (uncompressed): %s\n", hex.EncodeToString(publicKeyUncompressed))
 }
+```
+
+```javascript
+const { randomBytes } = require('crypto');
+const secp256k1 = require('secp256k1');
+
+// Generate random private key
+let privateKey;
+do {
+  privateKey = randomBytes(32);
+} while (!secp256k1.privateKeyVerify(privateKey));
+
+// Derive public key
+const publicKeyCompressed = secp256k1.publicKeyCreate(privateKey, true);    // 33 bytes
+const publicKeyUncompressed = secp256k1.publicKeyCreate(privateKey, false); // 65 bytes
+
+console.log(`Private Key: ${privateKey.toString('hex')}`);
+console.log(`Public Key (compressed): ${Buffer.from(publicKeyCompressed).toString('hex')}`);
+console.log(`Public Key (uncompressed): ${Buffer.from(publicKeyUncompressed).toString('hex')}`);
 ```
 :::
 
@@ -619,30 +619,6 @@ int main() {
 }
 ```
 
-```javascript
-const crypto = require('crypto');
-const secp256k1 = require('secp256k1');
-
-// Private key
-const privateKey = Buffer.from(
-  'e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35', 'hex'
-);
-
-// Message to sign
-const message = Buffer.from('Hello, Bitcoin!');
-const messageHash = crypto.createHash('sha256').update(message).digest();
-
-// Sign
-const sigObj = secp256k1.ecdsaSign(messageHash, privateKey);
-console.log(`Message Hash: ${messageHash.toString('hex')}`);
-console.log(`Signature: ${Buffer.from(sigObj.signature).toString('hex')}`);
-
-// Verify
-const publicKey = secp256k1.publicKeyCreate(privateKey);
-const isValid = secp256k1.ecdsaVerify(sigObj.signature, messageHash, publicKey);
-console.log(`Signature valid: ${isValid}`);
-```
-
 ```go
 package main
 
@@ -676,6 +652,30 @@ func main() {
 	isValid := signature.Verify(messageHash[:], publicKey)
 	fmt.Printf("Signature valid: %v\n", isValid)
 }
+```
+
+```javascript
+const crypto = require('crypto');
+const secp256k1 = require('secp256k1');
+
+// Private key
+const privateKey = Buffer.from(
+  'e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35', 'hex'
+);
+
+// Message to sign
+const message = Buffer.from('Hello, Bitcoin!');
+const messageHash = crypto.createHash('sha256').update(message).digest();
+
+// Sign
+const sigObj = secp256k1.ecdsaSign(messageHash, privateKey);
+console.log(`Message Hash: ${messageHash.toString('hex')}`);
+console.log(`Signature: ${Buffer.from(sigObj.signature).toString('hex')}`);
+
+// Verify
+const publicKey = secp256k1.publicKeyCreate(privateKey);
+const isValid = secp256k1.ecdsaVerify(sigObj.signature, messageHash, publicKey);
+console.log(`Signature valid: ${isValid}`);
 ```
 :::
 
@@ -782,26 +782,6 @@ int main() {
 }
 ```
 
-```javascript
-const crypto = require('crypto');
-
-function taggedHash(tag, msg) {
-    const tagHash = crypto.createHash('sha256').update(tag).digest();
-    return crypto.createHash('sha256')
-        .update(tagHash)
-        .update(tagHash)
-        .update(msg)
-        .digest();
-}
-
-// Example tags used in Bitcoin
-const challenge = taggedHash('BIP0340/challenge', Buffer.from('some data'));
-const aux = taggedHash('BIP0340/aux', Buffer.from('random auxiliary data'));
-const nonce = taggedHash('BIP0340/nonce', Buffer.from('nonce derivation input'));
-
-console.log(`Challenge hash: ${challenge.toString('hex')}`);
-```
-
 ```go
 package main
 
@@ -833,6 +813,26 @@ func main() {
 	fmt.Printf("Aux hash: %s\n", hex.EncodeToString(aux[:]))
 	fmt.Printf("Nonce hash: %s\n", hex.EncodeToString(nonce[:]))
 }
+```
+
+```javascript
+const crypto = require('crypto');
+
+function taggedHash(tag, msg) {
+    const tagHash = crypto.createHash('sha256').update(tag).digest();
+    return crypto.createHash('sha256')
+        .update(tagHash)
+        .update(tagHash)
+        .update(msg)
+        .digest();
+}
+
+// Example tags used in Bitcoin
+const challenge = taggedHash('BIP0340/challenge', Buffer.from('some data'));
+const aux = taggedHash('BIP0340/aux', Buffer.from('random auxiliary data'));
+const nonce = taggedHash('BIP0340/nonce', Buffer.from('nonce derivation input'));
+
+console.log(`Challenge hash: ${challenge.toString('hex')}`);
 ```
 :::
 
@@ -1026,54 +1026,6 @@ Hash merkle_root(std::vector<Hash> hashes) {
 }
 ```
 
-```javascript
-const crypto = require('crypto');
-
-function doubleSha256(data) {
-    const first = crypto.createHash('sha256').update(data).digest();
-    return crypto.createHash('sha256').update(first).digest();
-}
-
-function merkleRoot(hashes) {
-    if (hashes.length === 0) return Buffer.alloc(32);
-    if (hashes.length === 1) return hashes[0];
-    
-    // Duplicate last if odd
-    if (hashes.length % 2 === 1) {
-        hashes.push(hashes[hashes.length - 1]);
-    }
-    
-    // Hash pairs
-    const nextLevel = [];
-    for (let i = 0; i < hashes.length; i += 2) {
-        const combined = Buffer.concat([hashes[i], hashes[i + 1]]);
-        nextLevel.push(doubleSha256(combined));
-    }
-    
-    return merkleRoot(nextLevel);
-}
-
-function verifyMerkleProof(txHash, proof, root, index) {
-    let current = txHash;
-    for (const sibling of proof) {
-        if (index % 2 === 0) {
-            current = doubleSha256(Buffer.concat([current, sibling]));
-        } else {
-            current = doubleSha256(Buffer.concat([sibling, current]));
-        }
-        index = Math.floor(index / 2);
-    }
-    return current.equals(root);
-}
-
-// Example: 4 transactions
-const txHashes = [0, 1, 2, 3].map(i => 
-    doubleSha256(Buffer.from(`tx${i}`))
-);
-const root = merkleRoot(txHashes);
-console.log(`Merkle Root: ${root.toString('hex')}`);
-```
-
 ```go
 package main
 
@@ -1145,6 +1097,54 @@ func main() {
 	root := MerkleRoot(txHashes)
 	fmt.Printf("Merkle Root: %s\n", hex.EncodeToString(root[:]))
 }
+```
+
+```javascript
+const crypto = require('crypto');
+
+function doubleSha256(data) {
+    const first = crypto.createHash('sha256').update(data).digest();
+    return crypto.createHash('sha256').update(first).digest();
+}
+
+function merkleRoot(hashes) {
+    if (hashes.length === 0) return Buffer.alloc(32);
+    if (hashes.length === 1) return hashes[0];
+    
+    // Duplicate last if odd
+    if (hashes.length % 2 === 1) {
+        hashes.push(hashes[hashes.length - 1]);
+    }
+    
+    // Hash pairs
+    const nextLevel = [];
+    for (let i = 0; i < hashes.length; i += 2) {
+        const combined = Buffer.concat([hashes[i], hashes[i + 1]]);
+        nextLevel.push(doubleSha256(combined));
+    }
+    
+    return merkleRoot(nextLevel);
+}
+
+function verifyMerkleProof(txHash, proof, root, index) {
+    let current = txHash;
+    for (const sibling of proof) {
+        if (index % 2 === 0) {
+            current = doubleSha256(Buffer.concat([current, sibling]));
+        } else {
+            current = doubleSha256(Buffer.concat([sibling, current]));
+        }
+        index = Math.floor(index / 2);
+    }
+    return current.equals(root);
+}
+
+// Example: 4 transactions
+const txHashes = [0, 1, 2, 3].map(i => 
+    doubleSha256(Buffer.from(`tx${i}`))
+);
+const root = merkleRoot(txHashes);
+console.log(`Merkle Root: ${root.toString('hex')}`);
 ```
 :::
 
@@ -1401,6 +1401,65 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"golang.org/x/crypto/ripemd160"
+)
+
+func hash160(data []byte) []byte {
+	sha := sha256.Sum256(data)
+	hasher := ripemd160.New()
+	hasher.Write(sha[:])
+	return hasher.Sum(nil)
+}
+
+func generateAddresses() {
+	// 1. Generate private key
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// 2. Get compressed public key
+	publicKey := privateKey.PubKey()
+	publicKeyBytes := publicKey.SerializeCompressed()
+
+	// 3. Hash160 the public key
+	pubkeyHash := hash160(publicKeyBytes)
+
+	// 4. Generate P2PKH address (Legacy - starts with '1')
+	p2pkhAddr, err := btcutil.NewAddressPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	// 5. Generate P2WPKH address (Native SegWit - starts with 'bc1q')
+	p2wpkhAddr, err := btcutil.NewAddressWitnessPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Private Key: %x\n", privateKey.Serialize())
+	fmt.Printf("Public Key: %s\n", hex.EncodeToString(publicKeyBytes))
+	fmt.Printf("Pubkey Hash: %s\n", hex.EncodeToString(pubkeyHash))
+	fmt.Printf("P2PKH Address: %s\n", p2pkhAddr.EncodeAddress())
+	fmt.Printf("P2WPKH Address: %s\n", p2wpkhAddr.EncodeAddress())
+}
+
+func main() {
+	generateAddresses()
+}
+```
+
 ```javascript
 const crypto = require('crypto');
 const secp256k1 = require('secp256k1');
@@ -1472,65 +1531,6 @@ console.log(`Private Key: ${result.privateKey}`);
 console.log(`Public Key: ${result.publicKey}`);
 console.log(`P2PKH Address: ${result.p2pkhAddress}`);
 console.log(`P2WPKH Address: ${result.p2wpkhAddress}`);
-```
-
-```go
-package main
-
-import (
-	"crypto/sha256"
-	"encoding/hex"
-	"fmt"
-
-	"github.com/btcsuite/btcd/btcec/v2"
-	"github.com/btcsuite/btcd/btcutil"
-	"github.com/btcsuite/btcd/chaincfg"
-	"golang.org/x/crypto/ripemd160"
-)
-
-func hash160(data []byte) []byte {
-	sha := sha256.Sum256(data)
-	hasher := ripemd160.New()
-	hasher.Write(sha[:])
-	return hasher.Sum(nil)
-}
-
-func generateAddresses() {
-	// 1. Generate private key
-	privateKey, err := btcec.NewPrivateKey()
-	if err != nil {
-		panic(err)
-	}
-
-	// 2. Get compressed public key
-	publicKey := privateKey.PubKey()
-	publicKeyBytes := publicKey.SerializeCompressed()
-
-	// 3. Hash160 the public key
-	pubkeyHash := hash160(publicKeyBytes)
-
-	// 4. Generate P2PKH address (Legacy - starts with '1')
-	p2pkhAddr, err := btcutil.NewAddressPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
-	if err != nil {
-		panic(err)
-	}
-
-	// 5. Generate P2WPKH address (Native SegWit - starts with 'bc1q')
-	p2wpkhAddr, err := btcutil.NewAddressWitnessPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("Private Key: %x\n", privateKey.Serialize())
-	fmt.Printf("Public Key: %s\n", hex.EncodeToString(publicKeyBytes))
-	fmt.Printf("Pubkey Hash: %s\n", hex.EncodeToString(pubkeyHash))
-	fmt.Printf("P2PKH Address: %s\n", p2pkhAddr.EncodeAddress())
-	fmt.Printf("P2WPKH Address: %s\n", p2wpkhAddr.EncodeAddress())
-}
-
-func main() {
-	generateAddresses()
-}
 ```
 :::
 

@@ -423,19 +423,6 @@ bc::config::network get_network(const std::string& type) {
 }
 ```
 
-```javascript
-import * as bitcoin from 'bitcoinjs-lib';
-
-function getNetwork(type) {
-  const networks = {
-    mainnet: bitcoin.networks.bitcoin,
-    testnet: bitcoin.networks.testnet,
-    regtest: bitcoin.networks.regtest,
-  };
-  return networks[type];
-}
-```
-
 ```go
 package main
 
@@ -463,6 +450,19 @@ func getNetwork(networkType string) *chaincfg.Params {
 func main() {
 	network := getNetwork("testnet")
 	fmt.Printf("Network: %s\n", network.Name)
+}
+```
+
+```javascript
+import * as bitcoin from 'bitcoinjs-lib';
+
+function getNetwork(type) {
+  const networks = {
+    mainnet: bitcoin.networks.bitcoin,
+    testnet: bitcoin.networks.testnet,
+    regtest: bitcoin.networks.regtest,
+  };
+  return networks[type];
 }
 ```
 :::

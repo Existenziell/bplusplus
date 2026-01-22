@@ -309,6 +309,86 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+// ParseAmount parses amount from human-readable part.
+// Returns amount in millisatoshis.
+func ParseAmount(hrp string) (*uint64, error) {
+	// Remove network prefix
+	amountStr := strings.TrimLeft(hrp, "lnbcrts")
+	
+	// Parse suffix (m, u, n, p)
+	multipliers := map[byte]uint64{
+		'm': 100_000_000_000_000, // milli
+		'u': 100_000_000_000,     // micro
+		'n': 100_000_000,         // nano
+		'p': 10_000_000,          // pico
+	}
+	
+	if len(amountStr) > 0 {
+		suffix := amountStr[len(amountStr)-1]
+		if multiplier, ok := multipliers[suffix]; ok {
+			numStr := amountStr[:len(amountStr)-1]
+			num, err := strconv.ParseUint(numStr, 10, 64)
+			if err != nil {
+				return nil, err
+			}
+			value := num * multiplier
+			// For pico, divide by 10 since 1p = 0.1 msat
+			if suffix == 'p' {
+				value = value / 10
+			}
+			result := value
+			return &result, nil
+		}
+	}
+	
+	// No suffix = whole BTC
+	num, err := strconv.ParseUint(amountStr, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	result := num * 100_000_000_000
+	return &result, nil
+}
+
+// GetNetwork gets network from invoice string
+func GetNetwork(invoice string) string {
+	invoice = strings.ToLower(invoice)
+	if strings.HasPrefix(invoice, "lntbs") {
+		return "signet"
+	}
+	if strings.HasPrefix(invoice, "lntb") {
+		return "testnet"
+	}
+	if strings.HasPrefix(invoice, "lnbcrt") {
+		return "regtest"
+	}
+	if strings.HasPrefix(invoice, "lnbc") {
+		return "mainnet"
+	}
+	return "unknown"
+}
+
+func main() {
+	hrp := "lnbc2500u"
+	amount, err := ParseAmount(hrp)
+	if err == nil && amount != nil {
+		fmt.Printf("Amount: %d msat\n", *amount)
+		fmt.Printf("Amount: %d sats\n", *amount/1000)
+	}
+	
+	fmt.Printf("Network: %s\n", GetNetwork("lnbc2500u1..."))
+}
+```
+
 ```javascript
 /**
  * @typedef {Object} ParsedInvoice
@@ -400,106 +480,6 @@ const parsed = parseInvoice(invoice);
 console.log(`Network: ${parsed.network}`);
 console.log(`Amount: ${parsed.amountMsat} msat`);
 console.log(`Amount: ${parsed.amountMsat / 1000n} sats`);
-```
-
-```go
-package main
-
-import (
-	"fmt"
-	"strconv"
-	"strings"
-)
-
-// ParsedInvoice represents parsed BOLT11 invoice fields
-type ParsedInvoice struct {
-	Network       string
-	AmountMsat    *uint64
-	PaymentHash   [32]byte
-	Description   *string
-	ExpirySeconds uint32
-	Timestamp     uint64
-}
-
-// ParseAmount parses amount from human-readable part.
-// Returns amount in millisatoshis.
-// 1 BTC = 100,000,000 sat = 100,000,000,000 msat
-func ParseAmount(hrp string) (*uint64, error) {
-	// Remove network prefix
-	amountStr := strings.TrimLeft(hrp, "lnbcrts")
-	
-	if amountStr == "" {
-		return nil, nil
-	}
-	
-	// Determine multiplier (to millisatoshis)
-	// m = milli (10^-3), u = micro (10^-6), n = nano (10^-9), p = pico (10^-12)
-	var multiplier uint64
-	var isPico bool
-	suffix := amountStr[len(amountStr)-1]
-	
-	switch suffix {
-	case 'm':
-		multiplier = 100_000_000 // milli-BTC
-	case 'u':
-		multiplier = 100_000 // micro-BTC
-	case 'n':
-		multiplier = 100 // nano-BTC
-	case 'p':
-		multiplier = 1
-		isPico = true // pico-BTC (0.1 msat)
-	default:
-		multiplier = 100_000_000_000 // whole BTC
-		num, err := strconv.ParseUint(amountStr, 10, 64)
-		if err != nil {
-			return nil, err
-		}
-		value := num * multiplier
-		return &value, nil
-	}
-	
-	numStr := amountStr[:len(amountStr)-1]
-	num, err := strconv.ParseUint(numStr, 10, 64)
-	if err != nil {
-		return nil, err
-	}
-	
-	value := num * multiplier
-	// For pico, divide by 10 since 1p = 0.1 msat
-	if isPico {
-		value = value / 10
-	}
-	return &value, nil
-}
-
-// GetNetwork gets network from invoice prefix
-func GetNetwork(invoice string) string {
-	if strings.HasPrefix(invoice, "lntbs") {
-		return "signet"
-	}
-	if strings.HasPrefix(invoice, "lntb") {
-		return "testnet"
-	}
-	if strings.HasPrefix(invoice, "lnbc") {
-		return "mainnet"
-	}
-	return "unknown"
-}
-
-func main() {
-	hrp := "lnbc2500u"
-	amount, err := ParseAmount(hrp)
-	if err != nil {
-		panic(err)
-	}
-	
-	if amount != nil {
-		fmt.Printf("Amount: %d msat\n", *amount)
-		fmt.Printf("Amount: %d sats\n", *amount/1000)
-	}
-	
-	fmt.Printf("Network: %s\n", GetNetwork("lnbc2500u1..."))
-}
 ```
 :::
 

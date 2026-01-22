@@ -211,6 +211,53 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"encoding/binary"
+	"encoding/hex"
+	"fmt"
+)
+
+// EncodeMppTlv encodes TLV for MPP payment data
+// Format: type (8 bytes) + length (8 bytes) + payment_secret (32 bytes) + total_msat (8 bytes)
+func EncodeMppTlv(paymentSecret [32]byte, totalMsat uint64) string {
+	var result []byte
+
+	// Type: 8 (uint64, big-endian)
+	typeBytes := make([]byte, 8)
+	binary.BigEndian.PutUint64(typeBytes, 8)
+	result = append(result, typeBytes...)
+
+	// Length: 40 (uint64, big-endian)
+	lengthBytes := make([]byte, 8)
+	binary.BigEndian.PutUint64(lengthBytes, 40)
+	result = append(result, lengthBytes...)
+
+	// Payment secret: 32 bytes
+	result = append(result, paymentSecret[:]...)
+
+	// Total msat: 8 bytes (uint64, big-endian)
+	msatBytes := make([]byte, 8)
+	binary.BigEndian.PutUint64(msatBytes, totalMsat)
+	result = append(result, msatBytes...)
+
+	return hex.EncodeToString(result)
+}
+
+func main() {
+	// Example usage
+	paymentSecret := [32]byte{0xb3, 0xc3, 0x96, 0x51, 0x28, 0xb0, 0x5c, 0x96,
+		0xd7, 0x63, 0x48, 0x15, 0x8f, 0x8f, 0x3a, 0x1b,
+		0x92, 0xe2, 0x84, 0x71, 0x72, 0xf9, 0xad, 0xeb,
+		0xb4, 0x00, 0xa9, 0xe8, 0x3e, 0x62, 0xf0, 0x66}
+	totalMsat := uint64(120000)
+	tlv := EncodeMppTlv(paymentSecret, totalMsat)
+	fmt.Printf("TLV: %s\n", tlv)
+}
+```
+
 ```javascript
 /**
  * Encode TLV for MPP payment data
@@ -249,52 +296,6 @@ const paymentSecret = Buffer.from('b3c3965128b05c96d76348158f8f3a1b92e2847172f9a
 const totalMsat = 120000n;
 const tlv = encodeMppTlv(paymentSecret, totalMsat);
 console.log(`TLV: ${tlv}`);
-```
-
-```go
-package main
-
-import (
-	"encoding/binary"
-	"encoding/hex"
-	"fmt"
-)
-
-// EncodeMppTlv encodes TLV for MPP payment data
-// Format: type (8 bytes) + length (8 bytes) + payment_secret (32 bytes) + total_msat (8 bytes)
-func EncodeMppTlv(paymentSecret [32]byte, totalMsat uint64) string {
-	var result []byte
-
-	// Type: 8 (uint64, big-endian)
-	typeBytes := make([]byte, 8)
-	binary.BigEndian.PutUint64(typeBytes, 8)
-	result = append(result, typeBytes...)
-
-	// Length: 40 (uint64, big-endian)
-	lengthBytes := make([]byte, 8)
-	binary.BigEndian.PutUint64(lengthBytes, 40)
-	result = append(result, lengthBytes...)
-
-	// Payment secret: 32 bytes
-	result = append(result, paymentSecret[:]...)
-
-	// Total msat: 8 bytes (uint64, big-endian)
-	msatBytes := make([]byte, 8)
-	binary.BigEndian.PutUint64(msatBytes, totalMsat)
-	result = append(result, msatBytes...)
-
-	return hex.EncodeToString(result)
-}
-
-func main() {
-	paymentSecret, _ := hex.DecodeString("b3c3965128b05c96d76348158f8f3a1b92e2847172f9adebb400a9e83e62f066")
-	var secret [32]byte
-	copy(secret[:], paymentSecret)
-
-	totalMsat := uint64(120_000)
-	tlv := EncodeMppTlv(secret, totalMsat)
-	fmt.Printf("TLV: %s\n", tlv)
-}
 ```
 :::
 

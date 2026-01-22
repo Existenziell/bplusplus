@@ -170,33 +170,6 @@ void print_channel_balance(const ChannelBalance& balance) {
 }
 ```
 
-```javascript
-const { exec } = require('child_process');
-const util = require('util');
-const execPromise = util.promisify(exec);
-
-/**
- * Query channel balances using lncli
- * @returns {Promise<{localBalance: bigint, remoteBalance: bigint}>}
- */
-async function getChannelBalances() {
-    const { stdout } = await execPromise('lncli channelbalance --macaroonpath=/path/to/admin.macaroon');
-    const balance = JSON.parse(stdout);
-    
-    return {
-        localBalance: BigInt(balance.local_balance?.sat || 0),
-        remoteBalance: BigInt(balance.remote_balance?.sat || 0),
-        pendingOpen: BigInt(balance.pending_open_local_balance?.sat || 0),
-    };
-}
-
-// Example usage
-getChannelBalances().then(balance => {
-    console.log(`Local: ${balance.localBalance} sats`);
-    console.log(`Remote: ${balance.remoteBalance} sats`);
-});
-```
-
 ```go
 package main
 
@@ -234,12 +207,40 @@ func getChannelBalances() (*ChannelBalance, error) {
 func main() {
 	balance, err := getChannelBalances()
 	if err != nil {
-		panic(err)
+		fmt.Printf("Error: %v\n", err)
+		return
 	}
 
 	fmt.Printf("Local: %d sats\n", balance.LocalBalance.Sat)
 	fmt.Printf("Remote: %d sats\n", balance.RemoteBalance.Sat)
 }
+```
+
+```javascript
+const { exec } = require('child_process');
+const util = require('util');
+const execPromise = util.promisify(exec);
+
+/**
+ * Query channel balances using lncli
+ * @returns {Promise<{localBalance: bigint, remoteBalance: bigint}>}
+ */
+async function getChannelBalances() {
+    const { stdout } = await execPromise('lncli channelbalance --macaroonpath=/path/to/admin.macaroon');
+    const balance = JSON.parse(stdout);
+    
+    return {
+        localBalance: BigInt(balance.local_balance?.sat || 0),
+        remoteBalance: BigInt(balance.remote_balance?.sat || 0),
+        pendingOpen: BigInt(balance.pending_open_local_balance?.sat || 0),
+    };
+}
+
+// Example usage
+getChannelBalances().then(balance => {
+    console.log(`Local: ${balance.localBalance} sats`);
+    console.log(`Remote: ${balance.remoteBalance} sats`);
+});
 ```
 :::
 

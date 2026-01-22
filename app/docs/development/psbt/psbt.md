@@ -105,19 +105,6 @@ psbt_bytes = psbt.serialize()
 // See: https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki
 ```
 
-```javascript
-import * as bitcoin from 'bitcoinjs-lib';
-
-const psbt = new bitcoin.Psbt({ network: bitcoin.networks.bitcoin });
-psbt.addInput({
-  hash: 'previous_txid_here',
-  index: 0,
-  witnessUtxo: { script: Buffer.from('0014...', 'hex'), value: 100000 },
-});
-psbt.addOutput({ address: 'bc1q...', value: 50000 });
-const psbtBase64 = psbt.toBase64();
-```
-
 ```go
 package main
 
@@ -129,7 +116,6 @@ import (
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcd/wire"
-	"github.com/vulpemventures/go-bip32"
 )
 
 func createPSBT(prevTxid string, recipientAddr string, inputValue int64) (*wire.MsgTx, error) {
@@ -142,23 +128,22 @@ func createPSBT(prevTxid string, recipientAddr string, inputValue int64) (*wire.
 		return nil, err
 	}
 	txIn := wire.NewTxIn(wire.NewOutPoint(prevTxHash, 0), nil, nil)
-	txIn.Sequence = wire.MaxTxInSequenceNum - 2 // Enable RBF
 	tx.AddTxIn(txIn)
 
 	// Add output
-	recipientAddrDecoded, err := btcutil.DecodeAddress(recipientAddr, &chaincfg.MainNetParams)
+	addr, err := btcutil.DecodeAddress(recipientAddr, &chaincfg.MainNetParams)
 	if err != nil {
 		return nil, err
 	}
-	recipientScript, err := txscript.PayToAddrScript(recipientAddrDecoded)
+	script, err := txscript.PayToAddrScript(addr)
 	if err != nil {
 		return nil, err
 	}
-	txOut := wire.NewTxOut(50000, recipientScript)
+	txOut := wire.NewTxOut(50000, script)
 	tx.AddTxOut(txOut)
 
-	// In a real implementation, you would use a PSBT library
-	// This is a simplified example showing transaction structure
+	// In a real implementation, you would serialize this as a PSBT
+	// using BIP-174 format
 	return tx, nil
 }
 
@@ -167,12 +152,21 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	// Serialize transaction (simplified - real PSBT would use BIP-174 encoding)
-	var buf []byte
-	buf, _ = tx.Bytes()
-	fmt.Printf("Transaction: %s\n", hex.EncodeToString(buf))
+	fmt.Printf("Transaction created with %d inputs and %d outputs\n", len(tx.TxIn), len(tx.TxOut))
 }
+```
+
+```javascript
+import * as bitcoin from 'bitcoinjs-lib';
+
+const psbt = new bitcoin.Psbt({ network: bitcoin.networks.bitcoin });
+psbt.addInput({
+  hash: 'previous_txid_here',
+  index: 0,
+  witnessUtxo: { script: Buffer.from('0014...', 'hex'), value: 100000 },
+});
+psbt.addOutput({ address: 'bc1q...', value: 50000 });
+const psbtBase64 = psbt.toBase64();
 ```
 :::
 

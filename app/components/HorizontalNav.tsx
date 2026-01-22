@@ -7,9 +7,9 @@ import { ChevronDown, ArrowRight } from '@/app/components/Icons'
 
 export default function HorizontalNav() {
   const [isOpen, setIsOpen] = useState(false)
-  // Initialize with all sections expanded
+  // Initialize with all sections collapsed
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
-    new Set(navItems.map(item => item.href))
+    new Set()
   )
 
   const toggleSection = (href: string) => {
@@ -30,16 +30,34 @@ export default function HorizontalNav() {
         {/* Toggle Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full py-4 flex items-center justify-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-btc transition-colors"
+          className="w-full py-6 flex items-center justify-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-btc transition-colors"
         >
-          <span>Explore B++</span>
-          <ChevronDown className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          <span className="text-2xl">Explore B++</span>
+          <ChevronDown className={`w-6 h-6 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </button>
 
         {/* Tree Navigation */}
         {isOpen && (
-          <div className="pb-6 border-t border-zinc-200 dark:border-zinc-700 pt-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-2">
+          <div className="pb-6 border-t border-zinc-200 dark:border-zinc-700">
+            <div className="flex flex-row items-center justify-end gap-2 w-max ml-auto mb-3 mt-1">
+              <button
+                onClick={() => setExpandedSections(new Set(navItems.map(item => item.href)))}
+                className="px-1.5 py-0.5 text-secondary text-xs rounded hover:text-btc transition-colors rounded bg-zinc-200 dark:hover:bg-zinc-700"
+                aria-label="Expand all sections"
+                title="Expand all"
+              >
+                <span>Expand</span>
+              </button>
+              <button
+                onClick={() => setExpandedSections(new Set())}
+                className="px-1.5 py-0.5 text-secondary text-xs rounded hover:text-btc transition-colors rounded bg-zinc-200 dark:hover:bg-zinc-700"
+                aria-label="Collapse all sections"
+                title="Collapse all"
+              >
+                <span>Collapse</span>
+              </button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-8 gap-y-4">
               {navItems.map((section) => {
                 const hasChildren = section.children && section.children.length > 0
                 const isExpanded = expandedSections.has(section.href)

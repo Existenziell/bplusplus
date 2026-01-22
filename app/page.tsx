@@ -38,8 +38,8 @@ export default function Home() {
             <h2 className="heading-page mb-1">
               A Developer&apos;s Guide to Bitcoin
             </h2>
-            <p className="text-secondary mb-6">
-              From fundamental concepts to advanced protocol implementations.<br />Open source and always free.
+            <p className="text-secondary mb-8">
+              Open source and always free.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

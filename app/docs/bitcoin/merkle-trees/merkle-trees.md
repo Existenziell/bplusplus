@@ -243,7 +243,7 @@ function merkleRoot(transactions) {
 
 ## SPV (Simplified Payment Verification)
 
-Merkle trees enable SPV clients:
+Merkle trees enable [SPV](/docs/glossary#spv-simplified-payment-verification) clients:
 
 ```text
 SPV Client:
@@ -306,7 +306,7 @@ Block Header (80 bytes):
 ## Related Topics
 
 - [Block Structure](/docs/bitcoin/blocks) - How blocks are organized
-- [SPV](/docs/glossary#spv-simplified-payment-verification) - Simplified payment verification
+- SPV - Simplified payment verification
 - [Cryptography](/docs/bitcoin/cryptography) - Hash functions
 
 ---

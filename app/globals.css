@@ -251,6 +251,13 @@ main > div > div > h1:first-child {
   color: inherit;
 }
 
+/* Remove unwanted line backgrounds in code blocks that look like selections in dark mode */
+/* Target all elements except those with intentional background colors (addition/deletion) */
+.markdown-content pre code *:not(.hljs-addition):not(.hljs-deletion),
+.markdown-content .hljs *:not(.hljs-addition):not(.hljs-deletion) {
+  background-color: transparent !important;
+}
+
 /* Code block wrapper styles */
 .markdown-content .code-block-wrapper {
   @apply mb-4;

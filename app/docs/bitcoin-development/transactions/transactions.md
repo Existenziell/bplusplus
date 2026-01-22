@@ -781,7 +781,7 @@ Understanding these fundamentals enables building robust Bitcoin applications th
 
 ## Related Topics
 
-- [PSBT](/docs/development/psbt) - Partially Signed Bitcoin Transactions
+- [PSBT](/docs/bitcoin-development/psbt) - Partially Signed Bitcoin Transactions
 - [Coin Selection](/docs/wallets/coin-selection) - UTXO selection algorithms
-- [Address Generation](/docs/development/addresses) - Creating recipient addresses
+- [Address Generation](/docs/bitcoin-development/addresses) - Creating recipient addresses
 - [Mempool](/docs/mining/mempool) - Transaction propagation and fees

@@ -542,7 +542,7 @@ Understanding PSBTs is essential for modern Bitcoin development, especially when
 
 ## Related Topics
 
-- [Transaction Construction](/docs/development/transactions) - Building transactions from scratch
-- [Key Management](/docs/development/keys) - Managing signing keys
-- [Address Generation](/docs/development/addresses) - Creating and validating addresses
+- [Transaction Construction](/docs/bitcoin-development/transactions) - Building transactions from scratch
+- [Key Management](/docs/bitcoin-development/keys) - Managing signing keys
+- [Address Generation](/docs/bitcoin-development/addresses) - Creating and validating addresses
 - [Multisig](/docs/wallets/multisig) - Multi-signature wallet setups

@@ -912,5 +912,5 @@ Understanding transaction creation is essential for building Bitcoin wallets and
 - [What is a Wallet?](/docs/wallets) - Introduction to Bitcoin wallets
 - [Coin Selection](/docs/wallets/coin-selection) - How wallets choose UTXOs to spend
 - [Multisig](/docs/wallets/multisig) - Multi-signature transaction signing
-- [PSBT](/docs/development/psbt) - Partially Signed Bitcoin Transactions standard
+- [PSBT](/docs/bitcoin-development/psbt) - Partially Signed Bitcoin Transactions standard
 - [Mempool](/docs/mining/mempool) - Where unconfirmed transactions wait

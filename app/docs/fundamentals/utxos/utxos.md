@@ -367,8 +367,8 @@ The UTXO model is not just a technical detail: it's fundamental to how Bitcoin w
 
 ## Related Topics
 
-- [Transaction Construction](/docs/development/transactions) - How to build transactions using UTXOs
+- [Transaction Construction](/docs/bitcoin-development/transactions) - How to build transactions using UTXOs
 - [Coin Selection](/docs/wallets/coin-selection) - Algorithms for choosing which UTXOs to spend
 - [Address Types](/docs/wallets/address-types) - How addresses relate to UTXO scriptPubKeys
 - [RPC Commands](/docs/bitcoin/rpc#9-utxo-set-information) - Querying the UTXO set
-- [Blockchain Monitoring](/docs/development/blockchain-monitoring) - Tracking UTXOs programmatically
+- [Blockchain Monitoring](/docs/bitcoin-development/blockchain-monitoring) - Tracking UTXOs programmatically

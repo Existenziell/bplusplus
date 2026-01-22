@@ -45,7 +45,7 @@ Before diving into advanced topics, ensure you understand:
 - [Bitcoin Protocol fundamentals](/docs/bitcoin)
 - [Lightning Network basics](/docs/lightning)
 - [Bitcoin Script](/docs/bitcoin/script)
-- [Transaction construction](/docs/development/transactions)
+- [Transaction construction](/docs/bitcoin-development/transactions)
 
 ---
 
@@ -67,4 +67,5 @@ Always verify current implementation status and security considerations before u
 - [Bitcoin Protocol](/docs/bitcoin) - Core protocol documentation
 - [Lightning Network](/docs/lightning) - Standard Lightning features
 - [Wallets](/docs/wallets) - Privacy techniques and smart contracts
-- [Development Tools](/docs/development) - Practical development guides
+- [Development Infrastructure](/docs/development) - Setup and infrastructure for Bitcoin development
+- [Bitcoin Development](/docs/bitcoin-development) - Practical development tasks

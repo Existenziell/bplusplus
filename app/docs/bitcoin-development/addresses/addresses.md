@@ -604,7 +604,7 @@ Modern applications should default to Bech32m (Taproot) addresses for the best f
 
 ## Related Topics
 
-- [Key Management](/docs/development/keys) - Managing private and public keys
+- [Key Management](/docs/bitcoin-development/keys) - Managing private and public keys
 - [Address Types](/docs/wallets/address-types) - Detailed address type comparison
 - [HD Wallets](/docs/wallets/hd-wallets) - Derivation paths and wallet structure
-- [Transaction Construction](/docs/development/transactions) - Using addresses in transactions
+- [Transaction Construction](/docs/bitcoin-development/transactions) - Using addresses in transactions

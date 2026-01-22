@@ -1,6 +1,8 @@
-# Getting Started with Bitcoin Development
+# Development Infrastructure
 
-Bitcoin development spans multiple layers, from low-level protocol work to high-level application development. This guide covers the programming languages, tools, and approaches used across the Bitcoin ecosystem to help you choose the right path for your goals.
+This section covers the setup and infrastructure needed for Bitcoin development: installing Bitcoin Core, testing and debugging, working with test networks, choosing libraries, understanding node architecture, and exploring Bitcoin Core internals.
+
+> **Next steps:** Once you have your development environment set up, explore [Bitcoin Development](/docs/bitcoin-development) for practical development tasks like transaction construction, PSBT, address generation, and more.
 
 > **Hands-on learning:** Try Bitcoin RPC commands directly in the [Bitcoin CLI Terminal](/terminal). No node setup required.
 
@@ -197,10 +199,10 @@ Building applications that manage keys and create transactions.
 - [PSBT](/docs/glossary#psbt-partially-signed-bitcoin-transaction) (Partially Signed Bitcoin Transactions)
 
 **Getting started:**
-1. Choose a wallet library (BDK, bitcoinjs-lib, etc.)
-2. Learn key derivation
-3. Understand transaction structure
-4. Implement on testnet first
+1. Choose a wallet library (BDK, bitcoinjs-lib, etc.) - see [Libraries & SDKs](/docs/development/libraries)
+2. Learn key derivation - see [Bitcoin Development](/docs/bitcoin-development) for key management
+3. Understand transaction structure - see [Transaction Construction](/docs/bitcoin-development/transactions)
+4. Implement on testnet first - see [Test Networks](/docs/development/testnets)
 
 ### 3. Lightning Development
 
@@ -384,6 +386,7 @@ Only after thorough testing:
 
 ### Transaction Construction
 
+For detailed transaction construction guidance, see [Bitcoin Development](/docs/bitcoin-development):
 - **Calculate fees properly**: Too low = stuck, too high = waste
 - **Handle dust**: Outputs below ~546 sats may be unspendable
 - **Sign correctly**: Verify signatures before broadcasting
@@ -415,13 +418,24 @@ Start small, use testnet, and build incrementally. The Bitcoin development commu
 
 ## Related Topics
 
-- [Blockchain Monitoring](/docs/development/blockchain-monitoring) - Monitor blocks and transactions
-- [Pool Mining](/docs/development/pool-mining) - Mining development
-- [Price Tracking](/docs/development/price-tracking) - API integrations
-- [RPC Guide](/docs/bitcoin/rpc) - Bitcoin Core RPC commands
+### Infrastructure Topics (This Section)
+
+- [Installing Bitcoin](/docs/development/install-bitcoin) - Setup and installation guide
+- [Testing & Debugging](/docs/development/testing) - Testing strategies and debugging tools
+- [Test Networks](/docs/development/testnets) - Testnet, signet, and regtest
+- [Libraries & SDKs](/docs/development/libraries) - Language-specific Bitcoin libraries
 - [Node Types & Architecture](/docs/development/node-types) - Understanding different node configurations
 - [Bitcoin Core Internals](/docs/development/bitcoin-core-internals) - Reference implementation architecture
-- [Bitcoin Script Patterns](/docs/development/script-patterns) - Common script patterns and templates
+
+### Practical Development
+
+- [Bitcoin Development](/docs/bitcoin-development) - Practical development tasks including PSBT, transaction construction, address generation, key management, blockchain monitoring, and more
+
+### Protocol & Other Topics
+
+- [RPC Guide](/docs/bitcoin/rpc) - Bitcoin Core RPC commands
+- [Wallet Development](/docs/wallets) - Building Bitcoin wallets
+- [Bitcoin Protocol](/docs/bitcoin) - Deep technical protocol documentation
 
 ---
 

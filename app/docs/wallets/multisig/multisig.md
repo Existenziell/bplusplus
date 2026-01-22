@@ -570,5 +570,5 @@ Understanding multisig is essential for building secure Bitcoin wallets and mana
 
 - [What is a Wallet?](/docs/wallets) - Introduction to Bitcoin wallets
 - [Transaction Creation](/docs/wallets/transactions) - How to create and sign transactions
-- [PSBT](/docs/development/psbt) - Partially Signed Bitcoin Transactions for multisig coordination
+- [PSBT](/docs/bitcoin-development/psbt) - Partially Signed Bitcoin Transactions for multisig coordination
 - [Bitcoin Script](/docs/bitcoin/script) - Understanding the scripting system behind multisig

@@ -1,13 +1,13 @@
 {
   "statistics": {
-    "totalPages": 67,
-    "totalLinks": 787,
-    "internalLinks": 60,
+    "totalPages": 89,
+    "totalLinks": 960,
+    "internalLinks": 85,
     "glossaryLinks": 110,
     "anchorLinks": 9,
-    "externalLinks": 103,
+    "externalLinks": 123,
     "brokenLinks": 0,
-    "orphanedPages": 6
+    "orphanedPages": 3
   },
   "brokenLinks": [],
   "orphanedPages": [
@@ -22,31 +22,26 @@
       "section": "history"
     },
     {
-      "path": "/docs/history/bips",
-      "title": "BIPs",
-      "section": "history"
-    },
-    {
-      "path": "/docs/bitcoin",
-      "title": "The Bitcoin Protocol",
-      "section": "bitcoin"
-    },
-    {
-      "path": "/docs/development/install-bitcoin",
-      "title": "Installing Bitcoin",
-      "section": "development"
-    },
-    {
-      "path": "/docs/controversies",
-      "title": "Controversies",
-      "section": "controversies"
+      "path": "/docs/advanced",
+      "title": "Advanced Topics",
+      "section": "advanced"
     }
   ],
   "mostLinked": [
     {
+      "path": "/docs/lightning",
+      "count": 11,
+      "title": "Lightning Network"
+    },
+    {
       "path": "/docs/mining/economics",
       "count": 11,
       "title": "Economics"
+    },
+    {
+      "path": "/docs/bitcoin/script",
+      "count": 10,
+      "title": "Bitcoin Script"
     },
     {
       "path": "/docs/history/people",
@@ -59,6 +54,36 @@
       "title": "Proof-of-Work"
     },
     {
+      "path": "/docs/wallets",
+      "count": 8,
+      "title": "Wallet Development"
+    },
+    {
+      "path": "/docs/mining/mempool",
+      "count": 8,
+      "title": "Mempool"
+    },
+    {
+      "path": "/docs/wallets/address-types",
+      "count": 8,
+      "title": "Address Types"
+    },
+    {
+      "path": "/docs/bitcoin-development/transactions",
+      "count": 7,
+      "title": "Transaction Construction"
+    },
+    {
+      "path": "/docs/development",
+      "count": 7,
+      "title": "Development Infrastructure"
+    },
+    {
+      "path": "/docs/bitcoin/rpc",
+      "count": 7,
+      "title": "RPC Commands"
+    },
+    {
       "path": "/docs/fundamentals/decentralization",
       "count": 7,
       "title": "Decentralization"
@@ -69,14 +94,19 @@
       "title": "Difficulty Adjustment"
     },
     {
-      "path": "/docs/bitcoin/script",
+      "path": "/docs/lightning/routing",
       "count": 6,
-      "title": "Bitcoin Script"
+      "title": "Routing & HTLCs"
     },
     {
-      "path": "/docs/bitcoin/rpc",
+      "path": "/docs/bitcoin/cryptography",
       "count": 6,
-      "title": "RPC Commands"
+      "title": "Cryptography"
+    },
+    {
+      "path": "/docs/mining/block-construction",
+      "count": 6,
+      "title": "Block Construction"
     },
     {
       "path": "/docs/mining/pools",
@@ -84,64 +114,19 @@
       "title": "Mining Pools"
     },
     {
-      "path": "/docs/controversies/op-return",
-      "count": 5,
-      "title": "OP_RETURN Debate"
-    },
-    {
-      "path": "/docs/bitcoin/consensus",
-      "count": 5,
-      "title": "Consensus Mechanism"
-    },
-    {
-      "path": "/docs/wallets/address-types",
-      "count": 5,
-      "title": "Address Types"
-    },
-    {
-      "path": "/docs/mining/mempool",
-      "count": 5,
-      "title": "Mempool"
-    },
-    {
-      "path": "/docs/mining/block-construction",
-      "count": 5,
-      "title": "Block Construction"
-    },
-    {
-      "path": "/docs/development",
-      "count": 5,
-      "title": "Development Tools"
-    },
-    {
       "path": "/docs/wallets/coin-selection",
-      "count": 5,
+      "count": 6,
       "title": "Coin Selection"
+    },
+    {
+      "path": "/docs/development/node-types",
+      "count": 5,
+      "title": "Node Types & Architecture"
     },
     {
       "path": "/docs/lightning/channels",
       "count": 5,
       "title": "Channels"
-    },
-    {
-      "path": "/docs/lightning/routing",
-      "count": 5,
-      "title": "Routing & HTLCs"
-    },
-    {
-      "path": "/docs/wallets",
-      "count": 5,
-      "title": "Wallet Development"
-    },
-    {
-      "path": "/docs/bitcoin/cryptography",
-      "count": 4,
-      "title": "Cryptography"
-    },
-    {
-      "path": "/docs/fundamentals/utxos",
-      "count": 4,
-      "title": "UTXO Model"
     }
   ],
   "mostOutgoing": [
@@ -151,8 +136,13 @@
       "title": "BIPs"
     },
     {
+      "path": "/docs/development",
+      "count": 30,
+      "title": "Development Infrastructure"
+    },
+    {
       "path": "/docs/mining",
-      "count": 26,
+      "count": 28,
       "title": "Mining"
     },
     {
@@ -161,9 +151,19 @@
       "title": "Cryptography"
     },
     {
+      "path": "/docs/bitcoin",
+      "count": 25,
+      "title": "The Bitcoin Protocol"
+    },
+    {
       "path": "/docs/mining/attacks",
       "count": 23,
       "title": "Mining Attacks"
+    },
+    {
+      "path": "/docs/wallets",
+      "count": 23,
+      "title": "Wallet Development"
     },
     {
       "path": "/docs/fundamentals",
@@ -171,19 +171,14 @@
       "title": "Bitcoin Fundamentals"
     },
     {
-      "path": "/docs/wallets",
-      "count": 21,
-      "title": "Wallet Development"
-    },
-    {
       "path": "/docs/mining/block-construction",
       "count": 20,
       "title": "Block Construction"
     },
     {
-      "path": "/docs/development",
-      "count": 18,
-      "title": "Development Tools"
+      "path": "/docs/bitcoin-development",
+      "count": 19,
+      "title": "Bitcoin Development"
     },
     {
       "path": "/docs/mining/proof-of-work",
@@ -191,9 +186,9 @@
       "title": "Proof-of-Work"
     },
     {
-      "path": "/docs/bitcoin",
+      "path": "/docs/advanced",
       "count": 17,
-      "title": "The Bitcoin Protocol"
+      "title": "Advanced Topics"
     },
     {
       "path": "/docs/bitcoin/op-codes",
@@ -234,58 +229,58 @@
       "path": "/docs/bitcoin/consensus",
       "count": 11,
       "title": "Consensus Mechanism"
-    },
-    {
-      "path": "/docs/controversies/op-return",
-      "count": 11,
-      "title": "OP_RETURN Debate"
-    },
-    {
-      "path": "/docs/bitcoin/rpc",
-      "count": 9,
-      "title": "RPC Commands"
     }
   ],
   "sectionStats": {
     "fundamentals": {
       "pages": 11,
-      "incomingLinks": 31,
+      "incomingLinks": 32,
       "outgoingLinks": 97
     },
     "history": {
       "pages": 5,
-      "incomingLinks": 13,
+      "incomingLinks": 15,
       "outgoingLinks": 59
     },
     "bitcoin": {
-      "pages": 8,
-      "incomingLinks": 28,
-      "outgoingLinks": 106
+      "pages": 16,
+      "incomingLinks": 68,
+      "outgoingLinks": 142
     },
     "mining": {
-      "pages": 9,
-      "incomingLinks": 54,
-      "outgoingLinks": 144
+      "pages": 10,
+      "incomingLinks": 61,
+      "outgoingLinks": 149
     },
     "wallets": {
-      "pages": 6,
-      "incomingLinks": 26,
-      "outgoingLinks": 49
+      "pages": 8,
+      "incomingLinks": 41,
+      "outgoingLinks": 60
     },
     "lightning": {
-      "pages": 9,
-      "incomingLinks": 24,
-      "outgoingLinks": 33
+      "pages": 7,
+      "incomingLinks": 31,
+      "outgoingLinks": 29
     },
     "development": {
-      "pages": 12,
-      "incomingLinks": 32,
-      "outgoingLinks": 84
+      "pages": 7,
+      "incomingLinks": 27,
+      "outgoingLinks": 61
+    },
+    "bitcoin-development": {
+      "pages": 9,
+      "incomingLinks": 29,
+      "outgoingLinks": 63
     },
     "controversies": {
       "pages": 6,
-      "incomingLinks": 14,
+      "incomingLinks": 15,
       "outgoingLinks": 62
+    },
+    "advanced": {
+      "pages": 9,
+      "incomingLinks": 14,
+      "outgoingLinks": 39
     },
     "glossary": {
       "pages": 1,
@@ -294,38 +289,60 @@
     }
   },
   "crossSectionLinks": {
-    "bitcoin → glossary": 86,
+    "advanced → lightning": 10,
+    "advanced → bitcoin": 6,
+    "advanced → glossary": 1,
+    "advanced → development": 2,
+    "advanced → wallets": 4,
+    "advanced → history": 2,
+    "advanced → controversies": 1,
+    "advanced → bitcoin-development": 2,
+    "bitcoin → glossary": 88,
     "bitcoin → history": 2,
     "bitcoin → controversies": 1,
+    "bitcoin → mining": 4,
+    "bitcoin → development": 1,
     "bitcoin → fundamentals": 2,
+    "bitcoin → wallets": 3,
+    "bitcoin → lightning": 3,
+    "bitcoin-development → glossary": 12,
+    "bitcoin-development → wallets": 9,
+    "bitcoin-development → bitcoin": 6,
+    "bitcoin-development → mining": 8,
+    "bitcoin-development → development": 8,
+    "bitcoin-development → fundamentals": 3,
     "controversies → glossary": 44,
     "controversies → history": 2,
     "controversies → lightning": 1,
     "controversies → mining": 2,
-    "development → glossary": 36,
-    "development → wallets": 6,
-    "development → bitcoin": 5,
-    "development → mining": 8,
-    "development → fundamentals": 2,
+    "development → bitcoin": 7,
+    "development → glossary": 24,
+    "development → mining": 1,
+    "development → bitcoin-development": 7,
+    "development → wallets": 1,
     "fundamentals → history": 7,
     "fundamentals → glossary": 36,
     "fundamentals → bitcoin": 10,
     "fundamentals → mining": 5,
     "fundamentals → wallets": 3,
-    "fundamentals → development": 2,
+    "fundamentals → bitcoin-development": 2,
     "glossary → history": 1,
     "history → glossary": 53,
     "history → bitcoin": 3,
+    "lightning → advanced": 2,
     "lightning → glossary": 8,
     "mining → glossary": 89,
     "mining → lightning": 2,
     "mining → history": 5,
     "mining → fundamentals": 3,
-    "mining → bitcoin": 1,
+    "mining → bitcoin": 2,
+    "mining → development": 1,
     "wallets → glossary": 21,
-    "wallets → development": 4,
+    "wallets → bitcoin-development": 4,
     "wallets → fundamentals": 2,
     "wallets → mining": 2,
-    "wallets → bitcoin": 2
+    "wallets → bitcoin": 6,
+    "wallets → lightning": 1,
+    "wallets → advanced": 1
   }
 }

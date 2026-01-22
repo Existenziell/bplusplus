@@ -23,10 +23,10 @@ export default function NotFound() {
           </div>
 
           {/* Message */}
-          <h1 className="text-2xl md:text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">
+          <h1 className="heading-page">
             Block Not Found
           </h1>
-          <p className="text-zinc-600 dark:text-zinc-400 mb-8">
+          <p className="text-secondary mb-8">
             This page doesn&apos;t exist on the blockchain. Perhaps it was orphaned, or maybe it never existed in the first place.
           </p>
 
@@ -34,14 +34,14 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 justify-center px-6 py-3 bg-btc text-zinc-900 font-semibold rounded-md hover:bg-btc/90 transition-colors hover:no-underline"
+              className="btn-primary"
             >
               <HomeIcon />
               <span>Back to Genesis</span>
             </Link>
             <Link
               href="/docs/fundamentals"
-              className="inline-flex items-center gap-2 justify-center px-6 py-3 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline"
+              className="btn-secondary"
             >
               Start Learning
               <ArrowRight />

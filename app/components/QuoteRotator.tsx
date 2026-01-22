@@ -68,7 +68,7 @@ export default function QuoteRotator() {
 
   return (
     <p
-      className={`text-xl text-zinc-600 dark:text-zinc-400 text-center max-w-4xl mx-auto italic min-h-[4rem] md:min-h-[4rem] transition-opacity duration-500 ${
+      className={`text-xl text-secondary text-center max-w-4xl mx-auto italic min-h-[4rem] md:min-h-[4rem] transition-opacity duration-500 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >

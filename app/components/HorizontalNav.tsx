@@ -26,7 +26,7 @@ export default function HorizontalNav() {
 
   return (
     <div className="border-y border-zinc-200 dark:border-zinc-700 bg-white/50 dark:bg-zinc-800/50">
-      <div className="container mx-auto px-4 md:px-8">
+      <div className="container-content">
         {/* Toggle Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -73,7 +73,7 @@ export default function HorizontalNav() {
                           <li key={child.href}>
                             <Link
                               href={child.href}
-                              className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-btc transition-colors"
+                              className="text-sm text-secondary hover:text-btc transition-colors"
                             >
                               {child.title}
                             </Link>

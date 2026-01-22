@@ -13,7 +13,7 @@ export default function Breadcrumbs() {
 
   return (
     <nav className="py-2" aria-label="Breadcrumb">
-      <ol className="flex items-center flex-wrap space-x-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+      <ol className="flex items-center flex-wrap space-x-2 text-xs sm:text-sm text-secondary">
         {breadcrumbs.map((crumb, index) => (
           <li key={crumb.href} className="flex items-center">
             {index > 0 && (

@@ -112,7 +112,7 @@ export default function DocsNavigation() {
                             className={`block text-sm py-1 leading-tight transition-colors ${
                               childActive
                                 ? 'text-btc font-semibold'
-                                : 'text-zinc-600 dark:text-zinc-400 hover:text-btc hover:underline'
+                                : 'text-secondary hover:text-btc hover:underline'
                             }`}
                           >
                             {child.title}

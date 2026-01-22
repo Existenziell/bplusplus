@@ -14,15 +14,15 @@ export default function WhitepaperPage() {
     <main className="min-h-screen page-bg flex flex-col">
       <Header />
 
-      <div className="container mx-auto px-4 md:px-8 py-8 md:py-12 flex-grow">
+      <div className="container-content py-8 md:py-12 flex-grow">
         <div className="max-w-3xl mx-auto">
           {/* Title */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="heading-page text-center mb-2">
               Bitcoin Whitepaper
             </h1>
              {/* History */}
-              <p className="text-center text-sm text-zinc-600 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed mt-4">
+              <p className="text-center text-sm text-secondary max-w-lg mx-auto leading-relaxed mt-4">
                 Satoshi Nakamoto announced the whitepaper on the{' '}
                 <a
                   href="https://www.metzdowd.com/pipermail/cryptography/2008-October/014810.html"

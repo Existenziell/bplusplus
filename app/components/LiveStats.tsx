@@ -225,8 +225,8 @@ export default function LiveStats() {
   }
 
   return (
-    <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">
-      <h3 className="text-lg font-semibold text-center mb-4 text-zinc-700 dark:text-zinc-300">
+    <div className="container-content py-8 md:py-12">
+      <h3 className="heading-section text-center mb-4">
         Live Network Stats
       </h3>
       <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 mb-4">

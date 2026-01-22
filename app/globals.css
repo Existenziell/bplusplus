@@ -52,6 +52,43 @@ body {
   .page-bg {
     @apply bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200;
   }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 justify-center px-6 py-3 bg-btc text-zinc-900 font-semibold rounded-md hover:bg-btc/90 transition-colors hover:no-underline;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 justify-center px-6 py-3 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline;
+  }
+
+  /* Text Utilities */
+  .text-secondary {
+    @apply text-zinc-600 dark:text-zinc-400;
+  }
+
+  /* Container */
+  .container-content {
+    @apply container mx-auto px-4 md:px-8;
+  }
+
+  /* Code Block Header */
+  .code-block-header {
+    @apply bg-zinc-200 dark:bg-zinc-800 px-4 py-2 rounded-t-lg border-b border-zinc-300 dark:border-zinc-700;
+  }
+
+  /* Heading Styles */
+  .heading-page {
+    @apply text-2xl md:text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-100;
+  }
+
+  .heading-section {
+    @apply text-lg font-semibold text-zinc-800 dark:text-zinc-200;
+  }
+
+  .heading-subsection {
+    @apply text-base sm:text-lg font-semibold text-zinc-700 dark:text-zinc-300;
+  }
 }
 
 @layer utilities {}

@@ -18,7 +18,7 @@ export default function DocsLayout({
       <Header showBreadcrumbs />
 
       {/* Content Area */}
-      <div className="container mx-auto px-4 md:px-8 py-4 md:py-8 flex-grow">
+      <div className="container-content py-4 md:py-8 flex-grow">
         <div className="flex flex-col md:flex-row gap-4 md:gap-8">
           <div className="hidden md:block md:w-64 md:flex-shrink-0 md:self-start md:overflow-y-auto">
             <DocsNavigation />

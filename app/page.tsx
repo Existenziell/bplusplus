@@ -15,7 +15,7 @@ export default function Home() {
       <div className="flex-grow">
         {/* Hero Section */}
         <div className="bg-zinc-100 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700">
-          <div className="container mx-auto px-4 md:px-8 py-8 md:py-8">
+          <div className="container-content py-8 md:py-8">
             <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <QuoteRotator />
               <div className="relative aspect-video overflow-hidden rounded-md border border-zinc-200 dark:border-zinc-700">
@@ -33,25 +33,25 @@ export default function Home() {
         </div>
 
         {/* Start Reading CTA */}
-        <div className="container mx-auto px-4 md:px-8 py-8 md:py-8">
+        <div className="container-content py-8 md:py-8">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-1 text-zinc-900 dark:text-zinc-100">
+            <h2 className="heading-page mb-1">
               A Developer&apos;s Guide to Bitcoin
             </h2>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-secondary mb-6">
               From fundamental concepts to advanced protocol implementations.<br />Open source and always free.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/docs/fundamentals"
-                className="inline-flex items-center gap-2 justify-center px-6 py-3 bg-btc text-zinc-900 font-semibold rounded-md hover:bg-btc/90 transition-colors hover:no-underline"
+                className="btn-primary"
               >
                 Start Reading
                 <ArrowRight />
               </Link>
               <Link
                 href="/terminal"
-                className="inline-flex items-center gap-2 justify-center px-6 py-3 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline"
+                className="btn-secondary"
               >
                 Try the Terminal
                 <TerminalIcon />

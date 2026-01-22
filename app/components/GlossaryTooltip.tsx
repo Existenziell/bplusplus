@@ -99,7 +99,7 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
             bg-zinc-100 dark:bg-zinc-800
             border border-zinc-300 dark:border-zinc-600
             rounded-md shadow-lg
-            text-xs text-zinc-600 dark:text-zinc-400 font-normal
+            text-xs text-secondary font-normal
             transition-opacity duration-150
           `}
           style={{

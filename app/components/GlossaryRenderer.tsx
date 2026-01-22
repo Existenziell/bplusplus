@@ -219,8 +219,8 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
               >
                 <summary className="glossary-summary cursor-pointer list-none flex items-center gap-2 py-3 px-4 rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors">
                   {/* Chevron icon */}
-                  <ArrowRight className="w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform duration-200 group-open:rotate-90 flex-shrink-0" />
-                  <span className="text-base sm:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
+                  <ArrowRight className="w-4 h-4 text-secondary transition-transform duration-200 group-open:rotate-90 flex-shrink-0" />
+                  <span className="heading-subsection">
                     {entry.term}
                   </span>
                 </summary>

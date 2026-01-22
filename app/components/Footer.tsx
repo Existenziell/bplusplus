@@ -25,7 +25,7 @@ export default function Footer() {
     <footer className='text-xs text-center pb-6 overflow-hidden border-t border-zinc-300 dark:border-zinc-700 pt-6 mt-10'>
       {/* Resources Section */}
       <div className='mb-6'>
-        <h3 className='text-sm font-semibold text-zinc-800 dark:text-zinc-200 mb-3'>
+        <h3 className='heading-section text-sm mb-3'>
           More Bitcoin Resources
         </h3>
         <nav aria-label='External resources'>
@@ -41,7 +41,7 @@ export default function Footer() {
                 <span className='text-btc font-medium'>
                   {resource.name}
                 </span>
-                <span className='text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 hidden md:block'>
+                <span className='text-[10px] text-secondary mt-0.5 hidden md:block'>
                   {resource.description}
                 </span>
               </Link>

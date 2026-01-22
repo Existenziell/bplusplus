@@ -68,8 +68,8 @@ export default function CodeBlock({ language, children, className, ...props }: C
 
   return (
     <div className="code-block-wrapper my-4">
-      <div className="flex items-center justify-between bg-zinc-200 dark:bg-zinc-800 px-4 py-2 rounded-t-lg border-b border-zinc-300 dark:border-zinc-700">
-        <span className="text-xs font-mono text-zinc-600 dark:text-zinc-400 tracking-wider">
+      <div className="code-block-header flex items-center justify-between">
+        <span className="text-xs font-mono text-secondary tracking-wider">
           {displayName}
         </span>
       </div>
@@ -143,7 +143,7 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
 
   return (
     <div className="multi-language-code-block my-4">
-      <div className="flex items-center justify-between bg-zinc-200 dark:bg-zinc-800 px-4 py-2 rounded-t-lg border-b border-zinc-300 dark:border-zinc-700">
+      <div className="code-block-header flex items-center justify-between">
         <div className="flex gap-2">
           {languages.map(({ lang }) => (
             <button
@@ -152,7 +152,7 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
               className={`px-3 py-1 text-xs font-mono tracking-wider rounded transition-colors ${
                 selectedLang === lang
                   ? 'bg-btc text-zinc-900 font-semibold'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700'
+                  : 'text-secondary hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700'
               }`}
             >
               {languageNames[lang] || (lang.charAt(0).toUpperCase() + lang.slice(1).toLowerCase())}

@@ -13,7 +13,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
     <>
       <header className="mb-4">
         <div className="page-bg">
-          <div className="container mx-auto px-4 md:px-8 pt-4">
+          <div className="container-content pt-4">
             <div className="flex justify-between items-center">
               <Link href="/" className="text-center">
                 <Image src="/logo/logo.png" alt="B++ Logo" width={80} height={80} />
@@ -48,7 +48,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
       {/* Sticky Breadcrumbs - outside header so it can stick to viewport */}
       {showBreadcrumbs && (
         <div className="sticky top-0 z-10 page-bg">
-          <div className="container mx-auto px-4 md:px-8">
+          <div className="container-content">
             <div className="flex items-center justify-between">
               <Breadcrumbs />
               <div className="hidden md:block">

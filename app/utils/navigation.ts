@@ -147,42 +147,42 @@ export const navItems: NavSection[] = [
   {
     title: 'Fundamentals',
     href: '/docs/fundamentals',
-    children: docPages.filter(p => p.section === 'fundamentals').map(p => ({ title: p.title, href: p.path })),
+    children: docPages.filter(p => p.section === 'fundamentals' && p.path !== '/docs/fundamentals').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'History',
     href: '/docs/history',
-    children: docPages.filter(p => p.section === 'history').map(p => ({ title: p.title, href: p.path })),
+    children: docPages.filter(p => p.section === 'history' && p.path !== '/docs/history').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'Bitcoin Protocol',
     href: '/docs/bitcoin',
-    children: docPages.filter(p => p.section === 'bitcoin').map(p => ({ title: p.title, href: p.path })),
+    children: docPages.filter(p => p.section === 'bitcoin' && p.path !== '/docs/bitcoin').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'Mining',
     href: '/docs/mining',
-    children: docPages.filter(p => p.section === 'mining').map(p => ({ title: p.title, href: p.path })),
+    children: docPages.filter(p => p.section === 'mining' && p.path !== '/docs/mining').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'Wallets',
     href: '/docs/wallets',
-    children: docPages.filter(p => p.section === 'wallets').map(p => ({ title: p.title, href: p.path })),
+    children: docPages.filter(p => p.section === 'wallets' && p.path !== '/docs/wallets').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'Lightning Network',
     href: '/docs/lightning',
-    children: docPages.filter(p => p.section === 'lightning').map(p => ({ title: p.title, href: p.path })),
+    children: docPages.filter(p => p.section === 'lightning' && p.path !== '/docs/lightning').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'Development Tools',
     href: '/docs/development',
-    children: docPages.filter(p => p.section === 'development').map(p => ({ title: p.title, href: p.path })),
+    children: docPages.filter(p => p.section === 'development' && p.path !== '/docs/development').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'Controversies',
     href: '/docs/controversies',
-    children: docPages.filter(p => p.section === 'controversies').map(p => ({ title: p.title, href: p.path })),
+    children: docPages.filter(p => p.section === 'controversies' && p.path !== '/docs/controversies').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'Glossary',

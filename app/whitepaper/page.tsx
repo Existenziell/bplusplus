@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
+import { DownloadPDFIcon, HomeIcon } from '@/app/components/Icons'
 
 export const metadata = {
   title: 'Bitcoin Whitepaper - B++',
@@ -56,19 +57,7 @@ export default function WhitepaperPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-btc hover:bg-btc/90 text-white font-semibold rounded-lg transition-colors shadow-md"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
+              <DownloadPDFIcon />
               Open PDF
             </a>
             <p className="text-xs text-zinc-500 dark:text-zinc-500">
@@ -77,12 +66,13 @@ export default function WhitepaperPage() {
           </div>
 
           {/* Back Link */}
-          <div className="mt-12 text-center">
+          <div className="mt-12 text-center flex flex-row items-center justify-center gap-2">
             <Link
               href="/"
-              className="text-btc hover:underline text-sm"
+              className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
             >
-              &larr; Back to Home
+              <HomeIcon />
+              <span>Back Home</span>
             </Link>
           </div>
         </div>

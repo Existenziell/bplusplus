@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import ThemeToggle from '@/app/components/ThemeToggle'
 import Breadcrumbs from '@/app/components/Breadcrumbs'
-import DownloadButton from '@/app/components/DownloadButton'
+import DownloadMarkdownButton from '@/app/components/DownloadMarkdownButton'
 
 interface HeaderProps {
   showBreadcrumbs?: boolean
@@ -52,7 +52,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
             <div className="flex items-center justify-between">
               <Breadcrumbs />
               <div className="hidden md:block">
-                <DownloadButton />
+                <DownloadMarkdownButton />
               </div>
             </div>
           </div>

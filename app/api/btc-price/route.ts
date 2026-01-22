@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server'
 
-// Cache the price for 5 minutes (300 seconds)
-export const revalidate = 300
-
 export async function GET() {
   try {
     const response = await fetch(

@@ -71,12 +71,13 @@ bplusplus/
 │   │   ├── Breadcrumbs.tsx
 │   │   ├── CodeBlock.tsx
 │   │   ├── DocsNavigation.tsx
-│   │   ├── DownloadButton.tsx
+│   │   ├── DownloadMarkdownButton.tsx
 │   │   ├── Footer.tsx
 │   │   ├── GlossaryRenderer.tsx
 │   │   ├── GlossaryTooltip.tsx
 │   │   ├── Header.tsx
 │   │   ├── HorizontalNav.tsx
+│   │   ├── Icons.tsx
 │   │   ├── LiveStats.tsx
 │   │   ├── MarkdownRenderer.tsx
 │   │   ├── MobileNav.tsx
@@ -85,6 +86,8 @@ bplusplus/
 │   │   ├── QuoteRotator.tsx
 │   │   └── ThemeToggle.tsx
 │   ├── docs/                     # Documentation pages
+│   │   ├── [...slug]/            # Dynamic route handler for all docs
+│   │   │   └── page.tsx          # Single route handler (replaces 67 duplicate files)
 │   │   ├── bitcoin/              # Bitcoin protocol docs
 │   │   │   ├── blocks/
 │   │   │   ├── consensus/
@@ -171,10 +174,16 @@ bplusplus/
 
 ## Documentation Structure
 
+All documentation pages are handled by a single dynamic route (`app/docs/[...slug]/page.tsx`) that:
+- Maps URL paths to markdown files using `app/utils/navigation.ts`
+- Automatically generates metadata for SEO
+- Eliminates code duplication (replaced 67 duplicate page files)
+
 Each documentation section follows a consistent pattern:
 - `overview.md` - Section introduction and navigation
-- `[topic]/page.tsx` - Next.js page component
-- `[topic]/[topic].md` - Markdown content
+- `[topic]/[topic].md` - Markdown content (no page.tsx needed)
+
+The routing is configured in `app/utils/navigation.ts`, which serves as the single source of truth for all documentation paths and metadata.
 
 ## Scripts
 

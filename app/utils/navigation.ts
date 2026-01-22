@@ -2,7 +2,7 @@
  * Single source of truth for all documentation navigation and routing data.
  * This file is used by:
  * - DocsNavigation component (sidebar navigation)
- * - DownloadButton component (determines which pages have downloadable MD)
+ * - DownloadMarkdownButton component (determines which pages have downloadable MD)
  * - download-md API route (maps URLs to MD file paths)
  * - Breadcrumbs component (route labels)
  */

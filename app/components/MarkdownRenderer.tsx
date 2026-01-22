@@ -152,6 +152,22 @@ function YouTubeEmbed({ videoId }: { videoId: string }) {
 const remarkPlugins = [remarkGfm]
 const rehypePlugins = [rehypeRaw, rehypeHighlight]
 
+// Factory function to create heading components (h1-h6)
+const createHeading = (level: number) => {
+  const HeadingComponent = ({ children, ...props }: any) => {
+    const text = extractText(children)
+    const id = generateSlug(text)
+    const Tag = `h${level}` as keyof React.JSX.IntrinsicElements
+    return (
+      <Tag id={id} {...props}>
+        {children}
+      </Tag>
+    )
+  }
+  HeadingComponent.displayName = `Heading${level}`
+  return HeadingComponent
+}
+
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   const [glossaryData, setGlossaryData] = useState<GlossaryData>({})
 
@@ -189,60 +205,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       }
       return <div {...props}>{children}</div>
     },
-    h1: ({ children, ...props }: any) => {
-      const text = extractText(children)
-      const id = generateSlug(text)
-      return (
-        <h1 id={id} {...props}>
-          {children}
-        </h1>
-      )
-    },
-    h2: ({ children, ...props }: any) => {
-      const text = extractText(children)
-      const id = generateSlug(text)
-      return (
-        <h2 id={id} {...props}>
-          {children}
-        </h2>
-      )
-    },
-    h3: ({ children, ...props }: any) => {
-      const text = extractText(children)
-      const id = generateSlug(text)
-      return (
-        <h3 id={id} {...props}>
-          {children}
-        </h3>
-      )
-    },
-    h4: ({ children, ...props }: any) => {
-      const text = extractText(children)
-      const id = generateSlug(text)
-      return (
-        <h4 id={id} {...props}>
-          {children}
-        </h4>
-      )
-    },
-    h5: ({ children, ...props }: any) => {
-      const text = extractText(children)
-      const id = generateSlug(text)
-      return (
-        <h5 id={id} {...props}>
-          {children}
-        </h5>
-      )
-    },
-    h6: ({ children, ...props }: any) => {
-      const text = extractText(children)
-      const id = generateSlug(text)
-      return (
-        <h6 id={id} {...props}>
-          {children}
-        </h6>
-      )
-    },
+    h1: createHeading(1),
+    h2: createHeading(2),
+    h3: createHeading(3),
+    h4: createHeading(4),
+    h5: createHeading(5),
+    h6: createHeading(6),
     p: ({ children, ...props }: any) => {
       // Check if paragraph contains a YouTube embed (set by a component)
       const childrenArray = React.Children.toArray(children)

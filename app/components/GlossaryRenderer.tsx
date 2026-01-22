@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
+import { ArrowRight } from '@/app/components/Icons'
 
 interface GlossaryRendererProps {
   content: string
@@ -210,14 +211,7 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
               >
                 <summary className="glossary-summary cursor-pointer list-none flex items-center gap-2 py-3 px-4 rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors">
                   {/* Chevron icon */}
-                  <svg
-                    className="w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform duration-200 group-open:rotate-90 flex-shrink-0"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                  <ArrowRight className="w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform duration-200 group-open:rotate-90 flex-shrink-0" />
                   <span className="text-base sm:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
                     {entry.term}
                   </span>

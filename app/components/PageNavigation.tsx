@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useDocNavigation } from '@/app/hooks/useDocNavigation'
+import { ArrowLeft, ArrowRight, UpArrow } from '@/app/components/Icons'
 
 export default function PageNavigation() {
   const { previousPage, nextPage } = useDocNavigation()
@@ -20,14 +21,7 @@ export default function PageNavigation() {
             href={previousPage.href}
             className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            <ArrowLeft />
             <span className="hidden sm:inline">{previousPage.title}</span>
             <span className="sm:hidden">Prev</span>
           </Link>
@@ -42,14 +36,7 @@ export default function PageNavigation() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="cursor-pointer inline-flex items-center gap-2 text-btc hover:underline transition-colors"
         >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-          </svg>
+          <UpArrow />
           <span>Top</span>
         </span>
       </div>
@@ -62,14 +49,7 @@ export default function PageNavigation() {
             className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
           >
             <span>{nextPage.title}</span>
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            <ArrowRight />
           </Link>
         ) : (
           <div />

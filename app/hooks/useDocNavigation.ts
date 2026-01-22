@@ -47,7 +47,7 @@ const mainPageHrefs = new Set(
 
 /**
  * Hook that provides all pathname-derived navigation state.
- * Consolidates logic from Breadcrumbs, PageNavigation, and DownloadButton.
+ * Consolidates logic from Breadcrumbs, PageNavigation, and DownloadMarkdownButton.
  */
 export function useDocNavigation(): DocNavigationState {
   const pathname = usePathname()

@@ -121,10 +121,10 @@ function DefinitionRenderer({ content }: { content: string }) {
             return <a href={href} className="text-btc hover:underline">{children}</a>
           }
           return (
-            <a 
-              href={href} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-btc hover:underline external-link group inline-flex items-center"
             >
               {children}

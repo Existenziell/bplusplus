@@ -307,10 +307,10 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       }
       // External links
       return (
-        <a 
-          href={href} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="external-link group inline-flex items-center"
           {...props}
         >

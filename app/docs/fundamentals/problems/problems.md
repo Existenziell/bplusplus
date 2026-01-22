@@ -9,7 +9,7 @@ Before Bitcoin, decentralized digital currency faced seemingly insurmountable pr
 - **No central authority:** Traditional systems rely on banks/servers to coordinate
 - **Network unreliability:** Nodes fail, messages get lost, partitions occur
 - **Byzantine failures:** Some participants may be malicious or send conflicting information
-- **Timing:** No synchronized clocks or central time source to order events
+- **Timing:** No synchronized clocks or central time source to order events (see [Bitcoin as Timechain](/docs/fundamentals/timechain) for how this is solved)
 
 ## The Double-Spending Problem
 

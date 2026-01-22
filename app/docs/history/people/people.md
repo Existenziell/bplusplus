@@ -2,11 +2,9 @@
 
 Bitcoin didn't emerge from a vacuum. It was built on decades of cryptographic research and the work of visionary cypherpunks who dreamed of digital cash. This page honors both the pioneers who laid the groundwork and the contributors who brought Bitcoin to life.
 
-## Cryptographic Pioneers
+---
 
-These individuals created the foundational technologies that Bitcoin combines and builds upon.
-
-### David Chaum
+## David Chaum
 
 ![David Chaum](/images/people/David_Chaum.jpg)
 
@@ -16,9 +14,11 @@ David Chaum is widely regarded as the inventor of digital cash. In 1982, he publ
 
 While eCash ultimately failed commercially (DigiCash went bankrupt in 1998), Chaum's work established the fundamental cryptographic techniques for digital currency, including blind signatures that preserve privacy. His vision of electronic cash that could replicate the anonymity of physical cash directly inspired the cypherpunk movement and later cryptocurrency development.
 
+[More](https://en.wikipedia.org/wiki/David_Chaum)
+
 ---
 
-### Adam Back
+## Adam Back
 
 ![Adam Back](/images/people/Adam_Back.jpg)
 
@@ -30,9 +30,11 @@ Hashcash's proof-of-work mechanism became a critical component of Bitcoin. Satos
 
 Back is currently CEO of Blockstream, a Bitcoin infrastructure company he co-founded in 2014.
 
+[More](https://en.wikipedia.org/wiki/Adam_Back)
+
 ---
 
-### Nick Szabo
+## Nick Szabo
 
 ![Nick Szabo](/images/people/Nick_Szabo.jpg)
 
@@ -44,9 +46,11 @@ Szabo also coined the term "smart contracts" in 1994, describing self-executing 
 
 The similarities between Bit Gold and Bitcoin are so striking that many have speculated Szabo is Satoshi Nakamoto, which he has denied. Regardless, his intellectual contributions to the conceptual foundations of cryptocurrency are undeniable.
 
+[More](https://en.wikipedia.org/wiki/Nick_Szabo)
+
 ---
 
-### Wei Dai
+## Wei Dai
 
 ![Wei Dai](/images/people/Wei_Dai.jpg)
 
@@ -64,13 +68,13 @@ Satoshi Nakamoto cited b-money in the Bitcoin whitepaper and personally emailed 
 
 The smallest subunit of Ether (Ethereum's currency) is called a "wei" in his honor.
 
+[More](https://en.wikipedia.org/wiki/Wei_Dai)
+
 ---
 
-## Bitcoin Era
+## Satoshi Nakamoto
 
-These individuals were directly involved in Bitcoin's creation, early development, and evangelism.
-
-### Satoshi Nakamoto
+![Satoshi Nakamoto](/images/people/Satoshi_Nakamoto.jpg)
 
 **Contribution:** Bitcoin (2008-2010) - Creator of Bitcoin
 
@@ -86,9 +90,11 @@ Key facts about Satoshi:
 
 The mystery of Satoshi's identity has become part of Bitcoin's mythos. Various candidates have been proposed, including Nick Szabo, Hal Finney, and others, but none have been confirmed. In 2024, a UK court definitively ruled that Craig Wright is not Satoshi Nakamoto.
 
+[More](https://en.wikipedia.org/wiki/Satoshi_Nakamoto)
+
 ---
 
-### Hal Finney (1956-2014)
+## Hal Finney (1956-2014)
 
 ![Hal Finney](/images/people/Hal_Finney.jpg)
 
@@ -104,9 +110,11 @@ Finney was diagnosed with ALS (Lou Gehrig's disease) in 2009 and continued contr
 
 The "Finney attack" in Bitcoin is named after him: a type of [double-spend](/docs/glossary#double-spend) attack he described where a miner pre-mines a transaction and quickly broadcasts a conflicting one.
 
+[More](https://en.wikipedia.org/wiki/Hal_Finney_(computer_scientist))
+
 ---
 
-### Len Sassaman (1980-2011)
+## Len Sassaman (1980-2011)
 
 ![Len Sassaman](/images/people/Len_Sassaman.jpg)
 
@@ -120,9 +128,11 @@ Tragically, Sassaman died by suicide on July 3, 2011, just as Bitcoin was gainin
 
 Some have speculated that Sassaman was involved in Bitcoin's creation due to his technical skills, cypherpunk connections, and the timing of his death relative to Satoshi's disappearance, though there is no concrete evidence.
 
+[More](https://en.wikipedia.org/wiki/Len_Sassaman)
+
 ---
 
-### Gavin Andresen
+## Gavin Andresen
 
 ![Gavin Andresen](/images/people/Gavin_Andresen.jpg)
 
@@ -138,9 +148,11 @@ Andresen was instrumental in Bitcoin's early development and professionalization
 
 His role diminished after 2014, particularly following the blocksize debate and his controversial endorsement of Craig Wright's claim to be Satoshi in 2016 (which Andresen later said he was "bamboozled" about).
 
+[More](https://en.wikipedia.org/wiki/Gavin_Andresen)
+
 ---
 
-### Andreas M. Antonopoulos
+## Andreas M. Antonopoulos
 
 ![Andreas Antonopoulos](/images/people/Andreas_Antonopoulos.jpg)
 
@@ -156,3 +168,19 @@ His other works include:
 Antonopoulos is known for his ability to explain complex technical concepts to general audiences. His YouTube channel and speaking engagements have introduced millions of people to Bitcoin. He has testified before government bodies and advocated for cryptocurrency-friendly policies.
 
 In 2017, after it was revealed he had not held significant Bitcoin despite years of advocacy, the Bitcoin community donated over 100 BTC to him in appreciation of his educational contributions.
+
+[More](https://en.wikipedia.org/wiki/Andreas_Antonopoulos)
+
+---
+
+## You
+
+![You](/images/people/Anon.jpg)
+
+**Contribution:** The future of Bitcoin - Your story is still being written
+
+Bitcoin's history is still being written. The network continues to evolve, and its future will be shaped by those who participate today. Developers contributing code, educators sharing knowledge, users running nodes, and builders creating on Bitcoin's foundation.
+
+The pioneers on this page laid the groundwork, but Bitcoin's true potential will be realized by the collective efforts of its global community. Whether you're building infrastructure, creating applications, educating others, or simply using Bitcoin as peer-to-peer electronic cash, you are part of this ongoing experiment in decentralized money.
+
+The question is not whether you can be a Bitcoin pioneer. It's what kind of pioneer you will choose to be.

@@ -162,7 +162,7 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content h2 {
-  @apply text-xl sm:text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
+  @apply text-3xl sm:text-4xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
   scroll-margin-top: 40px;
 }
 

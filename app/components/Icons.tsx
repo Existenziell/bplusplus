@@ -5,14 +5,26 @@ interface IconProps extends SVGProps<SVGSVGElement> {
 }
 
 /**
+ * Merge default className with passed className, ensuring both are applied.
+ * Tailwind classes will properly override when needed (e.g., w-6 overrides w-4).
+ */
+function mergeClassName(defaultClass: string, passedClass?: string): string {
+  if (!passedClass) return defaultClass
+  // If passed class includes size classes, use it as-is (it will override)
+  // Otherwise, merge both
+  return `${defaultClass} ${passedClass}`.trim()
+}
+
+/**
  * Reusable icon components to eliminate duplicate SVG code across the codebase.
  * All icons use consistent styling and can be customized via className prop.
+ * Default size classes are preserved when additional classes are passed.
  */
 
-export function ArrowRight({ className = 'w-4 h-4', ...props }: IconProps) {
+export function ArrowRight({ className, ...props }: IconProps) {
   return (
     <svg
-      className={className}
+      className={mergeClassName('w-4 h-4', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -23,10 +35,10 @@ export function ArrowRight({ className = 'w-4 h-4', ...props }: IconProps) {
   )
 }
 
-export function ArrowLeft({ className = 'w-4 h-4', ...props }: IconProps) {
+export function ArrowLeft({ className, ...props }: IconProps) {
   return (
     <svg
-      className={className}
+      className={mergeClassName('w-4 h-4', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -37,10 +49,10 @@ export function ArrowLeft({ className = 'w-4 h-4', ...props }: IconProps) {
   )
 }
 
-export function ChevronDown({ className = 'w-4 h-4', ...props }: IconProps) {
+export function ChevronDown({ className, ...props }: IconProps) {
   return (
     <svg
-      className={className}
+      className={mergeClassName('w-4 h-4', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -51,10 +63,10 @@ export function ChevronDown({ className = 'w-4 h-4', ...props }: IconProps) {
   )
 }
 
-export function DownloadMarkdownIcon({ className = 'w-4 h-4', ...props }: IconProps) {
+export function DownloadMarkdownIcon({ className, ...props }: IconProps) {
   return (
     <svg
-      className={className}
+      className={mergeClassName('w-4 h-4', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -70,10 +82,10 @@ export function DownloadMarkdownIcon({ className = 'w-4 h-4', ...props }: IconPr
   )
 }
 
-export function DownloadPDFIcon({ className = 'w-5 h-5', ...props }: IconProps) {
+export function DownloadPDFIcon({ className, ...props }: IconProps) {
   return (
     <svg
-      className={className}
+      className={mergeClassName('w-5 h-5', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -89,10 +101,10 @@ export function DownloadPDFIcon({ className = 'w-5 h-5', ...props }: IconProps) 
   )
 }
 
-export function HomeIcon({ className = 'w-4 h-4', ...props }: IconProps) {
+export function HomeIcon({ className, ...props }: IconProps) {
   return (
     <svg
-      className={className}
+      className={mergeClassName('w-4 h-4', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -108,10 +120,10 @@ export function HomeIcon({ className = 'w-4 h-4', ...props }: IconProps) {
   )
 }
 
-export function UpArrow({ className = 'w-4 h-4', ...props }: IconProps) {
+export function UpArrow({ className, ...props }: IconProps) {
   return (
     <svg
-      className={className}
+      className={mergeClassName('w-4 h-4', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -122,10 +134,10 @@ export function UpArrow({ className = 'w-4 h-4', ...props }: IconProps) {
   )
 }
 
-export function TerminalIcon({ className = 'w-5 h-5', ...props }: IconProps) {
+export function TerminalIcon({ className, ...props }: IconProps) {
   return (
     <svg
-      className={className}
+      className={mergeClassName('w-5 h-5', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"

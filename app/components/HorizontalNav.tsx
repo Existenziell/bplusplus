@@ -33,7 +33,7 @@ export default function HorizontalNav() {
           className="w-full py-4 flex items-center justify-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-btc transition-colors"
         >
           <span>Explore B++</span>
-          <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </button>
 
         {/* Tree Navigation */}

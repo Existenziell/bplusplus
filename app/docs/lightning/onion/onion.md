@@ -57,10 +57,10 @@ Total: 1366 bytes
 
 Each decrypted layer contains:
 
-- **Short Channel ID**: 8 bytes - Which channel to forward through
-- **Amount to Forward**: Variable - HTLC amount for next hop
-- **Outgoing CLTV**: 4 bytes - Expiry for outgoing HTLC
-- **Padding**: Variable - Random data to maintain fixed size
+- **Short Channel ID**: 8 bytes: Which channel to forward through
+- **Amount to Forward**: Variable: HTLC amount for next hop
+- **Outgoing CLTV**: 4 bytes: Expiry for outgoing HTLC
+- **Padding**: Variable: Random data to maintain fixed size
 
 ---
 

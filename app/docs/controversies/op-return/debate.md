@@ -16,9 +16,9 @@ OP_RETURN <data>
 ```
 
 **Key Characteristics:**
-- [Outputs](/docs/glossary#output) are **unspendable** - they cannot be used as [inputs](/docs/glossary#input) in future transactions
+- [Outputs](/docs/glossary#output) are **unspendable**: they cannot be used as [inputs](/docs/glossary#input) in future transactions
 - Data is **permanently stored** on the blockchain (immutable)
-- Data does **not contribute to [UTXO set](/docs/glossary#utxo-set)** - can be pruned by nodes
+- Data does **not contribute to [UTXO set](/docs/glossary#utxo-set)**: can be pruned by nodes
 - Originally limited to **80 bytes** of data per output
 
 ### How It Works Technically
@@ -171,7 +171,7 @@ OP_RETURN 48656c6c6f20576f726c64  (hex for "Hello World")
 **Argument:**
 - If users are willing to pay transaction fees, they should be able to use block space as they see fit
 - Market forces (fees) will naturally limit abuse
-- No one is forced to store the data - nodes can prune
+- No one is forced to store the data: nodes can prune
 
 **Technical Support:**
 - OP_RETURN outputs don't bloat UTXO set (unspendable)

@@ -11,7 +11,7 @@ Bitcoin's history spans from its creation in 2009 to its future supply schedule 
 - **Block Reward**: 50 BTC
 - **Creator**: [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto)
 
-The [Genesis Block](/docs/glossary#genesis-block) was mined by Satoshi Nakamoto, marking the birth of the Bitcoin network. The block contains a hidden message in its coinbase transaction: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks" - a reference to a headline from The Times newspaper, highlighting Bitcoin's purpose as an alternative to the traditional financial system.
+The [Genesis Block](/docs/glossary#genesis-block) was mined by Satoshi Nakamoto, marking the birth of the Bitcoin network. The block contains a hidden message in its coinbase transaction: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks": a reference to a headline from The Times newspaper, highlighting Bitcoin's purpose as an alternative to the traditional financial system.
 
 ### First Transaction
 

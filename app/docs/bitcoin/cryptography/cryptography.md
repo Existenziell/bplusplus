@@ -6,10 +6,10 @@ Bitcoin relies on several cryptographic primitives to secure transactions, prove
 
 Cryptography enables remarkable capabilities that seem almost magical:
 
-- **Prove knowledge without revealing it** - You can prove you know a secret (like a private key) without ever exposing the secret itself. This is how you sign Bitcoin transactions.
-- **Create unforgeable signatures** - Only the holder of a private key can create a valid signature, but anyone can verify it with the corresponding public key.
-- **Commit to data irrevocably** - Hash functions create unique fingerprints that bind you to specific data without revealing it until you choose to.
-- **Verify integrity instantly** - Detect any tampering with data, no matter how large, by comparing small hash values.
+- **Prove knowledge without revealing it**: You can prove you know a secret (like a private key) without ever exposing the secret itself. This is how you sign Bitcoin transactions.
+- **Create unforgeable signatures**: Only the holder of a private key can create a valid signature, but anyone can verify it with the corresponding public key.
+- **Commit to data irrevocably**: Hash functions create unique fingerprints that bind you to specific data without revealing it until you choose to.
+- **Verify integrity instantly**: Detect any tampering with data, no matter how large, by comparing small hash values.
 
 These concepts aren't unique to Bitcoin. You encounter cryptography daily:
 
@@ -29,9 +29,9 @@ Bitcoin combines these proven cryptographic techniques in a novel way to create 
 
 Bitcoin uses cryptography for three main purposes:
 
-1. **Ownership & Authentication** - Proving you own bitcoin without revealing your private key
-2. **Integrity** - Ensuring data hasn't been tampered with
-3. **Proof-of-Work** - Securing the blockchain through computational work
+1. **Ownership & Authentication**: Proving you own bitcoin without revealing your private key
+2. **Integrity**: Ensuring data hasn't been tampered with
+3. **Proof-of-Work**: Securing the blockchain through computational work
 
 ---
 
@@ -506,9 +506,9 @@ Finding `k` requires solving the **Elliptic Curve Discrete Logarithm Problem (EC
 ### What is a Digital Signature?
 
 A **digital signature** proves:
-1. **Authenticity** - Message came from the claimed sender
-2. **Integrity** - Message hasn't been altered
-3. **Non-repudiation** - Sender cannot deny sending
+1. **Authenticity**: Message came from the claimed sender
+2. **Integrity**: Message hasn't been altered
+3. **Non-repudiation**: Sender cannot deny sending
 
 ### ECDSA (Elliptic Curve Digital Signature Algorithm)
 
@@ -694,17 +694,17 @@ console.log(`Signature valid: ${isValid}`);
 **Schnorr signatures** were introduced with the [Taproot](/docs/glossary#taproot) upgrade (2021).
 
 **Advantages over ECDSA:**
-- **Simpler** - Mathematically cleaner
-- **Smaller** - Fixed 64-byte signatures
-- **Linearity** - Enables key and signature aggregation
-- **Provably secure** - Better security proofs
-- **Batch verification** - Faster validation of multiple signatures
+- **Simpler**: Mathematically cleaner
+- **Smaller**: Fixed 64-byte signatures
+- **Linearity**: Enables key and signature aggregation
+- **Provably secure**: Better security proofs
+- **Batch verification**: Faster validation of multiple signatures
 
 **Signature Aggregation:**
 Multiple signatures can be combined into one, enabling:
-- **[MuSig](/docs/glossary#musig)** - Multi-signature schemes that look like single signatures
-- **Privacy** - Multi-party transactions appear as single-party
-- **Efficiency** - Reduced transaction size and fees
+- **[MuSig](/docs/glossary#musig)**: Multi-signature schemes that look like single signatures
+- **Privacy**: Multi-party transactions appear as single-party
+- **Efficiency**: Reduced transaction size and fees
 
 ### Code: BIP-340 Schnorr Tagged Hash
 
@@ -882,9 +882,9 @@ A **Merkle tree** (or hash tree) is a data structure that efficiently summarizes
 - Changing any transaction changes the Merkle root
 
 **Benefits:**
-1. **Efficient verification** - Prove transaction inclusion with O(log n) hashes
-2. **Compact proofs** - [SPV](/docs/glossary#spv-simplified-payment-verification) nodes don't need full blockchain
-3. **Data integrity** - Any tampering is immediately detectable
+1. **Efficient verification**: Prove transaction inclusion with O(log n) hashes
+2. **Compact proofs**: [SPV](/docs/glossary#spv-simplified-payment-verification) nodes don't need full blockchain
+3. **Data integrity**: Any tampering is immediately detectable
 
 ### Merkle Proofs (SPV)
 
@@ -1189,8 +1189,8 @@ console.log(`Merkle Root: ${root.toString('hex')}`);
 - Prefix: `bc1` for mainnet, `tb1` for testnet
 
 **Address Types:**
-- `bc1q...` - Native SegWit ([P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash), [P2WSH](/docs/glossary#p2wsh-pay-to-witness-script-hash)) - Bech32
-- `bc1p...` - Taproot ([P2TR](/docs/glossary#p2tr-pay-to-taproot)) - Bech32m
+- `bc1q...`: Native SegWit ([P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash), [P2WSH](/docs/glossary#p2wsh-pay-to-witness-script-hash)) - Bech32
+- `bc1p...`: Taproot ([P2TR](/docs/glossary#p2tr-pay-to-taproot)) - Bech32m
 
 **Bech32m** (BIP-350) is a modified version for Taproot addresses with improved error detection.
 

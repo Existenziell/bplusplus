@@ -2,7 +2,7 @@
 
 Bitcoin Education and Hopium for the Masses!
 
-An open-source developer's guide to Bitcoin, covering everything from fundamental concepts to advanced protocol implementations. Built with Next.js 14 and designed to be always free.
+An open-source developer's guide to Bitcoin, covering everything from fundamental concepts to advanced protocol implementations. Built with Next.js 16 and designed to be always free.
 
 ## Features
 
@@ -16,25 +16,26 @@ An open-source developer's guide to Bitcoin, covering everything from fundamenta
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
+- **Framework**: Next.js 16.1.4 (App Router, Turbopack)
+- **React**: React 19.2.3
+- **Styling**: Tailwind CSS 3.4.19
 - **Markdown**: react-markdown with remark-gfm, rehype-highlight, rehype-raw
 - **Theming**: next-themes
 - **Analytics**: Vercel Analytics & Speed Insights
-- **Language**: TypeScript
+- **Language**: TypeScript 5.9.3
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 20.9+ (required for Next.js 16)
 - npm, yarn, pnpm, or bun
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/bplusplus.git
+git clone https://github.com/Existenziell/bplusplus.git
 cd bplusplus
 
 # Install dependencies

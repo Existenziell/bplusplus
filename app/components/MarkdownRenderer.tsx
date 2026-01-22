@@ -77,8 +77,11 @@ function extractText(children: React.ReactNode): string {
   if (Array.isArray(children)) {
     return children.map(extractText).join('')
   }
-  if (React.isValidElement(children) && children.props.children) {
-    return extractText(children.props.children)
+  if (React.isValidElement(children)) {
+    const props = children.props as { children?: React.ReactNode }
+    if (props && props.children) {
+      return extractText(props.children)
+    }
   }
   return ''
 }

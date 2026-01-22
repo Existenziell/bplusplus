@@ -178,6 +178,70 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/binary"
+	"fmt"
+)
+
+// sha256d performs double SHA-256 hash
+func sha256d(data []byte) []byte {
+	first := sha256.Sum256(data)
+	second := sha256.Sum256(first[:])
+	return second[:]
+}
+
+// mineBlockHeader demonstrates the basic mining hash calculation.
+// In real mining, this would be optimized and run billions of times.
+func mineBlockHeader(header []byte, target []byte, maxNonce uint32) (uint32, bool) {
+	data := make([]byte, len(header)+4)
+	copy(data, header)
+	
+	for nonce := uint32(0); nonce < maxNonce; nonce++ {
+		// Add nonce to header (little-endian 4-byte integer)
+		binary.LittleEndian.PutUint32(data[len(header):], nonce)
+		
+		// Double SHA-256
+		hash := sha256d(data)
+		
+		// Check if hash is below target
+		if compareBytes(hash, target) < 0 {
+			return nonce, true
+		}
+	}
+	return 0, false
+}
+
+func compareBytes(a, b []byte) int {
+	for i := 0; i < len(a) && i < len(b); i++ {
+		if a[i] < b[i] {
+			return -1
+		}
+		if a[i] > b[i] {
+			return 1
+		}
+	}
+	return 0
+}
+
+func main() {
+	// Example: very easy target for demonstration
+	header := []byte("example block header data")
+	easyTarget := make([]byte, 32)
+	for i := range easyTarget {
+		easyTarget[i] = 0x0F // Very easy target
+	}
+	
+	nonce, found := mineBlockHeader(header, easyTarget, 1_000_000)
+	if found {
+		fmt.Printf("Found valid nonce: %d\n", nonce)
+	}
+}
+```
+
 ```javascript
 const crypto = require('crypto');
 

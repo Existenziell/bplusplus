@@ -277,6 +277,69 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/binary"
+	"encoding/hex"
+	"fmt"
+)
+
+// SHA256D performs double SHA-256 (SHA256D) hash.
+func SHA256D(data []byte) []byte {
+	first := sha256.Sum256(data)
+	second := sha256.Sum256(first[:])
+	return second[:]
+}
+
+// MeetsTarget checks if a hash meets the difficulty target.
+// The hash must be numerically less than the target.
+func MeetsTarget(hash []byte, target []byte) bool {
+	// Compare bytes from most significant to least significant
+	for i := 31; i >= 0; i-- {
+		if hash[i] < target[i] {
+			return true
+		}
+		if hash[i] > target[i] {
+			return false
+		}
+	}
+	return true // Equal hashes meet the target
+}
+
+// MineBlock constructs an 80-byte block header and performs proof-of-work.
+func MineBlock(version uint32, prevHash []byte, merkleRoot []byte, timestamp uint32, bits uint32, target []byte, maxNonce uint32) (uint32, []byte, bool) {
+	header := make([]byte, 80)
+	
+	// Build header (all fields little-endian)
+	binary.LittleEndian.PutUint32(header[0:4], version)
+	copy(header[4:36], prevHash)
+	copy(header[36:68], merkleRoot)
+	binary.LittleEndian.PutUint32(header[68:72], timestamp)
+	binary.LittleEndian.PutUint32(header[72:76], bits)
+	
+	for nonce := uint32(0); nonce < maxNonce; nonce++ {
+		binary.LittleEndian.PutUint32(header[76:80], nonce)
+		
+		hash := SHA256D(header)
+		
+		if MeetsTarget(hash, target) {
+			return nonce, hash, true
+		}
+	}
+	return 0, nil, false
+}
+
+func main() {
+	// Example usage
+	data := []byte("Hello, Bitcoin!")
+	hash := SHA256D(data)
+	fmt.Printf("SHA256D hash: %s\n", hex.EncodeToString(hash))
+}
+```
+
 ```javascript
 const crypto = require('crypto');
 
@@ -344,6 +407,22 @@ function mineBlock(version, prevHash, merkleRoot, timestamp, bits, target, maxNo
 const data = Buffer.from('Hello, Bitcoin!');
 const hash = sha256d(data);
 console.log(`SHA256D hash: ${hash.toString('hex')}`);
+```
+:::
+		hash := SHA256D(header[:])
+
+		if MeetsTarget(hash, target) {
+			return nonce, hash, true
+		}
+	}
+	return 0, [32]byte{}, false
+}
+
+func main() {
+	data := []byte("Hello, Bitcoin!")
+	hash := SHA256D(data)
+	fmt.Printf("SHA256D hash: %s\n", hex.EncodeToString(hash[:]))
+}
 ```
 :::
 

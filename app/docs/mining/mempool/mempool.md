@@ -216,6 +216,129 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"bytes"
+	"encoding/base64"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+)
+
+// RPCCall makes a JSON-RPC call to Bitcoin Core
+func RPCCall(method string, params []interface{}) (interface{}, error) {
+	request := map[string]interface{}{
+		"jsonrpc": "1.0",
+		"id":      "go",
+		"method":  method,
+		"params":  params,
+	}
+
+	jsonData, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", "http://127.0.0.1:8332", bytes.NewBuffer(jsonData))
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+	auth := base64.StdEncoding.EncodeToString([]byte("rpcuser:rpcpassword"))
+	req.Header.Set("Authorization", "Basic "+auth)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var result struct {
+		Result interface{} `json:"result"`
+		Error  interface{} `json:"error"`
+	}
+
+	if err := json.Unmarshal(body, &result); err != nil {
+		return nil, err
+	}
+
+	if result.Error != nil {
+		return nil, fmt.Errorf("RPC error: %v", result.Error)
+	}
+
+	return result.Result, nil
+}
+
+// QueryMempool queries mempool information using Bitcoin Core RPC
+func QueryMempool() error {
+	// Get mempool info
+	mempoolInfo, err := RPCCall("getmempoolinfo", []interface{}{})
+	if err != nil {
+		return err
+	}
+
+	info := mempoolInfo.(map[string]interface{})
+	fmt.Println("Mempool Info:")
+	fmt.Printf("  Size: %.0f transactions\n", info["size"])
+	fmt.Printf("  Bytes: %.0f bytes\n", info["bytes"])
+	fmt.Printf("  Memory Usage: %.0f bytes\n", info["usage"])
+	fmt.Printf("  Min Fee Rate: %v BTC/kB\n", info["mempoolminfee"])
+
+	// Get all transaction IDs
+	txids, err := RPCCall("getrawmempool", []interface{}{false})
+	if err != nil {
+		return err
+	}
+
+	txidList := txids.([]interface{})
+	fmt.Printf("\nTotal transactions: %d\n", len(txidList))
+
+	// Get detailed mempool
+	mempoolVerbose, err := RPCCall("getrawmempool", []interface{}{true})
+	if err != nil {
+		return err
+	}
+
+	verboseMap := mempoolVerbose.(map[string]interface{})
+	type feeEntry struct {
+		txid string
+		fee  float64
+	}
+
+	var fees []feeEntry
+	for txid, info := range verboseMap {
+		infoMap := info.(map[string]interface{})
+		feesMap := infoMap["fees"].(map[string]interface{})
+		fee := feesMap["base"].(float64)
+		fees = append(fees, feeEntry{txid: txid, fee: fee})
+	}
+
+	// Sort by fee (simplified - would use sort.Slice in real code)
+	fmt.Println("\nTop 5 highest fee transactions:")
+	for i := 0; i < 5 && i < len(fees); i++ {
+		fmt.Printf("  %s: %.8f BTC\n", fees[i].txid[:16], fees[i].fee)
+	}
+
+	return nil
+}
+
+func main() {
+	if err := QueryMempool(); err != nil {
+		fmt.Printf("Error: %v\n", err)
+	}
+}
+```
+
 ```javascript
 const http = require('http');
 

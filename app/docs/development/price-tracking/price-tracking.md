@@ -60,6 +60,46 @@ async function getPriceCoingecko() {
   return data.bitcoin.usd;
 }
 ```
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+)
+
+func getPriceCoinGecko() (float64, error) {
+	url := "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
+	resp, err := http.Get(url)
+	if err != nil {
+		return 0, err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return 0, err
+	}
+
+	var data map[string]map[string]float64
+	if err := json.Unmarshal(body, &data); err != nil {
+		return 0, err
+	}
+
+	return data["bitcoin"]["usd"], nil
+}
+
+func main() {
+	price, err := getPriceCoinGecko()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Bitcoin price: $%.2f\n", price)
+}
+```
 :::
 
 ### Mempool.space API
@@ -95,6 +135,46 @@ async function getPriceMempool() {
   const response = await fetch('https://mempool.space/api/v1/prices');
   const data = await response.json();
   return data.USD;
+}
+```
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+)
+
+func getPriceMempool() (float64, error) {
+	url := "https://mempool.space/api/v1/prices"
+	resp, err := http.Get(url)
+	if err != nil {
+		return 0, err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return 0, err
+	}
+
+	var data map[string]float64
+	if err := json.Unmarshal(body, &data); err != nil {
+		return 0, err
+	}
+
+	return data["USD"], nil
+}
+
+func main() {
+	price, err := getPriceMempool()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Bitcoin price: $%.2f\n", price)
 }
 ```
 :::
@@ -219,6 +299,69 @@ function getCachedPrice(currency) {
 
 function setCachedPrice(currency, price) {
   cache.set(currency, { price, timestamp: Date.now() });
+}
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+type PriceCache struct {
+	cache    map[string]priceEntry
+	duration time.Duration
+	mu       sync.RWMutex
+}
+
+type priceEntry struct {
+	price     float64
+	timestamp time.Time
+}
+
+func NewPriceCache(duration time.Duration) *PriceCache {
+	return &PriceCache{
+		cache:    make(map[string]priceEntry),
+		duration: duration,
+	}
+}
+
+func (pc *PriceCache) Get(currency string) (float64, bool) {
+	pc.mu.RLock()
+	defer pc.mu.RUnlock()
+
+	entry, exists := pc.cache[currency]
+	if !exists {
+		return 0, false
+	}
+
+	if time.Since(entry.timestamp) < pc.duration {
+		return entry.price, true
+	}
+
+	return 0, false
+}
+
+func (pc *PriceCache) Set(currency string, price float64) {
+	pc.mu.Lock()
+	defer pc.mu.Unlock()
+
+	pc.cache[currency] = priceEntry{
+		price:     price,
+		timestamp: time.Now(),
+	}
+}
+
+func main() {
+	cache := NewPriceCache(60 * time.Second)
+	cache.Set("USD", 50000.0)
+
+	if price, ok := cache.Get("USD"); ok {
+		fmt.Printf("Cached price: $%.2f\n", price)
+	}
 }
 ```
 :::

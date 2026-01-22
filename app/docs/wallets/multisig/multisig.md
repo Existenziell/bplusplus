@@ -307,6 +307,71 @@ const multisig = createMultisigAddress(2, pubkeys);
 console.log('Multisig Address:', multisig.address);
 console.log('Redeem Script:', multisig.redeemScript.toString('hex'));
 ```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+	"sort"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/txscript"
+)
+
+func createMultisigAddress(required int, pubkeys [][]byte, network *chaincfg.Params) (string, []byte, error) {
+	// Sort pubkeys (BIP67 compliance)
+	sort.Slice(pubkeys, func(i, j int) bool {
+		return hex.EncodeToString(pubkeys[i]) < hex.EncodeToString(pubkeys[j])
+	})
+
+	// Build the redeem script: OP_M <pubkeys> OP_N OP_CHECKMULTISIG
+	builder := txscript.NewScriptBuilder()
+	builder.AddInt64(int64(required))
+
+	for _, pubkey := range pubkeys {
+		builder.AddData(pubkey)
+	}
+
+	builder.AddInt64(int64(len(pubkeys)))
+	builder.AddOp(txscript.OP_CHECKMULTISIG)
+	redeemScript, err := builder.Script()
+	if err != nil {
+		return "", nil, err
+	}
+
+	// Create P2WSH address (SegWit multisig)
+	scriptHash := sha256.Sum256(redeemScript)
+	addr, err := btcutil.NewAddressWitnessScriptHash(scriptHash[:], network)
+	if err != nil {
+		return "", nil, err
+	}
+
+	return addr.EncodeAddress(), redeemScript, nil
+}
+
+func main() {
+	// Generate 3 key pairs
+	pubkeys := make([][]byte, 3)
+	for i := 0; i < 3; i++ {
+		privkey, _ := btcec.NewPrivateKey()
+		pubkeys[i] = privkey.PubKey().SerializeCompressed()
+	}
+
+	// Create 2-of-3 multisig address
+	addr, redeemScript, err := createMultisigAddress(2, pubkeys, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Multisig Address: %s\n", addr)
+	fmt.Printf("Redeem Script: %s\n", hex.EncodeToString(redeemScript))
+}
+```
 :::
 
 ## Spending from Multisig

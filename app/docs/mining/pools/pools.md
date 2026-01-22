@@ -381,6 +381,105 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// DifficultyToTarget converts a difficulty value to a 256-bit target
+func DifficultyToTarget(difficulty float64) float64 {
+	// Simplified: return difficulty as target ratio
+	// Real implementation would use big.Int for 256-bit precision
+	return 1.0 / difficulty
+}
+
+// ValidateShare validates if a hash meets the share difficulty
+func ValidateShare(hash []byte, shareDifficulty float64) bool {
+	// Simplified validation - real implementation would compare full 256-bit values
+	// Check leading zero bytes based on difficulty
+	requiredZeroBytes := int(math.Log2(shareDifficulty) / 8.0)
+	for i := 0; i < requiredZeroBytes && i < len(hash); i++ {
+		if hash[i] != 0 {
+			return false
+		}
+	}
+	return true
+}
+
+// ExpectedSharesPerBlock calculates the expected shares per block for a given share difficulty
+func ExpectedSharesPerBlock(shareDifficulty float64, networkDifficulty float64) float64 {
+	return networkDifficulty / shareDifficulty
+}
+
+// PoolPayout represents a pool payout calculator for different schemes
+type PoolPayout struct {
+	BlockReward     float64
+	PoolFeePercent  float64
+}
+
+func NewPoolPayout(blockReward float64, poolFeePercent float64) *PoolPayout {
+	return &PoolPayout{
+		BlockReward:    blockReward,
+		PoolFeePercent: poolFeePercent,
+	}
+}
+
+// NetReward returns net reward after pool fee
+func (p *PoolPayout) NetReward() float64 {
+	return p.BlockReward * (1.0 - p.PoolFeePercent/100.0)
+}
+
+// ProportionalPayout calculates proportional payout for a miner
+func (p *PoolPayout) ProportionalPayout(minerShares uint64, totalShares uint64) float64 {
+	shareRatio := float64(minerShares) / float64(totalShares)
+	return p.NetReward() * shareRatio
+}
+
+// PPSValue calculates PPS (Pay Per Share) value per share
+func (p *PoolPayout) PPSValue(shareDifficulty float64, networkDifficulty float64) float64 {
+	expected := ExpectedSharesPerBlock(shareDifficulty, networkDifficulty)
+	return p.NetReward() / expected
+}
+
+// FPPSValue calculates FPPS including transaction fees
+func (p *PoolPayout) FPPSValue(shareDifficulty float64, networkDifficulty float64, avgTxFees float64) float64 {
+	totalReward := p.BlockReward + avgTxFees
+	netTotal := totalReward * (1.0 - p.PoolFeePercent/100.0)
+	expected := ExpectedSharesPerBlock(shareDifficulty, networkDifficulty)
+	return netTotal / expected
+}
+
+// PPLNSPayout calculates PPLNS payout
+func (p *PoolPayout) PPLNSPayout(minerShares uint64, windowTotal uint64) float64 {
+	return p.NetReward() * (float64(minerShares) / float64(windowTotal))
+}
+
+func main() {
+	shareDifficulty := 65536.0
+	networkDifficulty := 70_000_000_000_000.0 // ~70 trillion
+
+	fmt.Printf("Share difficulty: %.0f\n", shareDifficulty)
+	fmt.Printf("Network difficulty: %.0f\n", networkDifficulty)
+	fmt.Printf("Expected shares per block: %.0f\n", ExpectedSharesPerBlock(shareDifficulty, networkDifficulty))
+
+	payout := NewPoolPayout(3.125, 2.0) // 3.125 BTC reward, 2% fee
+
+	// Example: miner contributed 50,000 out of 1,000,000 shares
+	minerPayout := payout.ProportionalPayout(50_000, 1_000_000)
+	fmt.Printf("\nMiner payout (50k/1M shares): %.8f BTC\n", minerPayout)
+
+	ppsPerShare := payout.PPSValue(shareDifficulty, networkDifficulty)
+	fmt.Printf("PPS value per share: %.12f BTC\n", ppsPerShare)
+
+	// FPPS with average 0.25 BTC transaction fees
+	fppsPerShare := payout.FPPSValue(shareDifficulty, networkDifficulty, 0.25)
+	fmt.Printf("FPPS value per share: %.12f BTC\n", fppsPerShare)
+}
+```
+
 ```javascript
 /**
  * Converts a difficulty value to a 256-bit target.
@@ -500,6 +599,98 @@ console.log(`PPS value per share: ${ppsPerShare.toFixed(12)} BTC`);
 // FPPS with average 0.25 BTC transaction fees
 const fppsPerShare = payout.fppsValue(shareDifficulty, networkDifficulty, 0.25);
 console.log(`FPPS value per share: ${fppsPerShare.toFixed(12)} BTC`);
+```
+:::
+	"math"
+	"math/big"
+)
+
+// DifficultyToTarget converts a difficulty value to a 256-bit target.
+// Target = MAX_TARGET / difficulty
+func DifficultyToTarget(difficulty float64) *big.Int {
+	// Bitcoin's max target (difficulty 1)
+	maxTarget := new(big.Int)
+	maxTarget.SetString("00000000FFFF0000000000000000000000000000000000000000000000000000", 16)
+
+	diffInt := big.NewInt(int64(difficulty))
+	target := new(big.Int)
+	target.Div(maxTarget, diffInt)
+	return target
+}
+
+// ValidateShare validates if a hash meets the share difficulty.
+func ValidateShare(hash []byte, shareDifficulty float64) bool {
+	hashInt := new(big.Int).SetBytes(hash)
+	target := DifficultyToTarget(shareDifficulty)
+	return hashInt.Cmp(target) < 0
+}
+
+// ExpectedSharesPerBlock calculates the expected shares per block for a given share difficulty.
+func ExpectedSharesPerBlock(shareDifficulty, networkDifficulty float64) float64 {
+	return networkDifficulty / shareDifficulty
+}
+
+// PoolPayout calculates pool payouts for different schemes.
+type PoolPayout struct {
+	BlockReward     float64
+	PoolFeePercent  float64
+}
+
+// NetReward returns net reward after pool fee
+func (p *PoolPayout) NetReward() float64 {
+	return p.BlockReward * (1.0 - p.PoolFeePercent/100.0)
+}
+
+// ProportionalPayout calculates proportional payout for a miner.
+func (p *PoolPayout) ProportionalPayout(minerShares, totalShares uint64) float64 {
+	shareRatio := float64(minerShares) / float64(totalShares)
+	return p.NetReward() * shareRatio
+}
+
+// PPSValue calculates PPS (Pay Per Share) value per share.
+func (p *PoolPayout) PPSValue(shareDifficulty, networkDifficulty float64) float64 {
+	expectedShares := ExpectedSharesPerBlock(shareDifficulty, networkDifficulty)
+	return p.NetReward() / expectedShares
+}
+
+// FPPSValue calculates FPPS including transaction fees.
+func (p *PoolPayout) FPPSValue(shareDifficulty, networkDifficulty, avgTxFees float64) float64 {
+	totalReward := p.BlockReward + avgTxFees
+	netTotal := totalReward * (1.0 - p.PoolFeePercent/100.0)
+	expectedShares := ExpectedSharesPerBlock(shareDifficulty, networkDifficulty)
+	return netTotal / expectedShares
+}
+
+// PPLNSPayout calculates PPLNS payout.
+func (p *PoolPayout) PPLNSPayout(minerShares, windowTotal uint64) float64 {
+	return p.NetReward() * (float64(minerShares) / float64(windowTotal))
+}
+
+func main() {
+	shareDifficulty := 65536.0
+	networkDifficulty := 70_000_000_000_000.0 // ~70 trillion
+
+	fmt.Printf("Share difficulty: %.0f\n", shareDifficulty)
+	fmt.Printf("Network difficulty: %.0f\n", networkDifficulty)
+	fmt.Printf("Expected shares per block: %.0f\n",
+		ExpectedSharesPerBlock(shareDifficulty, networkDifficulty))
+
+	payout := &PoolPayout{
+		BlockReward:    3.125,
+		PoolFeePercent: 2.0,
+	}
+
+	// Example: miner contributed 50,000 out of 1,000,000 shares
+	minerPayout := payout.ProportionalPayout(50_000, 1_000_000)
+	fmt.Printf("\nMiner payout (50k/1M shares): %.8f BTC\n", minerPayout)
+
+	ppsPerShare := payout.PPSValue(shareDifficulty, networkDifficulty)
+	fmt.Printf("PPS value per share: %.12f BTC\n", ppsPerShare)
+
+	// FPPS with average 0.25 BTC transaction fees
+	fppsPerShare := payout.FPPSValue(shareDifficulty, networkDifficulty, 0.25)
+	fmt.Printf("FPPS value per share: %.12f BTC\n", fppsPerShare)
+}
 ```
 :::
 

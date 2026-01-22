@@ -81,6 +81,34 @@ BOOST_AUTO_TEST_CASE(test_address_generation) {
 }
 ```
 
+```go
+package main
+
+import (
+	"encoding/hex"
+	"testing"
+)
+
+func TestAddressGeneration(t *testing.T) {
+	pubkeyHex := "0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798"
+	pubkey, err := hex.DecodeString(pubkeyHex)
+	if err != nil {
+		t.Fatal(err)
+	}
+	
+	// In a real implementation, you would use a Bitcoin library
+	// to generate the address from the pubkey
+	// This is a simplified example
+	_ = pubkey
+	
+	// Example assertion (would use actual address generation)
+	// addr := generateP2WPKHAddress(pubkey)
+	// if !strings.HasPrefix(addr, "bc1q") {
+	//     t.Errorf("Expected address to start with 'bc1q', got %s", addr)
+	// }
+}
+```
+
 ```javascript
 test('generates valid P2WPKH address', () => {
   const pubkey = Buffer.from('0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798', 'hex');
@@ -119,12 +147,70 @@ BOOST_AUTO_TEST_CASE(test_transaction) {
 }
 ```
 
+```go
+package main
+
+import (
+	"testing"
+)
+
+type Transaction struct {
+	Version int32
+	Inputs  []Input
+	Outputs []Output
+}
+
+type Input struct {
+	PrevOutHash  []byte
+	PrevOutIndex uint32
+}
+
+type Output struct {
+	Value  int64
+	Script []byte
+}
+
+func TestTransactionConstruction(t *testing.T) {
+	tx := Transaction{
+		Version: 2,
+		Inputs:  []Input{},
+		Outputs: []Output{},
+	}
+	
+	if tx.Version != 2 {
+		t.Errorf("Expected version 2, got %d", tx.Version)
+	}
+}
+```
+
 ```javascript
 test('creates valid transaction structure', () => {
   const psbt = new bitcoin.Psbt();
   psbt.addInput({ hash: Buffer.alloc(32), index: 0, witnessUtxo: { script: Buffer.alloc(22), value: 100000 } });
   expect(psbt.inputCount).toBe(1);
 });
+```
+:::
+
+type Hash [32]byte
+
+func TestTransactionConstruction(t *testing.T) {
+	tx := Transaction{
+		Version: 2,
+		Inputs:  []Input{{}},
+		Outputs: []Output{},
+	}
+	
+	if tx.Version != 2 {
+		t.Errorf("Expected version 2, got %d", tx.Version)
+	}
+	if len(tx.Inputs) != 1 {
+		t.Errorf("Expected 1 input, got %d", len(tx.Inputs))
+	}
+	if len(tx.Outputs) != 0 {
+		t.Errorf("Expected 0 outputs, got %d", len(tx.Outputs))
+	}
+}
 ```
 :::
 

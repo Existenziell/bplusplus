@@ -121,6 +121,73 @@ function effectiveValue(coin, feeRate) {
 const feeRate = 0.0000001; // 10 sat/vB in BTC/vB
 const usefulCoins = coins.filter(c => effectiveValue(c, feeRate) > 0);
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+type Coin struct {
+	Amount  float64
+	Address string
+}
+
+// EffectiveValue calculates effective value of a coin at a given fee rate
+// effective_value = amount - (input_vbytes * fee_rate)
+func EffectiveValue(coin Coin, feeRate float64) float64 {
+	spendCost := float64(InputVbytes(coin.Address)) * feeRate
+	return coin.Amount - spendCost
+}
+
+// InputVbytes calculates virtual bytes for spending a UTXO based on address type
+func InputVbytes(address string) float64 {
+	if strings.HasPrefix(address, "bc1p") || strings.HasPrefix(address, "tb1p") ||
+		strings.HasPrefix(address, "bcrt1p") {
+		return 57.5 // Taproot (p2tr)
+	} else if strings.HasPrefix(address, "bc1q") || strings.HasPrefix(address, "tb1q") ||
+		strings.HasPrefix(address, "bcrt1q") {
+		return 68.0 // Native SegWit (p2wpkh)
+	} else if strings.HasPrefix(address, "2") || strings.HasPrefix(address, "3") {
+		return 91.0 // Nested SegWit (p2sh-p2wpkh)
+	}
+	return 148.0 // Legacy (p2pkh)
+}
+
+// OutputVbytes calculates virtual bytes for an output based on address type
+func OutputVbytes(address string) float64 {
+	if strings.HasPrefix(address, "bc1p") || strings.HasPrefix(address, "tb1p") ||
+		strings.HasPrefix(address, "bcrt1p") {
+		return 43.0 // Taproot
+	} else if strings.HasPrefix(address, "bc1q") || strings.HasPrefix(address, "tb1q") ||
+		strings.HasPrefix(address, "bcrt1q") {
+		return 31.0 // Native SegWit
+	} else if strings.HasPrefix(address, "2") || strings.HasPrefix(address, "3") {
+		return 32.0 // P2SH
+	}
+	return 34.0 // Legacy
+}
+
+func main() {
+	// Example: At 10 sat/vB, filter out negative effective value UTXOs
+	feeRate := 0.0000001 // 10 sat/vB in BTC/vB
+	coins := []Coin{
+		{Amount: 0.001, Address: "bc1q..."},
+		{Amount: 0.0001, Address: "1..."},
+	}
+
+	var usefulCoins []Coin
+	for _, coin := range coins {
+		if EffectiveValue(coin, feeRate) > 0 {
+			usefulCoins = append(usefulCoins, coin)
+		}
+	}
+
+	fmt.Printf("Useful coins: %d\n", len(usefulCoins))
+}
+```
 :::
 
 ## UTXO Characteristics
@@ -411,6 +478,73 @@ function selectLargestFirst(coins, targetAmount, feeRate) {
     throw new Error('Insufficient funds');
 }
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+type Coin struct {
+	Amount  float64
+	Address string
+}
+
+// SelectLargestFirst selects coins using largest-first greedy algorithm
+func SelectLargestFirst(coins []Coin, targetAmount float64, feeRate float64) ([]Coin, float64, error) {
+	// Sort by amount descending
+	sortedCoins := make([]Coin, len(coins))
+	copy(sortedCoins, coins)
+	sort.Slice(sortedCoins, func(i, j int) bool {
+		return sortedCoins[i].Amount > sortedCoins[j].Amount
+	})
+
+	var selected []Coin
+	total := 0.0
+
+	for _, coin := range sortedCoins {
+		selected = append(selected, coin)
+		total += coin.Amount
+
+		// Estimate fee based on selected inputs (simplified)
+		estimatedFee := EstimateFee(len(selected), feeRate)
+
+		if total >= targetAmount+estimatedFee {
+			change := total - targetAmount - estimatedFee
+			return selected, change, nil
+		}
+	}
+
+	return nil, 0, fmt.Errorf("insufficient funds")
+}
+
+// EstimateFee estimates transaction fee (simplified)
+func EstimateFee(inputCount int, feeRate float64) float64 {
+	// Simplified: assume 68 vB per input + 31 vB per output
+	baseSize := 10.0 // Base transaction size
+	inputSize := float64(inputCount) * 68.0
+	outputSize := 31.0 * 2 // Assume 2 outputs
+	totalVbytes := baseSize + inputSize + outputSize
+	return totalVbytes * feeRate
+}
+
+func main() {
+	coins := []Coin{
+		{Amount: 0.5, Address: "bc1q..."},
+		{Amount: 0.3, Address: "bc1q..."},
+		{Amount: 0.1, Address: "bc1q..."},
+	}
+
+	selected, change, err := SelectLargestFirst(coins, 0.4, 0.0000001)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Selected %d coins, change: %.8f BTC\n", len(selected), change)
+}
+```
 :::
 
 **Pros:**
@@ -628,6 +762,82 @@ function calculateTxVsize(inputs, outputAddresses) {
     
     // Ceiling the vsize to ensure we don't underestimate
     return Math.ceil(overhead + inputSize + outputSize);
+}
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+	"strings"
+)
+
+type Coin struct {
+	Amount  float64
+	Address string
+}
+
+// CalculateTxVsize calculates the total virtual size of a transaction
+// tx_vsize = 10.5 (overhead) + sum(input_vbytes) + sum(output_vbytes)
+func CalculateTxVsize(inputs []Coin, outputAddresses []string) int {
+	// Transaction overhead: ~10.5 vB
+	overhead := 10.5
+
+	// Sum input sizes based on address types
+	var inputSize float64
+	for _, coin := range inputs {
+		inputSize += InputVbytes(coin.Address)
+	}
+
+	// Sum output sizes based on address types
+	var outputSize float64
+	for _, addr := range outputAddresses {
+		outputSize += OutputVbytes(addr)
+	}
+
+	// Ceiling the vsize to ensure we don't underestimate
+	return int(math.Ceil(overhead + inputSize + outputSize))
+}
+
+// InputVbytes calculates virtual bytes for spending a UTXO based on address type
+func InputVbytes(address string) float64 {
+	if strings.HasPrefix(address, "bc1p") || strings.HasPrefix(address, "tb1p") ||
+		strings.HasPrefix(address, "bcrt1p") {
+		return 57.5 // Taproot (p2tr)
+	} else if strings.HasPrefix(address, "bc1q") || strings.HasPrefix(address, "tb1q") ||
+		strings.HasPrefix(address, "bcrt1q") {
+		return 68.0 // Native SegWit (p2wpkh)
+	} else if strings.HasPrefix(address, "2") || strings.HasPrefix(address, "3") {
+		return 91.0 // Nested SegWit (p2sh-p2wpkh)
+	}
+	return 148.0 // Legacy (p2pkh)
+}
+
+// OutputVbytes calculates virtual bytes for an output based on address type
+func OutputVbytes(address string) float64 {
+	if strings.HasPrefix(address, "bc1p") || strings.HasPrefix(address, "tb1p") ||
+		strings.HasPrefix(address, "bcrt1p") {
+		return 43.0 // Taproot
+	} else if strings.HasPrefix(address, "bc1q") || strings.HasPrefix(address, "tb1q") ||
+		strings.HasPrefix(address, "bcrt1q") {
+		return 31.0 // Native SegWit
+	} else if strings.HasPrefix(address, "2") || strings.HasPrefix(address, "3") {
+		return 32.0 // P2SH
+	}
+	return 34.0 // Legacy
+}
+
+func main() {
+	inputs := []Coin{
+		{Amount: 0.5, Address: "bc1q..."},
+		{Amount: 0.3, Address: "bc1q..."},
+	}
+	outputs := []string{"bc1q...", "bc1q..."}
+
+	vsize := CalculateTxVsize(inputs, outputs)
+	fmt.Printf("Transaction vsize: %d vbytes\n", vsize)
 }
 ```
 :::

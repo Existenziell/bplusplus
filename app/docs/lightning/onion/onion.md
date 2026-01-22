@@ -234,6 +234,77 @@ function deriveMuKey(sharedSecret) {
         .digest();
 }
 ```
+
+```go
+package main
+
+import (
+	"crypto/ecdsa"
+	"crypto/elliptic"
+	"crypto/rand"
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+	"math/big"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+)
+
+// DeriveSharedSecret derives shared secret using ECDH
+func DeriveSharedSecret(ephemeralPrivateKey *btcec.PrivateKey, hopPublicKey *btcec.PublicKey) [32]byte {
+	// Perform ECDH: multiply hop's public key by our secret
+	sharedPoint := new(btcec.PublicKey)
+	sharedPoint.X, sharedPoint.Y = elliptic.P256().ScalarMult(hopPublicKey.X(), hopPublicKey.Y(), ephemeralPrivateKey.D().Bytes())
+
+	// Hash the x-coordinate to get the shared secret
+	hash := sha256.Sum256(sharedPoint.SerializeCompressed())
+	return hash
+}
+
+// DeriveBlindingFactor derives the blinding factor for key rotation
+func DeriveBlindingFactor(ephemeralPubkey *btcec.PublicKey, sharedSecret [32]byte) [32]byte {
+	hasher := sha256.New()
+	hasher.Write(ephemeralPubkey.SerializeCompressed())
+	hasher.Write(sharedSecret[:])
+	var result [32]byte
+	copy(result[:], hasher.Sum(nil))
+	return result
+}
+
+// DeriveRhoKey derives the rho key for payload encryption (ChaCha20)
+func DeriveRhoKey(sharedSecret [32]byte) [32]byte {
+	hasher := sha256.New()
+	hasher.Write([]byte("rho"))
+	hasher.Write(sharedSecret[:])
+	var result [32]byte
+	copy(result[:], hasher.Sum(nil))
+	return result
+}
+
+// DeriveMuKey derives the mu key for HMAC computation
+func DeriveMuKey(sharedSecret [32]byte) [32]byte {
+	hasher := sha256.New()
+	hasher.Write([]byte("mu"))
+	hasher.Write(sharedSecret[:])
+	var result [32]byte
+	copy(result[:], hasher.Sum(nil))
+	return result
+}
+
+func main() {
+	// Example usage
+	ephemeralPrivate, _ := btcec.NewPrivateKey()
+	hopPublic, _ := btcec.NewPrivateKey()
+
+	sharedSecret := DeriveSharedSecret(ephemeralPrivate, hopPublic.PubKey())
+	fmt.Printf("Shared secret: %s\n", hex.EncodeToString(sharedSecret[:]))
+
+	rhoKey := DeriveRhoKey(sharedSecret)
+	muKey := DeriveMuKey(sharedSecret)
+	fmt.Printf("Rho key: %s\n", hex.EncodeToString(rhoKey[:]))
+	fmt.Printf("Mu key: %s\n", hex.EncodeToString(muKey[:]))
+}
+```
 :::
 
 ## Encryption Process

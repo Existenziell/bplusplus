@@ -229,6 +229,139 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"fmt"
+	"golang.org/x/crypto/ripemd160"
+)
+
+type StackItem interface{}
+
+type ScriptInterpreter struct {
+	stack []StackItem
+}
+
+func NewScriptInterpreter() *ScriptInterpreter {
+	return &ScriptInterpreter{
+		stack: make([]StackItem, 0),
+	}
+}
+
+func (si *ScriptInterpreter) Push(item StackItem) {
+	si.stack = append(si.stack, item)
+}
+
+func (si *ScriptInterpreter) Pop() (StackItem, bool) {
+	if len(si.stack) == 0 {
+		return nil, false
+	}
+	item := si.stack[len(si.stack)-1]
+	si.stack = si.stack[:len(si.stack)-1]
+	return item, true
+}
+
+func (si *ScriptInterpreter) OpDup() bool {
+	if len(si.stack) == 0 {
+		return false
+	}
+	si.stack = append(si.stack, si.stack[len(si.stack)-1])
+	return true
+}
+
+func (si *ScriptInterpreter) OpDrop() bool {
+	if len(si.stack) == 0 {
+		return false
+	}
+	si.stack = si.stack[:len(si.stack)-1]
+	return true
+}
+
+func (si *ScriptInterpreter) OpAdd() bool {
+	if len(si.stack) < 2 {
+		return false
+	}
+	b, _ := si.Pop()
+	a, _ := si.Pop()
+	
+	bInt, bOk := b.(int)
+	aInt, aOk := a.(int)
+	if !aOk || !bOk {
+		return false
+	}
+	si.Push(aInt + bInt)
+	return true
+}
+
+func (si *ScriptInterpreter) OpEqual() bool {
+	if len(si.stack) < 2 {
+		return false
+	}
+	b, _ := si.Pop()
+	a, _ := si.Pop()
+	
+	var equal bool
+	switch aVal := a.(type) {
+	case int:
+		if bVal, ok := b.(int); ok {
+			equal = aVal == bVal
+		}
+	case []byte:
+		if bVal, ok := b.([]byte); ok {
+			equal = string(aVal) == string(bVal)
+		}
+	default:
+		equal = false
+	}
+	
+	if equal {
+		si.Push(1)
+	} else {
+		si.Push(0)
+	}
+	return true
+}
+
+func (si *ScriptInterpreter) OpHash160() bool {
+	if len(si.stack) == 0 {
+		return false
+	}
+	data, _ := si.Pop()
+	
+	var dataBytes []byte
+	switch v := data.(type) {
+	case []byte:
+		dataBytes = v
+	case int:
+		dataBytes = []byte{byte(v)}
+	default:
+		return false
+	}
+	
+	sha := sha256.Sum256(dataBytes)
+	hasher := ripemd160.New()
+	hasher.Write(sha[:])
+	ripemd := hasher.Sum(nil)
+	si.Push(ripemd)
+	return true
+}
+
+func main() {
+	interp := NewScriptInterpreter()
+	
+	// Simulate: 5 3 OP_ADD 8 OP_EQUAL
+	interp.Push(5)
+	interp.Push(3)
+	interp.OpAdd()
+	interp.Push(8)
+	interp.OpEqual()
+	
+	fmt.Printf("Result: %v\n", interp.stack) // [1] = true
+}
+```
+
 ```javascript
 class ScriptInterpreter {
     constructor() {

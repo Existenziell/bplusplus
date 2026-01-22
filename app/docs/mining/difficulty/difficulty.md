@@ -190,6 +190,36 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// AdjustDifficulty performs simplified difficulty adjustment
+func AdjustDifficulty(oldDifficulty float64, actualTime float64, targetTime float64) float64 {
+	if targetTime == 0 {
+		targetTime = 20160.0 // Default: 2016 blocks × 10 minutes
+	}
+	
+	ratio := targetTime / actualTime
+	
+	// Limit adjustment to ±4x
+	ratio = math.Max(0.25, math.Min(4.0, ratio))
+	
+	newDifficulty := oldDifficulty * ratio
+	return newDifficulty
+}
+
+func main() {
+	// Example: blocks mined in 18,000 minutes (faster than target)
+	newDiff := AdjustDifficulty(100_000.0, 18_000.0, 20_160.0)
+	fmt.Printf("New difficulty: %.0f\n", newDiff) // ~112,000
+}
+```
+
 ```javascript
 /**
  * Simplified difficulty adjustment.

@@ -117,6 +117,63 @@ psbt.addInput({
 psbt.addOutput({ address: 'bc1q...', value: 50000 });
 const psbtBase64 = psbt.toBase64();
 ```
+
+```go
+package main
+
+import (
+	"encoding/hex"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/txscript"
+	"github.com/btcsuite/btcd/wire"
+	"github.com/vulpemventures/go-bip32"
+)
+
+func createPSBT(prevTxid string, recipientAddr string, inputValue int64) (*wire.MsgTx, error) {
+	// Create transaction
+	tx := wire.NewMsgTx(wire.TxVersion)
+
+	// Add input
+	prevTxHash, err := wire.NewHashFromStr(prevTxid)
+	if err != nil {
+		return nil, err
+	}
+	txIn := wire.NewTxIn(wire.NewOutPoint(prevTxHash, 0), nil, nil)
+	txIn.Sequence = wire.MaxTxInSequenceNum - 2 // Enable RBF
+	tx.AddTxIn(txIn)
+
+	// Add output
+	recipientAddrDecoded, err := btcutil.DecodeAddress(recipientAddr, &chaincfg.MainNetParams)
+	if err != nil {
+		return nil, err
+	}
+	recipientScript, err := txscript.PayToAddrScript(recipientAddrDecoded)
+	if err != nil {
+		return nil, err
+	}
+	txOut := wire.NewTxOut(50000, recipientScript)
+	tx.AddTxOut(txOut)
+
+	// In a real implementation, you would use a PSBT library
+	// This is a simplified example showing transaction structure
+	return tx, nil
+}
+
+func main() {
+	tx, err := createPSBT("previous_txid_here", "bc1q...", 100000)
+	if err != nil {
+		panic(err)
+	}
+
+	// Serialize transaction (simplified - real PSBT would use BIP-174 encoding)
+	var buf []byte
+	buf, _ = tx.Bytes()
+	fmt.Printf("Transaction: %s\n", hex.EncodeToString(buf))
+}
+```
 :::
 
 ## Signing PSBTs

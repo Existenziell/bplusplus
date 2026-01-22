@@ -78,6 +78,60 @@ const seed = await bip39.mnemonicToSeed(mnemonic);
 const root = bip32.fromSeed(seed);
 const child = root.derivePath("m/84'/0'/0'/0/0");
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/tyler-smith/go-bip32"
+	"github.com/tyler-smith/go-bip39"
+)
+
+func deriveKey(seed []byte) (*bip32.Key, error) {
+	master, err := bip32.NewMasterKey(seed)
+	if err != nil {
+		return nil, err
+	}
+	
+	// Derive m/84'/0'/0'/0/0
+	child, err := master.NewChildKey(bip32.FirstHardenedChild + 84)
+	if err != nil {
+		return nil, err
+	}
+	child, err = child.NewChildKey(bip32.FirstHardenedChild + 0)
+	if err != nil {
+		return nil, err
+	}
+	child, err = child.NewChildKey(bip32.FirstHardenedChild + 0)
+	if err != nil {
+		return nil, err
+	}
+	child, err = child.NewChildKey(0)
+	if err != nil {
+		return nil, err
+	}
+	child, err = child.NewChildKey(0)
+	if err != nil {
+		return nil, err
+	}
+	
+	return child, nil
+}
+
+func main() {
+	mnemonic, _ := bip39.NewMnemonic(bip39.NewEntropy(256))
+	seed, _ := bip39.NewSeedWithErrorChecking(mnemonic, "")
+	
+	key, err := deriveKey(seed)
+	if err != nil {
+		panic(err)
+	}
+	
+	fmt.Printf("Derived key: %x\n", key.Key)
+}
+```
 :::
 
 ## Seed Phrases (BIP39)
@@ -118,6 +172,42 @@ import * as bip39 from 'bip39';
 const mnemonic = bip39.generateMnemonic(256);
 const isValid = bip39.validateMnemonic(mnemonic);
 const seed = await bip39.mnemonicToSeed(mnemonic, 'optional_passphrase');
+```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/tyler-smith/go-bip39"
+)
+
+func main() {
+	// Generate mnemonic (128=12 words, 256=24 words)
+	entropy, err := bip39.NewEntropy(256)
+	if err != nil {
+		panic(err)
+	}
+	
+	mnemonic, err := bip39.NewMnemonic(entropy)
+	if err != nil {
+		panic(err)
+	}
+	
+	// Validate mnemonic
+	isValid := bip39.IsMnemonicValid(mnemonic)
+	
+	// Convert to seed with optional passphrase
+	seed, err := bip39.NewSeedWithErrorChecking(mnemonic, "optional_passphrase")
+	if err != nil {
+		panic(err)
+	}
+	
+	fmt.Printf("Mnemonic: %s\n", mnemonic)
+	fmt.Printf("Valid: %v\n", isValid)
+	fmt.Printf("Seed: %x\n", seed)
+}
 ```
 :::
 

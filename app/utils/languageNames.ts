@@ -4,6 +4,7 @@ export const languageNames: Record<string, string> = {
   rust: 'Rust',
   cpp: 'C++',
   c: 'C',
+  go: 'Go',
   javascript: 'JS',
   js: 'JS',
   typescript: 'TypeScript',

@@ -127,6 +127,41 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// GetBlockSubsidy calculates block subsidy for any block height.
+// Returns subsidy in BTC.
+func GetBlockSubsidy(blockHeight uint64) float64 {
+	halvings := blockHeight / 210_000
+	if halvings >= 64 {
+		return 0.0
+	}
+	return 50.0 / math.Pow(2.0, float64(halvings))
+}
+
+// GetBlockSubsidySats calculates block subsidy in satoshis (more precise).
+func GetBlockSubsidySats(blockHeight uint64) uint64 {
+	halvings := blockHeight / 210_000
+	if halvings >= 64 {
+		return 0
+	}
+	initialSubsidy := uint64(50 * 100_000_000) // 50 BTC in satoshis
+	return initialSubsidy >> halvings
+}
+
+func main() {
+	fmt.Printf("Block 0: %.8f BTC\n", GetBlockSubsidy(0))
+	fmt.Printf("Block 210,000: %.8f BTC\n", GetBlockSubsidy(210_000))
+	fmt.Printf("Block 840,000: %.8f BTC\n", GetBlockSubsidy(840_000))
+}
+```
+
 ```javascript
 /**
  * Calculate block subsidy for any block height.
@@ -157,6 +192,41 @@ function getBlockSubsidySats(blockHeight) {
 console.log(`Block 0: ${getBlockSubsidy(0)} BTC`);
 console.log(`Block 210,000: ${getBlockSubsidy(210000)} BTC`);
 console.log(`Block 840,000: ${getBlockSubsidy(840000)} BTC`);
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// GetBlockSubsidy calculates block subsidy for any block height.
+// Returns subsidy in BTC.
+func GetBlockSubsidy(blockHeight uint64) float64 {
+	halvings := blockHeight / 210_000
+	if halvings >= 64 {
+		return 0.0
+	}
+	return 50.0 / math.Pow(2.0, float64(halvings))
+}
+
+// GetBlockSubsidySats calculates block subsidy in satoshis (more precise).
+func GetBlockSubsidySats(blockHeight uint64) uint64 {
+	halvings := blockHeight / 210_000
+	if halvings >= 64 {
+		return 0
+	}
+	initialSubsidy := uint64(50 * 100_000_000) // 50 BTC in satoshis
+	return initialSubsidy >> halvings
+}
+
+func main() {
+	fmt.Printf("Block 0: %.8f BTC\n", GetBlockSubsidy(0))
+	fmt.Printf("Block 210,000: %.8f BTC\n", GetBlockSubsidy(210_000))
+	fmt.Printf("Block 840,000: %.8f BTC\n", GetBlockSubsidy(840_000))
+}
 ```
 :::
 
@@ -277,6 +347,40 @@ double total_supply_up_to_block(uint64_t block_height) {
 }
 ```
 
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func totalSupplyUpToBlock(blockHeight uint64) float64 {
+	total := 0.0
+	current := uint64(0)
+	
+	for current <= blockHeight {
+		halvings := current / 210_000
+		if halvings >= 64 {
+			break
+		}
+		
+		periodEnd := uint64(math.Min(float64((halvings+1)*210_000), float64(blockHeight+1)))
+		blocks := periodEnd - (halvings * 210_000)
+		subsidy := 50.0 / math.Pow(2.0, float64(halvings))
+		
+		total += float64(blocks) * subsidy
+		current = periodEnd
+	}
+	return total
+}
+
+func main() {
+	supply := totalSupplyUpToBlock(840_000)
+	fmt.Printf("Supply at block 840,000: %.0f BTC\n", supply)
+}
+```
+
 ```javascript
 function totalSupplyUpToBlock(blockHeight) {
     let total = 0;
@@ -335,6 +439,24 @@ std::pair<uint64_t, uint64_t> next_halving(uint64_t current_height) {
     uint64_t next_height = (current_halvings + 1) * 210000;
     uint64_t blocks_remaining = next_height - current_height;
     return {next_height, blocks_remaining};
+}
+```
+
+```go
+package main
+
+import "fmt"
+
+func nextHalving(currentHeight uint64) (uint64, uint64) {
+	currentHalvings := currentHeight / 210_000
+	nextHeight := (currentHalvings + 1) * 210_000
+	blocksRemaining := nextHeight - currentHeight
+	return nextHeight, blocksRemaining
+}
+
+func main() {
+	nextHeight, remaining := nextHalving(880_000)
+	fmt.Printf("Next halving at block %d, %d blocks remaining\n", nextHeight, remaining)
 }
 ```
 

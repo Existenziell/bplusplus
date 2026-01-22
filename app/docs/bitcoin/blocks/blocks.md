@@ -210,6 +210,66 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	
+	"github.com/pebbe/zmq4"
+)
+
+func subscribeToBlocks() {
+	subscriber, err := zmq4.NewSocket(zmq4.SUB)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer subscriber.Close()
+	
+	// Connect to Bitcoin Core's ZMQ endpoint
+	err = subscriber.Connect("tcp://127.0.0.1:28332")
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	err = subscriber.SetSubscribe("hashblock")
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	fmt.Println("Listening for new blocks...")
+	
+	for {
+		// Receive multipart message: [topic, body, sequence]
+		parts, err := subscriber.RecvMessageBytes(0)
+		if err != nil {
+			log.Fatal(err)
+		}
+		
+		if len(parts) < 3 {
+			continue
+		}
+		
+		// Reverse bytes for big-endian display
+		body := parts[1]
+		hashHex := ""
+		for i := len(body) - 1; i >= 0; i-- {
+			hashHex += fmt.Sprintf("%02x", body[i])
+		}
+		
+		seq := parts[2]
+		sequence := uint32(seq[0]) | uint32(seq[1])<<8 | uint32(seq[2])<<16 | uint32(seq[3])<<24
+		
+		fmt.Printf("New block #%d: %s\n", sequence, hashHex)
+	}
+}
+
+func main() {
+	subscribeToBlocks()
+}
+```
+
 ```javascript
 const zmq = require('zeromq');
 
@@ -368,6 +428,66 @@ int main() {
     // (In practice, read from network or file)
     std::cout << "Block header parser ready" << std::endl;
     return 0;
+}
+```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/binary"
+	"encoding/hex"
+	"fmt"
+)
+
+type BlockHeader struct {
+	Version     int32
+	PrevBlock   [32]byte
+	MerkleRoot  [32]byte
+	Timestamp   uint32
+	Bits        uint32
+	Nonce       uint32
+}
+
+func ParseBlockHeader(data []byte) *BlockHeader {
+	header := &BlockHeader{}
+	header.Version = int32(binary.LittleEndian.Uint32(data[0:4]))
+	copy(header.PrevBlock[:], data[4:36])
+	copy(header.MerkleRoot[:], data[36:68])
+	header.Timestamp = binary.LittleEndian.Uint32(data[68:72])
+	header.Bits = binary.LittleEndian.Uint32(data[72:76])
+	header.Nonce = binary.LittleEndian.Uint32(data[76:80])
+	return header
+}
+
+func (h *BlockHeader) Hash(data []byte) [32]byte {
+	// Double SHA256
+	first := sha256.Sum256(data)
+	second := sha256.Sum256(first[:])
+	return second
+}
+
+func (h *BlockHeader) HashHex(data []byte) string {
+	hash := h.Hash(data)
+	// Reverse bytes for big-endian display
+	reversed := make([]byte, 32)
+	for i := 0; i < 32; i++ {
+		reversed[i] = hash[31-i]
+	}
+	return hex.EncodeToString(reversed)
+}
+
+func main() {
+	// Example: Genesis block header
+	headerHex := "0100000000000000000000000000000000000000000000000000000000000000000000003ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a29ab5f49ffff001d1dac2b7c"
+	headerBytes, _ := hex.DecodeString(headerHex)
+
+	header := ParseBlockHeader(headerBytes)
+	fmt.Printf("Version: %d\n", header.Version)
+	fmt.Printf("Timestamp: %d\n", header.Timestamp)
+	fmt.Printf("Nonce: %d\n", header.Nonce)
+	fmt.Printf("Block hash: %s\n", header.HashHex(headerBytes))
 }
 ```
 

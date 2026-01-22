@@ -233,27 +233,27 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       info: {
         bg: 'bg-blue-50 dark:bg-blue-950/20',
         border: 'border-blue-200 dark:border-blue-800',
-        icon: 'ℹ️',
+        icon: '₿',
       },
       warning: {
         bg: 'bg-yellow-50 dark:bg-yellow-950/20',
         border: 'border-yellow-200 dark:border-yellow-800',
-        icon: '⚠️',
+        icon: '₿',
       },
       error: {
         bg: 'bg-red-50 dark:bg-red-950/20',
         border: 'border-red-200 dark:border-red-800',
-        icon: '❌',
+        icon: '₿',
       },
       success: {
         bg: 'bg-green-50 dark:bg-green-950/20',
         border: 'border-green-200 dark:border-green-800',
-        icon: '✅',
+        icon: '₿',
       },
       tip: {
         bg: 'bg-emerald-50 dark:bg-emerald-950/20',
         border: 'border-emerald-200 dark:border-emerald-800',
-        icon: '💡',
+        icon: '₿',
       },
     }
 

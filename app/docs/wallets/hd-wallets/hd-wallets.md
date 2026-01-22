@@ -152,6 +152,46 @@ mnemonicToSeed(mnemonic).then(seed => {
 // const ecc = require('tiny-secp256k1');
 // const bip32 = BIP32Factory(ecc);
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/tyler-smith/go-bip39"
+)
+
+func generateMnemonic(strength int) (string, error) {
+	// Generate mnemonic (128=12 words, 256=24 words)
+	entropy, err := bip39.NewEntropy(strength)
+	if err != nil {
+		return "", err
+	}
+	return bip39.NewMnemonic(entropy)
+}
+
+func mnemonicToSeed(mnemonic, passphrase string) ([]byte, error) {
+	// Convert mnemonic to 512-bit seed using PBKDF2
+	return bip39.NewSeedWithErrorChecking(mnemonic, passphrase)
+}
+
+func main() {
+	// Generate 24-word mnemonic
+	mnemonic, err := generateMnemonic(256)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Mnemonic: %s\n", mnemonic)
+
+	// Convert to seed (no passphrase)
+	seed, err := mnemonicToSeed(mnemonic, "")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Seed: %x\n", seed)
+}
+```
 :::
 
 ## BIP32: Key Derivation
@@ -331,6 +371,76 @@ const mnemonic = bip39.generateMnemonic(256);
 console.log('Mnemonic:', mnemonic);
 deriveKeys(mnemonic);
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/tyler-smith/go-bip32"
+	"github.com/tyler-smith/go-bip39"
+)
+
+func deriveKeys(mnemonic string) error {
+	// Convert mnemonic to seed
+	seed, err := bip39.NewSeedWithErrorChecking(mnemonic, "")
+	if err != nil {
+		return err
+	}
+
+	// Create master key from seed
+	master, err := bip32.NewMasterKey(seed)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Master xprv: %s\n", master.B58Serialize())
+
+	// Derive BIP84 path: m/84'/0'/0'/0/0
+	// 84' = purpose (native SegWit)
+	// 0' = coin type (Bitcoin mainnet)
+	// 0' = account
+	// 0 = external chain (receiving)
+	// 0 = first address
+	purpose, err := master.NewChildKey(bip32.FirstHardenedChild + 84)
+	if err != nil {
+		return err
+	}
+
+	coin, err := purpose.NewChildKey(bip32.FirstHardenedChild + 0)
+	if err != nil {
+		return err
+	}
+
+	account, err := coin.NewChildKey(bip32.FirstHardenedChild + 0)
+	if err != nil {
+		return err
+	}
+
+	change, err := account.NewChildKey(0)
+	if err != nil {
+		return err
+	}
+
+	address, err := change.NewChildKey(0)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("Derived xprv: %s\n", address.B58Serialize())
+	fmt.Printf("Derived xpub: %s\n", address.PublicKey().B58Serialize())
+	fmt.Printf("Private key: %x\n", address.Key)
+	fmt.Printf("Public key: %x\n", address.PublicKey().Key)
+
+	return nil
+}
+
+func main() {
+	mnemonic, _ := bip39.NewMnemonic(bip39.NewEntropy(256))
+	fmt.Printf("Mnemonic: %s\n", mnemonic)
+	deriveKeys(mnemonic)
+}
+```
 :::
 
 ## BIP44: Multi-Account Hierarchy
@@ -470,6 +580,56 @@ function generateAddressesFromXpub(xpubString, count = 5) {
 // Example usage with account xpub
 const xpub = 'xpub...';
 generateAddressesFromXpub(xpub, 5);
+```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/tyler-smith/go-bip32"
+)
+
+func generateAddressesFromXpub(xpubString string, count int) error {
+	// Parse extended public key
+	xpub, err := bip32.B58Deserialize(xpubString)
+	if err != nil {
+		return err
+	}
+
+	for i := 0; i < count; i++ {
+		// Derive: xpub/0/i (receiving chain)
+		change, err := xpub.NewChildKey(0)
+		if err != nil {
+			return err
+		}
+
+		addressKey, err := change.NewChildKey(uint32(i))
+		if err != nil {
+			return err
+		}
+
+		// Generate P2WPKH address
+		pubkeyHash := btcutil.Hash160(addressKey.Key)
+		addr, err := btcutil.NewAddressWitnessPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
+		if err != nil {
+			return err
+		}
+
+		fmt.Printf("Address %d: %s\n", i, addr.EncodeAddress())
+	}
+
+	return nil
+}
+
+func main() {
+	// Example usage with account xpub
+	xpub := "xpub..." // Extended public key
+	generateAddressesFromXpub(xpub, 5)
+}
 ```
 :::
 

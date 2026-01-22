@@ -1,8 +1,7 @@
 # What is Bitcoin?
 
+Depending on who you ask or where you currently are in your journey down the Bitcoin rabbit hole, Bitcoin can mean many things.
 Bitcoin is a decentralized digital currency and payment system that operates without a central authority or intermediary. It was created in 2009 by an anonymous person or group using the pseudonym [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto).
-
-## Core Definition
 
 **Bitcoin** (capitalized) refers to the protocol, network, and system.  
 **bitcoin** (lowercase) or **BTC** refers to the currency unit.

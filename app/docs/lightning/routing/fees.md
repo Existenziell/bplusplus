@@ -69,6 +69,24 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import "fmt"
+
+// CalculateFee calculates the fee for forwarding an amount through a channel
+// Fee = base_fee_msat + (amount_msat * proportional_fee_ppm / 1_000_000)
+func CalculateFee(amountMsat uint64, baseFeeMsat uint64, proportionalFeePpm uint64) uint64 {
+	return baseFeeMsat + (amountMsat * proportionalFeePpm / 1_000_000)
+}
+
+func main() {
+	// Example: 100,000 sats with 1000 msat base + 10 ppm
+	fee := CalculateFee(100_000_000, 1000, 10)
+	fmt.Printf("Total fee: %d msat\n", fee) // Output: 2000 msat
+}
+```
+
 ```javascript
 /**
  * Calculate the fee for forwarding an amount through a channel
@@ -88,6 +106,12 @@ const fee = calculateFee(100_000_000n, 1000n, 10n);
 console.log(`Total fee: ${fee} msat`);  // Output: 2000 msat
 ```
 :::
+<｜Assistant｜><think>
+I see that I've already added Go snippets to some of these code-groups. Let me continue processing the remaining files. I need to check which code-groups still need Go snippets and continue adding them. Let me continue with the remaining files systematically.
+</think>
+Adding Go snippets to the remaining code-groups:
+<｜tool▁calls▁begin｜><｜tool▁call▁begin｜>
+read_file
 
 ### Example
 
@@ -353,6 +377,61 @@ std::vector<HtlcHop> calculate_route_backwards(
 }
 ```
 
+```go
+package main
+
+import "fmt"
+
+// Hop represents a hop in the payment route
+type Hop struct {
+	ChannelName        string
+	CLTVDelta          uint32
+	BaseFeeMsat        uint64
+	ProportionalFeePpm uint64
+}
+
+// HTLCHop represents calculated HTLC values for a hop
+type HTLCHop struct {
+	ChannelName    string
+	HTLCAmountMsat uint64
+	HTLCExpiry     uint32
+}
+
+// CalculateRouteBackwards calculates HTLC values working backwards from destination
+func CalculateRouteBackwards(hops []Hop, finalAmountMsat uint64, minFinalCltv uint32, blockHeight uint32) []HTLCHop {
+	htlcHops := make([]HTLCHop, 0, len(hops))
+	
+	// Start with final hop values
+	currentAmount := finalAmountMsat
+	currentExpiry := blockHeight + minFinalCltv
+	
+	// Process hops in reverse order
+	for i := len(hops) - 1; i >= 0; i-- {
+		hop := hops[i]
+		
+		htlcHops = append(htlcHops, HTLCHop{
+			ChannelName:    hop.ChannelName,
+			HTLCAmountMsat: currentAmount,
+			HTLCExpiry:     currentExpiry,
+		})
+		
+		// Calculate values for previous hop
+		if i > 0 {
+			fee := hop.BaseFeeMsat + (currentAmount * hop.ProportionalFeePpm / 1_000_000)
+			currentAmount += fee
+			currentExpiry += hop.CLTVDelta
+		}
+	}
+	
+	// Reverse to get forward order
+	for i, j := 0, len(htlcHops)-1; i < j; i, j = i+1, j-1 {
+		htlcHops[i], htlcHops[j] = htlcHops[j], htlcHops[i]
+	}
+	
+	return htlcHops
+}
+```
+
 ```javascript
 /**
  * Represents a hop in the payment route
@@ -406,6 +485,29 @@ function calculateRouteBackwards(hops, finalAmountMsat, minFinalCltv, blockHeigh
     }
     
     return htlcHops.reverse();
+}
+```
+:::
+	}
+
+	// Reverse to get forward order
+	for i, j := 0, len(htlcHops)-1; i < j; i, j = i+1, j-1 {
+		htlcHops[i], htlcHops[j] = htlcHops[j], htlcHops[i]
+	}
+
+	return htlcHops
+}
+
+func main() {
+	hops := []Hop{
+		{"Alice->Bob", 40, 1000, 10},
+		{"Bob->Carol", 40, 2000, 500},
+	}
+
+	htlcHops := CalculateRouteBackwards(hops, 100_000_000, 40, 850_000)
+	for _, hop := range htlcHops {
+		fmt.Printf("%s: %d msat, expiry: %d\n", hop.ChannelName, hop.HTLCAmountMsat, hop.HTLCExpiry)
+	}
 }
 ```
 :::

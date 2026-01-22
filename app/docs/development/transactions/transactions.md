@@ -107,6 +107,64 @@ function createTransaction(prevTxid, recipientAddr, changeAddr) {
   return psbt;
 }
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/txscript"
+	"github.com/btcsuite/btcd/wire"
+)
+
+func createTransaction(prevTxid string, recipientAddr string, changeAddr string) (*wire.MsgTx, error) {
+	tx := wire.NewMsgTx(wire.TxVersion)
+
+	// Add input
+	prevTxHash, err := wire.NewHashFromStr(prevTxid)
+	if err != nil {
+		return nil, err
+	}
+	txIn := wire.NewTxIn(wire.NewOutPoint(prevTxHash, 0), nil, nil)
+	txIn.Sequence = wire.MaxTxInSequenceNum - 2 // Enable RBF
+	tx.AddTxIn(txIn)
+
+	// Add recipient output
+	recipientAddrDecoded, err := btcutil.DecodeAddress(recipientAddr, &chaincfg.MainNetParams)
+	if err != nil {
+		return nil, err
+	}
+	recipientScript, err := txscript.PayToAddrScript(recipientAddrDecoded)
+	if err != nil {
+		return nil, err
+	}
+	tx.AddTxOut(wire.NewTxOut(50000, recipientScript))
+
+	// Add change output
+	changeAddrDecoded, err := btcutil.DecodeAddress(changeAddr, &chaincfg.MainNetParams)
+	if err != nil {
+		return nil, err
+	}
+	changeScript, err := txscript.PayToAddrScript(changeAddrDecoded)
+	if err != nil {
+		return nil, err
+	}
+	tx.AddTxOut(wire.NewTxOut(49000, changeScript))
+
+	return tx, nil
+}
+
+func main() {
+	tx, err := createTransaction("prev_txid", "bc1q...", "bc1q...")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Transaction created with %d inputs and %d outputs\n", len(tx.TxIn), len(tx.TxOut))
+}
+```
 :::
 
 ## Input Selection
@@ -564,6 +622,49 @@ async function broadcastTransaction(txHex) {
   });
   if (!response.ok) throw new Error(await response.text());
   return await response.text(); // Returns txid
+}
+```
+
+```go
+package main
+
+import (
+	"bytes"
+	"encoding/hex"
+	"fmt"
+	"io"
+	"net/http"
+)
+
+func broadcastTransaction(txHex string) (string, error) {
+	url := "https://mempool.space/api/tx"
+	resp, err := http.Post(url, "text/plain", bytes.NewBufferString(txHex))
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		return "", fmt.Errorf("broadcast failed: %s", string(body))
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	return string(body), nil // Returns txid
+}
+
+func main() {
+	// Example: broadcast a transaction
+	txHex := "0100000001..." // Transaction hex
+	txid, err := broadcastTransaction(txHex)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Transaction broadcast: %s\n", txid)
 }
 ```
 :::

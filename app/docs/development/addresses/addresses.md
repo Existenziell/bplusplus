@@ -133,6 +133,48 @@ const p2wpkh = bitcoin.payments.p2wpkh({
 });
 console.log(p2wpkh.address); // bc1q...
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+)
+
+func pubkeyToP2WPKH(pubkeyBytes []byte, mainnet bool) (string, error) {
+	pubkey, err := btcec.ParsePubKey(pubkeyBytes)
+	if err != nil {
+		return "", err
+	}
+
+	pubkeyHash := btcutil.Hash160(pubkey.SerializeCompressed())
+	
+	params := &chaincfg.MainNetParams
+	if !mainnet {
+		params = &chaincfg.TestNet3Params
+	}
+
+	addr, err := btcutil.NewAddressWitnessPubKeyHash(pubkeyHash, params)
+	if err != nil {
+		return "", err
+	}
+
+	return addr.EncodeAddress(), nil
+}
+
+func main() {
+	// Example usage
+	pubkey, _ := btcec.NewPrivateKey()
+	pubkeyBytes := pubkey.PubKey().SerializeCompressed()
+	
+	addr, _ := pubkeyToP2WPKH(pubkeyBytes, true)
+	fmt.Println(addr) // bc1q...
+}
+```
 :::
 
 ## Validating Addresses
@@ -193,6 +235,48 @@ function validateAddress(address, network = bitcoin.networks.bitcoin) {
   }
 }
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+)
+
+func validateAddress(address string) (bool, string) {
+	addr, err := btcutil.DecodeAddress(address, &chaincfg.MainNetParams)
+	if err != nil {
+		// Try testnet
+		addr, err = btcutil.DecodeAddress(address, &chaincfg.TestNet3Params)
+		if err != nil {
+			return false, "Invalid"
+		}
+	}
+
+	switch addr.(type) {
+	case *btcutil.AddressPubKeyHash:
+		return true, "P2PKH"
+	case *btcutil.AddressScriptHash:
+		return true, "P2SH"
+	case *btcutil.AddressWitnessPubKeyHash:
+		return true, "P2WPKH"
+	case *btcutil.AddressWitnessScriptHash:
+		return true, "P2WSH"
+	case *btcutil.AddressTaproot:
+		return true, "P2TR"
+	default:
+		return true, "Other"
+	}
+}
+
+func main() {
+	valid, addrType := validateAddress("1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2")
+	fmt.Printf("Valid: %v, Type: %s\n", valid, addrType)
+}
+```
 :::
 
 ## Bech32 Encoding Details
@@ -245,6 +329,40 @@ import * as bitcoin from 'bitcoinjs-lib';
 
 function scriptToAddress(script, network = bitcoin.networks.bitcoin) {
   return bitcoin.address.fromOutputScript(script, network);
+}
+```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/txscript"
+)
+
+func scriptToAddress(script []byte) (string, error) {
+	addr, err := btcutil.NewAddressScriptHash(script, &chaincfg.MainNetParams)
+	if err != nil {
+		return "", err
+	}
+	return addr.EncodeAddress(), nil
+}
+
+func main() {
+	// Example: Convert a script to address
+	script, _ := txscript.NewScriptBuilder().
+		AddOp(txscript.OP_DUP).
+		AddOp(txscript.OP_HASH160).
+		AddData([]byte("example_pubkey_hash")).
+		AddOp(txscript.OP_EQUALVERIFY).
+		AddOp(txscript.OP_CHECKSIG).
+		Script()
+
+	addr, _ := scriptToAddress(script)
+	fmt.Println(addr)
 }
 ```
 :::
@@ -361,6 +479,55 @@ function createMultisig(m, pubkeys) {
   const multisig = bitcoin.payments.p2ms({ m, pubkeys });
   const p2wsh = bitcoin.payments.p2wsh({ redeem: multisig });
   return p2wsh.address; // bc1q... (P2WSH)
+}
+```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/txscript"
+)
+
+func createMultisig(m int, pubkeys [][]byte) (string, error) {
+	// Create multisig script
+	builder := txscript.NewScriptBuilder()
+	builder.AddInt64(int64(m))
+	for _, pubkey := range pubkeys {
+		builder.AddData(pubkey)
+	}
+	builder.AddInt64(int64(len(pubkeys)))
+	builder.AddOp(txscript.OP_CHECKMULTISIG)
+	script, err := builder.Script()
+	if err != nil {
+		return "", err
+	}
+
+	// Create P2WSH address
+	scriptHash := btcutil.Hash160(script)
+	addr, err := btcutil.NewAddressWitnessScriptHash(scriptHash, &chaincfg.MainNetParams)
+	if err != nil {
+		return "", err
+	}
+
+	return addr.EncodeAddress(), nil
+}
+
+func main() {
+	// Example: 2-of-3 multisig
+	pubkeys := make([][]byte, 3)
+	for i := 0; i < 3; i++ {
+		privkey, _ := btcec.NewPrivateKey()
+		pubkeys[i] = privkey.PubKey().SerializeCompressed()
+	}
+
+	addr, _ := createMultisig(2, pubkeys)
+	fmt.Println(addr) // bc1q... (P2WSH)
 }
 ```
 :::

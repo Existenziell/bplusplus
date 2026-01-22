@@ -152,6 +152,47 @@ const { privateKey, address } = generateP2PKHAddress();
 console.log('Private Key (WIF):', privateKey);
 console.log('P2PKH Address:', address);
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+)
+
+func generateP2PKHAddress() (string, string) {
+	// Generate key pair
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// Get WIF private key
+	wif, err := btcutil.NewWIF(privateKey, &chaincfg.MainNetParams, true)
+	if err != nil {
+		panic(err)
+	}
+
+	// Create P2PKH address
+	pubkeyHash := btcutil.Hash160(privateKey.PubKey().SerializeCompressed())
+	addr, err := btcutil.NewAddressPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	return wif.String(), addr.EncodeAddress()
+}
+
+func main() {
+	privateKey, address := generateP2PKHAddress()
+	fmt.Printf("Private Key (WIF): %s\n", privateKey)
+	fmt.Printf("P2PKH Address: %s\n", address) // Starts with '1'
+}
+```
 :::
 
 ### Characteristics
@@ -299,6 +340,52 @@ function generateP2SHP2WPKHAddress() {
 const { privateKey, address } = generateP2SHP2WPKHAddress();
 console.log('P2SH-P2WPKH Address:', address);
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/txscript"
+)
+
+func generateP2SHP2WPKHAddress() (string, string) {
+	// Generate key pair
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// Get WIF private key
+	wif, err := btcutil.NewWIF(privateKey, &chaincfg.MainNetParams, true)
+	if err != nil {
+		panic(err)
+	}
+
+	// Create P2WPKH witness program
+	pubkeyHash := btcutil.Hash160(privateKey.PubKey().SerializeCompressed())
+	witnessProgram := append([]byte{0x00, 0x14}, pubkeyHash...)
+
+	// Create P2SH address from witness program
+	scriptHash := btcutil.Hash160(witnessProgram)
+	addr, err := btcutil.NewAddressScriptHashFromHash(scriptHash, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	return wif.String(), addr.EncodeAddress()
+}
+
+func main() {
+	privateKey, address := generateP2SHP2WPKHAddress()
+	fmt.Printf("Private Key (WIF): %s\n", privateKey)
+	fmt.Printf("P2SH-P2WPKH Address: %s\n", address) // Starts with '3'
+}
+```
 :::
 
 ### Characteristics
@@ -443,6 +530,47 @@ function generateP2WPKHAddress() {
 
 const { privateKey, address } = generateP2WPKHAddress();
 console.log('P2WPKH Address:', address);
+```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+)
+
+func generateP2WPKHAddress() (string, string) {
+	// Generate key pair
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// Get WIF private key
+	wif, err := btcutil.NewWIF(privateKey, &chaincfg.MainNetParams, true)
+	if err != nil {
+		panic(err)
+	}
+
+	// Create P2WPKH (native SegWit) address
+	pubkeyHash := btcutil.Hash160(privateKey.PubKey().SerializeCompressed())
+	addr, err := btcutil.NewAddressWitnessPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	return wif.String(), addr.EncodeAddress()
+}
+
+func main() {
+	privateKey, address := generateP2WPKHAddress()
+	fmt.Printf("Private Key (WIF): %s\n", privateKey)
+	fmt.Printf("P2WPKH Address: %s\n", address) // Starts with 'bc1q'
+}
 ```
 :::
 
@@ -611,6 +739,51 @@ function generateP2TRAddress() {
 
 const { privateKey, address } = generateP2TRAddress();
 console.log('P2TR Address:', address);
+```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+)
+
+func generateP2TRAddress() (string, string) {
+	// Generate key pair
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// Get WIF private key
+	wif, err := btcutil.NewWIF(privateKey, &chaincfg.MainNetParams, true)
+	if err != nil {
+		panic(err)
+	}
+
+	// Get x-only public key (32 bytes, drop the prefix)
+	pubkey := privateKey.PubKey()
+	xOnlyPubkey := pubkey.SerializeCompressed()[1:33]
+
+	// Create P2TR address (key path only, simplified)
+	// In production, apply proper BIP341 tweaking
+	addr, err := btcutil.NewAddressTaproot(xOnlyPubkey, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	return wif.String(), addr.EncodeAddress()
+}
+
+func main() {
+	privateKey, address := generateP2TRAddress()
+	fmt.Printf("Private Key (WIF): %s\n", privateKey)
+	fmt.Printf("P2TR Address: %s\n", address) // Starts with 'bc1p'
+}
 ```
 :::
 

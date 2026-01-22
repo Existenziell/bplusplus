@@ -277,6 +277,88 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import "fmt"
+
+// MiningCalculator calculates mining profitability based on hardware specs and costs.
+type MiningCalculator struct {
+	HashRateTh        float64 // Hashrate in TH/s
+	PowerWatts        float64 // Power consumption in watts
+	ElectricityRate   float64 // $/kWh
+	PoolFeePercent    float64 // Pool fee percentage
+	BTCPrice          float64 // Current BTC price in USD
+	NetworkHashRateEh float64 // Network hashrate in EH/s
+	BlockReward       float64 // Block reward in BTC
+}
+
+func NewMiningCalculator(hashRateTh, powerWatts, electricityRate, poolFeePercent, btcPrice, networkHashRateEh, blockReward float64) *MiningCalculator {
+	return &MiningCalculator{
+		HashRateTh:        hashRateTh,
+		PowerWatts:        powerWatts,
+		ElectricityRate:   electricityRate,
+		PoolFeePercent:    poolFeePercent,
+		BTCPrice:          btcPrice,
+		NetworkHashRateEh: networkHashRateEh,
+		BlockReward:       blockReward,
+	}
+}
+
+// DailyBtcRevenue calculates daily revenue in BTC
+func (m *MiningCalculator) DailyBtcRevenue() float64 {
+	blocksPerDay := 144.0
+	
+	// Your share of the network (TH/s vs EH/s = 1e6 ratio)
+	networkShare := m.HashRateTh / (m.NetworkHashRateEh * 1_000_000.0)
+	
+	// Daily BTC before pool fees
+	grossBtc := networkShare * blocksPerDay * m.BlockReward
+	
+	// After pool fees
+	return grossBtc * (1.0 - m.PoolFeePercent/100.0)
+}
+
+// DailyElectricityCost calculates daily electricity cost in USD
+func (m *MiningCalculator) DailyElectricityCost() float64 {
+	kwhPerDay := (m.PowerWatts / 1000.0) * 24.0
+	return kwhPerDay * m.ElectricityRate
+}
+
+// DailyProfit calculates daily profit in USD
+func (m *MiningCalculator) DailyProfit() float64 {
+	revenue := m.DailyBtcRevenue() * m.BTCPrice
+	cost := m.DailyElectricityCost()
+	return revenue - cost
+}
+
+// BreakEvenElectricityRate calculates break-even electricity rate in $/kWh
+func (m *MiningCalculator) BreakEvenElectricityRate() float64 {
+	dailyRevenue := m.DailyBtcRevenue() * m.BTCPrice
+	kwhPerDay := (m.PowerWatts / 1000.0) * 24.0
+	return dailyRevenue / kwhPerDay
+}
+
+func main() {
+	// Example: Antminer S19 XP
+	calc := NewMiningCalculator(
+		140.0,    // 140 TH/s
+		3010.0,   // 3010W
+		0.05,     // $0.05/kWh
+		2.0,      // 2% pool fee
+		60_000.0, // $60,000 per BTC
+		700.0,    // 700 EH/s
+		3.125,    // 3.125 BTC block reward
+	)
+	
+	fmt.Printf("Daily BTC: %.8f BTC\n", calc.DailyBtcRevenue())
+	fmt.Printf("Daily Revenue: $%.2f\n", calc.DailyBtcRevenue()*calc.BTCPrice)
+	fmt.Printf("Daily Electricity: $%.2f\n", calc.DailyElectricityCost())
+	fmt.Printf("Daily Profit: $%.2f\n", calc.DailyProfit())
+	fmt.Printf("Break-even rate: $%.4f/kWh\n", calc.BreakEvenElectricityRate())
+}
+```
+
 ```javascript
 /**
  * Mining profitability calculator.
@@ -353,6 +435,28 @@ console.log(`Daily Revenue: $${(calc.dailyBtcRevenue() * calc.btcPrice).toFixed(
 console.log(`Daily Electricity: $${calc.dailyElectricityCost().toFixed(2)}`);
 console.log(`Daily Profit: $${calc.dailyProfit().toFixed(2)}`);
 console.log(`Break-even rate: $${calc.breakEvenElectricityRate().toFixed(4)}/kWh`);
+```
+:::
+
+
+func main() {
+	// Example: Antminer S19 XP
+	calc := &MiningCalculator{
+		HashRateTh:        140.0,  // 140 TH/s
+		PowerWatts:        3010.0, // 3010W
+		ElectricityRate:   0.05,   // $0.05/kWh
+		PoolFeePercent:    2.0,    // 2% pool fee
+		BTCPrice:          60_000.0, // $60,000 per BTC
+		NetworkHashRateEh: 700.0,  // 700 EH/s
+		BlockReward:       3.125,
+	}
+
+	fmt.Printf("Daily BTC: %.8f BTC\n", calc.DailyBTCRevenue())
+	fmt.Printf("Daily Revenue: $%.2f\n", calc.DailyBTCRevenue()*calc.BTCPrice)
+	fmt.Printf("Daily Electricity: $%.2f\n", calc.DailyElectricityCost())
+	fmt.Printf("Daily Profit: $%.2f\n", calc.DailyProfit())
+	fmt.Printf("Break-even rate: $%.4f/kWh\n", calc.BreakEvenElectricityRate())
+}
 ```
 :::
 

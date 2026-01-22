@@ -435,6 +435,36 @@ function getNetwork(type) {
   return networks[type];
 }
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/chaincfg"
+)
+
+func getNetwork(networkType string) *chaincfg.Params {
+	switch networkType {
+	case "mainnet":
+		return &chaincfg.MainNetParams
+	case "testnet":
+		return &chaincfg.TestNet3Params
+	case "regtest":
+		return &chaincfg.RegressionNetParams
+	case "signet":
+		return &chaincfg.SigNetParams
+	default:
+		panic("Unknown network")
+	}
+}
+
+func main() {
+	network := getNetwork("testnet")
+	fmt.Printf("Network: %s\n", network.Name)
+}
+```
 :::
 
 ### RPC Port Configuration

@@ -168,6 +168,33 @@ const message = Buffer.from('Hello');
 console.log(`SHA-256: ${sha256(message).toString('hex')}`);
 console.log(`Double SHA-256: ${doubleSha256(message).toString('hex')}`);
 ```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+)
+
+func SHA256(data []byte) [32]byte {
+	return sha256.Sum256(data)
+}
+
+func DoubleSHA256(data []byte) [32]byte {
+	// Bitcoin's double SHA-256
+	first := sha256.Sum256(data)
+	second := sha256.Sum256(first[:])
+	return second
+}
+
+func main() {
+	message := []byte("Hello")
+	fmt.Printf("SHA-256: %s\n", hex.EncodeToString(SHA256(message)[:]))
+	fmt.Printf("Double SHA-256: %s\n", hex.EncodeToString(DoubleSHA256(message)[:]))
+}
+```
 :::
 
 ### [RIPEMD-160](/docs/glossary#ripemd-160) and Hash160
@@ -242,6 +269,33 @@ function hash160(data) {
 // Hash a public key
 const publicKey = Buffer.from('02b4632d08485ff1df2db55b9dafd23347d1c47a457072a1e87be26896549a8737', 'hex');
 console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
+```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+
+	"golang.org/x/crypto/ripemd160"
+)
+
+// Hash160 performs RIPEMD160(SHA256(data)) - used for Bitcoin addresses
+func Hash160(data []byte) []byte {
+	sha256Hash := sha256.Sum256(data)
+	hasher := ripemd160.New()
+	hasher.Write(sha256Hash[:])
+	return hasher.Sum(nil)
+}
+
+func main() {
+	// Hash a public key
+	publicKey, _ := hex.DecodeString("02b4632d08485ff1df2db55b9dafd23347d1c47a457072a1e87be26896549a8737")
+	hash160 := Hash160(publicKey)
+	fmt.Printf("Hash160: %s\n", hex.EncodeToString(hash160))
+}
 ```
 :::
 
@@ -390,6 +444,36 @@ const publicKeyUncompressed = secp256k1.publicKeyCreate(privateKey, false); // 6
 console.log(`Private Key: ${privateKey.toString('hex')}`);
 console.log(`Public Key (compressed): ${Buffer.from(publicKeyCompressed).toString('hex')}`);
 console.log(`Public Key (uncompressed): ${Buffer.from(publicKeyUncompressed).toString('hex')}`);
+```
+
+```go
+package main
+
+import (
+	"crypto/rand"
+	"encoding/hex"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+)
+
+func main() {
+	// Generate random private key
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// Serialize keys
+	privateKeyBytes := privateKey.Serialize()
+	publicKey := privateKey.PubKey()
+	publicKeyCompressed := publicKey.SerializeCompressed()     // 33 bytes
+	publicKeyUncompressed := publicKey.SerializeUncompressed()  // 65 bytes
+
+	fmt.Printf("Private Key: %s\n", hex.EncodeToString(privateKeyBytes))
+	fmt.Printf("Public Key (compressed): %s\n", hex.EncodeToString(publicKeyCompressed))
+	fmt.Printf("Public Key (uncompressed): %s\n", hex.EncodeToString(publicKeyUncompressed))
+}
 ```
 :::
 
@@ -558,6 +642,41 @@ const publicKey = secp256k1.publicKeyCreate(privateKey);
 const isValid = secp256k1.ecdsaVerify(sigObj.signature, messageHash, publicKey);
 console.log(`Signature valid: ${isValid}`);
 ```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2/ecdsa"
+)
+
+func main() {
+	// Private key
+	privateKeyBytes, _ := hex.DecodeString("e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35")
+	privateKey, _ := btcec.PrivKeyFromBytes(privateKeyBytes)
+
+	// Message to sign
+	message := []byte("Hello, Bitcoin!")
+	messageHash := sha256.Sum256(message)
+
+	// Sign
+	signature := ecdsa.Sign(privateKey, messageHash[:])
+	signatureBytes := signature.Serialize()
+
+	fmt.Printf("Message Hash: %s\n", hex.EncodeToString(messageHash[:]))
+	fmt.Printf("Signature: %s\n", hex.EncodeToString(signatureBytes))
+
+	// Verify
+	publicKey := privateKey.PubKey()
+	isValid := signature.Verify(messageHash[:], publicKey)
+	fmt.Printf("Signature valid: %v\n", isValid)
+}
+```
 :::
 
 ### [Schnorr Signatures](/docs/glossary#schnorr-signature)
@@ -681,6 +800,39 @@ const aux = taggedHash('BIP0340/aux', Buffer.from('random auxiliary data'));
 const nonce = taggedHash('BIP0340/nonce', Buffer.from('nonce derivation input'));
 
 console.log(`Challenge hash: ${challenge.toString('hex')}`);
+```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+)
+
+func TaggedHash(tag string, msg []byte) [32]byte {
+	tagHash := sha256.Sum256([]byte(tag))
+	
+	// Concatenate: tag_hash || tag_hash || msg
+	data := make([]byte, 0, len(tagHash)*2+len(msg))
+	data = append(data, tagHash[:]...)
+	data = append(data, tagHash[:]...)
+	data = append(data, msg...)
+	
+	return sha256.Sum256(data)
+}
+
+func main() {
+	// Example tags used in Bitcoin
+	challenge := TaggedHash("BIP0340/challenge", []byte("some data"))
+	aux := TaggedHash("BIP0340/aux", []byte("random auxiliary data"))
+	nonce := TaggedHash("BIP0340/nonce", []byte("nonce derivation input"))
+	
+	fmt.Printf("Challenge hash: %s\n", hex.EncodeToString(challenge[:]))
+	fmt.Printf("Aux hash: %s\n", hex.EncodeToString(aux[:]))
+	fmt.Printf("Nonce hash: %s\n", hex.EncodeToString(nonce[:]))
+}
 ```
 :::
 
@@ -920,6 +1072,79 @@ const txHashes = [0, 1, 2, 3].map(i =>
 );
 const root = merkleRoot(txHashes);
 console.log(`Merkle Root: ${root.toString('hex')}`);
+```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+)
+
+func DoubleSHA256(data []byte) [32]byte {
+	first := sha256.Sum256(data)
+	second := sha256.Sum256(first[:])
+	return second
+}
+
+func MerkleRoot(hashes [][]byte) [32]byte {
+	if len(hashes) == 0 {
+		return [32]byte{}
+	}
+	if len(hashes) == 1 {
+		var result [32]byte
+		copy(result[:], hashes[0])
+		return result
+	}
+	
+	// Duplicate last if odd
+	if len(hashes)%2 == 1 {
+		hashes = append(hashes, hashes[len(hashes)-1])
+	}
+	
+	// Hash pairs
+	var nextLevel [][]byte
+	for i := 0; i < len(hashes); i += 2 {
+		combined := append(hashes[i], hashes[i+1]...)
+		hash := DoubleSHA256(combined)
+		nextLevel = append(nextLevel, hash[:])
+	}
+	
+	return MerkleRoot(nextLevel)
+}
+
+func VerifyMerkleProof(txHash []byte, proof [][]byte, root [32]byte, index int) bool {
+	current := make([]byte, 32)
+	copy(current, txHash)
+	
+	for _, sibling := range proof {
+		var combined []byte
+		if index%2 == 0 {
+			combined = append(current, sibling...)
+		} else {
+			combined = append(sibling, current...)
+		}
+		current = DoubleSHA256(combined)[:]
+		index = index / 2
+	}
+	
+	return hex.EncodeToString(current) == hex.EncodeToString(root[:])
+}
+
+func main() {
+	// Example: 4 transactions
+	txHashes := make([][]byte, 4)
+	for i := 0; i < 4; i++ {
+		tx := []byte(fmt.Sprintf("tx%d", i))
+		hash := DoubleSHA256(tx)
+		txHashes[i] = hash[:]
+	}
+	
+	root := MerkleRoot(txHashes)
+	fmt.Printf("Merkle Root: %s\n", hex.EncodeToString(root[:]))
+}
 ```
 :::
 
@@ -1247,6 +1472,65 @@ console.log(`Private Key: ${result.privateKey}`);
 console.log(`Public Key: ${result.publicKey}`);
 console.log(`P2PKH Address: ${result.p2pkhAddress}`);
 console.log(`P2WPKH Address: ${result.p2wpkhAddress}`);
+```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"golang.org/x/crypto/ripemd160"
+)
+
+func hash160(data []byte) []byte {
+	sha := sha256.Sum256(data)
+	hasher := ripemd160.New()
+	hasher.Write(sha[:])
+	return hasher.Sum(nil)
+}
+
+func generateAddresses() {
+	// 1. Generate private key
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// 2. Get compressed public key
+	publicKey := privateKey.PubKey()
+	publicKeyBytes := publicKey.SerializeCompressed()
+
+	// 3. Hash160 the public key
+	pubkeyHash := hash160(publicKeyBytes)
+
+	// 4. Generate P2PKH address (Legacy - starts with '1')
+	p2pkhAddr, err := btcutil.NewAddressPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	// 5. Generate P2WPKH address (Native SegWit - starts with 'bc1q')
+	p2wpkhAddr, err := btcutil.NewAddressWitnessPubKeyHash(pubkeyHash, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Private Key: %x\n", privateKey.Serialize())
+	fmt.Printf("Public Key: %s\n", hex.EncodeToString(publicKeyBytes))
+	fmt.Printf("Pubkey Hash: %s\n", hex.EncodeToString(pubkeyHash))
+	fmt.Printf("P2PKH Address: %s\n", p2pkhAddr.EncodeAddress())
+	fmt.Printf("P2WPKH Address: %s\n", p2wpkhAddr.EncodeAddress())
+}
+
+func main() {
+	generateAddresses()
+}
 ```
 :::
 

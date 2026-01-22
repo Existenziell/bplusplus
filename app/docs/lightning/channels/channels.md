@@ -196,6 +196,51 @@ getChannelBalances().then(balance => {
     console.log(`Remote: ${balance.remoteBalance} sats`);
 });
 ```
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os/exec"
+)
+
+type ChannelBalance struct {
+	LocalBalance  BalanceInfo `json:"local_balance"`
+	RemoteBalance BalanceInfo `json:"remote_balance"`
+}
+
+type BalanceInfo struct {
+	Sat int64 `json:"sat"`
+}
+
+func getChannelBalances() (*ChannelBalance, error) {
+	// Query channel balances using lncli
+	cmd := exec.Command("lncli", "channelbalance")
+	output, err := cmd.Output()
+	if err != nil {
+		return nil, err
+	}
+
+	var balance ChannelBalance
+	if err := json.Unmarshal(output, &balance); err != nil {
+		return nil, err
+	}
+
+	return &balance, nil
+}
+
+func main() {
+	balance, err := getChannelBalances()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Local: %d sats\n", balance.LocalBalance.Sat)
+	fmt.Printf("Remote: %d sats\n", balance.RemoteBalance.Sat)
+}
+```
 :::
 
 ## Channel Capacity and Liquidity

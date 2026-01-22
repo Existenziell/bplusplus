@@ -227,6 +227,43 @@ const { address } = bitcoin.payments.p2pkh({
 console.log('Private Key:', privateKey);
 console.log('Address:', address);
 ```
+
+```go
+package main
+
+import (
+	"crypto/rand"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+)
+
+func main() {
+	// Generate key pair
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// Get private key (WIF format)
+	wif, err := btcutil.NewWIF(privateKey, &chaincfg.MainNetParams, true)
+	if err != nil {
+		panic(err)
+	}
+
+	// Generate address (P2PKH)
+	pubKeyHash := btcutil.Hash160(privateKey.PubKey().SerializeCompressed())
+	addr, err := btcutil.NewAddressPubKeyHash(pubKeyHash, &chaincfg.MainNetParams)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Private Key: %s\n", wif.String())
+	fmt.Printf("Address: %s\n", addr.EncodeAddress())
+}
+```
 :::
 
 ## Wallet Security Best Practices

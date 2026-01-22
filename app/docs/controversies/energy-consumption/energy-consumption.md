@@ -75,7 +75,7 @@ To understand Bitcoin's energy consumption, it's helpful to compare it with othe
 |--------|----------------------------------|-------|
 | **Total Global Energy** | ~165,000 TWh | All energy uses worldwide |
 | **Residential Buildings** | ~26,000 TWh | Global residential energy use |
-| **Air Conditioning (US alone)** | ~6,500 TWh | US air conditioning energy use (350 million people in America use more electricity for cooling than 1.1 billion people in Africa for everything) |
+| **Air Conditioning (US alone)** | ~6,500 TWh | US air conditioning energy use |
 | **Construction** | ~6,000 TWh | Global construction industry |
 | **Finance & Insurance** | ~5,000 TWh | Global financial services sector |
 | **Aviation** | ~4,000 TWh | Global aviation industry |
@@ -84,6 +84,12 @@ To understand Bitcoin's energy consumption, it's helpful to compare it with othe
 | **Holiday Lights (US alone)** | ~200 TWh | US holiday lighting energy use |
 | **Bitcoin** | ~100-150 TWh | Bitcoin network (2021 estimate) |
 | **US Military** | ~30 TWh | US military energy consumption (30,000 GWh) |
+
+:::info Perspective on Energy Inequality
+**350 million people in the US use more electricity for cooling than 1.1 billion people in Africa use for everything.**
+
+This stark comparison highlights the massive energy inequality between developed and developing nations. When evaluating Bitcoin's energy consumption, it's crucial to remember that energy use is not evenly distributed globally, and what seems like "too much" energy in one context may be trivial compared to other uses.
+:::
 
 ### Key Observations
 
@@ -155,14 +161,12 @@ The long-term sustainability of Bitcoin's energy consumption depends on:
 
 ## Conclusion
 
-Bitcoin's energy consumption is a complex topic with valid arguments on both sides. While Bitcoin does consume significant energy, it's important to view this consumption in context:
+While Bitcoin does consume significant energy, it's important to view this consumption in context:
 
 - Bitcoin uses a relatively small fraction of global energy
 - Energy consumption is a security feature, not a bug
 - Mining increasingly uses renewable energy sources
 - The value provided by Bitcoin may justify its energy use
-
-The debate over Bitcoin's energy consumption will likely continue as the network grows and evolves. Understanding both the criticisms and defenses helps form a balanced perspective on this controversial topic.
 
 ## Related Topics
 

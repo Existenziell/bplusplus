@@ -11,7 +11,7 @@ interface HeaderProps {
 export default function Header({ showBreadcrumbs = false }: HeaderProps) {
   return (
     <>
-      <header className="mb-2 md:mb-4">
+      <header className="mb-4">
         <div className="page-bg">
           <div className="container mx-auto px-4 md:px-8 pt-4">
             <div className="flex justify-between items-center">

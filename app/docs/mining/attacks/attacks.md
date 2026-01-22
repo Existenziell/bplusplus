@@ -330,6 +330,106 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// AttackSuccessProbability calculates the probability of a successful double-spend attack.
+// Based on the analysis in Satoshi's whitepaper.
+func AttackSuccessProbability(q float64, z int) float64 {
+	if q >= 0.5 {
+		return 1.0 // Attacker always wins with majority
+	}
+	
+	p := 1.0 - q // Honest miners' fraction
+	lambda := float64(z) * (q / p)
+	
+	// Poisson probability: sum from k=0 to z of (lambda^k * e^-lambda) / k!
+	prob := 0.0
+	for k := 0; k <= z; k++ {
+		prob += math.Pow(lambda, float64(k)) * math.Exp(-lambda) / float64(factorial(k))
+	}
+	
+	// Probability attacker catches up: (q/p)^z
+	catchUpProb := math.Pow(q/p, float64(z))
+	
+	return 1.0 - prob + catchUpProb
+}
+
+func factorial(n int) int {
+	if n <= 1 {
+		return 1
+	}
+	return n * factorial(n-1)
+}
+
+// AttackProbabilitySimple is a simplified version for small z
+func AttackProbabilitySimple(q float64, z int) float64 {
+	if q >= 0.5 {
+		return 1.0
+	}
+	return math.Pow(q/(1.0-q), float64(z))
+}
+
+// RequiredConfirmations finds the number of confirmations needed for a target attack probability
+func RequiredConfirmations(q float64, targetProb float64) int {
+	for z := 1; z < 1000; z++ {
+		if AttackSuccessProbability(q, z) < targetProb {
+			return z
+		}
+	}
+	return 100
+}
+
+// CostOfAttack estimates the cost of a 51% attack
+func CostOfAttack(q float64, networkHashrateEh float64, electricityCost float64, hours float64) float64 {
+	attackerHashrate := networkHashrateEh * (q / (1.0 - q))
+	
+	// Assume 25 J/TH efficiency
+	joulesPerTh := 25.0
+	powerWatts := attackerHashrate * 1e6 * joulesPerTh
+	powerKw := powerWatts / 1000.0
+	
+	electricity := powerKw * hours * electricityCost
+	hardwareCostPerTh := 50.0
+	hardware := attackerHashrate * 1e6 * hardwareCostPerTh
+	
+	return electricity + hardware
+}
+
+func main() {
+	fmt.Println("Double-Spend Attack Success Probability\n")
+	fmt.Println("Attacker hashrate | 1 conf | 3 conf | 6 conf | 12 conf")
+	fmt.Println("------------------------------------------------------------")
+	
+	qValues := []float64{0.10, 0.20, 0.30, 0.40, 0.45}
+	zValues := []int{1, 3, 6, 12}
+	
+	for _, q := range qValues {
+		fmt.Printf("      %2.0f%%          |", q*100)
+		for _, z := range zValues {
+			prob := AttackSuccessProbability(q, z)
+			fmt.Printf(" %.4f |", prob)
+		}
+		fmt.Println()
+	}
+	
+	fmt.Println("\nRequired confirmations for 0.1% attack probability:")
+	for _, q := range []float64{0.10, 0.20, 0.30} {
+		confs := RequiredConfirmations(q, 0.001)
+		fmt.Printf("  %.0f%% attacker: %d confirmations\n", q*100, confs)
+	}
+	
+	fmt.Println("\nEstimated attack cost (51% for 1 hour):")
+	cost := CostOfAttack(0.51, 700, 0.05, 1)
+	fmt.Printf("  $%.2f billion (hardware + electricity)\n", cost/1e9)
+}
+```
+
 ```javascript
 /**
  * Calculate the probability of a successful double-spend attack.
@@ -431,6 +531,13 @@ for (const q of [0.10, 0.20, 0.30]) {
 console.log("\nEstimated attack cost (51% for 1 hour):");
 const cost = costOfAttack(0.51, 700, 0.05, 1);
 console.log(`  $${(cost/1e9).toFixed(2)} billion (hardware + electricity)`);
+```
+:::
+
+	fmt.Println("\nEstimated attack cost (51% for 1 hour):")
+	cost := CostOfAttack(0.51, 700, 0.05, 1)
+	fmt.Printf("  $%.2f billion (hardware + electricity)\n", cost/1e9)
+}
 ```
 :::
 

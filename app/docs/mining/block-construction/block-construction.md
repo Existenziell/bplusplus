@@ -475,6 +475,116 @@ int main() {
 }
 ```
 
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+)
+
+// SHA256D performs double SHA-256 hash
+func SHA256D(data []byte) []byte {
+	first := sha256.Sum256(data)
+	second := sha256.Sum256(first[:])
+	return second[:]
+}
+
+// ComputeMerkleRoot computes the Merkle root from a list of transaction hashes
+func ComputeMerkleRoot(txHashes [][]byte) []byte {
+	if len(txHashes) == 0 {
+		return make([]byte, 32)
+	}
+	
+	if len(txHashes) == 1 {
+		return txHashes[0]
+	}
+	
+	// Build next level
+	var nextLevel [][]byte
+	for i := 0; i < len(txHashes); i += 2 {
+		if i+1 < len(txHashes) {
+			// Pair of hashes
+			combined := append(txHashes[i], txHashes[i+1]...)
+			nextLevel = append(nextLevel, SHA256D(combined))
+		} else {
+			// Odd one out, hash with itself
+			combined := append(txHashes[i], txHashes[i]...)
+			nextLevel = append(nextLevel, SHA256D(combined))
+		}
+	}
+	
+	return ComputeMerkleRoot(nextLevel)
+}
+
+// GenerateMerkleProof generates a Merkle proof for a transaction at the given index
+func GenerateMerkleProof(txHashes [][]byte, txIndex int) [][]byte {
+	if txIndex < 0 || txIndex >= len(txHashes) {
+		return nil
+	}
+	
+	var proof [][]byte
+	level := txHashes
+	index := txIndex
+	
+	for len(level) > 1 {
+		siblingIndex := index ^ 1 // XOR to get sibling
+		if siblingIndex < len(level) {
+			proof = append(proof, level[siblingIndex])
+		}
+		
+		// Build next level
+		var nextLevel [][]byte
+		for i := 0; i < len(level); i += 2 {
+			if i+1 < len(level) {
+				combined := append(level[i], level[i+1]...)
+				nextLevel = append(nextLevel, SHA256D(combined))
+			} else {
+				combined := append(level[i], level[i]...)
+				nextLevel = append(nextLevel, SHA256D(combined))
+			}
+		}
+		
+		level = nextLevel
+		index = index / 2
+	}
+	
+	return proof
+}
+
+// VerifyMerkleProof verifies a Merkle proof
+func VerifyMerkleProof(txHash []byte, proof [][]byte, root []byte) bool {
+	current := txHash
+	
+	for _, sibling := range proof {
+		combined := append(current, sibling...)
+		current = SHA256D(combined)
+	}
+	
+	return hex.EncodeToString(current) == hex.EncodeToString(root)
+}
+
+func main() {
+	// Example usage
+	txHashes := make([][]byte, 4)
+	for i := 0; i < 4; i++ {
+		txData := []byte(fmt.Sprintf("tx%d", i+1))
+		txHashes[i] = SHA256D(txData)
+	}
+	
+	root := ComputeMerkleRoot(txHashes)
+	fmt.Printf("Merkle root: %s\n", hex.EncodeToString(root))
+	
+	// Generate and verify proof for tx at index 2
+	proof := GenerateMerkleProof(txHashes, 2)
+	fmt.Printf("Proof has %d elements\n", len(proof))
+	
+	isValid := VerifyMerkleProof(txHashes[2], proof, root)
+	fmt.Printf("Proof valid: %v\n", isValid)
+}
+```
+
 ```javascript
 const crypto = require('crypto');
 

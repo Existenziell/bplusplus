@@ -95,7 +95,7 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           ref={tooltipRef}
           role="tooltip"
           className={`
-            block fixed z-[9999] w-64 sm:w-72 p-2.5
+            block fixed z-[9999] w-64 sm:w-72 p-4 pt-2
             bg-zinc-100 dark:bg-zinc-800
             border border-zinc-300 dark:border-zinc-600
             rounded-md shadow-lg
@@ -129,10 +129,10 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
 
           {/* Content */}
           <span className="relative block font-normal">
-            <span className="block font-medium text-btc mb-1 text-sm" style={{ lineHeight: 1.2 }}>
+            <span className="block font-medium text-btc mb-1 text-base">
               {entry.term}
             </span>
-            <span className="block text-xs font-normal" style={{ lineHeight: 1.3 }}>
+            <span className="block text-sm font-normal" style={{ lineHeight: 1.4 }}>
               {entry.definition}
             </span>
           </span>

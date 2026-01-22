@@ -396,6 +396,120 @@ async function main() {
 
 main();
 ```
+```
+
+```go
+package main
+
+import (
+	"bytes"
+	"encoding/base64"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"time"
+)
+
+type RPCRequest struct {
+	JSONRPC string        `json:"jsonrpc"`
+	ID      string        `json:"id"`
+	Method  string        `json:"method"`
+	Params  []interface{} `json:"params"`
+}
+
+type RPCResponse struct {
+	Result interface{} `json:"result"`
+	Error  *RPCError   `json:"error"`
+}
+
+type RPCError struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}
+
+type BitcoinRPC struct {
+	url      string
+	user     string
+	password string
+	client   *http.Client
+}
+
+func NewBitcoinRPC(url, user, password string) *BitcoinRPC {
+	return &BitcoinRPC{
+		url:      url,
+		user:     user,
+		password: password,
+		client: &http.Client{
+			Timeout: 30 * time.Second,
+		},
+	}
+}
+
+func (rpc *BitcoinRPC) Call(method string, params []interface{}) (interface{}, error) {
+	request := RPCRequest{
+		JSONRPC: "1.0",
+		ID:      "go-client",
+		Method:  method,
+		Params:  params,
+	}
+
+	jsonData, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", rpc.url, bytes.NewBuffer(jsonData))
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+	auth := base64.StdEncoding.EncodeToString([]byte(rpc.user + ":" + rpc.password))
+	req.Header.Set("Authorization", "Basic "+auth)
+
+	resp, err := rpc.client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("connection error: %v", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var rpcResp RPCResponse
+	if err := json.Unmarshal(body, &rpcResp); err != nil {
+		return nil, err
+	}
+
+	if rpcResp.Error != nil {
+		return nil, fmt.Errorf("RPC error %d: %s", rpcResp.Error.Code, rpcResp.Error.Message)
+	}
+
+	return rpcResp.Result, nil
+}
+
+func (rpc *BitcoinRPC) GetBlockchainInfo() (map[string]interface{}, error) {
+	result, err := rpc.Call("getblockchaininfo", []interface{}{})
+	if err != nil {
+		return nil, err
+	}
+	return result.(map[string]interface{}), nil
+}
+
+func main() {
+	rpc := NewBitcoinRPC("http://127.0.0.1:8332", "user", "password")
+
+	info, err := rpc.GetBlockchainInfo()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Block height: %.0f\n", info["blocks"])
+}
+```
 :::
 
 ## Essential Node Information Commands

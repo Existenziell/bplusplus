@@ -234,6 +234,83 @@ class Output {
   }
 }
 ```
+
+```go
+package main
+
+import (
+	"encoding/binary"
+	"encoding/hex"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcutil/bech32"
+)
+
+type Output struct {
+	Value         uint64
+	WitnessVersion uint8
+	WitnessData   []byte
+}
+
+func NewOutput() *Output {
+	return &Output{
+		Value:         0,
+		WitnessVersion: 0,
+		WitnessData:   []byte{},
+	}
+}
+
+// FromOptions creates output from address and value in satoshis
+func FromOptions(addr string, value uint64) (*Output, error) {
+	hrp, data, err := bech32.Decode(addr)
+	if err != nil {
+		return nil, err
+	}
+
+	witnessVersion := data[0]
+	witnessProgram, err := bech32.ConvertBits(data[1:], 5, 8, false)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Output{
+		Value:         value,
+		WitnessVersion: witnessVersion,
+		WitnessData:   witnessProgram,
+	}, nil
+}
+
+// Serialize serializes output for transaction
+func (o *Output) Serialize() []byte {
+	var result []byte
+
+	// Value: 8 bytes (little-endian)
+	valueBytes := make([]byte, 8)
+	binary.LittleEndian.PutUint64(valueBytes, o.Value)
+	result = append(result, valueBytes...)
+
+	// Script length
+	scriptLength := 1 + 1 + len(o.WitnessData)
+	result = append(result, byte(scriptLength))
+
+	// Witness version + data length + witness data
+	result = append(result, o.WitnessVersion)
+	result = append(result, byte(len(o.WitnessData)))
+	result = append(result, o.WitnessData...)
+
+	return result
+}
+
+func main() {
+	output, err := FromOptions("bc1q...", 50000)
+	if err != nil {
+		panic(err)
+	}
+
+	serialized := output.Serialize()
+	fmt.Printf("Serialized output: %s\n", hex.EncodeToString(serialized))
+}
+```
 :::
 
 ## Step-by-Step Process
@@ -408,6 +485,64 @@ const inputsJson = JSON.stringify(inputs);
 const outputsJson = JSON.stringify(outputs);
 const unsignedTx = bcli(`createrawtransaction '${inputsJson}' '${outputsJson}'`);
 ```
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os/exec"
+)
+
+type UTXO struct {
+	Txid string `json:"txid"`
+	Vout int    `json:"vout"`
+}
+
+func bcli(cmd string) (string, error) {
+	// Execute bitcoin-cli command
+	args := append([]string{"-signet"}, cmd...)
+	output, err := exec.Command("bitcoin-cli", args...).Output()
+	if err != nil {
+		return "", err
+	}
+	return string(output), nil
+}
+
+func main() {
+	// Build inputs from selected UTXOs
+	selectedUtxos := []UTXO{
+		{Txid: "abc123...", Vout: 0},
+		{Txid: "def456...", Vout: 1},
+	}
+
+	inputs := make([]map[string]interface{}, len(selectedUtxos))
+	for i, utxo := range selectedUtxos {
+		inputs[i] = map[string]interface{}{
+			"txid": utxo.Txid,
+			"vout": utxo.Vout,
+		}
+	}
+
+	// Build outputs (payment + change)
+	outputs := map[string]float64{
+		"destination_address": 0.001,
+		"change_address":      0.0005,
+	}
+
+	// Create raw transaction
+	inputsJSON, _ := json.Marshal(inputs)
+	outputsJSON, _ := json.Marshal(outputs)
+
+	unsignedTx, err := bcli(fmt.Sprintf("createrawtransaction '%s' '%s'", string(inputsJSON), string(outputsJSON)))
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Unsigned transaction: %s\n", unsignedTx)
+}
+```
 :::
 
 ### Step 3: Sign Transaction
@@ -502,6 +637,55 @@ const signedTx = signedData.hex;
 // Broadcast transaction (0 = no maxfeerate protection)
 const txid = bcli(`sendrawtransaction ${signedTx} 0`);
 console.log(`Transaction broadcast: ${txid}`);
+```
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os/exec"
+)
+
+func bcli(cmd string) (string, error) {
+	args := append([]string{"-signet"}, cmd...)
+	output, err := exec.Command("bitcoin-cli", args...).Output()
+	if err != nil {
+		return "", err
+	}
+	return string(output), nil
+}
+
+func main() {
+	unsignedTx := "0100000001..." // From previous step
+
+	// Sign the transaction
+	signResult, err := bcli(fmt.Sprintf("signrawtransactionwithwallet %s", unsignedTx))
+	if err != nil {
+		panic(err)
+	}
+
+	var signedData map[string]interface{}
+	if err := json.Unmarshal([]byte(signResult), &signedData); err != nil {
+		panic(err)
+	}
+
+	complete, _ := signedData["complete"].(bool)
+	if !complete {
+		panic("Transaction signing incomplete")
+	}
+
+	signedTx := signedData["hex"].(string)
+
+	// Broadcast transaction (0 = no maxfeerate protection)
+	txid, err := bcli(fmt.Sprintf("sendrawtransaction %s 0", signedTx))
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Transaction broadcast: %s\n", txid)
+}
 ```
 :::
 

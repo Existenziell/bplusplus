@@ -116,6 +116,60 @@ async function monitorBlocks() {
 }
 monitorBlocks();
 ```
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/pebbe/zmq4"
+)
+
+func monitorBlocks() error {
+	socket, err := zmq4.NewSocket(zmq4.SUB)
+	if err != nil {
+		return err
+	}
+	defer socket.Close()
+
+	err = socket.Connect("tcp://127.0.0.1:28332")
+	if err != nil {
+		return err
+	}
+
+	err = socket.SetSubscribe("hashblock")
+	if err != nil {
+		return err
+	}
+
+	for {
+		parts, err := socket.RecvMessageBytes(0)
+		if err != nil {
+			return err
+		}
+
+		if len(parts) < 2 {
+			continue
+		}
+
+		// parts[0] is topic, parts[1] is block hash
+		blockHash := parts[1]
+		hashHex := ""
+		for i := len(blockHash) - 1; i >= 0; i-- {
+			hashHex += fmt.Sprintf("%02x", blockHash[i])
+		}
+		fmt.Printf("New block: %s\n", hashHex)
+	}
+}
+
+func main() {
+	if err := monitorBlocks(); err != nil {
+		log.Fatal(err)
+	}
+}
+```
 :::
 
 ### Using Polling (Fallback)
@@ -180,6 +234,59 @@ async function pollBlocks(rpc) {
     }
     await new Promise(r => setTimeout(r, 10000));
   }
+}
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/btcsuite/btcd/rpcclient"
+)
+
+func pollBlocks(client *rpcclient.Client) error {
+	lastBlock, err := client.GetBlockCount()
+	if err != nil {
+		return err
+	}
+
+	for {
+		current, err := client.GetBlockCount()
+		if err != nil {
+			return err
+		}
+
+		if current > lastBlock {
+			fmt.Printf("New block: %d\n", current)
+			lastBlock = current
+		}
+
+		time.Sleep(10 * time.Second)
+	}
+}
+
+func main() {
+	// Connect to Bitcoin Core RPC
+	connCfg := &rpcclient.ConnConfig{
+		Host:         "127.0.0.1:8332",
+		User:         "rpcuser",
+		Pass:         "rpcpassword",
+		HTTPPostMode: true,
+		DisableTLS:   true,
+	}
+
+	client, err := rpcclient.New(connCfg, nil)
+	if err != nil {
+		panic(err)
+	}
+	defer client.Shutdown()
+
+	if err := pollBlocks(client); err != nil {
+		panic(err)
+	}
 }
 ```
 :::
@@ -355,6 +462,58 @@ async function monitorMempool() {
   }
 }
 ```
+
+```go
+package main
+
+import (
+	"encoding/hex"
+	"fmt"
+	"log"
+
+	"github.com/pebbe/zmq4"
+)
+
+func monitorMempool() error {
+	socket, err := zmq4.NewSocket(zmq4.SUB)
+	if err != nil {
+		return err
+	}
+	defer socket.Close()
+
+	err = socket.Connect("tcp://127.0.0.1:28333")
+	if err != nil {
+		return err
+	}
+
+	err = socket.SetSubscribe("hashtx")
+	if err != nil {
+		return err
+	}
+
+	for {
+		parts, err := socket.RecvMessageBytes(0)
+		if err != nil {
+			return err
+		}
+
+		if len(parts) < 2 {
+			continue
+		}
+
+		// parts[0] is topic, parts[1] is transaction hash
+		txHash := parts[1]
+		hashHex := hex.EncodeToString(txHash)
+		fmt.Printf("New transaction: %s\n", hashHex)
+	}
+}
+
+func main() {
+	if err := monitorMempool(); err != nil {
+		log.Fatal(err)
+	}
+}
+```
 :::
 
 ### Transaction Analysis
@@ -378,6 +537,50 @@ json tx = rpc.getrawtransaction(tx_hash, true);
 ```javascript
 const tx = await rpc.getRawTransaction(txHash, true);
 // Access: tx.vin, tx.vout, tx.size, tx.vsize
+```
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/btcsuite/btcd/rpcclient"
+)
+
+func getTransactionInfo(client *rpcclient.Client, txHash string) error {
+	tx, err := client.GetRawTransactionVerbose(txHash)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("Transaction ID: %s\n", tx.Txid)
+	fmt.Printf("Size: %d bytes\n", tx.Size)
+	fmt.Printf("Virtual Size: %d vbytes\n", tx.Vsize)
+	fmt.Printf("Inputs: %d\n", len(tx.Vin))
+	fmt.Printf("Outputs: %d\n", len(tx.Vout))
+
+	return nil
+}
+
+func main() {
+	connCfg := &rpcclient.ConnConfig{
+		Host:         "127.0.0.1:8332",
+		User:         "rpcuser",
+		Pass:         "rpcpassword",
+		HTTPPostMode: true,
+		DisableTLS:   true,
+	}
+
+	client, err := rpcclient.New(connCfg, nil)
+	if err != nil {
+		panic(err)
+	}
+	defer client.Shutdown()
+
+	// Example usage
+	_ = getTransactionInfo(client, "example_tx_hash")
+}
 ```
 :::
 

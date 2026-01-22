@@ -23,6 +23,13 @@ const quotes = [
   "There are 3 eras of currency: Commodity based, politically based, and now, math based. — Chris Dixon",
   "Bitcoin will do to banks what email did to the postal industry. — Rick Falkvinge, Founder of the Swedish pirate party",
   "Bitcoin represents something unprecedented: Element Zero, consisting only of energy. — Nick Szabo",
+  "Bitcoin is the currency of resistance. — Max Keiser",
+  "The internet of money is here. Let's build it together. — Andreas Antonopoulos",
+  "Bitcoin is a tool for freeing humanity from oligarchs and tyrants, dressed up as a get-rich-quick scheme. — Naval Ravikant",
+  "Crypto offers freedom to the unbanked and hope to the underprivileged. — Elizabeth Stark",
+  "Bitcoin is the most important invention since the internet. — Charlie Shrem",
+  "Bitcoin is hope, human interaction & communication. And the inevitable future of money.",
+  "Bitcoin: Beauty through simplicity.",
 ]
 
 // Shuffle the array using the Fisher-Yates algorithm

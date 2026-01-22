@@ -7,9 +7,9 @@ The blockchain is Bitcoin's foundational data structure: a cryptographically lin
 A blockchain is a sequence of blocks, where each block is cryptographically linked to the previous one through a hash reference. This creates a chain structure where:
 
 - **Each block references the previous block** via its hash
-- **The chain is immutable** - changing any block breaks the chain
-- **The entire history is verifiable** - nodes can verify the chain's integrity
-- **No central authority is needed** - the structure itself provides security
+- **The chain is immutable**: changing any block breaks the chain
+- **The entire history is verifiable**: nodes can verify the chain's integrity
+- **No central authority is needed**: the structure itself provides security
 
 Unlike a traditional database where records can be modified or deleted, the blockchain creates a permanent, append-only ledger. Once a block is added to the chain, it becomes part of an unalterable historical record.
 
@@ -52,7 +52,7 @@ When a miner creates a new block:
 3. **Mines the new block** by finding a valid proof-of-work
 4. **The new block's hash** becomes the reference for the next block
 
-This creates a one-way chain: you can verify that Block N+1 follows Block N by checking that Block N+1's "Previous Block Hash" matches Block N's actual hash. But you cannot go backwards - the hash function is one-way.
+This creates a one-way chain: you can verify that Block N+1 follows Block N by checking that Block N+1's "Previous Block Hash" matches Block N's actual hash. But you cannot go backwards: the hash function is one-way.
 
 ### Cryptographic Security
 
@@ -150,7 +150,7 @@ The blockchain structure is fundamental to many other Bitcoin concepts:
 The blockchain enables consensus without a central authority:
 - All nodes independently verify the same chain structure
 - The longest valid chain naturally emerges as the consensus chain
-- No voting or coordination needed - the structure itself creates agreement
+- No voting or coordination needed: the structure itself creates agreement
 
 ### Security
 
@@ -183,9 +183,9 @@ Understanding the blockchain structure explains several important aspects of Bit
 
 Each block added after your transaction makes it more secure:
 - Block 1: Your transaction is in the chain
-- Block 2: One confirmation - attacker must redo 1 block of work
-- Block 6: Six confirmations - attacker must redo 6 blocks of work
-- Block 100: One hundred confirmations - attacker must redo 100 blocks of work
+- Block 2: One confirmation: attacker must redo 1 block of work
+- Block 6: Six confirmations: attacker must redo 6 blocks of work
+- Block 100: One hundred confirmations: attacker must redo 100 blocks of work
 
 More confirmations = more blocks built on top = more work required to reverse = more security.
 
@@ -202,7 +202,7 @@ A chain reorganization (reorg) occurs when the network switches to a different c
 Full nodes verify the entire blockchain:
 - They independently verify every block and transaction
 - They reject invalid blocks, protecting the network
-- They don't trust other nodes - they verify the chain structure themselves
+- They don't trust other nodes; they verify the chain structure themselves
 - More full nodes = more decentralized verification = stronger security
 
 ### Why Blockchain Size Matters
@@ -239,7 +239,7 @@ The blockchain structure is elegant because it:
 5. **Scales verification**: Efficient to verify incrementally as new blocks arrive
 6. **Prevents tampering**: The cost of changing history grows exponentially
 
-The blockchain isn't just a data structure - it's a mechanism that creates trust through mathematics rather than authority.
+The blockchain isn't just a data structure: it's a mechanism that creates trust through mathematics rather than authority.
 
 ---
 
@@ -277,7 +277,7 @@ The blockchain is Bitcoin's foundational innovation: a cryptographically linked 
 
 - **History cannot be rewritten** without redoing all subsequent proof-of-work
 - **Anyone can verify** the chain's integrity independently
-- **No central authority** is needed - the structure itself provides security
+- **No central authority** is needed: the structure itself provides security
 - **Consensus emerges naturally** through the longest chain rule
 
-This elegant structure enables Bitcoin's core properties: decentralization, immutability, and trustlessness. The blockchain isn't just how Bitcoin stores data - it's the mechanism that makes Bitcoin possible.
+This elegant structure enables Bitcoin's core properties: decentralization, immutability, and trustlessness. The blockchain isn't just how Bitcoin stores data: it's the mechanism that makes Bitcoin possible.

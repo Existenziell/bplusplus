@@ -1,0 +1,265 @@
+# Node Types & Architecture
+
+Bitcoin nodes come in different types, each with different capabilities, resource requirements, and trust models. Understanding node types helps you choose the right setup for your needs.
+
+## Node Types
+
+### Full Nodes
+
+**Full nodes** download and validate the entire blockchain:
+
+```text
+Characteristics:
+- Downloads ~600GB+ blockchain data
+- Validates all transactions and blocks
+- Maintains complete UTXO set
+- Maximum security and privacy
+- Requires significant resources
+```
+
+**Use cases**:
+- Maximum security
+- Privacy-sensitive applications
+- Contributing to network
+- Development and testing
+
+### Pruned Nodes
+
+**Pruned nodes** validate everything but don't store full history:
+
+```text
+Characteristics:
+- Validates all blocks
+- Stores only recent blocks (~2GB)
+- Maintains UTXO set
+- Good security, lower storage
+- Can't serve historical data
+```
+
+**Use cases**:
+- Limited storage space
+- Still want full validation
+- Don't need historical data
+
+### Archival Nodes
+
+**Archival nodes** store complete blockchain history:
+
+```text
+Characteristics:
+- Full blockchain storage
+- Can serve historical data
+- Maximum storage requirements
+- Useful for research/analysis
+```
+
+**Use cases**:
+- Blockchain analysis
+- Historical data access
+- Research purposes
+- Public services
+
+### SPV (Simplified Payment Verification) Nodes
+
+**SPV nodes** download only block headers:
+
+```text
+Characteristics:
+- Downloads ~80 bytes per block
+- Minimal storage (~50MB)
+- Relies on full nodes
+- Less privacy
+- Faster sync
+```
+
+**Use cases**:
+- Mobile wallets
+- Lightweight clients
+- Limited resources
+- Quick setup
+
+---
+
+## Code Examples
+
+### Checking Node Type
+
+:::code-group
+```rust
+use serde_json::json;
+use reqwest;
+
+async fn get_node_info() -> Result<serde_json::Value, Box<dyn std::error::Error>> {
+    let client = reqwest::Client::new();
+    let response = client
+        .post("http://localhost:8332")
+        .json(&json!({
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "getblockchaininfo"
+        }))
+        .send()
+        .await?;
+    
+    let info: serde_json::Value = response.json().await?;
+    Ok(info["result"].clone())
+}
+```
+
+```python
+import requests
+import json
+
+def get_node_info():
+    """Get node information via RPC."""
+    response = requests.post(
+        "http://localhost:8332",
+        json={
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "getblockchaininfo"
+        }
+    )
+    return response.json()["result"]
+```
+
+```cpp
+#include <curl/curl.h>
+#include <json/json.h>
+#include <string>
+
+Json::Value get_node_info() {
+    CURL* curl = curl_easy_init();
+    std::string response_data;
+    
+    std::string json_data = R"({
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getblockchaininfo"
+    })";
+    
+    curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:8332");
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data.c_str());
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_data);
+    curl_easy_perform(curl);
+    
+    Json::Value root;
+    Json::Reader reader;
+    reader.parse(response_data, root);
+    
+    return root["result"];
+}
+```
+
+```go
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"io"
+	"net/http"
+)
+
+type RPCRequest struct {
+	JSONRPC string        `json:"jsonrpc"`
+	ID      int           `json:"id"`
+	Method  string        `json:"method"`
+	Params  []interface{} `json:"params,omitempty"`
+}
+
+func getNodeInfo() (map[string]interface{}, error) {
+	req := RPCRequest{
+		JSONRPC: "2.0",
+		ID:      1,
+		Method:  "getblockchaininfo",
+	}
+	
+	jsonData, _ := json.Marshal(req)
+	resp, err := http.Post(
+		"http://localhost:8332",
+		"application/json",
+		bytes.NewBuffer(jsonData),
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	
+	body, _ := io.ReadAll(resp.Body)
+	var result map[string]interface{}
+	json.Unmarshal(body, &result)
+	
+	return result["result"].(map[string]interface{}), nil
+}
+```
+
+```javascript
+async function getNodeInfo() {
+    const response = await fetch('http://localhost:8332', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jsonrpc: '2.0',
+            id: 1,
+            method: 'getblockchaininfo',
+        }),
+    });
+    const data = await response.json();
+    return data.result;
+}
+```
+:::
+
+---
+
+## Comparison
+
+| Feature | Full Node | Pruned Node | SPV Node |
+|---------|-----------|-------------|----------|
+| **Storage** | ~600GB+ | ~2GB | ~50MB |
+| **Validation** | Complete | Complete | Partial |
+| **Privacy** | Maximum | Maximum | Reduced |
+| **Sync Time** | Days | Days | Minutes |
+| **Bandwidth** | High | High | Low |
+| **Security** | Maximum | Maximum | Reduced |
+
+---
+
+## Choosing a Node Type
+
+### Use Full Node If:
+
+- You need maximum security
+- Privacy is critical
+- You're developing Bitcoin software
+- You want to contribute to network
+
+### Use Pruned Node If:
+
+- Storage is limited
+- You still want full validation
+- You don't need historical data
+
+### Use SPV Node If:
+
+- You're on mobile device
+- Storage is very limited
+- You accept reduced privacy
+- You need quick setup
+
+---
+
+## Related Topics
+
+- [Bitcoin Core Internals](/docs/development/bitcoin-core-internals) - Node implementation
+- [P2P Network Protocol](/docs/bitcoin/p2p-protocol) - Network communication
+- [Installing Bitcoin](/docs/development/install-bitcoin) - Setup guide
+
+---
+
+## Resources
+
+- [Bitcoin Core Documentation](https://bitcoincore.org/en/doc/)
+- [Running a Full Node](https://bitcoin.org/en/full-node)

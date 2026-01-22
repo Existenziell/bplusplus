@@ -11,7 +11,7 @@ Traditional financial systems rely on legal enforcement, trusted authorities, an
 - Attackers have strong incentives to break the system
 - Cooperation must emerge without coordination
 
-Game theory provides the framework to understand how Bitcoin achieves security and consensus in this hostile environment. By structuring incentives correctly, Bitcoin creates games where **honesty is the dominant strategy**—the most profitable choice for rational actors.
+Game theory provides the framework to understand how Bitcoin achieves security and consensus in this hostile environment. By structuring incentives correctly, Bitcoin creates games where **honesty is the dominant strategy**: the most profitable choice for rational actors.
 
 ---
 
@@ -84,7 +84,7 @@ Bitcoin's longest chain rule is a coordination mechanism:
 - **All nodes** accept the longest valid chain
 - **All users** recognize transactions in the longest chain
 
-This creates a **focal point**—a natural choice that all participants converge on without communication or coordination.
+This creates a **focal point**: a natural choice that all participants converge on without communication or coordination.
 
 ### Why Coordination Works
 
@@ -212,7 +212,7 @@ Game theory explains why Bitcoin works. By structuring incentives so that honest
 - **Attacks are deterred** through economic disincentives
 - **Consensus is achieved** through natural convergence
 
-Understanding game theory is essential for understanding Bitcoin because it explains **why** the network remains secure, not just **how** the protocol works. Every aspect of Bitcoin's design—from proof-of-work to the fee market to consensus rules—is shaped by game-theoretic principles that align participant incentives toward network security.
+Understanding game theory is essential for understanding Bitcoin because it explains **why** the network remains secure, not just **how** the protocol works. Every aspect of Bitcoin's design, from proof-of-work to the fee market to consensus rules, is shaped by game-theoretic principles that align participant incentives toward network security.
 
 ---
 

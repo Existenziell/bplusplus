@@ -1,0 +1,261 @@
+# Bitcoin Script Patterns
+
+Common Bitcoin Script patterns provide reusable templates for building smart contracts. Understanding these patterns helps developers implement common use cases efficiently.
+
+## Common Patterns
+
+### 1. Pay-to-Pubkey-Hash (P2PKH)
+
+Standard single-signature:
+
+```text
+ScriptPubKey:
+OP_DUP OP_HASH160 <pubkey_hash> OP_EQUALVERIFY OP_CHECKSIG
+
+ScriptSig:
+<signature> <pubkey>
+```
+
+### 2. Multisig
+
+Multiple signatures required:
+
+```text
+ScriptPubKey:
+<M> <pubkey1> <pubkey2> ... <pubkeyN> <N> OP_CHECKMULTISIG
+
+ScriptSig:
+OP_0 <sig1> <sig2> ... <sigM>
+```
+
+### 3. Hash Lock
+
+Reveal secret to spend:
+
+```text
+ScriptPubKey:
+OP_HASH256 <hash> OP_EQUAL
+
+ScriptSig:
+<secret>
+```
+
+### 4. Time Lock
+
+Absolute timelock:
+
+```text
+ScriptPubKey:
+<locktime> OP_CHECKLOCKTIMEVERIFY OP_DROP <pubkey> OP_CHECKSIG
+
+ScriptSig:
+<signature>
+```
+
+### 5. Relative Time Lock
+
+Relative timelock:
+
+```text
+ScriptPubKey:
+<blocks> OP_CHECKSEQUENCEVERIFY OP_DROP <pubkey> OP_CHECKSIG
+
+ScriptSig:
+<signature>
+```
+
+---
+
+## Advanced Patterns
+
+### Escrow Contract
+
+Three-party escrow:
+
+```text
+2-of-3 Multisig:
+- Buyer + Seller
+- Buyer + Escrow
+- Seller + Escrow
+```
+
+### Vault Contract
+
+Time-delayed recovery:
+
+```text
+Structure:
+- Hot key: Immediate spend (small)
+- Cold key: Delayed spend (large)
+- Recovery: Longer delay
+```
+
+### Inheritance Contract
+
+Time-locked beneficiary:
+
+```text
+Structure:
+- Beneficiary key
+- Time lock (absolute)
+- Can claim after date
+```
+
+---
+
+## Code Examples
+
+### Creating Common Patterns
+
+:::code-group
+```rust
+use bitcoin::{Script, ScriptBuf};
+use bitcoin::opcodes::all::*;
+
+// P2PKH
+fn create_p2pkh_script(pubkey_hash: &[u8; 20]) -> ScriptBuf {
+    let mut script = ScriptBuf::new();
+    script.push_opcode(OP_DUP);
+    script.push_opcode(OP_HASH160);
+    script.push_slice(pubkey_hash);
+    script.push_opcode(OP_EQUALVERIFY);
+    script.push_opcode(OP_CHECKSIG);
+    script
+}
+
+// Hash Lock
+fn create_hash_lock_script(hash: &[u8; 32]) -> ScriptBuf {
+    let mut script = ScriptBuf::new();
+    script.push_opcode(OP_HASH256);
+    script.push_slice(hash);
+    script.push_opcode(OP_EQUAL);
+    script
+}
+```
+
+```python
+from bitcoin.core.script import CScript, OP_DUP, OP_HASH160, OP_EQUALVERIFY, OP_CHECKSIG
+from bitcoin.core.script import OP_HASH256, OP_EQUAL
+
+# P2PKH
+def create_p2pkh_script(pubkey_hash):
+    return CScript([
+        OP_DUP,
+        OP_HASH160,
+        pubkey_hash,
+        OP_EQUALVERIFY,
+        OP_CHECKSIG,
+    ])
+
+# Hash Lock
+def create_hash_lock_script(hash_value):
+    return CScript([
+        OP_HASH256,
+        hash_value,
+        OP_EQUAL,
+    ])
+```
+
+```cpp
+#include <bitcoin/bitcoin.hpp>
+
+// P2PKH
+bc::script create_p2pkh_script(const bc::short_hash& pubkey_hash) {
+    bc::script script;
+    script.push_operation(bc::opcode::dup);
+    script.push_operation(bc::opcode::hash160);
+    script.push_data(bc::to_chunk(pubkey_hash));
+    script.push_operation(bc::opcode::equalverify);
+    script.push_operation(bc::opcode::checksig);
+    return script;
+}
+
+// Hash Lock
+bc::script create_hash_lock_script(const bc::hash_digest& hash) {
+    bc::script script;
+    script.push_operation(bc::opcode::hash256);
+    script.push_data(bc::to_chunk(hash));
+    script.push_operation(bc::opcode::equal);
+    return script;
+}
+```
+
+```go
+package main
+
+import (
+	"github.com/btcsuite/btcd/txscript"
+)
+
+// P2PKH
+func createP2PKHScript(pubkeyHash []byte) ([]byte, error) {
+	builder := txscript.NewScriptBuilder()
+	builder.AddOp(txscript.OP_DUP)
+	builder.AddOp(txscript.OP_HASH160)
+	builder.AddData(pubkeyHash)
+	builder.AddOp(txscript.OP_EQUALVERIFY)
+	builder.AddOp(txscript.OP_CHECKSIG)
+	return builder.Script()
+}
+
+// Hash Lock
+func createHashLockScript(hash []byte) ([]byte, error) {
+	builder := txscript.NewScriptBuilder()
+	builder.AddOp(txscript.OP_HASH256)
+	builder.AddData(hash)
+	builder.AddOp(txscript.OP_EQUAL)
+	return builder.Script()
+}
+```
+
+```javascript
+const bitcoin = require('bitcoinjs-lib');
+
+// P2PKH
+function createP2PKHScript(pubkeyHash) {
+    return bitcoin.script.compile([
+        bitcoin.opcodes.OP_DUP,
+        bitcoin.opcodes.OP_HASH160,
+        pubkeyHash,
+        bitcoin.opcodes.OP_EQUALVERIFY,
+        bitcoin.opcodes.OP_CHECKSIG,
+    ]);
+}
+
+// Hash Lock
+function createHashLockScript(hash) {
+    return bitcoin.script.compile([
+        bitcoin.opcodes.OP_HASH256,
+        hash,
+        bitcoin.opcodes.OP_EQUAL,
+    ]);
+}
+```
+:::
+
+---
+
+## Best Practices
+
+### For Developers
+
+1. **Use established patterns**: Don't reinvent
+2. **Test thoroughly**: Script bugs are costly
+3. **Consider Taproot**: Better privacy and efficiency
+4. **Document patterns**: Explain what contracts do
+
+---
+
+## Related Topics
+
+- [Bitcoin Script](/docs/bitcoin/script) - Script system
+- [OP Codes](/docs/bitcoin/op-codes) - Available operations
+- [Smart Contracts](/docs/wallets/smart-contracts) - Contract patterns
+- [Miniscript](https://bitcoin.sipa.be/miniscript/) - Policy compiler
+
+---
+
+## Resources
+
+- [Bitcoin Script Patterns](https://en.bitcoin.it/wiki/Script)
+- [Miniscript](https://bitcoin.sipa.be/miniscript/) - Policy to script compiler

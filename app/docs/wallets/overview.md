@@ -326,3 +326,5 @@ console.log('Address:', address);
 - [Coin Selection](/docs/wallets/coin-selection) - How wallets choose UTXOs to spend
 - [Multisig](/docs/wallets/multisig) - Multi-signature wallet concepts
 - [Transaction Creation](/docs/wallets/transactions) - How to create and sign transactions
+- [Privacy Techniques](/docs/wallets/privacy) - CoinJoin, Payjoin, and privacy best practices
+- [Smart Contracts](/docs/wallets/smart-contracts) - Advanced scripting and contract patterns

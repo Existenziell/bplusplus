@@ -44,7 +44,7 @@ Two armies, led by two generals, are positioned on opposite sides of an enemy ci
 - General A sends a message: "Attack at dawn"
 - General B receives it and sends back: "Acknowledged, attacking at dawn"
 - General A receives the acknowledgment, but thinks: "How do I know General B received my acknowledgment of their acknowledgment?"
-- This creates infinite regress—each confirmation requires its own confirmation
+- This creates infinite regress: each confirmation requires its own confirmation
 
 ### Why It's Theoretically Unsolvable
 
@@ -59,7 +59,7 @@ Bitcoin sidesteps the impossibility by accepting **probabilistic finality** inst
 3. **Increasing certainty over time:** Each block added makes the previous blocks exponentially harder to reverse
 4. **Practical finality:** While theoretically reversible, 6 confirmations (about 1 hour) is considered effectively irreversible due to the enormous computational cost required
 
-This is fundamentally different from trying to achieve perfect certainty through message acknowledgments—Bitcoin uses economic and cryptographic mechanisms to create convergence without requiring perfect communication.
+This is fundamentally different from trying to achieve perfect certainty through message acknowledgments; Bitcoin uses economic and cryptographic mechanisms to create convergence without requiring perfect communication.
 
 ### Two Generals vs. Byzantine Generals
 

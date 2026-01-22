@@ -66,9 +66,9 @@ These debates aren't just historical curiosities. They reveal:
 
 ## Antifragile by Design
 
-Bitcoin is **antifragile** - a term coined by Nassim Taleb for systems that don't just survive stress, but grow stronger from it.
+Bitcoin is **antifragile**: a term coined by Nassim Taleb for systems that don't just survive stress, but grow stronger from it.
 
-Every attack has hardened Bitcoin's defenses. Every scam has educated its users. Every internal conflict has clarified its values. The Blocksize Wars didn't weaken Bitcoin - they proved that no corporation or mining cartel could capture it. Mt. Gox didn't kill Bitcoin - it taught a generation to hold their own keys.
+Every attack has hardened Bitcoin's defenses. Every scam has educated its users. Every internal conflict has clarified its values. The Blocksize Wars didn't weaken Bitcoin; they proved that no corporation or mining cartel could capture it. Mt. Gox didn't kill Bitcoin; it taught a generation to hold their own keys.
 
 This is not an accident. Bitcoin's decentralized design means there's no single point of failure to attack, no CEO to arrest, no server to shut down. Attackers face a system that learns from every assault and emerges more resilient.
 

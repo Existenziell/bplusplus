@@ -419,6 +419,9 @@ Start small, use testnet, and build incrementally. The Bitcoin development commu
 - [Pool Mining](/docs/development/pool-mining) - Mining development
 - [Price Tracking](/docs/development/price-tracking) - API integrations
 - [RPC Guide](/docs/bitcoin/rpc) - Bitcoin Core RPC commands
+- [Node Types & Architecture](/docs/development/node-types) - Understanding different node configurations
+- [Bitcoin Core Internals](/docs/development/bitcoin-core-internals) - Reference implementation architecture
+- [Bitcoin Script Patterns](/docs/development/script-patterns) - Common script patterns and templates
 
 ---
 

@@ -16,7 +16,7 @@ The analogy runs deeper:
 | New gold enters circulation through mining | New bitcoin enters circulation through mining |
 | Anyone can mine (permissionless) | Anyone can mine (permissionless) |
 
-This parallel was intentional. [Satoshi Nakamoto](/docs/history/people) designed Bitcoin to be "digital gold" - a scarce, hard money that requires real-world cost to produce, preventing arbitrary inflation.
+This parallel was intentional. [Satoshi Nakamoto](/docs/history/people) designed Bitcoin to be "digital gold": a scarce, hard money that requires real-world cost to produce, preventing arbitrary inflation.
 
 ---
 
@@ -333,7 +333,7 @@ See [Mining Pools](/docs/mining/pools) for detailed information on pool operatio
 
 ### Network Security
 
-Mining provides Bitcoin's security through proof-of-work. To attack the network, an adversary would need to control more than 50% of the global hash rate - an astronomically expensive proposition requiring billions of dollars in hardware and electricity. See [Mining Attacks](/docs/mining/attacks) for more on security considerations.
+Mining provides Bitcoin's security through proof-of-work. To attack the network, an adversary would need to control more than 50% of the global hash rate: an astronomically expensive proposition requiring billions of dollars in hardware and electricity. See [Mining Attacks](/docs/mining/attacks) for more on security considerations.
 
 ### Decentralization
 
@@ -374,3 +374,5 @@ Modern Bitcoin mining is dominated by:
 - [Mining Economics](/docs/mining/economics) - Block rewards, fees, and profitability
 - [Block Construction](/docs/mining/block-construction) - How miners build blocks
 - [Mining Pools](/docs/mining/pools) - Collaborative mining operations
+- [Mining Attacks](/docs/mining/attacks) - Mining-specific attack vectors
+- [Network Attacks & Security](/docs/mining/network-attacks) - Network-layer security threats

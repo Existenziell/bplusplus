@@ -450,7 +450,7 @@ Onion routing provides Lightning's privacy layer:
 ## Related Topics
 
 - [Routing & HTLCs](/docs/lightning/routing) - Payment routing mechanics
-- [Trampoline Routing](/docs/lightning/trampoline) - Delegated pathfinding
+- [Trampoline Routing](/docs/advanced/trampoline-routing) - Delegated pathfinding
 - [Invoices (BOLT11)](/docs/lightning/invoices) - Payment request format
 
 ---

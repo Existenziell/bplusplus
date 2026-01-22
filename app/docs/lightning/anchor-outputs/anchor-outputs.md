@@ -282,7 +282,7 @@ Anchor outputs provide:
 
 - [Channels](/docs/lightning/channels) - Channel lifecycle and force close
 - [Watchtowers](/docs/lightning/watchtowers) - Automated breach response
-- [Zero-Conf Channels](/docs/lightning/zero-conf) - Instant channel opening
+- [Zero-Conf Channels](/docs/advanced/zero-conf-channels) - Instant channel opening
 
 ---
 

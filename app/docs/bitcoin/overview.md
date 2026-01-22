@@ -96,3 +96,11 @@ Dive into the technical details:
 - [Blocks](/docs/bitcoin/blocks) - Block structure and propagation
 - [Subsidy](/docs/bitcoin/subsidy) - The mathematical supply schedule
 - [RPC](/docs/bitcoin/rpc) - Node communication interface
+- [SegWit](/docs/bitcoin/segwit) - Segregated Witness protocol upgrade
+- [Taproot](/docs/bitcoin/taproot) - Schnorr signatures and MAST
+- [P2P Network Protocol](/docs/bitcoin/p2p-protocol) - Peer-to-peer communication
+- [Merkle Trees](/docs/bitcoin/merkle-trees) - Efficient transaction verification
+- [Transaction Fees](/docs/bitcoin/transaction-fees) - Fee market and estimation
+- [Timelocks](/docs/bitcoin/timelocks) - Time-based spending conditions
+- [Transaction Malleability](/docs/bitcoin/transaction-malleability) - Historical issue and fix
+- [Transaction Lifecycle](/docs/bitcoin/transaction-lifecycle) - Transaction states and confirmations

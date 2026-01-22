@@ -4,7 +4,7 @@ The UTXO (Unspent Transaction Output) model is one of Bitcoin's most fundamental
 
 ## What is a UTXO?
 
-A **UTXO** is a transaction output that hasn't been spent yet. It represents the actual "coins" in Bitcoin's accounting model. When you "have 1 BTC," you don't have a balance in an account—you actually possess one or more UTXOs that sum to that amount.
+A **UTXO** is a transaction output that hasn't been spent yet. It represents the actual "coins" in Bitcoin's accounting model. When you "have 1 BTC," you don't have a balance in an account. You actually possess one or more UTXOs that sum to that amount.
 
 ### Key Characteristics
 
@@ -58,7 +58,7 @@ New Outputs Created (become new UTXOs)
 1. **Output Creation**: A transaction creates outputs with specific amounts and spending conditions (scriptPubKeys)
 2. **UTXO Status**: If an output hasn't been spent, it's a UTXO
 3. **Spending**: A transaction input references a UTXO (by transaction ID and output index)
-4. **Consumption**: The UTXO is consumed—it can never be spent again
+4. **Consumption**: The UTXO is consumed: it can never be spent again
 5. **New UTXOs**: The transaction creates new outputs, which become new UTXOs
 
 ---
@@ -183,7 +183,7 @@ Result:
 - Two new UTXOs created (payment + change)
 ```
 
-This demonstrates **coin selection**—the process of choosing which UTXOs to spend. Wallets must select UTXOs that sum to at least the payment amount plus fees.
+This demonstrates **coin selection**: the process of choosing which UTXOs to spend. Wallets must select UTXOs that sum to at least the payment amount plus fees.
 
 ### Change Outputs Explained
 
@@ -343,7 +343,7 @@ The UTXO model has important privacy characteristics:
 
 ### "UTXOs are stored in my wallet"
 
-**Reality**: UTXOs exist on the blockchain. Your wallet tracks which UTXOs you can spend by monitoring addresses you control. The wallet doesn't "store" the UTXOs—they're on every full node.
+**Reality**: UTXOs exist on the blockchain. Your wallet tracks which UTXOs you can spend by monitoring addresses you control. The wallet doesn't "store" the UTXOs: they're on every full node.
 
 ### "The UTXO set is the blockchain"
 
@@ -361,7 +361,7 @@ Understanding the UTXO model is essential because:
 4. **Wallet Design**: Wallets must implement coin selection algorithms
 5. **Node Operation**: Running a node requires understanding UTXO set management
 
-The UTXO model is not just a technical detail—it's fundamental to how Bitcoin works. Every transaction, every wallet, every node interacts with the UTXO model. Understanding it deeply will make you a better Bitcoin user, developer, or node operator.
+The UTXO model is not just a technical detail: it's fundamental to how Bitcoin works. Every transaction, every wallet, every node interacts with the UTXO model. Understanding it deeply will make you a better Bitcoin user, developer, or node operator.
 
 ---
 

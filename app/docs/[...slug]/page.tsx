@@ -16,21 +16,22 @@ export async function generateStaticParams() {
 }
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string[]
-  }
+  }>
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
   // Handle case where slug might be undefined or empty
-  if (!params?.slug || !Array.isArray(params.slug) || params.slug.length === 0) {
+  if (!slug || !Array.isArray(slug) || slug.length === 0) {
     return {
       title: 'Page Not Found | B++',
     }
   }
 
-  const path = `/docs/${params.slug.join('/')}`
+  const path = `/docs/${slug.join('/')}`
   const page = docPages.find(p => p.path === path)
 
   if (!page) {
@@ -56,13 +57,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function DocPage({ params }: PageProps) {
+  const { slug } = await params
   // Handle case where slug might be undefined or empty
-  if (!params?.slug || !Array.isArray(params.slug) || params.slug.length === 0) {
+  if (!slug || !Array.isArray(slug) || slug.length === 0) {
     notFound()
   }
 
   // Reconstruct the path from slug segments
-  const path = `/docs/${params.slug.join('/')}`
+  const path = `/docs/${slug.join('/')}`
 
   // Look up the markdown file for this path
   const mdFile = pathToMdFile[path]

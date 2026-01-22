@@ -287,6 +287,67 @@ export default function TerminalPage() {
     return desc ? desc.includes('Usage:') : false
   }
 
+  // Parameter format mapping
+  const getParameterFormat = (paramName: string): { format: string; description: string } => {
+    const normalized = paramName.toLowerCase()
+
+    if (normalized === 'blockhash') {
+      return { format: 'hex string (64 characters)', description: 'The block hash' }
+    }
+    if (normalized === 'height') {
+      return { format: 'number (integer)', description: 'The block height' }
+    }
+    if (normalized === 'txid') {
+      return { format: 'hex string (64 characters)', description: 'The transaction ID' }
+    }
+    if (normalized === 'conf_target') {
+      return { format: 'number (integer)', description: 'Confirmation target in blocks' }
+    }
+    if (normalized === 'verbose') {
+      return { format: 'boolean (true/false) or number', description: 'Optional: Return verbose output' }
+    }
+    if (normalized === 'verbosity') {
+      return { format: 'number (0, 1, or 2)', description: 'Optional: verbosity level' }
+    }
+
+    return { format: 'string', description: 'Parameter value' }
+  }
+
+  // Extract and format parameter information from usage string
+  const getParameterDetails = (usage: string): Array<{ name: string; isOptional: boolean; format: string; description: string }> => {
+    const parameters: Array<{ name: string; isOptional: boolean; format: string; description: string }> = []
+
+    // Match required parameters: <param>
+    const requiredRegex = /<(\w+)>/g
+    let requiredMatch: RegExpExecArray | null
+    while ((requiredMatch = requiredRegex.exec(usage)) !== null) {
+      const paramName = requiredMatch[1]
+      const { format, description } = getParameterFormat(paramName)
+      parameters.push({
+        name: paramName,
+        isOptional: false,
+        format,
+        description,
+      })
+    }
+
+    // Match optional parameters: [param]
+    const optionalRegex = /\[(\w+)\]/g
+    let optionalMatch: RegExpExecArray | null
+    while ((optionalMatch = optionalRegex.exec(usage)) !== null) {
+      const paramName = optionalMatch[1]
+      const { format, description } = getParameterFormat(paramName)
+      parameters.push({
+        name: paramName,
+        isOptional: true,
+        format,
+        description,
+      })
+    }
+
+    return parameters
+  }
+
   // Extract usage information from command description
   const getUsageInfo = (method: string): string | null => {
     const desc = COMMANDS[method]
@@ -375,13 +436,97 @@ export default function TerminalPage() {
     }
 
     if (method === 'help') {
-      const helpText = Object.entries(COMMANDS)
-        .map(([cmd, desc]) => `  ${cmd.padEnd(20)} ${desc}`)
-        .join('\n')
-      setOutput(prev => [
-        ...prev,
-        { type: 'info', content: `Available commands:\n${helpText}`, timestamp: new Date() },
-      ])
+      // Check if a command name parameter was provided
+      if (params.length > 0) {
+        // Get the command name (support both -commandname and commandname formats)
+        let commandName = String(params[0])
+        if (commandName.startsWith('-')) {
+          commandName = commandName.substring(1)
+        }
+        commandName = commandName.toLowerCase()
+
+        // Validate command exists
+        if (!COMMANDS[commandName]) {
+          setOutput(prev => [
+            ...prev,
+            {
+              type: 'error',
+              content: `error: unknown command "${commandName}". Type 'help' for available commands.`,
+              timestamp: new Date(),
+            },
+          ])
+          return
+        }
+
+        // Get command description (remove usage part for cleaner display)
+        const fullDesc = COMMANDS[commandName]
+        const descMatch = fullDesc.match(/^(.+?)(?:\.\s*Usage:)/)
+        const description = descMatch ? descMatch[1] : fullDesc.replace(/\.\s*Usage:.*$/, '')
+
+        // Build detailed help output
+        const helpLines: string[] = []
+        helpLines.push(`Command: ${commandName}`)
+        helpLines.push(`Description: ${description}`)
+        helpLines.push('')
+
+        // Get usage information
+        const usage = getUsageInfo(commandName)
+        if (usage) {
+          helpLines.push(`Usage: ${commandName} ${usage}`)
+          helpLines.push('')
+
+          // Get parameter details
+          const paramDetails = getParameterDetails(usage)
+          if (paramDetails.length > 0) {
+            helpLines.push('Parameters:')
+            paramDetails.forEach(param => {
+              const paramDisplay = param.isOptional ? `[${param.name}]` : `<${param.name}>`
+              helpLines.push(`  ${paramDisplay.padEnd(20)} ${param.format} - ${param.description}`)
+            })
+            helpLines.push('')
+          }
+
+          // Get example usage
+          const example = generateExample(commandName, usage)
+          if (example) {
+            const fullCommand = `${commandName} ${example}`
+            setOutput(prev => [
+              ...prev,
+              { type: 'info', content: helpLines.join('\n'), timestamp: new Date() },
+              {
+                type: 'usage',
+                content: `Example usage: ${fullCommand}`,
+                timestamp: new Date(),
+                copyableCommand: fullCommand,
+              },
+            ])
+          } else {
+            setOutput(prev => [
+              ...prev,
+              { type: 'info', content: helpLines.join('\n'), timestamp: new Date() },
+            ])
+          }
+        } else {
+          // No usage info, just show description
+          setOutput(prev => [
+            ...prev,
+            { type: 'info', content: helpLines.join('\n'), timestamp: new Date() },
+          ])
+        }
+      } else {
+        // No parameter - show all commands
+        const helpText = Object.entries(COMMANDS)
+          .map(([cmd, desc]) => `  ${cmd.padEnd(20)} ${desc}`)
+          .join('\n')
+        setOutput(prev => [
+          ...prev,
+          {
+            type: 'info',
+            content: `Available commands:\n${helpText}\n\nUse 'help <command>' for detailed information about a specific command.`,
+            timestamp: new Date()
+          },
+        ])
+      }
       return
     }
 

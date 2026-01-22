@@ -15,10 +15,10 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
         <div className="page-bg">
           <div className="container-content pt-4">
             <div className="flex justify-between items-center">
-              <Link href="/" className="text-center">
+              <Link href="/" className="text-center" aria-label="B++ Home">
                 <Image src="/logo/logo.png" alt="B++ Logo" width={80} height={80} />
               </Link>
-              <Link href="/terminal" className="text-center hover:text-btc transition-opacity">
+              <Link href="/terminal" className="text-center hover:text-btc transition-opacity" aria-label="Bitcoin CLI Terminal">
               <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 hover:opacity-80 transition-opacity" aria-hidden="true">
                 <Image
                   src="/icons/satoshi-black.svg"

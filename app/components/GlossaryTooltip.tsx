@@ -86,6 +86,7 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
         onMouseLeave={handleMouseLeave}
         onFocus={handleMouseEnter}
         onBlur={handleMouseLeave}
+        aria-describedby={isVisible ? `glossary-tooltip-${slug}` : undefined}
       >
         {children}
       </Link>
@@ -93,6 +94,7 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
       {isVisible && (
         <span
           ref={tooltipRef}
+          id={`glossary-tooltip-${slug}`}
           role="tooltip"
           className={`
             block fixed z-[9999] w-64 sm:w-72 p-4 pt-2

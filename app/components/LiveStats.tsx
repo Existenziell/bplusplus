@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 import Link from 'next/link'
 import copyToClipboard from '@/app/utils/copyToClipboard'
+import { formatNumber, formatPrice, formatDifficulty, formatBytes } from '@/app/utils/formatting'
 
 const BTC_HEX = '#f2a900'
 
@@ -89,36 +90,6 @@ export default function LiveStats() {
     fetchData()
   }, [])
 
-  const formatNumber = (num: number) => {
-    return new Intl.NumberFormat('en-US').format(num)
-  }
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price)
-  }
-
-  const formatDifficulty = (diff: number) => {
-    if (diff >= 1e12) {
-      return `${(diff / 1e12).toFixed(2)}T`
-    }
-    return formatNumber(Math.round(diff))
-  }
-
-  const formatBytes = (bytes: number) => {
-    if (bytes >= 1e6) {
-      return `${(bytes / 1e6).toFixed(1)} MB`
-    }
-    if (bytes >= 1e3) {
-      return `${(bytes / 1e3).toFixed(0)} KB`
-    }
-    return `${bytes} B`
-  }
-
   const stats: StatItem[] = [
     {
       label: 'Block Height',
@@ -173,16 +144,16 @@ export default function LiveStats() {
     },
   ]
 
-  const StatCard = ({ stat }: { stat: StatItem }) => {
+  const StatCard = memo(({ stat }: { stat: StatItem }) => {
     const content = (
       <>
-        <div className="text-sm md:text-xl font-bold text-btc min-h-[2rem] flex items-center justify-center">
+        <div className="text-sm md:text-xl font-bold text-btc min-h-[2rem] flex items-center justify-center" aria-live="polite" aria-atomic="true">
           {loading && !stat.value ? (
-            <span className="animate-pulse text-zinc-400">...</span>
+            <span className="animate-pulse text-zinc-400" aria-label="Loading">...</span>
           ) : stat.value ? (
             stat.value
           ) : (
-            <span className="text-zinc-400">—</span>
+            <span className="text-zinc-400" aria-label="No data available">—</span>
           )}
         </div>
         <div className="text-xs text-zinc-500 dark:text-zinc-400 group-hover:text-btc transition-colors">
@@ -195,7 +166,11 @@ export default function LiveStats() {
 
     if (stat.onClick) {
       return (
-        <button onClick={stat.onClick} className={`${className} cursor-pointer w-full`}>
+        <button
+          onClick={stat.onClick}
+          className={`${className} cursor-pointer w-full`}
+          aria-label={`${stat.label}: ${stat.value || 'Click to copy'}`}
+        >
           {content}
         </button>
       )
@@ -209,20 +184,31 @@ export default function LiveStats() {
             target="_blank"
             rel="noopener noreferrer"
             className={className}
+            aria-label={`${stat.label}: ${stat.value || 'No data'} (opens in new tab)`}
           >
             {content}
           </a>
         )
       }
       return (
-        <Link href={stat.href} className={className}>
+        <Link
+          href={stat.href}
+          className={className}
+          aria-label={`${stat.label}: ${stat.value || 'No data'}`}
+        >
           {content}
         </Link>
       )
     }
 
-    return <div className={className}>{content}</div>
-  }
+    return (
+      <div className={className} role="status" aria-label={`${stat.label}: ${stat.value || 'No data'}`}>
+        {content}
+      </div>
+    )
+  })
+
+  StatCard.displayName = 'StatCard'
 
   return (
     <div className="container-content py-8 md:py-12">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 import type { ReactNode } from 'react'
 import { languageNames } from '@/app/utils/languageNames'
 import type { HLJSApi } from 'highlight.js'
@@ -62,19 +62,19 @@ interface CodeBlockProps {
   [key: string]: any
 }
 
-export default function CodeBlock({ language, children, className, ...props }: CodeBlockProps) {
+function CodeBlock({ language, children, className, ...props }: CodeBlockProps) {
   const displayName = languageNames[language] || (language.charAt(0).toUpperCase() + language.slice(1).toLowerCase())
 
   // Syntax highlighting is done at BUILD TIME via rehype-highlight
   // This component just provides the wrapper and language label
   return (
     <div className="code-block-wrapper my-4">
-      <div className="code-block-header flex items-center justify-between">
+      <div className="code-block-header flex items-center justify-between" role="group" aria-label={`Code block: ${displayName}`}>
         <span className="text-xs font-mono text-secondary tracking-wider">
           {displayName}
         </span>
       </div>
-      <pre className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto border border-zinc-300 dark:border-zinc-700 border-t-0">
+      <pre className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto border border-zinc-300 dark:border-zinc-700 border-t-0" role="code" aria-label={`${displayName} code`}>
         <code className={className} {...props}>
           {children}
         </code>
@@ -82,6 +82,8 @@ export default function CodeBlock({ language, children, className, ...props }: C
     </div>
   )
 }
+
+export default memo(CodeBlock)
 
 interface MultiLanguageCodeBlockProps {
   languages: { lang: string; code: string; className?: string }[]
@@ -145,11 +147,14 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
   return (
     <div className="multi-language-code-block my-4">
       <div className="code-block-header flex items-center justify-between">
-        <div className="flex gap-2">
+        <div className="flex gap-2" role="tablist" aria-label="Programming language selector">
           {languages.map(({ lang }) => (
             <button
               key={lang}
               onClick={() => setSelectedLang(lang)}
+              role="tab"
+              aria-selected={selectedLang === lang}
+              aria-controls={`code-block-${lang}`}
               className={`px-3 py-1 text-xs font-mono tracking-wider rounded transition-colors ${
                 selectedLang === lang
                   ? 'bg-btc text-zinc-900 font-semibold'
@@ -161,7 +166,13 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
           ))}
         </div>
       </div>
-      <pre className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto border border-zinc-300 dark:border-zinc-700 border-t-0">
+      <pre
+        className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto border border-zinc-300 dark:border-zinc-700 border-t-0"
+        role="code"
+        aria-label={`${languageNames[selectedLang] || selectedLang} code`}
+        id={`code-block-${selectedLang}`}
+        tabIndex={0}
+      >
         <code
           className={`language-${selectedLang} ${selectedCode?.className || ''}`}
           dangerouslySetInnerHTML={{ __html: selectedCode?.highlighted || '' }}

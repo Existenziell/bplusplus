@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, memo } from 'react'
 
 const quotes = [
   "Bitcoin fixes this.",
@@ -42,7 +42,7 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled
 }
 
-export default function QuoteRotator() {
+function QuoteRotator() {
   const [quote, setQuote] = useState<string>('')
   const [isVisible, setIsVisible] = useState(true)
   const remainingQuotes = useRef<string[]>([])
@@ -67,12 +67,16 @@ export default function QuoteRotator() {
   }, [])
 
   return (
-    <p
+    <blockquote
       className={`text-xl text-secondary text-center max-w-4xl mx-auto italic min-h-[4rem] md:min-h-[4rem] transition-opacity duration-500 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
+      aria-live="polite"
+      aria-atomic="true"
     >
       {quote && <>&quot;{quote}&quot;</>}
-    </p>
+    </blockquote>
   )
 }
+
+export default memo(QuoteRotator)

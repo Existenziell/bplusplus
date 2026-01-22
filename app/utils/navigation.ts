@@ -32,7 +32,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/history/people', mdFile: 'app/docs/history/people/people.md', title: 'People', section: 'history' },
   { path: '/docs/history/halvings', mdFile: 'app/docs/history/halvings.md', title: 'Halvings', section: 'history' },
   { path: '/docs/history/forks', mdFile: 'app/docs/history/forks.md', title: 'Forks', section: 'history' },
-  { path: '/docs/history/supply', mdFile: 'app/docs/history/supply.md', title: 'Supply Schedule', section: 'history' },
   { path: '/docs/history/bips', mdFile: 'app/docs/history/bips.md', title: 'BIPs', section: 'history' },
 
   // Bitcoin Protocol (deep technical)
@@ -103,7 +102,7 @@ export const sections: Record<string, { title: string; description: string }> = 
   },
   history: {
     title: 'Bitcoin History',
-    description: "Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete supply schedule.",
+    description: "Explore Bitcoin's history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete halving and supply schedule.",
   },
   bitcoin: {
     title: 'Bitcoin Protocol',
@@ -214,7 +213,6 @@ export const routeLabels: Record<string, string> = {
   halvings: 'Halvings',
   people: 'People',
   forks: 'Forks',
-  supply: 'Supply Schedule',
   bips: 'BIPs',
   script: 'Script System',
   'op-codes': 'OP Codes',

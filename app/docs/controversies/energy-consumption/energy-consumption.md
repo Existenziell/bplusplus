@@ -172,6 +172,5 @@ The debate over Bitcoin's energy consumption will likely continue as the network
 
 ## Resources
 
-- [Bitcoin Mining Council](https://bitcoinminingcouncil.com/) - Industry group tracking Bitcoin mining energy use
 - [Cambridge Bitcoin Electricity Consumption Index](https://ccaf.io/cbeci/index) - Real-time Bitcoin energy consumption estimates
 - [Bitcoin Energy Consumption](https://digiconomist.net/bitcoin-energy-consumption) - Alternative energy consumption estimates

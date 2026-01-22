@@ -22,7 +22,7 @@ const resources: Resource[] = [
 
 export default function Footer() {
   return (
-    <footer className='text-xs text-center pb-4 overflow-hidden border-t border-zinc-300 dark:border-zinc-700 pt-6 mt-8'>
+    <footer className='text-xs text-center pb-6 overflow-hidden border-t border-zinc-300 dark:border-zinc-700 pt-6 mt-10'>
       {/* Resources Section */}
       <div className='mb-6'>
         <h3 className='text-sm font-semibold text-zinc-800 dark:text-zinc-200 mb-3'>
@@ -41,7 +41,7 @@ export default function Footer() {
                 <span className='text-btc font-medium'>
                   {resource.name}
                 </span>
-                <span className='text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5'>
+                <span className='text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 hidden md:block'>
                   {resource.description}
                 </span>
               </Link>
@@ -55,7 +55,7 @@ export default function Footer() {
         className='hover:cursor-pointer hover:underline'
         onClick={() => copyToClipboard(NPUB_ADDRESS, 'npub')}
       >
-        Made with <span className='text-btc text-lg' aria-hidden='true'>&#9829;</span> by Chris
+        Made with <span className='text-btc' aria-hidden='true'>&#9829;</span> by Chris
       </p>
     </footer>
   )

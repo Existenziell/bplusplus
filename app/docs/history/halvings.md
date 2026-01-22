@@ -2,6 +2,22 @@
 
 Bitcoin's [block reward](/docs/glossary#block-reward) halves every 210,000 [blocks](/docs/glossary#block), which occurs approximately every 4 years. This creates a predictable, decreasing inflation rate and ensures the total supply will never exceed [21 million](/docs/glossary#21-million) BTC.
 
+## Supply Formula
+
+The total Bitcoin supply follows a geometric series:
+
+```
+Total Supply = 210,000 × 50 × (1 + 1/2 + 1/4 + 1/8 + ...)
+             = 210,000 × 50 × 2
+             = 21,000,000 BTC
+```
+
+This geometric series ensures that:
+- Each [halving](/docs/glossary#halving) period creates 210,000 [blocks](/docs/glossary#block)
+- Each period creates half the Bitcoin of the previous period
+- The series converges to exactly 21 million BTC
+- After 32 halvings, the subsidy becomes effectively 0
+
 ## Complete Halving Schedule
 
 | Event | Date | Block Height | Block Reward (BTC) | Total BTC Created in Period |
@@ -45,11 +61,24 @@ Bitcoin's [block reward](/docs/glossary#block-reward) halves every 210,000 [bloc
 
 ## Key Facts
 
+- **Total Supply**: Exactly 21,000,000 BTC
 - **Total Halvings**: 32 halving events
 - **Halving Interval**: Every 210,000 blocks (~4 years)
-- **Initial Reward**: 50 BTC per block
-- **Current Reward**: 3.125 BTC per block (after 4th halving in 2024)
+- **Initial Block Reward**: 50 BTC per block
+- **Current Block Reward**: 3.125 BTC (after 4th halving in 2024)
 - **Final Halving**: Block 6,720,000 (halving #32)
+- **Block Height at Completion**: ~6,930,000
 - **All Coins Issued**: December 22, 2137 (estimated)
 
-For more details on the mathematical formula behind halvings, see [Subsidy Equation](/docs/bitcoin/subsidy).
+## After All Coins Are Issued
+
+Once all 21 million Bitcoin have been created (around December 22, 2137):
+
+- **No New Bitcoin**: Block rewards will be 0
+- **Miner Income**: [Miners](/docs/glossary#miner) will rely entirely on [transaction fees](/docs/glossary#transaction-fee)
+- **Network Security**: Economic incentives remain through fee collection
+- **Inflation**: Bitcoin becomes deflationary (supply decreases if coins are lost)
+
+## Related Topics
+
+- [Subsidy Equation](/docs/bitcoin/subsidy) - Mathematical formula and implementation details

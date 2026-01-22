@@ -61,8 +61,7 @@ export default function PageNavigation() {
             href={nextPage.href}
             className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
           >
-            <span className="hidden sm:inline">{nextPage.title}</span>
-            <span className="sm:hidden">Next</span>
+            <span>{nextPage.title}</span>
             <svg
               className="w-4 h-4"
               fill="none"

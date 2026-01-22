@@ -151,11 +151,6 @@ Bitcoin reached its then all-time high during the 2017 bull run, driven by retai
 
 El Salvador became the first country to adopt Bitcoin as legal tender.
 
-### All-Time High
-
-- **Date**: November 10, 2021
-- **Price**: ~$69,000/BTC
-
 ---
 
 ## 2024

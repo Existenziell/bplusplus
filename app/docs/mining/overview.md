@@ -22,7 +22,7 @@ This parallel was intentional. [Satoshi Nakamoto](/docs/history/people) designed
 
 Mining serves two critical functions:
 1. **Transaction Processing**: Validating and confirming transactions
-2. **Currency Issuance**: Creating new bitcoin according to the predetermined [supply schedule](/docs/history/supply)
+2. **Currency Issuance**: Creating new bitcoin according to the predetermined [supply schedule](/docs/history/halvings)
 
 ## How Mining Works
 
@@ -269,7 +269,7 @@ Unlike traditional payment systems with central authorities, Bitcoin's mining is
 
 ### Monetary Policy Enforcement
 
-Mining enforces Bitcoin's fixed [supply schedule](/docs/history/supply). The protocol rules embedded in mining software ensure that:
+Mining enforces Bitcoin's fixed [supply schedule](/docs/history/halvings). The protocol rules embedded in mining software ensure that:
 - Only ~21 million bitcoin will ever exist
 - Block rewards halve every 210,000 blocks
 - No entity can create bitcoin outside the rules

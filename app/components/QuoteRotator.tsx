@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 
 const quotes = [
   "Bitcoin fixes this.",
+  "Bitcoin cannot be hacked. It can only be adopted.",
   "Bitcoin is a titanic base layer of absolute truth, robust enough to carry the entire world economy on its shoulders.",
   "Bitcoin is nothing but mathematics and decentralized communication. It requires no army to defend, no borders to enforce, no politicians to maintain.",
   "Bitcoin is a trust machine. It replaces trust in institutions with mathematical verification.",

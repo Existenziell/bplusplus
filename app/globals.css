@@ -190,7 +190,7 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content li {
-  @apply mb-2;
+  @apply mb-0.5;
 }
 
 .markdown-content blockquote {

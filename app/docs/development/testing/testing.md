@@ -194,28 +194,6 @@ test('creates valid transaction structure', () => {
 ```
 :::
 
-type Hash [32]byte
-
-func TestTransactionConstruction(t *testing.T) {
-	tx := Transaction{
-		Version: 2,
-		Inputs:  []Input{{}},
-		Outputs: []Output{},
-	}
-	
-	if tx.Version != 2 {
-		t.Errorf("Expected version 2, got %d", tx.Version)
-	}
-	if len(tx.Inputs) != 1 {
-		t.Errorf("Expected 1 input, got %d", len(tx.Inputs))
-	}
-	if len(tx.Outputs) != 0 {
-		t.Errorf("Expected 0 outputs, got %d", len(tx.Outputs))
-	}
-}
-```
-:::
-
 ---
 
 ## Integration Testing

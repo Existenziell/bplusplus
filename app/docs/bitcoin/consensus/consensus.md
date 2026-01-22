@@ -69,7 +69,7 @@ This "unforgeable costliness" (a term coined by [Nick Szabo](/docs/history/peopl
 
 ### How PoW Creates Consensus
 
-Bitcoin uses **[Proof-of-Work](/docs/glossary#proof-of-work-pow)** (PoW) as its consensus mechanism. [Miners](/docs/glossary#miner) compete to solve cryptographic puzzles, with [difficulty](/docs/glossary#difficulty) adjusting to maintain ~10 minute block intervals. The first miner to find a valid solution broadcasts the [block](/docs/glossary#block), other [nodes](/docs/glossary#node) verify it, and the longest valid chain becomes the accepted truth.
+Bitcoin uses **[Proof-of-Work](/docs/glossary#proof-of-work-pow)** (PoW) as its consensus mechanism. Miners compete to solve cryptographic puzzles, with [difficulty](/docs/glossary#difficulty) adjusting to maintain ~10 minute block intervals. The first miner to find a valid solution broadcasts the block, other nodes verify it, and the longest valid chain becomes the accepted truth.
 
 ### The Consensus Process
 
@@ -86,7 +86,7 @@ Bitcoin uses **[Proof-of-Work](/docs/glossary#proof-of-work-pow)** (PoW) as its 
 
 ## Consensus Rules
 
-Nodes validate three layers: **[transactions](/docs/glossary#transaction)** (valid signatures, unspent inputs, no [double-spends](/docs/glossary#double-spend)), **blocks** (correct structure, valid PoW, all transactions valid), and **chains** (blocks link correctly, longest chain is canonical).
+Nodes validate three layers: **transactions** (valid signatures, unspent inputs, no [double-spends](/docs/glossary#double-spend)), **blocks** (correct structure, valid PoW, all transactions valid), and **chains** (blocks link correctly, longest chain is canonical).
 
 ### Consensus Rules vs Policy
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-A Bitcoin wallet is a software application or device that allows users to store, send, and receive Bitcoin. Despite the name, a wallet doesn't actually "store" Bitcoin. Bitcoin exists only on the [blockchain](/docs/glossary#blockchain). Instead, a wallet stores the **[private keys](/docs/glossary#private-key)** needed to access and control Bitcoin [addresses](/docs/glossary#address).
+A Bitcoin wallet is a software application or device that allows users to store, send, and receive Bitcoin. Despite the name, a wallet doesn't actually "store" Bitcoin. Bitcoin exists only on the blockchain. Instead, a wallet stores the **[private keys](/docs/glossary#private-key)** needed to access and control Bitcoin [addresses](/docs/glossary#address).
 
 ### Key Concepts
 
@@ -69,13 +69,13 @@ A Bitcoin wallet is a software application or device that allows users to store,
 
 1. **Random Generation**: Private key is randomly generated (256 bits)
 2. **Public Key Derivation**: Public key derived using elliptic curve cryptography
-3. **Address Creation**: Address generated from public key using [hash](/docs/glossary#hash) functions
+3. **Address Creation**: Address generated from public key using hash functions
 4. **Address Types**: [P2PKH](/docs/glossary#p2pkh-pay-to-pubkey-hash), [P2SH](/docs/glossary#p2sh-pay-to-script-hash), [P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash), [P2TR](/docs/glossary#p2tr-pay-to-taproot) (Taproot)
 
 ### Transaction Process
 
 1. **UTXO Selection**: Wallet chooses which UTXOs to spend ([coin selection](/docs/glossary#coin-selection))
-2. **[Transaction](/docs/glossary#transaction) Creation**: Builds transaction with [inputs](/docs/glossary#input) and [outputs](/docs/glossary#output)
+2. **Transaction Creation**: Builds transaction with [inputs](/docs/glossary#input) and [outputs](/docs/glossary#output)
 3. **Signing**: Signs transaction with private key(s)
 4. **Broadcasting**: Sends transaction to Bitcoin network
 5. **Confirmation**: Transaction included in a block

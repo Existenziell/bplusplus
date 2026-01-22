@@ -1,6 +1,6 @@
 # Block Construction
 
-Block construction is the process by which [miners](/docs/glossary#mining) assemble a new [block](/docs/glossary#block) from pending [transactions](/docs/glossary#transaction). This is where the [mempool](/docs/glossary#mempool-memory-pool) meets the [blockchain](/docs/glossary#blockchain). Miners must decide which transactions to include, how to order them, and how to structure the block for maximum profit while following [consensus rules](/docs/glossary#consensus-rules).
+Block construction is the process by which miners assemble a new block from pending transactions. This is where the [mempool](/docs/glossary#mempool-memory-pool) meets the blockchain. Miners must decide which transactions to include, how to order them, and how to structure the block for maximum profit while following [consensus rules](/docs/glossary#consensus-rules).
 
 ## Anatomy of a Block
 
@@ -161,7 +161,7 @@ All transactions in a block are hashed into a **[Merkle tree](/docs/glossary#mer
 
 ### Merkle Tree Construction
 
-1. [Hash](/docs/glossary#hash) each transaction (double SHA-256)
+1. Hash each transaction (double SHA-256)
 2. Pair hashes and hash together
 3. If odd number, duplicate the last hash
 4. Repeat until one hash remains (the root)

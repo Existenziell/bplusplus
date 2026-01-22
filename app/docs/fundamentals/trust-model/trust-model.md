@@ -18,9 +18,9 @@ Bitcoin's trust model differs fundamentally from traditional finance. Instead of
 
 You trust **mathematics and code** rather than **people and institutions**. This principle comes directly from [cypherpunk philosophy](/docs/fundamentals/cypherpunk-philosophy), which advocates for "trust code, not people":
 
-- **Cryptographic proof:** Digital signatures prove ownership; [hash](/docs/glossary#hash) functions secure the [blockchain](/docs/glossary#blockchain)
-- **Economic incentives:** [Miners](/docs/glossary#miner) profit from honest behavior; attacks are prohibitively expensive
-- **Open verification:** Anyone can run a [node](/docs/glossary#node) and independently verify every [transaction](/docs/glossary#transaction)
+- **Cryptographic proof:** Digital signatures prove ownership; hash functions secure the blockchain
+- **Economic incentives:** Miners profit from honest behavior; attacks are prohibitively expensive
+- **Open verification:** Anyone can run a node and independently verify every transaction
 
 ---
 

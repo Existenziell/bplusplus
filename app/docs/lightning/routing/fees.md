@@ -494,29 +494,6 @@ function calculateRouteBackwards(hops, finalAmountMsat, minFinalCltv, blockHeigh
 }
 ```
 :::
-	}
-
-	// Reverse to get forward order
-	for i, j := 0, len(htlcHops)-1; i < j; i, j = i+1, j-1 {
-		htlcHops[i], htlcHops[j] = htlcHops[j], htlcHops[i]
-	}
-
-	return htlcHops
-}
-
-func main() {
-	hops := []Hop{
-		{"Alice->Bob", 40, 1000, 10},
-		{"Bob->Carol", 40, 2000, 500},
-	}
-
-	htlcHops := CalculateRouteBackwards(hops, 100_000_000, 40, 850_000)
-	for _, hop := range htlcHops {
-		fmt.Printf("%s: %d msat, expiry: %d\n", hop.ChannelName, hop.HTLCAmountMsat, hop.HTLCExpiry)
-	}
-}
-```
-:::
 
 ---
 

@@ -9,7 +9,7 @@ The Bitcoin community overwhelmingly rejects Wright's claims, derisively calling
 ### What Would Prove It
 
 The real Satoshi Nakamoto has access to:
-- [Private keys](/docs/glossary#private-key) that mined the earliest Bitcoin [blocks](/docs/glossary#block)
+- [Private keys](/docs/glossary#private-key) that mined the earliest Bitcoin blocks
 - The private key behind the [genesis block](/docs/glossary#genesis-block)
 - Keys controlling approximately 1 million unmoved BTC
 

@@ -6,7 +6,7 @@ Bitcoin's history is marked by intense debates that have shaped its development 
 
 Every major Bitcoin controversy teaches us something about decentralized governance:
 
-- **The Blocksize Wars** showed that users, not [miners](/docs/glossary#miner) or corporations, ultimately control Bitcoin
+- **The Blocksize Wars** showed that users, not miners or corporations, ultimately control Bitcoin
 - **Mt. Gox** taught us "not your keys, not your coins"
 - **Energy debates** force us to articulate why [proof-of-work](/docs/glossary#proof-of-work-pow) matters
 - **Faketoshi claims** demonstrate the importance of cryptographic proof over authority
@@ -34,10 +34,10 @@ These debates are often heated because the stakes are high. Bitcoin is real mone
 ### Protocol Debates
 
 [**The Blocksize Wars (2015-2017)**](/docs/controversies/blocksize-wars)
-The defining battle over Bitcoin's scaling approach. Big blockers wanted larger [blocks](/docs/glossary#block) for more transactions; small blockers prioritized [decentralization](/docs/glossary#decentralization) and layer-2 solutions. The outcome: Bitcoin kept small blocks, [SegWit](/docs/glossary#segwit-segregated-witness) activated, and Bitcoin Cash [forked](/docs/glossary#hard-fork) off.
+The defining battle over Bitcoin's scaling approach. Big blockers wanted larger blocks for more transactions; small blockers prioritized [decentralization](/docs/glossary#decentralization) and layer-2 solutions. The outcome: Bitcoin kept small blocks, [SegWit](/docs/glossary#segwit-segregated-witness) activated, and Bitcoin Cash [forked](/docs/glossary#hard-fork) off.
 
 [**The OP_RETURN Debate**](/docs/controversies/op-return)
-An ongoing controversy about data storage on Bitcoin. Should Bitcoin allow arbitrary data in [transactions](/docs/glossary#transaction)? The 2024 Bitcoin Core v30 changes reignited debates about Bitcoin's purpose: is it purely money, or a platform for broader applications?
+An ongoing controversy about data storage on Bitcoin. Should Bitcoin allow arbitrary data in transactions? The 2024 Bitcoin Core v30 changes reignited debates about Bitcoin's purpose: is it purely money, or a platform for broader applications?
 
 ### External Challenges
 

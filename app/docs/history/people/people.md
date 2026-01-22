@@ -26,7 +26,7 @@ While eCash ultimately failed commercially (DigiCash went bankrupt in 1998), Cha
 
 Adam Back is a British cryptographer who invented Hashcash in 1997, a proof-of-work system designed to limit email spam and denial-of-service attacks. The core idea was elegant: require senders to perform computational work before sending an email, making mass spam economically infeasible.
 
-Hashcash's proof-of-work mechanism became a critical component of Bitcoin. Satoshi Nakamoto cited Hashcash in the Bitcoin whitepaper, and Bitcoin's [mining](/docs/glossary#mining) algorithm is essentially Hashcash applied to [transaction](/docs/glossary#transaction) validation. Back is one of only two people cited in the Bitcoin whitepaper who are still alive (the other being Wei Dai).
+Hashcash's proof-of-work mechanism became a critical component of Bitcoin. Satoshi Nakamoto cited Hashcash in the Bitcoin whitepaper, and Bitcoin's mining algorithm is essentially Hashcash applied to transaction validation. Back is one of only two people cited in the Bitcoin whitepaper who are still alive (the other being Wei Dai).
 
 Back is currently CEO of Blockstream, a Bitcoin infrastructure company he co-founded in 2014.
 
@@ -96,13 +96,13 @@ The mystery of Satoshi's identity has become part of Bitcoin's mythos. Various c
 
 Hal Finney was a cryptographic pioneer and one of Bitcoin's most important early contributors. Before Bitcoin, he developed RPOW (Reusable Proofs of Work) in 2004, a system that allowed proof-of-work tokens to be reused as digital cash, building on Adam Back's Hashcash. He was also the lead developer of PGP 2.0 (Pretty Good Privacy), the first widely-used implementation of public key cryptography for email encryption.
 
-Finney was the first person other than Satoshi to run the Bitcoin software, and on January 12, 2009, he received the first Bitcoin [transaction](/docs/glossary#transaction): 10 BTC from Satoshi Nakamoto. He immediately began contributing to the codebase, reporting bugs and suggesting improvements. He famously tweeted "Running bitcoin" on January 10, 2009.
+Finney was the first person other than Satoshi to run the Bitcoin software, and on January 12, 2009, he received the first Bitcoin transaction: 10 BTC from Satoshi Nakamoto. He immediately began contributing to the codebase, reporting bugs and suggesting improvements. He famously tweeted "Running bitcoin" on January 10, 2009.
 
 Interestingly, Finney lived just a few blocks from Dorian Satoshi Nakamoto in Temple City, California, a coincidence that fueled speculation when Dorian was mistakenly identified as Bitcoin's creator by Newsweek in 2014.
 
 Finney was diagnosed with ALS (Lou Gehrig's disease) in 2009 and continued contributing to Bitcoin until his physical limitations made it impossible. He passed away on August 28, 2014, and was cryopreserved by the Alcor Life Extension Foundation.
 
-The "Finney attack" in Bitcoin is named after him: a type of [double-spend](/docs/glossary#double-spend) attack he described where a [miner](/docs/glossary#miner) pre-mines a transaction and quickly broadcasts a conflicting one.
+The "Finney attack" in Bitcoin is named after him: a type of [double-spend](/docs/glossary#double-spend) attack he described where a miner pre-mines a transaction and quickly broadcasts a conflicting one.
 
 ---
 
@@ -116,7 +116,7 @@ Len Sassaman was a cypherpunk, privacy advocate, and cryptographer who made sign
 
 Sassaman was embedded in the cypherpunk community that would give rise to Bitcoin. He studied under David Chaum and worked with Hal Finney on PGP-related projects. His work on anonymous communication systems directly relates to Bitcoin's privacy goals.
 
-Tragically, Sassaman died by suicide on July 3, 2011, just as Bitcoin was gaining mainstream attention. A tribute was encoded into the Bitcoin [blockchain](/docs/glossary#blockchain) at [block](/docs/glossary#block) 138725.
+Tragically, Sassaman died by suicide on July 3, 2011, just as Bitcoin was gaining mainstream attention. A tribute was encoded into the Bitcoin blockchain at block 138725.
 
 Some have speculated that Sassaman was involved in Bitcoin's creation due to his technical skills, cypherpunk connections, and the timing of his death relative to Satoshi's disappearance, though there is no concrete evidence.
 

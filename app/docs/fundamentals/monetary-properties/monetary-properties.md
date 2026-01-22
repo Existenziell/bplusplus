@@ -32,7 +32,7 @@ The satoshi (named after Bitcoin's creator) is the smallest unit. "Stacking sats
 
 **Verifiability:** Digital signatures prove ownership cryptographically. Anyone can verify transactions on the public blockchain, and counterfeiting is mathematically impossible.
 
-**Programmability:** Bitcoin [Script](/docs/glossary#script) enables conditional [transactions](/docs/glossary#transaction): [time locks](/docs/glossary#time-lock) ([CLTV](/docs/glossary#cltv-checklocktimeverify), [CSV](/docs/glossary#csv-checksequenceverify)), [multisignature](/docs/glossary#multisig-multi-signature) requirements, and basic smart contracts.
+**Programmability:** Bitcoin [Script](/docs/glossary#script) enables conditional transactions: [time locks](/docs/glossary#time-lock) ([CLTV](/docs/glossary#cltv-checklocktimeverify), [CSV](/docs/glossary#csv-checksequenceverify)), [multisignature](/docs/glossary#multisig-multi-signature) requirements, and basic smart contracts.
 
 **Censorship Resistance:** No central authority can block transactions. The global, permissionless network makes shutdown impractical.
 

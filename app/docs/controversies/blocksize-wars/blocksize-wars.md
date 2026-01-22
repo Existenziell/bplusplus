@@ -8,9 +8,9 @@ The Blocksize Wars (2015-2017) were a period of intense debate and conflict with
 
 Bitcoin's block size was limited to **1 MB** (set by Satoshi Nakamoto in 2010). As Bitcoin adoption grew, this limit became a bottleneck:
 
-- **Transaction Backlog**: [Transactions](/docs/glossary#transaction) waiting hours or days for [confirmation](/docs/glossary#confirmation)
+- **Transaction Backlog**: Transactions waiting hours or days for [confirmation](/docs/glossary#confirmation)
 - **Rising Fees**: [Fees](/docs/glossary#transaction-fee) increased as users competed for limited block space
-- **Scalability Concerns**: Could Bitcoin handle global adoption with 1 MB [blocks](/docs/glossary#block)?
+- **Scalability Concerns**: Could Bitcoin handle global adoption with 1 MB blocks?
 
 ### The Question
 
@@ -57,7 +57,7 @@ This seemingly simple question divided the community into two camps with fundame
 
 **Key Advocates:**
 - Bitcoin Core developers
-- Most [node](/docs/glossary#node) operators
+- Most node operators
 - [Decentralization](/docs/glossary#decentralization)-focused community
 
 ---
@@ -152,7 +152,7 @@ This seemingly simple question divided the community into two camps with fundame
 
 4. **Economic Security**
    - Higher fees = better security
-   - [Miners](/docs/glossary#miner) need fees after [halvings](/docs/glossary#halving)
+   - Miners need fees after [halvings](/docs/glossary#halving)
    - Fee market is important
 
 ---

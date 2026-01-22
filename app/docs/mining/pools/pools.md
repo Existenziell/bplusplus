@@ -1,6 +1,6 @@
 # Mining Pools
 
-A **[mining pool](/docs/glossary#mining-pool)** is a collective of [miners](/docs/glossary#mining) who combine their computational resources to increase their chances of finding [blocks](/docs/glossary#block). When the pool finds a block, the reward is distributed among participants based on their contributed work.
+A **[mining pool](/docs/glossary#mining-pool)** is a collective of miners who combine their computational resources to increase their chances of finding blocks. When the pool finds a block, the reward is distributed among participants based on their contributed work.
 
 Solo mining is like playing the lottery: you might wait years for a payout. Pool mining provides regular, predictable income at the cost of sharing rewards.
 
@@ -44,7 +44,7 @@ By combining hashpower:
 
 **Shares** are proof that a miner is working:
 
-- A share is a [hash](/docs/glossary#hash) that meets a lower [difficulty](/docs/glossary#difficulty) than the network target
+- A share is a hash that meets a lower [difficulty](/docs/glossary#difficulty) than the network target
 - Easy to find (every few seconds)
 - Proves miner is honestly hashing
 - Pool uses shares to measure contribution
@@ -603,98 +603,6 @@ const fppsPerShare = payout.fppsValue(shareDifficulty, networkDifficulty, 0.25);
 console.log(`FPPS value per share: ${fppsPerShare.toFixed(12)} BTC`);
 ```
 :::
-	"math"
-	"math/big"
-)
-
-// DifficultyToTarget converts a difficulty value to a 256-bit target.
-// Target = MAX_TARGET / difficulty
-func DifficultyToTarget(difficulty float64) *big.Int {
-	// Bitcoin's max target (difficulty 1)
-	maxTarget := new(big.Int)
-	maxTarget.SetString("00000000FFFF0000000000000000000000000000000000000000000000000000", 16)
-
-	diffInt := big.NewInt(int64(difficulty))
-	target := new(big.Int)
-	target.Div(maxTarget, diffInt)
-	return target
-}
-
-// ValidateShare validates if a hash meets the share difficulty.
-func ValidateShare(hash []byte, shareDifficulty float64) bool {
-	hashInt := new(big.Int).SetBytes(hash)
-	target := DifficultyToTarget(shareDifficulty)
-	return hashInt.Cmp(target) < 0
-}
-
-// ExpectedSharesPerBlock calculates the expected shares per block for a given share difficulty.
-func ExpectedSharesPerBlock(shareDifficulty, networkDifficulty float64) float64 {
-	return networkDifficulty / shareDifficulty
-}
-
-// PoolPayout calculates pool payouts for different schemes.
-type PoolPayout struct {
-	BlockReward     float64
-	PoolFeePercent  float64
-}
-
-// NetReward returns net reward after pool fee
-func (p *PoolPayout) NetReward() float64 {
-	return p.BlockReward * (1.0 - p.PoolFeePercent/100.0)
-}
-
-// ProportionalPayout calculates proportional payout for a miner.
-func (p *PoolPayout) ProportionalPayout(minerShares, totalShares uint64) float64 {
-	shareRatio := float64(minerShares) / float64(totalShares)
-	return p.NetReward() * shareRatio
-}
-
-// PPSValue calculates PPS (Pay Per Share) value per share.
-func (p *PoolPayout) PPSValue(shareDifficulty, networkDifficulty float64) float64 {
-	expectedShares := ExpectedSharesPerBlock(shareDifficulty, networkDifficulty)
-	return p.NetReward() / expectedShares
-}
-
-// FPPSValue calculates FPPS including transaction fees.
-func (p *PoolPayout) FPPSValue(shareDifficulty, networkDifficulty, avgTxFees float64) float64 {
-	totalReward := p.BlockReward + avgTxFees
-	netTotal := totalReward * (1.0 - p.PoolFeePercent/100.0)
-	expectedShares := ExpectedSharesPerBlock(shareDifficulty, networkDifficulty)
-	return netTotal / expectedShares
-}
-
-// PPLNSPayout calculates PPLNS payout.
-func (p *PoolPayout) PPLNSPayout(minerShares, windowTotal uint64) float64 {
-	return p.NetReward() * (float64(minerShares) / float64(windowTotal))
-}
-
-func main() {
-	shareDifficulty := 65536.0
-	networkDifficulty := 70_000_000_000_000.0 // ~70 trillion
-
-	fmt.Printf("Share difficulty: %.0f\n", shareDifficulty)
-	fmt.Printf("Network difficulty: %.0f\n", networkDifficulty)
-	fmt.Printf("Expected shares per block: %.0f\n",
-		ExpectedSharesPerBlock(shareDifficulty, networkDifficulty))
-
-	payout := &PoolPayout{
-		BlockReward:    3.125,
-		PoolFeePercent: 2.0,
-	}
-
-	// Example: miner contributed 50,000 out of 1,000,000 shares
-	minerPayout := payout.ProportionalPayout(50_000, 1_000_000)
-	fmt.Printf("\nMiner payout (50k/1M shares): %.8f BTC\n", minerPayout)
-
-	ppsPerShare := payout.PPSValue(shareDifficulty, networkDifficulty)
-	fmt.Printf("PPS value per share: %.12f BTC\n", ppsPerShare)
-
-	// FPPS with average 0.25 BTC transaction fees
-	fppsPerShare := payout.FPPSValue(shareDifficulty, networkDifficulty, 0.25)
-	fmt.Printf("FPPS value per share: %.12f BTC\n", fppsPerShare)
-}
-```
-:::
 
 ### Contribution Tracking
 
@@ -855,7 +763,7 @@ Top pools control majority of hashrate:
 Attempts to remove pool operators:
 
 **P2Pool** (historical):
-- Miners run pool [nodes](/docs/glossary#node)
+- Miners run pool nodes
 - Separate blockchain tracks shares
 - No central operator
 - Died due to complexity and variance for small miners

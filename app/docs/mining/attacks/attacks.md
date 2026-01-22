@@ -14,7 +14,7 @@ With >50% hashrate, an attacker can:
 
 1. **Double-spend**: Reverse their own transactions
 2. **Block transactions**: Prevent specific transactions from confirming
-3. **Empty blocks**: Mine [blocks](/docs/glossary#block) with no transactions (censorship)
+3. **Empty blocks**: Mine blocks with no transactions (censorship)
 
 ### What It Doesn't Enable
 
@@ -534,13 +534,6 @@ console.log(`  $${(cost/1e9).toFixed(2)} billion (hardware + electricity)`);
 ```
 :::
 
-	fmt.Println("\nEstimated attack cost (51% for 1 hour):")
-	cost := CostOfAttack(0.51, 700, 0.05, 1)
-	fmt.Printf("  $%.2f billion (hardware + electricity)\n", cost/1e9)
-}
-```
-:::
-
 ### Cost Analysis
 
 **Renting Hashrate**
@@ -643,7 +636,7 @@ Below this threshold, the strategy loses money compared to honest mining.
 
 ### Defenses
 
-- **Uniform tie-breaking**: [Nodes](/docs/glossary#node) randomly choose between equal-height blocks
+- **Uniform tie-breaking**: Nodes randomly choose between equal-height blocks
 - **Timestamp analysis**: Detect anomalous block timing
 - **Pool monitoring**: Watch for suspicious behavior
 
@@ -682,7 +675,7 @@ An attack by pool miners against their own pool.
 
 ## Fee Sniping
 
-Miners stealing high-fee [transactions](/docs/glossary#transaction) from other miners' blocks.
+Miners stealing high-fee transactions from other miners' blocks.
 
 ### How It Works
 

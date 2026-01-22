@@ -129,7 +129,7 @@ Bitcoin mining has become more energy-efficient over time:
 
 Supporters argue that Bitcoin's energy consumption is justified by the value it provides:
 
-- **Financial Sovereignty**: Enables [censorship-resistant](/docs/glossary#censorship-resistance), borderless [transactions](/docs/glossary#transaction)
+- **Financial Sovereignty**: Enables [censorship-resistant](/docs/glossary#censorship-resistance), borderless transactions
 - **Store of Value**: Provides a decentralized alternative to traditional monetary systems
 - **Network Security**: Energy consumption directly translates to network security
 - **Global Access**: Provides financial services to unbanked populations

@@ -20,14 +20,14 @@ These BIPs define changes to the Bitcoin consensus rules and protocol.
 
 - **Status**: Final
 - **Activated**: 2016
-- **Description**: Mechanism for deploying [soft forks](/docs/glossary#soft-fork) using version bits in [block](/docs/glossary#block) headers. Allows multiple soft forks to be deployed in parallel with defined activation thresholds and timeouts.
-- **Key Concepts**: [Miners](/docs/glossary#miner) signal readiness by setting bits in block version field. Activation requires 95% of blocks in a retarget period.
+- **Description**: Mechanism for deploying [soft forks](/docs/glossary#soft-fork) using version bits in block headers. Allows multiple soft forks to be deployed in parallel with defined activation thresholds and timeouts.
+- **Key Concepts**: Miners signal readiness by setting bits in block version field. Activation requires 95% of blocks in a retarget period.
 
 ### BIP 16 - Pay to Script Hash ([P2SH](/docs/glossary#p2sh-pay-to-script-hash))
 
 - **Status**: Final
 - **Activated**: April 1, 2012 (Block 173,805)
-- **Description**: Allows [transactions](/docs/glossary#transaction) to be sent to a [script](/docs/glossary#script) hash instead of a [public key](/docs/glossary#public-key) hash. The actual script is revealed only when spending.
+- **Description**: Allows transactions to be sent to a [script](/docs/glossary#script) hash instead of a [public key](/docs/glossary#public-key) hash. The actual script is revealed only when spending.
 - **Impact**: Enabled [multisig](/docs/glossary#multisig-multi-signature) wallets, complex scripts, and reduced transaction sizes for senders.
 
 ### BIP 34 - Block v2, Height in Coinbase
@@ -214,7 +214,7 @@ These BIPs define Bitcoin address formats and encoding.
 
 - **Status**: Final
 - **Year**: 2016
-- **Description**: Reduces bandwidth for block [propagation](/docs/glossary#propagation). [Nodes](/docs/glossary#node) share short transaction IDs instead of full transactions.
+- **Description**: Reduces bandwidth for block [propagation](/docs/glossary#propagation). Nodes share short transaction IDs instead of full transactions.
 - **Impact**: Faster block propagation, reduced bandwidth by ~90%.
 
 ---

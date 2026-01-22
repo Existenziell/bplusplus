@@ -1,6 +1,6 @@
 # Cryptography in Bitcoin
 
-Bitcoin relies on several cryptographic primitives to secure [transactions](/docs/glossary#transaction), prove ownership, and maintain the integrity of the [blockchain](/docs/glossary#blockchain). Understanding these cryptographic foundations is essential for grasping how Bitcoin achieves trustless security.
+Bitcoin relies on several cryptographic primitives to secure transactions, prove ownership, and maintain the integrity of the blockchain. Understanding these cryptographic foundations is essential for grasping how Bitcoin achieves trustless security.
 
 ## The Power of Cryptography
 
@@ -53,7 +53,7 @@ A **cryptographic hash function** takes any input data and produces a fixed-size
 
 ### SHA-256
 
-Bitcoin's primary [hash](/docs/glossary#hash) function is **[SHA-256](/docs/glossary#sha-256)** (Secure Hash Algorithm, 256-bit).
+Bitcoin's primary hash function is **[SHA-256](/docs/glossary#sha-256)** (Secure Hash Algorithm, 256-bit).
 
 **Characteristics:**
 - Output: 256 bits (32 bytes, 64 hex characters)
@@ -76,7 +76,7 @@ Notice how adding a single character completely changes the output (avalanche ef
 Bitcoin often uses **double SHA-256**: `SHA256(SHA256(data))`
 
 **Used for:**
-- [Block](/docs/glossary#block) hashes
+- Block hashes
 - [Transaction IDs](/docs/glossary#transaction-id-txid) (TXIDs)
 - [Merkle tree](/docs/glossary#merkle-tree) nodes
 - [Proof-of-work](/docs/glossary#proof-of-work-pow)
@@ -853,7 +853,7 @@ When you spend bitcoin:
 3. **Sign** the sighash with your private key
 4. **Include signature** in transaction's [witness](/docs/glossary#witness)/[scriptSig](/docs/glossary#scriptsig)
 5. **Broadcast** transaction to network
-6. **[Nodes](/docs/glossary#node) verify** signature matches public key and transaction
+6. **Nodes verify** signature matches public key and transaction
 
 ---
 

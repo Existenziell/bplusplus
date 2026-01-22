@@ -1,6 +1,6 @@
 # Difficulty Adjustment
 
-Bitcoin's difficulty adjustment is a critical mechanism that maintains the network's target [block time](/docs/glossary#block-time) of approximately 10 minutes. Every 2016 [blocks](/docs/glossary#block) (~2 weeks), the network automatically adjusts the [mining](/docs/glossary#mining) difficulty based on the actual time it took to mine the previous 2016 blocks.
+Bitcoin's difficulty adjustment is a critical mechanism that maintains the network's target [block time](/docs/glossary#block-time) of approximately 10 minutes. Every 2016 blocks (~2 weeks), the network automatically adjusts the mining difficulty based on the actual time it took to mine the previous 2016 blocks.
 
 ## How Difficulty Adjustment Works
 
@@ -36,7 +36,7 @@ Where:
 
 - **Hash Rate Changes**: Network [hash rate](/docs/glossary#hash-rate) fluctuates
 - **Hardware Improvements**: New [ASICs](/docs/glossary#asic-application-specific-integrated-circuit) increase network hash rate
-- **Miner Participation**: [Miners](/docs/glossary#miner) join/leave the network
+- **Miner Participation**: Miners join/leave the network
 - **Adaptation**: Difficulty adjusts to maintain security
 
 ### Economic Stability
@@ -112,7 +112,7 @@ When network hash rate decreases:
 The difficulty is encoded in the block header's `nBits` field:
 - **Compact representation**: 32-bit value
 - **Target calculation**: Converts nBits to full 256-bit [difficulty target](/docs/glossary#difficulty-target)
-- **Validation**: Block [hash](/docs/glossary#hash) must be less than target
+- **Validation**: Block hash must be less than target
 
 ### Adjustment Algorithm
 

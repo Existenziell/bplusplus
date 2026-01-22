@@ -1,6 +1,6 @@
 # Block Propagation
 
-This document explains how [blocks](/docs/glossary#block) propagate through the Bitcoin network, including the [gossip protocol](/docs/glossary#gossip-protocol), validation process, and [orphan block](/docs/glossary#orphan-block) handling.
+This document explains how blocks propagate through the Bitcoin network, including the [gossip protocol](/docs/glossary#gossip-protocol), validation process, and [orphan block](/docs/glossary#orphan-block) handling.
 
 ## Block Propagation Flow
 

@@ -1,11 +1,11 @@
 # Proof-of-Work Mechanism
 
-Bitcoin uses a **proof-of-work** [consensus](/docs/glossary#consensus) mechanism where [miners](/docs/glossary#mining) compete to solve a cryptographic puzzle. This process secures the network and validates [transactions](/docs/glossary#transaction).
+Bitcoin uses a **proof-of-work** [consensus](/docs/glossary#consensus) mechanism where miners compete to solve a cryptographic puzzle. This process secures the network and validates transactions.
 
 ## How It Works
 
-1. **Block Construction**: Miners collect transactions from the [mempool](/docs/glossary#mempool-memory-pool) and create a candidate [block](/docs/glossary#block)
-2. **Nonce Search**: Miners repeatedly [hash](/docs/glossary#hash) the [block header](/docs/glossary#block-header) with different [nonce](/docs/glossary#nonce) values
+1. **Block Construction**: Miners collect transactions from the [mempool](/docs/glossary#mempool-memory-pool) and create a candidate block
+2. **Nonce Search**: Miners repeatedly hash the [block header](/docs/glossary#block-header) with different [nonce](/docs/glossary#nonce) values
 3. **Difficulty Target**: The hash must be below a certain target (set by network [difficulty](/docs/glossary#difficulty))
 4. **Success**: When a miner finds a valid hash, they broadcast the block to the network
 5. **Reward**: The miner receives the [block reward](/docs/glossary#block-reward) (currently 3.125 BTC) plus [transaction fees](/docs/glossary#transaction-fee)
@@ -413,22 +413,6 @@ function mineBlock(version, prevHash, merkleRoot, timestamp, bits, target, maxNo
 const data = Buffer.from('Hello, Bitcoin!');
 const hash = sha256d(data);
 console.log(`SHA256D hash: ${hash.toString('hex')}`);
-```
-:::
-		hash := SHA256D(header[:])
-
-		if MeetsTarget(hash, target) {
-			return nonce, hash, true
-		}
-	}
-	return 0, [32]byte{}, false
-}
-
-func main() {
-	data := []byte("Hello, Bitcoin!")
-	hash := SHA256D(data)
-	fmt.Printf("SHA256D hash: %s\n", hex.EncodeToString(hash[:]))
-}
 ```
 :::
 

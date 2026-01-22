@@ -1,6 +1,6 @@
 # Bitcoin Mining
 
-Bitcoin mining is the process by which new Bitcoin [transactions](/docs/glossary#transaction) are verified and added to the [blockchain](/docs/glossary#blockchain). Miners compete to solve cryptographic puzzles using computational power, and the first miner to solve the puzzle gets to add the next [block](/docs/glossary#block) to the blockchain and receive a reward.
+Bitcoin mining is the process by which new Bitcoin transactions are verified and added to the blockchain. Miners compete to solve cryptographic puzzles using computational power, and the first miner to solve the puzzle gets to add the next block to the blockchain and receive a reward.
 
 ## Why "Mining"?
 
@@ -34,10 +34,10 @@ Mining serves two critical functions:
 
 1. **Transaction Collection**: Miners collect pending transactions from the [mempool](/docs/glossary#mempool-memory-pool)
 2. **Block Construction**: Miners assemble transactions into a candidate block
-3. **Proof-of-Work**: Miners repeatedly [hash](/docs/glossary#hash) the [block header](/docs/glossary#block-header) with different [nonce](/docs/glossary#nonce) values
+3. **Proof-of-Work**: Miners repeatedly hash the [block header](/docs/glossary#block-header) with different [nonce](/docs/glossary#nonce) values
 4. **Difficulty Target**: The hash must be below a certain target (determined by network [difficulty](/docs/glossary#difficulty))
 5. **Block Discovery**: When a miner finds a valid hash, they broadcast the block to the network
-6. **Block Validation**: Other [nodes](/docs/glossary#node) verify the block and add it to their blockchain
+6. **Block Validation**: Other nodes verify the block and add it to their blockchain
 7. **Reward**: The successful miner receives the [block reward](/docs/glossary#block-reward) plus [transaction fees](/docs/glossary#transaction-fee)
 
 ### The Mining Algorithm

@@ -1,6 +1,6 @@
 # Mt. Gox Collapse
 
-Mt. Gox was once the world's largest Bitcoin exchange, handling over 70% of all Bitcoin [transactions](/docs/glossary#transaction) at its peak. In February 2014, it collapsed spectacularly, losing approximately 850,000 BTC (worth ~$450 million at the time, and tens of billions at later prices). The Mt. Gox disaster became Bitcoin's defining cautionary tale and permanently shaped how the community thinks about custody, exchange security, and the principle of "not your keys, not your coins."
+Mt. Gox was once the world's largest Bitcoin exchange, handling over 70% of all Bitcoin transactions at its peak. In February 2014, it collapsed spectacularly, losing approximately 850,000 BTC (worth ~$450 million at the time, and tens of billions at later prices). The Mt. Gox disaster became Bitcoin's defining cautionary tale and permanently shaped how the community thinks about custody, exchange security, and the principle of "not your keys, not your coins."
 
 ## The Rise of Mt. Gox
 

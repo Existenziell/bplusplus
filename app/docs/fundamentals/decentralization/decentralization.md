@@ -4,7 +4,7 @@ Decentralization is the distribution of control across many independent particip
 
 ## What Decentralization Means
 
-No single entity controls Bitcoin. Control is distributed across thousands of [nodes](/docs/glossary#node), multiple [mining pools](/docs/glossary#mining-pool), diverse developers, and a global user base. This means:
+No single entity controls Bitcoin. Control is distributed across thousands of nodes, multiple [mining pools](/docs/glossary#mining-pool), diverse developers, and a global user base. This means:
 
 - **No central authority:** No government, company, or person controls Bitcoin
 - **No single point of failure:** The network survives even if parts go offline
@@ -30,11 +30,11 @@ Decentralization enables Bitcoin's core properties:
 
 ### Nodes
 
-Bitcoin has ~15,000-20,000 reachable [full nodes](/docs/glossary#full-node) spread across 100+ countries. Each node independently validates every [transaction](/docs/glossary#transaction) and stores the complete [blockchain](/docs/glossary#blockchain). No single node is essential; if one goes offline, the network continues.
+Bitcoin has ~15,000-20,000 reachable [full nodes](/docs/glossary#full-node) spread across 100+ countries. Each node independently validates every transaction and stores the complete blockchain. No single node is essential; if one goes offline, the network continues.
 
 ### Mining
 
-[Hash rate](/docs/glossary#hash-rate) is distributed across multiple independent mining pools, with the largest typically controlling less than 20% of total hash power. [Miners](/docs/glossary#miner) can switch pools freely, preventing any single pool from gaining too much control. Geographic distribution across many countries reduces regulatory risk.
+[Hash rate](/docs/glossary#hash-rate) is distributed across multiple independent mining pools, with the largest typically controlling less than 20% of total hash power. Miners can switch pools freely, preventing any single pool from gaining too much control. Geographic distribution across many countries reduces regulatory risk.
 
 ### Development
 

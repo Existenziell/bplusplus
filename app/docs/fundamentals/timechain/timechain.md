@@ -39,7 +39,7 @@ Bitcoin solves the timing problem by using **[proof-of-work](/docs/glossary#proo
 
 ### Blocks as Temporal Units
 
-Each [block](/docs/glossary#block) in the blockchain represents a discrete unit of time. Blocks are discovered approximately every 10 minutes through proof-of-work mining. The sequence of blocks creates a **temporal ordering** of all transactions:
+Each block in the blockchain represents a discrete unit of time. Blocks are discovered approximately every 10 minutes through proof-of-work mining. The sequence of blocks creates a **temporal ordering** of all transactions:
 
 ```
 Block 1 (10:00) → Block 2 (10:10) → Block 3 (10:20) → Block 4 (10:30)

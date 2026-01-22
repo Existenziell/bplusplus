@@ -1,6 +1,6 @@
 # The Mempool
 
-The **[mempool](/docs/glossary#mempool-memory-pool)** (memory pool) is Bitcoin's waiting room for unconfirmed [transactions](/docs/glossary#transaction). When you broadcast a transaction, it doesn't immediately go into a [block](/docs/glossary#block). It first enters the mempool, where it waits for a [miner](/docs/glossary#mining) to include it in the next block.
+The **[mempool](/docs/glossary#mempool-memory-pool)** (memory pool) is Bitcoin's waiting room for unconfirmed transactions. When you broadcast a transaction, it doesn't immediately go into a block. It first enters the mempool, where it waits for a miner to include it in the next block.
 
 Every [full node](/docs/glossary#full-node) maintains its own mempool. There is no single, global mempool; each node has its own view of pending transactions, though they generally converge through transaction propagation across the network.
 

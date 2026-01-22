@@ -1,6 +1,6 @@
 # Pool Mining Setup and Monitoring
 
-Pool [mining](/docs/glossary#mining) allows you to contribute [hash rate](/docs/glossary#hash-rate) to a [mining pool](/docs/glossary#mining-pool) and receive proportional rewards. This guide covers setup, monitoring, and optimization.
+Pool mining allows you to contribute [hash rate](/docs/glossary#hash-rate) to a [mining pool](/docs/glossary#mining-pool) and receive proportional rewards. This guide covers setup, monitoring, and optimization.
 
 ## Mining Architecture
 
@@ -123,7 +123,7 @@ Hash Rate = Total Hashes / Time
 A share is a [proof-of-work](/docs/glossary#proof-of-work-pow) submission that:
 - Meets pool [difficulty](/docs/glossary#difficulty) (lower than network difficulty)
 - Proves mining work was done
-- Entitles [miner](/docs/glossary#miner) to proportional reward
+- Entitles miner to proportional reward
 
 ### Share Difficulty
 

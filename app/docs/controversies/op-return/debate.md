@@ -8,7 +8,7 @@ An analysis of the ongoing debate about OP_RETURN, carrier size limits, and Bitc
 
 ### Basic Function
 
-`[OP_RETURN](/docs/glossary#op-return)` is a Bitcoin [Script](/docs/glossary#script) [opcode](/docs/glossary#opcode) that creates **provably unspendable outputs**. When executed, it immediately terminates script execution and marks the [transaction](/docs/glossary#transaction) as invalid.
+`[OP_RETURN](/docs/glossary#op-return)` is a Bitcoin [Script](/docs/glossary#script) [opcode](/docs/glossary#opcode) that creates **provably unspendable outputs**. When executed, it immediately terminates script execution and marks the transaction as invalid.
 
 **Script Pattern:**
 ```
@@ -17,8 +17,8 @@ OP_RETURN <data>
 
 **Key Characteristics:**
 - [Outputs](/docs/glossary#output) are **unspendable** - they cannot be used as [inputs](/docs/glossary#input) in future transactions
-- Data is **permanently stored** on the [blockchain](/docs/glossary#blockchain) (immutable)
-- Data does **not contribute to [UTXO set](/docs/glossary#utxo-set)** - can be pruned by [nodes](/docs/glossary#node)
+- Data is **permanently stored** on the blockchain (immutable)
+- Data does **not contribute to [UTXO set](/docs/glossary#utxo-set)** - can be pruned by nodes
 - Originally limited to **80 bytes** of data per output
 
 ### How It Works Technically
@@ -66,8 +66,8 @@ OP_RETURN 48656c6c6f20576f726c64  (hex for "Hello World")
 
 1. **Policy, Not [Consensus](/docs/glossary#consensus):** OP_RETURN limits are **relay policy**, not [consensus rules](/docs/glossary#consensus-rules)
    - Nodes can reject transactions as "non-standard"
-   - But if included in a [block](/docs/glossary#block), they're still valid
-   - [Miners](/docs/glossary#miner) can include non-standard transactions if they choose
+   - But if included in a block, they're still valid
+   - Miners can include non-standard transactions if they choose
 
 2. **Cumulative Limit:** The limit applies to **total size** across all OP_RETURN outputs in a transaction
    - Not per-output, but total across all outputs

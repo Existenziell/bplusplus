@@ -1,6 +1,6 @@
 # RPC Commands Reference
 
-This document provides a guide for interacting with your Bitcoin [node](/docs/glossary#node) using both curl and bitcoin-cli commands via [RPC](/docs/glossary#rpc-remote-procedure-call).
+This document provides a guide for interacting with your Bitcoin node using both curl and bitcoin-cli commands via [RPC](/docs/glossary#rpc-remote-procedure-call).
 
 > **Try it live!** Test these commands directly in the [Bitcoin CLI Terminal](/terminal). Connected to mainnet, no setup required.
 
@@ -21,7 +21,7 @@ This document provides a guide for interacting with your Bitcoin [node](/docs/gl
 - [8. Index Information](#8-index-information) - `btc getindexinfo`
 - [9. [UTXO](/docs/fundamentals/utxos) Set Information](#9-utxo-set-information) - `btc gettxoutsetinfo`
 - [10. [Peer](/docs/glossary#peer) Information](#10-peer-information) - `btc getpeerinfo`
-- [11. [ZMQ](/docs/glossary#zmq-zeromq) Notifications](#11-zmq-notifications) - Real-time [block](/docs/glossary#block) and [transaction](/docs/glossary#transaction) notifications
+- [11. [ZMQ](/docs/glossary#zmq-zeromq) Notifications](#11-zmq-notifications) - Real-time block and transaction notifications
 
 ### Quick Aliases
 ```bash
@@ -512,117 +512,6 @@ async function main() {
 }
 
 main();
-```
-:::
-
-import (
-	"bytes"
-	"encoding/base64"
-	"encoding/json"
-	"fmt"
-	"io"
-	"net/http"
-	"time"
-)
-
-type RPCRequest struct {
-	JSONRPC string        `json:"jsonrpc"`
-	ID      string        `json:"id"`
-	Method  string        `json:"method"`
-	Params  []interface{} `json:"params"`
-}
-
-type RPCResponse struct {
-	Result interface{} `json:"result"`
-	Error  *RPCError   `json:"error"`
-}
-
-type RPCError struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-}
-
-type BitcoinRPC struct {
-	url      string
-	user     string
-	password string
-	client   *http.Client
-}
-
-func NewBitcoinRPC(url, user, password string) *BitcoinRPC {
-	return &BitcoinRPC{
-		url:      url,
-		user:     user,
-		password: password,
-		client: &http.Client{
-			Timeout: 30 * time.Second,
-		},
-	}
-}
-
-func (rpc *BitcoinRPC) Call(method string, params []interface{}) (interface{}, error) {
-	request := RPCRequest{
-		JSONRPC: "1.0",
-		ID:      "go-client",
-		Method:  method,
-		Params:  params,
-	}
-
-	jsonData, err := json.Marshal(request)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", rpc.url, bytes.NewBuffer(jsonData))
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Set("Content-Type", "application/json")
-	auth := base64.StdEncoding.EncodeToString([]byte(rpc.user + ":" + rpc.password))
-	req.Header.Set("Authorization", "Basic "+auth)
-
-	resp, err := rpc.client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("connection error: %v", err)
-	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	var rpcResp RPCResponse
-	if err := json.Unmarshal(body, &rpcResp); err != nil {
-		return nil, err
-	}
-
-	if rpcResp.Error != nil {
-		return nil, fmt.Errorf("RPC error %d: %s", rpcResp.Error.Code, rpcResp.Error.Message)
-	}
-
-	return rpcResp.Result, nil
-}
-
-func (rpc *BitcoinRPC) GetBlockchainInfo() (map[string]interface{}, error) {
-	result, err := rpc.Call("getblockchaininfo", []interface{}{})
-	if err != nil {
-		return nil, err
-	}
-	return result.(map[string]interface{}), nil
-}
-
-func main() {
-	rpc := NewBitcoinRPC("http://127.0.0.1:8332", "user", "password")
-
-	info, err := rpc.GetBlockchainInfo()
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("Block height: %.0f\n", info["blocks"])
-}
 ```
 :::
 

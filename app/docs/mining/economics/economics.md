@@ -1,6 +1,6 @@
 # Mining Economics
 
-Understanding the economics of Bitcoin [mining](/docs/glossary#mining) is essential for anyone considering participating in the network. This page covers the revenue sources, cost factors, and profitability calculations that determine whether mining is financially viable.
+Understanding the economics of Bitcoin mining is essential for anyone considering participating in the network. This page covers the revenue sources, cost factors, and profitability calculations that determine whether mining is financially viable.
 
 ## Block Rewards
 
@@ -439,28 +439,6 @@ console.log(`Daily Revenue: $${(calc.dailyBtcRevenue() * calc.btcPrice).toFixed(
 console.log(`Daily Electricity: $${calc.dailyElectricityCost().toFixed(2)}`);
 console.log(`Daily Profit: $${calc.dailyProfit().toFixed(2)}`);
 console.log(`Break-even rate: $${calc.breakEvenElectricityRate().toFixed(4)}/kWh`);
-```
-:::
-
-
-func main() {
-	// Example: Antminer S19 XP
-	calc := &MiningCalculator{
-		HashRateTh:        140.0,  // 140 TH/s
-		PowerWatts:        3010.0, // 3010W
-		ElectricityRate:   0.05,   // $0.05/kWh
-		PoolFeePercent:    2.0,    // 2% pool fee
-		BTCPrice:          60_000.0, // $60,000 per BTC
-		NetworkHashRateEh: 700.0,  // 700 EH/s
-		BlockReward:       3.125,
-	}
-
-	fmt.Printf("Daily BTC: %.8f BTC\n", calc.DailyBTCRevenue())
-	fmt.Printf("Daily Revenue: $%.2f\n", calc.DailyBTCRevenue()*calc.BTCPrice)
-	fmt.Printf("Daily Electricity: $%.2f\n", calc.DailyElectricityCost())
-	fmt.Printf("Daily Profit: $%.2f\n", calc.DailyProfit())
-	fmt.Printf("Break-even rate: $%.4f/kWh\n", calc.BreakEvenElectricityRate())
-}
 ```
 :::
 

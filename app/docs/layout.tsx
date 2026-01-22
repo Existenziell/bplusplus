@@ -5,9 +5,6 @@ import PageNavigation from '@/app/components/PageNavigation'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
-// Force static generation for all doc pages - they only read from filesystem
-export const dynamic = 'force-static'
-
 export default function DocsLayout({
   children,
 }: {

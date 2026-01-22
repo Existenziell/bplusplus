@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import LiveStats from '../components/LiveStats'
+import { HomeIcon } from '../components/Icons'
+import Link from 'next/link'
 
 // Available commands with descriptions
 const COMMANDS: Record<string, string> = {
@@ -368,20 +370,16 @@ export default function TerminalPage() {
           </form>
         </div>
 
-        <button
-          onClick={() => router.back()}
-          className="mt-4 inline-flex items-center gap-2 text-zinc-500 hover:text-btc transition-colors text-sm"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back
-        </button>
+        {/* Back Link */}
+        <div className="mt-12 text-center flex flex-row items-center justify-center gap-2">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+            >
+              <HomeIcon />
+              <span>Back Home</span>
+            </Link>
+          </div>
       </div>
      <LiveStats />
       <Footer />

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -9,17 +9,11 @@ import Link from 'next/link'
 import CodeBlock, { MultiLanguageCodeBlock } from '@/app/components/CodeBlock'
 import GlossaryTooltip from '@/app/components/GlossaryTooltip'
 import { ExternalLinkIcon } from '@/app/components/Icons'
+import { useGlossary } from '@/app/contexts/GlossaryContext'
 
 interface MarkdownRendererProps {
   content: string
 }
-
-interface GlossaryEntry {
-  term: string
-  definition: string
-}
-
-type GlossaryData = Record<string, GlossaryEntry>
 
 interface CodeGroupBlock {
   id: string
@@ -161,6 +155,7 @@ function YouTubeEmbed({ videoId }: { videoId: string }) {
 
 // Memoize plugin arrays at module level to prevent recreation
 const remarkPlugins = [remarkGfm]
+// rehype-highlight runs at BUILD TIME for static pages (not runtime) - this is optimal
 const rehypePlugins = [rehypeRaw, rehypeHighlight]
 
 // Factory function to create heading components (h1-h6)
@@ -180,15 +175,8 @@ const createHeading = (level: number) => {
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  const [glossaryData, setGlossaryData] = useState<GlossaryData>({})
-
-  // Load glossary data for tooltips
-  useEffect(() => {
-    fetch('/data/glossary.json')
-      .then(res => res.json())
-      .then(data => setGlossaryData(data))
-      .catch(err => console.warn('Failed to load glossary data:', err))
-  }, [])
+  // Use glossary data from context (loaded once globally)
+  const { glossaryData } = useGlossary()
 
   // Memoize the parsing of code groups - this is expensive regex processing
   const { processedContent, codeGroupMap } = useMemo(() => {

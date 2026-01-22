@@ -5,8 +5,14 @@ import type { ReactNode } from 'react'
 import { languageNames } from '@/app/utils/languageNames'
 import type { HLJSApi } from 'highlight.js'
 
-// Dynamic import for highlight.js to reduce initial bundle size
-// Only load when MultiLanguageCodeBlock is used
+// Escape HTML for fallback rendering
+const escapeHtml = (code: string) =>
+  code
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+
+// Dynamic import for highlight.js - only needed for MultiLanguageCodeBlock (client-side)
 let hljsInstance: HLJSApi | null = null
 let hljsPromise: Promise<HLJSApi> | null = null
 
@@ -49,13 +55,6 @@ const getHljs = (): Promise<HLJSApi> => {
   return hljsPromise
 }
 
-// Escape HTML for fallback rendering
-const escapeHtml = (code: string) =>
-  code
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-
 interface CodeBlockProps {
   language: string
   children: ReactNode
@@ -66,6 +65,8 @@ interface CodeBlockProps {
 export default function CodeBlock({ language, children, className, ...props }: CodeBlockProps) {
   const displayName = languageNames[language] || (language.charAt(0).toUpperCase() + language.slice(1).toLowerCase())
 
+  // Syntax highlighting is done at BUILD TIME via rehype-highlight
+  // This component just provides the wrapper and language label
   return (
     <div className="code-block-wrapper my-4">
       <div className="code-block-header flex items-center justify-between">

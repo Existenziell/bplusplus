@@ -1,12 +1,15 @@
 import { Ubuntu } from 'next/font/google'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import { readFileSync } from 'fs'
+import { join } from 'path'
 
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Notification from '@/app/components/Notification'
+import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
 
 const ubuntu = Ubuntu({
   weight: '400',
@@ -66,19 +69,45 @@ export default function RootLayout({
 }: {
   children: ReactNode
 }) {
+  // Inline glossary data at build time (for static generation)
+  let glossaryData = {}
+  try {
+    const glossaryPath = join(process.cwd(), 'public/data/glossary.json')
+    const glossaryContent = readFileSync(glossaryPath, 'utf-8')
+    glossaryData = JSON.parse(glossaryContent)
+  } catch (error) {
+    // Glossary data not available at build time, will be empty
+    console.warn('Could not load glossary data at build time:', error)
+  }
+
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
         {/* Preconnect to Vercel Analytics/Speed Insights origins */}
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
+        {/* Inline glossary data for instant client-side access */}
+        <script
+          id="glossary-data"
+          type="application/json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(glossaryData),
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__GLOSSARY_DATA__ = ${JSON.stringify(glossaryData)};`,
+          }}
+        />
       </head>
       <body className={ubuntu.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Notification />
-          {children}
-          <Analytics />
-          <SpeedInsights />
+          <GlossaryProvider>
+            <Notification />
+            {children}
+            <Analytics />
+            <SpeedInsights />
+          </GlossaryProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -17,7 +17,7 @@ export default function WhitepaperPage() {
       <div className="container-content py-8 md:py-12 flex-grow">
         <div className="max-w-3xl mx-auto">
           {/* Title */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h1 className="heading-page text-center mb-2">
               Bitcoin Whitepaper
             </h1>
@@ -37,6 +37,19 @@ export default function WhitepaperPage() {
               </p>
           </div>
 
+            {/* Download Button */}
+            <div className="flex flex-col items-center mb-6">
+            <a
+              href="/data/bitcoin.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-btc hover:bg-btc/90 text-white font-semibold rounded-lg transition-colors shadow-md"
+            >
+              <DownloadPDFIcon />
+              Open PDF
+            </a>
+          </div>
+
           {/* Whitepaper Image */}
           <div className="relative aspect-[3/4] w-full max-w-xl mx-auto mb-8 rounded-md overflow-hidden shadow-lg border border-zinc-200 dark:border-zinc-700">
             <Image
@@ -47,22 +60,6 @@ export default function WhitepaperPage() {
               sizes="(max-width: 768px) 100vw, 768px"
               priority
             />
-          </div>
-
-          {/* Download Button */}
-          <div className="flex flex-col items-center gap-4">
-            <a
-              href="/data/bitcoin.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-btc hover:bg-btc/90 text-white font-semibold rounded-lg transition-colors shadow-md"
-            >
-              <DownloadPDFIcon />
-              Open PDF
-            </a>
-            <p className="text-xs text-zinc-500 dark:text-zinc-500">
-              Published October 31, 2008
-            </p>
           </div>
 
           {/* Back Link */}

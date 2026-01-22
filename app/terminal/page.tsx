@@ -738,15 +738,15 @@ export default function TerminalPage() {
                 <pre className="text-zinc-400 whitespace-pre-wrap">{line.content}</pre>
               )}
               {line.type === 'usage' && (
-                <div className="flex items-center gap-2 group">
-                  <pre className="text-emerald-400 whitespace-pre-wrap flex-1">{line.content}</pre>
+                <div className="flex items-center gap-2 group flex-wrap">
+                  <pre className="text-emerald-400 whitespace-pre-wrap">{line.content}</pre>
                   {line.copyableCommand && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation()
                         copyToClipboard(line.copyableCommand!, 'Command')
                       }}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-zinc-800 rounded"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-zinc-800 rounded flex-shrink-0"
                       title="Copy command"
                     >
                       <CopyIcon className="w-3.5 h-3.5 text-emerald-400" />

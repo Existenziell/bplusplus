@@ -16,35 +16,6 @@ interface MarkdownRendererProps {
   content: string
 }
 
-// Type definitions for react-markdown component props
-interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
-  'data-code-group-id'?: string
-  node?: unknown
-  children?: React.ReactNode
-}
-
-interface ParagraphProps extends React.HTMLAttributes<HTMLParagraphElement> {
-  node?: unknown
-  children?: React.ReactNode
-}
-
-interface AnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  node?: unknown
-  children?: React.ReactNode
-}
-
-interface CodeProps extends React.HTMLAttributes<HTMLElement> {
-  inline?: boolean
-  className?: string
-  node?: unknown
-  children?: React.ReactNode
-}
-
-interface PreProps extends React.HTMLAttributes<HTMLPreElement> {
-  node?: unknown
-  children?: React.ReactNode
-}
-
 interface CodeGroupBlock {
   id: string
   languages: { lang: string; code: string }[]
@@ -189,35 +160,21 @@ const remarkPlugins = [remarkGfm]
 const rehypePlugins = [rehypeRaw, rehypeHighlight]
 
 // Factory function to create heading components (h1-h6)
+// Using any for props is acceptable here - react-markdown handles internal typing
+// and we're mostly just extracting text and passing props through
 const createHeading = (level: number) => {
-  interface HeadingProps {
-    node?: unknown
-    children?: React.ReactNode
-  }
-
-  const HeadingComponent = ({ children, ...props }: HeadingProps) => {
+  const HeadingComponent = ({ children, ...props }: any) => {
     const text = extractText(children)
     const id = generateSlug(text)
     // Extract node from props to avoid passing it to the DOM element
-    const { node, ...htmlProps } = props as HeadingProps & React.HTMLAttributes<HTMLHeadingElement>
+    const { node, ...htmlProps } = props
 
-    // Use a switch to ensure proper typing for each heading level
-    switch (level) {
-      case 1:
-        return <h1 id={id} {...(htmlProps as React.HTMLAttributes<HTMLHeadingElement>)}>{children}</h1>
-      case 2:
-        return <h2 id={id} {...(htmlProps as React.HTMLAttributes<HTMLHeadingElement>)}>{children}</h2>
-      case 3:
-        return <h3 id={id} {...(htmlProps as React.HTMLAttributes<HTMLHeadingElement>)}>{children}</h3>
-      case 4:
-        return <h4 id={id} {...(htmlProps as React.HTMLAttributes<HTMLHeadingElement>)}>{children}</h4>
-      case 5:
-        return <h5 id={id} {...(htmlProps as React.HTMLAttributes<HTMLHeadingElement>)}>{children}</h5>
-      case 6:
-        return <h6 id={id} {...(htmlProps as React.HTMLAttributes<HTMLHeadingElement>)}>{children}</h6>
-      default:
-        return <h1 id={id} {...(htmlProps as React.HTMLAttributes<HTMLHeadingElement>)}>{children}</h1>
-    }
+    const Tag = `h${level}` as keyof React.JSX.IntrinsicElements
+    return (
+      <Tag id={id} {...htmlProps}>
+        {children}
+      </Tag>
+    )
   }
   HeadingComponent.displayName = `Heading${level}`
   return HeadingComponent
@@ -235,9 +192,11 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   }, [content])
 
   // Memoize components object to prevent recreation on every render
+  // Using any for component props is acceptable - react-markdown handles internal typing
+  // and we're mostly passing props through or accessing specific known properties
   const components = useMemo<Components>(() => ({
     // Handle code group placeholders
-    div: ({ node, children, ...props }: DivProps) => {
+    div: ({ node, children, ...props }: any) => {
       const codeGroupId = props['data-code-group-id']
       if (codeGroupId && codeGroupMap.has(codeGroupId)) {
         const group = codeGroupMap.get(codeGroupId)!
@@ -259,7 +218,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     h4: createHeading(4),
     h5: createHeading(5),
     h6: createHeading(6),
-    p: ({ children, ...props }: ParagraphProps) => {
+    p: ({ children, ...props }: any) => {
       // Check if paragraph contains a YouTube embed (set by a component)
       const childrenArray = React.Children.toArray(children)
 
@@ -305,7 +264,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       // Default paragraph rendering
       return <p {...props}>{children}</p>
     },
-    a: ({ href, children, ...props }: AnchorProps) => {
+    a: ({ href, children, ...props }: any) => {
       // YouTube video embeds - check first
       if (href && typeof href === 'string' && (href.includes('youtube.com') || href.includes('youtu.be'))) {
         const videoId = getYouTubeVideoId(href)
@@ -358,7 +317,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         </a>
       )
     },
-    code: ({ inline, className, children, ...props }: CodeProps) => {
+    code: ({ inline, className, children, ...props }: any) => {
       // Only handle inline code here
       if (inline) {
         return (
@@ -375,7 +334,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         </code>
       )
     },
-    pre: ({ children, ...props }: PreProps) => {
+    pre: ({ children, ...props }: any) => {
       // In react-markdown, pre contains a code element as its child
       // Extract the code element and its properties
       const codeElement = React.Children.toArray(children)[0]

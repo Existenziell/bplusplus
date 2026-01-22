@@ -253,14 +253,14 @@ export const routeLabels: Record<string, string> = {
   // Section labels
   fundamentals: 'Fundamentals',
   history: 'History',
-  bitcoin: 'Bitcoin Protocol',
-  mining: 'Mining',
-  wallets: 'Wallets',
-  lightning: 'Lightning Network',
   development: 'Setup & Infrastructure',
+  bitcoin: 'Bitcoin Protocol',
   'bitcoin-development': 'Bitcoin Development',
-  controversies: 'Controversies',
+  wallets: 'Wallets',
+  mining: 'Mining',
+  lightning: 'Lightning Network',
   advanced: 'Advanced Topics',
+  controversies: 'Controversies',
   glossary: 'Glossary',
 
   // Page labels (extracted from path segment to title)

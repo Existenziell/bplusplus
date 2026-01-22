@@ -1,6 +1,6 @@
 # Transaction Construction
 
-Building Bitcoin transactions from scratch requires understanding inputs, outputs, fees, and signing. This guide covers the complete process from UTXO selection to broadcasting.
+Building Bitcoin transactions from scratch requires understanding inputs, outputs, fees, and signing. This guide covers the complete process from [UTXO](/docs/fundamentals/utxos) selection to broadcasting.
 
 ## Transaction Structure
 

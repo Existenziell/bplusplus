@@ -19,7 +19,7 @@ This document provides a guide for interacting with your Bitcoin [node](/docs/gl
 
 ### Advanced Monitoring
 - [8. Index Information](#8-index-information) - `btc getindexinfo`
-- [9. [UTXO](/docs/glossary#utxo-unspent-transaction-output) Set Information](#9-utxo-set-information) - `btc gettxoutsetinfo`
+- [9. [UTXO](/docs/fundamentals/utxos) Set Information](#9-utxo-set-information) - `btc gettxoutsetinfo`
 - [10. [Peer](/docs/glossary#peer) Information](#10-peer-information) - `btc getpeerinfo`
 - [11. [ZMQ](/docs/glossary#zmq-zeromq) Notifications](#11-zmq-notifications) - Real-time [block](/docs/glossary#block) and [transaction](/docs/glossary#transaction) notifications
 
@@ -738,6 +738,8 @@ watch -n 30 'btc getindexinfo | jq ".txindex.best_block_height"'
 ```
 
 ### 9. UTXO Set Information
+
+The [UTXO Set](/docs/fundamentals/utxos#the-utxo-set) is the complete database of all unspent transaction outputs. These commands allow you to query information about it.
 
 ```bash
 # Get UTXO set statistics (can be slow)

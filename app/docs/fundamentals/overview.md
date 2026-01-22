@@ -46,7 +46,7 @@ The relationship is one-way: private key → public key → address. You cannot 
 
 ### Transaction Lifecycle
 
-1. **Creation**: User constructs a transaction specifying inputs (UTXOs to spend) and outputs (recipient addresses and amounts)
+1. **Creation**: User constructs a transaction specifying inputs ([UTXOs](/docs/fundamentals/utxos) to spend) and outputs (recipient addresses and amounts)
 2. **Signing**: User signs the transaction with their private key, proving ownership of the inputs
 3. **Broadcasting**: Signed transaction is sent to the network
 4. **Mempool**: Transaction waits in the [mempool](/docs/glossary#mempool) (memory pool) of unconfirmed transactions
@@ -85,7 +85,7 @@ A transaction with 6 confirmations is generally considered irreversible.
 - Requires significant computational resources
 
 ### UTXO Model
-- [Unspent Transaction Outputs](/docs/glossary#utxo-unspent-transaction-output)
+- [Unspent Transaction Outputs](/docs/fundamentals/utxos) - The fundamental accounting model of Bitcoin
 - Each transaction consumes and creates UTXOs
 - Enables parallel transaction processing
 - Clear ownership model
@@ -172,4 +172,6 @@ Dive deeper into the core concepts that make Bitcoin work:
 - [Decentralization](/docs/fundamentals/decentralization) - Distribution of control across the network
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin minimizes trust requirements
 - [Incentive Structure](/docs/fundamentals/incentives) - How economic incentives shape Bitcoin's security
+- [Game Theory](/docs/fundamentals/game-theory) - How strategic decision-making secures the Bitcoin network
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - The economic characteristics of Bitcoin
+- [UTXO Model](/docs/fundamentals/utxos) - How Bitcoin tracks ownership through unspent transaction outputs

@@ -25,13 +25,6 @@ interface CodeGroupBlock {
   languages: { lang: string; code: string }[]
 }
 
-interface CalloutBlock {
-  id: string
-  type: string
-  title?: string
-  content: string
-}
-
 // Parse :::code-group blocks and extract code blocks within them
 function parseCodeGroups(content: string): { processedContent: string; codeGroups: CodeGroupBlock[] } {
   const codeGroups: CodeGroupBlock[] = []
@@ -65,28 +58,6 @@ function parseCodeGroups(content: string): { processedContent: string; codeGroup
   })
 
   return { processedContent, codeGroups }
-}
-
-// Parse callout blocks (:::info, :::warning, etc.)
-function parseCallouts(content: string): { processedContent: string; callouts: CalloutBlock[] } {
-  const callouts: CalloutBlock[] = []
-  let calloutCounter = 0
-
-  // Match :::type Title?\n...content...\n::: blocks
-  const calloutRegex = /:::(\w+)(?:\s+([^\n]+))?\n([\s\S]*?)\n:::/g
-
-  const processedContent = content.replace(calloutRegex, (match, type, title, content) => {
-    const calloutId = `callout-${calloutCounter++}`
-    callouts.push({
-      id: calloutId,
-      type: type.toLowerCase(),
-      title: title?.trim(),
-      content: content.trim(),
-    })
-    return `<div data-callout-id="${calloutId}"></div>`
-  })
-
-  return { processedContent, callouts }
 }
 
 // Generate slug from text (same as GitHub markdown)
@@ -181,31 +152,6 @@ function YouTubeEmbed({ videoId }: { videoId: string }) {
 const remarkPlugins = [remarkGfm]
 const rehypePlugins = [rehypeRaw, rehypeHighlight]
 
-// Simplified components for callout content (no callout parsing to avoid recursion)
-const calloutComponents = {
-  p: ({ children, ...props }: any) => <p className="mb-2 last:mb-0" {...props}>{children}</p>,
-  ul: ({ children, ...props }: any) => <ul className="mb-2 ml-6 list-disc" {...props}>{children}</ul>,
-  ol: ({ children, ...props }: any) => <ol className="mb-2 ml-6 list-decimal" {...props}>{children}</ol>,
-  li: ({ children, ...props }: any) => <li className="mb-1" {...props}>{children}</li>,
-  strong: ({ children, ...props }: any) => <strong className="font-semibold" {...props}>{children}</strong>,
-  em: ({ children, ...props }: any) => <em {...props}>{children}</em>,
-  code: ({ inline, children, ...props }: any) => {
-    if (inline) {
-      return <code className="bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>{children}</code>
-    }
-    return <code {...props}>{children}</code>
-  },
-  a: ({ href, children, ...props }: any) => {
-    if (href?.startsWith('/')) {
-      return <Link href={href} className="text-btc hover:underline" {...props}>{children}</Link>
-    }
-    if (href?.startsWith('#')) {
-      return <a href={href} className="text-btc hover:underline" {...props}>{children}</a>
-    }
-    return <a href={href} target="_blank" rel="noopener noreferrer" className="text-btc hover:underline" {...props}>{children}</a>
-  },
-}
-
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   const [glossaryData, setGlossaryData] = useState<GlossaryData>({})
 
@@ -217,68 +163,16 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       .catch(err => console.warn('Failed to load glossary data:', err))
   }, [])
 
-  // Memoize the parsing of code groups and callouts - this is expensive regex processing
-  const { processedContent, codeGroupMap, calloutMap } = useMemo(() => {
-    // First parse callouts, then code groups (callouts might contain code groups)
-    const { processedContent: contentAfterCallouts, callouts } = parseCallouts(content)
-    const { processedContent: finalContent, codeGroups } = parseCodeGroups(contentAfterCallouts)
+  // Memoize the parsing of code groups - this is expensive regex processing
+  const { processedContent, codeGroupMap } = useMemo(() => {
+    const { processedContent: finalContent, codeGroups } = parseCodeGroups(content)
     const codeGroupMap = new Map(codeGroups.map(g => [g.id, g]))
-    const calloutMap = new Map(callouts.map(c => [c.id, c]))
-    return { processedContent: finalContent, codeGroupMap, calloutMap }
+    return { processedContent: finalContent, codeGroupMap }
   }, [content])
-
-  // Callout component for rendering info/warning/etc blocks
-  const Callout = ({ type, title, content }: { type: string; title?: string; content: string }) => {
-    const typeStyles: Record<string, { bg: string; border: string; icon: string }> = {
-      info: {
-        bg: 'bg-blue-50 dark:bg-blue-950/20',
-        border: 'border-blue-200 dark:border-blue-800',
-        icon: '₿',
-      },
-      warning: {
-        bg: 'bg-yellow-50 dark:bg-yellow-950/20',
-        border: 'border-yellow-200 dark:border-yellow-800',
-        icon: '₿',
-      },
-      error: {
-        bg: 'bg-red-50 dark:bg-red-950/20',
-        border: 'border-red-200 dark:border-red-800',
-        icon: '₿',
-      },
-      success: {
-        bg: 'bg-green-50 dark:bg-green-950/20',
-        border: 'border-green-200 dark:border-green-800',
-        icon: '₿',
-      },
-      tip: {
-        bg: 'bg-emerald-50 dark:bg-emerald-950/20',
-        border: 'border-emerald-200 dark:border-emerald-800',
-        icon: '₿',
-      },
-    }
-
-    const style = typeStyles[type] || typeStyles.info
-
-    return (
-      <div className={`${style.bg} ${style.border} border-l-4 rounded-r-lg p-4 my-4`}>
-        {title && (
-          <div className="flex items-center gap-2 mb-2 font-semibold text-zinc-900 dark:text-zinc-100">
-            <span>{style.icon}</span>
-            <span>{title}</span>
-          </div>
-        )}
-        <div className="text-zinc-800 dark:text-zinc-200">
-          <ReactMarkdown remarkPlugins={remarkPlugins} rehypePlugins={rehypePlugins} components={calloutComponents}>
-            {content}
-          </ReactMarkdown>
-        </div>
-      </div>
-    )
-  }
 
   // Memoize components object to prevent recreation on every render
   const components = useMemo(() => ({
-    // Handle code group and callout placeholders
+    // Handle code group placeholders
     div: ({ node, children, ...props }: any) => {
       const codeGroupId = props['data-code-group-id']
       if (codeGroupId && codeGroupMap.has(codeGroupId)) {
@@ -292,11 +186,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             }))}
           />
         )
-      }
-      const calloutId = props['data-callout-id']
-      if (calloutId && calloutMap.has(calloutId)) {
-        const callout = calloutMap.get(calloutId)!
-        return <Callout type={callout.type} title={callout.title} content={callout.content} />
       }
       return <div {...props}>{children}</div>
     },
@@ -487,7 +376,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         </pre>
       )
     },
-  }), [codeGroupMap, calloutMap, glossaryData])
+  }), [codeGroupMap, glossaryData])
 
   return (
     <div className="markdown-content prose prose-invert max-w-none">

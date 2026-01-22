@@ -532,8 +532,9 @@ const html = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// Write the HTML file
-const outputPath = path.join(__dirname, '../link-visualization.html');
+// Write the HTML file to public directory so it's served as a static file
+const outputPath = path.join(__dirname, '../public/link-visualization.html');
 fs.writeFileSync(outputPath, html);
 console.log(`✅ Visualization generated: ${outputPath}`);
-console.log(`   Open it in your browser to view the interactive link structure!`);
+console.log(`   Accessible at: https://bplusplus.info/link-visualization.html`);
+console.log(`   Or open it locally in your browser!`);

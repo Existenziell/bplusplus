@@ -162,6 +162,7 @@ bplusplus/
 │   ├── graphs/                   # Graph images
 │   ├── icons/                    # Icon assets
 │   ├── images/                   # Image assets
+│   ├── link-visualization.html   # Interactive link structure visualization
 │   └── og/                       # Open Graph images
 ├── scripts/                      # Build scripts
 │   ├── analyze-links.js          # Link structure analysis
@@ -169,7 +170,6 @@ bplusplus/
 │   ├── generate-link-visualization.js  # Interactive link visualization
 │   └── generate-md-content.js
 ├── link-analysis.json            # Generated link analysis report
-├── link-visualization.html       # Interactive link structure visualization
 ├── next.config.js
 ├── tailwind.config.ts
 ├── tsconfig.json

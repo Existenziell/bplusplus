@@ -64,12 +64,12 @@ interface CodeBlockProps {
 }
 
 export default function CodeBlock({ language, children, className, ...props }: CodeBlockProps) {
-  const displayName = languageNames[language] || language.toUpperCase()
+  const displayName = languageNames[language] || (language.charAt(0).toUpperCase() + language.slice(1).toLowerCase())
 
   return (
     <div className="code-block-wrapper my-4">
       <div className="flex items-center justify-between bg-zinc-200 dark:bg-zinc-800 px-4 py-2 rounded-t-lg border-b border-zinc-300 dark:border-zinc-700">
-        <span className="text-xs font-mono text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">
+        <span className="text-xs font-mono text-zinc-600 dark:text-zinc-400 tracking-wider">
           {displayName}
         </span>
       </div>
@@ -149,13 +149,13 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
             <button
               key={lang}
               onClick={() => setSelectedLang(lang)}
-              className={`px-3 py-1 text-xs font-mono uppercase tracking-wider rounded transition-colors ${
+              className={`px-3 py-1 text-xs font-mono tracking-wider rounded transition-colors ${
                 selectedLang === lang
                   ? 'bg-btc text-zinc-900 font-semibold'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700'
               }`}
             >
-              {languageNames[lang] || lang.toUpperCase()}
+              {languageNames[lang] || (lang.charAt(0).toUpperCase() + lang.slice(1).toLowerCase())}
             </button>
           ))}
         </div>

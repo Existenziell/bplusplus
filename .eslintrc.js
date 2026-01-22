@@ -7,7 +7,6 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'plugin:import/recommended',
-    'standard',
     'next',
   ],
   parserOptions: {

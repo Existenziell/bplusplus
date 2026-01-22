@@ -51,7 +51,7 @@ The elegant solution combines cryptographic proof (making fraud detectable) with
 
 ### Proof-of-Work: Digital Gold Mining
 
-The concept of proof-of-work predates Bitcoin. In 1997, **[Adam Back](/docs/history/people#adam-back)** invented [Hashcash](https://en.wikipedia.org/wiki/Hashcash), a proof-of-work system designed to combat email spam. The sender had to perform computational work to send an email: trivial for legitimate users, but prohibitively expensive for spammers sending millions of messages. Satoshi Nakamoto cited Hashcash in the Bitcoin whitepaper and adapted its core mechanism for blockchain consensus.
+The concept of proof-of-work predates Bitcoin. In 1997, **[Adam Back](/docs/history/people#adam-back)** invented [Hashcash](https://en.wikipedia.org/wiki/Hashcash), a proof-of-work system designed to combat email spam. The sender had to perform computational work to send an email: trivial for legitimate users, but prohibitively expensive for spammers sending millions of messages. Satoshi Nakamoto cited Hashcash in the [Bitcoin whitepaper](/whitepaper) and adapted its core mechanism for blockchain consensus.
 
 The intuition behind proof-of-work mirrors **gold mining**. When someone presents you with a gold bar, you don't need to watch them mine it. The gold itself is proof that work was done. Gold cannot be created cheaply; its existence demonstrates that someone expended real resources (time, labor, equipment) to extract it from the earth. This is **implicit proof of work**.
 

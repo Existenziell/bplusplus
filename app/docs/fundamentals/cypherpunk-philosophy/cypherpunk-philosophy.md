@@ -134,7 +134,7 @@ Eric Hughes co-founded the cypherpunk mailing list and wrote "A Cypherpunk's Man
 
 ### Adam Back
 
-[Adam Back](/docs/history/people#adam-back) invented Hashcash (1997), a proof-of-work system that became a critical component of Bitcoin. Satoshi Nakamoto cited Hashcash in the Bitcoin whitepaper, and Bitcoin's mining algorithm is essentially Hashcash applied to transaction validation.
+[Adam Back](/docs/history/people#adam-back) invented Hashcash (1997), a proof-of-work system that became a critical component of Bitcoin. Satoshi Nakamoto cited Hashcash in the [Bitcoin whitepaper](/whitepaper), and Bitcoin's mining algorithm is essentially Hashcash applied to transaction validation.
 
 ### Nick Szabo
 

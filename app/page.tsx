@@ -53,7 +53,7 @@ export default function Home() {
                 href="/terminal"
                 className="btn-secondary"
               >
-                Try Terminal
+                Bitcoin CLI
                 <TerminalIcon />
               </Link>
             </div>

@@ -74,7 +74,7 @@ These individuals were directly involved in Bitcoin's creation, early developmen
 
 **Contribution:** Bitcoin (2008-2010) - Creator of Bitcoin
 
-Satoshi Nakamoto is the pseudonymous person or group who created Bitcoin. On October 31, 2008, Nakamoto published the Bitcoin whitepaper, "Bitcoin: A Peer-to-Peer Electronic Cash System." On January 3, 2009, they mined the [Genesis Block](/docs/glossary#genesis-block), embedding the message: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks."
+Satoshi Nakamoto is the pseudonymous person or group who created Bitcoin. On October 31, 2008, Nakamoto published the [Bitcoin whitepaper](/whitepaper), "Bitcoin: A Peer-to-Peer Electronic Cash System." On January 3, 2009, they mined the [Genesis Block](/docs/glossary#genesis-block), embedding the message: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks."
 
 Satoshi was active in developing Bitcoin and communicating on forums until December 2010, when they handed over control to Gavin Andresen and disappeared. Their last known communication was an email in April 2011.
 

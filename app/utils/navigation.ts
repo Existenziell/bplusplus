@@ -26,6 +26,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/fundamentals', mdFile: 'app/docs/fundamentals/overview.md', title: 'Bitcoin Fundamentals', section: 'fundamentals' },
   { path: '/docs/fundamentals/problems', mdFile: 'app/docs/fundamentals/problems/problems.md', title: 'Problems Bitcoin Solved', section: 'fundamentals' },
   { path: '/docs/fundamentals/cypherpunk-philosophy', mdFile: 'app/docs/fundamentals/cypherpunk-philosophy/cypherpunk-philosophy.md', title: 'Cypherpunk Philosophy', section: 'fundamentals' },
+  { path: '/docs/fundamentals/blockchain', mdFile: 'app/docs/fundamentals/blockchain/blockchain.md', title: 'The Blockchain', section: 'fundamentals' },
   { path: '/docs/fundamentals/timechain', mdFile: 'app/docs/fundamentals/timechain/timechain.md', title: 'Bitcoin as Timechain', section: 'fundamentals' },
   { path: '/docs/fundamentals/decentralization', mdFile: 'app/docs/fundamentals/decentralization/decentralization.md', title: 'Decentralization', section: 'fundamentals' },
   { path: '/docs/fundamentals/trust-model', mdFile: 'app/docs/fundamentals/trust-model/trust-model.md', title: 'Trust Model', section: 'fundamentals' },
@@ -219,6 +220,7 @@ export const routeLabels: Record<string, string> = {
   // Page labels (extracted from path segment to title)
   problems: 'Problems Bitcoin Solved',
   'cypherpunk-philosophy': 'Cypherpunk Philosophy',
+  blockchain: 'The Blockchain',
   timechain: 'Bitcoin as Timechain',
   decentralization: 'Decentralization',
   'trust-model': 'Trust Model',

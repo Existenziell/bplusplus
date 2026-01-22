@@ -102,10 +102,10 @@ export const docPages: DocPage[] = [
 
   // Bitcoin Development
   { path: '/docs/bitcoin-development', mdFile: 'app/docs/bitcoin-development/overview.md', title: 'Bitcoin Development', section: 'bitcoin-development' },
-  { path: '/docs/bitcoin-development/psbt', mdFile: 'app/docs/bitcoin-development/psbt/psbt.md', title: 'PSBT', section: 'bitcoin-development' },
+  { path: '/docs/bitcoin-development/keys', mdFile: 'app/docs/bitcoin-development/keys/keys.md', title: 'Key Management', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/addresses', mdFile: 'app/docs/bitcoin-development/addresses/addresses.md', title: 'Address Generation', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/transactions', mdFile: 'app/docs/bitcoin-development/transactions/transactions.md', title: 'Transaction Construction', section: 'bitcoin-development' },
-  { path: '/docs/bitcoin-development/keys', mdFile: 'app/docs/bitcoin-development/keys/keys.md', title: 'Key Management', section: 'bitcoin-development' },
+  { path: '/docs/bitcoin-development/psbt', mdFile: 'app/docs/bitcoin-development/psbt/psbt.md', title: 'PSBT', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/blockchain-monitoring', mdFile: 'app/docs/bitcoin-development/blockchain-monitoring/blockchain-monitoring.md', title: 'Blockchain Monitoring', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/pool-mining', mdFile: 'app/docs/bitcoin-development/pool-mining/pool-mining.md', title: 'Pool Mining', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/price-tracking', mdFile: 'app/docs/bitcoin-development/price-tracking/price-tracking.md', title: 'Price Tracking', section: 'bitcoin-development' },
@@ -195,14 +195,14 @@ export const navItems: NavSection[] = [
     children: docPages.filter(p => p.section === 'history' && p.path !== '/docs/history').map(p => ({ title: p.title, href: p.path })),
   },
   {
-    title: 'Bitcoin Protocol',
-    href: '/docs/bitcoin',
-    children: docPages.filter(p => p.section === 'bitcoin' && p.path !== '/docs/bitcoin').map(p => ({ title: p.title, href: p.path })),
-  },
-  {
     title: 'Setup & Infrastructure',
     href: '/docs/development',
     children: docPages.filter(p => p.section === 'development' && p.path !== '/docs/development').map(p => ({ title: p.title, href: p.path })),
+  },
+  {
+    title: 'Bitcoin Protocol',
+    href: '/docs/bitcoin',
+    children: docPages.filter(p => p.section === 'bitcoin' && p.path !== '/docs/bitcoin').map(p => ({ title: p.title, href: p.path })),
   },
   {
     title: 'Bitcoin Development',

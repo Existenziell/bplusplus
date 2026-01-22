@@ -1,5 +1,7 @@
 # The Bitcoin Protocol
 
+**How Bitcoin works.**
+
 The Bitcoin protocol is an elegant system of interlocking mechanisms that together create the world's first truly decentralized digital currency. At its core, it solves the seemingly impossible problem of achieving consensus among untrusted parties without a central authority.
 
 ## Why the Protocol Matters

@@ -1,5 +1,7 @@
 # Bitcoin Development
 
+**How to build apps.**
+
 This section covers practical Bitcoin development tasks—the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more.
 
 > **Prerequisites:** Before diving into these topics, make sure you're familiar with [Setup & Infrastructure](/docs/development) topics like installing Bitcoin, testing, and using libraries.
@@ -8,25 +10,15 @@ This section covers practical Bitcoin development tasks—the building blocks yo
 
 ## Core Development Tasks
 
-### [PSBT](/docs/bitcoin-development/psbt)
+### [Key Management](/docs/bitcoin-development/keys)
 
-Partially Signed Bitcoin Transactions (BIP-174) provide a standardized format for passing unsigned or partially signed transactions between different software and hardware. Essential for multi-party signing, hardware wallet integration, and air-gapped setups.
-
-**Key topics:**
-- PSBT structure and workflow
-- Creating and combining PSBTs
-- Hardware wallet integration
-- Multi-signature coordination
-
-### [Transaction Construction](/docs/bitcoin-development/transactions)
-
-Build Bitcoin transactions from scratch, understanding inputs, outputs, fees, and signing. Learn the complete process from UTXO selection to broadcasting.
+Securely generate, store, and manage Bitcoin private keys. Learn about key derivation, encryption, and hardware wallet integration.
 
 **Key topics:**
-- Transaction structure and serialization
-- Fee calculation strategies
-- Coin selection algorithms
-- Signing and validation
+- Private key generation
+- Key derivation (BIP32)
+- Secure storage practices
+- Hardware wallet protocols
 
 ### [Address Generation](/docs/bitcoin-development/addresses)
 
@@ -38,15 +30,25 @@ Generate and validate Bitcoin addresses for different address types (P2PKH, P2SH
 - Address validation
 - Derivation paths
 
-### [Key Management](/docs/bitcoin-development/keys)
+### [Transaction Construction](/docs/bitcoin-development/transactions)
 
-Securely generate, store, and manage Bitcoin private keys. Learn about key derivation, encryption, and hardware wallet integration.
+Build Bitcoin transactions from scratch, understanding inputs, outputs, fees, and signing. Learn the complete process from UTXO selection to broadcasting.
 
 **Key topics:**
-- Private key generation
-- Key derivation (BIP32)
-- Secure storage practices
-- Hardware wallet protocols
+- Transaction structure and serialization
+- Fee calculation strategies
+- Coin selection algorithms
+- Signing and validation
+
+### [PSBT](/docs/bitcoin-development/psbt)
+
+Partially Signed Bitcoin Transactions (BIP-174) provide a standardized format for passing unsigned or partially signed transactions between different software and hardware. Essential for multi-party signing, hardware wallet integration, and air-gapped setups.
+
+**Key topics:**
+- PSBT structure and workflow
+- Creating and combining PSBTs
+- Hardware wallet integration
+- Multi-signature coordination
 
 ---
 

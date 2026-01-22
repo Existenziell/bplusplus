@@ -6,6 +6,8 @@ Bitcoin is a decentralized digital currency and payment system that operates wit
 **Bitcoin** (capitalized) refers to the protocol, network, and system.  
 **bitcoin** (lowercase) or **BTC** refers to the currency unit.
 
+> **Note:** Throughout this documentation, "Bitcoin" refers specifically to **BTC (Bitcoin Core)**, the original and longest-running Bitcoin network. While other networks like Bitcoin Cash (BCH) and Bitcoin SV (BSV) share Bitcoin's history up to their respective fork points, they are separate networks with different consensus rules. This documentation focuses exclusively on Bitcoin (BTC).
+
 ## How Bitcoin Works
 
 ### The Blockchain

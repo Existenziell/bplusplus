@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import GlossaryRenderer from '@/app/components/GlossaryRenderer'
 import { readMarkdown } from '@/app/utils/readMarkdown'
 import { pathToMdFile, docPages, sections } from '@/app/utils/navigation'
 
@@ -77,9 +78,16 @@ export default async function DocPage({ params }: PageProps) {
   try {
     const content = await readMarkdown(mdFile)
 
+    // Use GlossaryRenderer for glossary page, MarkdownRenderer for all other pages
+    const isGlossaryPage = path === '/docs/glossary'
+
     return (
       <div>
-        <MarkdownRenderer content={content} />
+        {isGlossaryPage ? (
+          <GlossaryRenderer content={content} />
+        ) : (
+          <MarkdownRenderer content={content} />
+        )}
       </div>
     )
   } catch (error) {

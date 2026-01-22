@@ -2,6 +2,22 @@
 
 Building Bitcoin transactions from scratch requires understanding inputs, outputs, fees, and signing. This guide covers the complete process from [UTXO](/docs/fundamentals/utxos) selection to broadcasting.
 
+## Transaction Lifecycle
+
+Understanding the complete lifecycle of a transaction helps contextualize the construction process:
+
+1. **Creation**: User constructs a transaction specifying inputs ([UTXOs](/docs/fundamentals/utxos) to spend) and outputs (recipient addresses and amounts)
+2. **Signing**: User signs the transaction with their private key, proving ownership of the inputs
+3. **Broadcasting**: Signed transaction is sent to the network
+4. **Mempool**: Transaction waits in the [mempool](/docs/glossary#mempool) (memory pool) of unconfirmed transactions
+5. **Selection**: A miner selects the transaction (typically prioritizing higher fees)
+6. **Inclusion**: Transaction is included in a candidate block
+7. **Mining**: Miner finds valid proof-of-work for the block
+8. **Propagation**: New block spreads across the network
+9. **Confirmation**: Each subsequent block adds another confirmation, increasing security
+
+A transaction with 6 confirmations is generally considered irreversible.
+
 ## Transaction Structure
 
 ### Components

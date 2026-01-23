@@ -1,6 +1,7 @@
 'use client'
 
-import { InfoIcon } from '@/app/components/Icons'
+import InfoTooltip from '@/app/components/stack-lab/InfoTooltip'
+import StackLabCard from '@/app/components/stack-lab/StackLabCard'
 
 interface ScriptTemplate {
   name: string
@@ -90,15 +91,10 @@ interface ScriptTemplatesProps {
 
 export default function ScriptTemplates({ onLoadTemplate }: ScriptTemplatesProps) {
   return (
-    <div className="bg-zinc-900 dark:bg-zinc-950 rounded-lg border border-zinc-700 p-4">
+    <StackLabCard>
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-zinc-300">Script Templates</h3>
-        <div className="group relative">
-          <InfoIcon className="w-4 h-4 text-zinc-500 hover:text-zinc-300 cursor-help" />
-          <div className="absolute right-0 top-6 w-64 p-3 bg-zinc-800 border border-zinc-700 rounded shadow-lg text-xs text-zinc-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
-            Click on a template to load a pre-built script example. Templates demonstrate common Bitcoin Script patterns and can be modified after loading.
-          </div>
-        </div>
+        <InfoTooltip content="Click on a template to load a pre-built script example. Templates demonstrate common Bitcoin Script patterns and can be modified after loading." />
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {TEMPLATES.map((template, index) => (
@@ -116,6 +112,6 @@ export default function ScriptTemplates({ onLoadTemplate }: ScriptTemplatesProps
           </button>
         ))}
       </div>
-    </div>
+    </StackLabCard>
   )
 }

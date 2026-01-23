@@ -3,6 +3,8 @@
  * Implements core OP codes for educational purposes
  */
 
+import { bytesToHex } from '@/app/utils/stackLabFormatters'
+
 export type StackItem = number | string | boolean | Uint8Array
 
 export interface OpCode {
@@ -107,6 +109,35 @@ export class ScriptInterpreter {
     return null
   }
 
+  /** Pop two stack items, convert to numbers. Returns values or error. Does not record step. */
+  private popTwoNumbers(): { a: number; b: number } | { error: string } {
+    const b = this.pop()
+    const a = this.pop()
+    if (a === null || b === null) return { error: 'Stack has less than 2 items' }
+    const na = this.toNumber(a)
+    const nb = this.toNumber(b)
+    if (na === null || nb === null) return { error: 'Cannot convert to numbers' }
+    return { a: na, b: nb }
+  }
+
+  /** Pop one stack item, convert to number. Returns value or error. Does not record step. */
+  private popOneNumber(): number | { error: string } {
+    const top = this.pop()
+    if (top === null) return { error: 'Stack empty' }
+    const num = this.toNumber(top)
+    if (num === null) return { error: 'Cannot convert to number' }
+    return num
+  }
+
+  /** Pop one stack item, convert to bytes. Returns value or error. Does not record step. */
+  private popOneBytes(): Uint8Array | { error: string } {
+    const top = this.pop()
+    if (top === null) return { error: 'Stack empty' }
+    const bytes = this.toBytes(top)
+    if (bytes === null) return { error: 'Cannot convert to bytes' }
+    return bytes
+  }
+
   // Convert stack item to bytes
   private toBytes(item: StackItem): Uint8Array | null {
     if (item instanceof Uint8Array) return item
@@ -117,7 +148,7 @@ export class ScriptInterpreter {
         if (hex.length % 2 === 0) {
           const bytes = new Uint8Array(hex.length / 2)
           for (let i = 0; i < hex.length; i += 2) {
-            bytes[i / 2] = parseInt(hex.substr(i, 2), 16)
+            bytes[i / 2] = parseInt(hex.slice(i, i + 2), 16)
           }
           return bytes
         }
@@ -348,19 +379,12 @@ export class ScriptInterpreter {
       this.recordStep('OP_ADD', stackBefore, true)
       return true
     }
-    const b = this.pop()
-    const a = this.pop()
-    if (a === null || b === null) {
-      this.recordStep('OP_ADD', stackBefore, false, 'Stack has less than 2 items')
+    const ab = this.popTwoNumbers()
+    if ('error' in ab) {
+      this.recordStep('OP_ADD', stackBefore, false, ab.error)
       return false
     }
-    const numA = this.toNumber(a)
-    const numB = this.toNumber(b)
-    if (numA === null || numB === null) {
-      this.recordStep('OP_ADD', stackBefore, false, 'Cannot convert to numbers')
-      return false
-    }
-    this.push(numA + numB)
+    this.push(ab.a + ab.b)
     this.recordStep('OP_ADD', stackBefore, true)
     return true
   }
@@ -371,19 +395,12 @@ export class ScriptInterpreter {
       this.recordStep('OP_SUB', stackBefore, true)
       return true
     }
-    const b = this.pop()
-    const a = this.pop()
-    if (a === null || b === null) {
-      this.recordStep('OP_SUB', stackBefore, false, 'Stack has less than 2 items')
+    const ab = this.popTwoNumbers()
+    if ('error' in ab) {
+      this.recordStep('OP_SUB', stackBefore, false, ab.error)
       return false
     }
-    const numA = this.toNumber(a)
-    const numB = this.toNumber(b)
-    if (numA === null || numB === null) {
-      this.recordStep('OP_SUB', stackBefore, false, 'Cannot convert to numbers')
-      return false
-    }
-    this.push(numA - numB)
+    this.push(ab.a - ab.b)
     this.recordStep('OP_SUB', stackBefore, true)
     return true
   }
@@ -394,14 +411,9 @@ export class ScriptInterpreter {
       this.recordStep('OP_1ADD', stackBefore, true)
       return true
     }
-    const top = this.pop()
-    if (top === null) {
-      this.recordStep('OP_1ADD', stackBefore, false, 'Stack empty')
-      return false
-    }
-    const num = this.toNumber(top)
-    if (num === null) {
-      this.recordStep('OP_1ADD', stackBefore, false, 'Cannot convert to number')
+    const num = this.popOneNumber()
+    if (typeof num === 'object') {
+      this.recordStep('OP_1ADD', stackBefore, false, num.error)
       return false
     }
     this.push(num + 1)
@@ -415,14 +427,9 @@ export class ScriptInterpreter {
       this.recordStep('OP_1SUB', stackBefore, true)
       return true
     }
-    const top = this.pop()
-    if (top === null) {
-      this.recordStep('OP_1SUB', stackBefore, false, 'Stack empty')
-      return false
-    }
-    const num = this.toNumber(top)
-    if (num === null) {
-      this.recordStep('OP_1SUB', stackBefore, false, 'Cannot convert to number')
+    const num = this.popOneNumber()
+    if (typeof num === 'object') {
+      this.recordStep('OP_1SUB', stackBefore, false, num.error)
       return false
     }
     this.push(num - 1)
@@ -436,14 +443,9 @@ export class ScriptInterpreter {
       this.recordStep('OP_NEGATE', stackBefore, true)
       return true
     }
-    const top = this.pop()
-    if (top === null) {
-      this.recordStep('OP_NEGATE', stackBefore, false, 'Stack empty')
-      return false
-    }
-    const num = this.toNumber(top)
-    if (num === null) {
-      this.recordStep('OP_NEGATE', stackBefore, false, 'Cannot convert to number')
+    const num = this.popOneNumber()
+    if (typeof num === 'object') {
+      this.recordStep('OP_NEGATE', stackBefore, false, num.error)
       return false
     }
     this.push(-num)
@@ -689,20 +691,13 @@ export class ScriptInterpreter {
       this.recordStep('OP_SHA256', stackBefore, true)
       return true
     }
-    const top = this.pop()
-    if (top === null) {
-      this.recordStep('OP_SHA256', stackBefore, false, 'Stack empty')
-      return false
-    }
-    // In a real implementation, this would compute SHA256
-    // For educational purposes, we'll use a placeholder
-    const bytes = this.toBytes(top)
-    if (bytes === null) {
-      this.recordStep('OP_SHA256', stackBefore, false, 'Cannot convert to bytes')
+    const bytes = this.popOneBytes()
+    if ('error' in bytes) {
+      this.recordStep('OP_SHA256', stackBefore, false, bytes.error)
       return false
     }
     // Simulate hash (in real implementation, use crypto.subtle.digest)
-    this.push(`0x${Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('')}`)
+    this.push(`0x${bytesToHex(bytes)}`)
     this.recordStep('OP_SHA256', stackBefore, true)
     return true
   }
@@ -713,18 +708,13 @@ export class ScriptInterpreter {
       this.recordStep('OP_HASH160', stackBefore, true)
       return true
     }
-    const top = this.pop()
-    if (top === null) {
-      this.recordStep('OP_HASH160', stackBefore, false, 'Stack empty')
-      return false
-    }
-    const bytes = this.toBytes(top)
-    if (bytes === null) {
-      this.recordStep('OP_HASH160', stackBefore, false, 'Cannot convert to bytes')
+    const bytes = this.popOneBytes()
+    if ('error' in bytes) {
+      this.recordStep('OP_HASH160', stackBefore, false, bytes.error)
       return false
     }
     // Simulate HASH160 (SHA256 + RIPEMD160)
-    this.push(`0x${Array.from(bytes.slice(0, 20)).map(b => b.toString(16).padStart(2, '0')).join('')}`)
+    this.push(`0x${bytesToHex(bytes, 20)}`)
     this.recordStep('OP_HASH160', stackBefore, true)
     return true
   }
@@ -735,18 +725,13 @@ export class ScriptInterpreter {
       this.recordStep('OP_HASH256', stackBefore, true)
       return true
     }
-    const top = this.pop()
-    if (top === null) {
-      this.recordStep('OP_HASH256', stackBefore, false, 'Stack empty')
-      return false
-    }
-    const bytes = this.toBytes(top)
-    if (bytes === null) {
-      this.recordStep('OP_HASH256', stackBefore, false, 'Cannot convert to bytes')
+    const bytes = this.popOneBytes()
+    if ('error' in bytes) {
+      this.recordStep('OP_HASH256', stackBefore, false, bytes.error)
       return false
     }
     // Simulate double SHA256
-    this.push(`0x${Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('')}`)
+    this.push(`0x${bytesToHex(bytes)}`)
     this.recordStep('OP_HASH256', stackBefore, true)
     return true
   }
@@ -885,53 +870,10 @@ export class ScriptInterpreter {
           case 'OP_1NEGATE':
             success = this.op1Negate()
             break
-          case 'OP_1': case 'OP_TRUE':
-            success = this.opN(1)
-            break
-          case 'OP_2':
-            success = this.opN(2)
-            break
-          case 'OP_3':
-            success = this.opN(3)
-            break
-          case 'OP_4':
-            success = this.opN(4)
-            break
-          case 'OP_5':
-            success = this.opN(5)
-            break
-          case 'OP_6':
-            success = this.opN(6)
-            break
-          case 'OP_7':
-            success = this.opN(7)
-            break
-          case 'OP_8':
-            success = this.opN(8)
-            break
-          case 'OP_9':
-            success = this.opN(9)
-            break
-          case 'OP_10':
-            success = this.opN(10)
-            break
-          case 'OP_11':
-            success = this.opN(11)
-            break
-          case 'OP_12':
-            success = this.opN(12)
-            break
-          case 'OP_13':
-            success = this.opN(13)
-            break
-          case 'OP_14':
-            success = this.opN(14)
-            break
-          case 'OP_15':
-            success = this.opN(15)
-            break
-          case 'OP_16':
-            success = this.opN(16)
+          case 'OP_1': case 'OP_TRUE': case 'OP_2': case 'OP_3': case 'OP_4': case 'OP_5':
+          case 'OP_6': case 'OP_7': case 'OP_8': case 'OP_9': case 'OP_10': case 'OP_11':
+          case 'OP_12': case 'OP_13': case 'OP_14': case 'OP_15': case 'OP_16':
+            success = this.opN(opCode === 'OP_TRUE' ? 1 : parseInt(opCode.slice(3), 10))
             break
           case 'OP_DUP':
             success = this.opDup()

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { DndContext, DragEndEvent, DragOverlay, closestCenter } from '@dnd-kit/core'
 import StackVisualization from '@/app/components/stack-lab/StackVisualization'
 import OpCodePalette from '@/app/components/stack-lab/OpCodePalette'
@@ -8,7 +8,9 @@ import ScriptBuilder from '@/app/components/stack-lab/ScriptBuilder'
 import ExecutionControls from '@/app/components/stack-lab/ExecutionControls'
 import ExecutionLog from '@/app/components/stack-lab/ExecutionLog'
 import ScriptTemplates from '@/app/components/stack-lab/ScriptTemplates'
+import StackLabCard from '@/app/components/stack-lab/StackLabCard'
 import { ScriptInterpreter, type StackItem, type ExecutionStep } from '@/app/utils/stackLabInterpreter'
+import { parseStackItem } from '@/app/utils/stackLabFormatters'
 import { ChevronDown, InfoIcon } from '@/app/components/Icons'
 
 export default function StackLabPage() {
@@ -23,12 +25,17 @@ export default function StackLabPage() {
   const [dataModalTarget, setDataModalTarget] = useState<'unlocking' | 'locking' | null>(null)
   const [dataInput, setDataInput] = useState('')
   const [activeId, setActiveId] = useState<string | null>(null)
-  const [activeItem, setActiveItem] = useState<string | StackItem | null>(null)
   const [showMobileWarning, setShowMobileWarning] = useState(false)
   const [mobileWarningDismissed, setMobileWarningDismissed] = useState(false)
   const [isFlowExplanationExpanded, setIsFlowExplanationExpanded] = useState(false)
 
-  const interpreter = new ScriptInterpreter()
+  const interpreterRef = useRef<ScriptInterpreter | null>(null)
+  useEffect(() => {
+    interpreterRef.current = new ScriptInterpreter()
+    return () => {
+      interpreterRef.current = null
+    }
+  }, [])
 
   // Prevent hydration mismatch by only rendering on client
   useEffect(() => {
@@ -65,7 +72,6 @@ export default function StackLabPage() {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over, delta } = event
     setActiveId(null)
-    setActiveItem(null)
 
     // Only process if there was an actual drag to a drop zone
     if (!over) return
@@ -97,7 +103,6 @@ export default function StackLabPage() {
   const handleDragStart = (event: any) => {
     const id = event.active.id as string
     setActiveId(id)
-    setActiveItem(null) // Only OP codes are draggable now
   }
 
   const handleRemoveFromScript = (scriptType: 'unlocking' | 'locking', index: number) => {
@@ -127,14 +132,13 @@ export default function StackLabPage() {
   const [executionResult, setExecutionResult] = useState<{ success: boolean; error?: string } | undefined>(undefined)
 
   const handleExecute = useCallback(() => {
+    if (!interpreterRef.current) return
     setIsExecuting(true)
     setCurrentStepIndex(-1)
 
-    // Combine unlocking and locking scripts
     const fullScript = [...unlockingScript, ...lockingScript]
-    
-    const result = interpreter.execute(fullScript)
-    
+    const result = interpreterRef.current.execute(fullScript)
+
     setStack(result.finalStack)
     setExecutionSteps(result.steps)
     setCurrentStepIndex(result.steps.length - 1)
@@ -146,66 +150,59 @@ export default function StackLabPage() {
   }, [unlockingScript, lockingScript])
 
   const handleStep = useCallback(() => {
+    if (!interpreterRef.current) return
     const fullScript = [...unlockingScript, ...lockingScript]
     if (fullScript.length === 0) return
 
     if (currentStepIndex < 0) {
-      // Start execution from beginning
-      const scriptToExecute = fullScript.slice(0, 1)
-      const result = interpreter.execute(scriptToExecute)
-      setStack(result.finalStack)
+      // Run full script once and cache all steps (O(N) instead of O(N^2) when stepping through)
+      const result = interpreterRef.current.execute(fullScript)
       setExecutionSteps(result.steps)
       setCurrentStepIndex(0)
+      setStack(result.steps[0]?.stackAfter ?? [])
     } else if (currentStepIndex < executionSteps.length - 1) {
-      // Move to next already-executed step
-      setCurrentStepIndex(prev => prev + 1)
-      if (executionSteps[currentStepIndex + 1]) {
-        setStack(executionSteps[currentStepIndex + 1].stackAfter)
-      }
+      // Advance to next already-cached step
+      setCurrentStepIndex((prev) => prev + 1)
+      const next = executionSteps[currentStepIndex + 1]
+      if (next) setStack(next.stackAfter)
     } else {
-      // Execute next step
+      // At end of cache; if script was extended, run one more prefix
       const nextIndex = currentStepIndex + 1
       if (nextIndex >= fullScript.length) return
-      
-      const scriptToExecute = fullScript.slice(0, nextIndex + 1)
-      const result = interpreter.execute(scriptToExecute)
-      setStack(result.finalStack)
+      const result = interpreterRef.current.execute(fullScript.slice(0, nextIndex + 1))
       setExecutionSteps(result.steps)
       setCurrentStepIndex(nextIndex)
+      setStack(result.finalStack)
     }
   }, [currentStepIndex, executionSteps, unlockingScript, lockingScript])
 
+  const clearExecutionState = useCallback(() => {
+    setStack([])
+    setExecutionSteps([])
+    setCurrentStepIndex(-1)
+  }, [])
+
   const handleStepBack = useCallback(() => {
     if (currentStepIndex <= 0) {
-      // Go back to initial state (before execution)
-      setCurrentStepIndex(-1)
-      setStack([])
-      setExecutionSteps([])
+      clearExecutionState()
     } else {
-      // Go back to previous step
       const prevIndex = currentStepIndex - 1
       setCurrentStepIndex(prevIndex)
       if (executionSteps[prevIndex]) {
         setStack(executionSteps[prevIndex].stackAfter)
       }
     }
-  }, [currentStepIndex, executionSteps])
+  }, [currentStepIndex, executionSteps, clearExecutionState])
 
   const handleReset = () => {
-    setStack([])
-    setExecutionSteps([])
-    setCurrentStepIndex(-1)
+    clearExecutionState()
     setExecutionResult(undefined)
     setUnlockingScript([])
     setLockingScript([])
   }
 
-  const handleLoadTemplate = (template: { unlockingScript: Array<string | number>, lockingScript: Array<string | number> }) => {
-    // Reset first to clear execution state
-    setStack([])
-    setExecutionSteps([])
-    setCurrentStepIndex(-1)
-    // Then load the template scripts
+  const handleLoadTemplate = (template: { unlockingScript: Array<string | number>; lockingScript: Array<string | number> }) => {
+    clearExecutionState()
     setUnlockingScript(template.unlockingScript)
     setLockingScript(template.lockingScript)
   }
@@ -219,17 +216,13 @@ export default function StackLabPage() {
   const handleDataSubmit = () => {
     if (!dataModalTarget || !dataInput.trim()) return
 
-    // Try to parse as number, otherwise use as string
-    let value: StackItem = dataInput.trim()
-    const numValue = Number(dataInput.trim())
-    if (!isNaN(numValue) && dataInput.trim() !== '') {
-      value = numValue
-    }
+    const value = parseStackItem(dataInput.trim())
+    if (value === null) return
 
     if (dataModalTarget === 'unlocking') {
-      setUnlockingScript(prev => [...prev, value])
+      setUnlockingScript((prev) => [...prev, value])
     } else {
-      setLockingScript(prev => [...prev, value])
+      setLockingScript((prev) => [...prev, value])
     }
 
     setShowDataModal(false)
@@ -267,9 +260,9 @@ export default function StackLabPage() {
         modifiers={[]}
         
       >
-        <div className="space-y-6">
+        <div className="space-y-2">
           {/* Flow Explanation */}
-          <div className="bg-zinc-900 dark:bg-zinc-950 rounded-lg border border-zinc-700 p-4">
+          <StackLabCard>
             <button
               onClick={() => setIsFlowExplanationExpanded(!isFlowExplanationExpanded)}
               className="w-full flex items-center justify-between text-left"
@@ -301,7 +294,7 @@ export default function StackLabPage() {
                 </div>
               </div>
             )}
-          </div>
+          </StackLabCard>
 
           {/* Templates */}
           <ScriptTemplates onLoadTemplate={handleLoadTemplate} />
@@ -316,7 +309,7 @@ export default function StackLabPage() {
           )}
 
           {/* Main workspace */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
             {/* Left: OP Code Palette */}
             <div className="lg:col-span-1">
               <div className="sticky top-4">
@@ -326,7 +319,7 @@ export default function StackLabPage() {
 
             {/* Center: Script Builders */}
             <div className="lg:col-span-1">
-              <div className="sticky top-4 space-y-4">
+              <div className="sticky top-4 space-y-2">
                 <ScriptBuilder
                   id="unlocking-script"
                   title="Unlocking Script"
@@ -346,7 +339,7 @@ export default function StackLabPage() {
 
             {/* Right: Stack Visualization */}
             <div className="lg:col-span-1">
-              <div className="sticky top-4 space-y-4">
+              <div className="sticky top-4 space-y-2">
                 <StackVisualization stack={stack} />
                 
                 {/* Execution Controls */}

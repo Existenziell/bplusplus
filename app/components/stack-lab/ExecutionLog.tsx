@@ -1,7 +1,9 @@
 'use client'
 
 import { ExecutionStep } from '@/app/utils/stackLabInterpreter'
-import { InfoIcon } from '@/app/components/Icons'
+import { formatStackForLog } from '@/app/utils/stackLabFormatters'
+import InfoTooltip from '@/app/components/stack-lab/InfoTooltip'
+import StackLabCard from '@/app/components/stack-lab/StackLabCard'
 
 interface ExecutionLogProps {
   steps: ExecutionStep[]
@@ -15,35 +17,25 @@ interface ExecutionLogProps {
 export default function ExecutionLog({ steps, currentStep, executionResult }: ExecutionLogProps) {
   if (steps.length === 0) {
     return (
-      <div className="bg-zinc-900 dark:bg-zinc-950 rounded-lg border border-zinc-700 p-4">
+      <StackLabCard>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-semibold text-zinc-300">Execution Log</h3>
-          <div className="group relative">
-            <InfoIcon className="w-4 h-4 text-zinc-500 hover:text-zinc-300 cursor-help" />
-            <div className="absolute right-0 top-6 w-64 p-3 bg-zinc-800 border border-zinc-700 rounded shadow-lg text-xs text-zinc-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
-              The execution log shows each step of script execution, including the stack state before and after each operation. Use the Step button to execute one operation at a time.
-            </div>
-          </div>
+          <InfoTooltip content="The execution log shows each step of script execution, including the stack state before and after each operation. Use the Step button to execute one operation at a time." />
         </div>
         <div className="text-zinc-500 text-sm text-center py-8">
           No execution steps yet
         </div>
-      </div>
+      </StackLabCard>
     )
   }
 
   const hasErrors = steps.some(step => !step.success) || (executionResult && !executionResult.success)
 
   return (
-    <div className="bg-zinc-900 dark:bg-zinc-950 rounded-lg border border-zinc-700 p-4">
+    <StackLabCard>
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-zinc-300">Execution Log</h3>
-        <div className="group relative">
-          <InfoIcon className="w-4 h-4 text-zinc-500 hover:text-zinc-300 cursor-help" />
-          <div className="absolute right-0 top-6 w-64 p-3 bg-zinc-800 border border-zinc-700 rounded shadow-lg text-xs text-zinc-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
-            The execution log shows each step of script execution, including the stack state before and after each operation. Use the Step button to execute one operation at a time.
-          </div>
-        </div>
+        <InfoTooltip content="The execution log shows each step of script execution, including the stack state before and after each operation. Use the Step button to execute one operation at a time." />
       </div>
       {/* Execution Summary */}
       {executionResult && (
@@ -87,13 +79,6 @@ export default function ExecutionLog({ steps, currentStep, executionResult }: Ex
       <div className="space-y-2 max-h-[300px] overflow-y-auto">
         {steps.map((step, index) => {
           const isCurrent = index === currentStep
-          const formatStack = (stack: typeof step.stackBefore) => {
-            if (stack.length === 0) return '[]'
-            return `[${stack.map(item => {
-              if (typeof item === 'string') return `"${item}"`
-              return String(item)
-            }).join(', ')}]`
-          }
 
           return (
             <div
@@ -119,8 +104,8 @@ export default function ExecutionLog({ steps, currentStep, executionResult }: Ex
                     </div>
                   )}
                   <div className="text-xs text-zinc-400 space-y-1">
-                    <div>Before: {formatStack(step.stackBefore)}</div>
-                    <div>After: {formatStack(step.stackAfter)}</div>
+                    <div>Before: {formatStackForLog(step.stackBefore)}</div>
+                    <div>After: {formatStackForLog(step.stackAfter)}</div>
                   </div>
                 </div>
                 {isCurrent && (
@@ -131,6 +116,6 @@ export default function ExecutionLog({ steps, currentStep, executionResult }: Ex
           )
         })}
       </div>
-    </div>
+    </StackLabCard>
   )
 }

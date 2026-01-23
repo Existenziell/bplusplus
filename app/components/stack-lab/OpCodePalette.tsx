@@ -3,7 +3,8 @@
 import { useDraggable } from '@dnd-kit/core'
 import { OP_CODES, OP_CODE_CATEGORIES, type OpCode } from '@/app/utils/stackLabInterpreter'
 import { useState } from 'react'
-import { InfoIcon } from '@/app/components/Icons'
+import InfoTooltip from '@/app/components/stack-lab/InfoTooltip'
+import StackLabCard from '@/app/components/stack-lab/StackLabCard'
 
 interface OpCodePaletteProps {
   onAddData?: () => void
@@ -56,15 +57,10 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
   }, {} as Record<string, OpCode[]>)
 
   return (
-    <div className="bg-zinc-900 dark:bg-zinc-950 rounded-lg border border-zinc-700 p-4 h-full flex flex-col">
+    <StackLabCard flex>
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-zinc-300">OP Codes</h3>
-        <div className="group relative">
-          <InfoIcon className="w-4 h-4 text-zinc-500 hover:text-zinc-300 cursor-help" />
-          <div className="absolute right-0 top-6 w-64 p-3 bg-zinc-800 border border-zinc-700 rounded shadow-lg text-xs text-zinc-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
-            Drag OP codes from here to the script builders. OP codes are the instructions that Bitcoin Script uses to manipulate the stack and execute logic.
-          </div>
-        </div>
+        <InfoTooltip content="Drag OP codes from here to the script builders. OP codes are the instructions that Bitcoin Script uses to manipulate the stack and execute logic." />
       </div>
       
       {/* Search */}
@@ -160,6 +156,6 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
           </div>
         )}
       </div>
-    </div>
+    </StackLabCard>
   )
 }

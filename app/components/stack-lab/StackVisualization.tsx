@@ -1,54 +1,20 @@
 'use client'
 
 import { StackItem } from '@/app/utils/stackLabInterpreter'
-import { InfoIcon } from '@/app/components/Icons'
+import { formatStackItem, getItemType, itemCount } from '@/app/utils/stackLabFormatters'
+import InfoTooltip from '@/app/components/stack-lab/InfoTooltip'
+import StackLabCard from '@/app/components/stack-lab/StackLabCard'
 
 interface StackVisualizationProps {
   stack: StackItem[]
 }
 
 export default function StackVisualization({ stack }: StackVisualizationProps) {
-  const formatItem = (item: StackItem): string => {
-    if (typeof item === 'number') {
-      return item.toString()
-    }
-    if (typeof item === 'boolean') {
-      return item ? 'true' : 'false'
-    }
-    if (typeof item === 'string') {
-      // Truncate long hex strings
-      if (item.startsWith('0x') && item.length > 20) {
-        return `${item.slice(0, 10)}...${item.slice(-8)}`
-      }
-      return item
-    }
-    if (item instanceof Uint8Array) {
-      return `0x${Array.from(item.slice(0, 8)).map(b => b.toString(16).padStart(2, '0')).join('')}${item.length > 8 ? '...' : ''}`
-    }
-    return String(item)
-  }
-
-  const getItemType = (item: StackItem): string => {
-    if (typeof item === 'number') return 'number'
-    if (typeof item === 'boolean') return 'boolean'
-    if (typeof item === 'string') {
-      if (item.startsWith('0x')) return 'hex'
-      return 'string'
-    }
-    if (item instanceof Uint8Array) return 'bytes'
-    return 'unknown'
-  }
-
   return (
-    <div className="bg-zinc-900 dark:bg-zinc-950 rounded-lg border border-zinc-700 p-4 h-full flex flex-col">
+    <StackLabCard flex>
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-zinc-300">Stack</h3>
-        <div className="group relative">
-          <InfoIcon className="w-4 h-4 text-zinc-500 hover:text-zinc-300 cursor-help" />
-          <div className="absolute right-0 top-6 w-64 p-3 bg-zinc-800 border border-zinc-700 rounded shadow-lg text-xs text-zinc-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
-            The stack is a Last-In-First-Out (LIFO) data structure. Items are pushed onto the top and popped from the top. The stack shows the current state during script execution.
-          </div>
-        </div>
+        <InfoTooltip content="The stack is a Last-In-First-Out (LIFO) data structure. Items are pushed onto the top and popped from the top. The stack shows the current state during script execution." />
       </div>
       
       {stack.length === 0 ? (
@@ -85,7 +51,7 @@ export default function StackVisualization({ stack }: StackVisualizationProps) {
                   <div className="flex items-center justify-between">
                     <div className="flex-1 min-w-0">
                       <div className="font-mono text-sm truncate">
-                        {formatItem(item)}
+                        {formatStackItem(item, { hexShowTail: true })}
                       </div>
                       <div className="text-xs text-zinc-500 mt-0.5">
                         {itemType}
@@ -109,8 +75,8 @@ export default function StackVisualization({ stack }: StackVisualizationProps) {
       
       {/* Stack info */}
       <div className="mt-3 pt-3 border-t border-zinc-700 text-xs text-zinc-500">
-        {stack.length} item{stack.length !== 1 ? 's' : ''}
+        {itemCount(stack.length)}
       </div>
-    </div>
+    </StackLabCard>
   )
 }

@@ -2,8 +2,6 @@
 
 This section covers the setup and infrastructure needed for Bitcoin development: installing Bitcoin Core, testing and debugging, working with test networks, choosing libraries, understanding node architecture, and exploring Bitcoin Core internals.
 
-> **Next steps:** Once you have your development environment set up, explore [Bitcoin Development](/docs/bitcoin-development) for practical development tasks like transaction construction, PSBT, address generation, and more.
-
 > **Hands-on learning:** Try Bitcoin RPC commands directly in the [Bitcoin CLI Terminal](/terminal). No node setup required.
 
 ## Programming Languages in Bitcoin

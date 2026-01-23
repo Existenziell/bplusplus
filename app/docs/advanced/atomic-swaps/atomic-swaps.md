@@ -2,8 +2,6 @@
 
 Atomic swaps enable trustless peer-to-peer exchange of cryptocurrencies across different blockchains without requiring a trusted third party or centralized exchange.
 
-## What are Atomic Swaps?
-
 **Atomic swaps** use hash time-locked contracts (HTLCs) to ensure that either both parties receive their funds or neither does:
 
 ```text

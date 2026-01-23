@@ -192,8 +192,36 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
     }
   }
 
+  // Handle clicking on a letter to jump to that section
+  const handleLetterClick = (sectionSlug: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    const element = document.getElementById(sectionSlug)
+    if (element) {
+      // Update URL hash
+      window.history.pushState(null, '', `#${sectionSlug}`)
+      // Scroll to section
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
   return (
     <div className="glossary-accordion">
+      {/* Letter navigation */}
+      <div className="mb-8 pb-4 border-b border-zinc-300 dark:border-zinc-700">
+        <div className="flex flex-wrap items-center gap-2 text-sm">
+          <span className="text-zinc-600 dark:text-zinc-400 font-medium mr-2">Jump to:</span>
+          {sections.map((section) => (
+            <a
+              key={section.slug}
+              href={`#${section.slug}`}
+              onClick={(e) => handleLetterClick(section.slug, e)}
+              className="text-btc hover:text-btc-dark dark:hover:text-btc-light hover:underline font-medium transition-colors"
+            >
+              {section.letter}
+            </a>
+          ))}
+        </div>
+      </div>
       {sections.map((section) => (
         <div key={section.slug} className="mb-8">
           {/* Section letter header */}
@@ -217,12 +245,12 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
                   handleTermClick(entry.slug, details.open)
                 }}
               >
-                <summary className="glossary-summary cursor-pointer list-none flex items-center gap-2 py-3 px-4 rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors">
+                <summary className="glossary-summary cursor-pointer list-none flex items-center gap-2 py-2 px-4 rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors">
                   {/* Chevron icon */}
                   <ArrowRight className="w-4 h-4 text-secondary transition-transform duration-200 group-open:rotate-90 flex-shrink-0" />
-                  <span className="heading-subsection">
+                  <h3 className="">
                     {entry.term}
-                  </span>
+                  </h3>
                 </summary>
 
                 <div className="glossary-definition px-4 py-4 ml-6 border-l-2 border-zinc-200 dark:border-zinc-700 mt-2 text-zinc-800 dark:text-zinc-200">

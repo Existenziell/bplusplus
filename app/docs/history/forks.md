@@ -34,18 +34,18 @@ A **hard fork** **loosens** the consensus rules (or changes them incompatibly). 
 
 | Date | Block Height | Type | Name | BIP(s) | Description | Status |
 |------|--------------|------|------|--------|-------------|--------|
-| **2009-01-03** | 0 | - | Genesis Block | - | Bitcoin network launch | ✅ Active |
-| **2010-08-15** | 74,638 | Hard Fork | Value Overflow Incident | - | Fixed integer overflow bug | ✅ Resolved |
-| **2012-04-01** | 173,805 | Soft Fork | P2SH (Pay-to-Script-Hash) | [BIP 16](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki) | Enabled complex scripts via script hashes | ✅ Active |
-| **2013-03-11** | 225,430 | Accidental | BerkeleyDB Fork | - | Database lock limit caused chain split | ✅ Resolved |
-| **2013-03-12** | 225,430 | Soft Fork | Strict DER Encoding | [BIP 66](https://github.com/bitcoin/bips/blob/master/bip-0066.mediawiki) | Required strict DER signature encoding | ✅ Active |
-| **2013-05-15** | 250,000 | Soft Fork | Strict Multisig | [BIP 65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki) | Required NULLDUMMY in multisig | ✅ Active |
-| **2015-12-08** | 388,381 | Soft Fork | CLTV (CheckLockTimeVerify) | [BIP 65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki) | Enabled absolute time locks | ✅ Active |
-| **2016-07-04** | 419,328 | Soft Fork | CSV (CheckSequenceVerify) | [BIP 112](https://github.com/bitcoin/bips/blob/master/bip-0112.mediawiki), [BIP 68](https://github.com/bitcoin/bips/blob/master/bip-0068.mediawiki), [BIP 113](https://github.com/bitcoin/bips/blob/master/bip-0113.mediawiki) | Enabled relative time locks | ✅ Active |
-| **2017-08-01** | 478,558 | Hard Fork | Bitcoin Cash | - | Increased block size to 8 MB | 🔀 Split Chain |
-| **2017-08-24** | 481,824 | Soft Fork | Segregated Witness (SegWit) | [BIP 141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki), [BIP 143](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki), [BIP 144](https://github.com/bitcoin/bips/blob/master/bip-0144.mediawiki), [BIP 148](https://github.com/bitcoin/bips/blob/master/bip-0148.mediawiki) | Separated witness data, fixed malleability | ✅ Active |
-| **2018-11-15** | 556,766 | Hard Fork | Bitcoin SV | - | Bitcoin Cash fork, increased to 128 MB blocks | 🔀 Split Chain |
-| **2021-11-14** | 709,632 | Soft Fork | Taproot | [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki), [BIP 342](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki), [BIP 340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki) | Schnorr signatures, improved privacy | ✅ Active |
+| **2009-01-03** | 0 | - | Genesis Block | - | Bitcoin network launch | Active |
+| **2010-08-15** | 74,638 | Hard Fork | Value Overflow Incident | - | Fixed integer overflow bug | Resolved |
+| **2012-04-01** | 173,805 | Soft Fork | P2SH (Pay-to-Script-Hash) | [BIP 16](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki) | Enabled complex scripts via script hashes | Active |
+| **2013-03-11** | 225,430 | Accidental | BerkeleyDB Fork | - | Database lock limit caused chain split | Resolved |
+| **2013-03-12** | 225,430 | Soft Fork | Strict DER Encoding | [BIP 66](https://github.com/bitcoin/bips/blob/master/bip-0066.mediawiki) | Required strict DER signature encoding | Active |
+| **2013-05-15** | 250,000 | Soft Fork | Strict Multisig | [BIP 65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki) | Required NULLDUMMY in multisig | Active |
+| **2015-12-08** | 388,381 | Soft Fork | CLTV (CheckLockTimeVerify) | [BIP 65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki) | Enabled absolute time locks | Active |
+| **2016-07-04** | 419,328 | Soft Fork | CSV (CheckSequenceVerify) | [BIP 112](https://github.com/bitcoin/bips/blob/master/bip-0112.mediawiki), [BIP 68](https://github.com/bitcoin/bips/blob/master/bip-0068.mediawiki), [BIP 113](https://github.com/bitcoin/bips/blob/master/bip-0113.mediawiki) | Enabled relative time locks | Active |
+| **2017-08-01** | 478,558 | Hard Fork | Bitcoin Cash | - | Increased block size to 8 MB | Split Chain |
+| **2017-08-24** | 481,824 | Soft Fork | Segregated Witness (SegWit) | [BIP 141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki), [BIP 143](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki), [BIP 144](https://github.com/bitcoin/bips/blob/master/bip-0144.mediawiki), [BIP 148](https://github.com/bitcoin/bips/blob/master/bip-0148.mediawiki) | Separated witness data, fixed malleability | Active |
+| **2018-11-15** | 556,766 | Hard Fork | Bitcoin SV | - | Bitcoin Cash fork, increased to 128 MB blocks | Split Chain |
+| **2021-11-14** | 709,632 | Soft Fork | Taproot | [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki), [BIP 342](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki), [BIP 340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki) | Schnorr signatures, improved privacy | Active |
 
 ---
 

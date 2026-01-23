@@ -26,18 +26,6 @@ This section covers advanced, experimental, and specialized Bitcoin topics that 
 
 ---
 
-## When to Use These Topics
-
-These advanced topics are useful when you need to:
-
-- **Build specialized applications** requiring experimental features
-- **Understand cutting-edge research** in Bitcoin development
-- **Implement privacy-preserving solutions** beyond standard practices
-- **Explore alternative scaling approaches** to Lightning Network
-- **Create complex smart contracts** using advanced scripting patterns
-
----
-
 ## Prerequisites
 
 Before diving into advanced topics, ensure you understand:

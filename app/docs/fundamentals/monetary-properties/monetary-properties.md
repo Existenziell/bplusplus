@@ -19,10 +19,16 @@ Bitcoin exhibits key monetary properties that make it suitable as both a medium 
 
 | Denomination | Symbol | Value in BTC |
 |-------------|--------|--------------|
-| [Satoshi](/docs/glossary#satoshi) | SAT | 0.00000001 |
-| Microbit | µBTC | 0.000001 |
+| Satoshi | SAT | 0.00000001 |
+| Microbit | µBTC (uBTC) | 0.000001 |
 | Millibit | mBTC | 0.001 |
+| Centibit | cBTC | 0.01 |
+| Decibit | dBTC | 0.1 |
 | Bitcoin | BTC | 1 |
+| DecaBit | daBTC | 10 |
+| Hectobit | hBTC | 100 |
+| Kilobit | kBTC | 1,000 |
+| Megabit | MBTC | 1,000,000 |
 
 The satoshi (named after Bitcoin's creator) is the smallest unit. "Stacking sats" has become common terminology for accumulating bitcoin in small amounts.
 

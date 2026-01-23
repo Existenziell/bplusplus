@@ -12,11 +12,12 @@ A **Merkle tree** (also called a hash tree) is a binary tree where:
 
 ```text
 Merkle Tree:
+
         Root Hash
        /        \
-    Hash AB    Hash CD
+    HashAB     HashCD
     /    \      /    \
-  Hash A Hash B Hash C Hash D
+ HashA  HashB HashC  HashD
    |      |      |      |
   Tx1    Tx2    Tx3    Tx4
 ```

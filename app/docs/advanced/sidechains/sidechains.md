@@ -2,8 +2,6 @@
 
 Sidechains are separate blockchains that are pegged to Bitcoin, allowing bitcoin to be moved between the main chain and sidechain. They provide alternative scaling solutions and specialized features.
 
-## What are Sidechains?
-
 **Sidechains** are independent blockchains with their own consensus rules that are pegged to Bitcoin:
 
 ```text

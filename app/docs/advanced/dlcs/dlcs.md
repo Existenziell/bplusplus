@@ -2,8 +2,6 @@
 
 Discreet Log Contracts (DLCs) enable Bitcoin smart contracts that depend on external data (oracles) without revealing contract details on-chain until execution.
 
-## What are DLCs?
-
 **DLCs** are smart contracts that:
 
 - **Use oracles**: Depend on external data (prices, events)

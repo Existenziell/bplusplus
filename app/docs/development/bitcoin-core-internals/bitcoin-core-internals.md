@@ -104,7 +104,7 @@ Used for:
 
 ```text
 src/
-├── consensus/     - Consensus validation
+├── consensus/    - Consensus validation
 ├── net/          - Network layer
 ├── wallet/       - Wallet functionality
 ├── rpc/          - RPC interface

@@ -2,8 +2,6 @@
 
 Statechains are a scaling solution that allows transferring bitcoin ownership off-chain through a federated service without requiring on-chain transactions for each transfer.
 
-## What are Statechains?
-
 **Statechains** enable off-chain bitcoin transfers:
 
 ```text

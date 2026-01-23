@@ -1,8 +1,6 @@
 import { Ubuntu } from 'next/font/google'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
@@ -10,6 +8,8 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Notification from '@/app/components/Notification'
 import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
+// Import the pre-generated glossary data (generated at build time by scripts/generate-glossary-data.js)
+import glossaryData from '@/public/data/glossary.json'
 
 const ubuntu = Ubuntu({
   weight: '400',
@@ -69,17 +69,6 @@ export default function RootLayout({
 }: {
   children: ReactNode
 }) {
-  // Inline glossary data at build time (for static generation)
-  let glossaryData = {}
-  try {
-    const glossaryPath = join(process.cwd(), 'public/data/glossary.json')
-    const glossaryContent = readFileSync(glossaryPath, 'utf-8')
-    glossaryData = JSON.parse(glossaryContent)
-  } catch (error) {
-    // Glossary data not available at build time, will be empty
-    console.warn('Could not load glossary data at build time:', error)
-  }
-
   return (
     <html lang='en' suppressHydrationWarning data-scroll-behavior="smooth">
       <head>

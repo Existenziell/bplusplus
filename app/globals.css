@@ -279,6 +279,11 @@ main > div > div > h1:first-child {
   @apply bg-zinc-100 dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50;
 }
 
+.markdown-content table th:last-child,
+.markdown-content table td:last-child {
+  white-space: nowrap;
+}
+
 .markdown-content a {
   @apply text-btc hover:underline;
 }

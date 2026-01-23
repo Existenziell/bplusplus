@@ -2,8 +2,6 @@
 
 Bitcoin Script enables smart contracts through conditional spending. While intentionally limited (no loops, no complex state), Bitcoin's scripting system supports powerful contract patterns.
 
-## What are Bitcoin Smart Contracts?
-
 Bitcoin smart contracts are **spending conditions** encoded in Script:
 
 ```text

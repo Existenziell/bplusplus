@@ -2,8 +2,6 @@
 
 Bloom filters are a probabilistic data structure used by SPV (Simplified Payment Verification) clients to request relevant transactions from full nodes without revealing exactly which addresses they're interested in.
 
-## What are Bloom Filters?
-
 **Bloom filters** allow SPV clients to:
 
 - **Request transactions**: Without revealing addresses

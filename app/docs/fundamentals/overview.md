@@ -1,10 +1,16 @@
 # What is Bitcoin?
 
-Depending on who you ask or where you currently are in your journey down the Bitcoin rabbit hole, Bitcoin can mean many things.
 Bitcoin is a decentralized digital currency and payment system that operates without a central authority or intermediary. It was created in 2009 by an anonymous person or group using the pseudonym [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto), who first described the system in the [Bitcoin whitepaper](/whitepaper) published on October 31, 2008.
+
+While this definition captures Bitcoin's technical foundation, Bitcoin is multifaceted. As you go down the Bitcoin rabbit hole, you'll discover that Bitcoin represents something unprecedented in human history. Bitcoin has a way of enticing you to learn more about related topics: economics, game theory, cryptography, monetary history, and the nature of trust itself.
+
+Stay curious and keep learning 🧡
+
+---
 
 **Bitcoin** (capitalized) refers to the protocol, network, and system.  
 **bitcoin** (lowercase) or **BTC** refers to the currency unit.
+
 
 > **Note:** Throughout this documentation, "Bitcoin" refers specifically to **BTC (Bitcoin Core)**, the original and longest-running Bitcoin network. While other networks like Bitcoin Cash (BCH) and Bitcoin SV (BSV) share Bitcoin's history up to their respective fork points, they are separate networks with different consensus rules. This documentation focuses exclusively on Bitcoin (BTC).  
 >   

@@ -67,7 +67,7 @@ function QuoteRotator() {
         setQuote(getNextQuote())
         setIsVisible(true)
       }, 500)
-    }, 2000)
+    }, 8000)
     return () => clearInterval(interval)
   }, [])
 

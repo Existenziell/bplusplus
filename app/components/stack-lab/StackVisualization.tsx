@@ -13,7 +13,7 @@ export default function StackVisualization({ stack }: StackVisualizationProps) {
   return (
     <StackLabCard flex>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-zinc-300">Stack</h3>
+        <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Stack</h3>
         <InfoTooltip content="The stack is a Last-In-First-Out (LIFO) data structure. Items are pushed onto the top and popped from the top. The stack shows the current state during script execution." />
       </div>
       
@@ -43,7 +43,7 @@ export default function StackVisualization({ stack }: StackVisualizationProps) {
                     px-3 py-2 rounded border
                     ${isTop 
                       ? 'bg-btc/20 border-btc/50 text-btc' 
-                      : 'bg-zinc-800/50 border-zinc-700 text-zinc-300'
+                      : 'bg-zinc-200/60 dark:bg-zinc-800/50 border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300'
                     }
                     transition-colors
                   `}
@@ -74,7 +74,7 @@ export default function StackVisualization({ stack }: StackVisualizationProps) {
       )}
       
       {/* Stack info */}
-      <div className="mt-3 pt-3 border-t border-zinc-700 text-xs text-zinc-500">
+      <div className="mt-3 pt-3 border-t border-zinc-300 dark:border-zinc-700 text-xs text-zinc-500">
         {itemCount(stack.length)}
       </div>
     </StackLabCard>

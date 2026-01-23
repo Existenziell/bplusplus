@@ -239,7 +239,7 @@ export default function StackLabPage() {
         <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">
           Interactive Bitcoin Script Playground
         </p>
-        <div className="text-center text-zinc-500">Loading...</div>
+        <div className="text-center text-secondary">Loading...</div>
       </>
     )
   }
@@ -268,11 +268,10 @@ export default function StackLabPage() {
               className="w-full flex items-center justify-between text-left"
             >
               <div className="flex items-center gap-2">
-                <InfoIcon className="w-5 h-5 text-zinc-200" />
-                <h3 className="text-sm font-semibold text-zinc-300">How Stack Lab Works</h3>
+                <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">How Stack Lab Works</h3>
               </div>
               <ChevronDown
-                className={`w-4 h-4 text-zinc-400 transition-transform ${
+                className={`w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform ${
                   isFlowExplanationExpanded ? 'rotate-180' : ''
                 }`}
               />
@@ -280,15 +279,15 @@ export default function StackLabPage() {
             {isFlowExplanationExpanded && (
               <div className="mt-3 space-y-4">
                 <div>
-                  <h4 className="text-sm font-semibold text-zinc-300 mb-2">How to Use</h4>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
-                    <strong className="text-zinc-300">1. Build Scripts:</strong><br />Drag OP codes from the palette to the Unlocking Script (runs first) and Locking Script (runs second). 
+                  <h4 className="text-sm font-semibold text-zinc-600 dark:text-zinc-300 mb-2">How to Use</h4>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <strong className="text-zinc-600 dark:text-zinc-300">1. Build Scripts:</strong><br />Drag OP codes from the palette to the Unlocking Script (runs first) and Locking Script (runs second). 
                     You can also push data (numbers, hex strings) using the &quot;+ Push Data&quot; button or load an example template.
                     <br />
-                    <strong className="text-zinc-300">2. Execute:</strong><br />Click &quot;Execute&quot; to run both scripts together, or use &quot;Step&quot; to execute one operation at a time. 
+                    <strong className="text-zinc-600 dark:text-zinc-300">2. Execute:</strong><br />Click &quot;Execute&quot; to run both scripts together, or use &quot;Step&quot; to execute one operation at a time. 
                     Watch the stack update in real-time as operations execute.
                     <br />
-                    <strong className="text-zinc-300">3. Learn:</strong><br />The execution log shows each step with the stack state before and after each operation. 
+                    <strong className="text-zinc-600 dark:text-zinc-300">3. Learn:</strong><br />The execution log shows each step with the stack state before and after each operation. 
                     A script is valid if the final stack contains a non-zero value.
                   </p>
                 </div>
@@ -363,7 +362,7 @@ export default function StackLabPage() {
 
           <DragOverlay dropAnimation={null}>
             {activeId && activeId.startsWith('opcode-') ? (
-              <div className="px-3 py-2 rounded border bg-zinc-800 border-zinc-600 text-zinc-200 pointer-events-none">
+              <div className="px-3 py-2 rounded border bg-zinc-200 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-600 text-zinc-800 dark:text-zinc-200 pointer-events-none">
                 <div className="font-mono text-sm font-semibold">
                   {activeId.replace('opcode-', '')}
                 </div>
@@ -376,11 +375,11 @@ export default function StackLabPage() {
       {/* Mobile Warning Modal */}
       {showMobileWarning && !mobileWarningDismissed && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
-            <p className="text-sm text-zinc-400 mb-6">
+          <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
               Stack Lab is not optimized for small screens. The drag-and-drop interface and layout work best on desktop or tablet devices with larger screens.
             </p>
-            <p className="text-sm text-zinc-400 mb-6">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
               You can still use Stack Lab on mobile, but the experience may be limited. For the best experience, please use a desktop or tablet.
             </p>
             <div className="flex flex-col gap-3">
@@ -392,7 +391,7 @@ export default function StackLabPage() {
               </button>
               <button
                 onClick={() => handleDismissMobileWarning(true)}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 text-zinc-200 rounded hover:border-zinc-600 transition-colors text-sm"
+                className="w-full px-4 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 rounded hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors text-sm"
               >
                 Continue & Don&apos;t Show Again
               </button>
@@ -404,11 +403,11 @@ export default function StackLabPage() {
       {/* Data Input Modal */}
       {showDataModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowDataModal(false)}>
-          <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-6 max-w-md w-full mx-4" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-lg font-semibold text-zinc-200 mb-4">
+          <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg p-6 max-w-md w-full mx-4" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
               Push Data to {dataModalTarget === 'unlocking' ? 'Unlocking' : 'Locking'} Script
             </h3>
-            <p className="text-sm text-zinc-400 mb-4">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
               Enter a number or hex string (e.g., 42, 0x1234, &quot;hello&quot;)
             </p>
             <input
@@ -422,14 +421,14 @@ export default function StackLabPage() {
                   setShowDataModal(false)
                 }
               }}
-              className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded text-zinc-200 mb-4 focus:outline-none focus:border-btc"
+              className="w-full px-3 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded text-zinc-800 dark:text-zinc-200 mb-4 focus:outline-none focus:border-btc"
               placeholder="Enter data..."
               autoFocus
             />
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowDataModal(false)}
-                className="px-4 py-2 bg-zinc-800 border border-zinc-700 text-zinc-200 rounded hover:border-zinc-600 transition-colors"
+                className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 rounded hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
               >
                 Cancel
               </button>

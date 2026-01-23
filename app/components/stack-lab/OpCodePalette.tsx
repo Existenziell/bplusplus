@@ -27,8 +27,8 @@ function DraggableOpCode({ opCode }: { opCode: OpCode }) {
       className={`
         px-2 py-1.5 rounded border cursor-grab active:cursor-grabbing
         ${opCode.enabled
-          ? 'bg-zinc-800 border-zinc-600 hover:border-btc hover:bg-zinc-700 text-zinc-200'
-          : 'bg-zinc-900 border-zinc-800 text-zinc-600 cursor-not-allowed opacity-50'
+          ? 'bg-zinc-200 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-600 hover:border-btc hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200'
+          : 'bg-zinc-100 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800 text-zinc-500 dark:text-zinc-600 cursor-not-allowed opacity-50'
         }
         ${isDragging ? 'opacity-0 pointer-events-none' : ''}
         transition-opacity
@@ -59,7 +59,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
   return (
     <StackLabCard flex>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-zinc-300">OP Codes</h3>
+        <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">OP Codes</h3>
         <InfoTooltip content="Drag OP codes from here to the script builders. OP codes are the instructions that Bitcoin Script uses to manipulate the stack and execute logic." />
       </div>
       
@@ -70,7 +70,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
           placeholder="Search OP codes..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-btc"
+          className="w-full px-3 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded text-sm text-zinc-800 dark:text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-btc"
         />
       </div>
 
@@ -82,7 +82,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
             px-2 py-1 text-xs rounded border
             ${!selectedCategory
               ? 'bg-btc/20 border-btc text-btc'
-              : 'bg-zinc-800 border-zinc-700 text-zinc-400 hover:border-zinc-600'
+              : 'bg-zinc-200 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-600'
             }
           `}
         >
@@ -96,7 +96,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
               px-2 py-1 text-xs rounded border
               ${selectedCategory === category
                 ? 'bg-btc/20 border-btc text-btc'
-                : 'bg-zinc-800 border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                : 'bg-zinc-200 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-600'
               }
             `}
           >
@@ -109,7 +109,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
       {onAddData && (
         <button
           onClick={onAddData}
-          className="mb-3 w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded text-sm text-zinc-200 hover:border-btc hover:bg-zinc-700 transition-colors"
+          className="mb-3 w-full px-3 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded text-sm text-zinc-800 dark:text-zinc-200 hover:border-btc hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
         >
           + Push Data
         </button>
@@ -119,7 +119,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
       <div className="flex-1 overflow-y-auto">
         {selectedCategory ? (
           <div>
-            <h4 className="text-xs font-semibold text-zinc-400 mb-2 uppercase">
+            <h4 className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-2 uppercase">
               {selectedCategory}
             </h4>
             <div className="grid grid-cols-2 gap-2">
@@ -136,7 +136,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
               
               return (
                 <div key={category}>
-                  <h4 className="text-xs font-semibold text-zinc-400 mb-2 uppercase">
+                  <h4 className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-2 uppercase">
                     {category}
                   </h4>
                   <div className="grid grid-cols-2 gap-2">

@@ -61,7 +61,7 @@ function ScriptItem({
   }
   if (isEditing) {
     return (
-      <div className="flex items-center gap-2 px-3 py-2 bg-zinc-800 border border-btc rounded">
+      <div className="flex items-center gap-2 px-3 py-2 bg-zinc-200 dark:bg-zinc-800 border border-btc rounded">
         <input
           type="text"
           value={editValue}
@@ -84,7 +84,7 @@ function ScriptItem({
               handleCancel()
             }
           }}
-          className="flex-1 bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-sm font-mono text-zinc-200 focus:outline-none focus:border-btc"
+          className="flex-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded px-2 py-1 text-sm font-mono text-zinc-800 dark:text-zinc-200 focus:outline-none focus:border-btc"
           autoFocus
         />
         <button
@@ -106,7 +106,7 @@ function ScriptItem({
             handleCancel()
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="px-2 py-1 bg-zinc-700 text-zinc-200 text-xs rounded hover:bg-zinc-600 transition-colors"
+          className="px-2 py-1 bg-zinc-300 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs rounded hover:bg-zinc-400 dark:hover:bg-zinc-600 transition-colors"
         >
           Cancel
         </button>
@@ -115,9 +115,9 @@ function ScriptItem({
   }
 
   return (
-    <div className="flex items-center gap-2 px-3 py-2 bg-zinc-800 border border-zinc-700 rounded hover:border-zinc-600 transition-colors group">
+    <div className="flex items-center gap-2 px-3 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors group">
       <div 
-        className="flex-1 font-mono text-sm text-zinc-200 cursor-text"
+        className="flex-1 font-mono text-sm text-zinc-800 dark:text-zinc-200 cursor-text"
         onClick={handleEdit}
         title="Click to edit"
       >
@@ -129,10 +129,10 @@ function ScriptItem({
           e.preventDefault()
           onRemove(index)
         }}
-        className="p-1 hover:bg-zinc-700 rounded transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100"
+        className="p-1 hover:bg-zinc-300 dark:hover:bg-zinc-700 rounded transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100"
         title="Remove"
       >
-        <XIcon className="w-4 h-4 text-zinc-400" />
+        <XIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
       </button>
     </div>
   )
@@ -159,7 +159,7 @@ export default function ScriptBuilder({
   return (
     <StackLabCard flex>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-zinc-300">{title}</h3>
+        <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{title}</h3>
         <InfoTooltip content={getInfoText()} />
       </div>
       
@@ -169,7 +169,7 @@ export default function ScriptBuilder({
           overflow-y-auto h-[250px] p-3 rounded border-2 border-dashed
           ${isOver
             ? 'border-btc bg-btc/10'
-            : 'border-zinc-700 bg-zinc-800/30'
+            : 'border-zinc-300 dark:border-zinc-700 bg-zinc-100/50 dark:bg-zinc-800/30'
           }
           transition-colors
         `}
@@ -196,7 +196,7 @@ export default function ScriptBuilder({
         )}
       </div>
       
-      <div className="mt-3 pt-3 border-t border-zinc-700 text-xs text-zinc-500">
+      <div className="mt-3 pt-3 border-t border-zinc-300 dark:border-zinc-700 text-xs text-zinc-500">
         {itemCount(script.length)}
       </div>
     </StackLabCard>

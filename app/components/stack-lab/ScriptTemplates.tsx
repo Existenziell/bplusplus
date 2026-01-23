@@ -1,7 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import InfoTooltip from '@/app/components/stack-lab/InfoTooltip'
 import StackLabCard from '@/app/components/stack-lab/StackLabCard'
+import { ChevronDown } from '@/app/components/Icons'
 
 interface ScriptTemplate {
   name: string
@@ -90,28 +92,42 @@ interface ScriptTemplatesProps {
 }
 
 export default function ScriptTemplates({ onLoadTemplate }: ScriptTemplatesProps) {
+  const [isExpanded, setIsExpanded] = useState(true)
+
   return (
     <StackLabCard>
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-zinc-300">Script Templates</h3>
-        <InfoTooltip content="Click on a template to load a pre-built script example. Templates demonstrate common Bitcoin Script patterns and can be modified after loading." />
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-        {TEMPLATES.map((template, index) => (
-          <button
-            key={index}
-            onClick={() => onLoadTemplate(template)}
-            className="text-left p-2 bg-zinc-800 border border-zinc-700 rounded hover:border-btc hover:bg-zinc-700 transition-colors"
-          >
-            <div className="font-semibold text-zinc-200 text-xs mb-0.5">
-              {template.name}
-            </div>
-            <div className="text-xs text-zinc-400 line-clamp-2">
-              {template.description}
-            </div>
-          </button>
-        ))}
-      </div>
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full flex items-center justify-between text-left"
+      >
+        <div className="flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Script Templates</h3>
+          <InfoTooltip content="Click on a template to load a pre-built script example. Templates demonstrate common Bitcoin Script patterns and can be modified after loading." />
+        </div>
+        <ChevronDown
+          className={`w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform ${
+            isExpanded ? 'rotate-180' : ''
+          }`}
+        />
+      </button>
+      {isExpanded && (
+        <div className="mt-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          {TEMPLATES.map((template, index) => (
+            <button
+              key={index}
+              onClick={() => onLoadTemplate(template)}
+              className="text-left p-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded hover:border-btc hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
+            >
+              <div className="font-semibold text-zinc-800 dark:text-zinc-200 text-xs mb-0.5">
+                {template.name}
+              </div>
+              <div className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                {template.description}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
     </StackLabCard>
   )
 }

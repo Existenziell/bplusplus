@@ -19,7 +19,7 @@ export default function ExecutionLog({ steps, currentStep, executionResult }: Ex
     return (
       <StackLabCard>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-semibold text-zinc-300">Execution Log</h3>
+          <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Execution Log</h3>
           <InfoTooltip content="The execution log shows each step of script execution, including the stack state before and after each operation. Use the Step button to execute one operation at a time." />
         </div>
         <div className="text-zinc-500 text-sm text-center py-8">
@@ -34,30 +34,30 @@ export default function ExecutionLog({ steps, currentStep, executionResult }: Ex
   return (
     <StackLabCard>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-zinc-300">Execution Log</h3>
+        <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Execution Log</h3>
         <InfoTooltip content="The execution log shows each step of script execution, including the stack state before and after each operation. Use the Step button to execute one operation at a time." />
       </div>
       {/* Execution Summary */}
       {executionResult && (
         <div className={`mb-3 p-3 rounded border ${
           executionResult.success
-            ? 'bg-emerald-900/20 border-emerald-700/50'
-            : 'bg-red-900/20 border-red-700/50'
+            ? 'bg-emerald-100/80 dark:bg-emerald-900/20 border-emerald-400 dark:border-emerald-700/50'
+            : 'bg-red-100/80 dark:bg-red-900/20 border-red-400 dark:border-red-700/50'
         }`}>
           <div className="flex items-center gap-2">
             <div className={`text-sm font-semibold ${
-              executionResult.success ? 'text-emerald-400' : 'text-red-400'
+              executionResult.success ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'
             }`}>
               {executionResult.success ? '✓ Script Valid' : '✗ Script Invalid'}
             </div>
           </div>
           {executionResult.error && (
-            <div className="text-xs text-red-400 mt-1">
+            <div className="text-xs text-red-600 dark:text-red-400 mt-1">
               {executionResult.error}
             </div>
           )}
           {executionResult.success && steps.length > 0 && (
-            <div className="text-xs text-zinc-400 mt-1">
+            <div className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">
               Final stack contains a truthy value
             </div>
           )}
@@ -66,11 +66,11 @@ export default function ExecutionLog({ steps, currentStep, executionResult }: Ex
 
       {/* Error Summary */}
       {hasErrors && !executionResult && (
-        <div className="mb-3 p-3 rounded border bg-yellow-900/20 border-yellow-700/50">
-          <div className="text-sm font-semibold text-yellow-400">
+        <div className="mb-3 p-3 rounded border bg-yellow-100/80 dark:bg-yellow-900/20 border-yellow-400 dark:border-yellow-700/50">
+          <div className="text-sm font-semibold text-yellow-700 dark:text-yellow-400">
             ⚠ Execution Errors Detected
           </div>
-          <div className="text-xs text-yellow-300 mt-1">
+          <div className="text-xs text-yellow-600 dark:text-yellow-300 mt-1">
             Check individual steps for error details
           </div>
         </div>
@@ -88,22 +88,22 @@ export default function ExecutionLog({ steps, currentStep, executionResult }: Ex
                 ${isCurrent
                   ? 'bg-btc/20 border-btc/50'
                   : step.success
-                    ? 'bg-zinc-800/50 border-zinc-700'
-                    : 'bg-red-900/20 border-red-700/50'
+                    ? 'bg-zinc-200/60 dark:bg-zinc-800/50 border-zinc-300 dark:border-zinc-700'
+                    : 'bg-red-100/80 dark:bg-red-900/20 border-red-400 dark:border-red-700/50'
                 }
               `}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="flex-1">
-                  <div className="font-mono font-semibold text-zinc-200 mb-1">
+                  <div className="font-mono font-semibold text-zinc-800 dark:text-zinc-200 mb-1">
                     {step.opCode}
                   </div>
                   {step.error && (
-                    <div className="text-red-400 text-xs mb-1">
+                    <div className="text-red-600 dark:text-red-400 text-xs mb-1">
                       Error: {step.error}
                     </div>
                   )}
-                  <div className="text-xs text-zinc-400 space-y-1">
+                  <div className="text-xs text-zinc-600 dark:text-zinc-400 space-y-1">
                     <div>Before: {formatStackForLog(step.stackBefore)}</div>
                     <div>After: {formatStackForLog(step.stackAfter)}</div>
                   </div>

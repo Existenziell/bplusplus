@@ -90,6 +90,8 @@ Bitcoin often uses **double SHA-256**: `SHA256(SHA256(data))`
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
 use sha2::{Sha256, Digest};
 
 fn sha256(data: &[u8]) -> [u8; 32] {
@@ -216,6 +218,8 @@ console.log(`Double SHA-256: ${doubleSha256(message).toString('hex')}`);
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
 use ripemd::Ripemd160;
 use sha2::{Sha256, Digest};
 
@@ -360,6 +364,8 @@ Random Number → Private Key → Public Key → Bitcoin Address
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
 use secp256k1::{Secp256k1, SecretKey, PublicKey};
 use secp256k1::rand::rngs::OsRng;
 
@@ -537,6 +543,8 @@ Bitcoin originally used **ECDSA** for all signatures.
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
 use secp256k1::{Secp256k1, SecretKey, Message};
 use sha2::{Sha256, Digest};
 
@@ -710,6 +718,8 @@ Multiple signatures can be combined into one, enabling:
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
 use sha2::{Sha256, Digest};
 
 fn tagged_hash(tag: &str, msg: &[u8]) -> [u8; 32] {

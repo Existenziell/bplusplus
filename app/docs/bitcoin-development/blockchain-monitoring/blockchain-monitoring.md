@@ -49,6 +49,8 @@ bitcoind -h | grep zmq
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
 use zmq;
 
 fn monitor_blocks() -> Result<(), Box<dyn std::error::Error>> {
@@ -415,6 +417,9 @@ function extractOpReturn(tx) {
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
+
 fn monitor_mempool() -> Result<(), Box<dyn std::error::Error>> {
     let context = zmq::Context::new();
     let socket = context.socket(zmq::SUB)?;

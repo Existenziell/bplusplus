@@ -72,8 +72,8 @@ def generate_p2pkh_address():
     verifying_key = signing_key.get_verifying_key()
     
     # Compressed public key (33 bytes)
-    x = verifying_key.pubkey.point.x()
-    y = verifying_key.pubkey.point.y()
+    x = verifying_key.point.x()
+    y = verifying_key.point.y()
     prefix = b'\x02' if y % 2 == 0 else b'\x03'
     public_key = prefix + x.to_bytes(32, 'big')
     
@@ -468,8 +468,8 @@ signing_key = SigningKey.from_string(private_key, curve=SECP256k1)
 vk = signing_key.get_verifying_key()
 
 # Compressed public key
-x = vk.pubkey.point.x()
-y = vk.pubkey.point.y()
+x = vk.point.x()
+y = vk.point.y()
 prefix = b'\x02' if y % 2 == 0 else b'\x03'
 public_key = prefix + x.to_bytes(32, 'big')
 

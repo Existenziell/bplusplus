@@ -189,8 +189,8 @@ for _ in range(3):
     vk = sk.get_verifying_key()
     
     # Compressed public key (33 bytes)
-    x = vk.pubkey.point.x()
-    y = vk.pubkey.point.y()
+    x = vk.point.x()
+    y = vk.point.y()
     prefix = b'\x02' if y % 2 == 0 else b'\x03'
     pubkey = prefix + x.to_bytes(32, 'big')
     

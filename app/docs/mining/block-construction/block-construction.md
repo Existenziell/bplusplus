@@ -170,6 +170,8 @@ All transactions in a block are hashed into a **[Merkle tree](/docs/glossary#mer
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
 use sha2::{Sha256, Digest};
 
 /// Performs double SHA-256 (SHA256D) hash.

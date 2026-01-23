@@ -38,6 +38,8 @@ BIP39 defines how to generate human-readable seed phrases from random entropy.
 
 :::code-group
 ```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
 use bip39::{Mnemonic, Language};
 
 fn generate_mnemonic() -> Mnemonic {
@@ -57,7 +59,7 @@ fn main() {
     
     // Optional passphrase (BIP39 calls this "extension word")
     let seed = mnemonic_to_seed(&mnemonic, "");
-    println!("Seed: {}", hex::encode(&seed));
+    println!("Seed: {}", hex::encode(seed));
 }
 ```
 

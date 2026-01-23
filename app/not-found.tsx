@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import { ArrowRight, HomeIcon } from '@/app/components/Icons'
 
@@ -11,8 +10,6 @@ export const metadata = {
 export default function NotFound() {
   return (
     <main className="min-h-screen page-bg flex flex-col">
-      <Header />
-
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="text-center max-w-md">
           {/* 404 Number with Bitcoin styling */}

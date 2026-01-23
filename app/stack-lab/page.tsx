@@ -299,17 +299,6 @@ export default function StackLabPage() {
           {/* Templates */}
           <ScriptTemplates onLoadTemplate={handleLoadTemplate} />
 
-          {/* Execution Log */}
-          {executionSteps.length > 0 && (
-            <ExecutionLog 
-              steps={executionResult !== undefined
-                ? executionSteps
-                : executionSteps.slice(0, currentStepIndex + 1)}
-              currentStep={currentStepIndex}
-              executionResult={executionResult}
-            />
-          )}
-
           {/* Main workspace */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
             {/* Left: OP Code Palette */}
@@ -357,6 +346,17 @@ export default function StackLabPage() {
                     isExecuting={isExecuting}
                   />
                 </div>
+
+                {/* Execution Log */}
+                {executionSteps.length > 0 && (
+                  <ExecutionLog 
+                    steps={executionResult !== undefined
+                      ? executionSteps
+                      : executionSteps.slice(0, currentStepIndex + 1)}
+                    currentStep={currentStepIndex}
+                    executionResult={executionResult}
+                  />
+                )}
               </div>
             </div>
           </div>

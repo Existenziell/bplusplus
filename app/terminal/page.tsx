@@ -2,8 +2,6 @@
 
 import { useState, useRef, useEffect, KeyboardEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import Header from '@/app/components/Header'
-import Footer from '@/app/components/Footer'
 import LiveStats from '../components/LiveStats'
 import { HomeIcon, CopyIcon } from '../components/Icons'
 import Link from 'next/link'
@@ -688,15 +686,12 @@ export default function TerminalPage() {
   }
 
   return (
-    <main className="min-h-screen page-bg flex flex-col">
-      <Header />
-      {/* Content Container */}
-      <div className="container-content py-4 md:py-8 flex-grow">
-        <h1 className="heading-page text-center">
-          Bitcoin CLI Terminal
-        </h1>
-        {/* Terminal Window */}
-        <div className="rounded-lg overflow-hidden border border-zinc-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
+    <>
+      <h1 className="heading-page text-center">
+        Bitcoin CLI Terminal
+      </h1>
+      {/* Terminal Window */}
+      <div className="rounded-lg overflow-hidden border border-zinc-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
           {/* Terminal Header */}
           <div className="bg-zinc-800 border-b border-zinc-700 px-3 md:px-4 py-2 flex items-center gap-2 flex-shrink-0">
             <div className="flex gap-1.5">
@@ -789,20 +784,18 @@ export default function TerminalPage() {
               Run
             </button>
           </form>
-        </div>
+      </div>
 
-        {/* Back Link */}
-        <div className="mt-12 text-center flex flex-row items-center justify-center gap-2">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
-            >
-              <HomeIcon />
-              <span>Back Home</span>
+      {/* Back Link */}
+      <div className="mt-12 text-center flex flex-row items-center justify-center gap-2">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+              >
+                <HomeIcon />
+                <span>Back Home</span>
             </Link>
           </div>
-      </div>
-      <Footer />
-    </main>
+    </>
   )
 }

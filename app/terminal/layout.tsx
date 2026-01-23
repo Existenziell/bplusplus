@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 import { generatePageMetadata } from '@/app/utils/metadata'
+import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'Bitcoin CLI Terminal',
@@ -10,7 +12,11 @@ export const metadata: Metadata = generatePageMetadata({
 export default function TerminalLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
-  return children
+  return (
+    <DocsLayoutWrapper>
+      {children}
+    </DocsLayoutWrapper>
+  )
 }

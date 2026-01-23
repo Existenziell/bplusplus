@@ -64,20 +64,8 @@ export default function DocsNavigation() {
   return (
     <nav className="w-full md:w-64 flex-shrink-0 md:pr-8 sticky top-0">
       <div>
-        <div className="mb-8">
+        <div className="mb-6">
           <ul className="space-y-1">
-            <li>
-              <Link
-                href="/author"
-                className={`block py-1 leading-tight transition-colors ${
-                  pathname === '/author'
-                    ? 'text-btc font-semibold'
-                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
-                }`}
-              >
-                About B++
-              </Link>
-            </li>
             <li>
               <Link
                 href="/whitepaper"
@@ -104,8 +92,8 @@ export default function DocsNavigation() {
             </li>
           </ul>
         </div>
-        <h2 className="text-base text-zinc-900 dark:text-zinc-100 mb-3">
-          Docs
+        <h2 className="text-base text-zinc-700 dark:text-zinc-300 mb-1">
+          Docs:
         </h2>
         <ul className="space-y-1">
           {navItems.map((item) => {
@@ -170,6 +158,35 @@ export default function DocsNavigation() {
           })}
         </ul>
       </div>
+
+      <div className="mt-6">
+          <ul className="space-y-1">
+            <li>
+              <Link
+                href="/docs/glossary"
+                className={`block py-1 leading-tight transition-colors ${
+                  pathname === '/docs/glossary'
+                    ? 'text-btc font-semibold'
+                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
+                }`}
+              >
+                Glossary
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/author"
+                className={`block py-1 leading-tight transition-colors ${
+                  pathname === '/author'
+                    ? 'text-btc font-semibold'
+                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
+                }`}
+              >
+                About B++
+              </Link>
+            </li>
+          </ul>
+        </div>
     </nav>
   )
 }

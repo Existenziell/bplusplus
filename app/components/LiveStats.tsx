@@ -201,10 +201,10 @@ export default function LiveStats() {
 
   return (
     <div className="container-content py-8 md:py-12">
-      <h3 className="heading-section text-center mb-4">
+      <h3 className="heading-section text-center mb-4 text-zinc-500 dark:text-zinc-300">
         Live Network Stats
       </h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-8 gap-4 mb-4">
         {stats.map((stat) => (
           <StatCard key={stat.label} stat={stat} />
         ))}

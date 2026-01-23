@@ -1,9 +1,5 @@
 import type { ReactNode } from 'react'
-import DocsNavigation from '@/app/components/DocsNavigation'
-import MobileNav from '@/app/components/MobileNav'
-import PageNavigation from '@/app/components/PageNavigation'
-import Header from '@/app/components/Header'
-import Footer from '@/app/components/Footer'
+import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
 
 export default function DocsLayout({
   children,
@@ -11,23 +7,8 @@ export default function DocsLayout({
   children: ReactNode
 }) {
   return (
-    <main className="min-h-screen page-bg flex flex-col">
-      <Header showBreadcrumbs />
-
-      {/* Content Area */}
-      <div className="container-content py-4 md:py-8 flex-grow">
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-          <div className="hidden md:block md:w-64 md:flex-shrink-0 md:self-start md:overflow-y-auto">
-            <DocsNavigation />
-          </div>
-          <div className="flex-1 min-w-0">
-            <MobileNav />
-            {children}
-            <PageNavigation />
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </main>
+    <DocsLayoutWrapper showBreadcrumbs showPageNavigation>
+      {children}
+    </DocsLayoutWrapper>
   )
 }

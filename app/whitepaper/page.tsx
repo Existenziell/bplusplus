@@ -1,23 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Header from '@/app/components/Header'
-import Footer from '@/app/components/Footer'
 import { DownloadPDFIcon, HomeIcon } from '@/app/components/Icons'
-import { generatePageMetadata } from '@/app/utils/metadata'
-
-export const metadata = generatePageMetadata({
-  title: 'Bitcoin Whitepaper',
-  description: 'Bitcoin: A Peer-to-Peer Electronic Cash System by Satoshi Nakamoto',
-  path: '/whitepaper',
-})
 
 export default function WhitepaperPage() {
   return (
-    <main className="min-h-screen page-bg flex flex-col">
-      <Header />
-
-      <div className="container-content py-8 md:py-12 flex-grow">
-        <div className="max-w-3xl mx-auto">
+    <div className="max-w-3xl mx-auto">
           {/* Title */}
           <div className="text-center mb-6">
             <h1 className="heading-page text-center mb-2">
@@ -74,10 +61,6 @@ export default function WhitepaperPage() {
               <span>Back Home</span>
             </Link>
           </div>
-        </div>
-      </div>
-
-      <Footer />
-    </main>
+    </div>
   )
 }

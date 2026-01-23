@@ -234,10 +234,6 @@ export const navItems: NavSection[] = [
     href: '/docs/controversies',
     children: docPages.filter(p => p.section === 'controversies' && p.path !== '/docs/controversies').map(p => ({ title: p.title, href: p.path })),
   },
-  {
-    title: 'Glossary',
-    href: '/docs/glossary',
-  },
 ]
 
 // Set of downloadable paths (derived from docPages)

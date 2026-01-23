@@ -1,8 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import Header from '@/app/components/Header'
-import Footer from '@/app/components/Footer'
 import { CopyIcon, HomeIcon } from '@/app/components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
 import Link from 'next/link'
@@ -24,11 +22,7 @@ export default function AuthorPage() {
   }
 
   return (
-    <main className="min-h-screen page-bg flex flex-col">
-        <Header />
-
-        <div className="container-content py-8 md:py-12 flex-grow">
-          <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto">
             {/* Hero Section */}
             <div className="text-center mb-12">
               <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden border-2 border-zinc-300 dark:border-zinc-700">
@@ -164,10 +158,6 @@ export default function AuthorPage() {
                 <span>Back Home</span>
               </Link>
             </div>
-          </div>
-        </div>
-
-        <Footer />
-      </main>
+    </div>
   )
 }

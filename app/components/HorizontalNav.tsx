@@ -108,12 +108,6 @@ export default function HorizontalNav() {
             <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-700">
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
-                  href="/author"
-                  className="btn-secondary-sm"
-                >
-                  About B++
-                </Link>
-                <Link
                   href="/whitepaper"
                   className="btn-secondary-sm"
                 >
@@ -124,6 +118,12 @@ export default function HorizontalNav() {
                   className="btn-secondary-sm"
                 >
                   Bitcoin CLI
+                </Link>
+                <Link
+                  href="/author"
+                  className="btn-secondary-sm"
+                >
+                  About B++
                 </Link>
               </div>
             </div>

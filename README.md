@@ -2,7 +2,7 @@
 
 Bitcoin Education without borders! Open knowledge. Open source.
 
-An open-source developer's guide to Bitcoin, covering everything from fundamental concepts to advanced protocol implementations. Built with Next.js 16 and designed to be always free.
+An open-source developer's guide to Bitcoin, covering everything from fundamental concepts to advanced protocol implementations. Built with Love and designed to be always free and open source.
 
 ## Features
 

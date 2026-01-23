@@ -552,7 +552,7 @@ btc getmempoolinfo
 ```
 
 **Key fields:**
-- `size`: Number of transactions in [mempool](/docs/glossary#mempool-memory-pool)
+- `size`: Number of transactions in [mempool](/docs/glossary#mempool)
 - `bytes`: Total mempool size in bytes
 - `total_fee`: Total fees in mempool
 

@@ -281,7 +281,7 @@
   },
   "digital-cash": {
     "term": "Digital Cash",
-    "definition": "Currency in a digital format, designed to mimic the characteristics of physical cash, such as privacy and peer-to-peer transactions. Bitcoin is often considered digital cash because it enables direct, trustless transfers between users without intermediaries."
+    "definition": "Currency in a digital format, designed to mimic the characteristics of physical cash, such as privacy and peer-to-peer transactions. Also called electronic cash. Bitcoin is often regarded as true digital (or electronic) cash because it enables direct, trustless transfers between users without..."
   },
   "digital-money": {
     "term": "Digital Money",
@@ -318,10 +318,6 @@
   "ecash": {
     "term": "eCash",
     "definition": "An early form of digital currency developed in the 1980s by cryptographer David Chaum. It allowed for anonymous electronic transactions but required a central issuer. While eCash itself did not achieve widespread adoption, its principles influenced the development of later decentralized digital..."
-  },
-  "electronic-cash": {
-    "term": "Electronic Cash",
-    "definition": "A general term for money in digital form that can be transferred electronically, aiming to replicate the experience of using physical cash in the digital realm. Bitcoin is often regarded as true electronic cash due to its decentralized and peer-to-peer nature."
   },
   "electronic-money": {
     "term": "Electronic Money",
@@ -389,15 +385,11 @@
   },
   "hash": {
     "term": "Hash",
-    "definition": "A cryptographic function that takes any input and produces a fixed-size output (digest) that appears random but is deterministic: the same input always produces the same output. Bitcoin uses SHA-256 for proof-of-work and transaction IDs, and RIPEMD-160 combined with SHA-256 for address generation...."
+    "definition": "A cryptographic function that takes any input and produces a fixed-size output (digest) that appears random but is deterministic: the same input always produces the same output. Hashing is the process of applying a hash function to data...."
   },
   "hash-rate": {
     "term": "Hash Rate",
     "definition": "The total computational power dedicated to Bitcoin mining, measured in hashes per second, representing the network's security level. The network currently operates at approximately 500-700 EH/s (exahashes per second, or 10^18 hashes per second)...."
-  },
-  "hashing": {
-    "term": "Hashing",
-    "definition": "The process of transforming data into a fixed-length output using a cryptographic algorithm. In Bitcoin, hashing ensures that data hasn't been altered, and it secures block creation in mining."
   },
   "hard-fork": {
     "term": "Hard Fork",
@@ -493,10 +485,6 @@
   },
   "mempool": {
     "term": "Mempool",
-    "definition": "The waiting room for unconfirmed Bitcoin transactions. See Mempool (Memory Pool) for the full definition."
-  },
-  "mempool-memory-pool": {
-    "term": "Mempool (Memory Pool)",
     "definition": "The collection of valid, unconfirmed transactions that a node has received and is holding in memory, waiting to be included in a block. Each node maintains its own mempool, and they may differ slightly based on when transactions were received and node-specific policies...."
   },
   "medium-of-exchange": {
@@ -617,7 +605,7 @@
   },
   "orphan-block": {
     "term": "Orphan Block",
-    "definition": "A valid block that was mined but is not part of the main chain because another block at the same height was adopted by the network instead. Orphans occur naturally when two miners find blocks nearly simultaneously; the network temporarily has two competing chain tips until one gets extended and..."
+    "definition": "A valid block that was mined but is not part of the main chain because another block at the same height was adopted by the network instead. Also called a stale block. Orphans occur naturally when two miners find blocks nearly simultaneously; the network temporarily has two competing chain tips..."
   },
   "output": {
     "term": "Output",
@@ -673,7 +661,7 @@
   },
   "preimage": {
     "term": "Preimage",
-    "definition": "The original input data that produces a specific hash output through a cryptographic hash function. In general cryptography, finding a preimage from a hash should be computationally infeasible (preimage resistance)...."
+    "definition": "The original input data that produces a specific hash output through a cryptographic hash function. In general cryptography, finding a preimage from a hash should be computationally infeasible (preimage resistance). For the Lightning Network usage, see Payment Preimage."
   },
   "propagation": {
     "term": "Propagation",
@@ -834,10 +822,6 @@
   "spv-simplified-payment-verification": {
     "term": "SPV (Simplified Payment Verification)",
     "definition": "A method described in the Bitcoin whitepaper for lightweight clients to verify transactions without downloading the full blockchain, relying on merkle proofs and block headers. SPV clients download only block headers (~80 bytes each vs...."
-  },
-  "stale-blocks": {
-    "term": "Stale Blocks",
-    "definition": "Valid blocks that were mined but not accepted into the blockchain because another block at the same height was added to the chain first. These blocks become disconnected from the timechain."
   },
   "store-of-value": {
     "term": "Store Of Value",

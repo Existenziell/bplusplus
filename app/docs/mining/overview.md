@@ -32,7 +32,7 @@ Mining serves two critical functions:
 
 ### Block Creation Process
 
-1. **Transaction Collection**: Miners collect pending transactions from the [mempool](/docs/glossary#mempool-memory-pool)
+1. **Transaction Collection**: Miners collect pending transactions from the [mempool](/docs/glossary#mempool)
 2. **Block Construction**: Miners assemble transactions into a candidate block
 3. **Proof-of-Work**: Miners repeatedly hash the [block header](/docs/glossary#block-header) with different [nonce](/docs/glossary#nonce) values
 4. **Difficulty Target**: The hash must be below a certain target (determined by network [difficulty](/docs/glossary#difficulty))

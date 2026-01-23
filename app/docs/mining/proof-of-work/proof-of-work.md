@@ -4,7 +4,7 @@ Bitcoin uses a **proof-of-work** [consensus](/docs/glossary#consensus) mechanism
 
 ## How It Works
 
-1. **Block Construction**: Miners collect transactions from the [mempool](/docs/glossary#mempool-memory-pool) and create a candidate block
+1. **Block Construction**: Miners collect transactions from the [mempool](/docs/glossary#mempool) and create a candidate block
 2. **Nonce Search**: Miners repeatedly hash the [block header](/docs/glossary#block-header) with different [nonce](/docs/glossary#nonce) values
 3. **Difficulty Target**: The hash must be below a certain target (set by network [difficulty](/docs/glossary#difficulty))
 4. **Success**: When a miner finds a valid hash, they broadcast the block to the network

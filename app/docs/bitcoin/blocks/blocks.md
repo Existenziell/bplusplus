@@ -9,7 +9,7 @@ This document explains how blocks propagate through the Bitcoin network, includi
 When a miner finds a new block:
 
 1. **Miner solves [proof-of-work](/docs/glossary#proof-of-work-pow) puzzle**: Finds a valid nonce
-2. **Creates valid block**: Includes transactions from [mempool](/docs/glossary#mempool-memory-pool)
+2. **Creates valid block**: Includes transactions from [mempool](/docs/glossary#mempool)
 3. **Immediately broadcasts**: Sends to all connected [peers](/docs/glossary#peer) (8-10 first-hop nodes)
 4. **First-hop nodes validate**: Each node checks the block
 5. **First-hop nodes forward**: Send to their peers (50-100 second-hop nodes)

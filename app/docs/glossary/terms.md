@@ -227,7 +227,7 @@ The maximum hash value that is considered valid for a block, expressed as a 256-
 An attempt to spend the same Bitcoin twice by creating two conflicting transactions that both reference the same UTXO. Bitcoin's blockchain consensus mechanism prevents this by establishing a single authoritative transaction history. Once one transaction is confirmed in a block, conflicting transactions become invalid. Before confirmation, double spends are possible (which is why merchants wait for confirmations), but after even one confirmation, reversing the transaction requires mining a longer alternative chain.
 
 ### Digital Cash
-Currency in a digital format, designed to mimic the characteristics of physical cash, such as privacy and peer-to-peer transactions. Bitcoin is often considered digital cash because it enables direct, trustless transfers between users without intermediaries.
+Currency in a digital format, designed to mimic the characteristics of physical cash, such as privacy and peer-to-peer transactions. Also called electronic cash. Bitcoin is often regarded as true digital (or electronic) cash because it enables direct, trustless transfers between users without intermediaries and operates without a central authority.
 
 ### Digital Money
 Any form of money stored and transacted electronically. This can include both centralized forms like bank deposits and decentralized currencies like Bitcoin, which operates without a central authority.
@@ -259,9 +259,6 @@ A key exchange protocol that allows two parties to establish a shared secret ove
 
 ### eCash
 An early form of digital currency developed in the 1980s by cryptographer David Chaum. It allowed for anonymous electronic transactions but required a central issuer. While eCash itself did not achieve widespread adoption, its principles influenced the development of later decentralized digital currencies like Bitcoin.
-
-### Electronic Cash
-A general term for money in digital form that can be transferred electronically, aiming to replicate the experience of using physical cash in the digital realm. Bitcoin is often regarded as true electronic cash due to its decentralized and peer-to-peer nature.
 
 ### Electronic Money
 Digital representations of fiat currency that can be transferred electronically. Unlike Bitcoin, e-money typically requires a centralized entity, like a bank or payment processor, to manage transactions and balances.
@@ -324,13 +321,10 @@ Specialized hardware originally used for video rendering. Early Bitcoin miners u
 An event that occurs every 210,000 blocks (approximately every four years) where the block reward paid to miners is cut in half, reducing Bitcoin's inflation rate. This mechanism is central to Bitcoin's monetary policy, creating a predictable and diminishing supply schedule that asymptotically approaches the 21 million cap. The most recent halving in April 2024 reduced the block reward from 6.25 to 3.125 BTC.
 
 ### Hash
-A cryptographic function that takes any input and produces a fixed-size output (digest) that appears random but is deterministic: the same input always produces the same output. Bitcoin uses SHA-256 for proof-of-work and transaction IDs, and RIPEMD-160 combined with SHA-256 for address generation. Hash functions are one-way, collision-resistant, and avalanche-sensitive (small input changes completely change the output).
+A cryptographic function that takes any input and produces a fixed-size output (digest) that appears random but is deterministic: the same input always produces the same output. Hashing is the process of applying a hash function to data. Bitcoin uses SHA-256 for proof-of-work and transaction IDs, and RIPEMD-160 combined with SHA-256 for address generation. Hash functions are one-way, collision-resistant, and avalanche-sensitive (small input changes completely change the output).
 
 ### Hash Rate
 The total computational power dedicated to Bitcoin mining, measured in hashes per second, representing the network's security level. The network currently operates at approximately 500-700 EH/s (exahashes per second, or 10^18 hashes per second). Higher hash rate means the network is more secure against 51% attacks, as an attacker would need proportionally more resources.
-
-### Hashing
-The process of transforming data into a fixed-length output using a cryptographic algorithm. In Bitcoin, hashing ensures that data hasn't been altered, and it secures block creation in mining.
 
 ### Hard Fork
 A protocol change that loosens consensus rules, making previously invalid blocks or transactions valid, which is not backward-compatible. Nodes that don't upgrade will reject new blocks as invalid, potentially creating a permanent chain split where two incompatible networks exist. Hard forks are controversial in Bitcoin because they risk splitting the network and are generally avoided in favor of soft forks, which maintain backward compatibility.
@@ -418,9 +412,6 @@ A transaction-level field (nLockTime) that prevents the transaction from being v
 The production Bitcoin network where real Bitcoin with actual monetary value is transacted, as opposed to test networks used for development. Mainnet addresses start with "1" (legacy), "3" (P2SH), or "bc1" (SegWit/Taproot), distinguishing them from testnet addresses. All consensus rules are fully enforced on mainnet, and transactions are irreversible.
 
 ### Mempool
-The waiting room for unconfirmed Bitcoin transactions. See [Mempool (Memory Pool)](#mempool-memory-pool) for the full definition.
-
-### Mempool (Memory Pool)
 The collection of valid, unconfirmed transactions that a node has received and is holding in memory, waiting to be included in a block. Each node maintains its own mempool, and they may differ slightly based on when transactions were received and node-specific policies. Miners select transactions from their mempool when constructing blocks, typically prioritizing by fee rate. Mempool size fluctuates with network demand.
 
 ### Medium Of Exchange
@@ -519,7 +510,7 @@ In Bitcoin, the practice of safeguarding personal data and actions to prevent re
 A method for assigning unique identifiers to individual satoshis, the smallest units of bitcoin, using the Ordinals protocol. This allows users to inscribe or attach arbitrary data, such as text, images, or other digital assets, directly onto a specific satoshi.
 
 ### Orphan Block
-A valid block that was mined but is not part of the main chain because another block at the same height was adopted by the network instead. Orphans occur naturally when two miners find blocks nearly simultaneously; the network temporarily has two competing chain tips until one gets extended and becomes the longest chain. The "losing" block becomes orphaned, and its transactions return to the mempool to be included in future blocks.
+A valid block that was mined but is not part of the main chain because another block at the same height was adopted by the network instead. Also called a stale block. Orphans occur naturally when two miners find blocks nearly simultaneously; the network temporarily has two competing chain tips until one gets extended and becomes the longest chain. The "losing" block becomes orphaned (disconnected from the timechain), and its transactions return to the mempool to be included in future blocks.
 
 ### Output
 A component of a Bitcoin transaction that specifies an amount of Bitcoin and the conditions (locking script or scriptPubKey) required to spend it. Each output represents a new UTXO that can later be used as an input in a future transaction. The locking script typically specifies a public key hash (address) that must provide a valid signature to spend, though more complex conditions are possible.
@@ -565,7 +556,7 @@ A cryptographic hash of the payment preimage, used in Lightning Network HTLCs to
 A random 32-byte secret generated by the payment recipient that, when hashed, produces the payment hash included in Lightning invoices. The preimage is the "key" that unlocks payment. The receiver reveals it to claim funds, and this revelation cascades back through all routing nodes to settle the HTLCs. Knowledge of the preimage serves as proof of payment, since only the original recipient could have revealed it.
 
 ### Preimage
-The original input data that produces a specific hash output through a cryptographic hash function. In general cryptography, finding a preimage from a hash should be computationally infeasible (preimage resistance). In Lightning Network specifically, the payment preimage is the secret whose hash is the payment hash; revealing it proves payment receipt.
+The original input data that produces a specific hash output through a cryptographic hash function. In general cryptography, finding a preimage from a hash should be computationally infeasible (preimage resistance). For the Lightning Network usage, see [Payment Preimage](#payment-preimage).
 
 ### Propagation
 The process by which new blocks and transactions spread across the Bitcoin network from node to node through the gossip protocol. Fast propagation is critical for network security; slow block propagation increases orphan rates and gives advantages to miners with better connectivity. Bitcoin Core includes optimizations like compact blocks and transaction relay improvements to minimize propagation delay.
@@ -694,9 +685,6 @@ The onion routing protocol used in Lightning Network to provide payment privacy,
 
 ### SPV (Simplified Payment Verification)
 A method described in the Bitcoin whitepaper for lightweight clients to verify transactions without downloading the full blockchain, relying on merkle proofs and block headers. SPV clients download only block headers (~80 bytes each vs. megabytes of full blocks), then request merkle proofs for transactions affecting their addresses. By verifying the proof against the merkle root in the header and checking that header is part of the longest chain, SPV clients can confirm transaction inclusion with reasonable security.
-
-### Stale Blocks
-Valid blocks that were mined but not accepted into the blockchain because another block at the same height was added to the chain first. These blocks become disconnected from the timechain.
 
 ### Store Of Value
 An asset that preserves its purchasing power over time. People use it to maintain wealth and protect against inflation. Gold and Bitcoin are often viewed as stores of value because they are resistant to inflation and currency devaluation, unlike fiat money, which loses value over time.

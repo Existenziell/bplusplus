@@ -51,11 +51,13 @@ export default function Footer() {
       </div>
 
       {/* Footer Credit */}
-      <p
-        className='hover:cursor-pointer hover:underline'
-        onClick={() => copyToClipboard(NPUB_ADDRESS, 'npub')}
-      >
-        Made with <span className='text-btc' aria-hidden='true'>&#9829;</span> by Chris
+      <p className='flex items-center justify-center gap-2'>
+        <Link
+          href='/author'
+          className='hover:text-btc transition-colors hover:no-underline'
+        >
+          Made with <span className='text-btc' aria-hidden='true'>&#9829;</span> by Chris
+        </Link>
       </p>
     </footer>
   )

@@ -487,3 +487,18 @@ main > div > div > h1:first-child {
 .terminal-output .json-null {
   @apply text-zinc-500;
 }
+
+/*
+* Author Page Styles
+*/
+.author-address-box {
+  @apply flex flex-col sm:flex-row items-start sm:items-center gap-3 px-4 py-2 bg-zinc-200 dark:bg-zinc-900 rounded border border-zinc-300 dark:border-zinc-700;
+}
+
+.author-address-code {
+  @apply text-sm font-mono text-zinc-700 dark:text-zinc-300 flex-1 break-all;
+}
+
+.author-copy-button {
+  @apply inline-flex items-center gap-2 px-4 py-2 bg-btc hover:bg-btc/90 text-zinc-900 font-semibold rounded transition-colors;
+}

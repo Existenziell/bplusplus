@@ -80,7 +80,7 @@ export default function Notification() {
 
   return (
     <div
-      className={`fixed top-0 left-0 right-0 w-full text-center py-3 sm:py-4 px-4 transition-all opacity-100 z-50 text-sm sm:text-base ${
+      className={`fixed top-0 left-0 right-0 w-full text-center py-4 sm:py-6 px-4 transition-all opacity-80 z-50 text-sm sm:text-base ${
         state.isError ? 'bg-red-600 text-white' : 'bg-btc text-zinc-800'
       }`}
     >

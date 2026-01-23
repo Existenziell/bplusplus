@@ -42,7 +42,7 @@ export default function HorizontalNav() {
             <div className="flex flex-row items-center justify-end gap-2 w-max ml-auto mb-3 mt-1">
               <button
                 onClick={() => setExpandedSections(new Set(navItems.map(item => item.href)))}
-                className="px-1.5 py-0.5 text-secondary text-xs rounded hover:text-btc transition-colors rounded bg-zinc-200 dark:bg-zinc-700"
+                className="px-1.5 py-0.5 text-secondary text-xs rounded hover:text-btc transition-colors bg-zinc-200 dark:bg-zinc-700"
                 aria-label="Expand all sections"
                 title="Expand all"
               >
@@ -50,7 +50,7 @@ export default function HorizontalNav() {
               </button>
               <button
                 onClick={() => setExpandedSections(new Set())}
-                className="px-1.5 py-0.5 text-secondary text-xs rounded hover:text-btc transition-colors rounded bg-zinc-200 dark:bg-zinc-700"
+                className="px-1.5 py-0.5 text-secondary text-xs rounded hover:text-btc transition-colors bg-zinc-200 dark:bg-zinc-700"
                 aria-label="Collapse all sections"
                 title="Collapse all"
               >
@@ -102,6 +102,30 @@ export default function HorizontalNav() {
                   </div>
                 )
               })}
+            </div>
+
+            {/* Quick Links Section - Prominent at the bottom */}
+            <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-700">
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/author"
+                  className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded transition-colors"
+                >
+                  About B++
+                </Link>
+                <Link
+                  href="/whitepaper"
+                  className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded transition-colors"
+                >
+                  Whitepaper
+                </Link>
+                <Link
+                  href="/terminal"
+                  className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded transition-colors"
+                >
+                  Bitcoin CLI
+                </Link>
+              </div>
             </div>
           </div>
         )}

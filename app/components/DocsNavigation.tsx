@@ -64,6 +64,49 @@ export default function DocsNavigation() {
   return (
     <nav className="w-full md:w-64 flex-shrink-0 md:pr-8 sticky top-0">
       <div>
+        <div className="mb-8">
+          <ul className="space-y-1">
+            <li>
+              <Link
+                href="/author"
+                className={`block py-1 leading-tight transition-colors ${
+                  pathname === '/author'
+                    ? 'text-btc font-semibold'
+                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
+                }`}
+              >
+                About B++
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/whitepaper"
+                className={`block py-1 leading-tight transition-colors ${
+                  pathname === '/whitepaper'
+                    ? 'text-btc font-semibold'
+                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
+                }`}
+              >
+                Bitcoin Whitepaper
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/terminal"
+                className={`block py-1 leading-tight transition-colors ${
+                  pathname === '/terminal'
+                    ? 'text-btc font-semibold'
+                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
+                }`}
+              >
+                Bitcoin CLI Terminal
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <h2 className="text-base text-zinc-900 dark:text-zinc-100 mb-3">
+          Docs
+        </h2>
         <ul className="space-y-1">
           {navItems.map((item) => {
             const itemActive = isActive(item.href)

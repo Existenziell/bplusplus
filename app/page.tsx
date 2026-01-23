@@ -13,7 +13,6 @@ export default function Home() {
       <Header />
 
       <div className="flex-grow">
-        {/* Hero Section */}
         <div className="bg-zinc-100 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700">
           <div className="container-content py-8 md:py-8">
             <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

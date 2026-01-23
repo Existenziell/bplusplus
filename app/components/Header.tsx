@@ -18,8 +18,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
               <Link href="/" className="text-center" aria-label="B++ Home">
                 <Image src="/logo/logo.png" alt="B++ Logo" width={80} height={80} />
               </Link>
-              <Link href="/terminal" className="text-center hover:text-btc transition-opacity" aria-label="Bitcoin CLI Terminal">
-              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 hover:opacity-80 transition-opacity" aria-hidden="true">
+              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40" aria-hidden="true">
                 <Image
                   src="/icons/satoshi-black.svg"
                   alt=""
@@ -34,8 +33,7 @@ export default function Header({ showBreadcrumbs = false }: HeaderProps) {
                   height={30}
                   className="dark:invert"
                 />
-                </div>
-              </Link>
+              </div>
               <div className="flex-shrink-0">
                 <ThemeToggle />
               </div>

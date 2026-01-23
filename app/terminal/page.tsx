@@ -802,7 +802,6 @@ export default function TerminalPage() {
             </Link>
           </div>
       </div>
-     <LiveStats />
       <Footer />
     </main>
   )

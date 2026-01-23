@@ -791,10 +791,7 @@ A feature introduced in Bitcoin's SegWit upgrade, which reduces the cost of stor
 
 ---
 
-## Z
-
-### ZMQ (ZeroMQ)
-A high-performance messaging library integrated into Bitcoin Core that provides real-time publish-subscribe notifications for new blocks, transactions, and other events. Applications can subscribe to ZMQ topics (like "rawtx" for new transactions or "hashblock" for new blocks) and receive instant notifications without polling the RPC interface. This is essential for building responsive applications that need to react immediately to blockchain events.
+## X
 
 ### XBT
 The ISO currency code for bitcoin. Like XAU for gold, "X" is used to indicate a currency that isn't tied to any specific country, in contrast to BTC, the commonly used ticker symbol.
@@ -802,8 +799,19 @@ The ISO currency code for bitcoin. Like XAU for gold, "X" is used to indicate a 
 ### xPub (Extended Public Key)
 An extended public key used by Hierarchical Deterministic (HD) wallets to generate multiple public addresses from one master key. This allows you to receive bitcoin while keeping your private keys securely offline.
 
+---
+
+## Y
+
 ### Ypub
 An extended public key format used in BIP49 wallets to generate SegWit addresses wrapped in P2SH. Unlike an Xpub, which is used for legacy P2PKH addresses, a Ypub derives addresses that start with "3," offering lower transaction fees while maintaining compatibility with older wallets.
+
+---
+
+## Z
+
+### ZMQ (ZeroMQ)
+A high-performance messaging library integrated into Bitcoin Core that provides real-time publish-subscribe notifications for new blocks, transactions, and other events. Applications can subscribe to ZMQ topics (like "rawtx" for new transactions or "hashblock" for new blocks) and receive instant notifications without polling the RPC interface. This is essential for building responsive applications that need to react immediately to blockchain events.
 
 ### Zero Confirmation Transaction
 A Bitcoin transaction that has been broadcasted to the network but hasn't yet been confirmed by miners and included in a block. It's considered riskier because it can still be reversed.

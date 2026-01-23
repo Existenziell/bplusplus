@@ -43,7 +43,7 @@ function truncateDefinition(text, maxLength = 300) {
   const lastSentence = truncated.lastIndexOf('. ')
   
   if (lastSentence > maxLength * 0.6) {
-    return truncated.slice(0, lastSentence + 1)
+    return truncated.slice(0, lastSentence + 1) + '...'
   }
   
   // Otherwise cut at word boundary

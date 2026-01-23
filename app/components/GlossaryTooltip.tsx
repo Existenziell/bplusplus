@@ -136,6 +136,22 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
             </span>
             <span className="block text-sm font-normal" style={{ lineHeight: 1.4 }}>
               {entry.definition}
+              {entry.definition.endsWith('...') && (
+                <Link
+                  href={href}
+                  className="ml-1 text-btc hover:underline font-medium"
+                  onClick={(e) => {
+                    // Close tooltip when clicking "more"
+                    setIsVisible(false)
+                  }}
+                  onMouseDown={(e) => {
+                    // Prevent tooltip from closing on mousedown
+                    e.stopPropagation()
+                  }}
+                >
+                  more
+                </Link>
+              )}
             </span>
           </span>
         </span>

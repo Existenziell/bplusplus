@@ -166,27 +166,39 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' })
           }
         }, 100)
+      } else {
+        setActiveSlug(null)
       }
     }
 
     // Check on mount
     handleHash()
 
-    // Listen for hash changes
+    // Listen for hash changes (including browser back/forward)
     window.addEventListener('hashchange', handleHash)
-    return () => window.removeEventListener('hashchange', handleHash)
+    // Also listen for popstate to handle browser back/forward buttons
+    window.addEventListener('popstate', handleHash)
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHash)
+      window.removeEventListener('popstate', handleHash)
+    }
   }, [])
 
   // Handle clicking on a term to update URL hash
   const handleTermClick = (slug: string, isOpen: boolean) => {
     if (isOpen) {
-      // Opening - update hash
-      window.history.pushState(null, '', `#${slug}`)
+      // Opening - update hash using replaceState to avoid adding history entries
+      // This prevents the double-back-button issue
+      const currentHash = window.location.hash.slice(1)
+      if (currentHash !== slug) {
+        window.history.replaceState(null, '', `#${slug}`)
+      }
       setActiveSlug(slug)
     } else {
       // Closing - clear hash if it matches
       if (activeSlug === slug) {
-        window.history.pushState(null, '', window.location.pathname)
+        window.history.replaceState(null, '', window.location.pathname)
         setActiveSlug(null)
       }
     }
@@ -197,10 +209,13 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
     e.preventDefault()
     const element = document.getElementById(sectionSlug)
     if (element) {
-      // Update URL hash
-      window.history.pushState(null, '', `#${sectionSlug}`)
+      // Update URL hash using replaceState to avoid adding history entries
+      window.history.replaceState(null, '', `#${sectionSlug}`)
       // Scroll to section
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // Update active slug if it's a term within this section
+      const hash = window.location.hash.slice(1)
+      setActiveSlug(hash)
     }
   }
 
@@ -209,7 +224,6 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
       {/* Letter navigation */}
       <div className="mb-8 pb-4 border-b border-zinc-300 dark:border-zinc-700">
         <div className="flex flex-wrap items-center gap-2 text-sm">
-          <span className="text-zinc-600 dark:text-zinc-400 font-medium mr-2">Jump to:</span>
           {sections.map((section) => (
             <a
               key={section.slug}

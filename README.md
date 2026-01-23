@@ -11,8 +11,20 @@ An open-source developer's guide to Bitcoin, covering everything from fundamenta
 - **Styling**: Tailwind CSS 3.4.19
 - **Markdown**: react-markdown with remark-gfm, rehype-highlight, rehype-raw
 - **Theming**: next-themes
-- **Analytics**: Vercel Analytics & Speed Insights
 - **Language**: TypeScript 5.9.3
+
+## Documentation Structure
+
+All documentation pages are handled by a single dynamic route (`app/docs/[...slug]/page.tsx`) that:
+- Maps URL paths to markdown files using `app/utils/navigation.ts`
+- Automatically generates metadata for SEO
+- Eliminates code duplication (replaced 67 duplicate page files)
+
+Each documentation section follows a consistent pattern:
+- `overview.md` - Section introduction and navigation
+- `[topic]/[topic].md` - Markdown content (no page.tsx needed)
+
+The routing is configured in `app/utils/navigation.ts`, which serves as the single source of truth for all documentation paths and metadata.
 
 ## Getting Started
 
@@ -48,19 +60,6 @@ npm run start
 ```
 
 The build process automatically generates glossary data and markdown content via prebuild scripts.
-
-## Documentation Structure
-
-All documentation pages are handled by a single dynamic route (`app/docs/[...slug]/page.tsx`) that:
-- Maps URL paths to markdown files using `app/utils/navigation.ts`
-- Automatically generates metadata for SEO
-- Eliminates code duplication (replaced 67 duplicate page files)
-
-Each documentation section follows a consistent pattern:
-- `overview.md` - Section introduction and navigation
-- `[topic]/[topic].md` - Markdown content (no page.tsx needed)
-
-The routing is configured in `app/utils/navigation.ts`, which serves as the single source of truth for all documentation paths and metadata.
 
 ## How Stack Lab Works
 

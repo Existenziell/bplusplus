@@ -15,7 +15,7 @@ export default function StackLabLayout({
   children: ReactNode
 }) {
   return (
-    <DocsLayoutWrapper>
+    <DocsLayoutWrapper defaultSidebarCollapsed>
       {children}
     </DocsLayoutWrapper>
   )

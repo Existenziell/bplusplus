@@ -246,6 +246,12 @@ export const pathToMdFile: Record<string, string> = Object.fromEntries(
 
 // Route labels for breadcrumbs (derived from docPages + section names)
 export const routeLabels: Record<string, string> = {
+  // Top-level app pages
+  terminal: 'CLI Terminal',
+  'stack-lab': 'Stack Lab',
+  whitepaper: 'Whitepaper',
+  author: 'About B++',
+
   // Section labels
   fundamentals: 'Fundamentals',
   history: 'History',

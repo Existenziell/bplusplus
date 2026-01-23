@@ -63,6 +63,46 @@ export function ChevronDown({ className, ...props }: IconProps) {
   )
 }
 
+/** Four horizontal lines (list / menu). Use for “expand navigation” when sidebar is collapsed. */
+export function PanelExpandIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={mergeClassName('w-4 h-4', className)}
+      viewBox="3 6 18 12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M3 6H21M3 10H21M3 14H21M3 18H21" />
+    </svg>
+  )
+}
+
+/** Four short lines on the left + left-pointing arrow (collapse / indent left). Use for “collapse sidebar”. */
+export function PanelCollapseIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={mergeClassName('w-4 h-4', className)}
+      viewBox="3 5 18 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      {/* Four short horizontal lines on the left */}
+      <path d="M4 6h5M4 10h5M4 14h5M4 18h5" />
+      {/* Left-pointing arrow on the right: shaft + arrowhead pointing at the lines */}
+      <path d="M12 12h8" />
+      <path d="M15 9l-3 3 3 3" />
+    </svg>
+  )
+}
+
 export function DownloadMarkdownIcon({ className, ...props }: IconProps) {
   return (
     <svg

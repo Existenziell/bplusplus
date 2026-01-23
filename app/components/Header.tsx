@@ -9,7 +9,7 @@ import DownloadMarkdownButton from '@/app/components/DownloadMarkdownButton'
 
 export default function Header() {
   const pathname = usePathname()
-  const showBreadcrumbs = pathname?.startsWith('/docs') ?? false
+  const showBreadcrumbs = Boolean(pathname && pathname !== '/')
 
   return (
     <>

@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { navItems } from '@/app/utils/navigation'
-import { ArrowRight } from '@/app/components/Icons'
+import { ArrowRight, PanelCollapseIcon, PanelExpandIcon } from '@/app/components/Icons'
 
 // Shared pathname matching logic
 function matchesPath(pathname: string, href: string): boolean {
@@ -48,7 +48,16 @@ function getLinkClassName(isActive: boolean, size: 'default' | 'sm' = 'default')
     : `${baseClasses} text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline`
 }
 
-export default function DocsNavigation() {
+interface DocsNavigationProps {
+  isSidebarCollapsed?: boolean
+  onToggleSidebar?: () => void
+}
+
+export default function DocsNavigation({
+  isSidebarCollapsed,
+  onToggleSidebar,
+}: DocsNavigationProps) {
+  const isSidebarNarrow = isSidebarCollapsed === true && onToggleSidebar != null
   const pathname = usePathname()
 
   // Memoize active section calculation
@@ -58,6 +67,8 @@ export default function DocsNavigation() {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(() => {
     return activeSection ? new Set([activeSection]) : new Set()
   })
+
+  const [isDocsExpanded, setIsDocsExpanded] = useState(true)
 
   // Update expanded sections when pathname changes (e.g., navigation)
   useEffect(() => {
@@ -89,9 +100,37 @@ export default function DocsNavigation() {
 
   const isExpanded = (href: string) => expandedSections.has(href)
 
+  // Collapsed sidebar: only expand button (desktop sidebar only)
+  if (isSidebarNarrow && onToggleSidebar) {
+    return (
+      <nav className="w-full flex-shrink-0 sticky top-0">
+        <button
+          onClick={onToggleSidebar}
+          className="flex items-center justify-start w-full pt-2 text-zinc-500 dark:text-zinc-400 hover:text-btc transition-colors"
+          aria-label="Expand navigation"
+          title="Expand sidebar"
+        >
+          <PanelExpandIcon className="w-6 h-6 shrink-0" />
+        </button>
+      </nav>
+    )
+  }
+
   return (
-    <nav className="w-full md:w-64 flex-shrink-0 md:pr-8 sticky top-0">
-      <div>
+    <nav className="w-full flex-shrink-0 sticky top-0 md:pr-8">
+      <div className="min-w-56">
+        {/* Collapse sidebar (desktop): at top of nav, reads as panel control */}
+        {onToggleSidebar && (
+          <button
+            onClick={onToggleSidebar}
+            className="flex items-center justify-start w-full pt-2 mb-2 text-zinc-500 dark:text-zinc-400 hover:text-btc transition-colors"
+            aria-label="Collapse sidebar"
+            title="Collapse sidebar"
+          >
+            <PanelCollapseIcon className="w-6 h-6 shrink-0" />
+          </button>
+        )}
+
         <div className="mb-6">
           <ul className="space-y-1">
             {staticLinks.map((link) => (
@@ -106,70 +145,82 @@ export default function DocsNavigation() {
             ))}
           </ul>
         </div>
-        <h2 className="text-base text-zinc-700 dark:text-zinc-300 mb-1">
-          Docs:
-        </h2>
-        <ul className="space-y-1">
-          {navItems.map((item) => {
-            const itemActive = isActive(item.href)
-            const hasChildren = item.children && item.children.length > 0
-            const expanded = isExpanded(item.href)
 
-            return (
-              <li key={item.href}>
-                <div className="flex items-center">
-                  {hasChildren && (
-                    <button
-                      onClick={() => toggleSection(item.href)}
-                      className="mr-1 p-1 text-zinc-500 hover:text-btc transition-colors"
-                      aria-label={expanded ? 'Collapse section' : 'Expand section'}
+        {/* Collapse/expand docs tree only */}
+        <button
+          onClick={() => setIsDocsExpanded((v) => !v)}
+          className="flex items-center gap-1.5 w-full text-left text-base text-zinc-700 dark:text-zinc-300 mb-2 hover:text-btc transition-colors"
+          aria-expanded={isDocsExpanded}
+          aria-label={isDocsExpanded ? 'Collapse docs' : 'Expand docs'}
+        >
+          <ArrowRight
+            className={`shrink-0 w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform ${isDocsExpanded ? 'rotate-90' : ''}`}
+          />
+          <span>Docs</span>
+        </button>
+        {isDocsExpanded && (
+          <ul className="space-y-1">
+            {navItems.map((item) => {
+              const itemActive = isActive(item.href)
+              const hasChildren = item.children && item.children.length > 0
+              const expanded = isExpanded(item.href)
+
+              return (
+                <li key={item.href}>
+                  <div className="flex items-center">
+                    {hasChildren && (
+                      <button
+                        onClick={() => toggleSection(item.href)}
+                        className="mr-1 p-1 text-zinc-500 hover:text-btc transition-colors"
+                        aria-label={expanded ? 'Collapse section' : 'Expand section'}
+                      >
+                        <ArrowRight
+                          className={`w-3 h-3 transition-transform ${expanded ? 'rotate-90' : ''}`}
+                        />
+                      </button>
+                    )}
+                    <Link
+                      href={item.href}
+                      onClick={() => hasChildren && !expanded && toggleSection(item.href)}
+                      className={getLinkClassName(itemActive)}
                     >
-                      <ArrowRight
-                        className={`w-3 h-3 transition-transform ${expanded ? 'rotate-90' : ''}`}
-                      />
-                    </button>
+                      {item.title}
+                    </Link>
+                  </div>
+                  {hasChildren && expanded && (
+                    <ul className="ml-5 mt-1 space-y-0">
+                      {item.children!.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            className={getLinkClassName(isActive(child.href), 'sm')}
+                          >
+                            {child.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   )}
-                  <Link
-                    href={item.href}
-                    onClick={() => hasChildren && !expanded && toggleSection(item.href)}
-                    className={getLinkClassName(itemActive)}
-                  >
-                    {item.title}
-                  </Link>
-                </div>
-                {hasChildren && expanded && (
-                  <ul className="ml-5 mt-1 space-y-0">
-                    {item.children!.map((child) => (
-                      <li key={child.href}>
-                        <Link
-                          href={child.href}
-                          className={getLinkClassName(isActive(child.href), 'sm')}
-                        >
-                          {child.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+                </li>
+              )
+            })}
+          </ul>
+        )}
 
-      <div className="mt-6">
-        <ul className="space-y-1">
-          {footerLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={getLinkClassName(isActive(link.href))}
-              >
-                {link.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-6">
+          <ul className="space-y-1">
+            {footerLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={getLinkClassName(isActive(link.href))}
+                >
+                  {link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </nav>
   )

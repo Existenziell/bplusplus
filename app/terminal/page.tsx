@@ -746,7 +746,7 @@ export default function TerminalPage() {
             {output.map((line, i) => (
             <div key={i} className={line.type === 'log' ? 'mb-0.5' : 'mb-1 md:mb-2'}>
               {line.type === 'logo' && (
-                <pre className="text-btc whitespace-pre text-[10px] md:text-sm">{line.content}</pre>
+                <pre className="text-zinc-900 dark:text-btc whitespace-pre text-[10px] md:text-sm">{line.content}</pre>
               )}
               {line.type === 'log' && (
                 <div className="text-zinc-600 dark:text-zinc-500 text-[10px] md:text-xs">{line.content}</div>

@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="mb-4">
+      <header className="pb-4 bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
         <div className="page-bg">
           <div className="container-content pt-4">
             <div className="flex justify-between items-center">

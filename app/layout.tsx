@@ -12,6 +12,9 @@ import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
 // Import the pre-generated glossary data (generated at build time by scripts/generate-glossary-data.js)
 import glossaryData from '@/public/data/glossary.json'
 
+const SITE_URL = 'https://bplusplus.info'
+const OG_LOGO = '/logo/logo.png'
+
 const ubuntu = Ubuntu({
   weight: '400',
   style: 'normal',
@@ -23,7 +26,7 @@ const ubuntu = Ubuntu({
 
 export const metadata: Metadata = {
   title: 'B++',
-  description: 'Bitcoin Education | Hopium for the masses',
+  description: 'Bitcoin Education | Education without borders.',
   icons: {
     icon: [
       { url: '/favicon/favicon.ico', sizes: 'any' },
@@ -40,15 +43,15 @@ export const metadata: Metadata = {
       },
     ],
   },
-  metadataBase: new URL('https://bplusplus.info'),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     title: 'B++',
-    description: 'Bitcoin Education | Hopium for the masses',
-    url: 'https://bplusplus.info',
+    description: 'Bitcoin Education | Education without borders.',
+    url: SITE_URL,
     siteName: 'B++',
     images: [
       {
-        url: '/og/og-image.png',
+        url: '/og/og.webp',
         width: 1200,
         height: 630,
         alt: 'B++ - Bitcoin Education',
@@ -56,12 +59,14 @@ export const metadata: Metadata = {
     ],
     locale: 'en_US',
     type: 'website',
-  },
+    // og:logo not in Next.js OpenGraph types; we emit it in <head>
+    logo: OG_LOGO,
+  } as import('next').Metadata['openGraph'] & { logo?: string },
   twitter: {
     card: 'summary_large_image',
     title: 'B++',
-    description: 'Bitcoin Education | Hopium for the masses',
-    images: ['/og/og-image.png'],
+    description: 'Bitcoin Education | Education without borders.',
+    images: ['/og/og.webp'],
   },
 }
 
@@ -73,6 +78,8 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
+        {/* og:logo not supported by Next.js openGraph; emitted here, value from openGraph.logo above */}
+        <meta property="og:logo" content={`${SITE_URL}${OG_LOGO}`} />
         {/* Preconnect to Vercel Analytics/Speed Insights origins */}
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />

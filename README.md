@@ -1,6 +1,6 @@
 # B++
 
-Bitcoin Education and Hopium for the Masses!
+Bitcoin Education without borders!
 
 An open-source developer's guide to Bitcoin, covering everything from fundamental concepts to advanced protocol implementations. Built with Next.js 16 and designed to be always free.
 

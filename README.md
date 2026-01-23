@@ -4,35 +4,6 @@ Bitcoin Education without borders! Open knowledge. Open source.
 
 An open-source developer's guide to Bitcoin, covering everything from fundamental concepts to advanced protocol implementations. Built with Love and designed to be always free and open source.
 
-## Features
-
-- **Comprehensive Documentation** - In-depth guides on Bitcoin fundamentals, protocol, mining, wallets, Lightning Network, and more
-- **Interactive Terminal** - Browser-based Bitcoin RPC terminal for hands-on learning
-- **Stack Lab** - Interactive Bitcoin Script playground with drag-and-drop OP codes and real-time stack visualization
-- **Live Stats** - Real-time Bitcoin network statistics
-- **Glossary with Tooltips** - Automatic term definitions throughout the documentation
-- **Dark/Light Mode** - Theme toggle for comfortable reading
-- **Markdown-based Content** - Easy to contribute and maintain
-- **Mobile Responsive** - Full documentation experience on any device
-
-## How Stack Lab Works
-
-Stack Lab simulates Bitcoin Script execution, which is how Bitcoin transactions are validated on the blockchain.
-
-### Script Components
-
-- **Locking Script (scriptPubKey)**: Defines the conditions that must be met to unlock and spend the Bitcoin. This script is stored in the transaction output and specifies what data or operations are required.
-
-- **Unlocking Script (scriptSig)**: Provides the data and operations necessary to satisfy the locking script's conditions. This script is included in the transaction input when spending Bitcoin.
-
-### Execution Flow
-
-1. The unlocking script runs first, pushing data (signatures, public keys, etc.) onto the stack
-2. The locking script runs second, verifying that the data satisfies the conditions
-3. If the final stack contains a non-zero value (typically `1`), the transaction is valid
-
-This is the same validation process that occurs on the Bitcoin network when transactions are processed.
-
 ## Tech Stack
 
 - **Framework**: Next.js 16.1.4 (App Router, Turbopack)
@@ -78,132 +49,6 @@ npm run start
 
 The build process automatically generates glossary data and markdown content via prebuild scripts.
 
-## Project Structure
-
-```
-bplusplus/
-├── app/
-│   ├── api/                      # API routes
-│   │   ├── bitcoin-rpc/          # Bitcoin RPC proxy
-│   │   ├── btc-price/            # Price data endpoint
-│   │   └── download-md/          # Markdown download endpoint
-│   ├── components/               # React components
-│   │   ├── Breadcrumbs.tsx
-│   │   ├── CodeBlock.tsx
-│   │   ├── DocsNavigation.tsx
-│   │   ├── DownloadMarkdownButton.tsx
-│   │   ├── Footer.tsx
-│   │   ├── GlossaryRenderer.tsx
-│   │   ├── GlossaryTooltip.tsx
-│   │   ├── Header.tsx
-│   │   ├── HorizontalNav.tsx
-│   │   ├── Icons.tsx
-│   │   ├── LiveStats.tsx
-│   │   ├── MarkdownRenderer.tsx
-│   │   ├── MobileNav.tsx
-│   │   ├── PageNavigation.tsx
-│   │   ├── Notification.tsx
-│   │   ├── QuoteRotator.tsx
-│   │   ├── stack-lab/             # Stack Lab components
-│   │   │   ├── ExecutionControls.tsx
-│   │   │   ├── ExecutionLog.tsx
-│   │   │   ├── OpCodePalette.tsx
-│   │   │   ├── ScriptBuilder.tsx
-│   │   │   ├── ScriptTemplates.tsx
-│   │   │   └── StackVisualization.tsx
-│   │   └── ThemeToggle.tsx
-│   ├── docs/                     # Documentation pages
-│   │   ├── [...slug]/            # Dynamic route handler for all docs
-│   │   │   └── page.tsx          # Single route handler (replaces 67 duplicate files)
-│   │   ├── bitcoin/              # Bitcoin protocol docs
-│   │   │   ├── blocks/
-│   │   │   ├── consensus/
-│   │   │   ├── cryptography/
-│   │   │   ├── op-codes/
-│   │   │   ├── rpc/
-│   │   │   ├── script/
-│   │   │   └── subsidy/
-│   │   ├── controversies/        # Historical controversies
-│   │   │   ├── blocksize-wars/
-│   │   │   ├── craig-wright/
-│   │   │   ├── energy-consumption/
-│   │   │   ├── mt-gox/
-│   │   │   └── op-return/
-│   │   ├── development/          # Developer guides
-│   │   │   ├── addresses/
-│   │   │   ├── blockchain-monitoring/
-│   │   │   ├── keys/
-│   │   │   ├── libraries/
-│   │   │   ├── pool-mining/
-│   │   │   ├── price-tracking/
-│   │   │   ├── psbt/
-│   │   │   ├── testing/
-│   │   │   ├── testnets/
-│   │   │   └── transactions/
-│   │   ├── fundamentals/         # Core concepts
-│   │   │   ├── decentralization/
-│   │   │   ├── monetary-properties/
-│   │   │   ├── problems/
-│   │   │   └── trust-model/
-│   │   ├── glossary/             # Bitcoin terminology
-│   │   ├── history/              # Bitcoin history
-│   │   │   ├── bips/
-│   │   │   ├── forks/
-│   │   │   ├── halvings/
-│   │   │   ├── people/
-│   │   │   └── supply/
-│   │   ├── lightning/            # Lightning Network
-│   │   │   ├── anchor-outputs/
-│   │   │   ├── channels/
-│   │   │   ├── invoices/
-│   │   │   ├── onion/
-│   │   │   ├── routing/
-│   │   │   ├── trampoline/
-│   │   │   ├── watchtowers/
-│   │   │   └── zero-conf/
-│   │   ├── mining/               # Mining documentation
-│   │   │   ├── attacks/
-│   │   │   ├── block-construction/
-│   │   │   ├── difficulty/
-│   │   │   ├── economics/
-│   │   │   ├── hardware/
-│   │   │   ├── mempool/
-│   │   │   ├── pools/
-│   │   │   └── proof-of-work/
-│   │   └── wallets/              # Wallet documentation
-│   │       ├── address-types/
-│   │       ├── coin-selection/
-│   │       ├── hd-wallets/
-│   │       ├── multisig/
-│   │       └── transactions/
-│   ├── hooks/                    # Custom React hooks
-│   ├── stack-lab/                 # Interactive Stack Lab page
-│   ├── terminal/                  # Interactive terminal page
-│   ├── utils/                     # Utility functions
-│   ├── whitepaper/                # Bitcoin whitepaper page
-│   ├── globals.css               # Global styles
-│   ├── layout.tsx                # Root layout
-│   └── page.tsx                  # Home page
-├── public/
-│   ├── data/                     # Generated JSON data
-│   ├── favicon/                  # Favicon files
-│   ├── graphs/                   # Graph images
-│   ├── icons/                    # Icon assets
-│   ├── images/                   # Image assets
-│   ├── link-visualization.html   # Interactive link structure visualization
-│   └── og/                       # Open Graph images
-├── scripts/                      # Build scripts
-│   ├── analyze-links.js          # Link structure analysis
-│   ├── generate-glossary-data.js
-│   ├── generate-link-visualization.js  # Interactive link visualization
-│   └── generate-md-content.js
-├── link-analysis.json            # Generated link analysis report
-├── next.config.js
-├── package.json
-├── tailwind.config.ts
-└── tsconfig.json
-```
-
 ## Documentation Structure
 
 All documentation pages are handled by a single dynamic route (`app/docs/[...slug]/page.tsx`) that:
@@ -216,6 +61,24 @@ Each documentation section follows a consistent pattern:
 - `[topic]/[topic].md` - Markdown content (no page.tsx needed)
 
 The routing is configured in `app/utils/navigation.ts`, which serves as the single source of truth for all documentation paths and metadata.
+
+## How Stack Lab Works
+
+Stack Lab simulates Bitcoin Script execution, which is how Bitcoin transactions are validated on the blockchain.
+
+### Script Components
+
+- **Locking Script (scriptPubKey)**: Defines the conditions that must be met to unlock and spend the Bitcoin. This script is stored in the transaction output and specifies what data or operations are required.
+
+- **Unlocking Script (scriptSig)**: Provides the data and operations necessary to satisfy the locking script's conditions. This script is included in the transaction input when spending Bitcoin.
+
+### Execution Flow
+
+1. The unlocking script runs first, pushing data (signatures, public keys, etc.) onto the stack
+2. The locking script runs second, verifying that the data satisfies the conditions
+3. If the final stack contains a non-zero value (typically `1`), the transaction is valid
+
+This is the same validation process that occurs on the Bitcoin network when transactions are processed.
 
 ## Scripts
 
@@ -270,4 +133,4 @@ Contributions are welcome! The documentation is written in Markdown, making it e
 
 ## License
 
-Open source - free to use and distribute.
+Open source - free to use and distribute 🧡

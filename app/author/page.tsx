@@ -41,7 +41,7 @@ export default function AuthorPage() {
               <p className="text-xl md:text-2xl text-secondary mb-1">
                 Developer & Bitcoin Educator
               </p>
-              <p className="text-sm md:text-base text-secondary mb-2">Giving back to the Bitcoin community 💛</p>
+              <p className="text-sm md:text-base text-secondary mb-2">Giving back to the Bitcoin community 🧡</p>
             </div>
 
             {/* About Section */}
@@ -109,8 +109,8 @@ export default function AuthorPage() {
                   Support
                 </h2>
                 <p className="text-zinc-800 dark:text-zinc-200 mb-6">
-                Every sat helps keep this resource free and open for everyone.
-                Thank you for your support 💛
+                  Every sat helps keep this resource free and open for everyone.
+                  Thank you for your support 🧡
                 </p>
                 {/* Bitcoin On-Chain */}
                 <div className="mb-6">

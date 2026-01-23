@@ -99,7 +99,7 @@ export default function LiveStats() {
     {
       label: 'Fee Rate',
       value: feeRate ? `${feeRate} sat/vB` : null,
-      href: '/docs/mining/mempool',
+      href: '/docs/bitcoin/transaction-fees',
     },
     {
       label: 'Difficulty',
@@ -109,12 +109,12 @@ export default function LiveStats() {
     {
       label: 'Mempool Txs',
       value: mempoolInfo?.size ? formatNumber(mempoolInfo.size) : null,
-      href: '/docs/mining/mempool',
+      href: '/docs/bitcoin/rpc#3-mempool-information',
     },
     {
       label: 'Mempool Size',
       value: mempoolInfo?.bytes ? formatBytes(mempoolInfo.bytes) : null,
-      href: '/docs/mining/mempool',
+      href: '/docs/mining/block-construction',
     },
     {
       label: 'Hex',

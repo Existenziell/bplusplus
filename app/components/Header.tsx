@@ -20,7 +20,7 @@ export default function Header() {
               <Link href="/" className="text-center" aria-label="B++ Home">
                 <Image src="/logo/logo.png" alt="B++ Logo" width={80} height={80} />
               </Link>
-              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40" aria-hidden="true">
+              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 -rotate-3" aria-hidden="true">
                 <Image
                   src="/icons/satoshi-black.svg"
                   alt=""

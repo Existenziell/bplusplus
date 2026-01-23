@@ -2,7 +2,7 @@ import { Ubuntu } from 'next/font/google'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
-import { DEFAULT_OG_IMAGE } from '@/app/utils/metadata'
+import { DEFAULT_OG_IMAGE, OG_LOGO, SITE_URL } from '@/app/utils/metadata'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
@@ -12,9 +12,6 @@ import Notification from '@/app/components/Notification'
 import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
 // Import the pre-generated glossary data (generated at build time by scripts/generate-glossary-data.js)
 import glossaryData from '@/public/data/glossary.json'
-
-const SITE_URL = 'https://bplusplus.info'
-const OG_LOGO = '/logo/logo.png'
 
 const ubuntu = Ubuntu({
   weight: '400',

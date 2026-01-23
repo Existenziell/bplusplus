@@ -102,32 +102,43 @@ export default function HorizontalNav() {
                   </div>
                 )
               })}
+              <div className="mb-2">
+                <div className="flex items-center">
+                  <span className="w-5" />
+                  <Link
+                    href="/docs/glossary"
+                    className="font-medium text-zinc-800 dark:text-zinc-200 hover:text-btc transition-colors"
+                  >
+                    Glossary
+                  </Link>
+                </div>
+              </div>
             </div>
 
             {/* Quick Links Section - Prominent at the bottom */}
             <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-700">
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
-                  href="/whitepaper"
-                  className="btn-secondary-sm"
-                >
-                  Whitepaper
-                </Link>
-                <Link
                   href="/terminal"
-                  className="btn-secondary-sm"
+                  className="btn-secondary-sm min-w-[10rem]"
                 >
                   Bitcoin CLI
                 </Link>
                 <Link
                   href="/stack-lab"
-                  className="btn-secondary-sm"
+                  className="btn-secondary-sm min-w-[10rem]"
                 >
                   Stack Lab
                 </Link>
                 <Link
+                  href="/whitepaper"
+                  className="btn-secondary-sm min-w-[10rem]"
+                >
+                  Whitepaper
+                </Link>
+                <Link
                   href="/author"
-                  className="btn-secondary-sm"
+                  className="btn-secondary-sm min-w-[10rem]"
                 >
                   About B++
                 </Link>

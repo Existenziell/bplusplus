@@ -5,7 +5,7 @@ import Header from '@/app/components/Header'
 import QuoteRotator from '@/app/components/QuoteRotator'
 import LiveStats from '@/app/components/LiveStats'
 import HorizontalNav from '@/app/components/HorizontalNav'
-import { ArrowRight, TerminalIcon } from '@/app/components/Icons'
+import { ArrowRight, TerminalIcon, StackLabIcon } from '@/app/components/Icons'
 
 export default function Home() {
   return (
@@ -54,6 +54,13 @@ export default function Home() {
               >
                 Bitcoin CLI
                 <TerminalIcon />
+              </Link>
+              <Link
+                href="/stack-lab"
+                className="btn-secondary"
+              >
+                Stack Lab
+                <StackLabIcon />
               </Link>
             </div>
           </div>

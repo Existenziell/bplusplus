@@ -25,6 +25,7 @@ function findActiveSectionHref(pathname: string): string | null {
 const staticLinks = [
   { href: '/whitepaper', title: 'Bitcoin Whitepaper' },
   { href: '/terminal', title: 'Bitcoin CLI Terminal' },
+  { href: '/stack-lab', title: 'Stack Lab' },
 ]
 
 const footerLinks = [

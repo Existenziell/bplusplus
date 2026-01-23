@@ -687,9 +687,13 @@ export default function TerminalPage() {
 
   return (
     <>
-      <h1 className="heading-page text-center">
+       <h1 className="heading-page text-center mb-1">
         Bitcoin CLI Terminal
       </h1>
+      <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">
+        Interactive Bitcoin RPC playground
+      </p>
+
       {/* Terminal Window */}
       <div className="rounded-lg overflow-hidden border border-zinc-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
           {/* Terminal Header */}

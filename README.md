@@ -8,11 +8,30 @@ An open-source developer's guide to Bitcoin, covering everything from fundamenta
 
 - **Comprehensive Documentation** - In-depth guides on Bitcoin fundamentals, protocol, mining, wallets, Lightning Network, and more
 - **Interactive Terminal** - Browser-based Bitcoin RPC terminal for hands-on learning
+- **Stack Lab** - Interactive Bitcoin Script playground with drag-and-drop OP codes and real-time stack visualization
 - **Live Stats** - Real-time Bitcoin network statistics
 - **Glossary with Tooltips** - Automatic term definitions throughout the documentation
 - **Dark/Light Mode** - Theme toggle for comfortable reading
 - **Markdown-based Content** - Easy to contribute and maintain
 - **Mobile Responsive** - Full documentation experience on any device
+
+## How Stack Lab Works
+
+Stack Lab simulates Bitcoin Script execution, which is how Bitcoin transactions are validated on the blockchain.
+
+### Script Components
+
+- **Locking Script (scriptPubKey)**: Defines the conditions that must be met to unlock and spend the Bitcoin. This script is stored in the transaction output and specifies what data or operations are required.
+
+- **Unlocking Script (scriptSig)**: Provides the data and operations necessary to satisfy the locking script's conditions. This script is included in the transaction input when spending Bitcoin.
+
+### Execution Flow
+
+1. The unlocking script runs first, pushing data (signatures, public keys, etc.) onto the stack
+2. The locking script runs second, verifying that the data satisfies the conditions
+3. If the final stack contains a non-zero value (typically `1`), the transaction is valid
+
+This is the same validation process that occurs on the Bitcoin network when transactions are processed.
 
 ## Tech Stack
 
@@ -85,6 +104,13 @@ bplusplus/
 │   │   ├── PageNavigation.tsx
 │   │   ├── Notification.tsx
 │   │   ├── QuoteRotator.tsx
+│   │   ├── stack-lab/             # Stack Lab components
+│   │   │   ├── ExecutionControls.tsx
+│   │   │   ├── ExecutionLog.tsx
+│   │   │   ├── OpCodePalette.tsx
+│   │   │   ├── ScriptBuilder.tsx
+│   │   │   ├── ScriptTemplates.tsx
+│   │   │   └── StackVisualization.tsx
 │   │   └── ThemeToggle.tsx
 │   ├── docs/                     # Documentation pages
 │   │   ├── [...slug]/            # Dynamic route handler for all docs
@@ -151,9 +177,10 @@ bplusplus/
 │   │       ├── multisig/
 │   │       └── transactions/
 │   ├── hooks/                    # Custom React hooks
-│   ├── terminal/                 # Interactive terminal page
-│   ├── utils/                    # Utility functions
-│   ├── whitepaper/               # Bitcoin whitepaper page
+│   ├── stack-lab/                 # Interactive Stack Lab page
+│   ├── terminal/                  # Interactive terminal page
+│   ├── utils/                     # Utility functions
+│   ├── whitepaper/                # Bitcoin whitepaper page
 │   ├── globals.css               # Global styles
 │   ├── layout.tsx                # Root layout
 │   └── page.tsx                  # Home page
@@ -172,9 +199,9 @@ bplusplus/
 │   └── generate-md-content.js
 ├── link-analysis.json            # Generated link analysis report
 ├── next.config.js
+├── package.json
 ├── tailwind.config.ts
-├── tsconfig.json
-└── package.json
+└── tsconfig.json
 ```
 
 ## Documentation Structure

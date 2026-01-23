@@ -120,6 +120,12 @@ export default function HorizontalNav() {
                   Bitcoin CLI
                 </Link>
                 <Link
+                  href="/stack-lab"
+                  className="btn-secondary-sm"
+                >
+                  Stack Lab
+                </Link>
+                <Link
                   href="/author"
                   className="btn-secondary-sm"
                 >

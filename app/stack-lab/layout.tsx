@@ -1,0 +1,22 @@
+import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
+import { generatePageMetadata } from '@/app/utils/metadata'
+import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
+
+export const metadata: Metadata = generatePageMetadata({
+  title: 'Stack Lab',
+  description: 'Interactive Bitcoin Script playground with drag-and-drop OP codes and real-time stack visualization',
+  path: '/stack-lab',
+})
+
+export default function StackLabLayout({
+  children,
+}: {
+  children: ReactNode
+}) {
+  return (
+    <DocsLayoutWrapper>
+      {children}
+    </DocsLayoutWrapper>
+  )
+}

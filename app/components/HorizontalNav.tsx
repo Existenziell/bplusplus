@@ -102,17 +102,12 @@ export default function HorizontalNav() {
                   </div>
                 )
               })}
-              <div className="mb-2">
-                <div className="flex items-center">
-                  <span className="w-5" />
-                  <Link
-                    href="/docs/glossary"
-                    className="font-medium text-zinc-800 dark:text-zinc-200 hover:text-btc transition-colors"
-                  >
-                    Glossary
-                  </Link>
-                </div>
-              </div>
+              <Link
+                href="/docs/glossary"
+                className="font-medium text-zinc-800 dark:text-zinc-200 hover:text-btc transition-colors pl-7"
+              >
+                Glossary
+              </Link>
             </div>
 
             {/* Quick Links Section - Prominent at the bottom */}

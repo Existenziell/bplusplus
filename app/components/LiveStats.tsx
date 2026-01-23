@@ -129,7 +129,7 @@ export default function LiveStats() {
     {
       label: 'Sats/USD',
       value: satsPerUSD ? formatNumber(satsPerUSD) : null,
-      href: '/docs/glossary#satoshi',
+      href: '/docs/glossary#sat-satoshi',
     },
   ]
 

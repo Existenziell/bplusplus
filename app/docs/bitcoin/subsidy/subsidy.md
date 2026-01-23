@@ -242,7 +242,7 @@ The limit arises from:
 - Halving interval: 210,000 blocks
 - Geometric series sum: 50 × 210,000 × 2 = 21,000,000
 
-After approximately 64 halvings (around year 2140), the subsidy drops below 1 [satoshi](/docs/glossary#satoshi) and becomes zero.
+After approximately 64 halvings (around year 2140), the subsidy drops below 1 [satoshi](/docs/glossary#sat-satoshi) and becomes zero.
 
 ---
 

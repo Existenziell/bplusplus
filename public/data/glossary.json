@@ -757,11 +757,7 @@
   },
   "sat-satoshi": {
     "term": "Sat (Satoshi)",
-    "definition": "A satoshi, or \"sat,\" is the smallest unit of bitcoin, equal to one hundred-millionth of a bitcoin (0.00000001 BTC). Named after Bitcoin's creator, Satoshi Nakamoto, sats are used to measure small amounts of bitcoin."
-  },
-  "satoshi": {
-    "term": "Satoshi",
-    "definition": "The smallest unit of Bitcoin, representing 0.00000001 BTC (one hundred millionth of a Bitcoin). Named after Bitcoin's pseudonymous creator, Satoshi Nakamoto, this denomination enables Bitcoin to be used for micropayments despite any future price appreciation...."
+    "definition": "A satoshi, or \"sat,\" is the smallest unit of bitcoin, equal to one hundred-millionth of a bitcoin (0.00000001 BTC). Named after Bitcoin's pseudonymous creator, Satoshi Nakamoto, sats are used to measure small amounts of bitcoin...."
   },
   "satoshi-nakamoto": {
     "term": "Satoshi Nakamoto",

@@ -109,19 +109,19 @@ export default function HorizontalNav() {
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
                   href="/author"
-                  className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded transition-colors"
+                  className="btn-secondary-sm"
                 >
                   About B++
                 </Link>
                 <Link
                   href="/whitepaper"
-                  className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded transition-colors"
+                  className="btn-secondary-sm"
                 >
                   Whitepaper
                 </Link>
                 <Link
                   href="/terminal"
-                  className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded transition-colors"
+                  className="btn-secondary-sm"
                 >
                   Bitcoin CLI
                 </Link>

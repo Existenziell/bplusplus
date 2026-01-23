@@ -46,8 +46,16 @@ body {
     @apply inline-flex items-center gap-2 justify-center px-6 py-3 bg-btc text-zinc-900 font-semibold rounded-md hover:bg-btc/90 transition-colors hover:no-underline;
   }
 
+  .btn-primary-sm {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-btc hover:bg-btc/90 text-zinc-900 font-semibold rounded transition-colors;
+  }
+
   .btn-secondary {
     @apply inline-flex items-center gap-2 justify-center px-6 py-3 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline;
+  }
+
+  .btn-secondary-sm {
+    @apply inline-flex items-center gap-2 justify-center px-4 py-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline;
   }
 
   /* Text Utilities */
@@ -499,6 +507,7 @@ main > div > div > h1:first-child {
   @apply text-sm font-mono text-zinc-700 dark:text-zinc-300 flex-1 break-all;
 }
 
+/* Legacy class - use .btn-primary-sm instead */
 .author-copy-button {
-  @apply inline-flex items-center gap-2 px-4 py-2 bg-btc hover:bg-btc/90 text-zinc-900 font-semibold rounded transition-colors;
+  @apply btn-primary-sm;
 }

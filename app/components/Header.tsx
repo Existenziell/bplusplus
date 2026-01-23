@@ -1,14 +1,16 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import ThemeToggle from '@/app/components/ThemeToggle'
 import Breadcrumbs from '@/app/components/Breadcrumbs'
 import DownloadMarkdownButton from '@/app/components/DownloadMarkdownButton'
 
-interface HeaderProps {
-  showBreadcrumbs?: boolean
-}
+export default function Header() {
+  const pathname = usePathname()
+  const showBreadcrumbs = pathname?.startsWith('/docs') ?? false
 
-export default function Header({ showBreadcrumbs = false }: HeaderProps) {
   return (
     <>
       <header className="mb-4">

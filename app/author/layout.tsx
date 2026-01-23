@@ -16,7 +16,7 @@ export default function AuthorLayout({
   children: ReactNode
 }) {
   return (
-    <DocsLayoutWrapper contentPadding="large">
+    <DocsLayoutWrapper>
       {children}
     </DocsLayoutWrapper>
   )

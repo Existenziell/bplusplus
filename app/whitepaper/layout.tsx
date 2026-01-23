@@ -15,7 +15,7 @@ export default function WhitepaperLayout({
   children: ReactNode
 }) {
   return (
-    <DocsLayoutWrapper contentPadding="large">
+    <DocsLayoutWrapper>
       {children}
     </DocsLayoutWrapper>
   )

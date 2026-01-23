@@ -23,8 +23,8 @@ function findActiveSectionHref(pathname: string): string | null {
 
 // Static navigation links
 const staticLinks = [
-  { href: '/whitepaper', title: 'Bitcoin Whitepaper' },
-  { href: '/terminal', title: 'Bitcoin CLI Terminal' },
+  { href: '/whitepaper', title: 'Whitepaper' },
+  { href: '/terminal', title: 'CLI Terminal' },
   { href: '/stack-lab', title: 'Stack Lab' },
 ]
 

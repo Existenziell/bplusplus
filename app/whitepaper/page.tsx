@@ -4,7 +4,7 @@ import { DownloadPDFIcon, HomeIcon } from '@/app/components/Icons'
 
 export default function WhitepaperPage() {
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-4xl mx-auto">
           {/* Title */}
           <div className="text-center mb-6">
             <h1 className="heading-page text-center mb-2">

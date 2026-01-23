@@ -7,7 +7,7 @@ export default function DocsLayout({
   children: ReactNode
 }) {
   return (
-    <DocsLayoutWrapper showBreadcrumbs showPageNavigation>
+    <DocsLayoutWrapper showPageNavigation>
       {children}
     </DocsLayoutWrapper>
   )

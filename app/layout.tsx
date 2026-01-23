@@ -6,6 +6,7 @@ import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Header from '@/app/components/Header'
 import Notification from '@/app/components/Notification'
 import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
 // Import the pre-generated glossary data (generated at build time by scripts/generate-glossary-data.js)
@@ -93,6 +94,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <GlossaryProvider>
             <Notification />
+            <Header />
             {children}
             <Analytics />
             <SpeedInsights />

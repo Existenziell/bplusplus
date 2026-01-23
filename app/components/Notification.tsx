@@ -6,6 +6,7 @@ interface NotificationState {
   show: boolean
   text: string
   isError: boolean
+  exiting: boolean
 }
 
 // Custom event for showing notifications
@@ -27,6 +28,18 @@ export function showNotification(text: string, isError = false) {
   )
 }
 
+const CheckIcon = () => (
+  <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+  </svg>
+)
+
+const XIcon = () => (
+  <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+)
+
 /**
  * Self-contained notification component.
  * Listens for custom events - no context needed.
@@ -36,28 +49,25 @@ export default function Notification() {
     show: false,
     text: '',
     isError: false,
+    exiting: false,
   })
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout | null = null
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
 
     const handleNotification = (event: CustomEvent<NotificationDetail>) => {
-      // Clear any existing timeout
-      if (timeoutId) {
-        clearTimeout(timeoutId)
-      }
+      if (timeoutId) clearTimeout(timeoutId)
 
-      // Show the notification
       setState({
         show: true,
         text: event.detail.text,
         isError: event.detail.isError ?? false,
+        exiting: false,
       })
 
-      // Auto-hide after delay
       const hideDelay = event.detail.isError ? 2000 : 3000
       timeoutId = setTimeout(() => {
-        setState(prev => ({ ...prev, show: false }))
+        setState(prev => ({ ...prev, exiting: true }))
         timeoutId = null
       }, hideDelay)
     }
@@ -66,25 +76,40 @@ export default function Notification() {
 
     return () => {
       window.removeEventListener(NOTIFICATION_EVENT, handleNotification as (e: Event) => void)
-      if (timeoutId) {
-        clearTimeout(timeoutId)
-      }
+      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [])
+
+  const handleAnimationEnd = () => {
+    setState(prev => (prev.exiting ? { ...prev, show: false, exiting: false } : prev))
+  }
 
   if (!state.show) return null
 
   const message = state.isError
-    ? 'Failed to copy to clipboard'
+    ? (state.text || 'Failed to copy to clipboard')
     : `${state.text} copied to clipboard`
+
+  const isError = state.isError
 
   return (
     <div
-      className={`fixed top-0 left-0 right-0 w-full text-center py-4 sm:py-6 px-4 transition-all opacity-80 z-50 text-sm sm:text-base ${
-        state.isError ? 'bg-red-600 text-white' : 'bg-btc text-zinc-800'
-      }`}
+      role="status"
+      aria-live="polite"
+      onAnimationEnd={handleAnimationEnd}
+      className={`
+        notification-toast fixed left-1/2 bottom-6 z-50 -translate-x-1/2
+        flex items-center gap-3 px-5 py-4 rounded-lg text-base font-medium
+        shadow-lg ring-1 max-w-[calc(100vw-2rem)]
+        ${state.exiting ? 'animate-toast-out' : 'animate-toast-in'}
+        ${isError
+          ? 'bg-red-50 dark:bg-red-950/90 text-red-700 dark:text-red-300 ring-red-200 dark:ring-red-800'
+          : 'bg-btc text-zinc-900 ring-amber-800/30 dark:ring-amber-600/40'
+        }
+      `}
     >
-      {message}
+      {isError ? <XIcon /> : <CheckIcon />}
+      <span>{message}</span>
     </div>
   )
 }

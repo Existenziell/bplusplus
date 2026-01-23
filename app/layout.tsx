@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: 'B++',
     images: [
       {
-        url: '/og/og.webp',
+        url: '/og/og.png',
         width: 1200,
         height: 630,
         alt: 'B++ - Bitcoin Education',
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'B++',
     description: 'Bitcoin Education | Education without borders.',
-    images: ['/og/og.webp'],
+    images: ['/og/og.png'],
   },
 }
 

@@ -693,7 +693,7 @@ export default function TerminalPage() {
       <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">
         Interactive Bitcoin RPC playground
       </p>
-
+      
       {/* Terminal Window */}
       <div className="rounded-lg overflow-hidden border border-zinc-300 dark:border-zinc-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
           {/* Terminal Header */}
@@ -789,6 +789,11 @@ export default function TerminalPage() {
             </button>
           </form>
       </div>
+
+      {/* Info */}
+      <p className="text-sm text-zinc-600 dark:text-zinc-400 text-center mt-12 max-w-2xl mx-auto">
+        This emulates <code className="font-mono text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.
+      </p>
 
       {/* Back Link */}
       <div className="mt-12 text-center flex flex-row items-center justify-center gap-2">

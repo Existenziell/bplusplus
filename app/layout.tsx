@@ -2,6 +2,7 @@ import { Ubuntu } from 'next/font/google'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
+import { DEFAULT_OG_IMAGE } from '@/app/utils/metadata'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
     siteName: 'B++',
     images: [
       {
-        url: '/og/og.png',
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: 'B++ - Bitcoin Education',
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'B++',
     description: 'Bitcoin Education | Education without borders.',
-    images: ['/og/og.png'],
+    images: [DEFAULT_OG_IMAGE],
   },
 }
 

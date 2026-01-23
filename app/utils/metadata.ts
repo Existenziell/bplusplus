@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 const SITE_URL = 'https://bplusplus.info'
-const DEFAULT_OG_IMAGE = '/og/og.png'
+export const DEFAULT_OG_IMAGE = '/og/og.png?v=2'
 
 export function generatePageMetadata({
   title,

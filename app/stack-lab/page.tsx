@@ -11,8 +11,7 @@ import ScriptTemplates from '@/app/components/stack-lab/ScriptTemplates'
 import StackLabCard from '@/app/components/stack-lab/StackLabCard'
 import { ScriptInterpreter, type StackItem, type ExecutionStep } from '@/app/utils/stackLabInterpreter'
 import { parseStackItem } from '@/app/utils/stackLabFormatters'
-import { ChevronDown, HomeIcon, InfoIcon } from '@/app/components/Icons'
-import Link from 'next/link'
+import { ChevronDown } from '@/app/components/Icons'
 
 export default function StackLabPage() {
   const [isMounted, setIsMounted] = useState(false)
@@ -372,24 +371,6 @@ export default function StackLabPage() {
           </DragOverlay>
         </div>
       </DndContext>
-
-      {/* Links */}
-      <div className="mt-12 text-center flex flex-row items-center justify-center gap-2">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
-        >
-          <HomeIcon />
-          <span>Back Home</span>
-        </Link>
-        <span className="text-zinc-400 dark:text-zinc-500">•</span>
-        <Link
-          href="/terminal"
-          className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
-        >
-          Bitcoin CLI Terminal
-        </Link>
-      </div>
 
       {/* Mobile Warning Modal */}
       {showMobileWarning && !mobileWarningDismissed && (

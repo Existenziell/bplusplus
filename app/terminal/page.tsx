@@ -2,9 +2,7 @@
 
 import { useState, useRef, useEffect, KeyboardEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import LiveStats from '../components/LiveStats'
-import { HomeIcon, CopyIcon } from '../components/Icons'
-import Link from 'next/link'
+import { CopyIcon } from '../components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
 
 // Available commands with descriptions
@@ -821,24 +819,6 @@ export default function TerminalPage() {
       <p className="text-sm text-zinc-600 dark:text-zinc-400 text-center mt-12 max-w-2xl mx-auto">
         This emulates <code className="font-mono text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.<br />Tab autocomplete is available.
       </p>
-
-      {/* Back Link */}
-      <div className="mt-12 text-center flex flex-row items-center justify-center gap-2">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
-        >
-          <HomeIcon />
-          <span>Back Home</span>
-        </Link>
-        <span className="text-zinc-400 dark:text-zinc-500">•</span>
-        <Link
-          href="/stack-lab"
-          className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
-        >
-          Stack Lab
-        </Link>
-      </div>
 
       {/* Mobile Warning Modal */}
       {showMobileWarning && !mobileWarningDismissed && (

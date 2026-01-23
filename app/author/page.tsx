@@ -1,9 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { CopyIcon, HomeIcon } from '@/app/components/Icons'
+import { CopyIcon } from '@/app/components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
-import Link from 'next/link'
 
 const NPUB_ADDRESS = 'npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he'
 const BITCOIN_ADDRESS = 'bc1qtu2z558uwvutm6xqjdvv7jrjcg9020hc0964wl'
@@ -92,11 +91,10 @@ export default function AuthorPage() {
                   </code>
                   <button
                     onClick={handleCopyNpub}
-                    className="author-copy-button"
+                    className="inline-flex items-center justify-center p-2 rounded bg-btc hover:bg-btc/90 text-zinc-900 transition-colors shrink-0"
                     aria-label="Copy npub to clipboard"
                   >
                     <CopyIcon />
-                    Copy
                   </button>
                 </div>
               </div>
@@ -123,11 +121,10 @@ export default function AuthorPage() {
                     </code>
                     <button
                       onClick={handleCopyBitcoin}
-                      className="author-copy-button"
+                      className="inline-flex items-center justify-center p-2 rounded bg-btc hover:bg-btc/90 text-zinc-900 transition-colors shrink-0"
                       aria-label="Copy Bitcoin address to clipboard"
                     >
                       <CopyIcon />
-                      Copy
                     </button>
                   </div>
                 </div>
@@ -143,22 +140,15 @@ export default function AuthorPage() {
                     </code>
                     <button
                       onClick={handleCopyNostr}
-                      className="author-copy-button"
+                      className="inline-flex items-center justify-center p-2 rounded bg-btc hover:bg-btc/90 text-zinc-900 transition-colors shrink-0"
                       aria-label="Copy Nostr address to clipboard"
                     >
                       <CopyIcon />
-                      Copy
                     </button>
                   </div>
                 </div>
               </div>
             </section>
-            <div className="mt-20 text-center flex flex-row items-center justify-center gap-2">
-              <Link href="/" className="inline-flex items-center gap-2 text-btc hover:underline transition-colors">
-                <HomeIcon />
-                <span>Back Home</span>
-              </Link>
-            </div>
     </div>
   )
 }

@@ -80,6 +80,8 @@ export default function TerminalPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [exampleBlockHash, setExampleBlockHash] = useState<string>('')
   const [exampleTxId, setExampleTxId] = useState<string>('')
+  const [showMobileWarning, setShowMobileWarning] = useState(false)
+  const [mobileWarningDismissed, setMobileWarningDismissed] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const outputRef = useRef<HTMLDivElement>(null)
   const lastTabPressRef = useRef<number>(0)
@@ -164,6 +166,31 @@ export default function TerminalPage() {
     const timeout = setTimeout(fetchExamples, 2000)
     return () => clearTimeout(timeout)
   }, [])
+
+  // Mobile warning: check viewport and persisted dismiss
+  useEffect(() => {
+    const dismissed = localStorage.getItem('terminal-mobile-warning-dismissed')
+    if (dismissed === 'true') {
+      setMobileWarningDismissed(true)
+      return
+    }
+    const checkMobile = () => {
+      if (window.innerWidth < 768) { // md breakpoint
+        setShowMobileWarning(true)
+      }
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const handleDismissMobileWarning = (remember: boolean) => {
+    setShowMobileWarning(false)
+    setMobileWarningDismissed(true)
+    if (remember) {
+      localStorage.setItem('terminal-mobile-warning-dismissed', 'true')
+    }
+  }
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -792,19 +819,54 @@ export default function TerminalPage() {
 
       {/* Info */}
       <p className="text-sm text-zinc-600 dark:text-zinc-400 text-center mt-12 max-w-2xl mx-auto">
-        This emulates <code className="font-mono text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.
+        This emulates <code className="font-mono text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.<br />Tab autocomplete is available.
       </p>
 
       {/* Back Link */}
       <div className="mt-12 text-center flex flex-row items-center justify-center gap-2">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+        >
+          <HomeIcon />
+          <span>Back Home</span>
+        </Link>
+        <span className="text-zinc-400 dark:text-zinc-500">•</span>
+        <Link
+          href="/stack-lab"
+          className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+        >
+          Stack Lab
+        </Link>
+      </div>
+
+      {/* Mobile Warning Modal */}
+      {showMobileWarning && !mobileWarningDismissed && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+              Bitcoin CLI Terminal is not optimized for small screens. The terminal interface and keyboard shortcuts (Tab autocomplete, arrow keys for history) work best on desktop or tablet devices with larger screens.
+            </p>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+              You can still use the terminal on mobile, but the experience may be limited. For the best experience, please use a desktop or tablet.
+            </p>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => handleDismissMobileWarning(false)}
+                className="w-full px-4 py-2 bg-btc text-zinc-900 font-semibold rounded hover:bg-btc/80 transition-colors"
               >
-                <HomeIcon />
-                <span>Back Home</span>
-            </Link>
+                Continue Anyway
+              </button>
+              <button
+                onClick={() => handleDismissMobileWarning(true)}
+                className="w-full px-4 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 rounded hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors text-sm"
+              >
+                Continue & Don&apos;t Show Again
+              </button>
+            </div>
           </div>
+        </div>
+      )}
     </>
   )
 }

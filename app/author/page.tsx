@@ -51,9 +51,10 @@ export default function AuthorPage() {
                   About
                 </h2>
                 <p className="text-zinc-800 dark:text-zinc-200 leading-7 mb-4">
-                  I have been traveling the world for the last 6 years. I often live in poorer, remote communities and having been financially vulnerable myself for some time, I started thinking about money. I got a grasp of what it entails to earn a living day by day, the uncertainty and the realization how inaccessible money can be.
-                  {' '}But then I found Bitcoin. It gave me hope. It gave me a way to build a life on my own terms. I&apos;m now building a life on Bitcoin.
-                  {' '}This site represents my contribution and dedication to the Bitcoin community.
+                  I have been traveling the world for the last 6 years. I often live in poorer, remote communities and having been financially vulnerable myself for some time, 
+                  I started thinking about money. I got a grasp of what it entails to earn a living day by day, the uncertainty and the realization how inaccessible money can be.
+                  But then I found Bitcoin. It gave me hope. It gave me a way to build a life on my own terms. I&apos;m now building a life on Bitcoin.
+                  This site represents my contribution and dedication to the Bitcoin community. Stay humble, stack sats.
                 </p>
               </div>
             </section>

@@ -67,15 +67,16 @@ function QuoteRotator() {
         setQuote(getNextQuote())
         setIsVisible(true)
       }, 500)
-    }, 8000)
+    }, 2000)
     return () => clearInterval(interval)
   }, [])
 
   // Don't render quote until mounted to avoid hydration mismatch
+  // Fixed height prevents layout jump on mobile when quotes of different lengths rotate
   if (!isMounted) {
     return (
       <blockquote
-        className="text-xl text-secondary text-center max-w-4xl mx-auto italic min-h-[4rem] md:min-h-[4rem]"
+        className="text-xl text-secondary text-center max-w-4xl mx-auto italic h-[8rem] md:h-[6rem] flex flex-col justify-center"
         aria-live="polite"
         aria-atomic="true"
       >
@@ -86,7 +87,7 @@ function QuoteRotator() {
 
   return (
     <blockquote
-      className={`text-xl text-secondary text-center max-w-4xl mx-auto italic min-h-[4rem] md:min-h-[4rem] transition-opacity duration-500 ${
+      className={`text-xl text-secondary text-center max-w-4xl mx-auto italic h-[9rem] md:h-[6rem] flex flex-col justify-center transition-opacity duration-500 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       aria-live="polite"

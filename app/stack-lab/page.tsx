@@ -302,7 +302,9 @@ export default function StackLabPage() {
           {/* Execution Log */}
           {executionSteps.length > 0 && (
             <ExecutionLog 
-              steps={executionSteps} 
+              steps={executionResult !== undefined
+                ? executionSteps
+                : executionSteps.slice(0, currentStepIndex + 1)}
               currentStep={currentStepIndex}
               executionResult={executionResult}
             />

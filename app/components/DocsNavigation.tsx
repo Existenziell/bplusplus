@@ -1,51 +1,78 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { navItems, type NavSection } from '@/app/utils/navigation'
+import { navItems } from '@/app/utils/navigation'
+import { ArrowRight } from '@/app/components/Icons'
 
-export type { NavSection as NavItem }
-
-export { navItems }
+// Shared pathname matching logic
+function matchesPath(pathname: string, href: string): boolean {
+  return pathname === href || pathname.startsWith(href + '/')
+}
 
 // Find which section contains the current path
 function findActiveSectionHref(pathname: string): string | null {
   for (const section of navItems) {
-    if (pathname === section.href || pathname.startsWith(section.href + '/')) {
+    if (matchesPath(pathname, section.href)) {
       return section.href
     }
   }
   return null
 }
 
+// Static navigation links
+const staticLinks = [
+  { href: '/whitepaper', title: 'Bitcoin Whitepaper' },
+  { href: '/terminal', title: 'Bitcoin CLI Terminal' },
+]
+
+const footerLinks = [
+  { href: '/docs/glossary', title: 'Glossary' },
+  { href: '/author', title: 'About B++' },
+]
+
+// Helper function to get link className based on active state
+function getLinkClassName(isActive: boolean, size: 'default' | 'sm' = 'default'): string {
+  const baseClasses = size === 'sm' 
+    ? 'block text-sm py-1 leading-tight transition-colors'
+    : 'block py-1 leading-tight transition-colors'
+  
+  if (isActive) {
+    return `${baseClasses} text-btc font-semibold`
+  }
+  
+  return size === 'sm'
+    ? `${baseClasses} text-secondary hover:text-btc hover:underline`
+    : `${baseClasses} text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline`
+}
+
 export default function DocsNavigation() {
   const pathname = usePathname()
 
+  // Memoize active section calculation
+  const activeSection = useMemo(() => findActiveSectionHref(pathname), [pathname])
+
   // Initialize with the section that contains the current page expanded
   const [expandedSections, setExpandedSections] = useState<Set<string>>(() => {
-    const activeSection = findActiveSectionHref(pathname)
     return activeSection ? new Set([activeSection]) : new Set()
   })
 
   // Update expanded sections when pathname changes (e.g., navigation)
   useEffect(() => {
-    const activeSection = findActiveSectionHref(pathname)
-    if (activeSection && !expandedSections.has(activeSection)) {
+    if (activeSection) {
       setExpandedSections(prev => {
-        const newSet = new Set(prev)
-        newSet.add(activeSection)
-        return newSet
+        if (!prev.has(activeSection)) {
+          const newSet = new Set(prev)
+          newSet.add(activeSection)
+          return newSet
+        }
+        return prev
       })
     }
-  }, [pathname, expandedSections])
+  }, [activeSection])
 
-  const isActive = (href: string) => {
-    if (pathname === href) return true
-    // Check if current path starts with this href (for parent sections)
-    if (pathname.startsWith(href + '/')) return true
-    return false
-  }
+  const isActive = (href: string) => matchesPath(pathname, href)
 
   const toggleSection = (href: string) => {
     setExpandedSections(prev => {
@@ -66,30 +93,16 @@ export default function DocsNavigation() {
       <div>
         <div className="mb-6">
           <ul className="space-y-1">
-            <li>
-              <Link
-                href="/whitepaper"
-                className={`block py-1 leading-tight transition-colors ${
-                  pathname === '/whitepaper'
-                    ? 'text-btc font-semibold'
-                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
-                }`}
-              >
-                Bitcoin Whitepaper
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/terminal"
-                className={`block py-1 leading-tight transition-colors ${
-                  pathname === '/terminal'
-                    ? 'text-btc font-semibold'
-                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
-                }`}
-              >
-                Bitcoin CLI Terminal
-              </Link>
-            </li>
+            {staticLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={getLinkClassName(isActive(link.href))}
+                >
+                  {link.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <h2 className="text-base text-zinc-700 dark:text-zinc-300 mb-1">
@@ -110,47 +123,31 @@ export default function DocsNavigation() {
                       className="mr-1 p-1 text-zinc-500 hover:text-btc transition-colors"
                       aria-label={expanded ? 'Collapse section' : 'Expand section'}
                     >
-                      <svg
+                      <ArrowRight
                         className={`w-3 h-3 transition-transform ${expanded ? 'rotate-90' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                      />
                     </button>
                   )}
                   <Link
                     href={item.href}
                     onClick={() => hasChildren && !expanded && toggleSection(item.href)}
-                    className={`block py-1 leading-tight transition-colors ${
-                      itemActive
-                        ? 'text-btc font-semibold'
-                        : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
-                    }`}
+                    className={getLinkClassName(itemActive)}
                   >
                     {item.title}
                   </Link>
                 </div>
                 {hasChildren && expanded && (
                   <ul className="ml-5 mt-1 space-y-0">
-                    {item.children!.map((child) => {
-                      const childActive = pathname === child.href
-                      return (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            className={`block text-sm py-1 leading-tight transition-colors ${
-                              childActive
-                                ? 'text-btc font-semibold'
-                                : 'text-secondary hover:text-btc hover:underline'
-                            }`}
-                          >
-                            {child.title}
-                          </Link>
-                        </li>
-                      )
-                    })}
+                    {item.children!.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          className={getLinkClassName(isActive(child.href), 'sm')}
+                        >
+                          {child.title}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 )}
               </li>
@@ -160,33 +157,19 @@ export default function DocsNavigation() {
       </div>
 
       <div className="mt-6">
-          <ul className="space-y-1">
-            <li>
+        <ul className="space-y-1">
+          {footerLinks.map((link) => (
+            <li key={link.href}>
               <Link
-                href="/docs/glossary"
-                className={`block py-1 leading-tight transition-colors ${
-                  pathname === '/docs/glossary'
-                    ? 'text-btc font-semibold'
-                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
-                }`}
+                href={link.href}
+                className={getLinkClassName(isActive(link.href))}
               >
-                Glossary
+                {link.title}
               </Link>
             </li>
-            <li>
-              <Link
-                href="/author"
-                className={`block py-1 leading-tight transition-colors ${
-                  pathname === '/author'
-                    ? 'text-btc font-semibold'
-                    : 'text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline'
-                }`}
-              >
-                About B++
-              </Link>
-            </li>
-          </ul>
-        </div>
+          ))}
+        </ul>
+      </div>
     </nav>
   )
 }

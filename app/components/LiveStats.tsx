@@ -117,17 +117,6 @@ export default function LiveStats() {
       href: '/docs/mining/mempool',
     },
     {
-      label: 'Bitcoin',
-      value: 'Whitepaper',
-      href: '/whitepaper',
-    },
-    {
-      label: 'GitHub',
-      value: 'Source Code',
-      href: 'https://github.com/bitcoin/bitcoin',
-      external: true,
-    },
-    {
       label: 'Hex',
       value: BTC_HEX,
       onClick: () => copyToClipboard(BTC_HEX, BTC_HEX),
@@ -215,7 +204,7 @@ export default function LiveStats() {
       <h3 className="heading-section text-center mb-4">
         Live Network Stats
       </h3>
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
         {stats.map((stat) => (
           <StatCard key={stat.label} stat={stat} />
         ))}

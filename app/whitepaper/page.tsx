@@ -3,11 +3,13 @@ import Link from 'next/link'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import { DownloadPDFIcon, HomeIcon } from '@/app/components/Icons'
+import { generatePageMetadata } from '@/app/utils/metadata'
 
-export const metadata = {
-  title: 'Bitcoin Whitepaper - B++',
+export const metadata = generatePageMetadata({
+  title: 'Bitcoin Whitepaper',
   description: 'Bitcoin: A Peer-to-Peer Electronic Cash System by Satoshi Nakamoto',
-}
+  path: '/whitepaper',
+})
 
 export default function WhitepaperPage() {
   return (

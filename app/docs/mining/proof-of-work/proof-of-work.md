@@ -1,6 +1,6 @@
 # Proof-of-Work Mechanism
 
-Bitcoin uses a **proof-of-work** [consensus](/docs/glossary#consensus) mechanism where miners compete to solve a cryptographic puzzle. This process secures the network and validates transactions.
+Bitcoin uses a **proof-of-work** consensus mechanism where miners compete to solve a cryptographic puzzle. This process secures the network and validates transactions.
 
 ## How It Works
 

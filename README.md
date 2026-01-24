@@ -34,11 +34,11 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 
 ## Interactive Tools
 
-The docs include **Bitcoin CLI Terminal**, **Stack Lab**, and a **Denominations Calculator**. They let you run commands, build scripts, and convert units in the browser (no local node, IDE, or extra setup). Use them to try concepts as you read, debug your mental model, or prepare for real tooling.
+The page includes **Bitcoin CLI Terminal**, **Stack Lab**, and a **Denominations Calculator**. They let you run commands, build scripts, and convert units in the browser, without the need for a local node, IDE, or extra setup. Use them to try concepts as you read, debug your mental model, or prepare for real tooling.
 
 ### Bitcoin CLI Terminal
 
-Run `getblockcount`, `getblock`, `getrawtransaction`, `getmempoolinfo`, and other Bitcoin Core RPC commands in the browser. Connects to a public mainnet node (no local node or setup). Type `help` for the command list.
+Run `getblockcount`, `getblock`, `getrawtransaction`, `getmempoolinfo`, and other Bitcoin Core RPC commands in the browser. Connects to a public mainnet node (no local node or setup). Type `help` for the command list. Supports tab autocomplete.
 
 ### Stack Lab
 

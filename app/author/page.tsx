@@ -17,7 +17,7 @@ export default function AuthorPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div>
             {/* Hero Section */}
             <div className="text-center mb-12">
               <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden border-2 border-zinc-300 dark:border-zinc-700">

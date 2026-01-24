@@ -14,7 +14,7 @@ export default async function GlossaryPage() {
   const content = await readMarkdown('app/docs/glossary/terms.md')
 
   return (
-    <div className="max-w-4xl">
+    <div>
       <h1 className="heading-page">Glossary</h1>
       <GlossaryRenderer content={content} />
     </div>

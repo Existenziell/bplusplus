@@ -4,7 +4,6 @@ import { useState, useRef, useEffect, KeyboardEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { CopyIcon } from '../components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
-import MarkdownRenderer from '@/app/components/MarkdownRenderer'
 
 const COMMANDS: Record<string, string> = {
   getblockchaininfo: 'Returns info about the current state of the blockchain',
@@ -748,17 +747,6 @@ export default function TerminalPage() {
       <p className="text-sm text-zinc-600 dark:text-zinc-400 text-center mt-12 max-w-2xl mx-auto">
         This emulates <code className="font-mono text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.<br />Tab autocomplete is available.
       </p>
-
-      <div className="mt-12 max-w-2xl mx-auto">
-        <MarkdownRenderer
-          content={`---
-## Related Topics
-
-- [RPC Commands](/docs/bitcoin/rpc) - Full RPC reference
-- [Stack Lab](/stack-lab) - Interactive Bitcoin Script playground
-`}
-        />
-      </div>
 
       {showMobileWarning && !mobileWarningDismissed && (
         <div className="modal-overlay flex items-center justify-center p-4">

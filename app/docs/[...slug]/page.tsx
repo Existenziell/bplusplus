@@ -79,7 +79,7 @@ export default async function DocPage({ params }: PageProps) {
     const content = await readMarkdown(mdFile)
 
     return (
-      <div className="max-w-4xl">
+      <div>
         <MarkdownRenderer content={content} />
       </div>
     )

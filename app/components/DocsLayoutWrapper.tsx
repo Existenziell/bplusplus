@@ -39,7 +39,11 @@ export default function DocsLayoutWrapper({
           </div>
           <div className="flex-1 min-w-0">
             <MobileNav />
-            {children}
+            <div
+              className={`mx-auto w-full transition-[max-width] duration-200 ease-in-out ${isSidebarCollapsed ? 'max-w-6xl' : 'max-w-4xl'}`}
+            >
+              {children}
+            </div>
             {showPageNavigation && <PageNavigation />}
           </div>
         </div>

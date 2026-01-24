@@ -18,8 +18,7 @@ export default function PageNavigation() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="cursor-pointer inline-flex items-center gap-2 text-btc hover:underline transition-colors"
         >
-          <UpArrow />
-          <span>Top</span>
+          <UpArrow className="w-8 h-8 " />
         </span>
       </div>
     )
@@ -40,8 +39,7 @@ export default function PageNavigation() {
             className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
           >
             <ArrowLeft />
-            <span className="hidden sm:inline">{previousPage.title}</span>
-            <span className="sm:hidden">Prev</span>
+            <span className="hidden md:inline">{previousPage.title}</span>
           </Link>
         ) : (
           <div />
@@ -54,8 +52,7 @@ export default function PageNavigation() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="cursor-pointer inline-flex items-center gap-2 text-btc hover:underline transition-colors"
         >
-          <UpArrow />
-          <span>Top</span>
+          <UpArrow className="w-8 h-8" />
         </span>
       </div>
 
@@ -66,7 +63,7 @@ export default function PageNavigation() {
             href={nextPage.href}
             className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
           >
-            <span>{nextPage.title}</span>
+            <span className="hidden md:inline">{nextPage.title}</span>
             <ArrowRight />
           </Link>
         ) : (

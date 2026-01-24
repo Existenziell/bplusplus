@@ -8,6 +8,8 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 - [What is B++](#what-is-b)
 - [Documentation](#documentation)
   - [Learning flow](#learning-flow)
+  - [Code snippets](#code-snippets)
+- [Search](#search)
 - [Interactive Tools](#interactive-tools)
   - [Bitcoin CLI Terminal](#bitcoin-cli-terminal)
   - [Stack Lab](#stack-lab)
@@ -16,7 +18,6 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 - [Getting Started](#getting-started)
 - [Scripts](#scripts)
 - [Testing](#testing)
-- [Prebuild scripts](#prebuild-scripts)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -26,6 +27,7 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 
 - **Documentation** — A Developer's Guide to Bitcoin
 - **Whitepaper** — Satoshi’s Bitcoin whitepaper.
+- **Search (⌘K)** — Find and jump to any doc, glossary term, or page. Press **Command+K** (Mac) or **Ctrl+K** (Windows/Linux).
 - **Bitcoin CLI Terminal** — Run Bitcoin Core RPC commands in the browser against a public mainnet node. No node setup. `/terminal`
 - **Stack Lab** — Interactive Bitcoin Script playground. Build and run locking/unlocking scripts in the browser; same model as on-chain validation. `/stack-lab`
 - **Denominations Calculator** — Convert between satoshis, bits, mBTC, BTC, and other units. On the Denominations doc. `/docs/fundamentals/denominations`
@@ -59,9 +61,21 @@ One dynamic route (`app/docs/[...slug]/page.tsx`) backed by `app/utils/navigatio
 
 **Controversies:** Protocol debates (OP_RETURN, Blocksize Wars), external critiques (Energy, Criminal Use), and defining events (Mt. Gox, Craig Wright). Order is flexible; the section explains how governance, values, and antifragility play out in practice.
 
+### Code snippets
+
+Many examples are shown in **five languages** (Python, Rust, C++, Go, JavaScript/TypeScript) via toggleable code blocks. Use the tabs above a snippet to switch to your stack—so you can copy, compare, or adapt examples without translating from another language.
+
+---
+
+## Search
+
+**Command+K** (Mac) or **Ctrl+K** (Windows/Linux) opens the search modal. It indexes docs, glossary terms, and key pages. Type a few characters, pick a result, and jump there. Also available via the search icon in the header.
+
 ---
 
 ## Interactive Tools
+
+The docs include **Bitcoin CLI Terminal**, **Stack Lab**, and a **Denominations Calculator**. They let you run commands, build scripts, and convert units in the browser—no local node, IDE, or extra setup. Use them to try concepts as you read, debug your mental model, or prepare for real tooling.
 
 ### Bitcoin CLI Terminal
 
@@ -98,7 +112,7 @@ npm install
 npm run dev    # → http://localhost:3000
 ```
 
-**Build:** `npm run build` runs the [prebuild scripts](#prebuild-scripts) (generate md-content, glossary, search index), then `next build`. Run `npm run start` for production.
+**Build:** `npm run build` generates md-content, glossary, and search index, then runs `next build`. Run `npm run start` for production.
 
 ---
 
@@ -107,7 +121,7 @@ npm run dev    # → http://localhost:3000
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Development server |
-| `npm run build` | Production build (prebuild + next build) |
+| `npm run build` | Production build |
 | `npm run start` | Production server |
 | `npm run test` | Unit + E2E |
 | `npm run test:unit` | Vitest (once) |
@@ -117,31 +131,6 @@ npm run dev    # → http://localhost:3000
 | `npm run test:e2e:ui` | Playwright UI |
 | `npm run lint` | ESLint |
 | `npm run analyze` | Bundle analysis |
-
----
-
-## Prebuild scripts
-
-On `npm run build`, the `prebuild` step runs:
-
-| Script | Input | Output | Purpose |
-|--------|-------|--------|---------|
-| `generate-md-content.js` | `navigation.ts`, `app/docs/**/*.md` | `public/data/md-content.json` | Docs for download API and `docs/[...slug]` |
-| `generate-glossary-data.js` | `app/docs/glossary/terms.md` | `public/data/glossary.json` | Glossary for tooltips (layout → `GlossaryContext`) |
-| `generate-search-index.js` | `md-content.json`, `glossary.json`, `navigation.ts` | `public/data/search-index.json` | Search index for `/api/search` |
-
-**Pipeline:** prebuild → those three scripts → `next build` (uses md-content, glossary, search-index). At runtime: `/api/download-md`, `/api/search`, and `docs/[...slug]` read from the generated JSON.
-
-**Shared:** `parse-doc-pages.js`, `slug.js`, `glossary-parse.js`, `search-index-helpers.js` (used by the scripts above).
-
-**Artifacts:** md-content.json → download-MD, docs/[...slug]; glossary.json → layout, GlossaryContext; search-index.json → /api/search.
-
-**Manual run:**
-```bash
-node scripts/generate-md-content.js
-node scripts/generate-glossary-data.js
-node scripts/generate-search-index.js   # run after the two above
-```
 
 ---
 

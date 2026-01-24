@@ -1,6 +1,6 @@
 # Taproot
 
-Taproot is a major Bitcoin protocol upgrade activated in November 2021 (block 709,632). It combines Schnorr signatures with MAST (Merkle Abstract Syntax Trees) to provide better privacy, efficiency, and flexibility for Bitcoin transactions.
+Taproot is a major Bitcoin protocol upgrade activated in November 2021 (block 709,632). It combines Schnorr signatures with MAST (Merkle Abstract Syntax Trees) to provide better privacy, efficiency, and flexibility for Bitcoin transactions. [Pieter Wuille](/docs/history/people#pieter-wuille) was a key designer (BIPs 340, 341, 342).
 
 ## What is Taproot?
 

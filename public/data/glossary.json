@@ -129,7 +129,7 @@
   },
   "btc": {
     "term": "BTC",
-    "definition": "The ticker symbol for bitcoin, representing the asset in trading pairs. It's also sometimes used as shorthand for the Bitcoin Core software. ---"
+    "definition": "The ticker symbol for bitcoin, representing the asset in trading pairs. It's also sometimes used as shorthand for the Bitcoin Core software. See Denominations for the full unit table and converter. ---"
   },
   "cltv-checklocktimeverify": {
     "term": "CLTV (CheckLockTimeVerify)",

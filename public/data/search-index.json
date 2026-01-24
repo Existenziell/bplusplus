@@ -201,9 +201,9 @@
   },
   {
     "path": "/docs/fundamentals/denominations",
-    "title": "Denomination Calculator",
+    "title": "Denominations",
     "section": "fundamentals",
-    "body": "Denomination Calculator Convert between Bitcoin and Lightning units: BTC, sats, bits (µBTC), millisats, and more. See Monetary Properties for the full denominations table. :::denomination-calculator :::"
+    "body": "Denominations Bitcoin is highly divisible: one bitcoin (BTC) equals 100 million of the smallest on-chain unit, the satoshi (sat). This design supports both large transfers and tiny amounts, and it scales as the nominal value of each unit changes over time. Common units include satoshis for small amounts, bits (µBTC, or one millionth of a BTC) for everyday thinking, and millibits (mBTC) or whole BTC for larger sums. Understanding how these units relate helps when reading fees, block rewards, and "
   },
   {
     "path": "/docs/fundamentals/incentives",
@@ -939,7 +939,7 @@
     "path": "/docs/glossary#btc",
     "title": "BTC",
     "section": "glossary",
-    "body": "The ticker symbol for bitcoin, representing the asset in trading pairs. It's also sometimes used as shorthand for the Bitcoin Core software. ---"
+    "body": "The ticker symbol for bitcoin, representing the asset in trading pairs. It's also sometimes used as shorthand for the Bitcoin Core software. See Denominations for the full unit table and converter. ---"
   },
   {
     "path": "/docs/glossary#cltv-checklocktimeverify",

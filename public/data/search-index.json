@@ -182,6 +182,12 @@
     "body": "Bitcoin as Timechain Bitcoin solves one of the most fundamental problems in distributed systems: how to order events in time without a central time source. In a decentralized network where nodes may have different clocks, network delays are unpredictable, and there's no trusted authority, determining the sequence of events is essential yet seemingly impossible. Bitcoin's solution is elegant: it creates a timechain, a cryptographically secured, decentralized ordering mechanism that enables "
   },
   {
+    "path": "/docs/fundamentals/utxos",
+    "title": "UTXO Model",
+    "section": "fundamentals",
+    "body": "The UTXO Model The UTXO (Unspent Transaction Output) model is one of Bitcoin's most fundamental and elegant design choices. Unlike traditional account-based systems where balances are stored in accounts, Bitcoin tracks ownership through discrete, spendable transaction outputs. Understanding UTXOs is essential to understanding how Bitcoin actually works. A UTXO is a transaction output that hasn't been spent yet. It represents the actual \"coins\" in Bitcoin's accounting model. When you \"have 1 "
+  },
+  {
     "path": "/docs/fundamentals/decentralization",
     "title": "Decentralization",
     "section": "fundamentals",
@@ -216,12 +222,6 @@
     "title": "Game Theory",
     "section": "fundamentals",
     "body": "Game Theory Game theory is the mathematical study of strategic decision-making. In Bitcoin, game theory explains why the network remains secure even when participants are anonymous, potentially malicious, and have no reason to trust each other. Bitcoin's design creates a system where rational self-interest naturally leads to honest behavior and network security. Why Game Theory Matters for Bitcoin Traditional financial systems rely on legal enforcement, trusted authorities, and institutional "
-  },
-  {
-    "path": "/docs/fundamentals/utxos",
-    "title": "UTXO Model",
-    "section": "fundamentals",
-    "body": "The UTXO Model The UTXO (Unspent Transaction Output) model is one of Bitcoin's most fundamental and elegant design choices. Unlike traditional account-based systems where balances are stored in accounts, Bitcoin tracks ownership through discrete, spendable transaction outputs. Understanding UTXOs is essential to understanding how Bitcoin actually works. A UTXO is a transaction output that hasn't been spent yet. It represents the actual \"coins\" in Bitcoin's accounting model. When you \"have 1 "
   },
   {
     "path": "/docs/history",

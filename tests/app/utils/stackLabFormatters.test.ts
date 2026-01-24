@@ -2,8 +2,12 @@ import { describe, it, expect } from 'vitest'
 import {
   bytesToHex,
   formatStackItem,
+  formatStackForLog,
+  getItemType,
+  itemCount,
   parseStackItem,
 } from '@/app/utils/stackLabFormatters'
+import type { StackItem } from '@/app/utils/stackLabInterpreter'
 
 describe('bytesToHex', () => {
   it('Uint8Array([0xab, 0xcd]) → "abcd"', () => {
@@ -42,6 +46,61 @@ describe('formatStackItem', () => {
   })
 })
 
+describe('formatStackForLog', () => {
+  it('[] → "[]"', () => {
+    expect(formatStackForLog([])).toBe('[]')
+  })
+
+  it('[1, "a"] → "[1, \\"a\\"]"', () => {
+    expect(formatStackForLog([1, 'a'])).toBe('[1, "a"]')
+  })
+
+  it('formats Uint8Array in stack', () => {
+    const stack: StackItem[] = [new Uint8Array([0xab, 0xcd])]
+    expect(formatStackForLog(stack)).toMatch(/^\[0x[\da-f]+\]$/)
+  })
+})
+
+describe('getItemType', () => {
+  it('number → "number"', () => {
+    expect(getItemType(42)).toBe('number')
+  })
+
+  it('boolean → "boolean"', () => {
+    expect(getItemType(true)).toBe('boolean')
+  })
+
+  it('plain string → "string"', () => {
+    expect(getItemType('hello')).toBe('string')
+  })
+
+  it('0x string → "hex"', () => {
+    expect(getItemType('0xab')).toBe('hex')
+  })
+
+  it('Uint8Array → "bytes"', () => {
+    expect(getItemType(new Uint8Array([1]))).toBe('bytes')
+  })
+
+  it('other → "unknown"', () => {
+    expect(getItemType({} as StackItem)).toBe('unknown')
+  })
+})
+
+describe('itemCount', () => {
+  it('0 → "0 items"', () => {
+    expect(itemCount(0)).toBe('0 items')
+  })
+
+  it('1 → "1 item"', () => {
+    expect(itemCount(1)).toBe('1 item')
+  })
+
+  it('2 → "2 items"', () => {
+    expect(itemCount(2)).toBe('2 items')
+  })
+})
+
 describe('parseStackItem', () => {
   it('" 42 " → 42', () => {
     expect(parseStackItem(' 42 ')).toBe(42)
@@ -57,5 +116,17 @@ describe('parseStackItem', () => {
 
   it('"   " → null', () => {
     expect(parseStackItem('   ')).toBe(null)
+  })
+
+  it('"0x1234" → 4660 (hex parsed as number)', () => {
+    expect(parseStackItem('0x1234')).toBe(4660)
+  })
+
+  it('"0xab" → 171', () => {
+    expect(parseStackItem('0xab')).toBe(171)
+  })
+
+  it('"abc" (non-numeric) → "abc"', () => {
+    expect(parseStackItem('abc')).toBe('abc')
   })
 })

@@ -112,12 +112,13 @@ This is the same validation process that occurs on the Bitcoin network when tran
 ```
 tests/
   app/utils/     # setUtils, metadata, denominationUtils, formatting, navigation, searchLogic,
-                # stackLabFormatters, stackLabInterpreter, bitcoinRpcCache, docNavigationState, getMarkdownForPath
+                # stackLabFormatters, stackLabInterpreter, terminalCommands, bitcoinRpcCache,
+                # docNavigationState, getMarkdownForPath
   scripts/lib/   # slug, parse-doc-pages, glossary-parse, search-index-helpers
-  e2e/           # Playwright E2E: home, docs, search, glossary, 404, download-md
+  e2e/           # Playwright E2E: home, docs, search, glossary, 404, download-md, stack-lab, terminal
 ```
 
-Covered: build pipeline (`parseDocPages`, `generateSlug`, `glossary-parse`, `search-index-helpers`), Stack Lab interpreter and formatters, denomination/formatting utils, search logic, navigation and doc navigation state, Bitcoin RPC validation/cache, download-MD path resolution, and metadata for SEO/OG.
+Covered: build pipeline (`parseDocPages`, `generateSlug`, `glossary-parse`, `search-index-helpers`), Stack Lab interpreter and formatters, terminal command parsing/help (`terminalCommands`), denomination/formatting utils, search logic, navigation and doc navigation state, Bitcoin RPC validation/cache, download-MD path resolution, and metadata for SEO/OG.
 
 **E2E tests** use [Playwright](https://playwright.dev) in `tests/e2e/`. They hit the app on `http://localhost:3000`; the config starts `npm run dev` if the server is not already running. Run `npm run test:e2e` or `npm run test` for all tests. For the first run (or in CI), install browsers: `npx playwright install chromium` (or `npx playwright install --with-deps` for all).
 

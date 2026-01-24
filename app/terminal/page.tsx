@@ -6,29 +6,15 @@ import { CopyIcon } from '@/app/components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
 import { bitcoinRpc } from '@/app/utils/bitcoinRpc'
 import { useMobileWarning } from '@/app/hooks/useMobileWarning'
-
-const COMMANDS: Record<string, string> = {
-  getblockchaininfo: 'Returns info about the current state of the blockchain',
-  getblockcount: 'Returns the height of the most-work fully-validated chain',
-  getbestblockhash: 'Returns the hash of the best (tip) block',
-  getblock: 'Returns block data. Usage: getblock <blockhash> [verbosity]',
-  getblockhash: 'Returns hash of block at given height. Usage: getblockhash <height>',
-  getblockheader: 'Returns block header. Usage: getblockheader <blockhash> [verbose]',
-  getrawtransaction: 'Returns raw transaction. Usage: getrawtransaction <txid> [verbose]',
-  getmempoolinfo: 'Returns details on the active state of the mempool',
-  getrawmempool: 'Returns all transaction ids in the mempool',
-  getmempoolentry: 'Returns mempool data for given tx. Usage: getmempoolentry <txid>',
-  getnetworkinfo: 'Returns info about the P2P networking',
-  getpeerinfo: 'Returns data about each connected network peer',
-  getnettotals: 'Returns info about network traffic',
-  getdifficulty: 'Returns the proof-of-work difficulty',
-  getchaintips: 'Returns info about all known chain tips',
-  getmininginfo: 'Returns mining-related information',
-  estimatesmartfee: 'Estimates fee rate. Usage: estimatesmartfee <conf_target>',
-  uptime: 'Returns the total uptime of the server',
-  help: 'Shows available commands',
-  clear: 'Clears the terminal',
-}
+import {
+  COMMANDS,
+  parseCommand,
+  findMatchingCommands,
+  commandRequiresParams,
+  getUsageInfo,
+  getParameterDetails,
+  generateExample,
+} from '@/app/utils/terminalCommands'
 
 interface OutputLine {
   type: 'command' | 'result' | 'error' | 'info' | 'logo' | 'log' | 'usage'
@@ -171,20 +157,9 @@ export default function TerminalPage() {
     }
   }
 
-  const findMatchingCommands = (inputText: string): string[] => {
-    const trimmed = inputText.trim().toLowerCase()
-    if (!trimmed) return Object.keys(COMMANDS)
-
-    const commandPrefix = trimmed.split(/\s+/)[0]
-
-    return Object.keys(COMMANDS).filter(cmd =>
-      cmd.toLowerCase().startsWith(commandPrefix)
-    )
-  }
-
   const handleAutocomplete = (showAll: boolean = false) => {
     const trimmed = input.trim()
-    const matches = findMatchingCommands(trimmed)
+    const matches = findMatchingCommands(trimmed, COMMANDS)
 
     if (matches.length === 0) {
       setOutput(prev => [
@@ -246,122 +221,6 @@ export default function TerminalPage() {
     }
   }
 
-  const commandRequiresParams = (method: string): boolean => {
-    const desc = COMMANDS[method]
-    return desc ? desc.includes('Usage:') : false
-  }
-
-  const getParameterFormat = (paramName: string): { format: string; description: string } => {
-    const normalized = paramName.toLowerCase()
-
-    if (normalized === 'blockhash') {
-      return { format: 'hex string (64 characters)', description: 'The block hash' }
-    }
-    if (normalized === 'height') {
-      return { format: 'number (integer)', description: 'The block height' }
-    }
-    if (normalized === 'txid') {
-      return { format: 'hex string (64 characters)', description: 'The transaction ID' }
-    }
-    if (normalized === 'conf_target') {
-      return { format: 'number (integer)', description: 'Confirmation target in blocks' }
-    }
-    if (normalized === 'verbose') {
-      return { format: 'boolean (true/false) or number', description: 'Optional: Return verbose output' }
-    }
-    if (normalized === 'verbosity') {
-      return { format: 'number (0, 1, or 2)', description: 'Optional: verbosity level' }
-    }
-
-    return { format: 'string', description: 'Parameter value' }
-  }
-
-  const getParameterDetails = (usage: string): Array<{ name: string; isOptional: boolean; format: string; description: string }> => {
-    const parameters: Array<{ name: string; isOptional: boolean; format: string; description: string }> = []
-
-    const requiredRegex = /<(\w+)>/g
-    let requiredMatch: RegExpExecArray | null
-    while ((requiredMatch = requiredRegex.exec(usage)) !== null) {
-      const paramName = requiredMatch[1]
-      const { format, description } = getParameterFormat(paramName)
-      parameters.push({
-        name: paramName,
-        isOptional: false,
-        format,
-        description,
-      })
-    }
-
-    const optionalRegex = /\[(\w+)\]/g
-    let optionalMatch: RegExpExecArray | null
-    while ((optionalMatch = optionalRegex.exec(usage)) !== null) {
-      const paramName = optionalMatch[1]
-      const { format, description } = getParameterFormat(paramName)
-      parameters.push({
-        name: paramName,
-        isOptional: true,
-        format,
-        description,
-      })
-    }
-
-    return parameters
-  }
-
-  const getUsageInfo = (method: string): string | null => {
-    const desc = COMMANDS[method]
-    if (!desc) return null
-
-    const usageMatch = desc.match(/Usage:\s*(.+)/)
-    if (!usageMatch) return null
-
-    let usage = usageMatch[1]
-    if (usage.toLowerCase().startsWith(method.toLowerCase())) {
-      usage = usage.substring(method.length).trim()
-    }
-    return usage
-  }
-
-  const generateExample = (method: string, usage: string): string => {
-    let example = usage
-
-    if (example.includes('<blockhash>')) {
-      const blockHash = exampleBlockHash || '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f' // Genesis block as fallback
-      example = example.replace('<blockhash>', blockHash)
-    }
-
-    if (example.includes('<height>')) {
-      example = example.replace('<height>', '800000')
-    }
-
-    if (example.includes('<txid>')) {
-      const txId = exampleTxId || 'f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16' // First Bitcoin transaction as fallback
-      example = example.replace('<txid>', txId)
-    }
-
-    if (example.includes('<conf_target>')) {
-      example = example.replace('<conf_target>', '6')
-    }
-
-    example = example.replace(/\s*\[verbose\]/g, '')
-    example = example.replace(/\s*\[verbosity\]/g, '')
-
-    return example
-  }
-
-  const parseCommand = (cmd: string): { method: string; params: (string | number | boolean)[] } => {
-    const parts = cmd.trim().split(/\s+/)
-    const method = parts[0].toLowerCase()
-    const params = parts.slice(1).map(p => {
-      const num = Number(p)
-      if (!isNaN(num)) return num
-      if (p.toLowerCase() === 'true') return true
-      if (p.toLowerCase() === 'false') return false
-      return p
-    })
-    return { method, params }
-  }
-
   const executeCommand = async (cmd: string) => {
     const trimmedCmd = cmd.trim()
     if (!trimmedCmd) return
@@ -411,7 +270,7 @@ export default function TerminalPage() {
         helpLines.push(`Description: ${description}`)
         helpLines.push('')
 
-        const usage = getUsageInfo(commandName)
+        const usage = getUsageInfo(commandName, COMMANDS)
         if (usage) {
           helpLines.push(`Usage: ${commandName} ${usage}`)
           helpLines.push('')
@@ -426,7 +285,7 @@ export default function TerminalPage() {
             helpLines.push('')
           }
 
-          const example = generateExample(commandName, usage)
+          const example = generateExample(commandName, usage, { exampleBlockHash, exampleTxId })
           if (example) {
             const fullCommand = `${commandName} ${example}`
             setOutput(prev => [
@@ -479,9 +338,9 @@ export default function TerminalPage() {
       return
     }
 
-    if (commandRequiresParams(method) && params.length === 0) {
-      const usage = getUsageInfo(method)
-      const example = usage ? generateExample(method, usage) : null
+    if (commandRequiresParams(method, COMMANDS) && params.length === 0) {
+      const usage = getUsageInfo(method, COMMANDS)
+      const example = usage ? generateExample(method, usage, { exampleBlockHash, exampleTxId }) : null
 
       setOutput(prev => [
         ...prev,

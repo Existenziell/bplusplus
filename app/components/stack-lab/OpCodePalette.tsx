@@ -122,7 +122,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
             <h4 className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-2 uppercase">
               {selectedCategory}
             </h4>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-wrap gap-2">
               {opCodesByCategory[selectedCategory]?.map(opCode => (
                 <DraggableOpCode key={opCode.name} opCode={opCode} />
               ))}
@@ -139,7 +139,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
                   <h4 className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-2 uppercase">
                     {category}
                   </h4>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {codes.map(opCode => (
                       <DraggableOpCode key={opCode.name} opCode={opCode} />
                     ))}

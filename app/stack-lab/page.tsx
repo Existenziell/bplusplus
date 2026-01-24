@@ -253,7 +253,7 @@ export default function StackLabPage() {
         modifiers={[]}
         
       >
-        <div className="space-y-2">
+        <div className="space-y-2 pb-12">
           {/* Flow Explanation */}
           <StackLabCard>
             <button
@@ -326,7 +326,7 @@ export default function StackLabPage() {
                 <StackVisualization stack={stack} />
                 
                 {/* Execution Controls */}
-                <div className="flex justify-center">
+                <div className="flex justify-center w-full">
                   <ExecutionControls
                     onExecute={handleExecute}
                     onStep={handleStep}
@@ -364,18 +364,6 @@ export default function StackLabPage() {
           </DragOverlay>
         </div>
       </DndContext>
-
-      <div className="mt-12">
-        <MarkdownRenderer
-          content={`---
-## Related Topics
-
-- [Bitcoin Script](/docs/bitcoin/script) - How Bitcoin Script works
-- [OP Codes](/docs/bitcoin/op-codes) - Reference for OP codes used in Stack Lab
-- [Bitcoin CLI Terminal](/terminal) - Interactive RPC playground
-`}
-        />
-      </div>
 
       {/* Mobile Warning Modal */}
       {showMobileWarning && !mobileWarningDismissed && (

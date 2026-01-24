@@ -32,6 +32,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const abortControllerRef = useRef<AbortController | null>(null)
+  const selectedItemRef = useRef<HTMLLIElement | null>(null)
   const router = useRouter()
 
   const debounced = useDebounce(query, DEBOUNCE_MS)
@@ -77,6 +78,10 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       inputRef.current?.focus()
     }
   }, [isOpen])
+
+  useEffect(() => {
+    selectedItemRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  }, [selectedIndex])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -159,6 +164,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               {results.map((r, i) => (
                 <li
                   key={r.path + r.title}
+                  ref={i === selectedIndex ? selectedItemRef : null}
                   role="option"
                   aria-selected={i === selectedIndex}
                   onMouseEnter={() => setSelectedIndex(i)}

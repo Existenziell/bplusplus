@@ -1,38 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// Import the pre-generated markdown content
-// This is generated at build time by scripts/generate-md-content.js
+import { getMarkdownForPath } from '@/app/utils/getMarkdownForPath'
 import mdContent from '@/public/data/md-content.json'
 
-// Type for the imported JSON
-interface MdEntry {
-  content: string
-  filename: string
-}
-
-const mdContentTyped = mdContent as Record<string, MdEntry>
+const mdContentTyped = mdContent as Record<string, { content: string; filename: string }>
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const path = searchParams.get('path')
+  const result = getMarkdownForPath(path, mdContentTyped)
 
-  if (!path) {
-    return NextResponse.json({ error: 'Path parameter is required' }, { status: 400 })
+  if ('content' in result) {
+    return new NextResponse(result.content, {
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'Content-Disposition': `attachment; filename="${result.filename}"`,
+      },
+    })
   }
-
-  // Normalize path - remove trailing slash if present
-  const normalizedPath = path.endsWith('/') ? path.slice(0, -1) : path
-
-  const entry = mdContentTyped[normalizedPath]
-
-  if (!entry) {
-    return NextResponse.json({ error: 'MD file not found for this path', path: normalizedPath }, { status: 404 })
+  if (result.status === 400) {
+    return NextResponse.json({ error: result.error }, { status: 400 })
   }
-
-  return new NextResponse(entry.content, {
-    headers: {
-      'Content-Type': 'text/markdown; charset=utf-8',
-      'Content-Disposition': `attachment; filename="${entry.filename}"`,
-    },
-  })
+  return NextResponse.json({ error: result.error, path: result.path }, { status: 404 })
 }

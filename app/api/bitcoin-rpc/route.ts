@@ -1,37 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// Whitelist of allowed read-only RPC commands
-const ALLOWED_COMMANDS = new Set([
-  'getblockchaininfo',
-  'getblockcount',
-  'getbestblockhash',
-  'getblock',
-  'getblockhash',
-  'getrawtransaction',
-  'getmempoolinfo',
-  'getnetworkinfo',
-  'getdifficulty',
-  'getchaintips',
-  'getblockheader',
-  'getmininginfo',
-  'getnettotals',
-  'getpeerinfo',
-  'estimatesmartfee',
-  'getmempoolentry',
-  'getrawmempool',
-  'gettxoutsetinfo',
-  'uptime',
-])
-
-// Commands that require parameters
-const REQUIRED_PARAMS: Record<string, { count: number; description: string }> = {
-  getblock: { count: 1, description: 'Usage: getblock <blockhash> [verbosity]' },
-  getblockhash: { count: 1, description: 'Usage: getblockhash <height>' },
-  getblockheader: { count: 1, description: 'Usage: getblockheader <blockhash> [verbose]' },
-  getrawtransaction: { count: 1, description: 'Usage: getrawtransaction <txid> [verbose]' },
-  getmempoolentry: { count: 1, description: 'Usage: getmempoolentry <txid>' },
-  estimatesmartfee: { count: 1, description: 'Usage: estimatesmartfee <conf_target>' },
-}
+import { getCacheTime, validateRpcRequest, ALLOWED_COMMANDS } from '@/app/utils/bitcoinRpcCache'
 
 // Commands not supported by PublicNode (we simulate them)
 const SIMULATED_COMMANDS: Record<string, () => unknown> = {
@@ -64,31 +32,9 @@ export async function POST(request: NextRequest) {
     const body: RpcRequest = await request.json()
     const { method, params = [] } = body
 
-    // Validate method is in whitelist
-    if (!ALLOWED_COMMANDS.has(method)) {
-      return NextResponse.json(
-        {
-          error: {
-            code: -32601,
-            message: `Method "${method}" is not allowed. Only read-only commands are supported.`,
-          },
-        },
-        { status: 400 }
-      )
-    }
-
-    // Check if required parameters are provided
-    const requiredParam = REQUIRED_PARAMS[method]
-    if (requiredParam && params.length < requiredParam.count) {
-      return NextResponse.json(
-        {
-          error: {
-            code: -1,
-            message: requiredParam.description,
-          },
-        },
-        { status: 400 }
-      )
+    const validation = validateRpcRequest({ method, params })
+    if (!('ok' in validation)) {
+      return NextResponse.json({ error: validation.error }, { status: 400 })
     }
 
     // Handle simulated commands (not supported by PublicNode)
@@ -164,40 +110,6 @@ export async function POST(request: NextRequest) {
       },
       { status: 500 }
     )
-  }
-}
-
-// Get cache time in seconds based on command
-function getCacheTime(method: string): number {
-  switch (method) {
-    // These change frequently
-    case 'getmempoolinfo':
-    case 'getrawmempool':
-    case 'getmempoolentry':
-      return 10
-    // These change every ~10 minutes (new block)
-    case 'getblockchaininfo':
-    case 'getblockcount':
-    case 'getbestblockhash':
-    case 'getdifficulty':
-    case 'getmininginfo':
-      return 30
-    // Network info changes less frequently
-    case 'getnetworkinfo':
-    case 'getnettotals':
-    case 'getpeerinfo':
-      return 60
-    // Block data is immutable once confirmed
-    case 'getblock':
-    case 'getblockhash':
-    case 'getblockheader':
-    case 'getrawtransaction':
-      return 3600 // 1 hour
-    // UTXO set info is expensive and changes slowly
-    case 'gettxoutsetinfo':
-      return 300
-    default:
-      return 30
   }
 }
 

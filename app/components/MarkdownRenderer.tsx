@@ -9,7 +9,7 @@ import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
 import CodeBlock, { MultiLanguageCodeBlock } from '@/app/components/CodeBlock'
 import GlossaryTooltip from '@/app/components/GlossaryTooltip'
-import { ExternalLinkIcon } from '@/app/components/Icons'
+import { ChevronDown, ExternalLinkIcon } from '@/app/components/Icons'
 import { useGlossary } from '@/app/contexts/GlossaryContext'
 
 interface MarkdownRendererProps {
@@ -21,12 +21,17 @@ interface CodeGroupBlock {
   languages: { lang: string; code: string }[]
 }
 
-interface VideoGroupBlock {
-  id: string
-  videoIds: string[]
+interface VideoGroupItem {
+  videoId: string
+  title: string
 }
 
-// Parse :::video-group and collect YouTube IDs from [text](url)
+interface VideoGroupBlock {
+  id: string
+  items: VideoGroupItem[]
+}
+
+// Parse :::video-group and collect [text](url) as { videoId, title }
 function parseVideoGroups(content: string): { processedContent: string; videoGroups: VideoGroupBlock[] } {
   const videoGroups: VideoGroupBlock[] = []
   let groupCounter = 0
@@ -35,20 +40,21 @@ function parseVideoGroups(content: string): { processedContent: string; videoGro
 
   const processedContent = content.replace(videoGroupRegex, (match, groupContent) => {
     const groupId = `video-group-${groupCounter++}`
-    const videoIds: string[] = []
+    const items: VideoGroupItem[] = []
 
-    const linkRegex = /\[[^\]]*\]\(([^)]+)\)/g
+    const linkRegex = /\[([^\]]*)\]\(([^)]+)\)/g
     let linkMatch
     while ((linkMatch = linkRegex.exec(groupContent)) !== null) {
-      const url = linkMatch[1]
+      const text = linkMatch[1].trim()
+      const url = linkMatch[2]
       const videoId = getYouTubeVideoId(url)
       if (videoId) {
-        videoIds.push(videoId)
+        items.push({ videoId, title: text })
       }
     }
 
-    if (videoIds.length > 0) {
-      videoGroups.push({ id: groupId, videoIds })
+    if (items.length > 0) {
+      videoGroups.push({ id: groupId, items })
       return `<div data-video-group-id="${groupId}"></div>`
     }
 
@@ -132,87 +138,54 @@ function getYouTubeVideoId(url: string): string | null {
   return null
 }
 
-// YouTube thumbnail; maxresdefault may not exist for all videos, hqdefault is fallback
-const YT_THUMB = (id: string, quality: 'maxresdefault' | 'hqdefault' = 'maxresdefault') =>
-  `https://img.youtube.com/vi/${id}/${quality}.jpg`
-
-// Lazy-load when in view; show thumbnail + play overlay until user clicks, then load iframe
-function YouTubeEmbed({ videoId, inGroup }: { videoId: string; inGroup?: boolean }) {
-  const [isVisible, setIsVisible] = React.useState(false)
-  const [hasStarted, setHasStarted] = React.useState(false)
-  const [thumbQuality, setThumbQuality] = React.useState<'maxresdefault' | 'hqdefault'>('maxresdefault')
-  const containerRef = React.useRef<HTMLDivElement>(null)
+// Collapsed: text link with video name + chevron. Expanded: link row (chevron up) + YouTube iframe. Click to toggle.
+function YouTubeEmbed({
+  videoId,
+  title,
+  inGroup,
+}: {
+  videoId: string
+  title?: string
+  inGroup?: boolean
+}) {
+  const [expanded, setExpanded] = React.useState(false)
   const iframeRef = React.useRef<HTMLIFrameElement>(null)
 
   React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect()
-        }
-      },
-      { rootMargin: '100px' } // Load when within 100px of viewport
-    )
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  // Set credentialless attribute to reduce cookie warnings
-  React.useEffect(() => {
-    if (hasStarted && iframeRef.current) {
+    if (expanded && iframeRef.current) {
       iframeRef.current.setAttribute('credentialless', '')
     }
-  }, [hasStarted])
+  }, [expanded])
 
-  const handleThumbError = () => {
-    if (thumbQuality === 'maxresdefault') setThumbQuality('hqdefault')
-  }
+  const label = (title && title.trim()) || 'Watch video'
 
   return (
-    <div className={inGroup ? '' : 'my-6'} ref={containerRef}>
-      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-        {!isVisible ? (
-          <div className="absolute top-0 left-0 w-full h-full rounded-md bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center">
-            <span className="text-zinc-500 dark:text-zinc-400">Loading video...</span>
-          </div>
-        ) : hasStarted ? (
+    <div className={inGroup ? '' : 'my-6'}>
+      <button
+        type="button"
+        onClick={() => setExpanded((prev) => !prev)}
+        className="text-btc hover:underline inline-flex items-center gap-1.5 cursor-pointer bg-transparent border-none p-0 font-inherit text-left"
+      >
+        <ChevronDown
+          className={`w-4 h-4 shrink-0 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
+          aria-hidden
+        />
+        {label}
+      </button>
+      {expanded && (
+        <div className="relative w-full rounded-md overflow-hidden mt-2" style={{ paddingBottom: '56.25%' }}>
           <iframe
             ref={iframeRef}
-            className="absolute top-0 left-0 w-full h-full rounded-md"
-            src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`}
+            className="absolute top-0 left-0 w-full h-full"
+            src={`https://www.youtube-nocookie.com/embed/${videoId}?modestbranding=1&rel=0`}
             title="YouTube video player"
-            allow="accelerometer; autoplay; picture-in-picture; web-share"
+            loading="lazy"
+            allow="accelerometer; picture-in-picture; web-share"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
           />
-        ) : (
-          <button
-            type="button"
-            onClick={() => setHasStarted(true)}
-            className="absolute top-0 left-0 w-full h-full rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
-            aria-label="Play video"
-          >
-            <img
-              src={YT_THUMB(videoId, thumbQuality)}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-              onError={handleThumbError}
-            />
-            <span className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors hover:bg-black/35">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600 shadow-lg transition-transform hover:scale-110">
-                <svg className="ml-1 h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </span>
-            </span>
-          </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -272,9 +245,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       if (videoGroupId && videoGroupMap.has(videoGroupId)) {
         const group = videoGroupMap.get(videoGroupId)!
         return (
-          <div className="my-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {group.videoIds.map(id => (
-              <YouTubeEmbed key={id} videoId={id} inGroup />
+          <div className="my-6 flex flex-col gap-4">
+            {group.items.map(({ videoId, title }) => (
+              <YouTubeEmbed key={videoId} videoId={videoId} title={title} inGroup />
             ))}
           </div>
         )
@@ -292,8 +265,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
       for (const child of childrenArray) {
         if (React.isValidElement(child)) {
-          const childProps = child.props as { 'data-youtube-embed'?: string }
+          const childProps = child.props as { 'data-youtube-embed'?: string; 'data-youtube-title'?: string }
           const videoId = childProps?.['data-youtube-embed']
+          const title = childProps?.['data-youtube-title']
 
           if (videoId) {
             const otherChildren = childrenArray.filter(c => c !== child)
@@ -301,7 +275,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
             // Standalone embed → return only embed
             if (otherText === '' || childrenArray.length === 1) {
-              return <YouTubeEmbed videoId={videoId} />
+              return <YouTubeEmbed videoId={videoId} title={title} />
             }
           }
         }
@@ -310,7 +284,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       // Fallback: direct YouTube links in <a>
       for (const child of childrenArray) {
         if (React.isValidElement(child)) {
-          const childProps = child.props as { href?: string }
+          const childProps = child.props as { href?: string; children?: React.ReactNode }
           const href = childProps?.href
 
           if (href && typeof href === 'string' && (href.includes('youtube.com') || href.includes('youtu.be'))) {
@@ -320,7 +294,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               const otherText = otherChildren.map(extractText).join('').trim()
 
               if (otherText === '' || childrenArray.length === 1) {
-                return <YouTubeEmbed videoId={videoId} />
+                const title = extractText(childProps?.children)
+                return <YouTubeEmbed videoId={videoId} title={title} />
               }
             }
           }
@@ -333,10 +308,10 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       if (href && typeof href === 'string' && (href.includes('youtube.com') || href.includes('youtu.be'))) {
         const videoId = getYouTubeVideoId(href)
         if (videoId) {
-          // Marker for p to replace paragraph with embed
+          const title = extractText(children)
           return (
-            <span data-youtube-embed={videoId} style={{ display: 'block' }}>
-              <YouTubeEmbed videoId={videoId} />
+            <span data-youtube-embed={videoId} data-youtube-title={title} style={{ display: 'block' }}>
+              <YouTubeEmbed videoId={videoId} title={title} />
             </span>
           )
         }

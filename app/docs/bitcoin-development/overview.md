@@ -98,6 +98,16 @@ Common Bitcoin script patterns and templates for building smart contracts and ad
 - Script optimization
 - Miniscript integration
 
+### [Miniscript](/docs/bitcoin-development/miniscript)
+
+Structured policy language that compiles to Bitcoin Script. Express spending conditions in high-level policies and get correct, analyzable scripts for multisig, timelocks, vaults, and Taproot.
+
+**Key topics:**
+- Policy vs. script
+- Fragments and composition
+- Correctness and safety
+- Tapscript support
+
 ---
 
 ## Development Workflow

@@ -33,7 +33,7 @@ export default function Header() {
                   alt=""
                   width={30}
                   height={30}
-                  className="dark:invert"
+                  className="dark:invert translate-y-1"
                 />
               </div>
               <div className="flex-shrink-0">

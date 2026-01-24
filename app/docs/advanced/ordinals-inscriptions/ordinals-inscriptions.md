@@ -1,0 +1,109 @@
+# Ordinals & Inscriptions
+
+Ordinals and inscriptions are a method for attaching arbitrary data to individual [satoshis](/docs/glossary#satoshi) on the Bitcoin blockchain. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol assigns unique identifiers to satoshis and allows "inscribing" content—images, text, JSON, or other files—into [witness data](/docs/glossary#witness) that gets stored on-chain.
+
+## What is the Ordinals Protocol?
+
+The **Ordinals protocol** assigns a unique, sequential number to each satoshi based on the order it was mined. This creates a way to identify and track individual sats through [transactions](/docs/glossary#transaction) and [UTXOs](/docs/glossary#utxo-unspent-transaction-output).
+
+### Key Concepts
+
+- **Ordinal number**: A satoshi's position in the total supply (0 to 2.1 quadrillion minus 1)
+- **Ordinal theory**: Tracks which ordinal numbers are in which UTXOs when [inputs](/docs/glossary#input) are spent (first-in-first-out by default)
+- **Rare sats**: Certain ordinals are considered "rare" (e.g., first sat of a [halving](/docs/history/halvings), [block](/docs/glossary#block) subsidy, etc.)
+
+### How Ordinals Work
+
+```text
+When Bitcoin is spent:
+- Inputs are consumed in the order they appear
+- Their ordinal numbers transfer to outputs in order
+- Default: FIFO (first input’s ordinals go to first output, etc.)
+```
+
+Ordinals do not require a [soft fork](/docs/glossary#soft-fork) or [consensus](/docs/glossary#consensus) change. They are an agreed-upon numbering and tracking scheme that [full nodes](/docs/glossary#full-node) do not need to implement; only indexers and wallets that support Ordinals do.
+
+---
+
+## What are Inscriptions?
+
+**Inscriptions** use the Ordinals protocol to attach content to a specific satoshi. The content is stored in the [witness](/docs/glossary#witness) (SegWit) portion of a transaction, often in an `OP_IF`/`OP_ENDIF` or similar pattern that is pruned from the [UTXO set](/docs/glossary#utxo-set) but remains in the blockchain.
+
+### Inscription Structure
+
+```text
+1. Envelope: Wrapped in script that is never executed (e.g., OP_FALSE OP_IF ... OP_ENDIF)
+2. Content type: MIME type (e.g., image/png, text/plain, application/json)
+3. Content: Raw bytes of the inscribed data
+```
+
+### Why Witness Data?
+
+- [SegWit](/docs/bitcoin/segwit) witness data is **discounted** in [block weight](/docs/glossary#block-size) (1 WU per byte vs 4 for non-witness)
+- Inscription data does not expand the UTXO set
+- Same consensus rules as other valid SegWit [scripts](/docs/bitcoin/script)
+
+---
+
+## BRC-20 and Other Token Standards
+
+**BRC-20** is an experimental, [fungible](/docs/glossary#fungibility) token standard on Bitcoin that uses JSON inscriptions to define "transfer" and "mint" operations. Similar in concept to [ERC-20](https://ethereum.org) on Ethereum, BRC-20 tokens do not use [Bitcoin Script](/docs/bitcoin/script) for logic; they rely on external indexers to parse inscription content and track balances.
+
+### Characteristics
+
+- **Inefficient**: Each "transfer" or "mint" typically requires a separate on-chain inscription and [transaction fees](/docs/bitcoin/transaction-fees)
+- **Indexer-dependent**: Balances and transfers are not enforced by consensus; they require off-chain indexing
+- **Blockspace**: During 2023–2024, BRC-20 and Ordinals activity contributed to [mempool](/docs/mining/mempool) congestion and higher [fee](/docs/glossary#fee) rates
+
+### Runes
+
+**Runes** (by Casey Rodarmor, 2024) is an alternative fungible token protocol on Bitcoin designed to be more efficient than BRC-20 by using the OP_RETURN-style output and a more compact on-chain representation. Like BRC-20, it requires indexers to interpret protocol messages.
+
+---
+
+## Impact on Bitcoin
+
+### Blockspace and Fees
+
+- Inscriptions and BRC-20 can generate many [transactions](/docs/bitcoin/transaction-lifecycle) competing for [block](/docs/bitcoin/blocks) space
+- During peaks, [fee rates](/docs/bitcoin/transaction-fees) increased, affecting users making ordinary [on-chain](/docs/glossary#on-chain) payments
+
+### Consensus and Policy
+
+- Ordinals and inscriptions use existing [SegWit](/docs/bitcoin/segwit) and [Taproot](/docs/bitcoin/taproot) rules; they are **valid** under current [consensus rules](/docs/glossary#consensus-rules)
+- Limits on data size (e.g., `-datacarriersize` for [OP_RETURN](/docs/controversies/op-return)) are **relay policy**, not consensus; witness-based inscriptions are subject to node policy (e.g., non-standard or size limits) in some configurations
+
+### Debate
+
+Views in the Bitcoin community vary:
+
+- **Supporters**: Ordinals demonstrate programmability, bring new use cases and users, and show that blockspace is a scarce resource with a [fee market](/docs/bitcoin/transaction-fees).
+- **Critics**: They argue inscriptions and token protocols consume blockspace for non-monetary data, raise fees for [peer-to-peer](/docs/bitcoin/p2p-protocol) cash use, and rely on extra-protocol indexing.
+
+---
+
+## Technical Summary
+
+| Aspect | Ordinals | Inscriptions |
+|--------|----------|---------------|
+| **Purpose** | Number and track satoshis | Attach data to a satoshi |
+| **Storage** | No extra data; ordering only | Witness (SegWit) data |
+| **Consensus** | Not enforced by nodes | Must be valid SegWit script |
+| **Indexing** | Required for tracking | Required for content retrieval |
+
+---
+
+## Related Topics
+
+- [OP_RETURN Debate](/docs/controversies/op-return) – Data on Bitcoin and blockspace use
+- [SegWit](/docs/bitcoin/segwit) – Witness discount and structure
+- [Transaction Fees](/docs/bitcoin/transaction-fees) – Fee market and fee estimation
+- [Mempool](/docs/mining/mempool) – How transactions are queued
+
+---
+
+## Resources
+
+- [Ordinals Handbook](https://docs.ordinals.com/) – Official Ordinals documentation
+- [BRC-20 Spec](https://domo-2.gitbook.io/brc-20-experiment/) – BRC-20 experiment description
+- [Runes](https://runes.network/) – Runes protocol overview

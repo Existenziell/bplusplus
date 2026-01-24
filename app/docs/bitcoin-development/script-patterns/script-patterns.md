@@ -235,14 +235,42 @@ function createHashLockScript(hash) {
 
 ---
 
+## Miniscript
+
+[Miniscript](/docs/bitcoin-development/miniscript) is a structured language for expressing spending *policies* that compiles to [Bitcoin Script](/docs/bitcoin/script). Instead of writing raw [OP codes](/docs/bitcoin/op-codes) directly, you define *what* must hold (e.g., "2-of-3 keys" or "key A and after block N") and tools produce correct, analyzable Script.
+
+### Policy vs. Script
+
+- **Policy**: High-level conditions (e.g., `2 of [pk(A), pk(B), pk(C)]` or `and(pk(A), after(100))`).
+- **Script**: The actual bytecode that [nodes](/docs/glossary#full-node) execute; Miniscript compiles policy → Script.
+
+### Fragments and Composition
+
+Miniscript uses composable **fragments** (`pk`, `thresh`, `and`, `or`, `after`, `older`, `hash`, `multi`, etc.) that map to Script. This makes it easier to:
+
+- Combine conditions (AND, OR, m-of-n) without hand-rolled [scriptSig](/docs/glossary#scriptsig)/witness.
+- Analyze **correctness** and **safety** (no unintended spends, no dust).
+- Estimate **satisfaction size** (witness size, number of [signatures](/docs/bitcoin/cryptography)).
+
+### When to Use Miniscript
+
+- **Wallets**: Multisig, [timelocks](/docs/bitcoin/timelocks), and recovery policies.
+- **Contracts**: [Vaults](/docs/wallets/smart-contracts), [Atomic Swaps](/docs/advanced/atomic-swaps)-style hashlocks, and [Taproot](/docs/bitcoin/taproot) script trees.
+- **Protocols**: [Lightning](/docs/lightning), [DLCs](/docs/advanced/dlcs), and other [smart contract](/docs/wallets/smart-contracts) templates.
+
+See [Miniscript](/docs/bitcoin-development/miniscript) for the full specification, fragment set, and [Tapscript](/docs/glossary#tapscript) support.
+
+---
+
 ## Best Practices
 
 ### For Developers
 
 1. **Use established patterns**: Don't reinvent
-2. **Test thoroughly**: Script bugs are costly
-3. **Consider Taproot**: Better privacy and efficiency
-4. **Document patterns**: Explain what contracts do
+2. **Prefer Miniscript for complex policies**: Compile from policy when possible
+3. **Test thoroughly**: Script bugs are costly
+4. **Consider Taproot**: Better privacy and efficiency
+5. **Document patterns**: Explain what contracts do
 
 ---
 
@@ -250,12 +278,12 @@ function createHashLockScript(hash) {
 
 - [Bitcoin Script](/docs/bitcoin/script) - Script system
 - [OP Codes](/docs/bitcoin/op-codes) - Available operations
+- [Miniscript](/docs/bitcoin-development/miniscript) - Policy-to-script compiler
 - [Smart Contracts](/docs/wallets/smart-contracts) - Contract patterns
-- [Miniscript](https://bitcoin.sipa.be/miniscript/) - Policy compiler
 
 ---
 
 ## Resources
 
 - [Bitcoin Script Patterns](https://en.bitcoin.it/wiki/Script)
-- [Miniscript](https://bitcoin.sipa.be/miniscript/) - Policy to script compiler
+- [Miniscript](https://bitcoin.sipa.be/miniscript/) - Playground and reference

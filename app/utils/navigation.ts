@@ -59,6 +59,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/bitcoin/timelocks', mdFile: 'app/docs/bitcoin/timelocks/timelocks.md', title: 'Timelocks', section: 'bitcoin' },
   { path: '/docs/bitcoin/transaction-malleability', mdFile: 'app/docs/bitcoin/transaction-malleability/transaction-malleability.md', title: 'Transaction Malleability', section: 'bitcoin' },
   { path: '/docs/bitcoin/transaction-lifecycle', mdFile: 'app/docs/bitcoin/transaction-lifecycle/transaction-lifecycle.md', title: 'Transaction Lifecycle', section: 'bitcoin' },
+  { path: '/docs/bitcoin/sighash-types', mdFile: 'app/docs/bitcoin/sighash-types/sighash-types.md', title: 'Sighash Types', section: 'bitcoin' },
 
   // Mining
   { path: '/docs/mining', mdFile: 'app/docs/mining/overview.md', title: 'Mining', section: 'mining' },
@@ -85,9 +86,12 @@ export const docPages: DocPage[] = [
   // Lightning
   { path: '/docs/lightning', mdFile: 'app/docs/lightning/overview.md', title: 'Lightning Network', section: 'lightning' },
   { path: '/docs/lightning/channels', mdFile: 'app/docs/lightning/channels/channels.md', title: 'Channels', section: 'lightning' },
-  { path: '/docs/lightning/routing', mdFile: 'app/docs/lightning/routing/fees.md', title: 'Routing & HTLCs', section: 'lightning' },
+  { path: '/docs/lightning/routing', mdFile: 'app/docs/lightning/routing/fees.md', title: 'Routing Fees', section: 'lightning' },
+  { path: '/docs/lightning/routing/htlc', mdFile: 'app/docs/lightning/routing/htlc.md', title: 'HTLCs', section: 'lightning' },
+  { path: '/docs/lightning/routing/mpp', mdFile: 'app/docs/lightning/routing/mpp.md', title: 'Multi-Part Payments', section: 'lightning' },
   { path: '/docs/lightning/onion', mdFile: 'app/docs/lightning/onion/onion.md', title: 'Onion Routing', section: 'lightning' },
   { path: '/docs/lightning/invoices', mdFile: 'app/docs/lightning/invoices/invoices.md', title: 'Invoices (BOLT11)', section: 'lightning' },
+  { path: '/docs/lightning/bolt12-offers', mdFile: 'app/docs/lightning/bolt12-offers/bolt12-offers.md', title: 'BOLT12 & Offers', section: 'lightning' },
   { path: '/docs/lightning/watchtowers', mdFile: 'app/docs/lightning/watchtowers/watchtowers.md', title: 'Watchtowers', section: 'lightning' },
   { path: '/docs/lightning/anchor-outputs', mdFile: 'app/docs/lightning/anchor-outputs/anchor-outputs.md', title: 'Anchor Outputs', section: 'lightning' },
 
@@ -110,6 +114,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/bitcoin-development/pool-mining', mdFile: 'app/docs/bitcoin-development/pool-mining/pool-mining.md', title: 'Pool Mining', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/price-tracking', mdFile: 'app/docs/bitcoin-development/price-tracking/price-tracking.md', title: 'Price Tracking', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/script-patterns', mdFile: 'app/docs/bitcoin-development/script-patterns/script-patterns.md', title: 'Bitcoin Script Patterns', section: 'bitcoin-development' },
+  { path: '/docs/bitcoin-development/miniscript', mdFile: 'app/docs/bitcoin-development/miniscript/miniscript.md', title: 'Miniscript', section: 'bitcoin-development' },
 
   // Controversies
   { path: '/docs/controversies', mdFile: 'app/docs/controversies/overview.md', title: 'Controversies', section: 'controversies' },
@@ -129,6 +134,8 @@ export const docPages: DocPage[] = [
   { path: '/docs/advanced/governance', mdFile: 'app/docs/advanced/governance/governance.md', title: 'Governance & Evolution', section: 'advanced' },
   { path: '/docs/advanced/zero-conf-channels', mdFile: 'app/docs/advanced/zero-conf-channels/zero-conf-channels.md', title: 'Zero-Conf Channels', section: 'advanced' },
   { path: '/docs/advanced/trampoline-routing', mdFile: 'app/docs/advanced/trampoline-routing/trampoline-routing.md', title: 'Trampoline Routing', section: 'advanced' },
+  { path: '/docs/advanced/ordinals-inscriptions', mdFile: 'app/docs/advanced/ordinals-inscriptions/ordinals-inscriptions.md', title: 'Ordinals & Inscriptions', section: 'advanced' },
+  { path: '/docs/advanced/covenants', mdFile: 'app/docs/advanced/covenants/covenants.md', title: 'Covenants', section: 'advanced' },
 
   // Glossary
   { path: '/docs/glossary', mdFile: 'app/docs/glossary/terms.md', title: 'Glossary', section: 'glossary' },
@@ -301,9 +308,12 @@ export const routeLabels: Record<string, string> = {
   multisig: 'Multisig',
   transactions: 'Transaction Creation',
   channels: 'Channels',
-  routing: 'Routing & HTLCs',
+  routing: 'Routing Fees',
+  htlc: 'HTLCs',
+  mpp: 'Multi-Part Payments',
   onion: 'Onion Routing',
   invoices: 'Invoices (BOLT11)',
+  'bolt12-offers': 'BOLT12 & Offers',
   watchtowers: 'Watchtowers',
   'anchor-outputs': 'Anchor Outputs',
   'install-bitcoin': 'Installing Bitcoin',
@@ -319,6 +329,7 @@ export const routeLabels: Record<string, string> = {
   'pool-mining': 'Pool Mining',
   'price-tracking': 'Price Tracking',
   'script-patterns': 'Bitcoin Script Patterns',
+  miniscript: 'Miniscript',
   segwit: 'SegWit',
   taproot: 'Taproot',
   'p2p-protocol': 'P2P Network Protocol',
@@ -327,6 +338,7 @@ export const routeLabels: Record<string, string> = {
   timelocks: 'Timelocks',
   'transaction-malleability': 'Transaction Malleability',
   'transaction-lifecycle': 'Transaction Lifecycle',
+  'sighash-types': 'Sighash Types',
   'network-attacks': 'Network Attacks & Security',
   privacy: 'Privacy Techniques',
   'smart-contracts': 'Smart Contracts & Advanced Scripting',
@@ -338,6 +350,8 @@ export const routeLabels: Record<string, string> = {
   governance: 'Governance & Evolution',
   'zero-conf-channels': 'Zero-Conf Channels',
   'trampoline-routing': 'Trampoline Routing',
+  'ordinals-inscriptions': 'Ordinals & Inscriptions',
+  covenants: 'Covenants',
   'op-return': 'OP_RETURN Debate',
   'blocksize-wars': 'Blocksize Wars',
   'energy-consumption': 'Energy Consumption',

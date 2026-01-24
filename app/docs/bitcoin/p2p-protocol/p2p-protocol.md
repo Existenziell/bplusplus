@@ -329,6 +329,15 @@ Compact Block:
 
 ---
 
+## P2P v2 / Encrypted Transport (BIP 324)
+
+[BIP 324](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki) defines a **v2 P2P transport** that encrypts and authenticated the [peer](/docs/glossary#peer)-to-peer link. [Messages](/docs/bitcoin/p2p-protocol#protocol-messages) (e.g., `version`, `verack`, `inv`, `block`, `tx`) are encrypted so that a passive on-path observer cannot read or tamper with them. This improves [privacy](/docs/wallets/privacy) (e.g., hiding which [blocks](/docs/bitcoin/blocks) or [transactions](/docs/bitcoin/transaction-lifecycle) are requested) and helps prevent some [eclipse](/docs/bitcoin/p2p-protocol#eclipse-attacks)-style and downgrade attacks.
+
+- **Handshake**: v2 uses an [ECDH](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki)-based key agreement; once the shared secret is established, the rest of the session is [ChaCha20](https://en.wikipedia.org/wiki/ChaCha20)-Poly1305 encrypted.
+- **Rollout**: Bitcoin Core and other nodes can support both the legacy (unencrypted) and v2 transports; v2 is used when both [peers](/docs/glossary#peer) support it. Adoption is increasing; see [Bitcoin Core](https://github.com/bitcoin/bitcoin) and [BIP 324](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki) for the latest status.
+
+---
+
 ## Related Topics
 
 - [Block Propagation](/docs/bitcoin/blocks) - How blocks spread
@@ -341,3 +350,4 @@ Compact Block:
 
 - [Bitcoin Protocol Documentation](https://en.bitcoin.it/wiki/Protocol_documentation)
 - [BIP 152: Compact Block Relay](https://github.com/bitcoin/bips/blob/master/bip-0152.mediawiki)
+- [BIP 324: Version 2 P2P Encrypted Transport](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki)

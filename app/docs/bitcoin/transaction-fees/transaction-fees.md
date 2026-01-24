@@ -279,36 +279,81 @@ function calculateFeeForOutputs(inputCount, outputCount, feeRate) {
 
 ## Fee Bumping
 
-### Replace-by-Fee (RBF)
+When a transaction is stuck in the [mempool](/docs/mining/mempool) because the fee rate is too low, you can increase the effective fee using **Replace-by-Fee (RBF)** or **Child Pays for Parent (CPFP)**.
 
-RBF allows replacing an unconfirmed transaction with a higher-fee version:
+### Replace-by-Fee (RBF) and BIP 125
 
-```text
-Original Transaction:
-- Fee: 5 sat/vB
-- Status: Unconfirmed
+**RBF** allows replacing an unconfirmed [transaction](/docs/bitcoin/transaction-lifecycle) with a new version that pays higher [fees](/docs/glossary#fee). The replacement must spend the same [inputs](/docs/glossary#input) and generally the same [outputs](/docs/glossary#output) (with stricter rules in BIP 125).
 
-Replacement Transaction:
-- Same inputs/outputs
-- Higher fee: 20 sat/vB
-- Replaces original
-```
+#### BIP 125 Replaceability Rules
+
+For a replacement to be accepted by [BIP 125](https://github.com/bitcoin/bips/blob/master/bip-0125.mediawiki)-compliant nodes:
+
+1. **Replaceability signal**: The original transaction must signal that it is replaceable. This is done by setting the [sequence](/docs/glossary#sequence) of at least one input to a value below `0xfffffffe` (and not `0xffffffff`, which is used for [locktime](/docs/glossary#locktime) opt-out). In practice, `nSequence < 0xfffffffe` on any input makes the tx replaceable.
+
+2. **Higher fee**: The replacement must pay a **higher total fee** than the original.
+
+3. **Higher fee rate**: The replacement must have a **higher fee rate** (sat/vB) than the original.
+
+4. **No new unconfirmed inputs**: All [inputs](/docs/glossary#input) must be either:
+   - already in the mempool, or
+   - [confirmed](/docs/glossary#confirmation) in the chain.
+   The replacement cannot add inputs that are themselves unconfirmed and not in the mempool (to prevent dependency chains that complicate replacement).
+
+5. **Output and amount constraints**: The replacement cannot add new [outputs](/docs/glossary#output), cannot remove outputs, and cannot lower any output amount. It can only change the fee (by reducing one or more output amounts or by adding/using extra inputs that are already confirmed or in the mempool).
+
+#### Full RBF
+
+**Full RBF** (Replace-By-Fee regardless of signaling) is a **policy** option on some nodes (including Bitcoin Core 24+ with `-mempoolfullrbf=1`). With full RBF, *any* unconfirmed transaction can be replaced by a higher-fee version, even if the original did not signal replaceability (sequence was `0xffffffff`). This is **not** consensus; it is a relay policy. Miners and node operators may or may not enable it. When enabled, it allows fee bumping of "non-RBF" transactions, but recipients of unconfirmed [outputs](/docs/glossary#output) should treat them as replaceable.
+
+#### Replaceability in Wallets
+
+- **Senders**: To allow RBF, wallets set `nSequence` to e.g. `0xfffffffd` (or lower) on at least one input. Many wallets enable this by default.
+- **Receivers**: If you receive an unconfirmed payment, assume it can be double-spent or replaced until it has [confirmations](/docs/glossary#confirmation). For high-value accepts, wait for 1–6 confirmations.
 
 ### Child Pays for Parent (CPFP)
 
-CPFP uses a child transaction to pay for a stuck parent:
+**CPFP** is used when you **cannot** replace the original (e.g., you are the **recipient** and don’t control the [inputs](/docs/glossary#input), or the original is not RBF-signaling). You create a **child** [transaction](/docs/bitcoin/transaction-lifecycle) that spends an **output** of the stuck (parent) transaction and attach a high enough fee so that miners are willing to mine both parent and child together. Miners evaluate the **package** (parent + child) by the combined fee and combined size; a high-fee child makes the package profitable.
 
 ```text
 Parent Transaction:
 - Fee: 2 sat/vB (too low)
-- Status: Stuck
+- Status: Stuck in mempool
+- Has an output to you
 
 Child Transaction:
-- Spends parent's output
-- High fee: 50 sat/vB
-- Covers both transactions
-- Both get confirmed
+- Spends the parent’s output to you
+- Fee: e.g. 50 sat/vB
+- Miner includes both; combined fee makes the package attractive
 ```
+
+CPFP works only if you control an [output](/docs/glossary#output) of the parent (e.g., you received the payment). The child must be valid and, under typical package relay rules, the parent+child package must meet the node’s fee and size policies.
+
+### Transaction Pinning
+
+**Pinning** is a class of attacks where an attacker tries to *prevent* a victim’s transaction from being replaced or from being mined, for example:
+
+- **RBF pinning**: The replacement is made to violate BIP 125 (e.g., by making the victim’s replacement depend on unconfirmed inputs that are not in the mempool, or by other rule games) so nodes reject it.
+- **CPFP pinning**: The victim’s child (or the package) is made to fail package validation, or the attacker spends the same parent output in a way that blocks the victim’s child.
+
+**Package relay** and **package RBF** (see below) are designed to make fee bumping more robust and to reduce pinning: for example, by allowing replacement of a *package* (parent + child) and by standardizing how packages are validated and relayed.
+
+### Package Relay and Package RBF
+
+**Package relay** (and related **package RBF** ideas) allow nodes to accept and relay a **package** of related transactions (e.g., parent + child) as a unit. The mempool and [block construction](/docs/mining/block-construction) logic can then:
+
+- Evaluate the package’s total fee and total size when deciding to accept or to [mine](/docs/mining) it.
+- In **package RBF**, allow a *replacement* that is itself a package (e.g., a new parent+child that replaces a previous parent, or that bumps the effective fee of an unconfirmed parent via a new child).
+
+As of this writing, package relay and package RBF are in [BIP process](https://github.com/bitcoin/bips) and/or implemented as optional node policy (e.g., in Bitcoin Core). They are important for [Lightning](/docs/lightning) and other [Layer 2](/docs/advanced/sidechains) protocols that need to reliably fee-bump [on-chain](/docs/glossary#on-chain) transactions.
+
+### When to Use RBF vs CPFP
+
+| Situation | Use |
+|-----------|-----|
+| You are the **sender** and control the inputs | **RBF**: Create a replacement that pays more (and meets BIP 125). |
+| You are the **recipient** and the sender did not enable RBF or you can’t replace | **CPFP**: Spend the output you received with a high-fee child. |
+| You use **Lightning** or other L2 | RBF and CPFP (and, where available, package RBF) are used by the implementation to bump commitment or [HTLC](/docs/lightning/routing/htlc) transactions. |
 
 ---
 

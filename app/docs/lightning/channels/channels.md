@@ -280,6 +280,35 @@ For routing payments, liquidity must exist in the payment direction:
 
 New nodes often struggle with inbound liquidity since opening channels only provides outbound.
 
+### Liquidity Management
+
+To receive payments or [route](/docs/lightning/routing) effectively, you need **inbound** [liquidity](/docs/lightning/channels#inbound-vs-outbound-liquidity). To send or route in the other direction, you need **outbound** [liquidity](/docs/lightning/channels#inbound-vs-outbound-liquidity). Common ways to adjust it:
+
+- **Circular rebalancing**: Pay yourself (e.g., between your own [channels](/docs/lightning/channels) or via a loop) to move [liquidity](/docs/lightning/channels#inbound-vs-outbound-liquidity) from one side to the other.
+- **Submarine swaps / liquidity marketplaces**: Use a service to swap [on-chain](/docs/glossary#on-chain) [BTC](/docs/glossary#btc) for [Lightning](/docs/lightning) [inbound](/docs/lightning/channels#inbound-vs-outbound-liquidity) (or the reverse), or to buy/sell [channel](/docs/lightning/channels) capacity.
+- **Liquidity ads (e.g., [BOLT 12](https://github.com/lightning/bolts) or implementation-specific)**: Some nodes advertise that they want to buy or sell [inbound](/docs/lightning/channels#inbound-vs-outbound-liquidity) or [outbound](/docs/lightning/channels#inbound-vs-outbound-liquidity) [liquidity](/docs/lightning/channels#inbound-vs-outbound-liquidity); you can open [channels](/docs/lightning/channels) or [splice](/docs/lightning/channels#channel-splicing) with them.
+- **[Splicing](/docs/lightning/channels#channel-splicing)**: Add or remove [on-chain](/docs/glossary#on-chain) capacity to an existing [channel](/docs/lightning/channels) to rebalance.
+
+---
+
+## Channel Splicing
+
+**Splicing** (as specified in the Lightning [BOLT](https://github.com/lightning/bolts) process) allows you to **add or remove [on-chain](/docs/glossary#on-chain) capacity** to or from an existing [channel](/docs/lightning/channels) **without closing** it. That way you can top up or withdraw [liquidity](/docs/lightning/channels#channel-capacity-and-liquidity) in a single [transaction](/docs/bitcoin/transaction-lifecycle) while keeping the same channel and [HTLC](/docs/lightning/routing/htlc) state.
+
+### How It Works
+
+- **Splice-in**: You add an extra [input](/docs/glossary#input) (and possibly [output](/docs/glossary#output)) to a new **funding [transaction](/docs/bitcoin/transaction-lifecycle)** that spends the existing 2-of-2 [multisig](/docs/glossary#multisig-multi-signature) [UTXO](/docs/glossary#utxo-unspent-transaction-output) and creates a **new** 2-of-2 with a larger (or smaller) amount. Both parties sign; the channel capacity is updated on [confirmation](/docs/glossary#confirmation).
+- **Splice-out**: Part of the channel [balance](/docs/lightning/channels#channel-capacity-and-liquidity) is sent to an [address](/docs/glossary#address) (yours or your peer’s) in the splice [transaction](/docs/bitcoin/transaction-lifecycle), reducing the new 2-of-2 amount.
+
+Splicing is **dual-funded** in the sense that the splice [transaction](/docs/bitcoin/transaction-lifecycle) is cooperatively built; typically it also uses [anchor outputs](/docs/lightning/anchor-outputs) or similar so [fee](/docs/glossary#fee) bumping works.
+
+### Why Use Splicing
+
+- **Add liquidity**: Get more [inbound](/docs/lightning/channels#inbound-vs-outbound-liquidity) or [outbound](/docs/lightning/channels#inbound-vs-outbound-liquidity) without opening a new [channel](/docs/lightning/channels) and without [on-chain](/docs/glossary#on-chain) round-trips for a full close+reopen.
+- **Withdraw liquidity**: Reduce channel capacity and free [BTC](/docs/glossary#btc) on-chain without closing the [channel](/docs/lightning/channels) and losing your [routing](/docs/lightning/routing) relationship.
+
+Support for splicing varies by implementation (e.g., [Core Lightning](https://github.com/ElementsProject/lightning), [LDK](https://github.com/lightningdevkit/rust-lightning)); check your node’s documentation.
+
 ---
 
 ## Channel Types
@@ -343,7 +372,7 @@ Third-party services that monitor the blockchain for breach attempts when your n
 **Problem**: Payment larger than available channel balance.
 
 **Solutions**:
-- Use [Multi-Part Payments (MPP)](/docs/lightning/routing#what-is-mpp)
+- Use [Multi-Part Payments (MPP)](/docs/lightning/routing/mpp)
 - Open larger channel
 - Find alternative route
 
@@ -363,6 +392,6 @@ Payment channels enable:
 
 ## Related Topics
 
-- [Routing & HTLCs](/docs/lightning/routing) - How payments route through channels
+- [Routing Fees](/docs/lightning/routing), [HTLCs](/docs/lightning/routing/htlc), and [Multi-Part Payments](/docs/lightning/routing/mpp) - How payments route through channels
 - [Watchtowers](/docs/lightning/watchtowers) - Third-party channel monitoring
-- [Anchor Outputs](/docs/lightning/anchor-outputs) - Modern channel format
+- [Anchor Outputs](/docs/lightning/anchor-outputs) - Modern channel format for fee bumping and splicing

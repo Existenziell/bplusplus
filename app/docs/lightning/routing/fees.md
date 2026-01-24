@@ -644,3 +644,12 @@ Lightning routing fees:
 - **Market driven**: Competition keeps fees reasonable
 
 Understanding fees helps both routing nodes optimize revenue and payment senders minimize costs.
+
+---
+
+## Related Topics
+
+- [HTLCs](/docs/lightning/routing/htlc) - Hash Time-Locked Contracts that carry payments along the route
+- [Multi-Part Payments](/docs/lightning/routing/mpp) - Splitting payments across multiple routes
+- [Channels](/docs/lightning/channels) - How channels and liquidity affect routing
+- [Onion Routing](/docs/lightning/onion) - How routes are encoded for privacy

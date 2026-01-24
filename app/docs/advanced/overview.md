@@ -20,9 +20,14 @@ This section covers advanced, experimental, and specialized Bitcoin topics that 
 
 - **[Bloom Filters](/docs/advanced/bloom-filters)** - Privacy-preserving SPV client technology
 
+### Data & Tokens on Bitcoin
+
+- **[Ordinals & Inscriptions](/docs/advanced/ordinals-inscriptions)** - Attaching data to satoshis; BRC-20, Runes, and blockspace impact
+
 ### Governance & Evolution
 
 - **[Governance & Evolution](/docs/advanced/governance)** - How Bitcoin evolves through rough consensus and the BIP process
+- **[Covenants](/docs/advanced/covenants)** - Proposed opcodes (OP_CTV, SIGHASH_ANYPREVOUT) that would constrain how outputs can be spent
 
 ---
 

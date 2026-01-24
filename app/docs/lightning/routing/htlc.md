@@ -477,6 +477,6 @@ HTLCs are the atomic building blocks of Lightning payments:
 
 ## Related Topics
 
-- [Routing Fees](/docs/lightning/routing#fee-structure) - How routing fees work
-- [Multi-Part Payments](/docs/lightning/routing#what-is-mpp) - Splitting payments across routes
+- [Routing Fees](/docs/lightning/routing) - How routing fees work
+- [Multi-Part Payments](/docs/lightning/routing/mpp) - Splitting payments across routes
 - [Onion Routing](/docs/lightning/onion) - Privacy in payment routing

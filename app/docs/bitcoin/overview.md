@@ -106,3 +106,4 @@ Dive into the technical details:
 - [Timelocks](/docs/bitcoin/timelocks) - Time-based spending conditions
 - [Transaction Malleability](/docs/bitcoin/transaction-malleability) - Historical issue and fix
 - [Transaction Lifecycle](/docs/bitcoin/transaction-lifecycle) - Transaction states and confirmations
+- [Sighash Types](/docs/bitcoin/sighash-types) - What signatures commit to (SIGHASH_ALL, SINGLE, NONE, ANYONECANPAY)

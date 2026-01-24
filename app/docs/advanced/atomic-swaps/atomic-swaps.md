@@ -237,7 +237,7 @@ Lightning Atomic Swap:
 
 ## Related Topics
 
-- [HTLCs](/docs/lightning/routing#what-is-an-htlc) - Hash time-locked contracts
+- [HTLCs](/docs/lightning/routing/htlc) - Hash time-locked contracts
 - [Timelocks](/docs/bitcoin/timelocks) - Time-based conditions
 - [Lightning Network](/docs/lightning) - Off-chain swaps
 

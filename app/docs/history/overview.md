@@ -44,6 +44,12 @@ The first published exchange rate valued Bitcoin at less than $0.001 per coin.
 
 ## 2010
 
+### Satoshi's Handover
+
+- **Date**: Mid–late 2010
+
+[Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto) gradually handed over [Bitcoin](/docs/glossary#bitcoin-network) development and [repository](https://github.com/bitcoin/bitcoin) access to [Gavin Andresen](/docs/history/people) and others, then stopped appearing in forums and email. The last known public communications are from early 2011. Satoshi’s identity remains unknown, and the [protocol](/docs/bitcoin) has since been maintained by the open-source community.
+
 ### Pizza Day
 
 - **Date**: May 22, 2010
@@ -61,7 +67,7 @@ Mt. Gox launched as the first major Bitcoin exchange, eventually handling over 7
 
 - **Date**: August 15, 2010
 
-A critical bug was discovered that allowed someone to create 184 billion BTC. The bug was quickly fixed with a soft fork, and the invalid transaction was removed from the blockchain.
+A critical [consensus](/docs/glossary#consensus) bug was discovered that allowed creation of 184 billion BTC from an integer overflow in [output](/docs/glossary#output) validation. The exploit was fixed with a [soft fork](/docs/glossary#soft-fork), and the invalid [transaction](/docs/bitcoin/transaction-lifecycle) was removed from the [blockchain](/docs/glossary#blockchain). It remains one of the most serious early [protocol](/docs/bitcoin) bugs; the response showed the network could coordinate a timely fix.
 
 ---
 
@@ -80,6 +86,12 @@ Bitcoin reached parity with the US dollar for the first time.
 - **Price**: $31/BTC
 
 Bitcoin's first major price spike, followed by a crash to $2 by November.
+
+### Silk Road Launches
+
+- **Date**: February 2011
+
+Silk Road, an online marketplace that used Bitcoin for payments, launched. It became the best-known early use case for [Bitcoin](/docs/glossary#bitcoin-network) and drew attention—both positive and negative—to [censorship resistance](/docs/glossary#censorship-resistance) and [privacy](/docs/wallets/privacy). The site was shut down by law enforcement in October 2013; the episode highlighted that [Bitcoin](/docs/glossary#bitcoin-network) is neutral infrastructure and that adoption and regulation would continue to evolve.
 
 ---
 
@@ -115,6 +127,12 @@ Bitcoin's market capitalization exceeded $1 billion for the first time.
 - **Price**: $1,000/BTC
 
 Bitcoin crossed $1,000 for the first time during a rally driven by Chinese exchange activity.
+
+### Silk Road Shut Down
+
+- **Date**: October 2013
+
+U.S. law enforcement shut down Silk Road and arrested its operator. The event fueled debate over [Bitcoin](/docs/glossary#bitcoin-network)’s use in illicit markets and over [regulation](/docs/glossary#aml-anti-money-laundering). The [network](/docs/bitcoin/p2p-protocol) continued to operate; no [protocol](/docs/bitcoin) change was required.
 
 ---
 

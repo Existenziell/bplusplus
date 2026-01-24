@@ -86,8 +86,22 @@ This is the same validation process that occurs on the Bitcoin network when tran
 | `npm run dev` | Start development server |
 | `npm run build` | Build for production (runs prebuild scripts, then `next build`) |
 | `npm run start` | Start production server |
+| `npm run test` | Run tests in watch mode (Vitest) |
+| `npm run test:run` | Run tests once (for CI) |
 | `npm run lint` | Run ESLint |
 | `npm run analyze` | Analyze bundle size |
+
+### Testing
+
+Tests use [Vitest](https://vitest.dev) and live in **`tests/`** with a mirrored layout:
+
+```
+tests/
+  app/utils/     # formatNumber, denominationUtils, stackLabInterpreter, stackLabFormatters, searchLogic, navigation
+  scripts/lib/   # slug (generateSlug), parse-doc-pages (parseDocPages)
+```
+
+Covered: build pipeline (`parseDocPages`, `generateSlug`), Stack Lab interpreter and formatters, denomination/formatting utils, search logic, and navigation consistency. Run `npm run test:run` to execute all tests. In CI, run `npm run test:run` before `npm run build` so the pipeline fails if tests fail.
 
 ### Prebuild scripts
 

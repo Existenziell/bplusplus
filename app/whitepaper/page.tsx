@@ -1,5 +1,15 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { DownloadPDFIcon } from '@/app/components/Icons'
+
+const relatedTopics = [
+  { href: '/docs/fundamentals/problems', title: 'Problems Bitcoin Solved', description: 'The fundamental challenges the whitepaper addresses' },
+  { href: '/docs/fundamentals/blockchain', title: 'The Blockchain', description: 'How blocks are cryptographically chained, as described in the whitepaper' },
+  { href: '/docs/mining/proof-of-work', title: 'Proof of Work', description: 'The mining mechanism that secures the network' },
+  { href: '/docs/bitcoin/consensus', title: 'Consensus', description: 'How the network agrees on a single transaction history' },
+  { href: '/docs/history/people#satoshi-nakamoto', title: 'Satoshi Nakamoto', description: 'The anonymous creator of the whitepaper' },
+  { href: '/docs/fundamentals/cypherpunk-philosophy', title: 'Cypherpunk Philosophy', description: 'The intellectual roots of Bitcoin' },
+]
 
 export default function WhitepaperPage() {
   return (
@@ -49,6 +59,24 @@ export default function WhitepaperPage() {
           priority
         />
       </div>
+
+      {/* Related Topics */}
+      <section className="mt-20 pt-8 border-t border-zinc-200 dark:border-zinc-700">
+        <h2 className="text-xl font-semibold mb-4">Related Topics</h2>
+        <ul className="space-y-2">
+          {relatedTopics.map(({ href, title, description }) => (
+            <li key={href}>
+              <Link
+                href={href}
+                className="text-btc hover:underline font-medium"
+              >
+                {title}
+              </Link>
+              <span className="text-secondary"> — {description}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }

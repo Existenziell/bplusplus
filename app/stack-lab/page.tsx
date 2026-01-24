@@ -12,6 +12,7 @@ import StackLabCard from '@/app/components/stack-lab/StackLabCard'
 import { ScriptInterpreter, type StackItem, type ExecutionStep } from '@/app/utils/stackLabInterpreter'
 import { parseStackItem } from '@/app/utils/stackLabFormatters'
 import { ChevronDown } from '@/app/components/Icons'
+import MarkdownRenderer from '@/app/components/MarkdownRenderer'
 
 export default function StackLabPage() {
   const [isMounted, setIsMounted] = useState(false)
@@ -371,6 +372,18 @@ export default function StackLabPage() {
           </DragOverlay>
         </div>
       </DndContext>
+
+      <div className="mt-12">
+        <MarkdownRenderer
+          content={`---
+## Related Topics
+
+- [Bitcoin Script](/docs/bitcoin/script) - How Bitcoin Script works
+- [OP Codes](/docs/bitcoin/op-codes) - Reference for OP codes used in Stack Lab
+- [Bitcoin CLI Terminal](/terminal) - Interactive RPC playground
+`}
+        />
+      </div>
 
       {/* Mobile Warning Modal */}
       {showMobileWarning && !mobileWarningDismissed && (

@@ -36,9 +36,9 @@ body {
 
 @layer components {
 
-  /* Main page background gradient - used across page layouts */
+  /* Main page background - used across page layouts */
   .page-bg {
-    @apply bg-gradient-linear from-zinc-50 via-zinc-100 to-zinc-50 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800 text-zinc-800 dark:text-zinc-200;
+    @apply bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200;
   }
 
   /* Button Styles */

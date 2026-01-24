@@ -106,7 +106,7 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           `}
           style={{
             left: linkRef.current ? linkRef.current.getBoundingClientRect().left + linkRef.current.getBoundingClientRect().width / 2 : 0,
-            transform: 'trangrayX(-50%)',
+            transform: 'translateX(-50%)',
             ...(position === 'top'
               ? { bottom: linkRef.current ? window.innerHeight - linkRef.current.getBoundingClientRect().top + 8 : 0 }
               : { top: linkRef.current ? linkRef.current.getBoundingClientRect().bottom + 8 : 0 }
@@ -118,7 +118,7 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           {/* Arrow */}
           <span
             className={`
-              block absolute left-1/2 -trangray-x-1/2 w-2.5 h-2.5
+              block absolute left-1/2 -translateX-1/2 w-2.5 h-2.5
               bg-gray-100 dark:bg-gray-800
               border-gray-300 dark:border-gray-600
               transform rotate-45

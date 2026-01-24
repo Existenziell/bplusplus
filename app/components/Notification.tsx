@@ -93,7 +93,7 @@ export default function Notification() {
       aria-live="polite"
       onAnimationEnd={handleAnimationEnd}
       className={`
-        notification-toast fixed left-1/2 bottom-6 z-50 -trangray-x-1/2
+        notification-toast fixed left-1/2 bottom-6 z-50 -translate-x-1/2
         flex items-center gap-3 px-5 py-4 rounded-lg text-base font-medium
         shadow-lg ring-1 max-w-[calc(100vw-2rem)]
         ${state.exiting ? 'animate-toast-out' : 'animate-toast-in'}

@@ -34,7 +34,7 @@ export default function Header() {
               <Link href="/" className="text-center" aria-label="B++ Home">
                 <Image src="/logo/logo.png" alt="" width={80} height={80} />
               </Link>
-              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 -rotate-3 trangray-x-16" aria-hidden="true">
+              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 -rotate-3 translate-x-16" aria-hidden="true">
                 <Image
                   src="/icons/satoshi.svg"
                   alt=""
@@ -47,7 +47,7 @@ export default function Header() {
                   alt=""
                   width={30}
                   height={30}
-                  className="dark:invert trangray-y-1"
+                  className="dark:invert translateY-1"
                 />
               </div>
               <div className="flex-shrink-0 flex items-center gap-1">

@@ -292,3 +292,63 @@ export function InfoIcon({ className, ...props }: IconProps) {
     </svg>
   )
 }
+
+export function SearchIcon({ className, title, ...props }: IconProps & { title?: string }) {
+  return (
+    <svg
+      className={mergeClassName('w-4 h-4', className)}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      {title ? <title>{title}</title> : null}
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+  )
+}
+
+/** Document / page. Use for search result type: page. */
+export function DocumentIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={mergeClassName('w-4 h-4', className)}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+      />
+    </svg>
+  )
+}
+
+/** Open book. Use for search result type: glossary. */
+export function BookOpenIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={mergeClassName('w-4 h-4', className)}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+      />
+    </svg>
+  )
+}

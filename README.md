@@ -59,7 +59,7 @@ npm run build
 npm run start
 ```
 
-The build process automatically generates glossary data and markdown content via prebuild scripts.
+The build process runs prebuild scripts (see [Prebuild scripts](#prebuild-scripts)) before `next build` to generate `public/data/*.json` used by the download API, glossary tooltips, and search.
 
 ## How Stack Lab Works
 
@@ -84,12 +84,30 @@ This is the same validation process that occurs on the Bitcoin network when tran
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server |
-| `npm run build` | Build for production (runs prebuild scripts) |
+| `npm run build` | Build for production (runs prebuild scripts, then `next build`) |
 | `npm run start` | Start production server |
 | `npm run lint` | Run ESLint |
 | `npm run analyze` | Analyze bundle size |
 
-### Link Analysis Tools
+### Prebuild scripts
+
+These run automatically in order when you `npm run build` (via the `prebuild` script):
+
+| Script | Input | Output | Purpose |
+|--------|-------|--------|---------|
+| `generate-md-content.js` | `app/utils/navigation.ts`, `app/docs/**/*.md` | `public/data/md-content.json` | Bundles all doc markdown as `path → { content, filename }` for the download-MD API |
+| `generate-glossary-data.js` | `app/docs/glossary/terms.md` | `public/data/glossary.json` | Parses `### Term` blocks into `{ slug: { term, definition } }` for glossary tooltips |
+| `generate-search-index.js` | `md-content.json`, `glossary.json`, `navigation.ts` | `public/data/search-index.json` | Builds search index: doc excerpts, glossary terms, static pages (e.g. /whitepaper, /terminal), with optional `keywords`; used by `/api/search` |
+
+You can run them manually (e.g. to refresh data without a full build):
+
+```bash
+node scripts/generate-md-content.js
+node scripts/generate-glossary-data.js
+node scripts/generate-search-index.js   # must run after the two above
+```
+
+### Link analysis tools
 
 The project includes tools to analyze and visualize the internal link structure of the documentation:
 

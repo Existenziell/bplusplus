@@ -188,6 +188,22 @@ export const sections: Record<string, { title: string; description: string }> = 
     title: 'Bitcoin Glossary',
     description: 'A comprehensive glossary of Bitcoin development terms, from ASIC to ZMQ.',
   },
+  whitepaper: {
+    title: 'Whitepaper',
+    description: 'The Bitcoin whitepaper by Satoshi Nakamoto.',
+  },
+  terminal: {
+    title: 'CLI Terminal',
+    description: 'Run Bitcoin RPC commands in the browser. No node setup required.',
+  },
+  'stack-lab': {
+    title: 'Stack Lab',
+    description: 'Interactive Bitcoin Script playground.',
+  },
+  author: {
+    title: 'About B++',
+    description: 'About the B++ project and its creator.',
+  },
 }
 
 // Navigation structure for sidebar

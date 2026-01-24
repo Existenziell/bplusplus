@@ -34,7 +34,7 @@ So `SIGHASH_ALL | SIGHASH_ANYONECANPAY` means “commit to all outputs and to th
 **Default and most common.** The sighash includes:
 
 - [Version](/docs/glossary#transaction-id-txid), [locktime](/docs/glossary#locktime)
-- All [inputs](/docs/glossary#input) (or only the current one if `ANYONECANPAY` is set): [outpoint](/docs/glossary#outpoint), [script](/docs/bitcoin/script) (or scriptCode for [SegWit](/docs/bitcoin/segwit)), [sequence](/docs/glossary#sequence)
+- All [inputs](/docs/glossary#input) (or only the current one if `ANYONECANPAY` is set): [outpoint](/docs/glossary#outpoint), [script](/docs/bitcoin/script) (or scriptCode for [SegWit](/docs/bitcoin/segwit)), sequence
 - All [outputs](/docs/glossary#output): value and [scriptPubKey](/docs/glossary#scriptpubkey)
 
 The signer commits to the whole [transaction](/docs/bitcoin/transaction-lifecycle) (or to all outputs and only this input with `ANYONECANPAY`). Changing any committed part invalidates the signature. For [SegWit](/docs/bitcoin/segwit) and [Taproot](/docs/bitcoin/taproot), the default used in most wallets is `SIGHASH_DEFAULT`, which is treated like `SIGHASH_ALL` (see below).

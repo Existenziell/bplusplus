@@ -106,7 +106,7 @@ The smallest subunit of Ether (Ethereum's currency) is called a "wei" in his hon
 
 **Contribution:** Merkle trees (1979) - Efficient verification of block contents
 
-Ralph Merkle is a computer scientist who invented Merkle trees (also called hash trees) in 1979. In this structure, leaf nodes contain hashes of data, and each parent node is the hash of its children, building up to a single root hash. The Bitcoin whitepaper uses this construction to enable compact proofs: [SPV](/docs/glossary#spv) clients can verify that a transaction is in a block by checking a path from the transaction to the [Merkle root](/docs/glossary#merkle-root) in the block header, without downloading the full block.
+Ralph Merkle is a computer scientist who invented Merkle trees (also called hash trees) in 1979. In this structure, leaf nodes contain hashes of data, and each parent node is the hash of its children, building up to a single root hash. The Bitcoin whitepaper uses this construction to enable compact proofs: [SPV](/docs/glossary#spv-simplified-payment-verification) clients can verify that a transaction is in a block by checking a path from the transaction to the [Merkle root](/docs/glossary#merkle-root) in the block header, without downloading the full block.
 
 Merkle trees are fundamental to Bitcoin's [block](/docs/glossary#block) structure. Every block header includes a Merkle root that commits to all transactions in the block; tampering with any transaction changes the root and breaks the chain. Merkle also contributed to public-key cryptography (Merkle's puzzles) and later to nanotechnology. His 1979 paper "Protocols for Public Key Cryptosystems" and the Merkle tree concept are among the cryptographic foundations Satoshi drew on.
 
@@ -230,7 +230,7 @@ His role diminished after 2014, particularly following the blocksize debate and 
 
 Laszlo Hanyecz is a programmer who, on May 22, 2010, completed the first known commercial transaction using Bitcoin: he paid 10,000 BTC for two pizzas delivered to his home in Florida. The deal was arranged on the Bitcointalk forum, where Hanyecz had offered to pay BTC for pizza delivery. A participant in the UK ordered the pizzas; Hanyecz sent the bitcoin. The exchange proved that Bitcoin could be used as a medium of exchange for real goods and services.
 
-The "Bitcoin pizza" has become a celebrated moment in Bitcoin's history—May 22 is sometimes observed as Bitcoin Pizza Day—and a reminder of Bitcoin's early, experimental use. At later prices, those 10,000 BTC would be worth hundreds of millions of dollars; at the time, they were a fair price for two pizzas and a historic proof of concept. Hanyecz continued contributing to Bitcoin, including work on the GPU mining software that would precede [ASIC](/docs/glossary#asic) miners.
+The "Bitcoin pizza" has become a celebrated moment in Bitcoin's history—May 22 is sometimes observed as Bitcoin Pizza Day—and a reminder of Bitcoin's early, experimental use. At later prices, those 10,000 BTC would be worth hundreds of millions of dollars; at the time, they were a fair price for two pizzas and a historic proof of concept. Hanyecz continued contributing to Bitcoin, including work on the GPU mining software that would precede [ASIC](/docs/glossary#asic-application-specific-integrated-circuit) miners.
 
 [More](https://en.wikipedia.org/wiki/Laszlo_Hanyecz)
 

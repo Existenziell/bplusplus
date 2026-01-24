@@ -283,13 +283,13 @@ When a transaction is stuck in the [mempool](/docs/mining/mempool) because the f
 
 ### Replace-by-Fee (RBF) and BIP 125
 
-**RBF** allows replacing an unconfirmed [transaction](/docs/bitcoin/transaction-lifecycle) with a new version that pays higher [fees](/docs/glossary#fee). The replacement must spend the same [inputs](/docs/glossary#input) and generally the same [outputs](/docs/glossary#output) (with stricter rules in BIP 125).
+**RBF** allows replacing an unconfirmed [transaction](/docs/bitcoin/transaction-lifecycle) with a new version that pays higher [fees](/docs/glossary#transaction-fee). The replacement must spend the same [inputs](/docs/glossary#input) and generally the same [outputs](/docs/glossary#output) (with stricter rules in BIP 125).
 
 #### BIP 125 Replaceability Rules
 
 For a replacement to be accepted by [BIP 125](https://github.com/bitcoin/bips/blob/master/bip-0125.mediawiki)-compliant nodes:
 
-1. **Replaceability signal**: The original transaction must signal that it is replaceable. This is done by setting the [sequence](/docs/glossary#sequence) of at least one input to a value below `0xfffffffe` (and not `0xffffffff`, which is used for [locktime](/docs/glossary#locktime) opt-out). In practice, `nSequence < 0xfffffffe` on any input makes the tx replaceable.
+1. **Replaceability signal**: The original transaction must signal that it is replaceable. This is done by setting the sequence of at least one input to a value below `0xfffffffe` (and not `0xffffffff`, which is used for [locktime](/docs/glossary#locktime) opt-out). In practice, `nSequence < 0xfffffffe` on any input makes the tx replaceable.
 
 2. **Higher fee**: The replacement must pay a **higher total fee** than the original.
 

@@ -300,6 +300,9 @@ A divergence in the blockchain where two or more competing chains temporarily or
 ### Full Node
 A Bitcoin node that independently validates every transaction and block against consensus rules, maintaining a complete copy of the blockchain without trusting any external source. Full nodes download and verify ~600GB+ of historical data during initial sync, then validate new blocks as they arrive. Running a full node provides the highest level of security and privacy, as you verify your own transactions rather than trusting third parties.
 
+### Fungibility
+The property that individual units of a currency or asset are interchangeable—one unit is equivalent to another. Bitcoin is fungible when one satoshi is treated the same as any other regardless of transaction history. Chain analysis can reduce fungibility by labeling or discriminating against certain coins based on their provenance.
+
 ---
 
 ## G
@@ -515,6 +518,9 @@ A valid block that was mined but is not part of the main chain because another b
 ### Output
 A component of a Bitcoin transaction that specifies an amount of Bitcoin and the conditions (locking script or scriptPubKey) required to spend it. Each output represents a new UTXO that can later be used as an input in a future transaction. The locking script typically specifies a public key hash (address) that must provide a valid signature to spend, though more complex conditions are possible.
 
+### Outpoint
+A reference that uniquely identifies a UTXO: the transaction ID (txid) of the transaction that created it, plus the output index (vout) within that transaction. Every transaction input references an outpoint to specify which UTXO it is spending. The pair (txid, vout) is used in signatures (sighash) and by covenant proposals that need to pin or inspect specific inputs.
+
 ---
 
 ## P
@@ -674,6 +680,9 @@ A backward-compatible protocol change that tightens consensus rules, making some
 ### Sidechain
 A separate blockchain that's interoperable with Bitcoin, allowing bitcoin to move between the two chains via two-way pegs. Sidechains can offer additional features or scalability while using Bitcoin as the base layer for security.
 
+### Sighash
+A 1-byte flag in Bitcoin signatures that selects which parts of the transaction are committed to by the signature. Sighash types (e.g. SIGHASH_ALL, SIGHASH_NONE, SIGHASH_SINGLE, SIGHASH_ANYPREVOUT) control whether the signer commits to all inputs and outputs, none, only the corresponding output, or allows the input to come from any outpoint. Sighash enables RBF (via sequence), contract protocols, and proposed covenants.
+
 ### Signature
 A digital signature in a Bitcoin transaction proves that the owner of the corresponding private key authorized the transaction. It ensures the authenticity and security of the transfer.
 
@@ -704,6 +713,9 @@ An attack where a malicious actor creates many fake identities (nodes) to gain d
 
 ### Taproot
 A major Bitcoin protocol upgrade activated in November 2021 (BIPs 340, 341, 342) that significantly improves privacy, efficiency, and smart contract capabilities. Taproot combines Schnorr signatures, MAST (Merkle Abstract Syntax Trees), and a new script version to make complex transactions indistinguishable from simple payments when using the key path. This means multisig wallets, Lightning channels, and sophisticated contracts all look like normal single-signature transactions on-chain, dramatically improving privacy for everyone.
+
+### Tapscript
+The scripting system used in Taproot’s script path (BIP 341/342). Tapscript is the opcode set and validation rules for the leaves of the Taproot Merkle tree when spending via a script rather than the key path. It reuses Bitcoin Script opcodes and adds BIP 342 opcodes (e.g. OP_CHECKSIGADD) for Schnorr and Taproot-specific behavior. Miniscript and other policy compilers can target Tapscript for P2TR outputs.
 
 ### Testnet
 A public Bitcoin network using worthless test coins, designed for development and testing without risking real money. Testnet uses different address prefixes (starting with "m", "n", "2", or "tb1") and different genesis block, ensuring testnet and mainnet transactions can never be confused. Testnet has had issues with griefing (malicious difficulty spikes) and coins sometimes acquiring value despite being meant to be free.

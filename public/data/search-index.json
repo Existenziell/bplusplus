@@ -1188,6 +1188,12 @@
     "body": "A Bitcoin node that independently validates every transaction and block against consensus rules, maintaining a complete copy of the blockchain without trusting any external source. Full nodes download and verify ~600GB+ of historical data during initial sync, then validate new blocks as they..."
   },
   {
+    "path": "/docs/glossary#fungibility",
+    "title": "Fungibility",
+    "section": "glossary",
+    "body": "The property that individual units of a currency or asset are interchangeable—one unit is equivalent to another. Bitcoin is fungible when one satoshi is treated the same as any other regardless of transaction history...."
+  },
+  {
     "path": "/docs/glossary#genesis-block",
     "title": "Genesis Block",
     "section": "glossary",
@@ -1554,6 +1560,12 @@
     "body": "A component of a Bitcoin transaction that specifies an amount of Bitcoin and the conditions (locking script or scriptPubKey) required to spend it. Each output represents a new UTXO that can later be used as an input in a future transaction...."
   },
   {
+    "path": "/docs/glossary#outpoint",
+    "title": "Outpoint",
+    "section": "glossary",
+    "body": "A reference that uniquely identifies a UTXO: the transaction ID (txid) of the transaction that created it, plus the output index (vout) within that transaction. Every transaction input references an outpoint to specify which UTXO it is spending...."
+  },
+  {
     "path": "/docs/glossary#paper-wallet",
     "title": "Paper Wallet",
     "section": "glossary",
@@ -1851,6 +1863,12 @@
     "body": "A separate blockchain that's interoperable with Bitcoin, allowing bitcoin to move between the two chains via two-way pegs. Sidechains can offer additional features or scalability while using Bitcoin as the base layer for security."
   },
   {
+    "path": "/docs/glossary#sighash",
+    "title": "Sighash",
+    "section": "glossary",
+    "body": "A 1-byte flag in Bitcoin signatures that selects which parts of the transaction are committed to by the signature. Sighash types (e.g. SIGHASHALL, SIGHASHNONE, SIGHASHSINGLE, SIGHASHANYPREVOUT) control whether the signer commits to all inputs and outputs, none, only the corresponding output, or..."
+  },
+  {
     "path": "/docs/glossary#signature",
     "title": "Signature",
     "section": "glossary",
@@ -1903,6 +1921,12 @@
     "title": "Taproot",
     "section": "glossary",
     "body": "A major Bitcoin protocol upgrade activated in November 2021 (BIPs 340, 341, 342) that significantly improves privacy, efficiency, and smart contract capabilities. Taproot combines Schnorr signatures, MAST (Merkle Abstract Syntax Trees), and a new script version to make complex transactions..."
+  },
+  {
+    "path": "/docs/glossary#tapscript",
+    "title": "Tapscript",
+    "section": "glossary",
+    "body": "The scripting system used in Taproot’s script path (BIP 341/342). Tapscript is the opcode set and validation rules for the leaves of the Taproot Merkle tree when spending via a script rather than the key path. It reuses Bitcoin Script opcodes and adds BIP 342 opcodes (e.g...."
   },
   {
     "path": "/docs/glossary#testnet",

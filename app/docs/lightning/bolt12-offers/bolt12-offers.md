@@ -74,7 +74,7 @@ BOLT12 defines **refund** flow: the payee can issue a **refund** (a kind of offe
 
 ## Blinded Paths and Privacy
 
-To request an [invoice](/docs/lightning/invoices) from an offer, the payer must reach the payee. BOLT12 can use **blinded paths** (onion-routed, [blinded](/docs/lightning/onion) identifiers) so that the payer does not need to know the payee’s direct [node id](/docs/glossary#node-id) or [IP](/docs/glossary#peer). The offer can contain a blinded path to the payee, improving [privacy](/docs/wallets/privacy).
+To request an [invoice](/docs/lightning/invoices) from an offer, the payer must reach the payee. BOLT12 can use **blinded paths** (onion-routed, [blinded](/docs/lightning/onion) identifiers) so that the payer does not need to know the payee’s direct node id or [IP](/docs/glossary#peer). The offer can contain a blinded path to the payee, improving [privacy](/docs/wallets/privacy).
 
 ---
 

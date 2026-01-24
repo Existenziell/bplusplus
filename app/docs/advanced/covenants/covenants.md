@@ -12,7 +12,7 @@ Covenants enable:
 
 - **Vaults**: Funds can only move to a “cooling-off” or recovery [script](/docs/bitcoin/script) first; direct spending is disallowed.
 - **Layered security**: e.g., “can only be sent to a 2-of-3 [multisig](/docs/wallets/multisig) or to a timelocked recovery path.”
-- **L2 and protocols**: [Channel factories](/docs/glossary#channel-factory), [Lightning](/docs/lightning)-style constructs, and other protocols could use covenants to enforce on-chain structure.
+- **L2 and protocols**: Channel factories, [Lightning](/docs/lightning)-style constructs, and other protocols could use covenants to enforce on-chain structure.
 
 ---
 

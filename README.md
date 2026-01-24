@@ -9,6 +9,7 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 - [Documentation](#documentation)
   - [Learning flow](#learning-flow)
   - [Code snippets](#code-snippets)
+  - [Glossary](#glossary)
 - [Search](#search)
 - [Interactive Tools](#interactive-tools)
   - [Bitcoin CLI Terminal](#bitcoin-cli-terminal)
@@ -25,13 +26,14 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 
 ## What is B++
 
-- **Documentation** — A Developer's Guide to Bitcoin
-- **Whitepaper** — Satoshi’s Bitcoin whitepaper.
-- **Search (⌘K)** — Find and jump to any doc, glossary term, or page. Press **Command+K** (Mac) or **Ctrl+K** (Windows/Linux).
-- **Bitcoin CLI Terminal** — Run Bitcoin Core RPC commands in the browser against a public mainnet node. No node setup. `/terminal`
-- **Stack Lab** — Interactive Bitcoin Script playground. Build and run locking/unlocking scripts in the browser; same model as on-chain validation. `/stack-lab`
-- **Denominations Calculator** — Convert between satoshis, bits, mBTC, BTC, and other units. On the Denominations doc. `/docs/fundamentals/denominations`
-- **About** — `/author`
+- **Documentation**: A Developer's Guide to Bitcoin
+- **Whitepaper**: Satoshi’s Bitcoin whitepaper.
+- **Glossary**: Browse 200+ Bitcoin terms A–Z at `/docs/glossary`. Linked terms in the docs show a hover tooltip with the definition.
+- **Search (⌘K)**: Find and jump to any doc, glossary term, or page. Press **Command+K** (Mac) or **Ctrl+K** (Windows/Linux).
+- **Bitcoin CLI Terminal**: Run Bitcoin Core RPC commands in the browser against a public mainnet node. No node setup. `/terminal`
+- **Stack Lab**: Interactive Bitcoin Script playground. Build and run locking/unlocking scripts in the browser; same model as on-chain validation. `/stack-lab`
+- **Denominations Calculator**: Convert between satoshis, bits, mBTC, BTC, and other units. On the Denominations doc. `/docs/fundamentals/denominations`
+- **About**: `/author`
 
 ---
 
@@ -55,7 +57,7 @@ One dynamic route (`app/docs/[...slug]/page.tsx`) backed by `app/utils/navigatio
 
 **Mining:** Proof-of-Work → Difficulty → Economics establishes the mechanism and incentives. Mempool and Block Construction cover what miners work with and how they build blocks. Pools and Hardware are operational; Attacks and Network Attacks complete the security picture. Best read after Bitcoin Protocol (consensus, blocks) and optionally Incentive Structure in Fundamentals.
 
-**Lightning:** Channels first—the 2-of-2 off-chain primitive. HTLCs → Routing Fees → MPP cover the routing layer; Onion adds privacy. Invoices (BOLT11) and BOLT12 & Offers cover payment requests; Watchtowers and Anchor Outputs address security and modern channel design. Assumes Bitcoin Protocol (Script, transactions) and ideally Setup & Infrastructure if running a node.
+**Lightning:** Channels first, the 2-of-2 off-chain primitive. HTLCs → Routing Fees → MPP cover the routing layer; Onion adds privacy. Invoices (BOLT11) and BOLT12 & Offers cover payment requests; Watchtowers and Anchor Outputs address security and modern channel design. Assumes Bitcoin Protocol (Script, transactions) and ideally Setup & Infrastructure if running a node.
 
 **Advanced Topics:** A catalog of specialized topics rather than a linear path. Smart contracts (Atomic Swaps, DLCs), L2 and scaling (Sidechains, Statechains, Zero-Conf Channels, Trampoline Routing), privacy (Bloom Filters), data on Bitcoin (Ordinals & Inscriptions), and governance and protocol proposals (Governance, Covenants). Prerequisites: Bitcoin Protocol, Lightning basics, Script, and Transaction construction.
 
@@ -63,7 +65,11 @@ One dynamic route (`app/docs/[...slug]/page.tsx`) backed by `app/utils/navigatio
 
 ### Code snippets
 
-Many examples are shown in **five languages** (Python, Rust, C++, Go, JavaScript/TypeScript) via toggleable code blocks. Use the tabs above a snippet to switch to your stack—so you can copy, compare, or adapt examples without translating from another language.
+Many examples are shown in **five languages** (Python, Rust, C++, Go, JavaScript/TypeScript) via toggleable code blocks. Use the tabs above a snippet to switch to your stack, so you can copy, compare, or adapt examples without translating from another language.
+
+### Glossary
+
+The **Glossary** (`/docs/glossary`) lists 200+ terms (address, mempool, HTLC, Taproot, and more) in A–Z sections. Each entry has a short definition; many link to a related article. When a term is linked in the docs, hovering it shows the definition in a tooltip so you can clarify jargon without leaving the page. Glossary terms are also included in Search (⌘K).
 
 ---
 
@@ -75,11 +81,11 @@ Many examples are shown in **five languages** (Python, Rust, C++, Go, JavaScript
 
 ## Interactive Tools
 
-The docs include **Bitcoin CLI Terminal**, **Stack Lab**, and a **Denominations Calculator**. They let you run commands, build scripts, and convert units in the browser—no local node, IDE, or extra setup. Use them to try concepts as you read, debug your mental model, or prepare for real tooling.
+The docs include **Bitcoin CLI Terminal**, **Stack Lab**, and a **Denominations Calculator**. They let you run commands, build scripts, and convert units in the browser (no local node, IDE, or extra setup). Use them to try concepts as you read, debug your mental model, or prepare for real tooling.
 
 ### Bitcoin CLI Terminal
 
-Run `getblockcount`, `getblock`, `getrawtransaction`, `getmempoolinfo`, and other Bitcoin Core RPC commands in the browser. Connects to a public mainnet node—no local node or setup. Type `help` for the command list.
+Run `getblockcount`, `getblock`, `getrawtransaction`, `getmempoolinfo`, and other Bitcoin Core RPC commands in the browser. Connects to a public mainnet node (no local node or setup). Type `help` for the command list.
 
 ### Stack Lab
 
@@ -147,4 +153,4 @@ Contributions are welcome. The docs are Markdown in `app/docs/`.
 
 ## License
 
-Open source — free to use and distribute 🧡
+Open source, free to use and distribute 🧡

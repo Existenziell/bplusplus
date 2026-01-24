@@ -23,7 +23,7 @@ export default function ThemeToggle() {
   }
 
   return (
-    <div className="relative inline-flex items-center gap-1 bg-white dark:bg-zinc-800 rounded-lg p-1 border border-zinc-200 dark:border-zinc-700">
+    <div className="relative inline-flex items-center gap-1 bg-white dark:bg-zinc-800 rounded-lg p-1 border border-zinc-200 dark:border-zinc-700" role="group" aria-label="Theme">
       <button
         onClick={() => setTheme('light')}
         className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${

@@ -21,8 +21,9 @@ export default function DownloadMarkdownButton() {
       onClick={handleDownload}
       className="inline-flex items-center gap-1 px-2 py-1 text-xs text-zinc-500 dark:text-zinc-500 hover:text-btc dark:hover:text-btc transition-colors"
       title="Download markdown file"
+      aria-label="Download markdown file"
     >
-      <DownloadMarkdownIcon />
+      <DownloadMarkdownIcon aria-hidden />
       <span>Download .md</span>
     </button>
   )

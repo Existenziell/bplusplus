@@ -32,11 +32,11 @@ export default function Header() {
         <div className="container-content pt-4">
           <div className="flex justify-between items-center">
               <Link href="/" className="text-center" aria-label="B++ Home">
-                <Image src="/logo/logo.png" alt="B++ Logo" width={80} height={80} />
+                <Image src="/logo/logo.png" alt="" width={80} height={80} />
               </Link>
-              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 -rotate-3" aria-hidden="true">
+              <div className="flex-shrink-0 items-center gap-2 flex-row hidden md:flex opacity-40 -rotate-3 translate-x-16" aria-hidden="true">
                 <Image
-                  src="/icons/satoshi-black.svg"
+                  src="/icons/satoshi.svg"
                   alt=""
                   width={40}
                   height={40}

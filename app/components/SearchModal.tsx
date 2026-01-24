@@ -137,6 +137,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             className="flex-1 py-3 bg-transparent border-0 outline-none placeholder:text-zinc-500 text-zinc-900 dark:text-zinc-100"
             autoComplete="off"
             autoCorrect="off"
+            aria-label="Search"
           />
           <button
             type="button"

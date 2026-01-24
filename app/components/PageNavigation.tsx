@@ -12,7 +12,7 @@ export default function PageNavigation() {
 
   if (isGlossaryPage) {
     return (
-      <div className="mt-12 pt-6 border-t border-zinc-200 dark:border-zinc-700 flex justify-center">
+      <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700 flex justify-center">
         <span
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="cursor-pointer inline-flex items-center gap-2 text-btc hover:underline transition-colors"
@@ -28,7 +28,7 @@ export default function PageNavigation() {
   }
 
   return (
-    <div className="mt-12 pt-6 border-t border-zinc-200 dark:border-zinc-700 flex justify-between items-center">
+    <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
       {/* Previous Page */}
       <div className="flex-1">
         {previousPage ? (

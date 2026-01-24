@@ -20,7 +20,7 @@ const resources: Resource[] = [
 
 export default function Footer() {
   return (
-    <footer className='border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100/80 dark:bg-zinc-800/50 overflow-hidden'>
+    <footer className='border-t border-gray-200 dark:border-gray-700 bg-gray-100/80 dark:bg-gray-800/50 overflow-hidden'>
       <div className='container-content py-4 flex flex-col items-center'>
         <nav aria-label='External resources' className='text-center mb-4'>
           <h3 className="heading-section-sm mb-4">
@@ -43,7 +43,7 @@ export default function Footer() {
         </nav>
 
         {/* Bottom bar: credit + copyright + tagline */}
-        <div className='w-full border-t border-zinc-200 dark:border-zinc-700 pt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-secondary'>
+        <div className='w-full border-t border-gray-200 dark:border-gray-700 pt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-secondary'>
           <Link
             href='/author'
             className='hover:text-btc transition-colors no-underline hover:underline'

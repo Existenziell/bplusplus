@@ -14,7 +14,7 @@ export default function ThemeToggle() {
   // Avoid hydration mismatch by not rendering theme-dependent classes until mounted
   if (!mounted) {
     return (
-      <div className="relative inline-flex items-center gap-1 bg-white dark:bg-zinc-800 rounded-lg p-1 border border-zinc-200 dark:border-zinc-700">
+      <div className="relative inline-flex items-center gap-1 bg-white dark:bg-gray-800 rounded-lg p-1 border border-gray-200 dark:border-gray-700">
         <div className="px-3 py-1.5 w-10 h-7" />
         <div className="px-3 py-1.5 w-10 h-7" />
         <div className="px-3 py-1.5 w-10 h-7" />
@@ -23,13 +23,13 @@ export default function ThemeToggle() {
   }
 
   return (
-    <div className="relative inline-flex items-center gap-1 bg-white dark:bg-zinc-800 rounded-lg p-1 border border-zinc-200 dark:border-zinc-700" role="group" aria-label="Theme">
+    <div className="relative inline-flex items-center gap-1 bg-white dark:bg-gray-800 rounded-lg p-1 border border-gray-200 dark:border-gray-700" role="group" aria-label="Theme">
       <button
         onClick={() => setTheme('light')}
         className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
           theme === 'light'
-            ? 'bg-btc text-zinc-900'
-            : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+            ? 'bg-btc text-gray-900'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
         }`}
         aria-label="Light theme"
         title="Light theme"
@@ -53,8 +53,8 @@ export default function ThemeToggle() {
         onClick={() => setTheme('dark')}
         className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
           theme === 'dark'
-            ? 'bg-btc text-zinc-900'
-            : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+            ? 'bg-btc text-gray-900'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
         }`}
         aria-label="Dark theme"
         title="Dark theme"
@@ -78,8 +78,8 @@ export default function ThemeToggle() {
         onClick={() => setTheme('system')}
         className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
           theme === 'system'
-            ? 'bg-btc text-zinc-900'
-            : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+            ? 'bg-btc text-gray-900'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
         }`}
         aria-label="System theme"
         title="System theme"

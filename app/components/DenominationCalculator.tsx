@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react'
 import { UNITS, toSats, fromSats, formatForUnit } from '@/app/utils/denominationUtils'
 
 const inputStyles =
-  'px-3 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded text-zinc-800 dark:text-zinc-200 focus:outline-none focus:border-btc'
+  'px-3 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-800 dark:text-gray-200 focus:outline-none focus:border-btc'
 
 export default function DenominationCalculator() {
   const [value, setValue] = useState('')
@@ -30,7 +30,7 @@ export default function DenominationCalculator() {
 
   return (
     <div className="my-6 max-w-md">
-      <div className="bg-zinc-100 dark:bg-zinc-900 rounded-lg border border-zinc-300 dark:border-zinc-700 p-4">
+      <div className="bg-gray-100 dark:bg-gray-900 rounded-lg border border-gray-300 dark:border-gray-700 p-4">
         <div className="flex flex-wrap items-center gap-3 mb-4">
           <label htmlFor="denom-input" className="sr-only">
             Amount
@@ -64,19 +64,19 @@ export default function DenominationCalculator() {
         </div>
         <div className="flex flex-col gap-y-2 text-sm">
           {results === null ? (
-            <span className="text-zinc-500 dark:text-zinc-400">Enter an amount</span>
+            <span className="text-gray-500 dark:text-gray-400">Enter an amount</span>
           ) : (
             results.map((item) =>
               item.type === 'separator' ? (
                 <div
                   key={`sep-${fromUnit}`}
-                  className="border-t border-dotted border-zinc-400 dark:border-zinc-500 my-0.5"
+                  className="border-t border-dotted border-gray-400 dark:border-gray-500 my-0.5"
                   aria-hidden="true"
                 />
               ) : (
                 <div key={item.id} className="flex justify-between gap-4">
-                  <span className="text-zinc-600 dark:text-zinc-400">{item.label} ({item.name})</span>
-                  <span className="font-mono text-zinc-800 dark:text-zinc-200 tabular-nums">{item.formatted}</span>
+                  <span className="text-gray-600 dark:text-gray-400">{item.label} ({item.name})</span>
+                  <span className="font-mono text-gray-800 dark:text-gray-200 tabular-nums">{item.formatted}</span>
                 </div>
               )
             )

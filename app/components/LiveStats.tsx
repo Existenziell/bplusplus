@@ -137,11 +137,11 @@ export default function LiveStats() {
       <>
         <div className="text-sm md:text-xl font-bold text-btc min-h-[2rem] flex items-center justify-center" aria-live="polite" aria-atomic="true">
           {loading && !stat.value ? (
-            <span className="animate-pulse text-zinc-400" aria-label="Loading">...</span>
+            <span className="animate-pulse text-gray-400" aria-label="Loading">...</span>
           ) : stat.value ? (
             stat.value
           ) : (
-            <span className="text-zinc-400" aria-label="No data available">—</span>
+            <span className="text-gray-400" aria-label="No data available">—</span>
           )}
         </div>
         <div className="text-xs text-secondary group-hover:text-btc transition-colors">
@@ -150,7 +150,7 @@ export default function LiveStats() {
       </>
     )
 
-    const className = "bg-white dark:bg-zinc-800 rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-shadow hover:no-underline group"
+    const className = "bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-shadow hover:no-underline group"
 
     if (stat.onClick) {
       return (

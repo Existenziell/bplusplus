@@ -74,7 +74,7 @@ function CodeBlock({ language, children, className, ...props }: CodeBlockProps) 
           {displayName}
         </span>
       </div>
-      <pre className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto border border-zinc-300 dark:border-zinc-700 border-t-0" role="code" aria-label={`${displayName} code`}>
+      <pre className="hljs bg-gray-100 dark:bg-gray-900 rounded-b-lg p-4 overflow-x-auto border border-gray-300 dark:border-gray-700 border-t-0" role="code" aria-label={`${displayName} code`}>
         <code className={className} {...props}>
           {children}
         </code>
@@ -157,8 +157,8 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
               aria-controls={`code-block-${lang}`}
               className={`px-3 py-1 text-xs font-mono tracking-wider rounded transition-colors ${
                 selectedLang === lang
-                  ? 'bg-btc text-zinc-900 font-semibold'
-                  : 'text-secondary hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700'
+                  ? 'bg-btc text-gray-900 font-semibold'
+                  : 'text-secondary hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700'
               }`}
             >
               {languageNames[lang] || (lang.charAt(0).toUpperCase() + lang.slice(1).toLowerCase())}
@@ -167,7 +167,7 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
         </div>
       </div>
       <pre
-        className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto border border-zinc-300 dark:border-zinc-700 border-t-0"
+        className="hljs bg-gray-100 dark:bg-gray-900 rounded-b-lg p-4 overflow-x-auto border border-gray-300 dark:border-gray-700 border-t-0"
         role="code"
         aria-label={`${languageNames[selectedLang] || selectedLang} code`}
         id={`code-block-${selectedLang}`}

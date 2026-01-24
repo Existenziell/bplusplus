@@ -123,18 +123,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       aria-label="Search documentation"
     >
       <div
-        className="w-full max-w-xl rounded-lg shadow-xl bg-zinc-50 dark:bg-zinc-900 overflow-hidden"
+        className="w-full max-w-xl rounded-lg shadow-xl bg-gray-50 dark:bg-gray-900 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-700 px-4">
-          <SearchIcon className="flex-shrink-0 text-zinc-500" />
+        <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 px-4">
+          <SearchIcon className="flex-shrink-0 text-gray-500" />
           <input
             ref={inputRef}
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search docs…"
-            className="flex-1 py-3 bg-transparent border-0 outline-none placeholder:text-zinc-500 text-zinc-900 dark:text-zinc-100"
+            className="flex-1 py-3 bg-transparent border-0 outline-none placeholder:text-gray-500 text-gray-900 dark:text-gray-100"
             autoComplete="off"
             autoCorrect="off"
             aria-label="Search"
@@ -142,7 +142,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-400"
+            className="p-1 rounded text-gray-500 hover:text-gray-700 dark:hover:text-gray-400"
             aria-label="Close"
           >
             <XIcon className="w-5 h-5" />
@@ -175,12 +175,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     onClick={onClose}
                     className={`flex gap-3 px-4 py-2.5 text-left transition-colors no-underline hover:no-underline ${
                       i === selectedIndex
-                        ? 'bg-btc/20 dark:bg-btc/25 text-zinc-900 dark:text-zinc-100'
-                        : 'text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                        ? 'bg-btc/20 dark:bg-btc/25 text-gray-900 dark:text-gray-100'
+                        : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
                     }`}
                   >
                     <span
-                      className="flex-shrink-0 text-zinc-500 dark:text-zinc-400 mt-0.5"
+                      className="flex-shrink-0 text-gray-500 dark:text-gray-400 mt-0.5"
                       aria-hidden
                     >
                       {r.path.startsWith('/docs/glossary#') ? (
@@ -194,7 +194,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     <div className="min-w-0 flex-1">
                       <div className="font-medium">{r.title}</div>
                       <div className="text-sm text-secondary truncate">{r.snippet}</div>
-                      <div className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">
+                      <div className="text-xs text-gray-500 dark:text-gray-500 mt-0.5">
                         {r.path.startsWith('/docs/history/people#') ? 'People' : sectionTitle(r.section)}
                       </div>
                     </div>

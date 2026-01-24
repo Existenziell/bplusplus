@@ -39,7 +39,7 @@ export default function WhitepaperPage() {
       </div>
 
       {/* Whitepaper Image */}
-      <div className="relative aspect-[3/4] w-full max-w-xl mx-auto mb-8 rounded-md overflow-hidden shadow-lg border border-zinc-200 dark:border-zinc-700">
+      <div className="relative aspect-[3/4] w-full max-w-xl mx-auto mb-8 rounded-md overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
         <Image
           src="/images/whitepaper.jpg"
           alt="Bitcoin Whitepaper Cover"

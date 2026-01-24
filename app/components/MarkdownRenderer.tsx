@@ -394,7 +394,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       }
 
       return (
-        <pre className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-lg p-4 overflow-x-auto mb-4 border border-zinc-300 dark:border-zinc-700" {...props}>
+        <pre className="hljs bg-gray-100 dark:bg-gray-900 rounded-lg p-4 overflow-x-auto mb-4 border border-gray-300 dark:border-gray-700" {...props}>
           {children}
         </pre>
       )

@@ -24,12 +24,12 @@ export default function HorizontalNav() {
   }
 
   return (
-    <div className="border-y border-zinc-200 dark:border-zinc-700 bg-white/50 dark:bg-zinc-800/50">
+    <div className="border-y border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50">
       <div className="container-content">
         {/* Toggle Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full py-6 flex items-center justify-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-btc transition-colors"
+          className="w-full py-6 flex items-center justify-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-btc transition-colors"
         >
           <span className="text-2xl">Explore B++</span>
           <ChevronDown className={`w-6 h-6 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
@@ -37,11 +37,11 @@ export default function HorizontalNav() {
 
         {/* Tree Navigation */}
         {isOpen && (
-          <div className="pb-6 border-t border-zinc-200 dark:border-zinc-700">
+          <div className="pb-6 border-t border-gray-200 dark:border-gray-700">
             <div className="flex flex-row items-center justify-end gap-2 w-max ml-auto mb-3 mt-1">
               <button
                 onClick={() => setExpandedSections(new Set(navItems.map(item => item.href)))}
-                className="px-1.5 py-0.5 text-secondary text-xs rounded-md hover:text-btc transition-colors bg-zinc-200 dark:bg-zinc-700"
+                className="px-1.5 py-0.5 text-secondary text-xs rounded-md hover:text-btc transition-colors bg-gray-200 dark:bg-gray-700"
                 aria-label="Expand all sections"
                 title="Expand all"
               >
@@ -49,7 +49,7 @@ export default function HorizontalNav() {
               </button>
               <button
                 onClick={() => setExpandedSections(new Set())}
-                className="px-1.5 py-0.5 text-secondary text-xs rounded-md hover:text-btc transition-colors bg-zinc-200 dark:bg-zinc-700"
+                className="px-1.5 py-0.5 text-secondary text-xs rounded-md hover:text-btc transition-colors bg-gray-200 dark:bg-gray-700"
                 aria-label="Collapse all sections"
                 title="Collapse all"
               >
@@ -68,7 +68,7 @@ export default function HorizontalNav() {
                       {hasChildren && (
                         <button
                           onClick={() => toggleSection(section.href)}
-                          className="mr-1 p-1 text-zinc-500 hover:text-btc transition-colors"
+                          className="mr-1 p-1 text-gray-500 hover:text-btc transition-colors"
                           aria-label={isExpanded ? 'Collapse section' : 'Expand section'}
                         >
                           <ArrowRight className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
@@ -77,7 +77,7 @@ export default function HorizontalNav() {
                       {!hasChildren && <span className="w-5" />}
                       <Link
                         href={section.href}
-                        className="font-medium text-zinc-800 dark:text-zinc-200 hover:text-btc transition-colors"
+                        className="font-medium text-gray-800 dark:text-gray-200 hover:text-btc transition-colors"
                       >
                         {section.title}
                       </Link>
@@ -85,7 +85,7 @@ export default function HorizontalNav() {
 
                     {/* Children */}
                     {hasChildren && isExpanded && (
-                      <ul className="ml-6 mt-1 space-y-1 border-l border-zinc-200 dark:border-zinc-700 pl-3">
+                      <ul className="ml-6 mt-1 space-y-1 border-l border-gray-200 dark:border-gray-700 pl-3">
                         {section.children!.map((child) => (
                           <li key={child.href}>
                             <Link
@@ -103,14 +103,14 @@ export default function HorizontalNav() {
               })}
               <Link
                 href="/docs/glossary"
-                className="font-medium text-zinc-800 dark:text-zinc-200 hover:text-btc transition-colors pl-7"
+                className="font-medium text-gray-800 dark:text-gray-200 hover:text-btc transition-colors pl-7"
               >
                 Glossary
               </Link>
             </div>
 
             {/* Quick Links Section - Prominent at the bottom */}
-            <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-700">
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
                   href="/terminal"

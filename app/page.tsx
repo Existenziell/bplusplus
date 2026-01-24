@@ -11,13 +11,13 @@ export default function Home() {
   return (
     <main className="min-h-screen page-bg flex flex-col">
       <div className="flex-grow">
-        <div className="bg-zinc-100 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700">
+        <div className="bg-gray-100 dark:bg-gray-800/50 border-y border-gray-200 dark:border-gray-700">
           <div className="container-content py-8 md:py-8">
             <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="order-2 md:order-1">
                 <QuoteRotator />
               </div>
-              <div className="order-1 md:order-2 relative aspect-video overflow-hidden rounded-md border border-zinc-200 dark:border-zinc-700">
+              <div className="order-1 md:order-2 relative aspect-video overflow-hidden rounded-md border border-gray-200 dark:border-gray-700">
                 <Image
                   src="/images/hope.jpg"
                   alt="Bitcoin inspiration"

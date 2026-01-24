@@ -98,15 +98,15 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           role="tooltip"
           className={`
             block fixed z-[9999] w-64 sm:w-72 p-4 pt-2
-            bg-zinc-100 dark:bg-zinc-800
-            border border-zinc-300 dark:border-zinc-600
+            bg-gray-100 dark:bg-gray-800
+            border border-gray-300 dark:border-gray-600
             rounded-md shadow-lg
             text-xs text-secondary font-normal
             transition-opacity duration-150
           `}
           style={{
             left: linkRef.current ? linkRef.current.getBoundingClientRect().left + linkRef.current.getBoundingClientRect().width / 2 : 0,
-            transform: 'translateX(-50%)',
+            transform: 'trangrayX(-50%)',
             ...(position === 'top'
               ? { bottom: linkRef.current ? window.innerHeight - linkRef.current.getBoundingClientRect().top + 8 : 0 }
               : { top: linkRef.current ? linkRef.current.getBoundingClientRect().bottom + 8 : 0 }
@@ -118,9 +118,9 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
           {/* Arrow */}
           <span
             className={`
-              block absolute left-1/2 -translate-x-1/2 w-2.5 h-2.5
-              bg-zinc-100 dark:bg-zinc-800
-              border-zinc-300 dark:border-zinc-600
+              block absolute left-1/2 -trangray-x-1/2 w-2.5 h-2.5
+              bg-gray-100 dark:bg-gray-800
+              border-gray-300 dark:border-gray-600
               transform rotate-45
               ${position === 'top'
                 ? 'bottom-[-6px] border-r border-b'

@@ -261,10 +261,10 @@ export default function StackLabPage() {
               className="w-full flex items-center justify-between text-left"
             >
               <div className="flex items-center gap-2">
-                <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">How Stack Lab Works</h3>
+                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">How Stack Lab Works</h3>
               </div>
               <ChevronDown
-                className={`w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform ${
+                className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform ${
                   isFlowExplanationExpanded ? 'rotate-180' : ''
                 }`}
               />
@@ -272,15 +272,15 @@ export default function StackLabPage() {
             {isFlowExplanationExpanded && (
               <div className="mt-3 space-y-4">
                 <div>
-                  <h4 className="text-sm font-semibold text-zinc-600 dark:text-zinc-300 mb-2">How to Use</h4>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    <strong className="text-zinc-600 dark:text-zinc-300">1. Build Scripts:</strong><br />Drag OP codes from the palette to the Unlocking Script (runs first) and Locking Script (runs second). 
+                  <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">How to Use</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <strong className="text-gray-600 dark:text-gray-300">1. Build Scripts:</strong><br />Drag OP codes from the palette to the Unlocking Script (runs first) and Locking Script (runs second). 
                     You can also push data (numbers, hex strings) using the &quot;+ Push Data&quot; button or load an example template.
                     <br />
-                    <strong className="text-zinc-600 dark:text-zinc-300">2. Execute:</strong><br />Click &quot;Execute&quot; to run both scripts together, or use &quot;Step&quot; to execute one operation at a time. 
+                    <strong className="text-gray-600 dark:text-gray-300">2. Execute:</strong><br />Click &quot;Execute&quot; to run both scripts together, or use &quot;Step&quot; to execute one operation at a time. 
                     Watch the stack update in real-time as operations execute.
                     <br />
-                    <strong className="text-zinc-600 dark:text-zinc-300">3. Learn:</strong><br />The execution log shows each step with the stack state before and after each operation. 
+                    <strong className="text-gray-600 dark:text-gray-300">3. Learn:</strong><br />The execution log shows each step with the stack state before and after each operation. 
                     A script is valid if the final stack contains a non-zero value.
                   </p>
                 </div>
@@ -355,7 +355,7 @@ export default function StackLabPage() {
 
           <DragOverlay dropAnimation={null}>
             {activeId && activeId.startsWith('opcode-') ? (
-              <div className="px-3 py-2 rounded border bg-zinc-200 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-600 text-zinc-800 dark:text-zinc-200 pointer-events-none">
+              <div className="px-3 py-2 rounded border bg-gray-200 dark:bg-gray-800 border-gray-400 dark:border-gray-600 text-gray-800 dark:text-gray-200 pointer-events-none">
                 <div className="font-mono text-sm font-semibold">
                   {activeId.replace('opcode-', '')}
                 </div>
@@ -369,10 +369,10 @@ export default function StackLabPage() {
       {showMobileWarning && !mobileWarningDismissed && (
         <div className="modal-overlay flex items-center justify-center p-4">
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
               Stack Lab is not optimized for small screens. The drag-and-drop interface and layout work best on desktop or tablet devices with larger screens.
             </p>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
               You can still use Stack Lab on mobile, but the experience may be limited. For the best experience, please use a desktop or tablet.
             </p>
             <div className="flex flex-col gap-3">
@@ -397,10 +397,10 @@ export default function StackLabPage() {
       {showDataModal && (
         <div className="modal-overlay flex items-center justify-center" onClick={() => setShowDataModal(false)}>
           <div className="modal-card mx-4" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
               Push Data to {dataModalTarget === 'unlocking' ? 'Unlocking' : 'Locking'} Script
             </h3>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               Enter a number or hex string (e.g., 42, 0x1234, &quot;hello&quot;)
             </p>
             <input
@@ -414,7 +414,7 @@ export default function StackLabPage() {
                   setShowDataModal(false)
                 }
               }}
-              className="w-full px-3 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded text-zinc-800 dark:text-zinc-200 mb-4 focus:outline-none focus:border-btc"
+              className="w-full px-3 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-800 dark:text-gray-200 mb-4 focus:outline-none focus:border-btc"
               placeholder="Enter data..."
               autoFocus
             />

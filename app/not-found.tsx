@@ -15,7 +15,7 @@ export default function NotFound() {
           {/* 404 Number with Bitcoin styling */}
           <div className="mb-6">
             <span className="text-8xl md:text-9xl font-bold text-btc">4</span>
-            <span className="text-8xl md:text-9xl font-bold text-zinc-300 dark:text-zinc-700">0</span>
+            <span className="text-8xl md:text-9xl font-bold text-gray-300 dark:text-gray-700">0</span>
             <span className="text-8xl md:text-9xl font-bold text-btc">4</span>
           </div>
 

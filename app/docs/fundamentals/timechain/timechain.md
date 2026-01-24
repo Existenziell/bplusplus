@@ -1,5 +1,7 @@
 # Bitcoin as Timechain
 
+> As Leslie Lamport once said: Special Relativity teaches us, that two different observers can have different notions of what ***at the same time*** means.
+
 Bitcoin solves one of the most fundamental problems in distributed systems: **how to order events in time without a central time source**. In a decentralized network where nodes may have different clocks, network delays are unpredictable, and there's no trusted authority, determining the sequence of events is essential yet seemingly impossible. Bitcoin's solution is elegant: it creates a **timechain**, a cryptographically secured, decentralized ordering mechanism that enables trustless temporal coordination.
 
 ## Why Timing Matters

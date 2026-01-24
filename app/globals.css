@@ -38,29 +38,29 @@ body {
 
   /* Main page background - used across page layouts */
   .page-bg {
-    @apply bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200;
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200;
   }
 
   /* Button Styles */
   .btn-primary {
-    @apply inline-flex items-center gap-2 justify-center px-6 py-3 bg-btc text-zinc-900 font-semibold rounded-md hover:bg-btc/90 transition-colors hover:no-underline;
+    @apply inline-flex items-center gap-2 justify-center px-6 py-3 bg-btc text-gray-900 font-semibold rounded-md hover:bg-btc/90 transition-colors hover:no-underline;
   }
 
   .btn-primary-sm {
-    @apply inline-flex items-center gap-2 px-4 py-2 bg-btc hover:bg-btc/90 text-zinc-900 font-semibold rounded-md transition-colors;
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-btc hover:bg-btc/90 text-gray-900 font-semibold rounded-md transition-colors;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center gap-2 justify-center px-6 py-3 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline;
+    @apply inline-flex items-center gap-2 justify-center px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-semibold rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors hover:no-underline;
   }
 
   .btn-secondary-sm {
-    @apply inline-flex items-center gap-2 justify-center px-4 py-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline;
+    @apply inline-flex items-center gap-2 justify-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors hover:no-underline;
   }
 
   /* Text Utilities */
   .text-secondary {
-    @apply text-zinc-600 dark:text-zinc-400;
+    @apply text-gray-600 dark:text-gray-400;
   }
 
   /* Container */
@@ -70,24 +70,24 @@ body {
 
   /* Code Block Header */
   .code-block-header {
-    @apply bg-zinc-200 dark:bg-zinc-800 px-4 py-2 rounded-t-lg border-b border-zinc-300 dark:border-zinc-700;
+    @apply bg-gray-200 dark:bg-gray-800 px-4 py-2 rounded-t-lg border-b border-gray-300 dark:border-gray-700;
   }
 
   /* Heading Styles */
   .heading-page {
-    @apply text-3xl md:text-4xl font-bold mb-4 text-zinc-900 dark:text-zinc-100;
+    @apply text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100;
   }
 
   .heading-page-hero {
-    @apply text-4xl md:text-5xl font-bold mb-4 text-zinc-900 dark:text-zinc-100;
+    @apply text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-gray-100;
   }
 
   .heading-section {
-    @apply text-lg font-semibold text-zinc-800 dark:text-zinc-200;
+    @apply text-lg font-semibold text-gray-800 dark:text-gray-200;
   }
 
   .heading-subsection {
-    @apply text-base sm:text-lg font-semibold text-zinc-700 dark:text-zinc-300;
+    @apply text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300;
   }
 
   .heading-section-accent {
@@ -95,11 +95,11 @@ body {
   }
 
   .heading-section-sm {
-    @apply text-sm font-semibold text-zinc-800 dark:text-zinc-200;
+    @apply text-sm font-semibold text-gray-800 dark:text-gray-200;
   }
 
   .heading-section-muted {
-    @apply text-lg font-semibold text-zinc-500 dark:text-zinc-300;
+    @apply text-lg font-semibold text-gray-500 dark:text-gray-300;
   }
 
   /* Modal overlay - use with flex/align/padding as needed per modal */
@@ -109,7 +109,7 @@ body {
 
   /* Modal card - use for dialog content (add mx-4 for small viewport spacing when needed) */
   .modal-card {
-    @apply rounded-lg p-6 max-w-md w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700;
+    @apply rounded-lg p-6 max-w-md w-full bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700;
   }
 }
 
@@ -197,7 +197,7 @@ input[type="radio"]:focus {
 * Page-level heading styles (outside markdown)
 */
 h1, h2, h3, h4, h5, h6 {
-  @apply text-zinc-900 dark:text-zinc-100;
+  @apply text-gray-900 dark:text-gray-100;
 }
 
 /* Remove top margin from first h1 in content area (not header) */
@@ -217,11 +217,11 @@ main > div > div > h1:first-child {
 * Markdown Content Styles
 */
 .markdown-content {
-  @apply text-zinc-800 dark:text-zinc-200;
+  @apply text-gray-800 dark:text-gray-200;
 }
 
 .markdown-content h1 {
-  @apply text-3xl sm:text-4xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
+  @apply text-3xl sm:text-4xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100;
 }
 
 .markdown-content h1:first-child {
@@ -229,25 +229,25 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content h2 {
-  @apply text-2xl sm:text-3xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
+  @apply text-2xl sm:text-3xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100;
   scroll-margin-top: 40px;
 }
 
 .markdown-content h3 {
-  @apply text-lg sm:text-xl font-semibold mt-6 mb-3 text-zinc-900 dark:text-zinc-100;
+  @apply text-lg sm:text-xl font-semibold mt-6 mb-3 text-gray-900 dark:text-gray-100;
   scroll-margin-top: 40px;
 }
 
 .markdown-content h4 {
-  @apply text-base sm:text-lg font-semibold mt-4 mb-2 text-zinc-900 dark:text-zinc-100;
+  @apply text-base sm:text-lg font-semibold mt-4 mb-2 text-gray-900 dark:text-gray-100;
 }
 
 .markdown-content h5 {
-  @apply text-sm sm:text-base font-semibold mt-4 mb-2 text-zinc-900 dark:text-zinc-100;
+  @apply text-sm sm:text-base font-semibold mt-4 mb-2 text-gray-900 dark:text-gray-100;
 }
 
 .markdown-content h6 {
-  @apply text-xs sm:text-sm font-semibold mt-4 mb-2 text-zinc-900 dark:text-zinc-100;
+  @apply text-xs sm:text-sm font-semibold mt-4 mb-2 text-gray-900 dark:text-gray-100;
 }
 
 .markdown-content p {
@@ -257,7 +257,7 @@ main > div > div > h1:first-child {
 /* Glossary links - dotted underline by default, BTC color with solid underline on hover */
 .markdown-content a[href^="/docs/glossary"],
 .markdown-content .glossary-link {
-  @apply text-zinc-900 dark:text-zinc-100 hover:text-btc transition-colors;
+  @apply text-gray-900 dark:text-gray-100 hover:text-btc transition-colors;
   text-decoration: underline;
   text-decoration-style: dotted;
   text-underline-offset: 2px;
@@ -286,19 +286,19 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content blockquote {
-  @apply border-l-4 border-btc pl-4 my-4 text-zinc-600 dark:text-zinc-300;
+  @apply border-l-4 border-btc pl-4 my-4 text-gray-600 dark:text-gray-300;
 }
 
 .markdown-content code {
-  @apply bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-sm font-mono text-zinc-900 dark:text-zinc-200;
+  @apply bg-gray-200 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm font-mono text-gray-900 dark:text-gray-200;
 }
 
 .markdown-content .inline-code {
-  @apply bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-sm font-mono text-btc;
+  @apply bg-gray-200 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm font-mono text-btc;
 }
 
 .markdown-content pre {
-  @apply bg-zinc-100 dark:bg-zinc-900 rounded-lg p-2 sm:p-4 overflow-x-auto mb-4 border border-zinc-300 dark:border-zinc-700 text-xs sm:text-sm text-zinc-900 dark:text-zinc-200;
+  @apply bg-gray-100 dark:bg-gray-900 rounded-lg p-2 sm:p-4 overflow-x-auto mb-4 border border-gray-300 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-gray-200;
 }
 
 .markdown-content pre code {
@@ -335,15 +335,15 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content table th {
-  @apply bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 px-2 sm:px-4 py-2 text-left font-semibold text-xs sm:text-sm text-zinc-900 dark:text-zinc-200;
+  @apply bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-2 sm:px-4 py-2 text-left font-semibold text-xs sm:text-sm text-gray-900 dark:text-gray-200;
 }
 
 .markdown-content table td {
-  @apply border border-zinc-300 dark:border-zinc-700 px-2 sm:px-4 py-2 text-xs sm:text-sm text-zinc-900 dark:text-zinc-200;
+  @apply border border-gray-300 dark:border-gray-700 px-2 sm:px-4 py-2 text-xs sm:text-sm text-gray-900 dark:text-gray-200;
 }
 
 .markdown-content table tr:nth-child(even) {
-  @apply bg-zinc-100 dark:bg-zinc-800 bg-opacity-50 dark:bg-opacity-50;
+  @apply bg-gray-100 dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50;
 }
 
 .markdown-content table th:last-child,
@@ -356,12 +356,12 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content hr {
-  @apply border-zinc-300 dark:border-zinc-700 my-8;
+  @apply border-gray-300 dark:border-gray-700 my-8;
 }
 
 /* Subtle divider for subsections (using custom class via div) */
 .markdown-content .divider-subtle {
-  @apply border-t border-zinc-300 dark:border-zinc-600 my-6 opacity-30;
+  @apply border-t border-gray-300 dark:border-gray-600 my-6 opacity-30;
 }
 
 .markdown-content img {
@@ -379,12 +379,12 @@ main > div > div > h1:first-child {
 
 /* Syntax highlighting theme */
 .markdown-content .hljs {
-  @apply bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200;
+  @apply bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200;
 }
 
 .markdown-content .hljs-comment,
 .markdown-content .hljs-quote {
-  @apply text-zinc-500 dark:text-zinc-500;
+  @apply text-gray-500 dark:text-gray-500;
 }
 
 .markdown-content .hljs-keyword,
@@ -439,7 +439,7 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content .hljs-meta {
-  @apply text-zinc-600 dark:text-zinc-400;
+  @apply text-gray-600 dark:text-gray-400;
 }
 
 .markdown-content .hljs-deletion {
@@ -470,7 +470,7 @@ main > div > div > h1:first-child {
 }
 
 .glossary-content h3 {
-  @apply text-base sm:text-lg font-semibold mt-4 mb-2 text-zinc-700 dark:text-zinc-300;
+  @apply text-base sm:text-lg font-semibold mt-4 mb-2 text-gray-700 dark:text-gray-300;
   scroll-margin-top: 40px;
 }
 
@@ -512,7 +512,7 @@ main > div > div > h1:first-child {
 
 /* Glossary definition prose styling */
 .glossary-definition a[href^="/docs/glossary"] {
-  @apply text-zinc-900 dark:text-zinc-100 hover:text-btc transition-colors;
+  @apply text-gray-900 dark:text-gray-100 hover:text-btc transition-colors;
   text-decoration: underline;
   text-decoration-style: dotted;
   text-underline-offset: 2px;
@@ -552,16 +552,16 @@ main > div > div > h1:first-child {
 }
 
 .terminal-output .json-null {
-  @apply text-zinc-500;
+  @apply text-gray-500;
 }
 
 /*
 * Author Page Styles
 */
 .author-address-box {
-  @apply flex flex-col sm:flex-row items-start sm:items-center gap-3 px-4 py-2 bg-zinc-200 dark:bg-zinc-900 rounded border border-zinc-300 dark:border-zinc-700;
+  @apply flex flex-col sm:flex-row items-start sm:items-center gap-3 px-4 py-2 bg-gray-200 dark:bg-gray-900 rounded border border-gray-300 dark:border-gray-700;
 }
 
 .author-address-code {
-  @apply text-sm font-mono text-zinc-700 dark:text-zinc-300 flex-1 break-all;
+  @apply text-sm font-mono text-gray-700 dark:text-gray-300 flex-1 break-all;
 }

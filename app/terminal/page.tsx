@@ -652,8 +652,8 @@ export default function TerminalPage() {
         Interactive Bitcoin RPC playground
       </p>
 
-      <div className="rounded-lg overflow-hidden border border-zinc-300 dark:border-zinc-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
-          <div className="bg-zinc-200 dark:bg-zinc-800 border-b border-zinc-300 dark:border-zinc-700 px-3 md:px-4 py-2 flex items-center gap-2 flex-shrink-0">
+      <div className="rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
+          <div className="bg-gray-200 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700 px-3 md:px-4 py-2 flex items-center gap-2 flex-shrink-0">
             <div className="flex gap-1.5">
               <button
                 onClick={() => router.back()}
@@ -663,21 +663,21 @@ export default function TerminalPage() {
               <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-500/80" />
               <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-500/80" />
             </div>
-            <span className="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm font-mono ml-2">bitcoin-cli — mainnet</span>
+            <span className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-mono ml-2">bitcoin-cli — mainnet</span>
           </div>
 
           <div
             ref={outputRef}
             onClick={handleOutputClick}
-            className="bg-zinc-50 dark:bg-zinc-950 p-2 md:p-4 overflow-y-auto font-mono text-xs md:text-sm cursor-text flex-1"
+            className="bg-gray-50 dark:bg-gray-950 p-2 md:p-4 overflow-y-auto font-mono text-xs md:text-sm cursor-text flex-1"
           >
             {output.map((line, i) => (
             <div key={i} className={line.type === 'log' ? 'mb-0.5' : 'mb-1 md:mb-2'}>
               {line.type === 'logo' && (
-                <pre className="text-zinc-900 dark:text-btc whitespace-pre text-[10px] md:text-sm">{line.content}</pre>
+                <pre className="text-gray-900 dark:text-btc whitespace-pre text-[10px] md:text-sm">{line.content}</pre>
               )}
               {line.type === 'log' && (
-                <div className="text-zinc-600 dark:text-zinc-500 text-[10px] md:text-xs">{line.content}</div>
+                <div className="text-gray-600 dark:text-gray-500 text-[10px] md:text-xs">{line.content}</div>
               )}
               {line.type === 'command' && (
                 <div className="text-btc">{line.content}</div>
@@ -689,7 +689,7 @@ export default function TerminalPage() {
                 <pre className="text-red-600 dark:text-red-400 whitespace-pre-wrap">{line.content}</pre>
               )}
               {line.type === 'info' && (
-                <pre className="text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap">{line.content}</pre>
+                <pre className="text-gray-600 dark:text-gray-400 whitespace-pre-wrap">{line.content}</pre>
               )}
               {line.type === 'usage' && (
                 <div className="flex items-center gap-2 group flex-wrap">
@@ -700,7 +700,7 @@ export default function TerminalPage() {
                         e.stopPropagation()
                         copyToClipboard(line.copyableCommand!, 'Command')
                       }}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded flex-shrink-0"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-200 dark:hover:bg-gray-800 rounded flex-shrink-0"
                       title="Copy command"
                     >
                       <CopyIcon className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
@@ -712,13 +712,13 @@ export default function TerminalPage() {
             ))}
 
             {isLoading && (
-              <div className="text-zinc-600 dark:text-zinc-500 animate-pulse">Loading...</div>
+              <div className="text-gray-600 dark:text-gray-500 animate-pulse">Loading...</div>
             )}
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-zinc-100 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 p-2 md:p-4 flex items-center gap-1 md:gap-2 flex-shrink-0">
+          <form onSubmit={handleSubmit} className="bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-2 md:p-4 flex items-center gap-1 md:gap-2 flex-shrink-0">
             <span className="text-btc font-mono text-xs md:text-sm">$</span>
-            <span className="text-zinc-600 dark:text-zinc-500 font-mono text-xs md:text-sm hidden sm:inline">bitcoin-cli</span>
+            <span className="text-gray-600 dark:text-gray-500 font-mono text-xs md:text-sm hidden sm:inline">bitcoin-cli</span>
             <input
               ref={inputRef}
               type="text"
@@ -726,7 +726,7 @@ export default function TerminalPage() {
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
-              className="flex-1 bg-transparent text-zinc-900 dark:text-zinc-100 font-mono text-xs md:text-sm outline-none placeholder-zinc-500 dark:placeholder-zinc-600 min-w-0"
+              className="flex-1 bg-transparent text-gray-900 dark:text-gray-100 font-mono text-xs md:text-sm outline-none placeholder-gray-500 dark:placeholder-gray-600 min-w-0"
               placeholder={isLoading ? 'executing...' : 'enter command...'}
               autoFocus
               spellCheck={false}
@@ -737,24 +737,24 @@ export default function TerminalPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="px-2 md:px-3 py-1 bg-btc text-zinc-900 font-mono text-xs md:text-sm rounded hover:bg-btc/80 disabled:opacity-50"
+              className="px-2 md:px-3 py-1 bg-btc text-gray-900 font-mono text-xs md:text-sm rounded hover:bg-btc/80 disabled:opacity-50"
             >
               Run
             </button>
           </form>
       </div>
 
-      <p className="text-sm text-zinc-600 dark:text-zinc-400 text-center mt-12 max-w-2xl mx-auto">
-        This emulates <code className="font-mono text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.<br />Tab autocomplete is available.
+      <p className="text-sm text-gray-600 dark:text-gray-400 text-center mt-12 max-w-2xl mx-auto">
+        This emulates <code className="font-mono text-xs bg-gray-200 dark:bg-gray-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.<br />Tab autocomplete is available.
       </p>
 
       {showMobileWarning && !mobileWarningDismissed && (
         <div className="modal-overlay flex items-center justify-center p-4">
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
               Bitcoin CLI Terminal is not optimized for small screens. The terminal interface and keyboard shortcuts (Tab autocomplete, arrow keys for history) work best on desktop or tablet devices with larger screens.
             </p>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
               You can still use the terminal on mobile, but the experience may be limited. For the best experience, please use a desktop or tablet.
             </p>
             <div className="flex flex-col gap-3">

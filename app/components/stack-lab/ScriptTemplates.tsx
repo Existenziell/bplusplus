@@ -101,11 +101,11 @@ export default function ScriptTemplates({ onLoadTemplate }: ScriptTemplatesProps
         className="w-full flex items-center justify-between text-left"
       >
         <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Script Templates</h3>
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">Script Templates</h3>
           <InfoTooltip content="Click on a template to load a pre-built script example. Templates demonstrate common Bitcoin Script patterns and can be modified after loading." />
         </div>
         <ChevronDown
-          className={`w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform ${
+          className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform ${
             isExpanded ? 'rotate-180' : ''
           }`}
         />
@@ -116,12 +116,12 @@ export default function ScriptTemplates({ onLoadTemplate }: ScriptTemplatesProps
             <button
               key={index}
               onClick={() => onLoadTemplate(template)}
-              className="text-left p-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded hover:border-btc hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
+              className="text-left p-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded hover:border-btc hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
             >
-              <div className="font-semibold text-zinc-800 dark:text-zinc-200 text-xs mb-0.5">
+              <div className="font-semibold text-gray-800 dark:text-gray-200 text-xs mb-0.5">
                 {template.name}
               </div>
-              <div className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2">
+              <div className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
                 {template.description}
               </div>
             </button>

@@ -10,7 +10,7 @@ export default function MobileNav() {
     <div className="md:hidden mb-4">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-200 px-4 py-2 rounded-lg flex items-center justify-between transition-colors"
+        className="w-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-200 px-4 py-2 rounded-lg flex items-center justify-between transition-colors"
         aria-label="Toggle navigation menu"
       >
         <span className="font-semibold">Navigation</span>
@@ -24,7 +24,7 @@ export default function MobileNav() {
         </svg>
       </button>
       {isOpen && (
-        <div className="mt-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg p-4 max-h-[70vh] overflow-y-auto border border-zinc-300 dark:border-zinc-700">
+        <div className="mt-2 bg-gray-100 dark:bg-gray-800 rounded-lg p-4 max-h-[70vh] overflow-y-auto border border-gray-300 dark:border-gray-700">
           <DocsNavigation />
         </div>
       )}

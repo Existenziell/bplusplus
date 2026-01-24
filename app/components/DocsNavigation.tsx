@@ -41,7 +41,7 @@ function getLinkClassName(isActive: boolean, size: 'default' | 'sm' = 'default')
   
   return size === 'sm'
     ? `${baseClasses} text-secondary hover:text-btc hover:underline`
-    : `${baseClasses} text-zinc-700 dark:text-zinc-300 hover:text-btc hover:underline`
+    : `${baseClasses} text-gray-700 dark:text-gray-300 hover:text-btc hover:underline`
 }
 
 interface DocsNavigationProps {
@@ -99,7 +99,7 @@ export default function DocsNavigation({
       <nav className="w-full flex-shrink-0 sticky top-0">
         <button
           onClick={onToggleSidebar}
-          className="flex items-center justify-start w-full pt-2 text-zinc-500 dark:text-zinc-400 hover:text-btc transition-colors"
+          className="flex items-center justify-start w-full pt-2 text-gray-500 dark:text-gray-400 hover:text-btc transition-colors"
           aria-label="Expand navigation"
           title="Expand sidebar"
         >
@@ -116,7 +116,7 @@ export default function DocsNavigation({
         {onToggleSidebar && (
           <button
             onClick={onToggleSidebar}
-            className="flex items-center justify-start w-full pt-2 mb-2 text-zinc-500 dark:text-zinc-400 hover:text-btc transition-colors"
+            className="flex items-center justify-start w-full pt-2 mb-2 text-gray-500 dark:text-gray-400 hover:text-btc transition-colors"
             aria-label="Collapse sidebar"
             title="Collapse sidebar"
           >
@@ -142,12 +142,12 @@ export default function DocsNavigation({
         {/* Collapse/expand docs tree only */}
         <button
           onClick={() => setIsDocsExpanded((v) => !v)}
-          className="flex items-center gap-1.5 w-full text-left text-base text-zinc-700 dark:text-zinc-300 mb-2 hover:text-btc transition-colors"
+          className="flex items-center gap-1.5 w-full text-left text-base text-gray-700 dark:text-gray-300 mb-2 hover:text-btc transition-colors"
           aria-expanded={isDocsExpanded}
           aria-label={isDocsExpanded ? 'Collapse docs' : 'Expand docs'}
         >
           <ArrowRight
-            className={`shrink-0 w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform ${isDocsExpanded ? 'rotate-90' : ''}`}
+            className={`shrink-0 w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform ${isDocsExpanded ? 'rotate-90' : ''}`}
           />
           <span>Docs</span>
         </button>
@@ -164,7 +164,7 @@ export default function DocsNavigation({
                     {hasChildren && (
                       <button
                         onClick={() => toggleSection(item.href)}
-                        className="mr-1 p-1 text-zinc-500 hover:text-btc transition-colors"
+                        className="mr-1 p-1 text-gray-500 hover:text-btc transition-colors"
                         aria-label={expanded ? 'Collapse section' : 'Expand section'}
                       >
                         <ArrowRight

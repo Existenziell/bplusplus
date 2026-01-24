@@ -1,15 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import copyToClipboard from '@/app/utils/copyToClipboard'
+import { ExternalLinkIcon } from '@/app/components/Icons'
 
 interface Resource {
   name: string
   url: string
   description: string
 }
-
-const NPUB_ADDRESS = 'npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he'
 
 const resources: Resource[] = [
   { name: 'Bitcoin Dev Project', url: 'https://bitcoindevs.xyz', description: 'Learning & development tools' },
@@ -22,43 +20,42 @@ const resources: Resource[] = [
 
 export default function Footer() {
   return (
-    <footer className='text-xs text-center pb-6 overflow-hidden border-t border-zinc-300 dark:border-zinc-700 pt-6 mt-10'>
-      {/* Resources Section */}
-      <div className='mb-6'>
-        <h3 className='heading-section text-sm mb-3'>
-          More Bitcoin Resources
-        </h3>
-        <nav aria-label='External resources'>
-          <div className='flex flex-wrap justify-center gap-4 md:gap-6'>
+    <footer className='border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100/80 dark:bg-zinc-800/50 overflow-hidden'>
+      <div className='container-content py-4 flex flex-col items-center'>
+        <nav aria-label='External resources' className='text-center mb-4'>
+          <h3 className='heading-section text-sm mb-4'>
+            More Bitcoin Resources
+          </h3>
+          <div className='flex flex-wrap justify-center gap-x-6 gap-y-2'>
             {resources.map((resource) => (
               <Link
                 key={resource.name}
                 href={resource.url}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group flex flex-col items-center hover:opacity-80 transition-opacity no-underline hover:no-underline'
+                className='group inline-flex items-center gap-1.5 text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
               >
-                <span className='text-btc font-medium'>
-                  {resource.name}
-                </span>
-                <span className='text-[10px] text-secondary mt-0.5 hidden md:block'>
-                  {resource.description}
-                </span>
+                <span>{resource.name}</span>
+                <ExternalLinkIcon className='w-3 h-3 flex-shrink-0' aria-hidden='true' />
               </Link>
             ))}
           </div>
         </nav>
-      </div>
 
-      {/* Footer Credit */}
-      <p className='flex items-center justify-center gap-2'>
-        <Link
-          href='/author'
-          className='hover:text-btc transition-colors hover:no-underline'
-        >
-          Made with <span className='text-btc' aria-hidden='true'>&#9829;</span> by Chris
-        </Link>
-      </p>
+        {/* Bottom bar: credit + copyright + tagline */}
+        <div className='w-full border-t border-zinc-200 dark:border-zinc-700 pt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-secondary'>
+          <Link
+            href='/author'
+            className='hover:text-btc transition-colors no-underline hover:underline'
+          >
+            Made with <span className='text-btc' aria-hidden='true'>&#9829;</span> by Chris
+          </Link>
+          <span aria-hidden='true'>|</span>
+          <span>© {new Date().getFullYear()} B++</span>
+          <span aria-hidden='true'>|</span>
+          <span>Open source · No ads · No tracking</span>
+        </div>
+      </div>
     </footer>
   )
 }

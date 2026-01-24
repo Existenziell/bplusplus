@@ -1,7 +1,5 @@
 # Bitcoin Script
 
-## What is Bitcoin Script?
-
 Bitcoin Script is a programming language that defines **how bitcoin can be spent**. Every transaction output contains a **locking script** that sets the spending conditions. To spend that output, you must provide an **unlocking script** that satisfies those conditions.
 
 | Term | Also Called | Purpose |

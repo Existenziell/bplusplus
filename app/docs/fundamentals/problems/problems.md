@@ -28,7 +28,10 @@ Alice has 1 BTC, attempts to send it to both Bob and Charlie:
 → Result: Only one transaction succeeds
 ```
 
+:::video-group
 [Video: Double Spending Problem Explained](https://www.youtube.com/watch?v=yBwDGby1yZA)
+[Double-Spending Problem Explained by a Developer](https://www.youtube.com/watch?v=jtc3_Gw39Ps?t=39)
+:::
 
 ---
 
@@ -74,7 +77,10 @@ These are often confused but address different problems:
 
 **In summary:** The Two Generals Problem is about **unreliable channels**, while the Byzantine Generals Problem is about **unreliable participants**. Bitcoin addresses both: proof-of-work handles unreliable communication through probabilistic finality, while the longest-chain rule and economic incentives handle potentially malicious miners.
 
-[Video: Two Generals Problem Explained](https://www.youtube.com/watch?v=nS9LH5gu65Y)
+:::video-group
+[Video: The Byzantine Generals problem, and why it matters for Bitcoin](https://www.youtube.com/watch?v=Bvj72wN0OVk)
+[Video: The Byzantine Generals problem, and why it matters for Bitcoin](https://www.youtube.com/watch?v=fyf-MCz0Qoo)
+:::
 
 ---
 

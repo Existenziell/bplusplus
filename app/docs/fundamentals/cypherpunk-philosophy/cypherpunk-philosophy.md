@@ -1,10 +1,6 @@
 # Cypherpunk Philosophy
 
-Bitcoin didn't emerge from a vacuum. It was born from a decades-long movement of cryptographers, privacy advocates, and technologists who believed that cryptography could be a tool for individual freedom and liberation. This movement, known as **cypherpunk**, provided the philosophical foundation that shaped Bitcoin's core design principles.
-
-## What is Cypherpunk Philosophy?
-
-Cypherpunk is a philosophy and movement that advocates for **privacy and freedom through cryptography**. The term combines "cypher" (encryption) and "punk" (rebellious counterculture). Cypherpunks believe that:
+Bitcoin didn't emerge from a vacuum. It was born from a decades-long movement of cryptographers, privacy advocates, and technologists who believed that cryptography could be a tool for individual freedom and liberation. This movement, known as **cypherpunk**, provided the philosophical foundation that shaped Bitcoin's core design principles. Cypherpunk is a philosophy and movement that advocates for **privacy and freedom through cryptography**. The term combines "cypher" (encryption) and "punk" (rebellious counterculture). Cypherpunks believe that:
 
 - **Privacy is a fundamental right** that must be protected through technology, not granted by institutions
 - **Cryptography enables individual sovereignty** by allowing people to communicate and transact without surveillance

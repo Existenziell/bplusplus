@@ -1,12 +1,6 @@
 # Lightning Payment Channels
 
-Payment channels are the fundamental building block of the Lightning Network. They enable off-chain transactions between two parties with on-chain settlement.
-
-## What is a Payment Channel?
-
-A payment channel is a 2-of-2 [multisig](/docs/glossary#multisig-multi-signature) address that locks Bitcoin between two parties. The parties can update the channel balance off-chain without broadcasting to the Bitcoin network.
-
-### Key Properties
+Payment channels are the fundamental building block of the Lightning Network. They enable off-chain transactions between two parties with on-chain settlement. A payment channel is a 2-of-2 [multisig](/docs/glossary#multisig-multi-signature) address that locks Bitcoin between two parties. The parties can update the channel balance off-chain without broadcasting to the Bitcoin network. Key properties:
 
 - **2-of-2 Multisig**: Both parties must sign to spend
 - **Off-Chain Updates**: Balance changes happen instantly without blockchain transactions

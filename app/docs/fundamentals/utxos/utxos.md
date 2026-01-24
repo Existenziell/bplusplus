@@ -1,12 +1,6 @@
 # The UTXO Model
 
-The UTXO (Unspent Transaction Output) model is one of Bitcoin's most fundamental and elegant design choices. Unlike traditional account-based systems where balances are stored in accounts, Bitcoin tracks ownership through discrete, spendable transaction outputs. Understanding UTXOs is essential to understanding how Bitcoin actually works.
-
-## What is a UTXO?
-
-A **UTXO** is a transaction output that hasn't been spent yet. It represents the actual "coins" in Bitcoin's accounting model. When you "have 1 BTC," you don't have a balance in an account. You actually possess one or more UTXOs that sum to that amount.
-
-### Key Characteristics
+The UTXO (Unspent Transaction Output) model is one of Bitcoin's most fundamental and elegant design choices. Unlike traditional account-based systems where balances are stored in accounts, Bitcoin tracks ownership through discrete, spendable transaction outputs. Understanding UTXOs is essential to understanding how Bitcoin actually works. A **UTXO** is a transaction output that hasn't been spent yet. It represents the actual "coins" in Bitcoin's accounting model. When you "have 1 BTC," you don't have a balance in an account. You actually possess one or more UTXOs that sum to that amount. Key characteristics:
 
 - **Discrete units**: Each UTXO is a separate, indivisible unit
 - **All-or-nothing spending**: You must spend an entire UTXO; partial spending isn't possible

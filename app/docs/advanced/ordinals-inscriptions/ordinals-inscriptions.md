@@ -2,30 +2,11 @@
 
 Ordinals and inscriptions are a method for attaching arbitrary data to individual [satoshis](/docs/glossary#satoshi) on the Bitcoin blockchain. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol assigns unique identifiers to satoshis and allows "inscribing" content—images, text, JSON, or other files—into [witness data](/docs/glossary#witness) that gets stored on-chain.
 
-## What is the Ordinals Protocol?
-
-The **Ordinals protocol** assigns a unique, sequential number to each satoshi based on the order it was mined. This creates a way to identify and track individual sats through [transactions](/docs/glossary#transaction) and [UTXOs](/docs/glossary#utxo-unspent-transaction-output).
-
-### Key Concepts
-
-- **Ordinal number**: A satoshi's position in the total supply (0 to 2.1 quadrillion minus 1)
-- **Ordinal theory**: Tracks which ordinal numbers are in which UTXOs when [inputs](/docs/glossary#input) are spent (first-in-first-out by default)
-- **Rare sats**: Certain ordinals are considered "rare" (e.g., first sat of a [halving](/docs/history/halvings), [block](/docs/glossary#block) subsidy, etc.)
-
-### How Ordinals Work
-
-```text
-When Bitcoin is spent:
-- Inputs are consumed in the order they appear
-- Their ordinal numbers transfer to outputs in order
-- Default: FIFO (first input’s ordinals go to first output, etc.)
-```
-
-Ordinals do not require a [soft fork](/docs/glossary#soft-fork) or [consensus](/docs/glossary#consensus) change. They are an agreed-upon numbering and tracking scheme that [full nodes](/docs/glossary#full-node) do not need to implement; only indexers and wallets that support Ordinals do.
+The **Ordinals protocol** assigns a unique, sequential number to each satoshi based on the order it was mined. This creates a way to identify and track individual sats through [transactions](/docs/glossary#transaction) and [UTXOs](/docs/glossary#utxo-unspent-transaction-output). Key concepts: **Ordinal number** (a satoshi's position in the total supply, 0 to 2.1 quadrillion minus 1), **Ordinal theory** (tracks which ordinal numbers are in which UTXOs when [inputs](/docs/glossary#input) are spent, first-in-first-out by default), **Rare sats** (certain ordinals considered "rare," e.g., first sat of a [halving](/docs/history/halvings) or [block](/docs/glossary#block) subsidy). When Bitcoin is spent, inputs are consumed in the order they appear and their ordinal numbers transfer to outputs in order (default: FIFO). Ordinals do not require a [soft fork](/docs/glossary#soft-fork) or [consensus](/docs/glossary#consensus) change; they are an agreed-upon numbering and tracking scheme that [full nodes](/docs/glossary#full-node) do not need to implement—only indexers and wallets that support Ordinals do.
 
 ---
 
-## What are Inscriptions?
+## Inscriptions
 
 **Inscriptions** use the Ordinals protocol to attach content to a specific satoshi. The content is stored in the [witness](/docs/glossary#witness) (SegWit) portion of a transaction, often in an `OP_IF`/`OP_ENDIF` or similar pattern that is pruned from the [UTXO set](/docs/glossary#utxo-set) but remains in the blockchain.
 

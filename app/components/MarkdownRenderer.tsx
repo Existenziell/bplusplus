@@ -21,6 +21,44 @@ interface CodeGroupBlock {
   languages: { lang: string; code: string }[]
 }
 
+interface VideoGroupBlock {
+  id: string
+  videoIds: string[]
+}
+
+// Parse :::video-group blocks and extract YouTube video IDs from markdown links
+function parseVideoGroups(content: string): { processedContent: string; videoGroups: VideoGroupBlock[] } {
+  const videoGroups: VideoGroupBlock[] = []
+  let groupCounter = 0
+
+  const videoGroupRegex = /:::video-group\s*\n([\s\S]*?)\n:::/g
+
+  const processedContent = content.replace(videoGroupRegex, (match, groupContent) => {
+    const groupId = `video-group-${groupCounter++}`
+    const videoIds: string[] = []
+
+    // Extract markdown links [text](url) and collect YouTube video IDs
+    const linkRegex = /\[[^\]]*\]\(([^)]+)\)/g
+    let linkMatch
+    while ((linkMatch = linkRegex.exec(groupContent)) !== null) {
+      const url = linkMatch[1]
+      const videoId = getYouTubeVideoId(url)
+      if (videoId) {
+        videoIds.push(videoId)
+      }
+    }
+
+    if (videoIds.length > 0) {
+      videoGroups.push({ id: groupId, videoIds })
+      return `<div data-video-group-id="${groupId}"></div>`
+    }
+
+    return match
+  })
+
+  return { processedContent, videoGroups }
+}
+
 // Parse :::code-group blocks and extract code blocks within them
 function parseCodeGroups(content: string): { processedContent: string; codeGroups: CodeGroupBlock[] } {
   const codeGroups: CodeGroupBlock[] = []
@@ -103,7 +141,7 @@ function getYouTubeVideoId(url: string): string | null {
 }
 
 // Lazy-loading YouTube embed component using Intersection Observer
-function YouTubeEmbed({ videoId }: { videoId: string }) {
+function YouTubeEmbed({ videoId, inGroup }: { videoId: string; inGroup?: boolean }) {
   const [isVisible, setIsVisible] = React.useState(false)
   const containerRef = React.useRef<HTMLDivElement>(null)
   const iframeRef = React.useRef<HTMLIFrameElement>(null)
@@ -134,7 +172,7 @@ function YouTubeEmbed({ videoId }: { videoId: string }) {
   }, [isVisible])
 
   return (
-    <div className="my-6" ref={containerRef}>
+    <div className={inGroup ? '' : 'my-6'} ref={containerRef}>
       <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
         {isVisible ? (
           <iframe
@@ -187,18 +225,20 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   // Use glossary data from context (loaded once globally)
   const { glossaryData } = useGlossary()
 
-  // Memoize the parsing of code groups - this is expensive regex processing
-  const { processedContent, codeGroupMap } = useMemo(() => {
-    const { processedContent: finalContent, codeGroups } = parseCodeGroups(content)
+  // Memoize the parsing of code groups and video groups - this is expensive regex processing
+  const { processedContent, codeGroupMap, videoGroupMap } = useMemo(() => {
+    const { processedContent: afterCode, codeGroups } = parseCodeGroups(content)
+    const { processedContent: finalContent, videoGroups } = parseVideoGroups(afterCode)
     const codeGroupMap = new Map(codeGroups.map(g => [g.id, g]))
-    return { processedContent: finalContent, codeGroupMap }
+    const videoGroupMap = new Map(videoGroups.map(g => [g.id, g]))
+    return { processedContent: finalContent, codeGroupMap, videoGroupMap }
   }, [content])
 
   // Memoize components object to prevent recreation on every render
   // Using any for component props is acceptable - react-markdown handles internal typing
   // and we're mostly passing props through or accessing specific known properties
   const components = useMemo<Components>(() => ({
-    // Handle code group placeholders
+    // Handle code group and video group placeholders
     div: ({ node, children, ...props }: any) => {
       const codeGroupId = props['data-code-group-id']
       if (codeGroupId && codeGroupMap.has(codeGroupId)) {
@@ -211,6 +251,17 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               className: `language-${lang}`
             }))}
           />
+        )
+      }
+      const videoGroupId = props['data-video-group-id']
+      if (videoGroupId && videoGroupMap.has(videoGroupId)) {
+        const group = videoGroupMap.get(videoGroupId)!
+        return (
+          <div className="my-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {group.videoIds.map(id => (
+              <YouTubeEmbed key={id} videoId={id} inGroup />
+            ))}
+          </div>
         )
       }
       return <div {...props}>{children}</div>
@@ -363,7 +414,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         </pre>
       )
     },
-  }), [codeGroupMap, glossaryData])
+  }), [codeGroupMap, videoGroupMap, glossaryData])
 
   return (
     <div className="markdown-content prose prose-invert max-w-none">

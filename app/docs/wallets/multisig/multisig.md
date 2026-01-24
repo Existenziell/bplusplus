@@ -1,20 +1,12 @@
 # Multisig
 
-Multi-signature (multisig) wallets require multiple signatures to spend funds. This provides enhanced security, shared custody, and flexible access control.
+Multi-signature (multisig) wallets require multiple signatures to spend funds. This provides enhanced security, shared custody, and flexible access control. A multisig wallet requires M-of-N signatures:
 
-## What is Multisig?
-
-A multisig wallet requires M-of-N signatures:
 - **M**: Minimum number of signatures required
 - **N**: Total number of possible signers
 - **Example**: 2-of-3 means 2 signatures from 3 possible keys
 
-### Common Configurations
-
-- **2-of-2**: Two parties must both sign (partnership)
-- **2-of-3**: Two of three parties must sign (backup key)
-- **3-of-5**: Three of five parties must sign (corporate)
-- **M-of-N**: Flexible configuration
+Common configurations: **2-of-2** (two parties must both sign, e.g. partnership), **2-of-3** (two of three parties must sign, e.g. backup key), **3-of-5** (three of five, e.g. corporate), or flexible **M-of-N**.
 
 ---
 

@@ -1,14 +1,6 @@
 # The OP_RETURN Debate: Bitcoin as Database vs. Financial Network
 
-An analysis of the ongoing debate about OP_RETURN, carrier size limits, and Bitcoin's fundamental purpose.
-
----
-
-## What is OP_RETURN?
-
-### Basic Function
-
-`[OP_RETURN](/docs/glossary#op-return)` is a Bitcoin [Script](/docs/glossary#script) [opcode](/docs/glossary#opcode) that creates **provably unspendable outputs**. When executed, it immediately terminates script execution and marks the transaction as invalid.
+An analysis of the ongoing debate about OP_RETURN, carrier size limits, and Bitcoin's fundamental purpose. `OP_RETURN` is a Bitcoin [Script](/docs/glossary#script) [opcode](/docs/glossary#opcode) that creates **provably unspendable outputs**. When executed, it immediately terminates script execution and marks the transaction as invalid.
 
 **Script Pattern:**
 ```
@@ -21,22 +13,7 @@ OP_RETURN <data>
 - Data does **not contribute to [UTXO set](/docs/glossary#utxo-set)**: can be pruned by nodes
 - Originally limited to **80 bytes** of data per output
 
-### How It Works Technically
-
-1. **Script Execution:**
-   - When `OP_RETURN` is encountered, script execution immediately fails
-   - Transaction is marked as invalid (cannot be spent)
-   - But the transaction itself is still valid and included in blocks
-
-2. **Data Storage:**
-   - Data follows `OP_RETURN` in the script
-   - Stored in the transaction output's `[scriptPubKey](/docs/glossary#scriptpubkey)`
-   - Permanently recorded in blockchain history
-
-3. **UTXO Set Impact:**
-   - Since outputs are unspendable, they don't add to UTXO set
-   - Nodes can prune OP_RETURN data after validation
-   - Reduces long-term storage burden compared to regular outputs
+**How it works:** (1) **Script execution:** when `OP_RETURN` is encountered, script execution immediately fails; the transaction is marked as invalid (cannot be spent) but the transaction itself is still valid and included in blocks. (2) **Data storage:** data follows `OP_RETURN` in the script, stored in the transaction output's `[scriptPubKey](/docs/glossary#scriptpubkey)`, permanently recorded in blockchain history. (3) **UTXO set impact:** since outputs are unspendable, they don't add to UTXO set; nodes can prune OP_RETURN data after validation, reducing long-term storage burden compared to regular outputs.
 
 **Example:**
 ```

@@ -1,12 +1,6 @@
 # Lightning Onion Routing
 
-Lightning Network uses Sphinx onion routing to provide privacy and security for payments. Each hop in a route only knows the previous and next hop, not the full route or payment details.
-
-## What is Onion Routing?
-
-Onion routing encrypts data in layers, like an onion. Each hop peels off one layer, revealing only the information needed for that hop to forward the payment.
-
-### Key Properties
+Lightning Network uses Sphinx onion routing to provide privacy and security for payments. Each hop in a route only knows the previous and next hop, not the full route or payment details. Onion routing encrypts data in layers, like an onion. Each hop peels off one layer, revealing only the information needed for that hop to forward the payment. Key properties:
 
 - **Privacy**: Each hop only knows immediate neighbors
 - **Integrity**: HMACs prevent tampering

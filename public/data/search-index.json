@@ -65,13 +65,13 @@
     "path": "/docs/fundamentals/cypherpunk-philosophy",
     "title": "Cypherpunk Philosophy",
     "section": "fundamentals",
-    "body": "Cypherpunk Philosophy Bitcoin didn't emerge from a vacuum. It was born from a decades-long movement of cryptographers, privacy advocates, and technologists who believed that cryptography could be a tool for individual freedom and liberation. This movement, known as cypherpunk, provided the philosophical foundation that shaped Bitcoin's core design principles. What is Cypherpunk Philosophy? Cypherpunk is a philosophy and movement that advocates for privacy and freedom through cryptography. The "
+    "body": "Cypherpunk Philosophy Bitcoin didn't emerge from a vacuum. It was born from a decades-long movement of cryptographers, privacy advocates, and technologists who believed that cryptography could be a tool for individual freedom and liberation. This movement, known as cypherpunk, provided the philosophical foundation that shaped Bitcoin's core design principles. Cypherpunk is a philosophy and movement that advocates for privacy and freedom through cryptography. The term combines \"cypher\" "
   },
   {
     "path": "/docs/fundamentals/blockchain",
     "title": "The Blockchain",
     "section": "fundamentals",
-    "body": "The Blockchain The blockchain is Bitcoin's foundational data structure: a cryptographically linked chain of blocks that creates an immutable, verifiable record of all transactions. Each block contains a hash of the previous block's header, creating an unbreakable chain where altering any block invalidates all subsequent blocks. This structure enables trustless verification, prevents tampering, and forms the backbone of Bitcoin's security model. What is a Blockchain? A blockchain is a sequence "
+    "body": "The Blockchain The blockchain is Bitcoin's foundational data structure: a cryptographically linked chain of blocks that creates an immutable, verifiable record of all transactions. Each block contains a hash of the previous block's header, creating an unbreakable chain where altering any block invalidates all subsequent blocks. This structure enables trustless verification, prevents tampering, and forms the backbone of Bitcoin's security model. A blockchain is a sequence of blocks, where each "
   },
   {
     "path": "/docs/fundamentals/timechain",
@@ -113,7 +113,7 @@
     "path": "/docs/fundamentals/utxos",
     "title": "UTXO Model",
     "section": "fundamentals",
-    "body": "The UTXO Model The UTXO (Unspent Transaction Output) model is one of Bitcoin's most fundamental and elegant design choices. Unlike traditional account-based systems where balances are stored in accounts, Bitcoin tracks ownership through discrete, spendable transaction outputs. Understanding UTXOs is essential to understanding how Bitcoin actually works. What is a UTXO? A UTXO is a transaction output that hasn't been spent yet. It represents the actual \"coins\" in Bitcoin's accounting model. When "
+    "body": "The UTXO Model The UTXO (Unspent Transaction Output) model is one of Bitcoin's most fundamental and elegant design choices. Unlike traditional account-based systems where balances are stored in accounts, Bitcoin tracks ownership through discrete, spendable transaction outputs. Understanding UTXOs is essential to understanding how Bitcoin actually works. A UTXO is a transaction output that hasn't been spent yet. It represents the actual \"coins\" in Bitcoin's accounting model. When you \"have 1 "
   },
   {
     "path": "/docs/history",
@@ -171,7 +171,7 @@
     "path": "/docs/bitcoin/script",
     "title": "Bitcoin Script",
     "section": "bitcoin",
-    "body": "Bitcoin Script What is Bitcoin Script? Bitcoin Script is a programming language that defines how bitcoin can be spent. Every transaction output contains a locking script that sets the spending conditions. To spend that output, you must provide an unlocking script that satisfies those conditions. | Term | Also Called | Purpose | |------|-------------|---------| | Locking Script | scriptPubKey, output script | Defines who can spend and under what conditions | | Unlocking Script | scriptSig, input "
+    "body": "Bitcoin Script Bitcoin Script is a programming language that defines how bitcoin can be spent. Every transaction output contains a locking script that sets the spending conditions. To spend that output, you must provide an unlocking script that satisfies those conditions. | Term | Also Called | Purpose | |------|-------------|---------| | Locking Script | scriptPubKey, output script | Defines who can spend and under what conditions | | Unlocking Script | scriptSig, input script, witness | "
   },
   {
     "path": "/docs/bitcoin/op-codes",
@@ -201,13 +201,13 @@
     "path": "/docs/bitcoin/segwit",
     "title": "SegWit",
     "section": "bitcoin",
-    "body": "Segregated Witness (SegWit) Segregated Witness (SegWit) is a major Bitcoin protocol upgrade activated in August 2017 (block 481,824). It separates signature (witness) data from transaction data, fixing transaction malleability and effectively increasing block capacity. SegWit was designed primarily by Pieter Wuille (BIP 141). What is SegWit? SegWit separates the \"witness\" (signature data) from the transaction body, storing it in a separate structure. This fundamental change enables: "
+    "body": "Segregated Witness (SegWit) Segregated Witness (SegWit) is a major Bitcoin protocol upgrade activated in August 2017 (block 481,824). It separates signature (witness) data from transaction data, fixing transaction malleability and effectively increasing block capacity. SegWit was designed primarily by Pieter Wuille (BIP 141). SegWit separates the \"witness\" (signature data) from the transaction body, storing it in a separate structure. This fundamental change enables: Malleability fix: "
   },
   {
     "path": "/docs/bitcoin/taproot",
     "title": "Taproot",
     "section": "bitcoin",
-    "body": "Taproot Taproot is a major Bitcoin protocol upgrade activated in November 2021 (block 709,632). It combines Schnorr signatures with MAST (Merkle Abstract Syntax Trees) to provide better privacy, efficiency, and flexibility for Bitcoin transactions. Pieter Wuille was a key designer (BIPs 340, 341, 342). What is Taproot? Taproot introduces a new output type (P2TR) that enables: Schnorr signatures: More efficient than ECDSA, enables signature aggregation MAST: Hides unused script conditions in a "
+    "body": "Taproot Taproot is a major Bitcoin protocol upgrade activated in November 2021 (block 709,632). It combines Schnorr signatures with MAST (Merkle Abstract Syntax Trees) to provide better privacy, efficiency, and flexibility for Bitcoin transactions. Pieter Wuille was a key designer (BIPs 340, 341, 342). Taproot introduces a new output type (P2TR) that enables: Schnorr signatures: More efficient than ECDSA, enables signature aggregation MAST: Hides unused script conditions in a Merkle tree Better "
   },
   {
     "path": "/docs/bitcoin/p2p-protocol",
@@ -219,7 +219,7 @@
     "path": "/docs/bitcoin/merkle-trees",
     "title": "Merkle Trees",
     "section": "bitcoin",
-    "body": "Merkle Trees Merkle trees are a fundamental data structure in Bitcoin that enable efficient verification of transaction inclusion in blocks. They provide cryptographic proof that specific transactions are part of a block without downloading the entire block. The structure is named after Ralph Merkle, who invented it in 1979; Satoshi cited the concept in the Bitcoin whitepaper. What is a Merkle Tree? A Merkle tree (also called a hash tree) is a binary tree where: Leaves: Hash of individual "
+    "body": "Merkle Trees Merkle trees are a fundamental data structure in Bitcoin that enable efficient verification of transaction inclusion in blocks. They provide cryptographic proof that specific transactions are part of a block without downloading the entire block. The structure is named after Ralph Merkle, who invented it in 1979; Satoshi cited the concept in the Bitcoin whitepaper. A Merkle tree (also called a hash tree) is a binary tree where: Leaves: Hash of individual transactions Internal nodes: "
   },
   {
     "path": "/docs/bitcoin/transaction-fees",
@@ -339,7 +339,7 @@
     "path": "/docs/wallets/multisig",
     "title": "Multisig",
     "section": "wallets",
-    "body": "Multisig Multi-signature (multisig) wallets require multiple signatures to spend funds. This provides enhanced security, shared custody, and flexible access control. What is Multisig? A multisig wallet requires M-of-N signatures: M: Minimum number of signatures required N: Total number of possible signers Example: 2-of-3 means 2 signatures from 3 possible keys Common Configurations 2-of-2: Two parties must both sign (partnership) 2-of-3: Two of three parties must sign (backup key) 3-of-5: Three "
+    "body": "Multisig Multi-signature (multisig) wallets require multiple signatures to spend funds. This provides enhanced security, shared custody, and flexible access control. A multisig wallet requires M-of-N signatures: M: Minimum number of signatures required N: Total number of possible signers Example: 2-of-3 means 2 signatures from 3 possible keys Common configurations: 2-of-2 (two parties must both sign, e.g. partnership), 2-of-3 (two of three parties must sign, e.g. backup key), 3-of-5 (three of "
   },
   {
     "path": "/docs/wallets/transactions",
@@ -369,7 +369,7 @@
     "path": "/docs/lightning/channels",
     "title": "Channels",
     "section": "lightning",
-    "body": "Lightning Payment Channels Payment channels are the fundamental building block of the Lightning Network. They enable off-chain transactions between two parties with on-chain settlement. What is a Payment Channel? A payment channel is a 2-of-2 multisig address that locks Bitcoin between two parties. The parties can update the channel balance off-chain without broadcasting to the Bitcoin network. Key Properties 2-of-2 Multisig: Both parties must sign to spend Off-Chain Updates: Balance changes "
+    "body": "Lightning Payment Channels Payment channels are the fundamental building block of the Lightning Network. They enable off-chain transactions between two parties with on-chain settlement. A payment channel is a 2-of-2 multisig address that locks Bitcoin between two parties. The parties can update the channel balance off-chain without broadcasting to the Bitcoin network. Key properties: 2-of-2 Multisig: Both parties must sign to spend Off-Chain Updates: Balance changes happen instantly without "
   },
   {
     "path": "/docs/lightning/routing",
@@ -381,19 +381,19 @@
     "path": "/docs/lightning/routing/htlc",
     "title": "HTLCs",
     "section": "lightning",
-    "body": "Hash Time-Locked Contracts (HTLCs) HTLCs are the mechanism that enables payments to route through the Lightning Network. They ensure that payments can only be claimed with the correct preimage, and expire after a certain time if unclaimed. What is an HTLC? An HTLC is a conditional payment that requires: 1. Hash Lock: Knowledge of a secret (preimage) that hashes to a known value 2. Time Lock: Expires after a certain block height (CLTV) --- How HTLCs Work in Lightning Payment Flow 1. Recipient "
+    "body": "Hash Time-Locked Contracts (HTLCs) HTLCs are the mechanism that enables payments to route through the Lightning Network. They ensure that payments can only be claimed with the correct preimage, and expire after a certain time if unclaimed. An HTLC is a conditional payment that requires: 1. Hash Lock: Knowledge of a secret (preimage) that hashes to a known value 2. Time Lock: Expires after a certain block height (CLTV) --- How HTLCs Work in Lightning Payment Flow 1. Recipient generates preimage: "
   },
   {
     "path": "/docs/lightning/routing/mpp",
     "title": "Multi-Part Payments",
     "section": "lightning",
-    "body": "Multi-Part Payments (MPP) Multi-Part Payments (MPP) allow splitting a single payment across multiple routes. This enables larger payments and improves success rates by utilizing multiple channels. What is MPP? Instead of sending one large payment through a single route, MPP splits the payment into multiple smaller parts that can take different routes. Example --- Why Use MPP? Benefits 1. Larger Payments: Can send amounts larger than any single channel 2. Higher Success Rate: Multiple routes "
+    "body": "Multi-Part Payments (MPP) Multi-Part Payments allow splitting a single payment across multiple routes. This enables larger payments and improves success rates by utilizing multiple channels. Instead of sending one large payment through a single route, MPP splits the payment into multiple smaller parts that can take different routes. Example --- Why Use MPP? Benefits 1. Larger Payments: Can send amounts larger than any single channel 2. Higher Success Rate: Multiple routes increase chance of "
   },
   {
     "path": "/docs/lightning/onion",
     "title": "Onion Routing",
     "section": "lightning",
-    "body": "Lightning Onion Routing Lightning Network uses Sphinx onion routing to provide privacy and security for payments. Each hop in a route only knows the previous and next hop, not the full route or payment details. What is Onion Routing? Onion routing encrypts data in layers, like an onion. Each hop peels off one layer, revealing only the information needed for that hop to forward the payment. Key Properties Privacy: Each hop only knows immediate neighbors Integrity: HMACs prevent tampering Source "
+    "body": "Lightning Onion Routing Lightning Network uses Sphinx onion routing to provide privacy and security for payments. Each hop in a route only knows the previous and next hop, not the full route or payment details. Onion routing encrypts data in layers, like an onion. Each hop peels off one layer, revealing only the information needed for that hop to forward the payment. Key properties: Privacy: Each hop only knows immediate neighbors Integrity: HMACs prevent tampering Source Hiding: Sender "
   },
   {
     "path": "/docs/lightning/invoices",
@@ -489,7 +489,7 @@
     "path": "/docs/bitcoin-development/psbt",
     "title": "PSBT",
     "section": "bitcoin-development",
-    "body": "Partially Signed Bitcoin Transactions (PSBT) PSBTs (BIP-174) provide a standardized format for passing unsigned or partially signed transactions between different software and hardware. They're essential for multi-party signing, hardware wallet integration, and air-gapped setups. What is PSBT? The Problem PSBTs Solve Before PSBT, passing transactions between wallets was ad-hoc: Each wallet had its own format Hardware wallets needed custom integrations Multi-signature coordination was complex No "
+    "body": "Partially Signed Bitcoin Transactions (PSBT) PSBTs (BIP-174) provide a standardized format for passing unsigned or partially signed transactions between different software and hardware. They're essential for multi-party signing, hardware wallet integration, and air-gapped setups. Before PSBT, passing transactions between wallets was ad-hoc: each wallet had its own format, hardware wallets needed custom integrations, multi-signature coordination was complex, and there was no standard way to "
   },
   {
     "path": "/docs/bitcoin-development/blockchain-monitoring",
@@ -531,7 +531,7 @@
     "path": "/docs/controversies/op-return",
     "title": "OP_RETURN Debate",
     "section": "controversies",
-    "body": "The OPRETURN Debate: Bitcoin as Database vs. Financial Network An analysis of the ongoing debate about OPRETURN, carrier size limits, and Bitcoin's fundamental purpose. --- What is OPRETURN? Basic Function OPRETURN is a Bitcoin Script opcode that creates provably unspendable outputs. When executed, it immediately terminates script execution and marks the transaction as invalid. Script Pattern: Key Characteristics: Outputs are unspendable: they cannot be used as inputs in future transactions "
+    "body": "The OPRETURN Debate: Bitcoin as Database vs. Financial Network An analysis of the ongoing debate about OPRETURN, carrier size limits, and Bitcoin's fundamental purpose. OPRETURN is a Bitcoin Script opcode that creates provably unspendable outputs. When executed, it immediately terminates script execution and marks the transaction as invalid. Script Pattern: Key Characteristics: Outputs are unspendable: they cannot be used as inputs in future transactions Data is permanently stored on the "
   },
   {
     "path": "/docs/controversies/blocksize-wars",
@@ -621,7 +621,7 @@
     "path": "/docs/advanced/ordinals-inscriptions",
     "title": "Ordinals & Inscriptions",
     "section": "advanced",
-    "body": "Ordinals & Inscriptions Ordinals and inscriptions are a method for attaching arbitrary data to individual satoshis on the Bitcoin blockchain. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol assigns unique identifiers to satoshis and allows \"inscribing\" content—images, text, JSON, or other files—into witness data that gets stored on-chain. What is the Ordinals Protocol? The Ordinals protocol assigns a unique, sequential number to each satoshi based on the order it was mined. "
+    "body": "Ordinals & Inscriptions Ordinals and inscriptions are a method for attaching arbitrary data to individual satoshis on the Bitcoin blockchain. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol assigns unique identifiers to satoshis and allows \"inscribing\" content—images, text, JSON, or other files—into witness data that gets stored on-chain. The Ordinals protocol assigns a unique, sequential number to each satoshi based on the order it was mined. This creates a way to identify "
   },
   {
     "path": "/docs/advanced/covenants",

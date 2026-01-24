@@ -2,11 +2,7 @@
 
 **Covenants** are a *proposed* type of [Bitcoin Script](/docs/bitcoin/script) constraint that would restrict how [outputs](/docs/glossary#output) from a [transaction](/docs/bitcoin/transaction-lifecycle) can be spent in **future** transactions. Unlike today’s scripts, which only define “who can spend and under what conditions,” covenants would allow “this [UTXO](/docs/glossary#utxo-unspent-transaction-output) may only be spent in a transaction that looks like X” (e.g., only to certain [address](/docs/glossary#address) types, or only after passing through a timelocked recovery path).
 
-No covenant opcodes are in [consensus](/docs/glossary#consensus) today. This page describes the design space and main proposals.
-
-## What is a Covenant?
-
-A **covenant** restricts the *shape* or *destination* of the transaction that spends an [output](/docs/glossary#output):
+No covenant opcodes are in [consensus](/docs/glossary#consensus) today. This page describes the design space and main proposals. A **covenant** restricts the *shape* or *destination* of the transaction that spends an [output](/docs/glossary#output):
 
 - **Shape**: e.g., “the spending transaction must have exactly N outputs” or “the first output must be to this script.”
 - **Destination**: e.g., “outputs may only go to [addresses](/docs/wallets/address-types) of type P2WPKH” or “only to this prespecified [script](/docs/bitcoin/script).”

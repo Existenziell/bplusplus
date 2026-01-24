@@ -1,10 +1,6 @@
 # The Blockchain
 
-The blockchain is Bitcoin's foundational data structure: a cryptographically linked chain of blocks that creates an immutable, verifiable record of all transactions. Each block contains a hash of the previous block's header, creating an unbreakable chain where altering any block invalidates all subsequent blocks. This structure enables trustless verification, prevents tampering, and forms the backbone of Bitcoin's security model.
-
-## What is a Blockchain?
-
-A blockchain is a sequence of blocks, where each block is cryptographically linked to the previous one through a hash reference. This creates a chain structure where:
+The blockchain is Bitcoin's foundational data structure: a cryptographically linked chain of blocks that creates an immutable, verifiable record of all transactions. Each block contains a hash of the previous block's header, creating an unbreakable chain where altering any block invalidates all subsequent blocks. This structure enables trustless verification, prevents tampering, and forms the backbone of Bitcoin's security model. A blockchain is a sequence of blocks, where each block is cryptographically linked to the previous one through a hash reference. This creates a chain structure where:
 
 - **Each block references the previous block** via its hash
 - **The chain is immutable**: changing any block breaks the chain

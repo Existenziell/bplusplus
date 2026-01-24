@@ -1,24 +1,6 @@
 # Partially Signed Bitcoin Transactions (PSBT)
 
-[PSBTs](/docs/glossary#psbt-partially-signed-bitcoin-transaction) (BIP-174) provide a standardized format for passing unsigned or partially signed transactions between different software and hardware. They're essential for multi-party signing, hardware wallet integration, and air-gapped setups.
-
-## What is PSBT?
-
-### The Problem PSBTs Solve
-
-Before PSBT, passing transactions between wallets was ad-hoc:
-- Each wallet had its own format
-- Hardware wallets needed custom integrations
-- Multi-signature coordination was complex
-- No standard way to include signing metadata
-
-### PSBT Solution
-
-PSBT provides:
-- **Standardized Format**: All wallets speak the same language
-- **Metadata Inclusion**: UTXOs, scripts, derivation paths
-- **Partial Signatures**: Multiple parties can sign independently
-- **Hardware Wallet Support**: Works with air-gapped devices
+PSBTs (BIP-174) provide a standardized format for passing unsigned or partially signed transactions between different software and hardware. They're essential for multi-party signing, hardware wallet integration, and air-gapped setups. Before PSBT, passing transactions between wallets was ad-hoc: each wallet had its own format, hardware wallets needed custom integrations, multi-signature coordination was complex, and there was no standard way to include signing metadata. PSBT provides: **Standardized Format** (all wallets speak the same language), **Metadata Inclusion** (UTXOs, scripts, derivation paths), **Partial Signatures** (multiple parties can sign independently), and **Hardware Wallet Support** (works with air-gapped devices).
 
 ---
 

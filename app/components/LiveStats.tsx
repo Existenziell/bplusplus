@@ -93,12 +93,12 @@ export default function LiveStats() {
     {
       label: 'Mempool Txs',
       value: mempoolInfo?.size ? formatNumber(mempoolInfo.size) : null,
-      href: '/docs/bitcoin/rpc#3-mempool-information',
+      href: '/docs/mining/mempool',
     },
     {
       label: 'Mempool Size',
       value: mempoolInfo?.bytes ? formatBytes(mempoolInfo.bytes) : null,
-      href: '/docs/mining/block-construction',
+      href: '/docs/glossary#block-size',
     },
     {
       label: 'Hex',
@@ -113,7 +113,7 @@ export default function LiveStats() {
     {
       label: 'Sats/USD',
       value: satsPerUSD ? formatNumber(satsPerUSD) : null,
-      href: '/docs/glossary#sat-satoshi',
+      href: '/docs/fundamentals/denominations',
     },
   ]
 

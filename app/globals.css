@@ -38,7 +38,7 @@ body {
 
   /* Main page background gradient - used across page layouts */
   .page-bg {
-    @apply bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200;
+    @apply bg-gradient-linear from-zinc-50 via-zinc-100 to-zinc-50 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800 text-zinc-800 dark:text-zinc-200;
   }
 
   /* Button Styles */

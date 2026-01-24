@@ -1,0 +1,10 @@
+{
+  "mpp-multi-part-payment": "/docs/lightning/routing/mpp",
+  "covenants": "/docs/advanced/covenants",
+  "anchor-outputs": "/docs/lightning/anchor-outputs",
+  "htlc-hash-time-locked-contract": "/docs/lightning/routing/htlc",
+  "miniscript": "/docs/bitcoin-development/miniscript",
+  "psbt-partially-signed-bitcoin-transaction": "/docs/bitcoin-development/psbt",
+  "taproot": "/docs/bitcoin/taproot",
+  "segwit-segregated-witness": "/docs/bitcoin/segwit"
+}

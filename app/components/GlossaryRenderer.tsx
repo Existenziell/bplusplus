@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
 import { ArrowRight, ExternalLinkIcon } from '@/app/components/Icons'
+import relatedArticles from '@/app/docs/glossary/related-articles.json'
 
 interface GlossaryRendererProps {
   content: string
@@ -269,6 +270,17 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
 
                 <div className="glossary-definition px-4 py-4 ml-6 border-l-2 border-zinc-200 dark:border-zinc-700 mt-2 text-zinc-800 dark:text-zinc-200">
                   <DefinitionRenderer content={entry.definition} />
+                  {(relatedArticles as Record<string, string>)[entry.slug] && (
+                    <p className="mt-3 text-sm">
+                      <Link
+                        href={(relatedArticles as Record<string, string>)[entry.slug]}
+                        className="text-btc hover:underline inline-flex items-center gap-1"
+                      >
+                        Related article
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </p>
+                  )}
                 </div>
               </details>
             ))}

@@ -93,17 +93,17 @@ Dive into the technical details:
 
 - [Cryptography](/docs/bitcoin/cryptography) - Hash functions, elliptic curves, and digital signatures
 - [Consensus](/docs/bitcoin/consensus) - How the network agrees on truth
+- [Transaction Lifecycle](/docs/bitcoin/transaction-lifecycle) - Transaction states and confirmations
 - [Script](/docs/bitcoin/script) - Bitcoin's programming language
 - [OP Codes](/docs/bitcoin/op-codes) - The instruction set reference
+- [Timelocks](/docs/bitcoin/timelocks) - Time-based spending conditions
+- [Sighash Types](/docs/bitcoin/sighash-types) - What signatures commit to (SIGHASH_ALL, SINGLE, NONE, ANYONECANPAY)
+- [Merkle Trees](/docs/bitcoin/merkle-trees) - Efficient transaction verification
 - [Blocks](/docs/bitcoin/blocks) - Block structure and propagation
 - [Subsidy](/docs/bitcoin/subsidy) - The mathematical supply schedule
-- [RPC](/docs/bitcoin/rpc) - Node communication interface
+- [Transaction Fees](/docs/bitcoin/transaction-fees) - Fee market and estimation
+- [Transaction Malleability](/docs/bitcoin/transaction-malleability) - Historical issue and fix
 - [SegWit](/docs/bitcoin/segwit) - Segregated Witness protocol upgrade
 - [Taproot](/docs/bitcoin/taproot) - Schnorr signatures and MAST
 - [P2P Network Protocol](/docs/bitcoin/p2p-protocol) - Peer-to-peer communication
-- [Merkle Trees](/docs/bitcoin/merkle-trees) - Efficient transaction verification
-- [Transaction Fees](/docs/bitcoin/transaction-fees) - Fee market and estimation
-- [Timelocks](/docs/bitcoin/timelocks) - Time-based spending conditions
-- [Transaction Malleability](/docs/bitcoin/transaction-malleability) - Historical issue and fix
-- [Transaction Lifecycle](/docs/bitcoin/transaction-lifecycle) - Transaction states and confirmations
-- [Sighash Types](/docs/bitcoin/sighash-types) - What signatures commit to (SIGHASH_ALL, SINGLE, NONE, ANYONECANPAY)
+- [RPC](/docs/bitcoin/rpc) - Node communication interface

@@ -1,204 +1,161 @@
 # B++
 
-Bitcoin Education without borders! Open knowledge. Open source.
+Bitcoin Education without borders.
+An open-source developer's guide to Bitcoin, from fundamentals to advanced protocol, built to be always free and open source.
 
-An open-source developer's guide to Bitcoin, covering everything from fundamental concepts to advanced protocol implementations. Built with Love and designed to be always free and open source.
+## Contents
+
+- [What is B++](#what-is-b)
+- [Documentation](#documentation)
+  - [Learning flow](#learning-flow)
+- [Interactive Tools](#interactive-tools)
+  - [Bitcoin CLI Terminal](#bitcoin-cli-terminal)
+  - [Stack Lab](#stack-lab)
+  - [Denominations Calculator](#denominations-calculator)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Scripts](#scripts)
+- [Testing](#testing)
+- [Prebuild scripts](#prebuild-scripts)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## What is B++
+
+- **Documentation** — A Developer's Guide to Bitcoin
+- **Whitepaper** — Satoshi’s Bitcoin whitepaper.
+- **Bitcoin CLI Terminal** — Run Bitcoin Core RPC commands in the browser against a public mainnet node. No node setup. `/terminal`
+- **Stack Lab** — Interactive Bitcoin Script playground. Build and run locking/unlocking scripts in the browser; same model as on-chain validation. `/stack-lab`
+- **Denominations Calculator** — Convert between satoshis, bits, mBTC, BTC, and other units. On the Denominations doc. `/docs/fundamentals/denominations`
+- **About** — `/author`
+
+---
+
+## Documentation
+
+One dynamic route (`app/docs/[...slug]/page.tsx`) backed by `app/utils/navigation.ts`. Each section: `overview.md` plus `[topic]/[topic].md`. Routing and nav are defined in `navigation.ts`.
+
+### Learning flow
+
+**Fundamentals:** Problems → Cypherpunk → Blockchain → Timechain → UTXO establishes the *why*, the philosophical lens, and the core technical building blocks. Decentralization and Trust Model then explore emergent properties and the trustless ideal. Monetary Properties, Denominations, Incentive Structure, and Game Theory cover the economic and game-theoretic foundations of Bitcoin's security and monetary design.
+
+**History:** People → Halvings → Forks → BIPs moves from *who* (Satoshi, cypherpunks, key figures) to the monetary schedule (halvings), chain splits (forks), and how the protocol evolves (BIPs). The section is referential; order matters less than for protocol or development.
+
+**Setup & Infrastructure:** Install → Testing → Testnets → Libraries → Node Types → Bitcoin Core Internals follows a get-started path: run a node, verify and debug, use test networks, choose libraries, understand node architecture, then go deep into the reference implementation. Prerequisite for hands-on Bitcoin and Lightning development.
+
+**Bitcoin Protocol:** Crypto → Consensus → Script → OP Codes is in good shape and matches how many scholars and textbooks order the material. The rest of the section follows: Transaction Lifecycle (the "unit" of consensus), script-related topics (Timelocks, Sighash Types), block structure (Merkle Trees, Block Propagation, Subsidy, Fees), the Malleability → SegWit → Taproot progression, then P2P and RPC.
+
+**Bitcoin Development:** Keys → Addresses → Transactions → PSBT is the core path for building and signing transactions; it assumes Setup & Infrastructure and benefits from Bitcoin Protocol (Script, RPC). Blockchain Monitoring and Price Tracking support integration; Pool Mining targets mining software; Script Patterns → Miniscript cover advanced scripting and policy-to-script compilation.
+
+**Wallets:** HD Wallets → Address Types → Coin Selection → Transaction Creation gives key and address handling plus the core spend path. Multisig, Privacy, and Smart Contracts then cover shared custody, privacy techniques, and advanced scripting. Overlaps with Bitcoin Development (keys, addresses, transactions) from a wallet-implementation angle.
+
+**Mining:** Proof-of-Work → Difficulty → Economics establishes the mechanism and incentives. Mempool and Block Construction cover what miners work with and how they build blocks. Pools and Hardware are operational; Attacks and Network Attacks complete the security picture. Best read after Bitcoin Protocol (consensus, blocks) and optionally Incentive Structure in Fundamentals.
+
+**Lightning:** Channels first—the 2-of-2 off-chain primitive. HTLCs → Routing Fees → MPP cover the routing layer; Onion adds privacy. Invoices (BOLT11) and BOLT12 & Offers cover payment requests; Watchtowers and Anchor Outputs address security and modern channel design. Assumes Bitcoin Protocol (Script, transactions) and ideally Setup & Infrastructure if running a node.
+
+**Advanced Topics:** A catalog of specialized topics rather than a linear path. Smart contracts (Atomic Swaps, DLCs), L2 and scaling (Sidechains, Statechains, Zero-Conf Channels, Trampoline Routing), privacy (Bloom Filters), data on Bitcoin (Ordinals & Inscriptions), and governance and protocol proposals (Governance, Covenants). Prerequisites: Bitcoin Protocol, Lightning basics, Script, and Transaction construction.
+
+**Controversies:** Protocol debates (OP_RETURN, Blocksize Wars), external critiques (Energy, Criminal Use), and defining events (Mt. Gox, Craig Wright). Order is flexible; the section explains how governance, values, and antifragility play out in practice.
+
+---
+
+## Interactive Tools
+
+### Bitcoin CLI Terminal
+
+Run `getblockcount`, `getblock`, `getrawtransaction`, `getmempoolinfo`, and other Bitcoin Core RPC commands in the browser. Connects to a public mainnet node—no local node or setup. Type `help` for the command list.
+
+### Stack Lab
+
+Interactive Bitcoin Script playground. Unlocking script runs first (pushes data onto the stack), then the locking script; the spend is valid if the stack ends in a non-zero value (typically `1`). Same model as on-chain validation.
+
+### Denominations Calculator
+
+Convert between satoshis, bits, mBTC, BTC, and other Bitcoin units. On the Denominations page.
+
+---
 
 ## Tech Stack
 
-- **Framework**: Next.js 16.1.4 (App Router, Turbopack)
-- **React**: React 19.2.3
-- **Styling**: Tailwind CSS 3.4.19
-- **Markdown**: react-markdown with remark-gfm, rehype-highlight, rehype-raw
-- **Theming**: next-themes
-- **Language**: TypeScript 5.9.3
-- **Testing**: Vitest 2.1 (unit), Playwright (E2E)
+- **Framework:** Next.js 16 (App Router, Turbopack)
+- **React:** 19, **Tailwind CSS**, **TypeScript**
+- **Markdown:** react-markdown, remark-gfm, rehype-highlight, rehype-raw
+- **Theming:** next-themes
+- **Testing:** Vitest (unit), Playwright (E2E)
 
-## Documentation Structure
-
-All documentation pages are handled by a single dynamic route (`app/docs/[...slug]/page.tsx`) that:
-- Maps URL paths to markdown files using `app/utils/navigation.ts`
-- Automatically generates metadata for SEO
-- Eliminates code duplication (replaced 67 duplicate page files)
-
-Each documentation section follows a consistent pattern:
-- `overview.md` - Section introduction and navigation
-- `[topic]/[topic].md` - Markdown content (no page.tsx needed)
-
-The routing is configured in `app/utils/navigation.ts`, which serves as the single source of truth for all documentation paths and metadata.
+---
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 20.9+ (required for Next.js 16)
-- npm, yarn, pnpm, or bun
-
-### Installation
+**Prerequisites:** Node.js 20.9+, npm / yarn / pnpm / bun
 
 ```bash
-# Clone the repository
 git clone https://github.com/Existenziell/bplusplus.git
 cd bplusplus
-
-# Install dependencies
 npm install
+npm run dev    # → http://localhost:3000
 ```
 
-### Development
+**Build:** `npm run build` runs the [prebuild scripts](#prebuild-scripts) (generate md-content, glossary, search index), then `next build`. Run `npm run start` for production.
 
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the site.
-
-### Build
-
-```bash
-npm run build
-npm run start
-```
-
-The build process runs prebuild scripts (see [Prebuild scripts](#prebuild-scripts)) before `next build` to generate `public/data/*.json` used by the download API, glossary tooltips, and search.
-
-## How Stack Lab Works
-
-Stack Lab simulates Bitcoin Script execution, which is how Bitcoin transactions are validated on the blockchain.
-
-### Script Components
-
-- **Locking Script (scriptPubKey)**: Defines the conditions that must be met to unlock and spend the Bitcoin. This script is stored in the transaction output and specifies what data or operations are required.
-
-- **Unlocking Script (scriptSig)**: Provides the data and operations necessary to satisfy the locking script's conditions. This script is included in the transaction input when spending Bitcoin.
-
-### Execution Flow
-
-1. The unlocking script runs first, pushing data (signatures, public keys, etc.) onto the stack
-2. The locking script runs second, verifying that the data satisfies the conditions
-3. If the final stack contains a non-zero value (typically `1`), the transaction is valid
-
-This is the same validation process that occurs on the Bitcoin network when transactions are processed.
+---
 
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production (runs prebuild scripts, then `next build`) |
-| `npm run start` | Start production server |
-| `npm run test` | Run all tests (unit + E2E) |
-| `npm run test:unit` | Run unit tests once (Vitest) |
-| `npm run test:unit:watch` | Run unit tests in watch mode |
-| `npm run test:unit:coverage` | Unit tests with coverage (v8) |
-| `npm run test:e2e` | Run E2E tests (Playwright) |
-| `npm run test:e2e:ui` | Run E2E tests in UI mode |
-| `npm run lint` | Run ESLint |
-| `npm run analyze` | Analyze bundle size |
+| `npm run dev` | Development server |
+| `npm run build` | Production build (prebuild + next build) |
+| `npm run start` | Production server |
+| `npm run test` | Unit + E2E |
+| `npm run test:unit` | Vitest (once) |
+| `npm run test:unit:watch` | Vitest watch |
+| `npm run test:unit:coverage` | Vitest with coverage |
+| `npm run test:e2e` | Playwright E2E |
+| `npm run test:e2e:ui` | Playwright UI |
+| `npm run lint` | ESLint |
+| `npm run analyze` | Bundle analysis |
 
-### Testing
+---
 
-| Script | Purpose |
-|--------|---------|
-| `test` | Run all tests (unit then E2E): `test:unit && test:e2e` |
-| `test:unit` | Run unit tests once (Vitest) |
-| `test:unit:watch` | Run unit tests in watch mode |
-| `test:unit:coverage` | Unit tests with coverage |
-| `test:e2e` | Run E2E tests (Playwright) |
-| `test:e2e:ui` | Run E2E tests in UI mode |
+## Prebuild scripts
 
-**Unit tests** use [Vitest](https://vitest.dev) and live in **`tests/`** with a mirrored layout:
-
-```
-tests/
-  app/utils/     # setUtils, metadata, denominationUtils, formatting, navigation, searchLogic,
-                # stackLabFormatters, stackLabInterpreter, terminalCommands, bitcoinRpcCache,
-                # docNavigationState, getMarkdownForPath
-  scripts/lib/   # slug, parse-doc-pages, glossary-parse, search-index-helpers
-  e2e/           # Playwright E2E: home, docs, search, glossary, 404, download-md, stack-lab, terminal
-```
-
-Covered: build pipeline (`parseDocPages`, `generateSlug`, `glossary-parse`, `search-index-helpers`), Stack Lab interpreter and formatters, terminal command parsing/help (`terminalCommands`), denomination/formatting utils, search logic, navigation and doc navigation state, Bitcoin RPC validation/cache, download-MD path resolution, and metadata for SEO/OG.
-
-**E2E tests** use [Playwright](https://playwright.dev) in `tests/e2e/`. They hit the app on `http://localhost:3000`; the config starts `npm run dev` if the server is not already running. Run `npm run test:e2e` or `npm run test` for all tests. For the first run (or in CI), install browsers: `npx playwright install chromium` (or `npx playwright install --with-deps` for all).
-
-In CI, run `npm run test` (or `npm run test:unit` then `npx playwright install chromium` and `npm run test:e2e`). E2E requires `public/data/*.json` (from prebuild or a prior `npm run build`).
-
-### Prebuild scripts
-
-These run automatically in order when you `npm run build` (via the `prebuild` script):
+On `npm run build`, the `prebuild` step runs:
 
 | Script | Input | Output | Purpose |
 |--------|-------|--------|---------|
-| `generate-md-content.js` | `app/utils/navigation.ts`, `app/docs/**/*.md` | `public/data/md-content.json` | Bundles all doc markdown as `path → { content, filename }` for the download-MD API |
-| `generate-glossary-data.js` | `app/docs/glossary/terms.md` | `public/data/glossary.json` | Parses `### Term` blocks into `{ slug: { term, definition } }` for glossary tooltips |
-| `generate-search-index.js` | `md-content.json`, `glossary.json`, `navigation.ts` | `public/data/search-index.json` | Builds search index: doc excerpts, glossary terms, static pages (e.g. /whitepaper, /terminal), with optional `keywords`; used by `/api/search` |
+| `generate-md-content.js` | `navigation.ts`, `app/docs/**/*.md` | `public/data/md-content.json` | Docs for download API and `docs/[...slug]` |
+| `generate-glossary-data.js` | `app/docs/glossary/terms.md` | `public/data/glossary.json` | Glossary for tooltips (layout → `GlossaryContext`) |
+| `generate-search-index.js` | `md-content.json`, `glossary.json`, `navigation.ts` | `public/data/search-index.json` | Search index for `/api/search` |
 
-#### When: prebuild vs build vs runtime
+**Pipeline:** prebuild → those three scripts → `next build` (uses md-content, glossary, search-index). At runtime: `/api/download-md`, `/api/search`, and `docs/[...slug]` read from the generated JSON.
 
-```
-prebuild (npm run build → prebuild)
-├── generate-md-content.js
-├── generate-glossary-data.js
-└── generate-search-index.js
+**Shared:** `parse-doc-pages.js`, `slug.js`, `glossary-parse.js`, `search-index-helpers.js` (used by the scripts above).
 
-Next.js build (after prebuild)
-├── Static pages: docs/[...slug] (from md-content.json), docs/glossary (readMarkdown(terms.md))
-├── Root layout: imports glossary.json, inlines to window.__GLOSSARY_DATA__
-└── API routes: bundle import of md-content.json, search-index.json
+**Artifacts:** md-content.json → download-MD, docs/[...slug]; glossary.json → layout, GlossaryContext; search-index.json → /api/search.
 
-Runtime (browser / server on demand)
-├── /api/download-md?path=… → reads md-content.json (in-memory)
-├── /api/search?q=…        → reads search-index.json (in-memory)
-├── GlossaryContext       → reads window.__GLOSSARY_DATA__ (from layout)
-└── docs/[...slug]        → reads md-content.json (same as /api/download-md)
-```
-
-#### Prebuild in words
-
-| Script | Reads | Parses / uses | Writes |
-|--------|-------|----------------|--------|
-| **generate-md-content** | `navigation.ts` | `parseDocPages` → `{ path, mdFile, title, section }`; for each `mdFile` reads `.md` from disk | `public/data/md-content.json` → `{ [path]: { content, filename } }` |
-| **generate-glossary-data** | `app/docs/glossary/terms.md` | `parseGlossary` (### Term, definition lines); `generateSlug(term)`; `stripMarkdown`, `truncateDefinition` | `public/data/glossary.json` → `{ [slug]: { term, definition } }` |
-| **generate-search-index** | `md-content.json`, `glossary.json`, `navigation.ts` | `parseDocPages`; `generateSlug` (for people); `stripMarkdown`, `excerpt`; merges staticPages + people from `/docs/history/people` + docPages + glossary | `public/data/search-index.json` → `[{ path, title, section, body, keywords? }]` |
-
-Shared:
-
-- **parse-doc-pages.js**: regex over `navigation.ts` → `[{ path, mdFile, title, section }]`. Used by **generate-md-content** and **generate-search-index**.
-- **slug.js**: `generateSlug(text)`. Used by **generate-glossary-data** and **generate-search-index** (people sections).
-- **glossary-parse.js**: `stripMarkdown`, `truncateDefinition`, `parseGlossary(termsMd)`. Used by **generate-glossary-data**.
-- **search-index-helpers.js**: `excerpt`, `parsePeopleSections(md)`, `stripMarkdown`. Used by **generate-search-index**.
-
-You can run them manually (e.g. to refresh data without a full build):
-
+**Manual run:**
 ```bash
 node scripts/generate-md-content.js
 node scripts/generate-glossary-data.js
-node scripts/generate-search-index.js   # must run after the two above
+node scripts/generate-search-index.js   # run after the two above
 ```
 
-### 6. Quick reference
-
-| Artifact | Created by | Consumed by |
-|----------|------------|-------------|
-| **md-content.json** | generate-md-content | /api/download-md, **docs/[...slug]** |
-| **glossary.json** | generate-glossary-data | layout (→ window), GlossaryContext |
-| **search-index.json** | generate-search-index | /api/search |
-| **navigation.ts** | (source) | generate-md-content, generate-search-index, docs/[...slug], docs/glossary, nav components |
-| **terms.md** | (source) | generate-glossary-data, docs/glossary (readMarkdown) |
-| **app/docs/**/*.md | (source) | generate-md-content only (→ md-content.json); docs/[...slug] uses md-content.json |
+---
 
 ## Contributing
 
-Contributions are welcome! The documentation is written in Markdown, making it easy to add or improve content.
+Contributions are welcome. The docs are Markdown in `app/docs/`.
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Add or edit markdown files in `app/docs/`
-4. Commit your changes (`git commit -m 'Add new content'`)
-5. Push to the branch (`git push origin feature/improvement`)
-6. Open a Pull Request
+1. Fork, create a branch (`git checkout -b feature/improvement`)
+2. Add or edit files in `app/docs/`
+3. Run `npm run lint`
+4. Commit, push, open a PR
+
+---
 
 ## License
 
-Open source - free to use and distribute 🧡
+Open source — free to use and distribute 🧡

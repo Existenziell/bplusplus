@@ -276,6 +276,12 @@
     "body": "Consensus Mechanism Bitcoin uses a consensus mechanism to achieve agreement among network participants about which transactions are valid and in what order they occurred. This consensus is reached without a central authority through a combination of cryptographic proof and economic incentives. The specific mechanism Bitcoin uses is formally known as Nakamoto Consensus, named after its pseudonymous creator. The Significance of Consensus The Byzantine Generals Problem Before Bitcoin, achieving "
   },
   {
+    "path": "/docs/bitcoin/transaction-lifecycle",
+    "title": "Transaction Lifecycle",
+    "section": "bitcoin",
+    "body": "Transaction Lifecycle Understanding the complete lifecycle of a Bitcoin transaction helps developers build robust applications and users understand what happens when they send bitcoin. Transaction States A transaction goes through several states: Created → 2. Signed → 3. Broadcast → 4. Mempool → Pending → 6. Confirmed → 7. Deeply Confirmed State Transitions 1. Created Transaction is constructed but not signed: Status: Created Inputs selected Outputs defined Fees calculated Not yet signed 2. "
+  },
+  {
     "path": "/docs/bitcoin/script",
     "title": "Bitcoin Script",
     "section": "bitcoin",
@@ -286,6 +292,24 @@
     "title": "OP Codes",
     "section": "bitcoin",
     "body": "OP Codes The instruction set for Bitcoin. Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive reference of Bitcoin OP codes with explanations and code examples. OP Code Categories | Category | Description | Examples | |----------|-------------|----------| | Stack Operations | Manipulate the stack | OP_DUP, OP_DROP, OP_SWAP | | Arithmetic | Mathematical operations | OP_ADD, OP_SUB | "
+  },
+  {
+    "path": "/docs/bitcoin/timelocks",
+    "title": "Timelocks",
+    "section": "bitcoin",
+    "body": "Timelocks Timelocks prevent Bitcoin from being spent until certain time conditions are met. Bitcoin supports two types of timelocks: absolute (CLTV) and relative (CSV). Types of Timelocks Absolute Timelocks (CLTV) CheckLockTimeVerify (CLTV) prevents spending until a specific block height or Unix timestamp: Example: \"Can't spend until block 800,000\" \"Can't spend until January 1, 2025\" Relative Timelocks (CSV) CheckSequenceVerify (CSV) prevents spending until a certain time has passed since the "
+  },
+  {
+    "path": "/docs/bitcoin/sighash-types",
+    "title": "Sighash Types",
+    "section": "bitcoin",
+    "body": "Sighash Types When you sign a Bitcoin transaction, the signature does not cover the raw transaction bytes. Instead, the signer first builds a signature hash (sighash): a structured digest of parts of the transaction. The sighash type (a byte appended to the signature or encoded in it) selects which parts are included. This controls what the signer commits to and what can be changed without invalidating the signature. Understanding sighash types is important for transaction construction, smart "
+  },
+  {
+    "path": "/docs/bitcoin/merkle-trees",
+    "title": "Merkle Trees",
+    "section": "bitcoin",
+    "body": "Merkle Trees Merkle trees are a fundamental data structure in Bitcoin that enable efficient verification of transaction inclusion in blocks. They provide cryptographic proof that specific transactions are part of a block without downloading the entire block. The structure is named after Ralph Merkle, who invented it in 1979; Satoshi cited the concept in the Bitcoin whitepaper. A Merkle tree (also called a hash tree) is a binary tree where: Leaves: Hash of individual transactions Internal nodes: "
   },
   {
     "path": "/docs/bitcoin/blocks",
@@ -300,10 +324,16 @@
     "body": "Block Subsidy The Bitcoin block subsidy is the amount of new Bitcoin created with each block. It follows a predictable mathematical formula that halves every 210,000 blocks, creating Bitcoin's fixed supply schedule. The Equation Mathematical Formula Block Subsidy = 50 / (2^halvings) Where: halvings = floor(block_height / 210,000) Bitcoin Core Implementation In Bitcoin Core (validation.cpp), the subsidy is calculated using bit shifting for efficiency: CAmount GetBlockSubsidy(int nHeight, const "
   },
   {
-    "path": "/docs/bitcoin/rpc",
-    "title": "RPC Commands",
+    "path": "/docs/bitcoin/transaction-fees",
+    "title": "Transaction Fees",
     "section": "bitcoin",
-    "body": "RPC Commands Reference This document provides a guide for interacting with your Bitcoin node using both curl and bitcoin-cli commands via RPC. Try it live! Test these commands directly in the Bitcoin CLI Terminal. Connected to mainnet, no setup required. Quick Command Reference Essential Commands 1. Blockchain Information - btc getblockchaininfo 2. Network Information - btc getnetworkinfo 3. Mempool Information - btc getmempoolinfo 4. Block Information - btc getblock, btc getbestblockhash 5. "
+    "body": "Transaction Fees Transaction fees are payments made to miners for including transactions in blocks. Understanding how fees work is essential for ensuring your transactions confirm in a timely manner. Why Fees Exist Fees serve multiple purposes: Incentivize miners: Reward miners for processing transactions Prevent spam: Make it expensive to flood the network Prioritize transactions: Higher fees = faster confirmation Economic security: Fees will replace block rewards over time Fee Calculation Fee "
+  },
+  {
+    "path": "/docs/bitcoin/transaction-malleability",
+    "title": "Transaction Malleability",
+    "section": "bitcoin",
+    "body": "Transaction Malleability Transaction malleability was a vulnerability in Bitcoin that allowed anyone to modify a transaction's signature without invalidating it, changing the transaction ID. SegWit fixed this issue in 2017. What Was Transaction Malleability? Transaction malleability allowed modifying transaction signatures in ways that changed the transaction ID but didn't invalidate the transaction: Original Transaction: TXID: abc123... Signature: valid signature] Malleated Transaction: TXID: "
   },
   {
     "path": "/docs/bitcoin/segwit",
@@ -324,40 +354,10 @@
     "body": "P2P Network Protocol Bitcoin uses a peer-to-peer (P2P) network protocol for nodes to communicate, share blocks, and propagate transactions. Understanding the P2P protocol is essential for running nodes and understanding network behavior. Network Architecture Node Types Full Nodes: Download and validate entire blockchain Relay blocks and transactions Maintain network consensus Light Nodes (SPV): Download block headers only Request specific transactions Rely on full nodes for data Connection "
   },
   {
-    "path": "/docs/bitcoin/merkle-trees",
-    "title": "Merkle Trees",
+    "path": "/docs/bitcoin/rpc",
+    "title": "RPC Commands",
     "section": "bitcoin",
-    "body": "Merkle Trees Merkle trees are a fundamental data structure in Bitcoin that enable efficient verification of transaction inclusion in blocks. They provide cryptographic proof that specific transactions are part of a block without downloading the entire block. The structure is named after Ralph Merkle, who invented it in 1979; Satoshi cited the concept in the Bitcoin whitepaper. A Merkle tree (also called a hash tree) is a binary tree where: Leaves: Hash of individual transactions Internal nodes: "
-  },
-  {
-    "path": "/docs/bitcoin/transaction-fees",
-    "title": "Transaction Fees",
-    "section": "bitcoin",
-    "body": "Transaction Fees Transaction fees are payments made to miners for including transactions in blocks. Understanding how fees work is essential for ensuring your transactions confirm in a timely manner. Why Fees Exist Fees serve multiple purposes: Incentivize miners: Reward miners for processing transactions Prevent spam: Make it expensive to flood the network Prioritize transactions: Higher fees = faster confirmation Economic security: Fees will replace block rewards over time Fee Calculation Fee "
-  },
-  {
-    "path": "/docs/bitcoin/timelocks",
-    "title": "Timelocks",
-    "section": "bitcoin",
-    "body": "Timelocks Timelocks prevent Bitcoin from being spent until certain time conditions are met. Bitcoin supports two types of timelocks: absolute (CLTV) and relative (CSV). Types of Timelocks Absolute Timelocks (CLTV) CheckLockTimeVerify (CLTV) prevents spending until a specific block height or Unix timestamp: Example: \"Can't spend until block 800,000\" \"Can't spend until January 1, 2025\" Relative Timelocks (CSV) CheckSequenceVerify (CSV) prevents spending until a certain time has passed since the "
-  },
-  {
-    "path": "/docs/bitcoin/transaction-malleability",
-    "title": "Transaction Malleability",
-    "section": "bitcoin",
-    "body": "Transaction Malleability Transaction malleability was a vulnerability in Bitcoin that allowed anyone to modify a transaction's signature without invalidating it, changing the transaction ID. SegWit fixed this issue in 2017. What Was Transaction Malleability? Transaction malleability allowed modifying transaction signatures in ways that changed the transaction ID but didn't invalidate the transaction: Original Transaction: TXID: abc123... Signature: valid signature] Malleated Transaction: TXID: "
-  },
-  {
-    "path": "/docs/bitcoin/transaction-lifecycle",
-    "title": "Transaction Lifecycle",
-    "section": "bitcoin",
-    "body": "Transaction Lifecycle Understanding the complete lifecycle of a Bitcoin transaction helps developers build robust applications and users understand what happens when they send bitcoin. Transaction States A transaction goes through several states: Created → 2. Signed → 3. Broadcast → 4. Mempool → Pending → 6. Confirmed → 7. Deeply Confirmed State Transitions 1. Created Transaction is constructed but not signed: Status: Created Inputs selected Outputs defined Fees calculated Not yet signed 2. "
-  },
-  {
-    "path": "/docs/bitcoin/sighash-types",
-    "title": "Sighash Types",
-    "section": "bitcoin",
-    "body": "Sighash Types When you sign a Bitcoin transaction, the signature does not cover the raw transaction bytes. Instead, the signer first builds a signature hash (sighash): a structured digest of parts of the transaction. The sighash type (a byte appended to the signature or encoded in it) selects which parts are included. This controls what the signer commits to and what can be changed without invalidating the signature. Understanding sighash types is important for transaction construction, smart "
+    "body": "RPC Commands Reference This document provides a guide for interacting with your Bitcoin node using both curl and bitcoin-cli commands via RPC. Try it live! Test these commands directly in the Bitcoin CLI Terminal. Connected to mainnet, no setup required. Quick Command Reference Essential Commands 1. Blockchain Information - btc getblockchaininfo 2. Network Information - btc getnetworkinfo 3. Mempool Information - btc getmempoolinfo 4. Block Information - btc getblock, btc getbestblockhash 5. "
   },
   {
     "path": "/docs/mining",

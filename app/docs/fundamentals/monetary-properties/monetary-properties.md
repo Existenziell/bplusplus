@@ -7,30 +7,11 @@ Bitcoin exhibits key monetary properties that make it suitable as both a medium 
 | Property | Definition | Bitcoin Implementation |
 |----------|------------|----------------------|
 | **Scarcity** | Limited supply that cannot be arbitrarily increased | Fixed [21 million](/docs/glossary#21-million) cap, predictable issuance via [halving](/docs/glossary#halving) schedule |
-| **Divisibility** | Ability to divide into smaller units | 8 decimal places (1 BTC = 100,000,000 satoshis) |
+| **Divisibility** | Ability to divide into smaller units | 8 decimal places (1 BTC = 100,000,000 satoshis). See [Denominations](/docs/fundamentals/denominations) for the full unit table and converter. |
 | **Portability** | Easy to transport and transfer | Digital, transferable globally via internet, 24/7 |
 | **Durability** | Resistance to wear or destruction | Digital (no degradation), distributed across thousands of nodes |
 | **Fungibility** | All units interchangeable | Technically fungible, though blockchain analysis can trace history |
 | **Acceptability** | Others willing to accept as payment | Growing adoption among millions of users and thousands of merchants |
-
----
-
-## Denominations
-
-| Denomination | Symbol | Value in BTC |
-|-------------|--------|--------------|
-| Satoshi | SAT | 0.00000001 |
-| Microbit | µBTC (uBTC) | 0.000001 |
-| Millibit | mBTC | 0.001 |
-| Centibit | cBTC | 0.01 |
-| Decibit | dBTC | 0.1 |
-| Bitcoin | BTC | 1 |
-| DecaBit | daBTC | 10 |
-| Hectobit | hBTC | 100 |
-| Kilobit | kBTC | 1,000 |
-| Megabit | MBTC | 1,000,000 |
-
-The satoshi (named after Bitcoin's creator) is the smallest unit. "Stacking sats" has become common terminology for accumulating bitcoin in small amounts.
 
 ---
 

@@ -200,6 +200,12 @@
     "body": "Monetary Properties Bitcoin exhibits key monetary properties that make it suitable as both a medium of exchange and a store of value. These properties emerge from Bitcoin's technical design and economic model. Core Monetary Properties | Property | Definition | Bitcoin Implementation | |----------|------------|----------------------| | Scarcity | Limited supply that cannot be arbitrarily increased | Fixed 21 million cap, predictable issuance via halving schedule | | Divisibility | Ability to "
   },
   {
+    "path": "/docs/fundamentals/denominations",
+    "title": "Denomination Calculator",
+    "section": "fundamentals",
+    "body": "Denomination Calculator Convert between Bitcoin and Lightning units: BTC, sats, bits (µBTC), millisats, and more. See Monetary Properties for the full denominations table. :::denomination-calculator :::"
+  },
+  {
     "path": "/docs/fundamentals/incentives",
     "title": "Incentive Structure",
     "section": "fundamentals",

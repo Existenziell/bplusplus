@@ -8,6 +8,7 @@ import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
 import CodeBlock, { MultiLanguageCodeBlock } from '@/app/components/CodeBlock'
+import DenominationCalculator from '@/app/components/DenominationCalculator'
 import GlossaryTooltip from '@/app/components/GlossaryTooltip'
 import { ChevronDown, ExternalLinkIcon } from '@/app/components/Icons'
 import { useGlossary } from '@/app/contexts/GlossaryContext'
@@ -92,6 +93,10 @@ function parseCodeGroups(content: string): { processedContent: string; codeGroup
   })
 
   return { processedContent, codeGroups }
+}
+
+function parseDenominationCalculator(content: string): string {
+  return content.replace(/:::denomination-calculator\s*\n([\s\S]*?)\n:::/g, '<div data-denomination-calculator="true"></div>')
 }
 
 // Generate slug from text (same as GitHub markdown)
@@ -216,10 +221,11 @@ const createHeading = (level: number) => {
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   const { glossaryData } = useGlossary()
 
-  // Memoize code/video group parsing (expensive)
+  // Memoize code/video group and denomination calculator parsing (expensive)
   const { processedContent, codeGroupMap, videoGroupMap } = useMemo(() => {
     const { processedContent: afterCode, codeGroups } = parseCodeGroups(content)
-    const { processedContent: finalContent, videoGroups } = parseVideoGroups(afterCode)
+    const { processedContent: afterVideo, videoGroups } = parseVideoGroups(afterCode)
+    const finalContent = parseDenominationCalculator(afterVideo)
     const codeGroupMap = new Map(codeGroups.map(g => [g.id, g]))
     const videoGroupMap = new Map(videoGroups.map(g => [g.id, g]))
     return { processedContent: finalContent, codeGroupMap, videoGroupMap }
@@ -251,6 +257,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             ))}
           </div>
         )
+      }
+      if ('data-denomination-calculator' in props || props['data-denomination-calculator']) {
+        return <DenominationCalculator />
       }
       return <div {...props}>{children}</div>
     },

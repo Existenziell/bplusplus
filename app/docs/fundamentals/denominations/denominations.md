@@ -1,0 +1,26 @@
+# Denominations
+
+Bitcoin is highly divisible: one [bitcoin](/docs/glossary#btc) (BTC) equals 100 million of the smallest on-chain unit, the [satoshi](/docs/glossary#sat-satoshi) (sat). This design supports both large transfers and tiny amounts, and it scales as the nominal value of each unit changes over time. Common units include satoshis for small amounts, bits (µBTC, or one millionth of a BTC) for everyday thinking, and millibits (mBTC) or whole BTC for larger sums. Understanding how these units relate helps when reading [fees](/docs/glossary#fee-rate), [block rewards](/docs/glossary#block-reward), and prices across wallets and [Lightning](/docs/glossary#lightning-network) apps. Below you can convert between units and see the full reference table.
+
+## Calculator
+
+:::denomination-calculator
+
+:::
+
+## Conversion Table
+
+| Denomination | Symbol | Value in BTC |
+|-------------|--------|--------------|
+| Satoshi | SAT | 0.00000001 |
+| Microbit | µBTC (uBTC) | 0.000001 |
+| Millibit | mBTC | 0.001 |
+| Centibit | cBTC | 0.01 |
+| Decibit | dBTC | 0.1 |
+| Bitcoin | BTC | 1 |
+| DecaBit | daBTC | 10 |
+| Hectobit | hBTC | 100 |
+| Kilobit | kBTC | 1,000 |
+| Megabit | MBTC | 1,000,000 |
+
+The [Lightning Network](/docs/glossary#lightning-network) uses **millisatoshis** (1/1000 of a satoshi) for routing and invoice amounts.

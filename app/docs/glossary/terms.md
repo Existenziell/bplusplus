@@ -105,7 +105,7 @@ The new bitcoin that miners receive as part of the block reward for successfully
 Experimental, fungible tokens on Bitcoin created using ordinal inscriptions, similar to Ethereum's ERC-20 tokens. They are an inefficient use of Bitcoin's block space, often leading to higher transaction fees and network congestion.
 
 ### BTC
-The ticker symbol for bitcoin, representing the asset in trading pairs. It's also sometimes used as shorthand for the Bitcoin Core software.
+The ticker symbol for bitcoin, representing the asset in trading pairs. It's also sometimes used as shorthand for the Bitcoin Core software. See [Denominations](/docs/fundamentals/denominations) for the full unit table and converter.
 
 ---
 
@@ -633,7 +633,7 @@ A fungible token standard on Bitcoin, designed to create and manage tokens direc
 ## S
 
 ### Sat (Satoshi)
-A satoshi, or "sat," is the smallest unit of bitcoin, equal to one hundred-millionth of a bitcoin (0.00000001 BTC). Named after Bitcoin's pseudonymous creator, [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto), sats are used to measure small amounts of bitcoin. This denomination enables Bitcoin to be used for micropayments despite any future price appreciation. The Lightning Network uses millisatoshis (1/1000 of a satoshi) for routing fee calculations, though on-chain transactions are limited to whole satoshi precision.
+A satoshi, or "sat," is the smallest unit of bitcoin, equal to one hundred-millionth of a bitcoin (0.00000001 BTC). Named after Bitcoin's pseudonymous creator, [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto), sats are used to measure small amounts of bitcoin. This denomination enables Bitcoin to be used for micropayments despite any future price appreciation. The Lightning Network uses millisatoshis (1/1000 of a satoshi - not in this table) for routing fee calculations, though on-chain transactions are limited to whole satoshi precision. See [Denominations](/docs/fundamentals/denominations) for the full unit table and converter.
 
 ### Satoshi Nakamoto
 The pseudonymous creator of Bitcoin. He released the Bitcoin whitepaper in 2008 by mailing it to the Cypherpunk mailing list and mined the Genesis Block in 2009. Satoshi remained active until mid-2010, when he handed over control of Bitcoin's development to others and gradually disappeared. His identity remains unknown.

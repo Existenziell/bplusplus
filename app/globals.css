@@ -221,7 +221,7 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content h1 {
-  @apply text-2xl sm:text-3xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
+  @apply text-3xl sm:text-4xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
 }
 
 .markdown-content h1:first-child {
@@ -229,7 +229,7 @@ main > div > div > h1:first-child {
 }
 
 .markdown-content h2 {
-  @apply text-3xl sm:text-4xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
+  @apply text-2xl sm:text-3xl font-bold mt-8 mb-4 text-zinc-900 dark:text-zinc-100;
   scroll-margin-top: 40px;
 }
 

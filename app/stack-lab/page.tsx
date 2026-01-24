@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { DndContext, DragEndEvent, DragOverlay, closestCenter } from '@dnd-kit/core'
+import { useMobileWarning } from '@/app/hooks/useMobileWarning'
 import StackVisualization from '@/app/components/stack-lab/StackVisualization'
 import OpCodePalette from '@/app/components/stack-lab/OpCodePalette'
 import ScriptBuilder from '@/app/components/stack-lab/ScriptBuilder'
@@ -26,8 +27,7 @@ export default function StackLabPage() {
   const [dataModalTarget, setDataModalTarget] = useState<'unlocking' | 'locking' | null>(null)
   const [dataInput, setDataInput] = useState('')
   const [activeId, setActiveId] = useState<string | null>(null)
-  const [showMobileWarning, setShowMobileWarning] = useState(false)
-  const [mobileWarningDismissed, setMobileWarningDismissed] = useState(false)
+  const { showWarning: showMobileWarning, dismissed: mobileWarningDismissed, dismiss: handleDismissMobileWarning } = useMobileWarning('stack-lab-mobile-warning-dismissed')
   const [isFlowExplanationExpanded, setIsFlowExplanationExpanded] = useState(false)
 
   const interpreterRef = useRef<ScriptInterpreter | null>(null)
@@ -41,32 +41,7 @@ export default function StackLabPage() {
   // Client-only to avoid hydration mismatch
   useEffect(() => {
     setIsMounted(true)
-
-    const dismissed = localStorage.getItem('stack-lab-mobile-warning-dismissed')
-    if (dismissed === 'true') {
-      setMobileWarningDismissed(true)
-      return
-    }
-
-    const checkMobile = () => {
-      const isMobile = window.innerWidth < 768 // md breakpoint
-      if (isMobile) {
-        setShowMobileWarning(true)
-      }
-    }
-
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
   }, [])
-
-  const handleDismissMobileWarning = (remember: boolean) => {
-    setShowMobileWarning(false)
-    setMobileWarningDismissed(true)
-    if (remember) {
-      localStorage.setItem('stack-lab-mobile-warning-dismissed', 'true')
-    }
-  }
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over, delta } = event

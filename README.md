@@ -99,6 +99,39 @@ These run automatically in order when you `npm run build` (via the `prebuild` sc
 | `generate-glossary-data.js` | `app/docs/glossary/terms.md` | `public/data/glossary.json` | Parses `### Term` blocks into `{ slug: { term, definition } }` for glossary tooltips |
 | `generate-search-index.js` | `md-content.json`, `glossary.json`, `navigation.ts` | `public/data/search-index.json` | Builds search index: doc excerpts, glossary terms, static pages (e.g. /whitepaper, /terminal), with optional `keywords`; used by `/api/search` |
 
+#### When: prebuild vs build vs runtime
+
+```
+prebuild (npm run build → prebuild)
+├── generate-md-content.js
+├── generate-glossary-data.js
+└── generate-search-index.js
+
+Next.js build (after prebuild)
+├── Static pages: docs/[...slug] (from md-content.json), docs/glossary (readMarkdown(terms.md))
+├── Root layout: imports glossary.json, inlines to window.__GLOSSARY_DATA__
+└── API routes: bundle import of md-content.json, search-index.json
+
+Runtime (browser / server on demand)
+├── /api/download-md?path=… → reads md-content.json (in-memory)
+├── /api/search?q=…        → reads search-index.json (in-memory)
+├── GlossaryContext       → reads window.__GLOSSARY_DATA__ (from layout)
+└── docs/[...slug]        → reads md-content.json (same as /api/download-md)
+```
+
+#### Prebuild in words
+
+| Script | Reads | Parses / uses | Writes |
+|--------|-------|----------------|--------|
+| **generate-md-content** | `navigation.ts` | `parseDocPages` → `{ path, mdFile, title, section }`; for each `mdFile` reads `.md` from disk | `public/data/md-content.json` → `{ [path]: { content, filename } }` |
+| **generate-glossary-data** | `app/docs/glossary/terms.md` | `parseGlossary` (### Term, definition lines); `generateSlug(term)`; `stripMarkdown`, `truncateDefinition` | `public/data/glossary.json` → `{ [slug]: { term, definition } }` |
+| **generate-search-index** | `md-content.json`, `glossary.json`, `navigation.ts` | `parseDocPages`; `generateSlug` (for people); `stripMarkdown`, `excerpt`; merges staticPages + people from `/docs/history/people` + docPages + glossary | `public/data/search-index.json` → `[{ path, title, section, body, keywords? }]` |
+
+Shared:
+
+- **parse-doc-pages.js**: regex over `navigation.ts` → `[{ path, mdFile, title, section }]`. Used by **generate-md-content** and **generate-search-index**.
+- **slug.js**: `generateSlug(text)`. Used by **generate-glossary-data** and **generate-search-index** (people sections).
+
 You can run them manually (e.g. to refresh data without a full build):
 
 ```bash
@@ -106,6 +139,17 @@ node scripts/generate-md-content.js
 node scripts/generate-glossary-data.js
 node scripts/generate-search-index.js   # must run after the two above
 ```
+
+### 6. Quick reference
+
+| Artifact | Created by | Consumed by |
+|----------|------------|-------------|
+| **md-content.json** | generate-md-content | /api/download-md, **docs/[...slug]** |
+| **glossary.json** | generate-glossary-data | layout (→ window), GlossaryContext |
+| **search-index.json** | generate-search-index | /api/search |
+| **navigation.ts** | (source) | generate-md-content, generate-search-index, docs/[...slug], docs/glossary, nav components |
+| **terms.md** | (source) | generate-glossary-data, docs/glossary (readMarkdown) |
+| **app/docs/**/*.md | (source) | generate-md-content only (→ md-content.json); docs/[...slug] uses md-content.json |
 
 ## Contributing
 

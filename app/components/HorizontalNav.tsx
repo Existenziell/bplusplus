@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { navItems } from '@/app/utils/navigation'
+import { navItems, staticNavLinks, footerNavLinks } from '@/app/utils/navigation'
+import { toggleInSet } from '@/app/utils/setUtils'
 import { ChevronDown, ArrowRight } from '@/app/components/Icons'
 
 export default function HorizontalNav() {
@@ -12,15 +13,7 @@ export default function HorizontalNav() {
   )
 
   const toggleSection = (href: string) => {
-    setExpandedSections(prev => {
-      const newSet = new Set(prev)
-      if (newSet.has(href)) {
-        newSet.delete(href)
-      } else {
-        newSet.add(href)
-      }
-      return newSet
-    })
+    setExpandedSections(prev => toggleInSet(prev, href))
   }
 
   return (
@@ -102,40 +95,25 @@ export default function HorizontalNav() {
                 )
               })}
               <Link
-                href="/docs/glossary"
+                href={footerNavLinks[0].href}
                 className="font-medium text-gray-800 dark:text-gray-200 hover:text-btc transition-colors pl-7"
               >
-                Glossary
+                {footerNavLinks[0].title}
               </Link>
             </div>
 
             {/* Quick Links Section - Prominent at the bottom */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
               <div className="flex flex-wrap justify-center gap-4">
-                <Link
-                  href="/terminal"
-                  className="btn-secondary-sm min-w-[10rem]"
-                >
-                  Bitcoin CLI
-                </Link>
-                <Link
-                  href="/stack-lab"
-                  className="btn-secondary-sm min-w-[10rem]"
-                >
-                  Stack Lab
-                </Link>
-                <Link
-                  href="/whitepaper"
-                  className="btn-secondary-sm min-w-[10rem]"
-                >
-                  Whitepaper
-                </Link>
-                <Link
-                  href="/author"
-                  className="btn-secondary-sm min-w-[10rem]"
-                >
-                  About B++
-                </Link>
+                {[staticNavLinks[1], staticNavLinks[2], staticNavLinks[0], footerNavLinks[1]].map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="btn-secondary-sm min-w-[10rem]"
+                  >
+                    {link.title}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>

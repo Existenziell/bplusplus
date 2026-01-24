@@ -7,16 +7,7 @@
 
 const fs = require('fs')
 const path = require('path')
-
-// Generate slug from text (same as the app)
-function generateSlug(text) {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
+const { generateSlug } = require('./lib/slug')
 
 // Strip markdown formatting for plain text tooltip
 function stripMarkdown(text) {

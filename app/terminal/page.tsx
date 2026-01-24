@@ -2,8 +2,10 @@
 
 import { useState, useRef, useEffect, KeyboardEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { CopyIcon } from '../components/Icons'
+import { CopyIcon } from '@/app/components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
+import { bitcoinRpc } from '@/app/utils/bitcoinRpc'
+import { useMobileWarning } from '@/app/hooks/useMobileWarning'
 
 const COMMANDS: Record<string, string> = {
   getblockchaininfo: 'Returns info about the current state of the blockchain',
@@ -76,8 +78,7 @@ export default function TerminalPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [exampleBlockHash, setExampleBlockHash] = useState<string>('')
   const [exampleTxId, setExampleTxId] = useState<string>('')
-  const [showMobileWarning, setShowMobileWarning] = useState(false)
-  const [mobileWarningDismissed, setMobileWarningDismissed] = useState(false)
+  const { showWarning: showMobileWarning, dismissed: mobileWarningDismissed, dismiss: handleDismissMobileWarning } = useMobileWarning('terminal-mobile-warning-dismissed')
   const inputRef = useRef<HTMLInputElement>(null)
   const outputRef = useRef<HTMLDivElement>(null)
   const lastTabPressRef = useRef<number>(0)
@@ -127,24 +128,15 @@ export default function TerminalPage() {
   useEffect(() => {
     const fetchExamples = async () => {
       try {
-        const blockHashResponse = await fetch('/api/bitcoin-rpc', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ method: 'getbestblockhash', params: [] }),
-        })
-        const blockHashData = await blockHashResponse.json()
+        const [blockHashData, mempoolData] = await Promise.all([
+          bitcoinRpc('getbestblockhash', []),
+          bitcoinRpc('getrawmempool', []),
+        ])
         if (blockHashData.result) {
-          setExampleBlockHash(blockHashData.result)
+          setExampleBlockHash(blockHashData.result as string)
         }
-
-        const mempoolResponse = await fetch('/api/bitcoin-rpc', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ method: 'getrawmempool', params: [] }),
-        })
-        const mempoolData = await mempoolResponse.json()
         if (mempoolData.result && Array.isArray(mempoolData.result) && mempoolData.result.length > 0) {
-          setExampleTxId(mempoolData.result[0])
+          setExampleTxId(mempoolData.result[0] as string)
         }
       } catch (error) {
         // On error, examples stay empty
@@ -156,30 +148,6 @@ export default function TerminalPage() {
     const timeout = setTimeout(fetchExamples, 2000)
     return () => clearTimeout(timeout)
   }, [])
-
-  useEffect(() => {
-    const dismissed = localStorage.getItem('terminal-mobile-warning-dismissed')
-    if (dismissed === 'true') {
-      setMobileWarningDismissed(true)
-      return
-    }
-    const checkMobile = () => {
-      if (window.innerWidth < 768) { // md breakpoint
-        setShowMobileWarning(true)
-      }
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  const handleDismissMobileWarning = (remember: boolean) => {
-    setShowMobileWarning(false)
-    setMobileWarningDismissed(true)
-    if (remember) {
-      localStorage.setItem('terminal-mobile-warning-dismissed', 'true')
-    }
-  }
 
   useEffect(() => {
     if (outputRef.current) {
@@ -551,20 +519,15 @@ export default function TerminalPage() {
 
     setIsLoading(true)
     try {
-      const response = await fetch('/api/bitcoin-rpc', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ method, params }),
-      })
-
-      const data = await response.json()
+      const data = await bitcoinRpc(method, params)
 
       if (data.error) {
+        const err = data.error
         setOutput(prev => [
           ...prev,
           {
             type: 'error',
-            content: `error code: ${data.error.code}\nerror message:\n${data.error.message}`,
+            content: `error code: ${err.code ?? 'unknown'}\nerror message:\n${err.message ?? 'Unknown error'}`,
             timestamp: new Date(),
           },
         ])

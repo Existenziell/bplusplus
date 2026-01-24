@@ -3,7 +3,8 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { navItems } from '@/app/utils/navigation'
+import { navItems, staticNavLinks, footerNavLinks } from '@/app/utils/navigation'
+import { toggleInSet } from '@/app/utils/setUtils'
 import { ArrowRight, PanelCollapseIcon, PanelExpandIcon } from '@/app/components/Icons'
 
 function matchesPath(pathname: string, href: string): boolean {
@@ -18,17 +19,6 @@ function findActiveSectionHref(pathname: string): string | null {
   }
   return null
 }
-
-const staticLinks = [
-  { href: '/whitepaper', title: 'Whitepaper' },
-  { href: '/terminal', title: 'CLI Terminal' },
-  { href: '/stack-lab', title: 'Stack Lab' },
-]
-
-const footerLinks = [
-  { href: '/docs/glossary', title: 'Glossary' },
-  { href: '/author', title: 'About B++' },
-]
 
 function getLinkClassName(isActive: boolean, size: 'default' | 'sm' = 'default'): string {
   const baseClasses = size === 'sm' 
@@ -80,15 +70,7 @@ export default function DocsNavigation({
   const isActive = (href: string) => matchesPath(pathname, href)
 
   const toggleSection = (href: string) => {
-    setExpandedSections(prev => {
-      const newSet = new Set(prev)
-      if (newSet.has(href)) {
-        newSet.delete(href)
-      } else {
-        newSet.add(href)
-      }
-      return newSet
-    })
+    setExpandedSections(prev => toggleInSet(prev, href))
   }
 
   const isExpanded = (href: string) => expandedSections.has(href)
@@ -126,7 +108,7 @@ export default function DocsNavigation({
 
         <div className="mb-6">
           <ul className="space-y-1">
-            {staticLinks.map((link) => (
+            {staticNavLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -202,7 +184,7 @@ export default function DocsNavigation({
 
         <div className="mt-6">
           <ul className="space-y-1">
-            {footerLinks.map((link) => (
+            {footerNavLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}

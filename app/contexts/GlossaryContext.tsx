@@ -14,27 +14,10 @@ interface GlossaryContextType {
   isLoading: boolean
 }
 
-// Read glossary data from inlined script tag (set at build time)
+// Read glossary data from window.__GLOSSARY_DATA__ (set at build time in layout)
 function getGlossaryData(): GlossaryData {
   if (typeof window === 'undefined') return {}
-
-  // Check if data is already inlined in window
-  const windowGlossary = (window as any).__GLOSSARY_DATA__
-  if (windowGlossary) {
-    return windowGlossary
-  }
-
-  // Fallback: try to read from script tag
-  const scriptTag = document.getElementById('glossary-data')
-  if (scriptTag && scriptTag.textContent) {
-    try {
-      return JSON.parse(scriptTag.textContent)
-    } catch {
-      return {}
-    }
-  }
-
-  return {}
+  return (window as unknown as { __GLOSSARY_DATA__?: GlossaryData }).__GLOSSARY_DATA__ ?? {}
 }
 
 const GlossaryContext = createContext<GlossaryContextType>({

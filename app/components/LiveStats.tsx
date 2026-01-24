@@ -3,6 +3,7 @@
 import { useState, useEffect, memo } from 'react'
 import Link from 'next/link'
 import copyToClipboard from '@/app/utils/copyToClipboard'
+import { bitcoinRpc } from '@/app/utils/bitcoinRpc'
 import { formatNumber, formatPrice, formatDifficulty, formatBytes } from '@/app/utils/formatting'
 
 const BTC_HEX = '#f2a900'
@@ -37,29 +38,12 @@ export default function LiveStats() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [priceRes, blockchainRes, mempoolRes, feeRes] = await Promise.all([
-          fetch('/api/btc-price'),
-          fetch('/api/bitcoin-rpc', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ method: 'getblockchaininfo' }),
-          }),
-          fetch('/api/bitcoin-rpc', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ method: 'getmempoolinfo' }),
-          }),
-          fetch('/api/bitcoin-rpc', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ method: 'estimatesmartfee', params: [6] }), // Target 6 blocks (~1 hour)
-          }),
+        const [priceData, blockchainData, mempoolData, feeData] = await Promise.all([
+          fetch('/api/btc-price').then(r => r.json()),
+          bitcoinRpc('getblockchaininfo'),
+          bitcoinRpc('getmempoolinfo'),
+          bitcoinRpc('estimatesmartfee', [6]), // Target 6 blocks (~1 hour)
         ])
-
-        const priceData = await priceRes.json()
-        const blockchainData = await blockchainRes.json()
-        const mempoolData = await mempoolRes.json()
-        const feeData = await feeRes.json()
 
         if (priceData.price) {
           setBtcPrice(priceData.price)
@@ -67,16 +51,17 @@ export default function LiveStats() {
         }
 
         if (blockchainData.result) {
-          setBlockchainInfo(blockchainData.result)
+          setBlockchainInfo(blockchainData.result as BlockchainInfo)
         }
 
         if (mempoolData.result) {
-          setMempoolInfo(mempoolData.result)
+          setMempoolInfo(mempoolData.result as MempoolInfo)
         }
 
         // Fee is returned in BTC/kvB, convert to sat/vB
-        if (feeData.result?.feerate) {
-          const satPerVb = Math.round(feeData.result.feerate * 100000) // BTC/kvB to sat/vB
+        const feerate = (feeData.result as { feerate?: number } | undefined)?.feerate
+        if (feerate != null) {
+          const satPerVb = Math.round(feerate * 100000) // BTC/kvB to sat/vB
           setFeeRate(satPerVb)
         }
       } catch (error) {

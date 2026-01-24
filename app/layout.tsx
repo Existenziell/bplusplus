@@ -82,13 +82,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
         {/* Inline glossary for client */}
         <script
-          id="glossary-data"
-          type="application/json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(glossaryData),
-          }}
-        />
-        <script
           dangerouslySetInnerHTML={{
             __html: `window.__GLOSSARY_DATA__ = ${JSON.stringify(glossaryData)};`,
           }}

@@ -2,9 +2,10 @@
  * Single source of truth for all documentation navigation and routing data.
  * This file is used by:
  * - DocsNavigation component (sidebar navigation)
- * - DownloadMarkdownButton component (determines which pages have downloadable MD)
- * - download-md API route (maps URLs to MD file paths)
+ * - DownloadMarkdownButton (via downloadablePaths in useDocNavigation)
  * - Breadcrumbs component (route labels)
+ * - generate-md-content and generate-search-index (parse docPages via parse-doc-pages)
+ * Note: /api/download-md and docs/[...slug] both use md-content.json (keyed by path), not pathToMdFile.
  */
 
 export interface DocPage {
@@ -195,6 +196,17 @@ export const sections: Record<string, { title: string; description: string }> = 
   },
 }
 
+export const staticNavLinks: { href: string; title: string }[] = [
+  { href: '/whitepaper', title: 'Whitepaper' },
+  { href: '/terminal', title: 'CLI Terminal' },
+  { href: '/stack-lab', title: 'Stack Lab' },
+]
+
+export const footerNavLinks: { href: string; title: string }[] = [
+  { href: '/docs/glossary', title: 'Glossary' },
+  { href: '/author', title: 'About B++' },
+]
+
 export const navItems: NavSection[] = [
   {
     title: 'Fundamentals',
@@ -250,112 +262,17 @@ export const navItems: NavSection[] = [
 
 export const downloadablePaths: Set<string> = new Set(docPages.map(p => p.path))
 
-export const pathToMdFile: Record<string, string> = Object.fromEntries(
-  docPages.map(p => [p.path, p.mdFile])
+// Breadcrumb labels: non-doc segments + doc pages derived from docPages (last path segment -> title)
+const docRouteLabels = Object.fromEntries(
+  docPages.map((p) => {
+    const seg = p.path.split('/').filter(Boolean).pop()!
+    return [seg, p.title]
+  })
 )
-
-// Breadcrumb labels
 export const routeLabels: Record<string, string> = {
   terminal: 'CLI Terminal',
   'stack-lab': 'Stack Lab',
   whitepaper: 'Whitepaper',
   author: 'About B++',
-
-  fundamentals: 'Fundamentals',
-  history: 'History',
-  development: 'Setup & Infrastructure',
-  bitcoin: 'Bitcoin Protocol',
-  'bitcoin-development': 'Bitcoin Development',
-  wallets: 'Wallets',
-  mining: 'Mining',
-  lightning: 'Lightning Network',
-  advanced: 'Advanced Topics',
-  controversies: 'Controversies',
-  glossary: 'Glossary',
-
-  problems: 'Problems Bitcoin Solved',
-  'cypherpunk-philosophy': 'Cypherpunk Philosophy',
-  blockchain: 'The Blockchain',
-  timechain: 'Bitcoin as Timechain',
-  decentralization: 'Decentralization',
-  'trust-model': 'Trust Model',
-  'monetary-properties': 'Monetary Properties',
-  denominations: 'Denominations',
-  incentives: 'Incentive Structure',
-  'game-theory': 'Game Theory',
-  utxos: 'UTXO Model',
-  consensus: 'Consensus Mechanism',
-  cryptography: 'Cryptography',
-  halvings: 'Halvings',
-  people: 'People',
-  forks: 'Forks',
-  bips: 'BIPs',
-  script: 'Script System',
-  'op-codes': 'OP Codes',
-  rpc: 'RPC Guide',
-  blocks: 'Block Propagation',
-  subsidy: 'Subsidy Equation',
-  'proof-of-work': 'Proof-of-Work',
-  difficulty: 'Difficulty Adjustment',
-  economics: 'Economics',
-  mempool: 'Mempool',
-  'block-construction': 'Block Construction',
-  pools: 'Mining Pools',
-  hardware: 'Hardware Evolution',
-  attacks: 'Mining Attacks',
-  'coin-selection': 'Coin Selection',
-  'hd-wallets': 'HD Wallets',
-  'address-types': 'Address Types',
-  multisig: 'Multisig',
-  transactions: 'Transaction Creation',
-  channels: 'Channels',
-  routing: 'Routing Fees',
-  htlc: 'HTLCs',
-  mpp: 'Multi-Part Payments',
-  onion: 'Onion Routing',
-  invoices: 'Invoices (BOLT11)',
-  'bolt12-offers': 'BOLT12 & Offers',
-  watchtowers: 'Watchtowers',
-  'anchor-outputs': 'Anchor Outputs',
-  'install-bitcoin': 'Installing Bitcoin',
-  testing: 'Testing & Debugging',
-  testnets: 'Test Networks',
-  libraries: 'Libraries & SDKs',
-  'node-types': 'Node Types & Architecture',
-  'bitcoin-core-internals': 'Bitcoin Core Internals',
-  psbt: 'PSBT',
-  addresses: 'Address Generation',
-  keys: 'Key Management',
-  'blockchain-monitoring': 'Blockchain Monitoring',
-  'pool-mining': 'Pool Mining',
-  'price-tracking': 'Price Tracking',
-  'script-patterns': 'Bitcoin Script Patterns',
-  miniscript: 'Miniscript',
-  segwit: 'SegWit',
-  taproot: 'Taproot',
-  'p2p-protocol': 'P2P Network Protocol',
-  'merkle-trees': 'Merkle Trees',
-  'transaction-fees': 'Transaction Fees',
-  timelocks: 'Timelocks',
-  'transaction-malleability': 'Transaction Malleability',
-  'transaction-lifecycle': 'Transaction Lifecycle',
-  'sighash-types': 'Sighash Types',
-  'network-attacks': 'Network Attacks & Security',
-  privacy: 'Privacy Techniques',
-  'smart-contracts': 'Smart Contracts & Advanced Scripting',
-  'atomic-swaps': 'Atomic Swaps',
-  dlcs: 'Discreet Log Contracts',
-  sidechains: 'Sidechains & Layer 2',
-  statechains: 'Statechains',
-  'bloom-filters': 'Bloom Filters',
-  governance: 'Governance & Evolution',
-  'zero-conf-channels': 'Zero-Conf Channels',
-  'trampoline-routing': 'Trampoline Routing',
-  'ordinals-inscriptions': 'Ordinals & Inscriptions',
-  covenants: 'Covenants',
-  'op-return': 'OP_RETURN Debate',
-  'blocksize-wars': 'Blocksize Wars',
-  'energy-consumption': 'Energy Consumption',
-  'mt-gox': 'Mt. Gox Collapse',
-  'craig-wright': 'Craig Wright',
+  ...docRouteLabels,
 }

@@ -186,13 +186,6 @@ input[type="radio"]:focus {
   outline-offset: max(2px, 0.15em);
 }
 
-.form-control {
-  line-height: 1.1;
-  display: grid;
-  grid-template-columns: 1em auto;
-  gap: 0.7em;
-}
-
 /*  
 * Page-level heading styles (outside markdown)
 */

@@ -8,6 +8,8 @@
 const fs = require('fs')
 const path = require('path')
 const removeMd = require('remove-markdown')
+const { generateSlug } = require('./lib/slug')
+const { parseDocPages } = require('./lib/parse-doc-pages')
 
 function stripMarkdown(text) {
   return removeMd(text, { useImgAltText: false }).replace(/\s+/g, ' ').trim()
@@ -19,16 +21,6 @@ function excerpt(text, maxLen = 500) {
   const last = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf(' '))
   if (last > maxLen * 0.5) return cut.slice(0, last + 1)
   return cut.trim() + '…'
-}
-
-// Generate slug from text (same as MarkdownRenderer / generate-glossary-data.js)
-function generateSlug(text) {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '')
 }
 
 // Parse ## Name sections from people.md; returns [{ slug, title, body }] for each person
@@ -48,18 +40,6 @@ function parsePeopleSections(md) {
     .filter(Boolean)
 }
 
-// Parse docPages from navigation.ts: path, title, section
-function parseDocPages(navContent) {
-  const block = navContent.match(/export const docPages: DocPage\[\] = \[([\s\S]*?)\n\]/)?.[1]
-  if (!block) return []
-  const re = /\{\s*path:\s*'([^']+)',\s*mdFile:\s*'[^']+',\s*title:\s*'([^']+)',\s*section:\s*'([^']+)'\s*\}/g
-  const pages = []
-  for (const m of block.matchAll(re)) {
-    pages.push({ path: m[1], title: m[2], section: m[3] })
-  }
-  return pages
-}
-
 const mdPath = path.join(__dirname, '../public/data/md-content.json')
 const glossaryPath = path.join(__dirname, '../public/data/glossary.json')
 const navPath = path.join(__dirname, '../app/utils/navigation.ts')
@@ -68,7 +48,7 @@ const outPath = path.join(__dirname, '../public/data/search-index.json')
 const mdContent = JSON.parse(fs.readFileSync(mdPath, 'utf-8'))
 const glossary = JSON.parse(fs.readFileSync(glossaryPath, 'utf-8'))
 const navContent = fs.readFileSync(navPath, 'utf-8')
-const docPages = parseDocPages(navContent)
+const docPages = parseDocPages(navContent) // [{ path, mdFile, title, section }]
 
 // Optional keywords per page or glossary term: alternative spellings, synonyms, and terms
 // that may not appear in the body (e.g. "sha256" when the text uses "SHA-256"). Add more

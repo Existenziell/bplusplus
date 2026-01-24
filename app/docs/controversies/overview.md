@@ -9,6 +9,7 @@ Every major Bitcoin controversy teaches us something about decentralized governa
 - **The Blocksize Wars** showed that users, not miners or corporations, ultimately control Bitcoin
 - **Mt. Gox** taught us "not your keys, not your coins"
 - **Energy debates** force us to articulate why [proof-of-work](/docs/glossary#proof-of-work-pow) matters
+- **Criminal-use accusations** remind us that money is a neutral tool—and that illicit activity overwhelmingly occurs in traditional currencies
 - **Faketoshi claims** demonstrate the importance of cryptographic proof over authority
 
 Understanding these battles is essential for anyone who wants to understand Bitcoin's culture and design philosophy.
@@ -43,6 +44,9 @@ An ongoing controversy about data storage on Bitcoin. Should Bitcoin allow arbit
 
 [**Energy Consumption**](/docs/controversies/energy-consumption)
 Critics claim Bitcoin wastes energy; supporters argue it's the most efficient use of energy ever invented. This debate touches on environmental concerns, the nature of value, and whether proof-of-work is a feature or a bug.
+
+[**Bitcoin and criminal use**](/docs/controversies/criminal-use)
+Critics claim Bitcoin is the currency of choice for criminals. In reality, Bitcoin is just money. What people do with it is their responsibility. The vast majority of illicit financial activity occurs in US dollars and the traditional banking system.
 
 ### Historical Events
 

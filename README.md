@@ -12,6 +12,7 @@ An open-source developer's guide to Bitcoin, covering everything from fundamenta
 - **Markdown**: react-markdown with remark-gfm, rehype-highlight, rehype-raw
 - **Theming**: next-themes
 - **Language**: TypeScript 5.9.3
+- **Testing**: Vitest 2.1
 
 ## Documentation Structure
 
@@ -88,6 +89,7 @@ This is the same validation process that occurs on the Bitcoin network when tran
 | `npm run start` | Start production server |
 | `npm run test` | Run tests in watch mode (Vitest) |
 | `npm run test:run` | Run tests once (for CI) |
+| `npm run test:coverage` | Run tests with coverage report (v8) |
 | `npm run lint` | Run ESLint |
 | `npm run analyze` | Analyze bundle size |
 
@@ -97,11 +99,12 @@ Tests use [Vitest](https://vitest.dev) and live in **`tests/`** with a mirrored 
 
 ```
 tests/
-  app/utils/     # formatNumber, denominationUtils, stackLabInterpreter, stackLabFormatters, searchLogic, navigation
-  scripts/lib/   # slug (generateSlug), parse-doc-pages (parseDocPages)
+  app/utils/     # setUtils, metadata, denominationUtils, formatting, navigation, searchLogic,
+                # stackLabFormatters, stackLabInterpreter, bitcoinRpcCache, docNavigationState, getMarkdownForPath
+  scripts/lib/   # slug, parse-doc-pages, glossary-parse, search-index-helpers
 ```
 
-Covered: build pipeline (`parseDocPages`, `generateSlug`), Stack Lab interpreter and formatters, denomination/formatting utils, search logic, and navigation consistency. Run `npm run test:run` to execute all tests. In CI, run `npm run test:run` before `npm run build` so the pipeline fails if tests fail.
+Covered: build pipeline (`parseDocPages`, `generateSlug`, `glossary-parse`, `search-index-helpers`), Stack Lab interpreter and formatters, denomination/formatting utils, search logic, navigation and doc navigation state, Bitcoin RPC validation/cache, download-MD path resolution, and metadata for SEO/OG. Run `npm run test:run` to execute all tests. In CI, run `npm run test:run` before `npm run build` so the pipeline fails if tests fail.
 
 ### Prebuild scripts
 
@@ -145,6 +148,8 @@ Shared:
 
 - **parse-doc-pages.js**: regex over `navigation.ts` → `[{ path, mdFile, title, section }]`. Used by **generate-md-content** and **generate-search-index**.
 - **slug.js**: `generateSlug(text)`. Used by **generate-glossary-data** and **generate-search-index** (people sections).
+- **glossary-parse.js**: `stripMarkdown`, `truncateDefinition`, `parseGlossary(termsMd)`. Used by **generate-glossary-data**.
+- **search-index-helpers.js**: `excerpt`, `parsePeopleSections(md)`, `stripMarkdown`. Used by **generate-search-index**.
 
 You can run them manually (e.g. to refresh data without a full build):
 

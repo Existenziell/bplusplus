@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { SearchIcon, XIcon, DocumentIcon, BookOpenIcon } from '@/app/components/Icons'
+import { SearchIcon, XIcon, DocumentIcon, BookOpenIcon, UserIcon } from '@/app/components/Icons'
 import { sections } from '@/app/utils/navigation'
 
 type SearchResult = { path: string; title: string; section: string; snippet: string }
@@ -178,6 +178,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     >
                       {r.path.startsWith('/docs/glossary#') ? (
                         <BookOpenIcon className="w-4 h-4" />
+                      ) : r.path.startsWith('/docs/history/people#') ? (
+                        <UserIcon className="w-4 h-4" />
                       ) : (
                         <DocumentIcon className="w-4 h-4" />
                       )}
@@ -186,7 +188,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       <div className="font-medium">{r.title}</div>
                       <div className="text-sm text-secondary truncate">{r.snippet}</div>
                       <div className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">
-                        {sectionTitle(r.section)}
+                        {r.path.startsWith('/docs/history/people#') ? 'People' : sectionTitle(r.section)}
                       </div>
                     </div>
                   </Link>

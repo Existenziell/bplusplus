@@ -348,3 +348,23 @@ export function BookOpenIcon({ className, ...props }: IconProps) {
     </svg>
   )
 }
+
+/** Person / user. Use for search result type: people. */
+export function UserIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={mergeClassName('w-4 h-4', className)}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+      />
+    </svg>
+  )
+}

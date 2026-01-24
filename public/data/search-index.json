@@ -50,6 +50,108 @@
     ]
   },
   {
+    "path": "/docs/history/people#david-chaum",
+    "title": "David Chaum",
+    "section": "history",
+    "body": "Contribution: eCash (1982) - The godfather of cryptocurrency David Chaum is widely regarded as the inventor of digital cash. In 1982, he published \"Blind Signatures for Untraceable Payments,\" introducing the concept of cryptographically secure anonymous payments. His company DigiCash launched eCash in the 1990s, which allowed users to withdraw digital tokens from a bank and spend them "
+  },
+  {
+    "path": "/docs/history/people#eric-hughes",
+    "title": "Eric Hughes",
+    "section": "history",
+    "body": "Contribution: \"A Cypherpunk's Manifesto\" (1993) - Privacy through cryptography Eric Hughes is a mathematician and privacy advocate who wrote \"A Cypherpunk's Manifesto\" in 1993, which became one of the foundational documents of the cypherpunk movement. The manifesto articulated that privacy in an open society requires cryptography—not laws or the good intentions of institutions. Along with Timothy "
+  },
+  {
+    "path": "/docs/history/people#timothy-c-may",
+    "title": "Timothy C. May",
+    "section": "history",
+    "body": "Contribution: \"The Crypto Anarchist Manifesto,\" cypherpunk mailing list co-founder Timothy C. May was an American physicist and writer who authored \"The Crypto Anarchist Manifesto\" (1988) and co-founded the cypherpunk mailing list with Eric Hughes and John Gilmore in 1992. His manifesto envisioned a future where cryptography would enable anonymous markets and transactions beyond the reach of "
+  },
+  {
+    "path": "/docs/history/people#adam-back",
+    "title": "Adam Back",
+    "section": "history",
+    "body": "Contribution: Hashcash (1997) - Proof-of-Work for spam prevention Adam Back is a British cryptographer who invented Hashcash in 1997, a proof-of-work system designed to limit email spam and denial-of-service attacks. The core idea was elegant: require senders to perform computational work before sending an email, making mass spam economically infeasible. Hashcash's proof-of-work mechanism became "
+  },
+  {
+    "path": "/docs/history/people#nick-szabo",
+    "title": "Nick Szabo",
+    "section": "history",
+    "body": "Contribution: Bit Gold (1998) - Decentralized digital currency concept Nick Szabo is a computer scientist, legal scholar, and cryptographer who designed Bit Gold in 1998, often called the direct precursor to Bitcoin. Bit Gold proposed a decentralized digital currency where participants would use computational power to solve cryptographic puzzles, with solutions timestamped and published to a "
+  },
+  {
+    "path": "/docs/history/people#wei-dai",
+    "title": "Wei Dai",
+    "section": "history",
+    "body": "Contribution: b-money (1998) - Digital scarcity and distributed consensus Wei Dai is a computer engineer and cryptographer who proposed b-money in 1998, a theoretical system for an anonymous, distributed electronic cash system. His proposal described two protocols: one where all participants maintain a database of account balances, and another using a subset of participants (similar to modern "
+  },
+  {
+    "path": "/docs/history/people#ralph-merkle",
+    "title": "Ralph Merkle",
+    "section": "history",
+    "body": "Contribution: Merkle trees (1979) - Efficient verification of block contents Ralph Merkle is a computer scientist who invented Merkle trees (also called hash trees) in 1979. In this structure, leaf nodes contain hashes of data, and each parent node is the hash of its children, building up to a single root hash. The Bitcoin whitepaper uses this construction to enable compact proofs: SPV clients "
+  },
+  {
+    "path": "/docs/history/people#stuart-haber-and-scott-stornetta",
+    "title": "Stuart Haber and Scott Stornetta",
+    "section": "history",
+    "body": "Contribution: Secure timestamps (1990-91) - \"How to time-stamp a digital document\" Stuart Haber and W. Scott Stornetta are cryptographers who, in a 1991 paper, solved the problem of timestamping digital documents so that they cannot be backdated or tampered with. Their scheme linked each new timestamp to the previous one in a chain—creating a cryptographically secured sequence that could prove "
+  },
+  {
+    "path": "/docs/history/people#satoshi-nakamoto",
+    "title": "Satoshi Nakamoto",
+    "section": "history",
+    "body": "Contribution: Bitcoin (2008-2010) - Creator of Bitcoin Satoshi Nakamoto is the pseudonymous person or group who created Bitcoin. On October 31, 2008, Nakamoto published the Bitcoin whitepaper, \"Bitcoin: A Peer-to-Peer Electronic Cash System.\" On January 3, 2009, they mined the Genesis Block, embedding the message: \"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks.\" Satoshi "
+  },
+  {
+    "path": "/docs/history/people#hal-finney-1956-2014",
+    "title": "Hal Finney (1956-2014)",
+    "section": "history",
+    "body": "Contribution: RPOW, PGP 2.0, first Bitcoin transaction recipient Hal Finney was a cryptographic pioneer and one of Bitcoin's most important early contributors. Before Bitcoin, he developed RPOW (Reusable Proofs of Work) in 2004, a system that allowed proof-of-work tokens to be reused as digital cash, building on Adam Back's Hashcash. He was also the lead developer of PGP 2.0 (Pretty Good "
+  },
+  {
+    "path": "/docs/history/people#len-sassaman-1980-2011",
+    "title": "Len Sassaman (1980-2011)",
+    "section": "history",
+    "body": "Contribution: Cypherpunk, anonymous remailer developer Len Sassaman was a cypherpunk, privacy advocate, and cryptographer who made significant contributions to anonymity and privacy-preserving technologies. He was a core developer of Mixmaster, the most widely-used anonymous remailer protocol, and worked on various cryptographic privacy tools. Sassaman was embedded in the cypherpunk community "
+  },
+  {
+    "path": "/docs/history/people#martti-malmi",
+    "title": "Martti Malmi",
+    "section": "history",
+    "body": "Contribution: Early contributor (2009-11) - bitcoin.org, first exchange and community tools Martti Malmi (known online as Sirius) was one of Bitcoin's first contributors after Satoshi Nakamoto and Hal Finney. He began collaborating with Satoshi in 2009, helping to run and design bitcoin.org, implement an early, simple exchange, and build the first Bitcoin forum. Malmi wrote much of the early, "
+  },
+  {
+    "path": "/docs/history/people#gavin-andresen",
+    "title": "Gavin Andresen",
+    "section": "history",
+    "body": "Contribution: Lead developer after Satoshi (2010-2014) Gavin Andresen is a software developer who became the lead maintainer of Bitcoin's code after Satoshi Nakamoto's departure. In late 2010, Satoshi emailed Andresen: \"I've moved on to other things,\" and handed him access to the codebase and the project's alert key. Andresen was instrumental in Bitcoin's early development and "
+  },
+  {
+    "path": "/docs/history/people#laszlo-hanyecz",
+    "title": "Laszlo Hanyecz",
+    "section": "history",
+    "body": "Contribution: First documented real-world Bitcoin transaction (May 2010) - \"Bitcoin pizza\" Laszlo Hanyecz is a programmer who, on May 22, 2010, completed the first known commercial transaction using Bitcoin: he paid 10,000 BTC for two pizzas delivered to his home in Florida. The deal was arranged on the Bitcointalk forum, where Hanyecz had offered to pay BTC for pizza delivery. A participant in "
+  },
+  {
+    "path": "/docs/history/people#wladimir-van-der-laan",
+    "title": "Wladimir van der Laan",
+    "section": "history",
+    "body": "Contribution: Bitcoin Core lead maintainer (2014-2021) Wladimir van der Laan is a software developer who served as the lead maintainer of Bitcoin Core from 2014 to 2021. He took over the role from Gavin Andresen during a turbulent period that included the blocksize wars—the intense debate over whether to increase Bitcoin's block size limit. Van der Laan maintained the Bitcoin Core repository, "
+  },
+  {
+    "path": "/docs/history/people#pieter-wuille",
+    "title": "Pieter Wuille",
+    "section": "history",
+    "body": "Contribution: SegWit (BIP 141), Taproot (BIP 340-342), libsecp256k1 Pieter Wuille is a Belgian software engineer and one of the most influential Bitcoin protocol developers. He is the primary author of SegWit (BIP 141), activated in 2017, which separated signature data from transaction data in the block structure, fixing transaction malleability and enabling second-layer protocols. He also "
+  },
+  {
+    "path": "/docs/history/people#andreas-m-antonopoulos",
+    "title": "Andreas M. Antonopoulos",
+    "section": "history",
+    "body": "Contribution: Author, educator, Bitcoin evangelist Andreas M. Antonopoulos is a Greek-British author, speaker, and educator who has become one of the most influential voices in Bitcoin and blockchain education. He is best known for his book \"Mastering Bitcoin\" (2014), a comprehensive technical guide that has become the standard reference for Bitcoin developers. His other works include: \"The "
+  },
+  {
     "path": "/docs/fundamentals",
     "title": "Bitcoin Fundamentals",
     "section": "fundamentals",
@@ -125,13 +227,13 @@
     "path": "/docs/history/people",
     "title": "People",
     "section": "history",
-    "body": "People in Bitcoin Bitcoin didn't emerge from a vacuum. It was built on decades of cryptographic research and the work of visionary cypherpunks who dreamed of digital cash. This page honors both the pioneers who laid the groundwork and the contributors who brought Bitcoin to life. --- David Chaum !David Chaum Contribution: eCash (1982) - The godfather of cryptocurrency David Chaum is widely regarded as the inventor of digital cash. In 1982, he published \"Blind Signatures for Untraceable "
+    "body": "People in Bitcoin Bitcoin didn't emerge from a vacuum. It was built on decades of cryptographic research and the work of visionary cypherpunks who dreamed of digital cash. This page honors both the pioneers who laid the groundwork and the contributors who brought Bitcoin to life. David Chaum Contribution: eCash (1982) - The godfather of cryptocurrency David Chaum is widely regarded as the inventor of digital cash. In 1982, he published \"Blind Signatures for Untraceable Payments,\" introducing "
   },
   {
     "path": "/docs/history/halvings",
     "title": "Halvings",
     "section": "history",
-    "body": "Bitcoin Halving Schedule Bitcoin's block reward halves every 210,000 blocks, which occurs approximately every 4 years. This creates a predictable, decreasing inflation rate and ensures the total supply will never exceed 21 million BTC. Supply Formula The total Bitcoin supply follows a geometric series: This geometric series ensures that: Each halving period creates 210,000 blocks Each period creates half the Bitcoin of the previous period The series converges to exactly 21 million BTC After 32 "
+    "body": "Bitcoin Halving Schedule Bitcoin's block reward halves every 210,000 blocks, which occurs approximately every 4 years. This creates a predictable, decreasing inflation rate and ensures the total supply will never exceed 21 million BTC. Supply Formula The total Bitcoin supply follows a geometric series: Total Supply = 210,000 × 50 × (1 + 1/2 + 1/4 + 1/8 + ...) = 210,000 × 50 × 2 = 21,000,000 BTC This geometric series ensures that: Each halving period creates 210,000 blocks Each period creates "
   },
   {
     "path": "/docs/history/forks",
@@ -177,19 +279,19 @@
     "path": "/docs/bitcoin/op-codes",
     "title": "OP Codes",
     "section": "bitcoin",
-    "body": "OP Codes The instruction set for Bitcoin. Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive reference of Bitcoin OP codes with explanations and code examples. OP Code Categories | Category | Description | Examples | |----------|-------------|----------| | Stack Operations | Manipulate the stack | OPDUP, OPDROP, OPSWAP | | Arithmetic | Mathematical operations | OPADD, OPSUB | | "
+    "body": "OP Codes The instruction set for Bitcoin. Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive reference of Bitcoin OP codes with explanations and code examples. OP Code Categories | Category | Description | Examples | |----------|-------------|----------| | Stack Operations | Manipulate the stack | OP_DUP, OP_DROP, OP_SWAP | | Arithmetic | Mathematical operations | OP_ADD, OP_SUB | "
   },
   {
     "path": "/docs/bitcoin/blocks",
     "title": "Block Propagation",
     "section": "bitcoin",
-    "body": "Block Propagation This document explains how blocks propagate through the Bitcoin network, including the gossip protocol, validation process, and orphan block handling. Block Propagation Flow 1. Block Discovery and Initial Broadcast When a miner finds a new block: 1. Miner solves proof-of-work puzzle: Finds a valid nonce 2. Creates valid block: Includes transactions from mempool 3. Immediately broadcasts: Sends to all connected peers (8-10 first-hop nodes) 4. First-hop nodes validate: Each node "
+    "body": "Block Propagation This document explains how blocks propagate through the Bitcoin network, including the gossip protocol, validation process, and orphan block handling. Block Propagation Flow 1. Block Discovery and Initial Broadcast When a miner finds a new block: Miner solves proof-of-work puzzle: Finds a valid nonce Creates valid block: Includes transactions from mempool Immediately broadcasts: Sends to all connected peers (8-10 first-hop nodes) First-hop nodes validate: Each node checks the "
   },
   {
     "path": "/docs/bitcoin/subsidy",
     "title": "Block Subsidy",
     "section": "bitcoin",
-    "body": "Block Subsidy The Bitcoin block subsidy is the amount of new Bitcoin created with each block. It follows a predictable mathematical formula that halves every 210,000 blocks, creating Bitcoin's fixed supply schedule. The Equation Mathematical Formula Bitcoin Core Implementation In Bitcoin Core (validation.cpp), the subsidy is calculated using bit shifting for efficiency: The right bit shift (>>=) divides by 2 for each halving, which is equivalent to the mathematical formula but more efficient. "
+    "body": "Block Subsidy The Bitcoin block subsidy is the amount of new Bitcoin created with each block. It follows a predictable mathematical formula that halves every 210,000 blocks, creating Bitcoin's fixed supply schedule. The Equation Mathematical Formula Block Subsidy = 50 / (2^halvings) Where: halvings = floor(block_height / 210,000) Bitcoin Core Implementation In Bitcoin Core (validation.cpp), the subsidy is calculated using bit shifting for efficiency: CAmount GetBlockSubsidy(int nHeight, const "
   },
   {
     "path": "/docs/bitcoin/rpc",
@@ -213,7 +315,7 @@
     "path": "/docs/bitcoin/p2p-protocol",
     "title": "P2P Network Protocol",
     "section": "bitcoin",
-    "body": "P2P Network Protocol Bitcoin uses a peer-to-peer (P2P) network protocol for nodes to communicate, share blocks, and propagate transactions. Understanding the P2P protocol is essential for running nodes and understanding network behavior. Network Architecture Node Types Connection Model --- Protocol Messages Handshake Nodes establish connections through a handshake: Core Messages | Message | Purpose | |---------|---------| | version | Initial handshake, announce capabilities | | verack | "
+    "body": "P2P Network Protocol Bitcoin uses a peer-to-peer (P2P) network protocol for nodes to communicate, share blocks, and propagate transactions. Understanding the P2P protocol is essential for running nodes and understanding network behavior. Network Architecture Node Types Full Nodes: Download and validate entire blockchain Relay blocks and transactions Maintain network consensus Light Nodes (SPV): Download block headers only Request specific transactions Rely on full nodes for data Connection "
   },
   {
     "path": "/docs/bitcoin/merkle-trees",
@@ -225,25 +327,25 @@
     "path": "/docs/bitcoin/transaction-fees",
     "title": "Transaction Fees",
     "section": "bitcoin",
-    "body": "Transaction Fees Transaction fees are payments made to miners for including transactions in blocks. Understanding how fees work is essential for ensuring your transactions confirm in a timely manner. Why Fees Exist Fees serve multiple purposes: 1. Incentivize miners: Reward miners for processing transactions 2. Prevent spam: Make it expensive to flood the network 3. Prioritize transactions: Higher fees = faster confirmation 4. Economic security: Fees will replace block rewards over time --- Fee "
+    "body": "Transaction Fees Transaction fees are payments made to miners for including transactions in blocks. Understanding how fees work is essential for ensuring your transactions confirm in a timely manner. Why Fees Exist Fees serve multiple purposes: Incentivize miners: Reward miners for processing transactions Prevent spam: Make it expensive to flood the network Prioritize transactions: Higher fees = faster confirmation Economic security: Fees will replace block rewards over time Fee Calculation Fee "
   },
   {
     "path": "/docs/bitcoin/timelocks",
     "title": "Timelocks",
     "section": "bitcoin",
-    "body": "Timelocks Timelocks prevent Bitcoin from being spent until certain time conditions are met. Bitcoin supports two types of timelocks: absolute (CLTV) and relative (CSV). Types of Timelocks Absolute Timelocks (CLTV) CheckLockTimeVerify (CLTV) prevents spending until a specific block height or Unix timestamp: Relative Timelocks (CSV) CheckSequenceVerify (CSV) prevents spending until a certain time has passed since the UTXO was created: --- Use Cases Escrow Hold funds until a dispute period "
+    "body": "Timelocks Timelocks prevent Bitcoin from being spent until certain time conditions are met. Bitcoin supports two types of timelocks: absolute (CLTV) and relative (CSV). Types of Timelocks Absolute Timelocks (CLTV) CheckLockTimeVerify (CLTV) prevents spending until a specific block height or Unix timestamp: Example: \"Can't spend until block 800,000\" \"Can't spend until January 1, 2025\" Relative Timelocks (CSV) CheckSequenceVerify (CSV) prevents spending until a certain time has passed since the "
   },
   {
     "path": "/docs/bitcoin/transaction-malleability",
     "title": "Transaction Malleability",
     "section": "bitcoin",
-    "body": "Transaction Malleability Transaction malleability was a vulnerability in Bitcoin that allowed anyone to modify a transaction's signature without invalidating it, changing the transaction ID. SegWit fixed this issue in 2017. What Was Transaction Malleability? Transaction malleability allowed modifying transaction signatures in ways that changed the transaction ID but didn't invalidate the transaction: Both transactions were valid, but had different IDs. --- How It Worked The Problem Before "
+    "body": "Transaction Malleability Transaction malleability was a vulnerability in Bitcoin that allowed anyone to modify a transaction's signature without invalidating it, changing the transaction ID. SegWit fixed this issue in 2017. What Was Transaction Malleability? Transaction malleability allowed modifying transaction signatures in ways that changed the transaction ID but didn't invalidate the transaction: Original Transaction: TXID: abc123... Signature: valid signature] Malleated Transaction: TXID: "
   },
   {
     "path": "/docs/bitcoin/transaction-lifecycle",
     "title": "Transaction Lifecycle",
     "section": "bitcoin",
-    "body": "Transaction Lifecycle Understanding the complete lifecycle of a Bitcoin transaction helps developers build robust applications and users understand what happens when they send bitcoin. Transaction States A transaction goes through several states: --- State Transitions 1. Created Transaction is constructed but not signed: 2. Signed Private keys sign the transaction: 3. Broadcast Transaction sent to network: 4. Mempool Transaction accepted by nodes: 5. Pending Transaction included in block: 6. "
+    "body": "Transaction Lifecycle Understanding the complete lifecycle of a Bitcoin transaction helps developers build robust applications and users understand what happens when they send bitcoin. Transaction States A transaction goes through several states: Created → 2. Signed → 3. Broadcast → 4. Mempool → Pending → 6. Confirmed → 7. Deeply Confirmed State Transitions 1. Created Transaction is constructed but not signed: Status: Created Inputs selected Outputs defined Fees calculated Not yet signed 2. "
   },
   {
     "path": "/docs/bitcoin/sighash-types",
@@ -261,13 +363,13 @@
     "path": "/docs/mining/proof-of-work",
     "title": "Proof-of-Work",
     "section": "mining",
-    "body": "Proof-of-Work Mechanism Bitcoin uses a proof-of-work consensus mechanism where miners compete to solve a cryptographic puzzle. This process secures the network and validates transactions. How It Works 1. Block Construction: Miners collect transactions from the mempool and create a candidate block 2. Nonce Search: Miners repeatedly hash the block header with different nonce values 3. Difficulty Target: The hash must be below a certain target (set by network difficulty) 4. Success: When a miner "
+    "body": "Proof-of-Work Mechanism Bitcoin uses a proof-of-work consensus mechanism where miners compete to solve a cryptographic puzzle. This process secures the network and validates transactions. How It Works Block Construction: Miners collect transactions from the mempool and create a candidate block Nonce Search: Miners repeatedly hash the block header with different nonce values Difficulty Target: The hash must be below a certain target (set by network difficulty) Success: When a miner finds a valid "
   },
   {
     "path": "/docs/mining/difficulty",
     "title": "Difficulty Adjustment",
     "section": "mining",
-    "body": "Difficulty Adjustment Bitcoin's difficulty adjustment is a critical mechanism that maintains the network's target block time of approximately 10 minutes. Every 2016 blocks (~2 weeks), the network automatically adjusts the mining difficulty based on the actual time it took to mine the previous 2016 blocks. How Difficulty Adjustment Works Adjustment Formula The difficulty adjusts every 2016 blocks (approximately every 2 weeks) using the formula: Where: Target Time: 2016 blocks × 10 minutes = "
+    "body": "Difficulty Adjustment Bitcoin's difficulty adjustment is a critical mechanism that maintains the network's target block time of approximately 10 minutes. Every 2016 blocks (~2 weeks), the network automatically adjusts the mining difficulty based on the actual time it took to mine the previous 2016 blocks. How Difficulty Adjustment Works Adjustment Formula The difficulty adjusts every 2016 blocks (approximately every 2 weeks) using the formula: New Difficulty = Old Difficulty × (Target Time / "
   },
   {
     "path": "/docs/mining/economics",
@@ -285,7 +387,7 @@
     "path": "/docs/mining/block-construction",
     "title": "Block Construction",
     "section": "mining",
-    "body": "Block Construction Block construction is the process by which miners assemble a new block from pending transactions. This is where the mempool meets the blockchain. Miners must decide which transactions to include, how to order them, and how to structure the block for maximum profit while following consensus rules. Anatomy of a Block A Bitcoin block consists of two main parts: Block Header (80 bytes) All numeric fields (version, timestamp, difficulty target, nonce) are stored in little endian "
+    "body": "Block Construction Block construction is the process by which miners assemble a new block from pending transactions. This is where the mempool meets the blockchain. Miners must decide which transactions to include, how to order them, and how to structure the block for maximum profit while following consensus rules. Anatomy of a Block A Bitcoin block consists of two main parts: Block Header (80 bytes) ┌─────────────────────────────────────────────────┐ │ Version (4 bytes) │ "
   },
   {
     "path": "/docs/mining/pools",
@@ -309,7 +411,7 @@
     "path": "/docs/mining/network-attacks",
     "title": "Network Attacks & Security",
     "section": "mining",
-    "body": "Network Attacks & Security Bitcoin's P2P network faces various attack vectors. Understanding these attacks helps node operators secure their nodes and developers build resilient applications. Attack Types Eclipse Attacks Eclipse attacks isolate a node by controlling all its connections: Mitigation: Connect to diverse IP ranges Use multiple outbound connections Verify block data independently Use block-relay-only connections Sybil Attacks Sybil attacks create many fake identities: Mitigation: "
+    "body": "Network Attacks & Security Bitcoin's P2P network faces various attack vectors. Understanding these attacks helps node operators secure their nodes and developers build resilient applications. Attack Types Eclipse Attacks Eclipse attacks isolate a node by controlling all its connections: Attack: Attacker controls many IP addresses Attacker connects to victim from all addresses Victim's connections are all to attacker Attacker controls what victim sees Victim sees fake blockchain state "
   },
   {
     "path": "/docs/wallets",
@@ -345,19 +447,19 @@
     "path": "/docs/wallets/transactions",
     "title": "Transaction Creation",
     "section": "wallets",
-    "body": "Transaction Creation Creating Bitcoin transactions programmatically involves selecting inputs, creating outputs, calculating fees, signing, and broadcasting. This guide covers the complete process. Transaction Structure Basic Components Input Structure Output Structure Serializing a Transaction Output :::code-group ::: --- Step-by-Step Process Step 1: Select UTXOs Choose which UTXOs to spend: Step 2: Create Raw Transaction Parameters: Inputs: Array of UTXOs to spend Outputs: Destination address "
+    "body": "Transaction Creation Creating Bitcoin transactions programmatically involves selecting inputs, creating outputs, calculating fees, signing, and broadcasting. This guide covers the complete process. Transaction Structure Basic Components Transaction: Version: 4 bytes Input Count: VarInt Inputs: Array of inputs Output Count: VarInt Outputs: Array of outputs Locktime: 4 bytes Witness: (if SegWit) Input Structure Input: Previous TXID: 32 bytes Previous Output Index: 4 bytes Script Length: VarInt "
   },
   {
     "path": "/docs/wallets/privacy",
     "title": "Privacy Techniques",
     "section": "wallets",
-    "body": "Privacy Techniques Bitcoin transactions are pseudonymous, not anonymous. Various techniques can improve privacy by breaking the linkability between transactions and making blockchain analysis more difficult. Privacy Challenges Blockchain Analysis All transactions are public: Common-Input-Ownership Heuristic Analysts assume all inputs to a transaction belong to the same entity: --- Privacy Techniques 1. CoinJoin CoinJoin combines multiple transactions into one: Benefits: Breaks "
+    "body": "Privacy Techniques Bitcoin transactions are pseudonymous, not anonymous. Various techniques can improve privacy by breaking the linkability between transactions and making blockchain analysis more difficult. Privacy Challenges Blockchain Analysis All transactions are public: Public Information: Transaction amounts Input/output addresses Transaction graph Timing patterns Common-Input-Ownership Heuristic Analysts assume all inputs to a transaction belong to the same entity: Transaction: Input 1: "
   },
   {
     "path": "/docs/wallets/smart-contracts",
     "title": "Smart Contracts & Advanced Scripting",
     "section": "wallets",
-    "body": "Smart Contracts & Advanced Scripting Bitcoin Script enables smart contracts through conditional spending. While intentionally limited (no loops, no complex state), Bitcoin's scripting system supports powerful contract patterns. Bitcoin smart contracts are spending conditions encoded in Script: Unlike Ethereum, Bitcoin contracts are: Stateless: No persistent contract state Deterministic: Same inputs = same result Limited: No loops, no external data Secure: Simpler = fewer vulnerabilities --- "
+    "body": "Smart Contracts & Advanced Scripting Bitcoin Script enables smart contracts through conditional spending. While intentionally limited (no loops, no complex state), Bitcoin's scripting system supports powerful contract patterns. Bitcoin smart contracts are spending conditions encoded in Script: Smart Contract = Locking Script + Unlocking Script Locking Script: Defines conditions Unlocking Script: Proves conditions are met Unlike Ethereum, Bitcoin contracts are: Stateless: No persistent contract "
   },
   {
     "path": "/docs/lightning",
@@ -375,19 +477,19 @@
     "path": "/docs/lightning/routing",
     "title": "Routing Fees",
     "section": "lightning",
-    "body": "Lightning Routing Fees Lightning routing fees are how nodes earn income for forwarding payments. Understanding fee calculation is essential for both routing nodes and payment senders. Fee Structure Lightning fees consist of two components: 1. Base Fee: Fixed fee per HTLC (in millisatoshis) 2. Proportional Fee: Percentage of payment amount (in parts per million) Fee Formula :::code-group ::: <｜Assistant｜><think> I see that I've already added Go snippets to some of these code-groups. Let me "
+    "body": "Lightning Routing Fees Lightning routing fees are how nodes earn income for forwarding payments. Understanding fee calculation is essential for both routing nodes and payment senders. Fee Structure Lightning fees consist of two components: Base Fee: Fixed fee per HTLC (in millisatoshis) Proportional Fee: Percentage of payment amount (in parts per million) Fee Formula Total Fee = Base Fee + (Payment Amount × Proportional Fee / 1,000,000) :::code-group /// Calculate the fee for forwarding an "
   },
   {
     "path": "/docs/lightning/routing/htlc",
     "title": "HTLCs",
     "section": "lightning",
-    "body": "Hash Time-Locked Contracts (HTLCs) HTLCs are the mechanism that enables payments to route through the Lightning Network. They ensure that payments can only be claimed with the correct preimage, and expire after a certain time if unclaimed. An HTLC is a conditional payment that requires: 1. Hash Lock: Knowledge of a secret (preimage) that hashes to a known value 2. Time Lock: Expires after a certain block height (CLTV) --- How HTLCs Work in Lightning Payment Flow 1. Recipient generates preimage: "
+    "body": "Hash Time-Locked Contracts (HTLCs) HTLCs are the mechanism that enables payments to route through the Lightning Network. They ensure that payments can only be claimed with the correct preimage, and expire after a certain time if unclaimed. An HTLC is a conditional payment that requires: Hash Lock: Knowledge of a secret (preimage) that hashes to a known value Time Lock: Expires after a certain block height (CLTV) HTLC Conditions: If preimage is revealed before expiry → Payment goes to recipient "
   },
   {
     "path": "/docs/lightning/routing/mpp",
     "title": "Multi-Part Payments",
     "section": "lightning",
-    "body": "Multi-Part Payments (MPP) Multi-Part Payments allow splitting a single payment across multiple routes. This enables larger payments and improves success rates by utilizing multiple channels. Instead of sending one large payment through a single route, MPP splits the payment into multiple smaller parts that can take different routes. Example --- Why Use MPP? Benefits 1. Larger Payments: Can send amounts larger than any single channel 2. Higher Success Rate: Multiple routes increase chance of "
+    "body": "Multi-Part Payments (MPP) Multi-Part Payments allow splitting a single payment across multiple routes. This enables larger payments and improves success rates by utilizing multiple channels. Instead of sending one large payment through a single route, MPP splits the payment into multiple smaller parts that can take different routes. Example Single Payment (fails): Alice → Bob → Carol → Dave Amount: 500,000 sats Problem: Carol's channel only has 200,000 sats capacity MPP Payment (succeeds): "
   },
   {
     "path": "/docs/lightning/onion",
@@ -399,7 +501,7 @@
     "path": "/docs/lightning/invoices",
     "title": "Invoices (BOLT11)",
     "section": "lightning",
-    "body": "Lightning Invoices (BOLT11) Lightning invoices are payment requests encoded in the BOLT11 format. They contain all the information a payer needs to send a payment, including the payment hash, amount, destination, and expiry. Invoice Structure A BOLT11 invoice consists of three parts: 1. Human-Readable Part (HRP): Network prefix and amount 2. Data Part: Encoded payment details 3. Signature: Proves invoice authenticity --- Human-Readable Part Network Prefixes | Prefix | Network | "
+    "body": "Lightning Invoices (BOLT11) Lightning invoices are payment requests encoded in the BOLT11 format. They contain all the information a payer needs to send a payment, including the payment hash, amount, destination, and expiry. Invoice Structure A BOLT11 invoice consists of three parts: Human-Readable Part (HRP): Network prefix and amount Data Part: Encoded payment details Signature: Proves invoice authenticity Example Invoice: "
   },
   {
     "path": "/docs/lightning/bolt12-offers",
@@ -429,43 +531,43 @@
     "path": "/docs/development/install-bitcoin",
     "title": "Installing Bitcoin",
     "section": "development",
-    "body": "Installing Bitcoin Bitcoin Core is the reference implementation of the Bitcoin protocol. Understanding how to install and run it is fundamental for development, running a full node, or participating in the network. Historical Context: The Original Bitcoin Client The original Bitcoin software released by Satoshi Nakamoto in January 2009 was a single monolithic application that bundled three distinct functions: 1. Full Node - Validating and relaying transactions and blocks 2. Wallet - Managing "
+    "body": "Installing Bitcoin Bitcoin Core is the reference implementation of the Bitcoin protocol. Understanding how to install and run it is fundamental for development, running a full node, or participating in the network. Historical Context: The Original Bitcoin Client The original Bitcoin software released by Satoshi Nakamoto in January 2009 was a single monolithic application that bundled three distinct functions: Full Node - Validating and relaying transactions and blocks Wallet - Managing keys, "
   },
   {
     "path": "/docs/development/testing",
     "title": "Testing & Debugging",
     "section": "development",
-    "body": "Testing & Debugging Bitcoin Applications Testing Bitcoin applications requires special considerations due to the financial nature of the software and the complexity of the protocol. This guide covers testing strategies, debugging techniques, and best practices. Testing Networks Regtest (Recommended for Development) Regtest provides a completely controlled environment where you can instantly generate blocks. Setup: Advantages: Instant block generation No network dependencies Complete control "
+    "body": "Testing & Debugging Bitcoin Applications Testing Bitcoin applications requires special considerations due to the financial nature of the software and the complexity of the protocol. This guide covers testing strategies, debugging techniques, and best practices. Testing Networks Regtest (Recommended for Development) Regtest provides a completely controlled environment where you can instantly generate blocks. Setup: Start Bitcoin Core in regtest mode bitcoind -regtest -daemon Create a wallet "
   },
   {
     "path": "/docs/development/testnets",
     "title": "Test Networks",
     "section": "development",
-    "body": "Signet & Testnet Deep Dive Test networks are essential for Bitcoin development. This guide covers the differences between testnet, signet, and regtest, along with setup instructions and best practices. Network Comparison | Feature | Mainnet | Testnet | Signet | Regtest | |---------|---------|---------|--------|---------| | Real Value | Yes | No | No | No | | Block Time | ~10 min | Variable | ~10 min | Instant | | Difficulty | Dynamic | Dynamic | Fixed | Minimal | | Public | Yes | Yes | Yes | "
+    "body": "Signet & Testnet Deep Dive Test networks are essential for Bitcoin development. This guide covers the differences between testnet, signet, and regtest, along with setup instructions and best practices. Network Comparison | Feature | Mainnet | Testnet | Signet | Regtest | |---------|---------|---------|--------|---------| | Real Value | Yes | No | No | No | | Block Time | 10 min | Variable | 10 min | Instant | | Difficulty | Dynamic | Dynamic | Fixed | Minimal | | Public | Yes | Yes | Yes | "
   },
   {
     "path": "/docs/development/libraries",
     "title": "Libraries & SDKs",
     "section": "development",
-    "body": "Libraries & SDKs Reference This guide compares major Bitcoin libraries across languages and provides practical examples for common development tasks. Library Versions Code examples in this documentation are tested with the following library versions: bitcoinjs-lib: v6.x (uses factory pattern for bip32/ecpair) bip32: v4.x (requires tiny-secp256k1 via BIP32Factory) rust-bitcoin: v0.31.x BDK: v0.29.x python-bitcoinlib: v0.12.x bip32utils: v0.3.x (use BIP32Key.fromSeed() for seed-based derivation) "
+    "body": "Libraries & SDKs Reference This guide compares major Bitcoin libraries across languages and provides practical examples for common development tasks. Library Versions Code examples in this documentation are tested with the following library versions: - bitcoinjs-lib: v6.x (uses factory pattern for bip32/ecpair) - bip32: v4.x (requires tiny-secp256k1 via BIP32Factory) - rust-bitcoin: v0.31.x - BDK: v0.29.x - python-bitcoinlib: v0.12.x - bip32utils: v0.3.x (use BIP32Key.fromSeed() for seed-based "
   },
   {
     "path": "/docs/development/node-types",
     "title": "Node Types & Architecture",
     "section": "development",
-    "body": "Node Types & Architecture Bitcoin nodes come in different types, each with different capabilities, resource requirements, and trust models. Understanding node types helps you choose the right setup for your needs. Node Types Full Nodes Full nodes download and validate the entire blockchain: Use cases: Maximum security Privacy-sensitive applications Contributing to network Development and testing Pruned Nodes Pruned nodes validate everything but don't store full history: Use cases: Limited "
+    "body": "Node Types & Architecture Bitcoin nodes come in different types, each with different capabilities, resource requirements, and trust models. Understanding node types helps you choose the right setup for your needs. Node Types Full Nodes Full nodes download and validate the entire blockchain: Characteristics: Downloads ~600GB+ blockchain data Validates all transactions and blocks Maintains complete UTXO set Maximum security and privacy Requires significant resources Use cases: Maximum security "
   },
   {
     "path": "/docs/development/bitcoin-core-internals",
     "title": "Bitcoin Core Internals",
     "section": "development",
-    "body": "Bitcoin Core Internals Bitcoin Core is the reference implementation of Bitcoin. Understanding its internal architecture helps developers contribute to Bitcoin Core, build compatible software, and debug issues. Architecture Overview Core Components --- Key Subsystems 1. Consensus Engine Validates transactions and blocks: 2. UTXO Set Tracks unspent transaction outputs: 3. Mempool Manages unconfirmed transactions: 4. Block Storage Stores blockchain data: --- Database Systems LevelDB Used for: "
+    "body": "Bitcoin Core Internals Bitcoin Core is the reference implementation of Bitcoin. Understanding its internal architecture helps developers contribute to Bitcoin Core, build compatible software, and debug issues. Architecture Overview Core Components Bitcoin Core: ├── Consensus Engine │ ├── Validation │ ├── Block processing │ └── Chain state ├── Network Layer │ ├── P2P protocol │ ├── Peer management │ └── Message handling ├── Wallet System │ ├── Key management │ ├── Transaction creation │ └── UTXO "
   },
   {
     "path": "/docs/bitcoin-development",
     "title": "Bitcoin Development",
     "section": "bitcoin-development",
-    "body": "Bitcoin Development How to build apps. This section covers practical Bitcoin development tasks—the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more. Prerequisites: Before diving into these topics, make sure you're familiar with Setup & Infrastructure topics like installing Bitcoin, testing, and using libraries. --- "
+    "body": "Bitcoin Development How to build apps. This section covers practical Bitcoin development tasks—the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more. Prerequisites: Before diving into these topics, make sure you're familiar with Setup & Infrastructure topics like installing Bitcoin, testing, and using libraries. Core "
   },
   {
     "path": "/docs/bitcoin-development/keys",
@@ -477,13 +579,13 @@
     "path": "/docs/bitcoin-development/addresses",
     "title": "Address Generation",
     "section": "bitcoin-development",
-    "body": "Address Generation & Validation Bitcoin addresses are human-readable encodings of output scripts. Understanding how to generate, validate, and work with different address types is fundamental to Bitcoin development. Address Types Overview Legacy Addresses (P2PKH) Format: Starts with 1 (mainnet) or m/n (testnet) Script: Pay-to-Public-Key-Hash Script Hash Addresses (P2SH) Format: Starts with 3 (mainnet) or 2 (testnet) Script: Pay-to-Script-Hash (can contain any script) Native SegWit (P2WPKH) "
+    "body": "Address Generation & Validation Bitcoin addresses are human-readable encodings of output scripts. Understanding how to generate, validate, and work with different address types is fundamental to Bitcoin development. Address Types Overview Legacy Addresses (P2PKH) Format: Starts with 1 (mainnet) or m/n (testnet) 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2 Script: Pay-to-Public-Key-Hash OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIG Script Hash Addresses (P2SH) Format: Starts with 3 (mainnet) or 2 (testnet) "
   },
   {
     "path": "/docs/bitcoin-development/transactions",
     "title": "Transaction Construction",
     "section": "bitcoin-development",
-    "body": "Transaction Construction Building Bitcoin transactions from scratch requires understanding inputs, outputs, fees, and signing. This guide covers the complete process from UTXO selection to broadcasting. Transaction Lifecycle Understanding the complete lifecycle of a transaction helps contextualize the construction process: 1. Creation: User constructs a transaction specifying inputs (UTXOs to spend) and outputs (recipient addresses and amounts) 2. Signing: User signs the transaction with their "
+    "body": "Transaction Construction Building Bitcoin transactions from scratch requires understanding inputs, outputs, fees, and signing. This guide covers the complete process from UTXO selection to broadcasting. Transaction Lifecycle Understanding the complete lifecycle of a transaction helps contextualize the construction process: Creation: User constructs a transaction specifying inputs (UTXOs to spend) and outputs (recipient addresses and amounts) Signing: User signs the transaction with their "
   },
   {
     "path": "/docs/bitcoin-development/psbt",
@@ -501,19 +603,19 @@
     "path": "/docs/bitcoin-development/pool-mining",
     "title": "Pool Mining",
     "section": "bitcoin-development",
-    "body": "Pool Mining Setup and Monitoring Pool mining allows you to contribute hash rate to a mining pool and receive proportional rewards. This guide covers setup, monitoring, and optimization. Mining Architecture Components 1. Bitcoin Node: Provides blockchain data via RPC 2. Mining Software: CPU/GPU/ASIC miner 3. Mining Pool: Coordinates mining efforts 4. Wallet: Receives mining rewards Data Flow --- Mining Software Setup CPU Mining (cpuminer-opt) Installation: Configuration: Configuration Parameters "
+    "body": "Pool Mining Setup and Monitoring Pool mining allows you to contribute hash rate to a mining pool and receive proportional rewards. This guide covers setup, monitoring, and optimization. Mining Architecture Components Bitcoin Node: Provides blockchain data via RPC Mining Software: CPU/GPU/ASIC miner Mining Pool: Coordinates mining efforts Wallet: Receives mining rewards Data Flow Bitcoin Node → Mining Software → Mining Pool → Rewards Mining Software Setup CPU Mining (cpuminer-opt) Installation: "
   },
   {
     "path": "/docs/bitcoin-development/price-tracking",
     "title": "Price Tracking",
     "section": "bitcoin-development",
-    "body": "Bitcoin Price Tracking Integrating Bitcoin price data into applications requires API integration, caching strategies, and handling rate limits. This guide covers best practices. API Providers CoinGecko Advantages: Free tier available Good rate limits Historical data Multiple currencies :::code-group ::: Mempool.space API An alternative source using the mempool.space API: :::code-group ::: --- Centralized Price Service Service Architecture Benefits: Single source of truth Caching reduces API "
+    "body": "Bitcoin Price Tracking Integrating Bitcoin price data into applications requires API integration, caching strategies, and handling rate limits. This guide covers best practices. API Providers CoinGecko Advantages: Free tier available Good rate limits Historical data Multiple currencies :::code-group use reqwest; use serde_json::Value; async fn get_price_coingecko() -> Result> { let url = \"https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd\"; let resp: Value = "
   },
   {
     "path": "/docs/bitcoin-development/script-patterns",
     "title": "Bitcoin Script Patterns",
     "section": "bitcoin-development",
-    "body": "Bitcoin Script Patterns Common Bitcoin Script patterns provide reusable templates for building smart contracts. Understanding these patterns helps developers implement common use cases efficiently. Common Patterns 1. Pay-to-Pubkey-Hash (P2PKH) Standard single-signature: 2. Multisig Multiple signatures required: 3. Hash Lock Reveal secret to spend: 4. Time Lock Absolute timelock: 5. Relative Time Lock Relative timelock: --- Advanced Patterns Escrow Contract Three-party escrow: Vault Contract "
+    "body": "Bitcoin Script Patterns Common Bitcoin Script patterns provide reusable templates for building smart contracts. Understanding these patterns helps developers implement common use cases efficiently. Common Patterns 1. Pay-to-Pubkey-Hash (P2PKH) Standard single-signature: ScriptPubKey: OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIG ScriptSig: 2. Multisig Multiple signatures required: ScriptPubKey: ... OP_CHECKMULTISIG ScriptSig: OP_0 ... 3. Hash Lock Reveal secret to spend: ScriptPubKey: OP_HASH256 "
   },
   {
     "path": "/docs/bitcoin-development/miniscript",
@@ -531,7 +633,7 @@
     "path": "/docs/controversies/op-return",
     "title": "OP_RETURN Debate",
     "section": "controversies",
-    "body": "The OPRETURN Debate: Bitcoin as Database vs. Financial Network An analysis of the ongoing debate about OPRETURN, carrier size limits, and Bitcoin's fundamental purpose. OPRETURN is a Bitcoin Script opcode that creates provably unspendable outputs. When executed, it immediately terminates script execution and marks the transaction as invalid. Script Pattern: Key Characteristics: Outputs are unspendable: they cannot be used as inputs in future transactions Data is permanently stored on the "
+    "body": "The OP_RETURN Debate: Bitcoin as Database vs. Financial Network An analysis of the ongoing debate about OP_RETURN, carrier size limits, and Bitcoin's fundamental purpose. OP_RETURN is a Bitcoin Script opcode that creates provably unspendable outputs. When executed, it immediately terminates script execution and marks the transaction as invalid. Script Pattern: OP_RETURN Key Characteristics: Outputs are unspendable: they cannot be used as inputs in future transactions Data is permanently stored "
   },
   {
     "path": "/docs/controversies/blocksize-wars",
@@ -573,49 +675,49 @@
     "path": "/docs/advanced/atomic-swaps",
     "title": "Atomic Swaps",
     "section": "advanced",
-    "body": "Atomic Swaps Atomic swaps enable trustless peer-to-peer exchange of cryptocurrencies across different blockchains without requiring a trusted third party or centralized exchange. Atomic swaps use hash time-locked contracts (HTLCs) to ensure that either both parties receive their funds or neither does: --- How Atomic Swaps Work Process Safety --- Code Examples Creating HTLC :::code-group ::: --- Lightning Network Swaps Atomic swaps can also work on Lightning Network: --- Limitations Requirements "
+    "body": "Atomic Swaps Atomic swaps enable trustless peer-to-peer exchange of cryptocurrencies across different blockchains without requiring a trusted third party or centralized exchange. Atomic swaps use hash time-locked contracts (HTLCs) to ensure that either both parties receive their funds or neither does: Atomic Swap: Alice wants to trade BTC for LTC Bob wants to trade LTC for BTC Either both succeed or both fail No trusted intermediary needed How Atomic Swaps Work Process Alice creates HTLC on "
   },
   {
     "path": "/docs/advanced/dlcs",
     "title": "Discreet Log Contracts",
     "section": "advanced",
-    "body": "Discreet Log Contracts (DLCs) Discreet Log Contracts (DLCs) enable Bitcoin smart contracts that depend on external data (oracles) without revealing contract details on-chain until execution. DLCs are smart contracts that: Use oracles: Depend on external data (prices, events) Privacy-preserving: Contract terms hidden until execution Trustless: No need to trust oracle (uses adaptor signatures) Bitcoin-native: Work on Bitcoin blockchain --- How DLCs Work Oracle Attestation Adaptor Signatures DLCs "
+    "body": "Discreet Log Contracts (DLCs) Discreet Log Contracts (DLCs) enable Bitcoin smart contracts that depend on external data (oracles) without revealing contract details on-chain until execution. DLCs are smart contracts that: Use oracles: Depend on external data (prices, events) Privacy-preserving: Contract terms hidden until execution Trustless: No need to trust oracle (uses adaptor signatures) Bitcoin-native: Work on Bitcoin blockchain How DLCs Work Oracle Attestation Oracle signs outcome data "
   },
   {
     "path": "/docs/advanced/sidechains",
     "title": "Sidechains & Layer 2",
     "section": "advanced",
-    "body": "Sidechains & Layer 2 Alternatives Sidechains are separate blockchains that are pegged to Bitcoin, allowing bitcoin to be moved between the main chain and sidechain. They provide alternative scaling solutions and specialized features. Sidechains are independent blockchains with their own consensus rules that are pegged to Bitcoin: --- Major Sidechains Liquid Network Liquid is a federated sidechain: Use cases: Exchange settlements Faster transactions Confidential amounts Tokenized assets "
+    "body": "Sidechains & Layer 2 Alternatives Sidechains are separate blockchains that are pegged to Bitcoin, allowing bitcoin to be moved between the main chain and sidechain. They provide alternative scaling solutions and specialized features. Sidechains are independent blockchains with their own consensus rules that are pegged to Bitcoin: Bitcoin Mainnet: ├── Lock bitcoin └── Receive sidechain tokens Sidechain: ├── Receive tokens ├── Use sidechain features └── Unlock to return to Bitcoin Major "
   },
   {
     "path": "/docs/advanced/statechains",
     "title": "Statechains",
     "section": "advanced",
-    "body": "Statechains Statechains are a scaling solution that allows transferring bitcoin ownership off-chain through a federated service without requiring on-chain transactions for each transfer. Statechains enable off-chain bitcoin transfers: --- How Statechains Work Initial Setup Transfers Unlocking --- Benefits Advantages No on-chain fees: Per transfer Fast transfers: Instant off-chain Bitcoin native: Uses real bitcoin No channel limits: No liquidity constraints Limitations Federated trust: Requires "
+    "body": "Statechains Statechains are a scaling solution that allows transferring bitcoin ownership off-chain through a federated service without requiring on-chain transactions for each transfer. Statechains enable off-chain bitcoin transfers: Concept: Lock bitcoin on-chain once Transfer ownership off-chain No on-chain transaction per transfer Federated service manages state How Statechains Work Initial Setup User locks bitcoin on-chain Creates statechain entry Federated service holds key share User "
   },
   {
     "path": "/docs/advanced/bloom-filters",
     "title": "Bloom Filters",
     "section": "advanced",
-    "body": "Bloom Filters Bloom filters are a probabilistic data structure used by SPV (Simplified Payment Verification) clients to request relevant transactions from full nodes without revealing exactly which addresses they're interested in. Bloom filters allow SPV clients to: Request transactions: Without revealing addresses Privacy: Partial privacy protection Efficiency: Compact representation False positives: Possible but manageable --- How Bloom Filters Work Construction Querying --- Privacy "
+    "body": "Bloom Filters Bloom filters are a probabilistic data structure used by SPV (Simplified Payment Verification) clients to request relevant transactions from full nodes without revealing exactly which addresses they're interested in. Bloom filters allow SPV clients to: Request transactions: Without revealing addresses Privacy: Partial privacy protection Efficiency: Compact representation False positives: Possible but manageable How Bloom Filters Work Construction Add addresses to filter Hash "
   },
   {
     "path": "/docs/advanced/governance",
     "title": "Governance & Evolution",
     "section": "advanced",
-    "body": "Governance & Evolution Bitcoin has no central authority. Its evolution happens through a decentralized process of rough consensus, where changes are proposed, discussed, and adopted (or rejected) by the community. How Bitcoin Evolves The Process Key Principles Rough consensus: No formal voting, but broad agreement needed Code is law: Running code determines network rules Backward compatibility: Soft forks preferred over hard forks Conservative changes: Slow, careful evolution --- Bitcoin "
+    "body": "Governance & Evolution Bitcoin has no central authority. Its evolution happens through a decentralized process of rough consensus, where changes are proposed, discussed, and adopted (or rejected) by the community. How Bitcoin Evolves The Process Proposal: BIP (Bitcoin Improvement Proposal) Discussion: Community review and debate Implementation: Code written and tested Activation: Network-wide adoption Deployment: Soft fork or hard fork Key Principles Rough consensus: No formal voting, but broad "
   },
   {
     "path": "/docs/advanced/zero-conf-channels",
     "title": "Zero-Conf Channels",
     "section": "advanced",
-    "body": "Zero-Conf Channels Zero-conf channels (also called turbo channels) allow Lightning channels to be used immediately after the funding transaction is broadcast, without waiting for blockchain confirmations. The Confirmation Problem Standard Lightning channel opening requires: 1. Broadcast funding transaction 2. Wait for 3-6 confirmations (30-60 minutes) 3. Channel becomes usable Impact: Users must wait before they can send or receive payments through the new channel. --- How Zero-Conf Works "
+    "body": "Zero-Conf Channels Zero-conf channels (also called turbo channels) allow Lightning channels to be used immediately after the funding transaction is broadcast, without waiting for blockchain confirmations. The Confirmation Problem Standard Lightning channel opening requires: Broadcast funding transaction Wait for 3-6 confirmations (30-60 minutes) Channel becomes usable Impact: Users must wait before they can send or receive payments through the new channel. How Zero-Conf Works Zero-conf channels "
   },
   {
     "path": "/docs/advanced/trampoline-routing",
     "title": "Trampoline Routing",
     "section": "advanced",
-    "body": "Trampoline Routing Trampoline routing allows lightweight Lightning clients to delegate pathfinding to intermediate nodes. Instead of computing the entire route, the sender specifies trampoline nodes that find the path to the destination. The Mobile Routing Problem Standard Lightning routing requires: 1. Downloading the entire network graph (~100MB+) 2. Keeping the graph synchronized 3. Computing routes through thousands of nodes Problems for mobile: Bandwidth: Downloading/syncing graph uses "
+    "body": "Trampoline Routing Trampoline routing allows lightweight Lightning clients to delegate pathfinding to intermediate nodes. Instead of computing the entire route, the sender specifies trampoline nodes that find the path to the destination. The Mobile Routing Problem Standard Lightning routing requires: Downloading the entire network graph (~100MB+) Keeping the graph synchronized Computing routes through thousands of nodes Problems for mobile: Bandwidth: Downloading/syncing graph uses data "
   },
   {
     "path": "/docs/advanced/ordinals-inscriptions",

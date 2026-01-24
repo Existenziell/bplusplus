@@ -132,9 +132,15 @@ function getYouTubeVideoId(url: string): string | null {
   return null
 }
 
-// Lazy-load when in view
+// YouTube thumbnail; maxresdefault may not exist for all videos, hqdefault is fallback
+const YT_THUMB = (id: string, quality: 'maxresdefault' | 'hqdefault' = 'maxresdefault') =>
+  `https://img.youtube.com/vi/${id}/${quality}.jpg`
+
+// Lazy-load when in view; show thumbnail + play overlay until user clicks, then load iframe
 function YouTubeEmbed({ videoId, inGroup }: { videoId: string; inGroup?: boolean }) {
   const [isVisible, setIsVisible] = React.useState(false)
+  const [hasStarted, setHasStarted] = React.useState(false)
+  const [thumbQuality, setThumbQuality] = React.useState<'maxresdefault' | 'hqdefault'>('maxresdefault')
   const containerRef = React.useRef<HTMLDivElement>(null)
   const iframeRef = React.useRef<HTMLIFrameElement>(null)
 
@@ -158,29 +164,53 @@ function YouTubeEmbed({ videoId, inGroup }: { videoId: string; inGroup?: boolean
 
   // Set credentialless attribute to reduce cookie warnings
   React.useEffect(() => {
-    if (isVisible && iframeRef.current) {
+    if (hasStarted && iframeRef.current) {
       iframeRef.current.setAttribute('credentialless', '')
     }
-  }, [isVisible])
+  }, [hasStarted])
+
+  const handleThumbError = () => {
+    if (thumbQuality === 'maxresdefault') setThumbQuality('hqdefault')
+  }
 
   return (
     <div className={inGroup ? '' : 'my-6'} ref={containerRef}>
       <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-        {isVisible ? (
+        {!isVisible ? (
+          <div className="absolute top-0 left-0 w-full h-full rounded-md bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center">
+            <span className="text-zinc-500 dark:text-zinc-400">Loading video...</span>
+          </div>
+        ) : hasStarted ? (
           <iframe
             ref={iframeRef}
             className="absolute top-0 left-0 w-full h-full rounded-md"
-            src={`https://www.youtube-nocookie.com/embed/${videoId}?modestbranding=1&rel=0`}
+            src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`}
             title="YouTube video player"
-            loading="lazy"
-            allow="accelerometer; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; picture-in-picture; web-share"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
           />
         ) : (
-          <div className="absolute top-0 left-0 w-full h-full rounded-md bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center">
-            <div className="text-zinc-500 dark:text-zinc-400">Loading video...</div>
-          </div>
+          <button
+            type="button"
+            onClick={() => setHasStarted(true)}
+            className="absolute top-0 left-0 w-full h-full rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
+            aria-label="Play video"
+          >
+            <img
+              src={YT_THUMB(videoId, thumbQuality)}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={handleThumbError}
+            />
+            <span className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors hover:bg-black/35">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600 shadow-lg transition-transform hover:scale-110">
+                <svg className="ml-1 h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </span>
+          </button>
         )}
       </div>
     </div>

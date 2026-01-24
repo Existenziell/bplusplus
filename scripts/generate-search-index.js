@@ -7,21 +7,10 @@
 
 const fs = require('fs')
 const path = require('path')
+const removeMd = require('remove-markdown')
 
-// Strip markdown to plain text for search indexing (extends glossary script logic)
 function stripMarkdown(text) {
-  return text
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/^#+\s*/gm, '')
-    .replace(/^>\s?/gm, '')
-    .replace(/^\s*[-*]\s+/gm, ' ')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    .replace(/\*([^*]+)\*/g, '$1')
-    .replace(/_([^_]+)_/g, '$1')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/\s+/g, ' ')
-    .trim()
+  return removeMd(text, { useImgAltText: false }).replace(/\s+/g, ' ').trim()
 }
 
 function excerpt(text, maxLen = 500) {
@@ -30,6 +19,33 @@ function excerpt(text, maxLen = 500) {
   const last = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf(' '))
   if (last > maxLen * 0.5) return cut.slice(0, last + 1)
   return cut.trim() + '…'
+}
+
+// Generate slug from text (same as MarkdownRenderer / generate-glossary-data.js)
+function generateSlug(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+// Parse ## Name sections from people.md; returns [{ slug, title, body }] for each person
+function parsePeopleSections(md) {
+  if (!md) return []
+  const parts = md.split(/\n## /)
+  parts.shift() // drop intro (content before first ##)
+  return parts
+    .map((part) => {
+      const idx = part.indexOf('\n\n')
+      const title = (idx >= 0 ? part.slice(0, idx) : part).trim()
+      const body = idx >= 0 ? part.slice(idx).trim() : ''
+      const slug = generateSlug(title)
+      if (slug === 'you') return null
+      return { slug, title, body: excerpt(stripMarkdown(body), 400) }
+    })
+    .filter(Boolean)
 }
 
 // Parse docPages from navigation.ts: path, title, section
@@ -72,7 +88,7 @@ function addEntry(entry) {
 
 const index = []
 
-// 1. Static pages first so /whitepaper etc. are found before doc pages that merely mention the term
+// Static first so /whitepaper ranks before mentioning docs
 const staticPages = [
   {
     path: '/whitepaper',
@@ -111,7 +127,11 @@ for (const p of staticPages) {
   index.push(addEntry(p))
 }
 
-// 2. Doc pages
+const peopleContent = mdContent['/docs/history/people']?.content
+for (const { slug, title, body } of parsePeopleSections(peopleContent)) {
+  index.push(addEntry({ path: `/docs/history/people#${slug}`, title, section: 'history', body }))
+}
+
 for (const page of docPages) {
   const raw = mdContent[page.path]?.content
   const body = raw ? excerpt(stripMarkdown(raw), 500) : ''
@@ -126,7 +146,6 @@ for (const page of docPages) {
   )
 }
 
-// 3. Glossary
 for (const [slug, { term, definition }] of Object.entries(glossary)) {
   index.push(
     addEntry({

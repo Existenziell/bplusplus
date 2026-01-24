@@ -19,26 +19,13 @@ function rank(rec: IndexEntry, nq: string): number {
   return 1
 }
 
-function snippet(body: string, query: string): string {
+function snippet(body: string): string {
   if (!body) return ''
-  const lower = body.toLowerCase()
-  const tokens = query
-    .toLowerCase()
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean)
-  let bestStart = 0
-  for (const t of tokens) {
-    const i = lower.indexOf(t)
-    if (i === -1) continue
-    const start = Math.max(0, i - Math.floor(SNIPPET_LEN / 2))
-    if (start < bestStart || bestStart === 0) bestStart = start
-  }
-  const end = Math.min(body.length, bestStart + SNIPPET_LEN)
-  const s = body.slice(bestStart, end).trim()
-  const prefix = bestStart > 0 ? '…' : ''
-  const suffix = end < body.length ? '…' : ''
-  return prefix + s + suffix
+  if (body.length <= SNIPPET_LEN) return body
+  const cut = body.slice(0, SNIPPET_LEN)
+  const last = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf(' '))
+  if (last > SNIPPET_LEN * 0.5) return cut.slice(0, last + 1) + '…'
+  return cut.trim() + '…'
 }
 
 type Row = { path: string; title: string; section: string; snippet: string; rank: number }
@@ -47,6 +34,7 @@ async function search(q: string): Promise<{ path: string; title: string; section
   const nq = normalize(q)
   const tokens = q.toLowerCase().split(/\s+/).filter(Boolean)
   const pageRows: Row[] = []
+  const peopleRows: Row[] = []
   const glossaryRows: Row[] = []
 
   for (const rec of index) {
@@ -56,16 +44,18 @@ async function search(q: string): Promise<{ path: string; title: string; section
       path: rec.path,
       title: rec.title,
       section: rec.section,
-      snippet: snippet(rec.body, q) || rec.title,
+      snippet: snippet(rec.body) || rec.title,
       rank: rank(rec, nq),
     }
     if (rec.path.startsWith('/docs/glossary#')) glossaryRows.push(row)
+    else if (rec.path.startsWith('/docs/history/people#')) peopleRows.push(row)
     else pageRows.push(row)
   }
 
   pageRows.sort((a, b) => b.rank - a.rank)
+  peopleRows.sort((a, b) => b.rank - a.rank)
   glossaryRows.sort((a, b) => b.rank - a.rank)
-  return [...pageRows, ...glossaryRows].slice(0, MAX_RESULTS).map(({ rank: _r, ...r }) => r)
+  return [...pageRows, ...peopleRows, ...glossaryRows].slice(0, MAX_RESULTS).map(({ rank: _r, ...r }) => r)
 }
 
 export async function GET(request: NextRequest) {

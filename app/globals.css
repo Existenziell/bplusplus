@@ -75,7 +75,7 @@ body {
 
   /* Heading Styles */
   .heading-page {
-    @apply text-2xl md:text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-100;
+    @apply text-3xl md:text-4xl font-bold mb-4 text-zinc-900 dark:text-zinc-100;
   }
 
   .heading-page-hero {
@@ -462,7 +462,7 @@ main > div > div > h1:first-child {
 * Glossary Styles
 */
 .glossary-content h2 {
-  @apply text-4xl sm:text-5xl font-bold mt-12 mb-6 text-btc border-b-2 border-btc pb-3;
+  @apply text-2xl sm:text-3xl font-bold mt-12 mb-6 text-btc border-b-2 border-btc pb-3;
 }
 
 .glossary-content h2:first-of-type {

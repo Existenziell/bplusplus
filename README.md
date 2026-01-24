@@ -110,14 +110,14 @@ This script:
 node scripts/generate-link-visualization.js
 ```
 
-This script creates an interactive HTML visualization ([`link-visualization.html`](https://bplusplus.info/link-visualization.html)) that shows:
+This script creates an interactive HTML visualization ([`data/link-visualization.html`](https://bplusplus.info/data/link-visualization.html)) that shows:
 - Network graph of all pages and their connections
 - Color-coded nodes by section
 - Node size based on incoming link count
 - Interactive controls (layout switching, section filtering)
 - Click nodes to view details and open pages
 
-To view the visualization, visit [https://bplusplus.info/link-visualization.html](https://bplusplus.info/link-visualization.html) or open the local file in your browser.
+To view the visualization, visit [https://bplusplus.info/data/link-visualization.html](https://bplusplus.info/data/link-visualization.html) or open the local file in your browser.
 
 ## Contributing
 

@@ -532,9 +532,9 @@ const html = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// Write the HTML file to public directory so it's served as a static file
-const outputPath = path.join(__dirname, '../public/link-visualization.html');
+// Write the HTML file to public/data so it's served as a static file
+const outputPath = path.join(__dirname, '../public/data/link-visualization.html');
 fs.writeFileSync(outputPath, html);
 console.log(`✅ Visualization generated: ${outputPath}`);
-console.log(`   Accessible at: https://bplusplus.info/link-visualization.html`);
+console.log(`   Accessible at: https://bplusplus.info/data/link-visualization.html`);
 console.log(`   Or open it locally in your browser!`);

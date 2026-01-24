@@ -311,7 +311,7 @@ console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
 
 ## Elliptic Curve Cryptography
 
-![Elliptic Curve Cryptography](/images/ECC.webp)
+![Elliptic Curve Cryptography](/images/docs/ECC.webp)
 
 ### What is ECC?
 
@@ -697,7 +697,7 @@ console.log(`Signature valid: ${isValid}`);
 
 ### [Schnorr Signatures](/docs/glossary#schnorr-signature)
 
-![Schnorr Signature Equations](/images/schnorr-equations.png)
+![Schnorr Signature Equations](/images/docs/schnorr-equations.png)
 
 **Schnorr signatures** were introduced with the [Taproot](/docs/glossary#taproot) upgrade (2021).
 

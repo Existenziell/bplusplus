@@ -23,7 +23,7 @@ export default function Footer() {
     <footer className='border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100/80 dark:bg-zinc-800/50 overflow-hidden'>
       <div className='container-content py-4 flex flex-col items-center'>
         <nav aria-label='External resources' className='text-center mb-4'>
-          <h3 className='heading-section text-sm mb-4'>
+          <h3 className="heading-section-sm mb-4">
             More Bitcoin Resources
           </h3>
           <div className='flex flex-wrap justify-center gap-x-6 gap-y-2'>

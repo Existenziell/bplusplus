@@ -30,7 +30,7 @@ export default function AuthorPage() {
                   priority
                 />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">
+              <h1 className="heading-page-hero">
                 Existenziell
               </h1>
               <p className="text-xl md:text-2xl text-secondary mb-1">
@@ -42,7 +42,7 @@ export default function AuthorPage() {
             {/* About Section */}
             <section className="mb-12">
               <div className="">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-btc">
+                <h2 className="heading-section-accent">
                   About
                 </h2>
                 <p className="text-zinc-800 dark:text-zinc-200 leading-7 mb-4">
@@ -57,7 +57,7 @@ export default function AuthorPage() {
             {/* Mission Section */}
             <section className="mb-12">
               <div className="">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-btc">
+                <h2 className="heading-section-accent">
                   Why B++?
                 </h2>
                 <p className="text-zinc-800 dark:text-zinc-200 leading-7 mb-4">
@@ -75,7 +75,7 @@ export default function AuthorPage() {
             {/* Support Section */}
             <section className="mb-12">
               <div className="">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-btc">
+                <h2 className="heading-section-accent">
                   Support
                 </h2>
                 <p className="text-zinc-800 dark:text-zinc-200 mb-6">
@@ -93,7 +93,7 @@ export default function AuthorPage() {
                     </code>
                     <button
                       onClick={handleCopyBitcoin}
-                      className="inline-flex items-center justify-center p-2 rounded bg-btc hover:bg-btc/90 text-zinc-900 transition-colors shrink-0"
+                      className="inline-flex items-center justify-center p-2 rounded-md bg-btc hover:bg-btc/90 text-zinc-900 transition-colors shrink-0"
                       aria-label="Copy Bitcoin address to clipboard"
                     >
                       <CopyIcon />
@@ -112,7 +112,7 @@ export default function AuthorPage() {
                     </code>
                     <button
                       onClick={handleCopyNostr}
-                      className="inline-flex items-center justify-center p-2 rounded bg-btc hover:bg-btc/90 text-zinc-900 transition-colors shrink-0"
+                      className="inline-flex items-center justify-center p-2 rounded-md bg-btc hover:bg-btc/90 text-zinc-900 transition-colors shrink-0"
                       aria-label="Copy Nostr address to clipboard"
                     >
                       <CopyIcon />

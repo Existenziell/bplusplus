@@ -41,7 +41,7 @@ export default function HorizontalNav() {
             <div className="flex flex-row items-center justify-end gap-2 w-max ml-auto mb-3 mt-1">
               <button
                 onClick={() => setExpandedSections(new Set(navItems.map(item => item.href)))}
-                className="px-1.5 py-0.5 text-secondary text-xs rounded hover:text-btc transition-colors bg-zinc-200 dark:bg-zinc-700"
+                className="px-1.5 py-0.5 text-secondary text-xs rounded-md hover:text-btc transition-colors bg-zinc-200 dark:bg-zinc-700"
                 aria-label="Expand all sections"
                 title="Expand all"
               >
@@ -49,7 +49,7 @@ export default function HorizontalNav() {
               </button>
               <button
                 onClick={() => setExpandedSections(new Set())}
-                className="px-1.5 py-0.5 text-secondary text-xs rounded hover:text-btc transition-colors bg-zinc-200 dark:bg-zinc-700"
+                className="px-1.5 py-0.5 text-secondary text-xs rounded-md hover:text-btc transition-colors bg-zinc-200 dark:bg-zinc-700"
                 aria-label="Collapse all sections"
                 title="Collapse all"
               >

@@ -28,10 +28,9 @@ export default function Header() {
 
   return (
     <>
-      <header className="pb-4 bg-gradient-linear from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
-        <div className="page-bg">
-          <div className="container-content pt-4">
-            <div className="flex justify-between items-center">
+      <header className="pb-4 page-bg">
+        <div className="container-content pt-4">
+          <div className="flex justify-between items-center">
               <Link href="/" className="text-center" aria-label="B++ Home">
                 <Image src="/logo/logo.png" alt="B++ Logo" width={80} height={80} />
               </Link>
@@ -63,7 +62,6 @@ export default function Header() {
                 </button>
                 <ThemeToggle />
               </div>
-            </div>
           </div>
         </div>
       </header>

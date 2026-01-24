@@ -393,7 +393,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   }), [codeGroupMap, videoGroupMap, glossaryData])
 
   return (
-    <div className="markdown-content prose prose-invert max-w-none">
+    <div className="markdown-content prose dark:prose-invert max-w-none">
       <ReactMarkdown
         remarkPlugins={remarkPlugins}
         rehypePlugins={rehypePlugins}

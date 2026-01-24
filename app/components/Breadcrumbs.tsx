@@ -17,7 +17,7 @@ export default function Breadcrumbs() {
         {breadcrumbs.map((crumb, index) => (
           <li key={crumb.href} className="flex items-center">
             {index > 0 && (
-              <span className="mx-2 text-zinc-500 dark:text-zinc-500">/</span>
+              <span className="mx-2 text-zinc-500 dark:text-zinc-400">/</span>
             )}
             {index === breadcrumbs.length - 1 ? (
               <span className="text-zinc-800 dark:text-zinc-300">{crumb.label}</span>

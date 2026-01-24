@@ -47,7 +47,7 @@ body {
   }
 
   .btn-primary-sm {
-    @apply inline-flex items-center gap-2 px-4 py-2 bg-btc hover:bg-btc/90 text-zinc-900 font-semibold rounded transition-colors;
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-btc hover:bg-btc/90 text-zinc-900 font-semibold rounded-md transition-colors;
   }
 
   .btn-secondary {
@@ -55,7 +55,7 @@ body {
   }
 
   .btn-secondary-sm {
-    @apply inline-flex items-center gap-2 justify-center px-4 py-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline;
+    @apply inline-flex items-center gap-2 justify-center px-4 py-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors hover:no-underline;
   }
 
   /* Text Utilities */
@@ -78,12 +78,38 @@ body {
     @apply text-2xl md:text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-100;
   }
 
+  .heading-page-hero {
+    @apply text-4xl md:text-5xl font-bold mb-4 text-zinc-900 dark:text-zinc-100;
+  }
+
   .heading-section {
     @apply text-lg font-semibold text-zinc-800 dark:text-zinc-200;
   }
 
   .heading-subsection {
     @apply text-base sm:text-lg font-semibold text-zinc-700 dark:text-zinc-300;
+  }
+
+  .heading-section-accent {
+    @apply text-2xl md:text-3xl font-bold mb-4 text-btc;
+  }
+
+  .heading-section-sm {
+    @apply text-sm font-semibold text-zinc-800 dark:text-zinc-200;
+  }
+
+  .heading-section-muted {
+    @apply text-lg font-semibold text-zinc-500 dark:text-zinc-300;
+  }
+
+  /* Modal overlay - use with flex/align/padding as needed per modal */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 bg-black/60;
+  }
+
+  /* Modal card - use for dialog content (add mx-4 for small viewport spacing when needed) */
+  .modal-card {
+    @apply rounded-lg p-6 max-w-md w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700;
   }
 }
 
@@ -538,9 +564,4 @@ main > div > div > h1:first-child {
 
 .author-address-code {
   @apply text-sm font-mono text-zinc-700 dark:text-zinc-300 flex-1 break-all;
-}
-
-/* Legacy class - use .btn-primary-sm instead */
-.author-copy-button {
-  @apply btn-primary-sm;
 }

@@ -379,8 +379,8 @@ export default function StackLabPage() {
 
       {/* Mobile Warning Modal */}
       {showMobileWarning && !mobileWarningDismissed && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay flex items-center justify-center p-4">
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
               Stack Lab is not optimized for small screens. The drag-and-drop interface and layout work best on desktop or tablet devices with larger screens.
             </p>
@@ -390,13 +390,13 @@ export default function StackLabPage() {
             <div className="flex flex-col gap-3">
               <button
                 onClick={() => handleDismissMobileWarning(false)}
-                className="w-full px-4 py-2 bg-btc text-zinc-900 font-semibold rounded hover:bg-btc/80 transition-colors"
+                className="btn-primary-sm w-full"
               >
                 Continue Anyway
               </button>
               <button
                 onClick={() => handleDismissMobileWarning(true)}
-                className="w-full px-4 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 rounded hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors text-sm"
+                className="btn-secondary-sm w-full"
               >
                 Continue & Don&apos;t Show Again
               </button>
@@ -407,8 +407,8 @@ export default function StackLabPage() {
 
       {/* Data Input Modal */}
       {showDataModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowDataModal(false)}>
-          <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg p-6 max-w-md w-full mx-4" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay flex items-center justify-center" onClick={() => setShowDataModal(false)}>
+          <div className="modal-card mx-4" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
               Push Data to {dataModalTarget === 'unlocking' ? 'Unlocking' : 'Locking'} Script
             </h3>
@@ -433,13 +433,13 @@ export default function StackLabPage() {
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowDataModal(false)}
-                className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 rounded hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+                className="btn-secondary-sm"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDataSubmit}
-                className="px-4 py-2 bg-btc text-zinc-900 font-semibold rounded hover:bg-btc/80 transition-colors"
+                className="btn-primary-sm"
               >
                 Add
               </button>

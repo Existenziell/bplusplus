@@ -16,7 +16,7 @@ export default function WhitepaperPage() {
     <div className="max-w-4xl mx-auto">
       {/* Title */}
       <div className="text-center mb-6">
-        <h1 className="heading-page text-center mb-2">
+        <h1 className="heading-page text-center">
           Bitcoin Whitepaper
         </h1>
           {/* History */}
@@ -41,7 +41,7 @@ export default function WhitepaperPage() {
           href="/data/bitcoin.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-btc hover:bg-btc/90 text-white font-semibold rounded-lg transition-colors shadow-md"
+          className="btn-primary"
         >
           <DownloadPDFIcon />
           Open PDF

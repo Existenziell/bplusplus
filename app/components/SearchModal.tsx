@@ -111,7 +111,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-[12vh] px-4 bg-black/50"
+      className="modal-overlay flex items-start justify-center pt-[12vh] px-4"
       onClick={onClose}
       role="dialog"
       aria-modal="true"

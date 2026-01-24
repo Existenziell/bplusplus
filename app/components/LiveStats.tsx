@@ -144,13 +144,13 @@ export default function LiveStats() {
             <span className="text-zinc-400" aria-label="No data available">—</span>
           )}
         </div>
-        <div className="text-xs text-zinc-500 dark:text-zinc-400 group-hover:text-btc transition-colors">
+        <div className="text-xs text-secondary group-hover:text-btc transition-colors">
           {stat.label}
         </div>
       </>
     )
 
-    const className = "bg-white dark:bg-zinc-800 rounded-md p-4 text-center shadow-sm hover:shadow-md transition-shadow hover:no-underline group"
+    const className = "bg-white dark:bg-zinc-800 rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-shadow hover:no-underline group"
 
     if (stat.onClick) {
       return (
@@ -200,7 +200,7 @@ export default function LiveStats() {
 
   return (
     <div className="container-content py-8 md:py-12">
-      <h3 className="heading-section text-center mb-4 text-zinc-500 dark:text-zinc-300">
+      <h3 className="heading-section-muted text-center mb-4">
         Live Network Stats
       </h3>
       <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-8 gap-4 mb-4">

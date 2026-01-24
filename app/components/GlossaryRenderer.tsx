@@ -201,7 +201,7 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
   }
 
   return (
-    <div className="glossary-accordion">
+    <div className="glossary-accordion glossary-content">
       {/* Letter navigation */}
       <div className="mb-8 pb-4 border-b border-zinc-300 dark:border-zinc-700">
         <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -220,10 +220,7 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
       {sections.map((section) => (
         <div key={section.slug} className="mb-8">
           {/* Section letter header */}
-          <h2
-            id={section.slug}
-            className="text-4xl sm:text-5xl font-bold mt-12 mb-6 text-btc border-b-2 border-btc pb-3 first:mt-4"
-          >
+          <h2 id={section.slug}>
             {section.letter}
           </h2>
 

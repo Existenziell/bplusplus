@@ -78,7 +78,11 @@ export default async function DocPage({ params }: PageProps) {
   try {
     const content = await readMarkdown(mdFile)
 
-    return <MarkdownRenderer content={content} />
+    return (
+      <div className="max-w-4xl">
+        <MarkdownRenderer content={content} />
+      </div>
+    )
   } catch (error) {
     // Log error in production for debugging
     console.error(`Error reading markdown file ${mdFile}:`, error)

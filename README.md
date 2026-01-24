@@ -12,7 +12,7 @@ An open-source developer's guide to Bitcoin, covering everything from fundamenta
 - **Markdown**: react-markdown with remark-gfm, rehype-highlight, rehype-raw
 - **Theming**: next-themes
 - **Language**: TypeScript 5.9.3
-- **Testing**: Vitest 2.1
+- **Testing**: Vitest 2.1 (unit), Playwright (E2E)
 
 ## Documentation Structure
 
@@ -87,24 +87,41 @@ This is the same validation process that occurs on the Bitcoin network when tran
 | `npm run dev` | Start development server |
 | `npm run build` | Build for production (runs prebuild scripts, then `next build`) |
 | `npm run start` | Start production server |
-| `npm run test` | Run tests in watch mode (Vitest) |
-| `npm run test:run` | Run tests once (for CI) |
-| `npm run test:coverage` | Run tests with coverage report (v8) |
+| `npm run test` | Run all tests (unit + E2E) |
+| `npm run test:unit` | Run unit tests once (Vitest) |
+| `npm run test:unit:watch` | Run unit tests in watch mode |
+| `npm run test:unit:coverage` | Unit tests with coverage (v8) |
+| `npm run test:e2e` | Run E2E tests (Playwright) |
+| `npm run test:e2e:ui` | Run E2E tests in UI mode |
 | `npm run lint` | Run ESLint |
 | `npm run analyze` | Analyze bundle size |
 
 ### Testing
 
-Tests use [Vitest](https://vitest.dev) and live in **`tests/`** with a mirrored layout:
+| Script | Purpose |
+|--------|---------|
+| `test` | Run all tests (unit then E2E): `test:unit && test:e2e` |
+| `test:unit` | Run unit tests once (Vitest) |
+| `test:unit:watch` | Run unit tests in watch mode |
+| `test:unit:coverage` | Unit tests with coverage |
+| `test:e2e` | Run E2E tests (Playwright) |
+| `test:e2e:ui` | Run E2E tests in UI mode |
+
+**Unit tests** use [Vitest](https://vitest.dev) and live in **`tests/`** with a mirrored layout:
 
 ```
 tests/
   app/utils/     # setUtils, metadata, denominationUtils, formatting, navigation, searchLogic,
                 # stackLabFormatters, stackLabInterpreter, bitcoinRpcCache, docNavigationState, getMarkdownForPath
   scripts/lib/   # slug, parse-doc-pages, glossary-parse, search-index-helpers
+  e2e/           # Playwright E2E: home, docs, search, glossary, 404, download-md
 ```
 
-Covered: build pipeline (`parseDocPages`, `generateSlug`, `glossary-parse`, `search-index-helpers`), Stack Lab interpreter and formatters, denomination/formatting utils, search logic, navigation and doc navigation state, Bitcoin RPC validation/cache, download-MD path resolution, and metadata for SEO/OG. Run `npm run test:run` to execute all tests. In CI, run `npm run test:run` before `npm run build` so the pipeline fails if tests fail.
+Covered: build pipeline (`parseDocPages`, `generateSlug`, `glossary-parse`, `search-index-helpers`), Stack Lab interpreter and formatters, denomination/formatting utils, search logic, navigation and doc navigation state, Bitcoin RPC validation/cache, download-MD path resolution, and metadata for SEO/OG.
+
+**E2E tests** use [Playwright](https://playwright.dev) in `tests/e2e/`. They hit the app on `http://localhost:3000`; the config starts `npm run dev` if the server is not already running. Run `npm run test:e2e` or `npm run test` for all tests. For the first run (or in CI), install browsers: `npx playwright install chromium` (or `npx playwright install --with-deps` for all).
+
+In CI, run `npm run test` (or `npm run test:unit` then `npx playwright install chromium` and `npm run test:e2e`). E2E requires `public/data/*.json` (from prebuild or a prior `npm run build`).
 
 ### Prebuild scripts
 

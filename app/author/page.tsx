@@ -8,10 +8,6 @@ const NPUB_ADDRESS = 'npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq9
 const BITCOIN_ADDRESS = 'bc1qtu2z558uwvutm6xqjdvv7jrjcg9020hc0964wl'
 
 export default function AuthorPage() {
-  const handleCopyNpub = () => {
-    copyToClipboard(NPUB_ADDRESS, 'npub')
-  }
-
   const handleCopyBitcoin = () => {
     copyToClipboard(BITCOIN_ADDRESS, 'Bitcoin address')
   }
@@ -73,30 +69,6 @@ export default function AuthorPage() {
                   no paywalls, no tracking. Just pure Bitcoin knowledge for anyone
                   who wants to learn.
                 </p>
-              </div>
-            </section>
-
-            {/* Connect Section */}
-            <section className="mb-12">
-              <div className="">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-btc">
-                  Connect
-                </h2>
-                <p className="text-zinc-800 dark:text-zinc-200 mb-2">
-                  You can find me on Nostr:
-                </p>
-                <div className="author-address-box">
-                  <code className="author-address-code">
-                    {NPUB_ADDRESS}
-                  </code>
-                  <button
-                    onClick={handleCopyNpub}
-                    className="inline-flex items-center justify-center p-2 rounded bg-btc hover:bg-btc/90 text-zinc-900 transition-colors shrink-0"
-                    aria-label="Copy npub to clipboard"
-                  >
-                    <CopyIcon />
-                  </button>
-                </div>
               </div>
             </section>
 

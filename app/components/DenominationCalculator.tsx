@@ -15,12 +15,17 @@ export default function DenominationCalculator() {
   const results = (() => {
     const s = sats()
     if (s === null) return null
-    return UNITS.filter((u) => u.id !== fromUnit).map((u) => ({
-      id: u.id,
-      label: u.label,
-      name: u.name,
-      formatted: formatForUnit(fromSats(s, u.id), u.id),
-    }))
+    return UNITS.map((u) =>
+      u.id === fromUnit
+        ? { type: 'separator' as const }
+        : {
+            type: 'result' as const,
+            id: u.id,
+            label: u.label,
+            name: u.name,
+            formatted: formatForUnit(fromSats(s, u.id), u.id),
+          }
+    )
   })()
 
   return (
@@ -52,21 +57,29 @@ export default function DenominationCalculator() {
           >
             {UNITS.map((u) => (
               <option key={u.id} value={u.id}>
-                {u.label}
+                {u.label} ({u.name})
               </option>
             ))}
           </select>
         </div>
         <div className="flex flex-col gap-y-2 text-sm">
           {results === null ? (
-            <p className="text-zinc-500 dark:text-zinc-400">Enter an amount</p>
+            <span className="text-zinc-500 dark:text-zinc-400">Enter an amount</span>
           ) : (
-            results.map(({ id, label, name, formatted }) => (
-              <div key={id} className="flex justify-between gap-4">
-                <span className="text-zinc-600 dark:text-zinc-400">{label} ({name})</span>
-                <span className="font-mono text-zinc-800 dark:text-zinc-200 tabular-nums">{formatted}</span>
-              </div>
-            ))
+            results.map((item) =>
+              item.type === 'separator' ? (
+                <div
+                  key={`sep-${fromUnit}`}
+                  className="border-t border-dotted border-zinc-400 dark:border-zinc-500 my-0.5"
+                  aria-hidden="true"
+                />
+              ) : (
+                <div key={item.id} className="flex justify-between gap-4">
+                  <span className="text-zinc-600 dark:text-zinc-400">{item.label} ({item.name})</span>
+                  <span className="font-mono text-zinc-800 dark:text-zinc-200 tabular-nums">{item.formatted}</span>
+                </div>
+              )
+            )
           )}
         </div>
       </div>

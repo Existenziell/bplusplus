@@ -7,7 +7,6 @@ import { ChevronDown, ArrowRight } from '@/app/components/Icons'
 
 export default function HorizontalNav() {
   const [isOpen, setIsOpen] = useState(false)
-  // Initialize with all sections collapsed
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set()
   )

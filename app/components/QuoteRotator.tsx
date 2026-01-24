@@ -56,7 +56,7 @@ function QuoteRotator() {
   }
 
   useEffect(() => {
-    // Only run on client to avoid hydration mismatch
+    // Client-only
     setIsMounted(true)
     setQuote(getNextQuote())
     setIsVisible(true)
@@ -71,8 +71,7 @@ function QuoteRotator() {
     return () => clearInterval(interval)
   }, [])
 
-  // Don't render quote until mounted to avoid hydration mismatch
-  // Fixed height prevents layout jump on mobile when quotes of different lengths rotate
+  // Mount + fixed height to avoid hydration and layout jump
   if (!isMounted) {
     return (
       <blockquote

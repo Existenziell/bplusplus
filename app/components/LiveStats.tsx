@@ -37,7 +37,6 @@ export default function LiveStats() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch all data in parallel
         const [priceRes, blockchainRes, mempoolRes, feeRes] = await Promise.all([
           fetch('/api/btc-price'),
           fetch('/api/bitcoin-rpc', {

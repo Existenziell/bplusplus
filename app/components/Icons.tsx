@@ -10,8 +10,6 @@ interface IconProps extends SVGProps<SVGSVGElement> {
  */
 function mergeClassName(defaultClass: string, passedClass?: string): string {
   if (!passedClass) return defaultClass
-  // If passed class includes size classes, use it as-is (it will override)
-  // Otherwise, merge both
   return `${defaultClass} ${passedClass}`.trim()
 }
 
@@ -94,9 +92,7 @@ export function PanelCollapseIcon({ className, ...props }: IconProps) {
       strokeLinejoin="round"
       {...props}
     >
-      {/* Four short horizontal lines on the left */}
       <path d="M4 6h5M4 10h5M4 14h5M4 18h5" />
-      {/* Left-pointing arrow on the right: shaft + arrowhead pointing at the lines */}
       <path d="M12 12h8" />
       <path d="M15 9l-3 3 3 3" />
     </svg>

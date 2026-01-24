@@ -38,18 +38,16 @@ export default function StackLabPage() {
     }
   }, [])
 
-  // Prevent hydration mismatch by only rendering on client
+  // Client-only to avoid hydration mismatch
   useEffect(() => {
     setIsMounted(true)
-    
-    // Check if mobile warning was previously dismissed
+
     const dismissed = localStorage.getItem('stack-lab-mobile-warning-dismissed')
     if (dismissed === 'true') {
       setMobileWarningDismissed(true)
       return
     }
 
-    // Check if device is mobile
     const checkMobile = () => {
       const isMobile = window.innerWidth < 768 // md breakpoint
       if (isMobile) {
@@ -74,14 +72,11 @@ export default function StackLabPage() {
     const { active, over, delta } = event
     setActiveId(null)
 
-    // Only process if there was an actual drag to a drop zone
     if (!over) return
-    
-    // Check if this was just a click (no actual movement)
-    // If active and over are the same, it was likely just a click
+
+    // Ignore click (no drag)
     if (active.id === over.id) return
-    
-    // Check if there was meaningful drag distance (at least 5px)
+
     if (delta && (Math.abs(delta.x) < 5 && Math.abs(delta.y) < 5)) {
       return
     }
@@ -89,7 +84,6 @@ export default function StackLabPage() {
     const activeId = active.id as string
     const overId = over.id as string
 
-    // Handle OP code drop - only if dropped on a script area
     if (activeId.startsWith('opcode-')) {
       const opCode = activeId.replace('opcode-', '')
       
@@ -162,12 +156,10 @@ export default function StackLabPage() {
       setCurrentStepIndex(0)
       setStack(result.steps[0]?.stackAfter ?? [])
     } else if (currentStepIndex < executionSteps.length - 1) {
-      // Advance to next already-cached step
       setCurrentStepIndex((prev) => prev + 1)
       const next = executionSteps[currentStepIndex + 1]
       if (next) setStack(next.stackAfter)
     } else {
-      // At end of cache; if script was extended, run one more prefix
       const nextIndex = currentStepIndex + 1
       if (nextIndex >= fullScript.length) return
       const result = interpreterRef.current.execute(fullScript.slice(0, nextIndex + 1))

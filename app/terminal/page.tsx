@@ -6,7 +6,6 @@ import { CopyIcon } from '../components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
 
-// Available commands with descriptions
 const COMMANDS: Record<string, string> = {
   getblockchaininfo: 'Returns info about the current state of the blockchain',
   getblockcount: 'Returns the height of the most-work fully-validated chain',
@@ -37,7 +36,6 @@ interface OutputLine {
   copyableCommand?: string // For example usage lines that can be copied
 }
 
-// Startup logs sequence
 const STARTUP_LOGS = [
   'Bitcoin Core version v28.0 (release build)',
   'Using the \'arm_shani(1way,2way)\' SHA256 implementation',
@@ -85,7 +83,6 @@ export default function TerminalPage() {
   const outputRef = useRef<HTMLDivElement>(null)
   const lastTabPressRef = useRef<number>(0)
 
-  // Welcome message on mount with animated startup
   useEffect(() => {
     const bitcoinLogo = `
      ⣿⡇⠀⢸⣿⡇⠀⠀⠀⠀
@@ -99,7 +96,6 @@ export default function TerminalPage() {
   ⠀⠀⠀⣿⡇⠀⢸⣿⡇
     `
 
-    // Start with logo
     setOutput([
       {
         type: 'logo',
@@ -108,7 +104,6 @@ export default function TerminalPage() {
       },
     ])
 
-    // Animate startup logs
     let currentIndex = 0
     const interval = setInterval(() => {
       if (currentIndex < STARTUP_LOGS.length) {
@@ -130,11 +125,9 @@ export default function TerminalPage() {
     return () => clearInterval(interval)
   }, [])
 
-  // Fetch example values for error messages
   useEffect(() => {
     const fetchExamples = async () => {
       try {
-        // Fetch best block hash for examples
         const blockHashResponse = await fetch('/api/bitcoin-rpc', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -145,7 +138,6 @@ export default function TerminalPage() {
           setExampleBlockHash(blockHashData.result)
         }
 
-        // Try to get a transaction ID from mempool for examples
         const mempoolResponse = await fetch('/api/bitcoin-rpc', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -156,17 +148,16 @@ export default function TerminalPage() {
           setExampleTxId(mempoolData.result[0])
         }
       } catch (error) {
-        // Silently fail - examples will just be empty
+        // On error, examples stay empty
         console.error('Failed to fetch examples:', error)
       }
     }
 
-    // Fetch examples after a short delay to not interfere with startup
+    // Defer to not block startup
     const timeout = setTimeout(fetchExamples, 2000)
     return () => clearTimeout(timeout)
   }, [])
 
-  // Mobile warning: check viewport and persisted dismiss
   useEffect(() => {
     const dismissed = localStorage.getItem('terminal-mobile-warning-dismissed')
     if (dismissed === 'true') {
@@ -191,39 +182,32 @@ export default function TerminalPage() {
     }
   }
 
-  // Auto-scroll to bottom
   useEffect(() => {
     if (outputRef.current) {
       outputRef.current.scrollTop = outputRef.current.scrollHeight
     }
   }, [output])
 
-  // Keep input focused after command execution completes
+  // Refocus after command finishes
   useEffect(() => {
-    // Refocus when loading state changes from true to false (command finished)
     if (!isLoading && inputRef.current && document.activeElement !== inputRef.current) {
-      // Use requestAnimationFrame to ensure focus happens after React's render
       requestAnimationFrame(() => {
         inputRef.current?.focus()
       })
     }
   }, [isLoading])
 
-  // Focus input on click anywhere in terminal (but not when selecting text)
   const handleOutputClick = () => {
-    // Only focus if no text is selected (allows copy/paste)
     const selection = window.getSelection()
     if (!selection || selection.toString().length === 0) {
       inputRef.current?.focus()
     }
   }
 
-  // Find matching commands based on current input
   const findMatchingCommands = (inputText: string): string[] => {
     const trimmed = inputText.trim().toLowerCase()
     if (!trimmed) return Object.keys(COMMANDS)
 
-    // Extract the first word (command name) from input
     const commandPrefix = trimmed.split(/\s+/)[0]
 
     return Object.keys(COMMANDS).filter(cmd =>
@@ -231,13 +215,11 @@ export default function TerminalPage() {
     )
   }
 
-  // Handle autocomplete
   const handleAutocomplete = (showAll: boolean = false) => {
     const trimmed = input.trim()
     const matches = findMatchingCommands(trimmed)
 
     if (matches.length === 0) {
-      // No matches - show error
       setOutput(prev => [
         ...prev,
         {
@@ -250,21 +232,16 @@ export default function TerminalPage() {
     }
 
     if (matches.length === 1) {
-      // Single match - autocomplete
       const match = matches[0]
       const inputParts = trimmed.split(/\s+/)
       if (inputParts.length === 1) {
-        // Only command name, no args - complete it
         setInput(match)
       } else {
-        // Has args - complete just the command name
         const args = inputParts.slice(1).join(' ')
         setInput(`${match} ${args}`)
       }
     } else {
-      // Multiple matches
       if (showAll) {
-        // Double tab - show all matches
         const matchList = matches.map(cmd => `  ${cmd.padEnd(20)} ${COMMANDS[cmd]}`).join('\n')
         setOutput(prev => [
           ...prev,
@@ -275,7 +252,6 @@ export default function TerminalPage() {
           },
         ])
       } else {
-        // Single tab with multiple matches - find common prefix
         const commonPrefix = matches.reduce((prefix, cmd) => {
           let i = 0
           while (i < prefix.length && i < cmd.length && prefix[i].toLowerCase() === cmd[i].toLowerCase()) {
@@ -285,12 +261,10 @@ export default function TerminalPage() {
         })
 
         if (commonPrefix.length > trimmed.split(/\s+/)[0].length) {
-          // Complete to common prefix
           const inputParts = trimmed.split(/\s+/)
           const args = inputParts.slice(1).join(' ')
           setInput(args ? `${commonPrefix} ${args}` : commonPrefix)
         } else {
-          // No common prefix - show matches on next tab
           const matchList = matches.map(cmd => `  ${cmd.padEnd(20)} ${COMMANDS[cmd]}`).join('\n')
           setOutput(prev => [
             ...prev,
@@ -305,13 +279,11 @@ export default function TerminalPage() {
     }
   }
 
-  // Check if a command requires parameters
   const commandRequiresParams = (method: string): boolean => {
     const desc = COMMANDS[method]
     return desc ? desc.includes('Usage:') : false
   }
 
-  // Parameter format mapping
   const getParameterFormat = (paramName: string): { format: string; description: string } => {
     const normalized = paramName.toLowerCase()
 
@@ -337,11 +309,9 @@ export default function TerminalPage() {
     return { format: 'string', description: 'Parameter value' }
   }
 
-  // Extract and format parameter information from usage string
   const getParameterDetails = (usage: string): Array<{ name: string; isOptional: boolean; format: string; description: string }> => {
     const parameters: Array<{ name: string; isOptional: boolean; format: string; description: string }> = []
 
-    // Match required parameters: <param>
     const requiredRegex = /<(\w+)>/g
     let requiredMatch: RegExpExecArray | null
     while ((requiredMatch = requiredRegex.exec(usage)) !== null) {
@@ -355,7 +325,6 @@ export default function TerminalPage() {
       })
     }
 
-    // Match optional parameters: [param]
     const optionalRegex = /\[(\w+)\]/g
     let optionalMatch: RegExpExecArray | null
     while ((optionalMatch = optionalRegex.exec(usage)) !== null) {
@@ -372,7 +341,6 @@ export default function TerminalPage() {
     return parameters
   }
 
-  // Extract usage information from command description
   const getUsageInfo = (method: string): string | null => {
     const desc = COMMANDS[method]
     if (!desc) return null
@@ -380,20 +348,16 @@ export default function TerminalPage() {
     const usageMatch = desc.match(/Usage:\s*(.+)/)
     if (!usageMatch) return null
 
-    // Remove the command name from the usage string if it's there
     let usage = usageMatch[1]
-    // If usage starts with the method name, remove it
     if (usage.toLowerCase().startsWith(method.toLowerCase())) {
       usage = usage.substring(method.length).trim()
     }
     return usage
   }
 
-  // Generate example command with actual values
   const generateExample = (method: string, usage: string): string => {
     let example = usage
 
-    // Replace placeholders with actual examples
     if (example.includes('<blockhash>')) {
       const blockHash = exampleBlockHash || '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f' // Genesis block as fallback
       example = example.replace('<blockhash>', blockHash)
@@ -412,64 +376,53 @@ export default function TerminalPage() {
       example = example.replace('<conf_target>', '6')
     }
 
-    // Remove optional parameters if they're not in the example
     example = example.replace(/\s*\[verbose\]/g, '')
     example = example.replace(/\s*\[verbosity\]/g, '')
 
     return example
   }
 
-  // Parse command and arguments
   const parseCommand = (cmd: string): { method: string; params: (string | number | boolean)[] } => {
     const parts = cmd.trim().split(/\s+/)
     const method = parts[0].toLowerCase()
     const params = parts.slice(1).map(p => {
-      // Try to parse as number
       const num = Number(p)
       if (!isNaN(num)) return num
-      // Check for boolean
       if (p.toLowerCase() === 'true') return true
       if (p.toLowerCase() === 'false') return false
-      // Return as string
       return p
     })
     return { method, params }
   }
 
-  // Execute command
   const executeCommand = async (cmd: string) => {
     const trimmedCmd = cmd.trim()
     if (!trimmedCmd) return
 
-    // Add command to output
     setOutput(prev => [
       ...prev,
       { type: 'command', content: `$ bitcoin-cli ${trimmedCmd}`, timestamp: new Date() },
     ])
 
-    // Add to history
     setCommandHistory(prev => [...prev, trimmedCmd])
     setHistoryIndex(-1)
 
     const { method, params } = parseCommand(trimmedCmd)
 
-    // Handle local commands
     if (method === 'clear') {
       setOutput([])
       return
     }
 
     if (method === 'help') {
-      // Check if a command name parameter was provided
       if (params.length > 0) {
-        // Get the command name (support both -commandname and commandname formats)
+        // Normalize -commandname or commandname
         let commandName = String(params[0])
         if (commandName.startsWith('-')) {
           commandName = commandName.substring(1)
         }
         commandName = commandName.toLowerCase()
 
-        // Validate command exists
         if (!COMMANDS[commandName]) {
           setOutput(prev => [
             ...prev,
@@ -482,24 +435,20 @@ export default function TerminalPage() {
           return
         }
 
-        // Get command description (remove usage part for cleaner display)
         const fullDesc = COMMANDS[commandName]
         const descMatch = fullDesc.match(/^(.+?)(?:\.\s*Usage:)/)
         const description = descMatch ? descMatch[1] : fullDesc.replace(/\.\s*Usage:.*$/, '')
 
-        // Build detailed help output
         const helpLines: string[] = []
         helpLines.push(`Command: ${commandName}`)
         helpLines.push(`Description: ${description}`)
         helpLines.push('')
 
-        // Get usage information
         const usage = getUsageInfo(commandName)
         if (usage) {
           helpLines.push(`Usage: ${commandName} ${usage}`)
           helpLines.push('')
 
-          // Get parameter details
           const paramDetails = getParameterDetails(usage)
           if (paramDetails.length > 0) {
             helpLines.push('Parameters:')
@@ -510,7 +459,6 @@ export default function TerminalPage() {
             helpLines.push('')
           }
 
-          // Get example usage
           const example = generateExample(commandName, usage)
           if (example) {
             const fullCommand = `${commandName} ${example}`
@@ -531,14 +479,12 @@ export default function TerminalPage() {
             ])
           }
         } else {
-          // No usage info, just show description
           setOutput(prev => [
             ...prev,
             { type: 'info', content: helpLines.join('\n'), timestamp: new Date() },
           ])
         }
       } else {
-        // No parameter - show all commands
         const helpText = Object.entries(COMMANDS)
           .map(([cmd, desc]) => `  ${cmd.padEnd(20)} ${desc}`)
           .join('\n')
@@ -554,7 +500,6 @@ export default function TerminalPage() {
       return
     }
 
-    // Check if command is supported
     if (!COMMANDS[method]) {
       setOutput(prev => [
         ...prev,
@@ -567,12 +512,10 @@ export default function TerminalPage() {
       return
     }
 
-    // Check if command requires parameters and validate
     if (commandRequiresParams(method) && params.length === 0) {
       const usage = getUsageInfo(method)
       const example = usage ? generateExample(method, usage) : null
 
-      // Output error code and message in red
       setOutput(prev => [
         ...prev,
         {
@@ -582,7 +525,6 @@ export default function TerminalPage() {
         },
       ])
 
-      // Output usage in green
       setOutput(prev => [
         ...prev,
         {
@@ -592,7 +534,6 @@ export default function TerminalPage() {
         },
       ])
 
-      // Output example in green if available
       if (example) {
         const fullCommand = `${method} ${example}`
         setOutput(prev => [
@@ -609,7 +550,6 @@ export default function TerminalPage() {
       return
     }
 
-    // Make API call
     setIsLoading(true)
     try {
       const response = await fetch('/api/bitcoin-rpc', {
@@ -652,20 +592,17 @@ export default function TerminalPage() {
     }
   }
 
-  // Handle form submission
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!isLoading && input.trim()) {
       executeCommand(input)
       setInput('')
-      // Refocus input after submission
       setTimeout(() => {
         inputRef.current?.focus()
       }, 0)
     }
   }
 
-  // Handle key events
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowUp') {
       e.preventDefault()
@@ -693,15 +630,11 @@ export default function TerminalPage() {
       lastTabPressRef.current = now
 
       if (isDoubleTab) {
-        // Double tab - show all matches
         handleAutocomplete(true)
       } else {
-        // Single tab - try to autocomplete
         handleAutocomplete(false)
       }
     } else if (e.key === 'Enter') {
-      // Ensure input stays focused after Enter (form submission)
-      // The handleSubmit will handle the actual submission
       setTimeout(() => {
         inputRef.current?.focus()
       }, 0)
@@ -719,10 +652,8 @@ export default function TerminalPage() {
       <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">
         Interactive Bitcoin RPC playground
       </p>
-      
-      {/* Terminal Window */}
+
       <div className="rounded-lg overflow-hidden border border-zinc-300 dark:border-zinc-700 shadow-xl flex flex-col h-[450px] md:h-[700px]">
-          {/* Terminal Header */}
           <div className="bg-zinc-200 dark:bg-zinc-800 border-b border-zinc-300 dark:border-zinc-700 px-3 md:px-4 py-2 flex items-center gap-2 flex-shrink-0">
             <div className="flex gap-1.5">
               <button
@@ -736,7 +667,6 @@ export default function TerminalPage() {
             <span className="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm font-mono ml-2">bitcoin-cli — mainnet</span>
           </div>
 
-          {/* Terminal Output */}
           <div
             ref={outputRef}
             onClick={handleOutputClick}
@@ -787,7 +717,6 @@ export default function TerminalPage() {
             )}
           </div>
 
-          {/* Input Line */}
           <form onSubmit={handleSubmit} className="bg-zinc-100 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 p-2 md:p-4 flex items-center gap-1 md:gap-2 flex-shrink-0">
             <span className="text-btc font-mono text-xs md:text-sm">$</span>
             <span className="text-zinc-600 dark:text-zinc-500 font-mono text-xs md:text-sm hidden sm:inline">bitcoin-cli</span>
@@ -816,7 +745,6 @@ export default function TerminalPage() {
           </form>
       </div>
 
-      {/* Info */}
       <p className="text-sm text-zinc-600 dark:text-zinc-400 text-center mt-12 max-w-2xl mx-auto">
         This emulates <code className="font-mono text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.<br />Tab autocomplete is available.
       </p>
@@ -832,7 +760,6 @@ export default function TerminalPage() {
         />
       </div>
 
-      {/* Mobile Warning Modal */}
       {showMobileWarning && !mobileWarningDismissed && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>

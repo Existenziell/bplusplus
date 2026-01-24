@@ -10,7 +10,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Header from '@/app/components/Header'
 import Notification from '@/app/components/Notification'
 import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
-// Import the pre-generated glossary data (generated at build time by scripts/generate-glossary-data.js)
+// Build-time glossary from generate-glossary-data.js
 import glossaryData from '@/public/data/glossary.json'
 
 const ubuntu = Ubuntu({
@@ -76,12 +76,11 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        {/* og:logo not supported by Next.js openGraph; emitted here, value from openGraph.logo above */}
         <meta property="og:logo" content={`${SITE_URL}${OG_LOGO}`} />
         {/* Preconnect to Vercel Analytics/Speed Insights origins */}
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
-        {/* Inline glossary data for instant client-side access */}
+        {/* Inline glossary for client */}
         <script
           id="glossary-data"
           type="application/json"

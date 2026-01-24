@@ -6,12 +6,10 @@ import { usePathname } from 'next/navigation'
 import { navItems } from '@/app/utils/navigation'
 import { ArrowRight, PanelCollapseIcon, PanelExpandIcon } from '@/app/components/Icons'
 
-// Shared pathname matching logic
 function matchesPath(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(href + '/')
 }
 
-// Find which section contains the current path
 function findActiveSectionHref(pathname: string): string | null {
   for (const section of navItems) {
     if (matchesPath(pathname, section.href)) {
@@ -21,7 +19,6 @@ function findActiveSectionHref(pathname: string): string | null {
   return null
 }
 
-// Static navigation links
 const staticLinks = [
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/terminal', title: 'CLI Terminal' },
@@ -33,7 +30,6 @@ const footerLinks = [
   { href: '/author', title: 'About B++' },
 ]
 
-// Helper function to get link className based on active state
 function getLinkClassName(isActive: boolean, size: 'default' | 'sm' = 'default'): string {
   const baseClasses = size === 'sm' 
     ? 'block text-sm py-1 leading-tight transition-colors'
@@ -60,17 +56,14 @@ export default function DocsNavigation({
   const isSidebarNarrow = isSidebarCollapsed === true && onToggleSidebar != null
   const pathname = usePathname()
 
-  // Memoize active section calculation
   const activeSection = useMemo(() => findActiveSectionHref(pathname), [pathname])
 
-  // Initialize with the section that contains the current page expanded
   const [expandedSections, setExpandedSections] = useState<Set<string>>(() => {
     return activeSection ? new Set([activeSection]) : new Set()
   })
 
   const [isDocsExpanded, setIsDocsExpanded] = useState(true)
 
-  // Update expanded sections when pathname changes (e.g., navigation)
   useEffect(() => {
     if (activeSection) {
       setExpandedSections(prev => {

@@ -7,15 +7,12 @@
 const fs = require('fs');
 const path = require('path');
 
-// Read the link analysis data
 const analysisPath = path.join(__dirname, '../link-analysis.json');
 const analysis = JSON.parse(fs.readFileSync(analysisPath, 'utf-8'));
 
-// Read navigation to get page details
 const navigationPath = path.join(__dirname, '../app/utils/navigation.ts');
 const navigationContent = fs.readFileSync(navigationPath, 'utf-8');
 
-// Extract docPages
 const arrayStart = navigationContent.indexOf('export const docPages: DocPage[] = [');
 let bracketCount = 0;
 let arrayEnd = arrayStart;
@@ -61,21 +58,17 @@ const sectionColors = {
   glossary: '#6b7280',          // gray
 };
 
-// Build graph data
 const nodes = [];
 const edges = [];
 const nodeMap = new Map();
 
-// Create nodes
 docPages.forEach((page, index) => {
   const nodeId = page.path;
   const section = page.section;
   const color = sectionColors[section] || '#6b7280';
-  
-  // Count incoming links
+
   const incomingCount = analysis.mostLinked.find(m => m.path === page.path)?.count || 0;
-  
-  // Calculate node size based on incoming links
+
   const size = Math.max(20, Math.min(50, 20 + incomingCount * 3));
   
   nodes.push({
@@ -95,8 +88,7 @@ docPages.forEach((page, index) => {
   nodeMap.set(nodeId, { page, incomingCount });
 });
 
-// Create edges from the analysis data
-// We need to read the actual link data from the markdown files
+// Edges from markdown links
 const docsDir = path.join(__dirname, '../app/docs');
 const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
 const edgesMap = new Map();
@@ -137,8 +129,7 @@ markdownFiles.forEach(filePath => {
     
     if (linkUrl.startsWith('/docs/') && !linkUrl.startsWith('/docs/glossary#')) {
       const targetPath = linkUrl.split('#')[0];
-      
-      // Only add edge if target exists
+
       if (nodeMap.has(targetPath) && page.path !== targetPath) {
         const edgeKey = `${page.path}->${targetPath}`;
         if (!edgesMap.has(edgeKey)) {
@@ -157,7 +148,6 @@ markdownFiles.forEach(filePath => {
 
 edges.push(...Array.from(edgesMap.values()));
 
-// Generate HTML
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -421,8 +411,7 @@ const html = `<!DOCTYPE html>
     };
     
     const network = new vis.Network(container, data, options);
-    
-    // Layout change
+
     document.getElementById('layout').addEventListener('change', (e) => {
       const layout = e.target.value;
       if (layout === 'hierarchical') {
@@ -445,26 +434,23 @@ const html = `<!DOCTYPE html>
     });
     
     const pageDataMap = ${JSON.stringify(docPages.reduce((acc, p) => { acc[p.path] = p; return acc; }, {}))};
-    
-    // Section filter
+
     document.getElementById('section').addEventListener('change', (e) => {
       const section = e.target.value;
       if (section === 'all') {
         filteredNodes = allNodes;
-        filteredEdges = allEdges.filter(edge => 
+        filteredEdges = allEdges.filter(edge =>
           allNodes.find(n => n.id === edge.from) && allNodes.find(n => n.id === edge.to)
         );
       } else {
-        // Find nodes by section
         const sectionNodes = allNodes.filter(node => {
           const pageData = pageDataMap[node.id];
           return pageData && pageData.section === section;
         });
-        
+
         const sectionNodeIds = new Set(sectionNodes.map(n => n.id));
         filteredNodes = sectionNodes;
-        // Include edges where both nodes are in the section, or where one node is in section and connects to it
-        filteredEdges = allEdges.filter(edge => 
+        filteredEdges = allEdges.filter(edge =>
           sectionNodeIds.has(edge.from) && sectionNodeIds.has(edge.to)
         );
       }
@@ -474,8 +460,7 @@ const html = `<!DOCTYPE html>
       data.nodes.add(filteredNodes);
       data.edges.add(filteredEdges);
     });
-    
-    // Node click handler
+
     network.on('click', (params) => {
       if (params.nodes.length > 0) {
         const nodeId = params.nodes[0];
@@ -498,8 +483,7 @@ const html = `<!DOCTYPE html>
         document.getElementById('info').classList.remove('visible');
       }
     });
-    
-    // Reset view
+
     function resetView() {
       network.fit({
         animation: {
@@ -508,8 +492,7 @@ const html = `<!DOCTYPE html>
         },
       });
     }
-    
-    // Fit network
+
     function fitNetwork() {
       network.fit({
         animation: {
@@ -518,8 +501,7 @@ const html = `<!DOCTYPE html>
         },
       });
     }
-    
-    // Initial fit
+
     setTimeout(() => {
       network.fit({
         animation: {
@@ -532,7 +514,7 @@ const html = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// Write the HTML file to public/data so it's served as a static file
+// Output to public/data
 const outputPath = path.join(__dirname, '../public/data/link-visualization.html');
 fs.writeFileSync(outputPath, html);
 console.log(`✅ Visualization generated: ${outputPath}`);

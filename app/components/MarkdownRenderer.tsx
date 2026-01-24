@@ -26,7 +26,7 @@ interface VideoGroupBlock {
   videoIds: string[]
 }
 
-// Parse :::video-group blocks and extract YouTube video IDs from markdown links
+// Parse :::video-group and collect YouTube IDs from [text](url)
 function parseVideoGroups(content: string): { processedContent: string; videoGroups: VideoGroupBlock[] } {
   const videoGroups: VideoGroupBlock[] = []
   let groupCounter = 0
@@ -37,7 +37,6 @@ function parseVideoGroups(content: string): { processedContent: string; videoGro
     const groupId = `video-group-${groupCounter++}`
     const videoIds: string[] = []
 
-    // Extract markdown links [text](url) and collect YouTube video IDs
     const linkRegex = /\[[^\]]*\]\(([^)]+)\)/g
     let linkMatch
     while ((linkMatch = linkRegex.exec(groupContent)) !== null) {
@@ -59,19 +58,16 @@ function parseVideoGroups(content: string): { processedContent: string; videoGro
   return { processedContent, videoGroups }
 }
 
-// Parse :::code-group blocks and extract code blocks within them
 function parseCodeGroups(content: string): { processedContent: string; codeGroups: CodeGroupBlock[] } {
   const codeGroups: CodeGroupBlock[] = []
   let groupCounter = 0
 
-  // Match :::code-group ... ::: blocks
   const codeGroupRegex = /:::code-group\s*\n([\s\S]*?)\n:::/g
 
   const processedContent = content.replace(codeGroupRegex, (match, groupContent) => {
     const groupId = `code-group-${groupCounter++}`
     const languages: { lang: string; code: string }[] = []
 
-    // Extract individual code blocks from the group
     const codeBlockRegex = /```(\w+)\s*\n([\s\S]*?)```/g
     let codeMatch
 
@@ -83,11 +79,9 @@ function parseCodeGroups(content: string): { processedContent: string; codeGroup
 
     if (languages.length > 0) {
       codeGroups.push({ id: groupId, languages })
-      // Return a placeholder that we'll render as the MultiLanguageCodeBlock
       return `<div data-code-group-id="${groupId}"></div>`
     }
 
-    // If no code blocks found, return original content
     return match
   })
 
@@ -104,7 +98,6 @@ function generateSlug(text: string): string {
     .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
 }
 
-// Extract text content from React children
 function extractText(children: React.ReactNode): string {
   if (typeof children === 'string') {
     return children
@@ -124,7 +117,6 @@ function extractText(children: React.ReactNode): string {
   return ''
 }
 
-// Extract YouTube video ID from URL
 function getYouTubeVideoId(url: string): string | null {
   const patterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
@@ -140,7 +132,7 @@ function getYouTubeVideoId(url: string): string | null {
   return null
 }
 
-// Lazy-loading YouTube embed component using Intersection Observer
+// Lazy-load when in view
 function YouTubeEmbed({ videoId, inGroup }: { videoId: string; inGroup?: boolean }) {
   const [isVisible, setIsVisible] = React.useState(false)
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -200,14 +192,11 @@ const remarkPlugins = [remarkGfm]
 // rehype-highlight runs at BUILD TIME for static pages (not runtime) - this is optimal
 const rehypePlugins = [rehypeRaw, rehypeHighlight]
 
-// Factory function to create heading components (h1-h6)
-// Using any for props is acceptable here - react-markdown handles internal typing
-// and we're mostly just extracting text and passing props through
+// any ok: react-markdown internals, we pass props through
 const createHeading = (level: number) => {
   const HeadingComponent = ({ children, ...props }: any) => {
     const text = extractText(children)
     const id = generateSlug(text)
-    // Extract node from props to avoid passing it to the DOM element
     const { node, ...htmlProps } = props
 
     const Tag = `h${level}` as keyof React.JSX.IntrinsicElements
@@ -222,10 +211,9 @@ const createHeading = (level: number) => {
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  // Use glossary data from context (loaded once globally)
   const { glossaryData } = useGlossary()
 
-  // Memoize the parsing of code groups and video groups - this is expensive regex processing
+  // Memoize code/video group parsing (expensive)
   const { processedContent, codeGroupMap, videoGroupMap } = useMemo(() => {
     const { processedContent: afterCode, codeGroups } = parseCodeGroups(content)
     const { processedContent: finalContent, videoGroups } = parseVideoGroups(afterCode)
@@ -234,11 +222,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     return { processedContent: finalContent, codeGroupMap, videoGroupMap }
   }, [content])
 
-  // Memoize components object to prevent recreation on every render
-  // Using any for component props is acceptable - react-markdown handles internal typing
-  // and we're mostly passing props through or accessing specific known properties
+  // Memoize components; any ok for react-markdown pass-through
   const components = useMemo<Components>(() => ({
-    // Handle code group and video group placeholders
     div: ({ node, children, ...props }: any) => {
       const codeGroupId = props['data-code-group-id']
       if (codeGroupId && codeGroupMap.has(codeGroupId)) {
@@ -273,21 +258,18 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     h5: createHeading(5),
     h6: createHeading(6),
     p: ({ children, ...props }: any) => {
-      // Check if paragraph contains a YouTube embed (set by a component)
       const childrenArray = React.Children.toArray(children)
 
-      // Check if paragraph contains a YouTube embed span
       for (const child of childrenArray) {
         if (React.isValidElement(child)) {
           const childProps = child.props as { 'data-youtube-embed'?: string }
           const videoId = childProps?.['data-youtube-embed']
 
           if (videoId) {
-            // Extract text content from other children (excluding the embed)
             const otherChildren = childrenArray.filter(c => c !== child)
             const otherText = otherChildren.map(extractText).join('').trim()
 
-            // If paragraph only contains the YouTube embed (or embed + minimal whitespace), return just the embed
+            // Standalone embed → return only embed
             if (otherText === '' || childrenArray.length === 1) {
               return <YouTubeEmbed videoId={videoId} />
             }
@@ -295,7 +277,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         }
       }
 
-      // Also check for direct YouTube links (fallback for cases where a component didn't catch it)
+      // Fallback: direct YouTube links in <a>
       for (const child of childrenArray) {
         if (React.isValidElement(child)) {
           const childProps = child.props as { href?: string }
@@ -315,15 +297,13 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         }
       }
 
-      // Default paragraph rendering
       return <p {...props}>{children}</p>
     },
     a: ({ href, children, ...props }: any) => {
-      // YouTube video embeds - check first
       if (href && typeof href === 'string' && (href.includes('youtube.com') || href.includes('youtu.be'))) {
         const videoId = getYouTubeVideoId(href)
         if (videoId) {
-          // Return embed with a marker so p component can detect and replace the paragraph
+          // Marker for p to replace paragraph with embed
           return (
             <span data-youtube-embed={videoId} style={{ display: 'block' }}>
               <YouTubeEmbed videoId={videoId} />
@@ -331,7 +311,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           )
         }
       }
-      // Glossary links with tooltip
       if (href?.startsWith('/docs/glossary#')) {
         return (
           <GlossaryTooltip href={href} glossaryData={glossaryData}>
@@ -339,7 +318,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </GlossaryTooltip>
         )
       }
-      // Internal Next.js links
       if (href?.startsWith('/')) {
         return (
           <Link href={href} {...props}>
@@ -347,7 +325,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </Link>
         )
       }
-      // Anchor links (same page)
       if (href?.startsWith('#')) {
         return (
           <a href={href} {...props}>
@@ -355,7 +332,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </a>
         )
       }
-      // External links
       return (
         <a
           href={href}
@@ -372,7 +348,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       )
     },
     code: ({ inline, className, children, ...props }: any) => {
-      // Only handle inline code here
       if (inline) {
         return (
           <code className="inline-code" {...props}>
@@ -380,8 +355,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </code>
         )
       }
-      // For block-level code, return the code element as-is
-      // The pre component will handle the wrapper
+      // Block: pass through; pre wraps
       return (
         <code className={className} {...props}>
           {children}
@@ -389,8 +363,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       )
     },
     pre: ({ children, ...props }: any) => {
-      // In react-markdown, pre contains a code element as its child
-      // Extract the code element and its properties
+      // react-markdown puts code inside pre
       const codeElement = React.Children.toArray(children)[0]
 
       if (React.isValidElement(codeElement) && codeElement.type === 'code') {
@@ -398,8 +371,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         const match = /language-(\w+)/.exec(className)
         const language = match ? match[1] : ''
 
-        // Use CodeBlock component for code blocks with language labels
-        // This prevents the pre from being wrapped in a p tag
+        // CodeBlock to avoid pre-in-p
         return (
           <CodeBlock language={language} className={className} {...props}>
             {(codeElement.props as { children?: React.ReactNode })?.children}
@@ -407,7 +379,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         )
       }
 
-      // Fallback to default pre rendering
       return (
         <pre className="hljs bg-zinc-100 dark:bg-zinc-900 rounded-lg p-4 overflow-x-auto mb-4 border border-zinc-300 dark:border-zinc-700" {...props}>
           {children}

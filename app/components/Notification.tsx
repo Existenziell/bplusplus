@@ -17,9 +17,7 @@ interface NotificationDetail {
   isError?: boolean
 }
 
-/**
- * Show a notification toast. Can be called from anywhere.
- */
+/** Show notification toast. Call from anywhere. */
 export function showNotification(text: string, isError = false) {
   window.dispatchEvent(
     new CustomEvent<NotificationDetail>(NOTIFICATION_EVENT, {
@@ -40,10 +38,7 @@ const XIcon = () => (
   </svg>
 )
 
-/**
- * Self-contained notification component.
- * Listens for custom events - no context needed.
- */
+/** Listens for custom events; no context. */
 export default function Notification() {
   const [state, setState] = useState<NotificationState>({
     show: false,

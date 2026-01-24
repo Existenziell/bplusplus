@@ -24,7 +24,6 @@ interface GlossarySection {
   entries: GlossaryEntry[]
 }
 
-// Generate slug from text (same as GitHub markdown)
 function generateSlug(text: string): string {
   return text
     .toLowerCase()
@@ -34,7 +33,6 @@ function generateSlug(text: string): string {
     .replace(/^-+|-+$/g, '')
 }
 
-// Parse the markdown content into structured sections and entries
 function parseGlossaryContent(content: string): GlossarySection[] {
   const sections: GlossarySection[] = []
   const lines = content.split('\n')
@@ -44,10 +42,8 @@ function parseGlossaryContent(content: string): GlossarySection[] {
   let currentDefinitionLines: string[] = []
 
   for (const line of lines) {
-    // Check for section header (## A, ## B, etc.)
     const sectionMatch = line.match(/^## (.+)$/)
     if (sectionMatch) {
-      // Save previous entry if exists
       if (currentEntry && currentSection) {
         currentEntry.definition = currentDefinitionLines.join('\n').trim()
         currentSection.entries.push(currentEntry)
@@ -55,7 +51,6 @@ function parseGlossaryContent(content: string): GlossarySection[] {
         currentDefinitionLines = []
       }
 
-      // Save previous section if exists
       if (currentSection) {
         sections.push(currentSection)
       }
@@ -69,10 +64,8 @@ function parseGlossaryContent(content: string): GlossarySection[] {
       continue
     }
 
-    // Check for term header (### Term Name)
     const termMatch = line.match(/^### (.+)$/)
     if (termMatch && currentSection) {
-      // Save previous entry if exists
       if (currentEntry) {
         currentEntry.definition = currentDefinitionLines.join('\n').trim()
         currentSection.entries.push(currentEntry)
@@ -88,13 +81,11 @@ function parseGlossaryContent(content: string): GlossarySection[] {
       continue
     }
 
-    // Accumulate definition content
     if (currentEntry) {
       currentDefinitionLines.push(line)
     }
   }
 
-  // Save last entry and section
   if (currentEntry && currentSection) {
     currentEntry.definition = currentDefinitionLines.join('\n').trim()
     currentSection.entries.push(currentEntry)
@@ -106,7 +97,7 @@ function parseGlossaryContent(content: string): GlossarySection[] {
   return sections
 }
 
-// Mini markdown renderer for definitions (inline content only)
+// Inline-only markdown for definitions
 function DefinitionRenderer({ content }: { content: string }) {
   return (
     <ReactMarkdown
@@ -153,14 +144,13 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null)
   const sections = React.useMemo(() => parseGlossaryContent(content), [content])
 
-  // Handle initial hash and hash changes
   useEffect(() => {
     const handleHash = () => {
-      const hash = window.location.hash.slice(1) // Remove the #
+      const hash = window.location.hash.slice(1)
       if (hash) {
         setActiveSlug(hash)
 
-        // Scroll to the element after a brief delay to allow expansion
+        // Brief delay for details to expand
         setTimeout(() => {
           const element = document.getElementById(hash)
           if (element) {
@@ -172,12 +162,9 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
       }
     }
 
-    // Check on mount
     handleHash()
-
-    // Listen for hash changes (including browser back/forward)
+    // hashchange + popstate for back/forward
     window.addEventListener('hashchange', handleHash)
-    // Also listen for popstate to handle browser back/forward buttons
     window.addEventListener('popstate', handleHash)
     
     return () => {
@@ -186,18 +173,15 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
     }
   }, [])
 
-  // Handle clicking on a term to update URL hash
   const handleTermClick = (slug: string, isOpen: boolean) => {
     if (isOpen) {
-      // Opening - update hash using replaceState to avoid adding history entries
-      // This prevents the double-back-button issue
+      // replaceState to avoid extra history (double-back)
       const currentHash = window.location.hash.slice(1)
       if (currentHash !== slug) {
         window.history.replaceState(null, '', `#${slug}`)
       }
       setActiveSlug(slug)
     } else {
-      // Closing - clear hash if it matches
       if (activeSlug === slug) {
         window.history.replaceState(null, '', window.location.pathname)
         setActiveSlug(null)
@@ -205,16 +189,12 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
     }
   }
 
-  // Handle clicking on a letter to jump to that section
   const handleLetterClick = (sectionSlug: string, e: React.MouseEvent) => {
     e.preventDefault()
     const element = document.getElementById(sectionSlug)
     if (element) {
-      // Update URL hash using replaceState to avoid adding history entries
       window.history.replaceState(null, '', `#${sectionSlug}`)
-      // Scroll to section
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      // Update active slug if it's a term within this section
       const hash = window.location.hash.slice(1)
       setActiveSlug(hash)
     }

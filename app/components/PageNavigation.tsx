@@ -10,7 +10,6 @@ export default function PageNavigation() {
   const { previousPage, nextPage } = useDocNavigation()
   const isGlossaryPage = pathname === '/docs/glossary'
 
-  // For glossary page, only show "Top" link
   if (isGlossaryPage) {
     return (
       <div className="mt-12 pt-6 border-t border-zinc-200 dark:border-zinc-700 flex justify-center">
@@ -24,7 +23,6 @@ export default function PageNavigation() {
     )
   }
 
-  // Don't show if no navigation available
   if (!previousPage && !nextPage) {
     return null
   }

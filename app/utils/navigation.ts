@@ -20,9 +20,7 @@ export interface NavSection {
   children?: { title: string; href: string }[]
 }
 
-// All documentation pages with their metadata
 export const docPages: DocPage[] = [
-  // Fundamentals (high-level concepts)
   { path: '/docs/fundamentals', mdFile: 'app/docs/fundamentals/overview.md', title: 'Bitcoin Fundamentals', section: 'fundamentals' },
   { path: '/docs/fundamentals/problems', mdFile: 'app/docs/fundamentals/problems/problems.md', title: 'Problems Bitcoin Solved', section: 'fundamentals' },
   { path: '/docs/fundamentals/cypherpunk-philosophy', mdFile: 'app/docs/fundamentals/cypherpunk-philosophy/cypherpunk-philosophy.md', title: 'Cypherpunk Philosophy', section: 'fundamentals' },
@@ -35,14 +33,12 @@ export const docPages: DocPage[] = [
   { path: '/docs/fundamentals/game-theory', mdFile: 'app/docs/fundamentals/game-theory/game-theory.md', title: 'Game Theory', section: 'fundamentals' },
   { path: '/docs/fundamentals/utxos', mdFile: 'app/docs/fundamentals/utxos/utxos.md', title: 'UTXO Model', section: 'fundamentals' },
 
-  // History
   { path: '/docs/history', mdFile: 'app/docs/history/overview.md', title: 'Bitcoin History', section: 'history' },
   { path: '/docs/history/people', mdFile: 'app/docs/history/people/people.md', title: 'People', section: 'history' },
   { path: '/docs/history/halvings', mdFile: 'app/docs/history/halvings.md', title: 'Halvings', section: 'history' },
   { path: '/docs/history/forks', mdFile: 'app/docs/history/forks.md', title: 'Forks', section: 'history' },
   { path: '/docs/history/bips', mdFile: 'app/docs/history/bips.md', title: 'BIPs', section: 'history' },
 
-  // Bitcoin Protocol (deep technical)
   { path: '/docs/bitcoin', mdFile: 'app/docs/bitcoin/overview.md', title: 'The Bitcoin Protocol', section: 'bitcoin' },
   { path: '/docs/bitcoin/cryptography', mdFile: 'app/docs/bitcoin/cryptography/cryptography.md', title: 'Cryptography', section: 'bitcoin' },
   { path: '/docs/bitcoin/consensus', mdFile: 'app/docs/bitcoin/consensus/consensus.md', title: 'Consensus Mechanism', section: 'bitcoin' },
@@ -61,7 +57,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/bitcoin/transaction-lifecycle', mdFile: 'app/docs/bitcoin/transaction-lifecycle/transaction-lifecycle.md', title: 'Transaction Lifecycle', section: 'bitcoin' },
   { path: '/docs/bitcoin/sighash-types', mdFile: 'app/docs/bitcoin/sighash-types/sighash-types.md', title: 'Sighash Types', section: 'bitcoin' },
 
-  // Mining
   { path: '/docs/mining', mdFile: 'app/docs/mining/overview.md', title: 'Mining', section: 'mining' },
   { path: '/docs/mining/proof-of-work', mdFile: 'app/docs/mining/proof-of-work/proof-of-work.md', title: 'Proof-of-Work', section: 'mining' },
   { path: '/docs/mining/difficulty', mdFile: 'app/docs/mining/difficulty/difficulty.md', title: 'Difficulty Adjustment', section: 'mining' },
@@ -73,7 +68,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/mining/attacks', mdFile: 'app/docs/mining/attacks/attacks.md', title: 'Mining Attacks', section: 'mining' },
   { path: '/docs/mining/network-attacks', mdFile: 'app/docs/mining/network-attacks/network-attacks.md', title: 'Network Attacks & Security', section: 'mining' },
 
-  // Wallets
   { path: '/docs/wallets', mdFile: 'app/docs/wallets/overview.md', title: 'Wallet Development', section: 'wallets' },
   { path: '/docs/wallets/hd-wallets', mdFile: 'app/docs/wallets/hd-wallets/hd-wallets.md', title: 'HD Wallets', section: 'wallets' },
   { path: '/docs/wallets/address-types', mdFile: 'app/docs/wallets/address-types/address-types.md', title: 'Address Types', section: 'wallets' },
@@ -83,7 +77,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/wallets/privacy', mdFile: 'app/docs/wallets/privacy/privacy.md', title: 'Privacy Techniques', section: 'wallets' },
   { path: '/docs/wallets/smart-contracts', mdFile: 'app/docs/wallets/smart-contracts/smart-contracts.md', title: 'Smart Contracts & Advanced Scripting', section: 'wallets' },
 
-  // Lightning
   { path: '/docs/lightning', mdFile: 'app/docs/lightning/overview.md', title: 'Lightning Network', section: 'lightning' },
   { path: '/docs/lightning/channels', mdFile: 'app/docs/lightning/channels/channels.md', title: 'Channels', section: 'lightning' },
   { path: '/docs/lightning/routing', mdFile: 'app/docs/lightning/routing/fees.md', title: 'Routing Fees', section: 'lightning' },
@@ -95,7 +88,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/lightning/watchtowers', mdFile: 'app/docs/lightning/watchtowers/watchtowers.md', title: 'Watchtowers', section: 'lightning' },
   { path: '/docs/lightning/anchor-outputs', mdFile: 'app/docs/lightning/anchor-outputs/anchor-outputs.md', title: 'Anchor Outputs', section: 'lightning' },
 
-  // Setup & Infrastructure
   { path: '/docs/development', mdFile: 'app/docs/development/overview.md', title: 'Setup & Infrastructure', section: 'development' },
   { path: '/docs/development/install-bitcoin', mdFile: 'app/docs/development/install-bitcoin/install-bitcoin.md', title: 'Installing Bitcoin', section: 'development' },
   { path: '/docs/development/testing', mdFile: 'app/docs/development/testing/testing.md', title: 'Testing & Debugging', section: 'development' },
@@ -104,7 +96,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/development/node-types', mdFile: 'app/docs/development/node-types/node-types.md', title: 'Node Types & Architecture', section: 'development' },
   { path: '/docs/development/bitcoin-core-internals', mdFile: 'app/docs/development/bitcoin-core-internals/bitcoin-core-internals.md', title: 'Bitcoin Core Internals', section: 'development' },
 
-  // Bitcoin Development
   { path: '/docs/bitcoin-development', mdFile: 'app/docs/bitcoin-development/overview.md', title: 'Bitcoin Development', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/keys', mdFile: 'app/docs/bitcoin-development/keys/keys.md', title: 'Key Management', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/addresses', mdFile: 'app/docs/bitcoin-development/addresses/addresses.md', title: 'Address Generation', section: 'bitcoin-development' },
@@ -116,7 +107,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/bitcoin-development/script-patterns', mdFile: 'app/docs/bitcoin-development/script-patterns/script-patterns.md', title: 'Bitcoin Script Patterns', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/miniscript', mdFile: 'app/docs/bitcoin-development/miniscript/miniscript.md', title: 'Miniscript', section: 'bitcoin-development' },
 
-  // Controversies
   { path: '/docs/controversies', mdFile: 'app/docs/controversies/overview.md', title: 'Controversies', section: 'controversies' },
   { path: '/docs/controversies/op-return', mdFile: 'app/docs/controversies/op-return/debate.md', title: 'OP_RETURN Debate', section: 'controversies' },
   { path: '/docs/controversies/blocksize-wars', mdFile: 'app/docs/controversies/blocksize-wars/blocksize-wars.md', title: 'Blocksize Wars', section: 'controversies' },
@@ -125,7 +115,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/controversies/mt-gox', mdFile: 'app/docs/controversies/mt-gox/mt-gox.md', title: 'Mt. Gox Collapse', section: 'controversies' },
   { path: '/docs/controversies/craig-wright', mdFile: 'app/docs/controversies/craig-wright/craig-wright.md', title: 'Craig Wright', section: 'controversies' },
 
-  // Advanced Topics
   { path: '/docs/advanced', mdFile: 'app/docs/advanced/overview.md', title: 'Advanced Topics', section: 'advanced' },
   { path: '/docs/advanced/atomic-swaps', mdFile: 'app/docs/advanced/atomic-swaps/atomic-swaps.md', title: 'Atomic Swaps', section: 'advanced' },
   { path: '/docs/advanced/dlcs', mdFile: 'app/docs/advanced/dlcs/dlcs.md', title: 'Discreet Log Contracts', section: 'advanced' },
@@ -138,7 +127,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/advanced/ordinals-inscriptions', mdFile: 'app/docs/advanced/ordinals-inscriptions/ordinals-inscriptions.md', title: 'Ordinals & Inscriptions', section: 'advanced' },
   { path: '/docs/advanced/covenants', mdFile: 'app/docs/advanced/covenants/covenants.md', title: 'Covenants', section: 'advanced' },
 
-  // Glossary
   { path: '/docs/glossary', mdFile: 'app/docs/glossary/terms.md', title: 'Glossary', section: 'glossary' },
 ]
 
@@ -206,7 +194,6 @@ export const sections: Record<string, { title: string; description: string }> = 
   },
 }
 
-// Navigation structure for sidebar
 export const navItems: NavSection[] = [
   {
     title: 'Fundamentals',
@@ -260,23 +247,19 @@ export const navItems: NavSection[] = [
   },
 ]
 
-// Set of downloadable paths (derived from docPages)
 export const downloadablePaths: Set<string> = new Set(docPages.map(p => p.path))
 
-// Map of paths to MD files (derived from docPages)
 export const pathToMdFile: Record<string, string> = Object.fromEntries(
   docPages.map(p => [p.path, p.mdFile])
 )
 
-// Route labels for breadcrumbs (derived from docPages + section names)
+// Breadcrumb labels
 export const routeLabels: Record<string, string> = {
-  // Top-level app pages
   terminal: 'CLI Terminal',
   'stack-lab': 'Stack Lab',
   whitepaper: 'Whitepaper',
   author: 'About B++',
 
-  // Section labels
   fundamentals: 'Fundamentals',
   history: 'History',
   development: 'Setup & Infrastructure',
@@ -289,7 +272,6 @@ export const routeLabels: Record<string, string> = {
   controversies: 'Controversies',
   glossary: 'Glossary',
 
-  // Page labels (extracted from path segment to title)
   problems: 'Problems Bitcoin Solved',
   'cypherpunk-philosophy': 'Cypherpunk Philosophy',
   blockchain: 'The Blockchain',

@@ -1,6 +1,6 @@
 # Bitcoin Halving Schedule
 
-Bitcoin's [block reward](/docs/glossary#block-reward) halves every 210,000 blocks, which occurs approximately every 4 years. This creates a predictable, decreasing inflation rate and ensures the total supply will never exceed [21 million](/docs/glossary#21-million) BTC.
+Bitcoin's [block reward](/docs/glossary#block-reward) halves every 210,000 blocks, which occurs approximately every 4 years. This creates a predictable, decreasing inflation rate and ensures the total supply will never exceed 21 million BTC.
 
 ## Supply Formula
 

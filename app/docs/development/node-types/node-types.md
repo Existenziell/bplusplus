@@ -84,7 +84,7 @@ Characteristics:
 
 ### Block-Relay-Only Connections
 
-**Block-relay-only** is a connection mode where the node does **not** exchange [transaction](/docs/bitcoin/transaction-lifecycle) ([inv](/docs/bitcoin/p2p-protocol), [mempool](/docs/mining/mempool)) data with that [peer](/docs/glossary#peer), only [blocks](/docs/bitcoin/blocks) and [compact blocks](/docs/bitcoin/blocks#compact-block-relay-bip-152). This reduces [privacy](/docs/wallets/privacy) leakage (peers cannot directly tie your [transactions](/docs/bitcoin/transaction-lifecycle) to your [IP](/docs/glossary#peer)) and bandwidth. Bitcoin Core uses some block-relay-only [outbound](/docs/bitcoin/p2p-protocol) connections by default.
+**Block-relay-only** is a connection mode where the node does **not** exchange [transaction](/docs/bitcoin/transaction-lifecycle) ([inv](/docs/bitcoin/p2p-protocol), [mempool](/docs/mining/mempool)) data with that [peer](/docs/glossary#peer), only blocks and [compact blocks](/docs/bitcoin/blocks#compact-block-relay-bip-152). This reduces [privacy](/docs/wallets/privacy) leakage (peers cannot directly tie your [transactions](/docs/bitcoin/transaction-lifecycle) to your IP) and bandwidth. Bitcoin Core uses some block-relay-only [outbound](/docs/bitcoin/p2p-protocol) connections by default.
 
 ---
 

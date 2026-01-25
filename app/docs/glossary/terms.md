@@ -138,6 +138,9 @@ The set of rules that all Bitcoin nodes must follow to validate transactions and
 ### Censorship Resistance
 The ability to make transactions that cannot be blocked, reversed, or seized by any central authority, government, or corporation. Bitcoin achieves this through decentralization: thousands of independent miners and nodes mean no single entity controls which transactions are included in blocks. Even if some miners refuse to include certain transactions, others will mine them for the fees.
 
+### ChaCha20
+A stream cipher designed by Daniel J. Bernstein that encrypts data by combining a key and nonce with a fast, ARX-based (Addition, Rotation, XOR) function. In the Bitcoin ecosystem, ChaCha20 is used in [BIP 324](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki) (v2 P2P transport) to encrypt connections between nodes, providing confidentiality and integrity. It is often combined with the Poly1305 authenticator (ChaCha20-Poly1305) for authenticated encryption.
+
 ### Change Output
 A transaction output that sends excess funds back to the sender, created because Bitcoin's UTXO model requires spending entire outputs. When input value exceeds the payment amount plus fees, the difference must be explicitly sent somewhere, typically a new address controlled by the sender. Wallets handle change automatically, but understanding it is important for privacy (change outputs can link transactions) and fee estimation.
 

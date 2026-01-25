@@ -335,13 +335,13 @@ main > div > div > h1:first-child {
   @apply border border-gray-300 dark:border-gray-700 px-2 sm:px-4 py-2 text-xs sm:text-sm text-gray-900 dark:text-gray-200;
 }
 
-.markdown-content table tr:nth-child(even) {
-  @apply bg-gray-100 dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50;
+.markdown-content table th:first-child,
+.markdown-content table td:first-child {
+  min-width: 14rem;
 }
 
-.markdown-content table th:last-child,
-.markdown-content table td:last-child {
-  white-space: nowrap;
+.markdown-content table tr:nth-child(even) {
+  @apply bg-gray-100 dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50;
 }
 
 .markdown-content a {

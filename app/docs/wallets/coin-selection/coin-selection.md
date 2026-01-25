@@ -1,6 +1,6 @@
 # Coin Selection
 
-Coin selection is the process of choosing which [UTXOs](/docs/fundamentals/utxos) (Unspent Transaction Outputs) to spend when creating a Bitcoin transaction. This is a critical wallet function that affects transaction fees, privacy, and efficiency. For a deeper understanding of the UTXO model, see the [UTXO Model](/docs/fundamentals/utxos) documentation.
+Coin selection is the process of choosing which UTXOs (Unspent Transaction Outputs) to spend when creating a Bitcoin transaction. This is a critical wallet function that affects transaction fees, privacy, and efficiency. For a deeper understanding of the UTXO model, see the [UTXO Model](/docs/fundamentals/utxos) documentation.
 
 ## The Challenge
 

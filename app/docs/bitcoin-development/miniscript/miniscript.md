@@ -1,10 +1,10 @@
 # Miniscript
 
-**Miniscript** is a structured language for writing [Bitcoin Script](/docs/bitcoin/script) that is easier to analyze, compose, and reason about than raw Script. It maps to a well-defined subset of [Script](/docs/bitcoin/script) and provides guarantees about spending conditions, costs, and the number and type of [signatures](/docs/bitcoin/cryptography) required.
+**Miniscript** is a structured language for writing [Bitcoin Script](/docs/bitcoin/script) that is easier to analyze, compose, and reason about than raw Script. It maps to a well-defined subset of Script and provides guarantees about spending conditions, costs, and the number and type of signatures required.
 
 ## Why Miniscript?
 
-Raw [Bitcoin Script](/docs/bitcoin/op-codes) is flexible but hard to work with:
+Raw Bitcoin Script is flexible but hard to work with:
 
 - **Opaque**: Deciding what a script does, what can satisfy it, and how much it costs requires careful analysis.
 - **Brittle**: Small changes can produce invalid or unexpected scripts.
@@ -14,7 +14,7 @@ Miniscript addresses this by:
 
 - **Policy vs. script**: You express a *policy* (high-level spending conditions); Miniscript compiles it to Script.
 - **Fragments**: A small set of composable *fragments* (e.g., `pk`, `thresh`, `after`) that map to Script.
-- **Analyzable**: Tools can compute correctness, [satisfaction](/docs/glossary#witness) size, and [signature](/docs/bitcoin/cryptography) requirements automatically.
+- **Analyzable**: Tools can compute correctness, [satisfaction](/docs/glossary#witness) size, and signature requirements automatically.
 
 ---
 
@@ -66,7 +66,7 @@ Not every Miniscript expression is **safe**; the compiler and analyzers can repo
 A Miniscript policy is compiled down to [Script](/docs/bitcoin/script) (and thus to [P2WSH](/docs/glossary#p2wsh-pay-to-witness-script-hash) or [P2TR](/docs/bitcoin/taproot) [Tapscript](/docs/glossary#tapscript)). The exact output depends on:
 
 - The target (pre-Taproot P2WSH vs [Taproot](/docs/bitcoin/taproot) Tapscript)
-- Optimization options (e.g., minimize size, minimize [signature](/docs/bitcoin/cryptography) count)
+- Optimization options (e.g., minimize size, minimize signature count)
 
 Libraries such as `rust-miniscript` and `miniscript` (C++) (and the reference `miniscript` site) perform this compilation.
 

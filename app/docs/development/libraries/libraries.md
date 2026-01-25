@@ -12,7 +12,6 @@ This guide compares major Bitcoin libraries across languages and provides practi
 > - **bip32utils**: v0.3.x (use `BIP32Key.fromSeed()` for seed-based derivation)
 
 When using different versions, consult each library's migration guides for API changes.
-:::
 
 ## Library Overview
 
@@ -51,7 +50,7 @@ The most popular JavaScript Bitcoin library.
 ```bash
 npm install bitcoinjs-lib
 npm install ecpair tiny-secp256k1  # For signing
-npm install bip32 bip39           # For HD wallets
+npm install bip32 bip39            # For HD wallets
 ```
 
 **Basic Usage:**

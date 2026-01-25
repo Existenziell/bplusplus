@@ -11,6 +11,8 @@ Locking Script: Defines conditions
 Unlocking Script: Proves conditions are met
 ```
 
+See this in action in [Stack Lab](/stack-lab).
+
 Unlike Ethereum, Bitcoin contracts are:
 - **Stateless**: No persistent contract state
 - **Deterministic**: Same inputs = same result

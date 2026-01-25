@@ -1,6 +1,6 @@
 # Address Generation & Validation
 
-Bitcoin [addresses](/docs/glossary#address) are human-readable encodings of output scripts. Understanding how to generate, validate, and work with different address types is fundamental to Bitcoin development.
+Bitcoin addresses are human-readable encodings of output scripts. Understanding how to generate, validate, and work with different address types is fundamental to Bitcoin development.
 
 ## Address Types Overview
 

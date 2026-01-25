@@ -1,6 +1,6 @@
 # Consensus Mechanism
 
-Bitcoin uses a **[consensus](/docs/glossary#consensus) mechanism** to achieve agreement among network participants about which transactions are valid and in what order they occurred. This consensus is reached without a central authority through a combination of cryptographic proof and economic incentives. The specific mechanism Bitcoin uses is formally known as **Nakamoto Consensus**, named after its pseudonymous creator.
+Bitcoin uses a consensus mechanism to achieve agreement among network participants about which transactions are valid and in what order they occurred. This consensus is reached without a central authority through a combination of cryptographic proof and economic incentives. The specific mechanism Bitcoin uses is formally known as **Nakamoto Consensus**, named after its pseudonymous creator.
 
 ## The Significance of Consensus
 

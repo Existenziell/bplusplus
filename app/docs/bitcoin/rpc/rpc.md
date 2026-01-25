@@ -4,38 +4,6 @@ This document provides a guide for interacting with your Bitcoin node using both
 
 > **Try it live!** Test these commands directly in the [Bitcoin CLI Terminal](/terminal). Connected to mainnet, no setup required.
 
-## Quick Command Reference
-
-### Essential Commands
-- [1. Blockchain Information](#1-blockchain-information) - `btc getblockchaininfo`
-- [2. Network Information](#2-network-information) - `btc getnetworkinfo`
-- [3. Mempool Information](#3-mempool-information) - `btc getmempoolinfo`
-- [4. Block Information](#4-block-information) - `btc getblock`, `btc getbestblockhash`
-- [5. Transaction Information](#5-transaction-information) - `btc getrawtransaction`
-
-### Wallet Commands
-- [6. Wallet Information](#6-wallet-information) - `btc getwalletinfo`, `btc listwallets`
-- [7. Wallet Management](#7-wallet-management) - `btc loadwallet`, `btc unloadwallet`
-
-### Advanced Monitoring
-- [8. Index Information](#8-index-information) - `btc getindexinfo`
-- [9. [UTXO](/docs/fundamentals/utxos) Set Information](#9-utxo-set-information) - `btc gettxoutsetinfo`
-- [10. [Peer](/docs/glossary#peer) Information](#10-peer-information) - `btc getpeerinfo`
-- [11. [ZMQ](/docs/glossary#zmq-zeromq) Notifications](#11-zmq-notifications) - Real-time block and transaction notifications
-
-### Quick Aliases
-```bash
-# Set up your alias (use environment variables for security)
-# Replace <path-to-bitcoin-cli> with your actual bitcoin-cli path
-alias btc='<path-to-bitcoin-cli> -rpcuser=$BITCOIN_RPC_USER -rpcpassword=$BITCOIN_RPC_PASSWORD -rpcport=$BITCOIN_RPC_PORT'
-
-# Most used commands
-btc getblockchaininfo | jq '{blocks, verificationprogress}'
-btc getindexinfo
-btc getwalletinfo | jq '{walletname, txcount, balance}'
-btc listwallets
-```
-
 ---
 
 ## RPC Configuration

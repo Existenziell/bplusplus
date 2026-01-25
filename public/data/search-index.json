@@ -59,7 +59,7 @@
     "path": "/docs/history/people#eric-hughes",
     "title": "Eric Hughes",
     "section": "history",
-    "body": "Contribution: \"A Cypherpunk's Manifesto\" (1993) - Privacy through cryptography Eric Hughes is a mathematician and privacy advocate who wrote \"A Cypherpunk's Manifesto\" in 1993, which became one of the foundational documents of the cypherpunk movement. The manifesto articulated that privacy in an open society requires cryptography—not laws or the good intentions of institutions. Along with Timothy "
+    "body": "Contribution: \"A Cypherpunk's Manifesto\" (1993) - Privacy through cryptography Eric Hughes is a mathematician and privacy advocate who wrote \"A Cypherpunk's Manifesto\" in 1993, which became one of the foundational documents of the cypherpunk movement. The manifesto articulated that privacy in an open society requires cryptography, not laws or the good intentions of institutions. Along with "
   },
   {
     "path": "/docs/history/people#timothy-c-may",
@@ -95,7 +95,7 @@
     "path": "/docs/history/people#stuart-haber-and-scott-stornetta",
     "title": "Stuart Haber and Scott Stornetta",
     "section": "history",
-    "body": "Contribution: Secure timestamps (1990-91) - \"How to time-stamp a digital document\" Stuart Haber and W. Scott Stornetta are cryptographers who, in a 1991 paper, solved the problem of timestamping digital documents so that they cannot be backdated or tampered with. Their scheme linked each new timestamp to the previous one in a chain—creating a cryptographically secured sequence that could prove "
+    "body": "Contribution: Secure timestamps (1990-91) - \"How to time-stamp a digital document\" Stuart Haber and W. Scott Stornetta are cryptographers who, in a 1991 paper, solved the problem of timestamping digital documents so that they cannot be backdated or tampered with. Their scheme linked each new timestamp to the previous one in a chain, creating a cryptographically secured sequence that could prove "
   },
   {
     "path": "/docs/history/people#satoshi-nakamoto",
@@ -137,7 +137,7 @@
     "path": "/docs/history/people#wladimir-van-der-laan",
     "title": "Wladimir van der Laan",
     "section": "history",
-    "body": "Contribution: Bitcoin Core lead maintainer (2014-2021) Wladimir van der Laan is a software developer who served as the lead maintainer of Bitcoin Core from 2014 to 2021. He took over the role from Gavin Andresen during a turbulent period that included the blocksize wars—the intense debate over whether to increase Bitcoin's block size limit. Van der Laan maintained the Bitcoin Core repository, "
+    "body": "Contribution: Bitcoin Core lead maintainer (2014-2021) Wladimir van der Laan is a software developer who served as the lead maintainer of Bitcoin Core from 2014 to 2021. He took over the role from Gavin Andresen during a turbulent period that included the blocksize wars, the intense debate over whether to increase Bitcoin's block size limit. Van der Laan maintained the Bitcoin Core repository, "
   },
   {
     "path": "/docs/history/people#pieter-wuille",
@@ -291,7 +291,7 @@
     "path": "/docs/bitcoin/op-codes",
     "title": "OP Codes",
     "section": "bitcoin",
-    "body": "OP Codes The instruction set for Bitcoin. Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive reference of Bitcoin OP codes with explanations and code examples. OP Code Categories | Category | Description | Examples | |----------|-------------|----------| | Stack Operations | Manipulate the stack | OP_DUP, OP_DROP, OP_SWAP | | Arithmetic | Mathematical operations | OP_ADD, OP_SUB | "
+    "body": "OP Codes The instruction set for Bitcoin. Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive reference of Bitcoin OP codes with explanations and code examples. Try these opcodes in Stack Lab. OP Code Categories | Category | Description | Examples | |----------|-------------|----------| | Stack Operations | Manipulate the stack | OP_DUP, OP_DROP, OP_SWAP | | Arithmetic | "
   },
   {
     "path": "/docs/bitcoin/timelocks",
@@ -357,7 +357,7 @@
     "path": "/docs/bitcoin/rpc",
     "title": "RPC Commands",
     "section": "bitcoin",
-    "body": "RPC Commands Reference This document provides a guide for interacting with your Bitcoin node using both curl and bitcoin-cli commands via RPC. Try it live! Test these commands directly in the Bitcoin CLI Terminal. Connected to mainnet, no setup required. Quick Command Reference Essential Commands 1. Blockchain Information - btc getblockchaininfo 2. Network Information - btc getnetworkinfo 3. Mempool Information - btc getmempoolinfo 4. Block Information - btc getblock, btc getbestblockhash 5. "
+    "body": "RPC Commands Reference This document provides a guide for interacting with your Bitcoin node using both curl and bitcoin-cli commands via RPC. Try it live! Test these commands directly in the Bitcoin CLI Terminal. Connected to mainnet, no setup required. RPC Configuration bitcoin.conf Setup Add these settings to your bitcoin.conf file: RPC Server Settings server=1 rpcuser=your_username rpcpassword=your_secure_password rpcport=8332 Restrict RPC to localhost (recommended) rpcbind=127.0.0.1 "
   },
   {
     "path": "/docs/mining",
@@ -465,7 +465,7 @@
     "path": "/docs/wallets/smart-contracts",
     "title": "Smart Contracts & Advanced Scripting",
     "section": "wallets",
-    "body": "Smart Contracts & Advanced Scripting Bitcoin Script enables smart contracts through conditional spending. While intentionally limited (no loops, no complex state), Bitcoin's scripting system supports powerful contract patterns. Bitcoin smart contracts are spending conditions encoded in Script: Smart Contract = Locking Script + Unlocking Script Locking Script: Defines conditions Unlocking Script: Proves conditions are met Unlike Ethereum, Bitcoin contracts are: Stateless: No persistent contract "
+    "body": "Smart Contracts & Advanced Scripting Bitcoin Script enables smart contracts through conditional spending. While intentionally limited (no loops, no complex state), Bitcoin's scripting system supports powerful contract patterns. Bitcoin smart contracts are spending conditions encoded in Script: Smart Contract = Locking Script + Unlocking Script Locking Script: Defines conditions Unlocking Script: Proves conditions are met See this in action in Stack Lab. Unlike Ethereum, Bitcoin contracts are: "
   },
   {
     "path": "/docs/lightning",
@@ -573,7 +573,7 @@
     "path": "/docs/bitcoin-development",
     "title": "Bitcoin Development",
     "section": "bitcoin-development",
-    "body": "Bitcoin Development How to build apps. This section covers practical Bitcoin development tasks—the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more. Prerequisites: Before diving into these topics, make sure you're familiar with Setup & Infrastructure topics like installing Bitcoin, testing, and using libraries. Core "
+    "body": "Bitcoin Development How to build apps. This section covers practical Bitcoin development tasks, the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more. Prerequisites: Before diving into these topics, make sure you're familiar with Setup & Infrastructure topics like installing Bitcoin, testing, and using libraries. Core "
   },
   {
     "path": "/docs/bitcoin-development/keys",
@@ -621,7 +621,7 @@
     "path": "/docs/bitcoin-development/script-patterns",
     "title": "Bitcoin Script Patterns",
     "section": "bitcoin-development",
-    "body": "Bitcoin Script Patterns Common Bitcoin Script patterns provide reusable templates for building smart contracts. Understanding these patterns helps developers implement common use cases efficiently. Common Patterns 1. Pay-to-Pubkey-Hash (P2PKH) Standard single-signature: ScriptPubKey: OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIG ScriptSig: 2. Multisig Multiple signatures required: ScriptPubKey: ... OP_CHECKMULTISIG ScriptSig: OP_0 ... 3. Hash Lock Reveal secret to spend: ScriptPubKey: OP_HASH256 "
+    "body": "Bitcoin Script Patterns Common Bitcoin Script patterns provide reusable templates for building smart contracts. Understanding these patterns helps developers implement common use cases efficiently. Build these patterns in Stack Lab. Common Patterns 1. Pay-to-Pubkey-Hash (P2PKH) Standard single-signature: ScriptPubKey: OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIG ScriptSig: 2. Multisig Multiple signatures required: ScriptPubKey: ... OP_CHECKMULTISIG ScriptSig: OP_0 ... 3. Hash Lock Reveal secret "
   },
   {
     "path": "/docs/bitcoin-development/miniscript",
@@ -729,7 +729,7 @@
     "path": "/docs/advanced/ordinals-inscriptions",
     "title": "Ordinals & Inscriptions",
     "section": "advanced",
-    "body": "Ordinals & Inscriptions Ordinals and inscriptions are a method for attaching arbitrary data to individual satoshis on the Bitcoin blockchain. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol assigns unique identifiers to satoshis and allows \"inscribing\" content—images, text, JSON, or other files—into witness data that gets stored on-chain. The Ordinals protocol assigns a unique, sequential number to each satoshi based on the order it was mined. This creates a way to identify "
+    "body": "Ordinals & Inscriptions Ordinals and inscriptions are a method for attaching arbitrary data to individual satoshis on the Bitcoin blockchain. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol assigns unique identifiers to satoshis and allows \"inscribing\" content (images, text, JSON, or other files) into witness data that gets stored on-chain. The Ordinals protocol assigns a unique, sequential number to each satoshi based on the order it was mined. This creates a way to identify "
   },
   {
     "path": "/docs/advanced/covenants",
@@ -994,6 +994,12 @@
     "title": "Censorship Resistance",
     "section": "glossary",
     "body": "The ability to make transactions that cannot be blocked, reversed, or seized by any central authority, government, or corporation. Bitcoin achieves this through decentralization: thousands of independent miners and nodes mean no single entity controls which transactions are included in blocks...."
+  },
+  {
+    "path": "/docs/glossary#chacha20",
+    "title": "ChaCha20",
+    "section": "glossary",
+    "body": "A stream cipher designed by Daniel J. Bernstein that encrypts data by combining a key and nonce with a fast, ARX-based (Addition, Rotation, XOR) function. In the Bitcoin ecosystem, ChaCha20 is used in BIP 324 (v2 P2P transport) to encrypt connections between nodes, providing confidentiality and..."
   },
   {
     "path": "/docs/glossary#change-output",
@@ -1299,7 +1305,7 @@
     "path": "/docs/glossary#fungibility",
     "title": "Fungibility",
     "section": "glossary",
-    "body": "The property that individual units of a currency or asset are interchangeable—one unit is equivalent to another. Bitcoin is fungible when one satoshi is treated the same as any other regardless of transaction history...."
+    "body": "The property that individual units of a currency or asset are interchangeable, one unit is equivalent to another. Bitcoin is fungible when one satoshi is treated the same as any other regardless of transaction history...."
   },
   {
     "path": "/docs/glossary#genesis-block",

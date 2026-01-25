@@ -1,6 +1,6 @@
 # Bitcoin Script Patterns
 
-Common Bitcoin Script patterns provide reusable templates for building smart contracts. Understanding these patterns helps developers implement common use cases efficiently.
+Common Bitcoin Script patterns provide reusable templates for building smart contracts. Understanding these patterns helps developers implement common use cases efficiently. Build these patterns in [Stack Lab](/stack-lab).
 
 ## Common Patterns
 

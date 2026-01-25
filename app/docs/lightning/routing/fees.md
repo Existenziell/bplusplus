@@ -50,8 +50,8 @@ print(f"Total fee: {fee} msat")  # Output: 2000 msat
 ```
 
 ```cpp
-#include <iostream>
-#include <cstdint>
+#include &lt;iostream&gt;
+#include &lt;cstdint&gt;
 
 /**
  * Calculate the fee for forwarding an amount through a channel
@@ -106,12 +106,6 @@ const fee = calculateFee(100_000_000n, 1000n, 10n);
 console.log(`Total fee: ${fee} msat`);  // Output: 2000 msat
 ```
 :::
-<｜Assistant｜><think>
-I see that I've already added Go snippets to some of these code-groups. Let me continue processing the remaining files. I need to check which code-groups still need Go snippets and continue adding them. Let me continue with the remaining files systematically.
-</think>
-Adding Go snippets to the remaining code-groups:
-<｜tool▁calls▁begin｜><｜tool▁call▁begin｜>
-read_file
 
 ### Example
 
@@ -243,7 +237,7 @@ fn calculate_route_backwards(
     final_amount_msat: u64,
     min_final_cltv: u32,
     block_height: u32,
-) -> Vec<HtlcHop> {
+) -> Vec&lt;HtlcHop&gt; {
     let mut htlc_hops = Vec::with_capacity(hops.len());
     
     // Start with final hop values
@@ -325,10 +319,10 @@ def calculate_route_backwards(
 ```
 
 ```cpp
-#include <vector>
-#include <string>
-#include <cstdint>
-#include <algorithm>
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;cstdint&gt;
+#include &lt;algorithm&gt;
 
 struct Hop {
     std::string channel_name;
@@ -346,13 +340,13 @@ struct HtlcHop {
 /**
  * Calculate HTLC values working backwards from destination
  */
-std::vector<HtlcHop> calculate_route_backwards(
-    const std::vector<Hop>& hops,
+std::vector&lt;HtlcHop&gt; calculate_route_backwards(
+    const std::vector&lt;Hop&gt;& hops,
     uint64_t final_amount_msat,
     uint32_t min_final_cltv,
     uint32_t block_height
 ) {
-    std::vector<HtlcHop> htlc_hops;
+    std::vector&lt;HtlcHop&gt; htlc_hops;
     htlc_hops.reserve(hops.size());
     
     // Start with final hop values
@@ -360,7 +354,7 @@ std::vector<HtlcHop> calculate_route_backwards(
     uint32_t current_expiry = block_height + min_final_cltv;
     
     // Process hops in reverse order
-    for (int i = static_cast<int>(hops.size()) - 1; i >= 0; --i) {
+    for (int i = static_cast&lt;int&gt;(hops.size()) - 1; i >= 0; --i) {
         const Hop& hop = hops[i];
         
         htlc_hops.push_back({

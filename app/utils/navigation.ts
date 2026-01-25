@@ -21,6 +21,9 @@ export interface NavSection {
   children?: { title: string; href: string }[]
 }
 
+/** Headings (h2) per doc path, from public/data/headings.json. Used by DocsNavigation for subsections. */
+export type HeadingsByPath = Record<string, { title: string; slug: string }[]>
+
 export const docPages: DocPage[] = [
   { path: '/docs/fundamentals', mdFile: 'app/docs/fundamentals/overview.md', title: 'Bitcoin Fundamentals', section: 'fundamentals' },
   { path: '/docs/fundamentals/problems', mdFile: 'app/docs/fundamentals/problems/problems.md', title: 'Problems Bitcoin Solved', section: 'fundamentals' },

@@ -3,7 +3,10 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { navItems, staticNavLinks, footerNavLinks } from '@/app/utils/navigation'
+import { navItems, staticNavLinks, footerNavLinks, type HeadingsByPath } from '@/app/utils/navigation'
+import headingsByPathData from '@/public/data/headings.json'
+
+const headingsByPath = headingsByPathData as HeadingsByPath
 import { toggleInSet } from '@/app/utils/setUtils'
 import { ArrowRight, PanelCollapseIcon, PanelExpandIcon } from '@/app/components/Icons'
 
@@ -164,16 +167,36 @@ export default function DocsNavigation({
                   </div>
                   {hasChildren && expanded && (
                     <ul className="ml-5 mt-1 space-y-0">
-                      {item.children!.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            className={getLinkClassName(isActive(child.href), 'sm')}
-                          >
-                            {child.title}
-                          </Link>
-                        </li>
-                      ))}
+                      {item.children!.map((child) => {
+                        const subsections =
+                          child.href === pathname && headingsByPath[pathname]
+                            ? headingsByPath[pathname]
+                            : []
+                        return (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              className={getLinkClassName(isActive(child.href), 'sm')}
+                            >
+                              {child.title}
+                            </Link>
+                            {subsections.length > 0 && (
+                              <ul className="ml-5 mt-1 space-y-0" aria-label="On this page">
+                                {subsections.map((h) => (
+                                  <li key={h.slug}>
+                                    <Link
+                                      href={`${pathname}#${h.slug}`}
+                                      className={getLinkClassName(false, 'sm')}
+                                    >
+                                      {h.title}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </li>
+                        )
+                      })}
                     </ul>
                   )}
                 </li>

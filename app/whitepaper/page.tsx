@@ -21,7 +21,15 @@ export default function WhitepaperPage() {
               cryptography mailing list
             </a>
             {' '}on October 31, 2008.
-            The Bitcoin network launched on January 3, 2009, when Satoshi mined the Genesis Block.
+            The Bitcoin network launched on January 3, 2009, when Satoshi mined the{' '}
+            <a
+              href="https://www.blockchain.com/explorer/blocks/btc/0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-btc hover:underline"
+            >
+              Genesis Block
+            </a>.
           </p>
       </div>
 

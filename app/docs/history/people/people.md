@@ -2,6 +2,12 @@
 
 Bitcoin didn't emerge from a vacuum. It was built on decades of cryptographic research and the work of visionary cypherpunks who dreamed of digital cash. This page honors both the pioneers who laid the groundwork and the contributors who brought Bitcoin to life.
 
+**Pioneers (pre-Bitcoin):** [David Chaum](#david-chaum), [Eric Hughes](#eric-hughes), [Timothy C. May](#timothy-c-may), [John Gilmore](#john-gilmore), [Adam Back](#adam-back), [Nick Szabo](#nick-szabo), [Wei Dai](#wei-dai), [Ralph Merkle](#ralph-merkle), [Stuart Haber and Scott Stornetta](#stuart-haber-and-scott-stornetta)
+
+**Bitcoin builders:** [Satoshi Nakamoto](#satoshi-nakamoto), [Hal Finney](#hal-finney-1956-2014), [Len Sassaman](#len-sassaman-1980-2011), [Martti Malmi](#martti-malmi), [Gavin Andresen](#gavin-andresen), [Laszlo Hanyecz](#laszlo-hanyecz), [Wladimir van der Laan](#wladimir-van-der-laan), [Pieter Wuille](#pieter-wuille), [Gregory Maxwell](#gregory-maxwell), [Joseph Poon and Thaddeus Dryja](#joseph-poon-and-thaddeus-dryja)
+
+**Evangelists & beyond:** [Andreas M. Antonopoulos](#andreas-m-antonopoulos), [Roger Ver](#roger-ver), [You ?](#you)
+
 ---
 
 ## David Chaum
@@ -43,6 +49,18 @@ Timothy C. May was an American physicist and writer who authored "The Crypto Ana
 May's writings foresaw many developments: anonymous digital currencies, reputational systems beyond national borders, and the collision of technology with traditional notions of regulation. The cypherpunk mailing list he helped create became the incubator where Chaum's eCash, Back's Hashcash, and Szabo's Bit Gold were discussed; the same community where Satoshi Nakamoto would later announce Bitcoin. May passed away in 2018.
 
 [More](https://en.wikipedia.org/wiki/Timothy_C._May)
+
+---
+
+## John Gilmore
+
+![John Gilmore](/images/people/John_Gilmore.jpg)
+
+**Contribution:** Cypherpunk mailing list co-founder (1992)
+
+John Gilmore is a computer scientist, entrepreneur, and civil-liberties advocate who co-founded the cypherpunk mailing list with Eric Hughes and Timothy C. May in 1992. The list became the main forum where ideas that would eventually produce Bitcoin, including David Chaum's eCash, Adam Back's Hashcash, and Nick Szabo's Bit Gold, were debated. Gilmore also co-founded the Electronic Frontier Foundation (EFF) and Cygnus Solutions; his work on open systems and crypto advocacy helped create the culture in which Satoshi Nakamoto would later publish the Bitcoin whitepaper.
+
+[More](https://en.wikipedia.org/wiki/John_Gilmore_(activist))
 
 ---
 
@@ -248,6 +266,7 @@ His tenure saw Bitcoin Core evolve from a smaller team into a distributed, open-
 
 [More](https://en.wikipedia.org/wiki/Wladimir_van_der_Laan)
 
+
 ---
 
 ## Pieter Wuille
@@ -261,6 +280,30 @@ Pieter Wuille is a Belgian software engineer and one of the most influential Bit
 Wuille created and maintains libsecp256k1, the cryptographic library used by Bitcoin Core for [elliptic curve](/docs/bitcoin/cryptography) operations, faster and more secure than generic crypto libraries. His work has shaped the security, scalability, and expressiveness of the Bitcoin protocol. He is a co-founder of Blockstream and remains an active Bitcoin Core contributor.
 
 [More](https://en.wikipedia.org/wiki/Pieter_Wuille)
+
+---
+
+## Gregory Maxwell
+
+![Gregory Maxwell](/images/people/Gregory_Maxwell.jpg)
+
+**Contribution:** Bitcoin Core developer, Blockstream co-founder, [CoinJoin](/docs/glossary#coinjoin), Confidential Transactions, [Sidechains](/docs/glossary#sidechain)
+
+Gregory Maxwell (Greg) is a Bitcoin Core developer and one of the most influential protocol and privacy researchers in Bitcoin. He co-founded Blockstream in 2014 and has authored or co-authored numerous BIPs and designs, including work on [CoinJoin](/docs/glossary#coinjoin) (which improved the blind-signature-based mixers that preceded it), Confidential Transactions (CT), and the sidechain concept. He was a central voice in the [blocksize wars](/docs/controversies/blocksize-wars), arguing for [Layer 2](/docs/glossary#layer-2) scaling and against raising the block size limit. His advocacy for [SegWit](/docs/glossary#segwit-segregated-witness) and for a conservative, [decentralization](/docs/glossary#decentralization)-focused approach to scaling helped shape Bitcoin's current direction.
+
+[More](https://en.wikipedia.org/wiki/Gregory_Maxwell)
+
+---
+
+## Joseph Poon and Thaddeus Dryja
+
+![Joseph Poon and Thaddeus Dryja](/images/people/Poon_Dryja.jpg)
+
+**Contribution:** [Lightning Network](/docs/glossary#lightning-network) whitepaper (2015)
+
+Joseph Poon and Thaddeus Dryja authored "The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments" (2015), which described a second-layer network of payment channels that would allow fast, low-cost transactions without recording every payment on the [blockchain](/docs/glossary#blockchain). The design built on [HTLCs](/docs/glossary#htlc-hash-time-locked-contract), [time locks](/docs/glossary#time-lock), and [SegWit](/docs/glossary#segwit-segregated-witness) (which was still under debate) to fix [transaction malleability](/docs/glossary#transaction-malleability) and enable bi-directional channels. The Lightning Network, as specified in the [BOLT](/docs/glossary#bolt-basis-of-lightning-technology) documents and implemented by LND, Core Lightning, Eclair, and others, is the main [Layer 2](/docs/glossary#layer-2) for Bitcoin and is directly rooted in their whitepaper.
+
+[More](https://lightning.network/lightning-network-paper.pdf) (whitepaper)
 
 ---
 
@@ -282,6 +325,18 @@ Antonopoulos is known for his ability to explain complex technical concepts to g
 In 2017, after it was revealed he had not held significant Bitcoin despite years of advocacy, the Bitcoin community donated over 100 BTC to him in appreciation of his educational contributions.
 
 [More](https://en.wikipedia.org/wiki/Andreas_Antonopoulos)
+
+---
+
+## Roger Ver
+
+![Roger Ver](/images/people/Roger_Ver.jpg)
+
+**Contribution:** Early investor, "Bitcoin Jesus," Bitcoin Cash advocate
+
+Roger Ver is an early Bitcoin investor and promoter who became known as "Bitcoin Jesus" for his advocacy and funding of Bitcoin-related projects and businesses. He was an outspoken supporter of increasing Bitcoin's block size and, during the [blocksize wars](/docs/controversies/blocksize-wars), backed alternative implementations and the hard fork that created Bitcoin Cash (BCH) in August 2017. His shift from promoting Bitcoin (BTC) to Bitcoin Cash made him a polarizing figure. Understanding his role is part of understanding the scaling debate, the philosophy of on-chain vs. [Layer 2](/docs/glossary#layer-2) scaling, and the fact that Bitcoin has no single leader: divergent views can lead to [forks](/docs/glossary#fork) rather than forced changes to the main chain.
+
+[More](https://en.wikipedia.org/wiki/Roger_Ver)
 
 ---
 

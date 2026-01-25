@@ -10,7 +10,7 @@ Bitcoin's history spans from its creation in 2009 to its future supply schedule 
 - **Author**: [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto)
 - **Title**: "Bitcoin: A Peer-to-Peer Electronic Cash System"
 
-Satoshi Nakamoto published the [Bitcoin whitepaper](/whitepaper), introducing the concept of a decentralized digital currency system. The whitepaper outlined the technical foundation for Bitcoin, including proof-of-work, the blockchain, and the peer-to-peer network architecture.
+Satoshi Nakamoto published the [Bitcoin whitepaper](/whitepaper), introducing the concept of a decentralized digital currency system. The whitepaper outlined the technical foundation for Bitcoin, including proof-of-work, the blockchain, and the peer-to-peer network architecture. Its release coincided with the 2008 financial crisis—bank bailouts, failed institutions, and loss of trust in central banks—which gave the idea of peer-to-peer electronic cash without intermediaries immediate relevance.
 
 ---
 
@@ -133,6 +133,26 @@ Bitcoin crossed $1,000 for the first time during a rally driven by Chinese excha
 - **Date**: October 2013
 
 U.S. law enforcement shut down Silk Road and arrested its operator. The event fueled debate over [Bitcoin](/docs/glossary#bitcoin-network)’s use in illicit markets and over [regulation](/docs/glossary#aml-anti-money-laundering). The [network](/docs/bitcoin/p2p-protocol) continued to operate; no [protocol](/docs/bitcoin) change was required.
+
+---
+
+## 2014
+
+### Mt. Gox Collapse
+
+- **Date**: February 2014
+
+[Mt. Gox](/docs/controversies/mt-gox), then the world's largest Bitcoin exchange, suspended trading and declared bankruptcy after losing approximately 850,000 BTC to theft and operational failures. The collapse entrenched "not your keys, not your coins" as a core lesson: custody matters, and trusting third parties with bitcoin carries serious risk.
+
+---
+
+## 2015
+
+### Scaling Debate and Lightning Whitepaper
+
+- **Date**: 2015
+
+The [blocksize wars](/docs/controversies/blocksize-wars) intensified as Bitcoin’s 1 MB block limit began to bite. Proposals to raise the limit (e.g. Bitcoin XT, larger blocks) clashed with efforts to scale via [Layer 2](/docs/glossary#layer-2) and [SegWit](/docs/glossary#segwit-segregated-witness). In the same year, Joseph Poon and Thaddeus Dryja published the [Lightning Network](/docs/glossary#lightning-network) whitepaper, outlining an off-chain payment-channel network that would later become Bitcoin’s main scaling solution.
 
 ---
 

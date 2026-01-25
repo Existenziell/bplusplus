@@ -68,6 +68,12 @@
     "body": "Contribution: \"The Crypto Anarchist Manifesto,\" cypherpunk mailing list co-founder Timothy C. May was an American physicist and writer who authored \"The Crypto Anarchist Manifesto\" (1988) and co-founded the cypherpunk mailing list with Eric Hughes and John Gilmore in 1992. His manifesto envisioned a future where cryptography would enable anonymous markets and transactions beyond the reach of "
   },
   {
+    "path": "/docs/history/people#john-gilmore",
+    "title": "John Gilmore",
+    "section": "history",
+    "body": "Contribution: Cypherpunk mailing list co-founder (1992) John Gilmore is a computer scientist, entrepreneur, and civil-liberties advocate who co-founded the cypherpunk mailing list with Eric Hughes and Timothy C. May in 1992. The list became the main forum where ideas that would eventually produce Bitcoin, including David Chaum's eCash, Adam Back's Hashcash, and Nick Szabo's Bit Gold, were "
+  },
+  {
     "path": "/docs/history/people#adam-back",
     "title": "Adam Back",
     "section": "history",
@@ -146,10 +152,28 @@
     "body": "Contribution: SegWit (BIP 141), Taproot (BIP 340-342), libsecp256k1 Pieter Wuille is a Belgian software engineer and one of the most influential Bitcoin protocol developers. He is the primary author of SegWit (BIP 141), activated in 2017, which separated signature data from transaction data in the block structure, fixing transaction malleability and enabling second-layer protocols. He also "
   },
   {
+    "path": "/docs/history/people#gregory-maxwell",
+    "title": "Gregory Maxwell",
+    "section": "history",
+    "body": "Contribution: Bitcoin Core developer, Blockstream co-founder, CoinJoin, Confidential Transactions, Sidechains Gregory Maxwell (Greg) is a Bitcoin Core developer and one of the most influential protocol and privacy researchers in Bitcoin. He co-founded Blockstream in 2014 and has authored or co-authored numerous BIPs and designs, including work on CoinJoin (which improved the blind-signature-based "
+  },
+  {
+    "path": "/docs/history/people#joseph-poon-and-thaddeus-dryja",
+    "title": "Joseph Poon and Thaddeus Dryja",
+    "section": "history",
+    "body": "Contribution: Lightning Network whitepaper (2015) Joseph Poon and Thaddeus Dryja authored \"The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments\" (2015), which described a second-layer network of payment channels that would allow fast, low-cost transactions without recording every payment on the blockchain. The design built on HTLCs, time locks, and SegWit (which was still under "
+  },
+  {
     "path": "/docs/history/people#andreas-m-antonopoulos",
     "title": "Andreas M. Antonopoulos",
     "section": "history",
     "body": "Contribution: Author, educator, Bitcoin evangelist Andreas M. Antonopoulos is a Greek-British author, speaker, and educator who has become one of the most influential voices in Bitcoin and blockchain education. He is best known for his book \"Mastering Bitcoin\" (2014), a comprehensive technical guide that has become the standard reference for Bitcoin developers. His other works include: \"The "
+  },
+  {
+    "path": "/docs/history/people#roger-ver",
+    "title": "Roger Ver",
+    "section": "history",
+    "body": "Contribution: Early investor, \"Bitcoin Jesus,\" Bitcoin Cash advocate Roger Ver is an early Bitcoin investor and promoter who became known as \"Bitcoin Jesus\" for his advocacy and funding of Bitcoin-related projects and businesses. He was an outspoken supporter of increasing Bitcoin's block size and, during the blocksize wars, backed alternative implementations and the hard fork that created "
   },
   {
     "path": "/docs/fundamentals",
@@ -233,7 +257,7 @@
     "path": "/docs/history/people",
     "title": "People",
     "section": "history",
-    "body": "People in Bitcoin Bitcoin didn't emerge from a vacuum. It was built on decades of cryptographic research and the work of visionary cypherpunks who dreamed of digital cash. This page honors both the pioneers who laid the groundwork and the contributors who brought Bitcoin to life. David Chaum Contribution: eCash (1982) - The godfather of cryptocurrency David Chaum is widely regarded as the inventor of digital cash. In 1982, he published \"Blind Signatures for Untraceable Payments,\" introducing "
+    "body": "People in Bitcoin Bitcoin didn't emerge from a vacuum. It was built on decades of cryptographic research and the work of visionary cypherpunks who dreamed of digital cash. This page honors both the pioneers who laid the groundwork and the contributors who brought Bitcoin to life. Pioneers (pre-Bitcoin): David Chaum, Eric Hughes, Timothy C. May, John Gilmore, Adam Back, Nick Szabo, Wei Dai, Ralph Merkle, Stuart Haber and Scott Stornetta Bitcoin builders: Satoshi Nakamoto, Hal Finney, Len "
   },
   {
     "path": "/docs/history/halvings",
@@ -672,6 +696,18 @@
     "body": "Craig Wright / \"Faketoshi\" Craig Steven Wright is an Australian computer scientist who has claimed since 2016 to be Satoshi Nakamoto, the pseudonymous creator of Bitcoin. Despite years of assertions, lawsuits, and media appearances, Wright has never provided cryptographic proof of his claim. This is something the real Satoshi could trivially do by signing a message with Satoshi's known private keys. The Bitcoin community overwhelmingly rejects Wright's claims, derisively calling him "
   },
   {
+    "path": "/docs/controversies/ordinals",
+    "title": "Ordinals and Inscriptions",
+    "section": "controversies",
+    "body": "Ordinals and Inscriptions Controversy Ordinals and inscriptions let users attach arbitrary data—images, text, JSON—to individual satoshis using witness data. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol and related tokens (e.g. BRC-20) sparked a heated debate: are they legitimate use of block space or spam that raises fees and distorts Bitcoin’s purpose? What Are Ordinals and Inscriptions? Ordinals: A numbering scheme that assigns a unique index to each satoshi and tracks "
+  },
+  {
+    "path": "/docs/controversies/etf-rejections",
+    "title": "ETF Rejections",
+    "section": "controversies",
+    "body": "Bitcoin ETF Rejections (2017–2023) For years, the U.S. Securities and Exchange Commission (SEC) rejected or delayed applications for a spot Bitcoin ETF. The main reasons were concerns about manipulation, custody, and market maturity. In January 2024, the SEC finally approved the first spot Bitcoin ETFs. The long refusal and eventual approval are an important part of Bitcoin’s regulatory history. What Is a Spot Bitcoin ETF? A spot Bitcoin ETF holds actual bitcoin (or claims backed by it) and "
+  },
+  {
     "path": "/docs/advanced",
     "title": "Advanced Topics",
     "section": "advanced",
@@ -813,7 +849,25 @@
     "path": "/docs/glossary#ark",
     "title": "Ark",
     "section": "glossary",
-    "body": "A proposed Bitcoin Layer 2 scaling solution designed to allow fast, off-chain Bitcoin transactions while reducing liquidity constraints seen in other Layer 2 protocols. Ark enables users to send and receive bitcoin without requiring complex onboarding or liquidity locks. ---"
+    "body": "A proposed Bitcoin Layer 2 scaling solution designed to allow fast, off-chain Bitcoin transactions while reducing liquidity constraints seen in other Layer 2 protocols. Ark enables users to send and receive bitcoin without requiring complex onboarding or liquidity locks."
+  },
+  {
+    "path": "/docs/glossary#altcoin",
+    "title": "Altcoin",
+    "section": "glossary",
+    "body": "Any cryptocurrency other than Bitcoin. The term is often used when comparing Bitcoin to other digital assets. Bitcoin was the first and remains the dominant cryptocurrency by market cap, security, and adoption; altcoins typically differ in consensus rules, supply, or intended use. ---"
+  },
+  {
+    "path": "/docs/glossary#bear-market",
+    "title": "Bear Market",
+    "section": "glossary",
+    "body": "A prolonged period of declining prices and pessimism. In a bear market, Bitcoin’s price tends to fall or trade sideways, and sentiment is cautious. The term is used across traditional and crypto markets."
+  },
+  {
+    "path": "/docs/glossary#bull-market",
+    "title": "Bull Market",
+    "section": "glossary",
+    "body": "A prolonged period of rising prices and optimism. In a bull market, Bitcoin’s price tends to rise and sentiment is positive. The term is used across traditional and crypto markets; Bitcoin’s cycles are often discussed in terms of bull and bear phases."
   },
   {
     "path": "/docs/glossary#batching",
@@ -1284,6 +1338,18 @@
     "body": "Government-issued money that holds value because governments mandate its use for taxes and as legal tender. Stronger fiat currencies like the U.S. dollar or euro hold value relative to other fiat currencies but are rapidly losing value against hard assets like Bitcoin due to inflation."
   },
   {
+    "path": "/docs/glossary#fomo-fear-of-missing-out",
+    "title": "FOMO (Fear Of Missing Out)",
+    "section": "glossary",
+    "body": "The anxiety that prices will rise and one will miss gains by not buying. FOMO often peaks during bull markets and can lead to buying at high prices. In Bitcoin, it is commonly discussed alongside DYOR and disciplined accumulation."
+  },
+  {
+    "path": "/docs/glossary#fud-fear-uncertainty-and-doubt",
+    "title": "FUD (Fear, Uncertainty, and Doubt)",
+    "section": "glossary",
+    "body": "Negative or misleading information spread to create fear, uncertainty, or doubt about an asset or project. In Bitcoin, \"FUD\" is often used to describe exaggerated criticism, regulatory scaremongering, or claims that Bitcoin has failed or will fail...."
+  },
+  {
     "path": "/docs/glossary#finality",
     "title": "Finality",
     "section": "glossary",
@@ -1360,6 +1426,12 @@
     "title": "Hardware Wallet",
     "section": "glossary",
     "body": "A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of cold storage and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access."
+  },
+  {
+    "path": "/docs/glossary#hodl",
+    "title": "HODL",
+    "section": "glossary",
+    "body": "A Bitcoin culture term meaning to hold bitcoin through volatility instead of selling. It originated from a 2013 Bitcointalk post titled \"I AM HODLING\" (a typo for \"holding\") during a sharp price drop...."
   },
   {
     "path": "/docs/glossary#htlc-hash-time-locked-contract",

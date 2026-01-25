@@ -40,6 +40,9 @@ The defining battle over Bitcoin's scaling approach. Big blockers wanted larger 
 [**The OP_RETURN Debate**](/docs/controversies/op-return)
 An ongoing controversy about data storage on Bitcoin. Should Bitcoin allow arbitrary data in transactions? The 2024 Bitcoin Core v30 changes reignited debates about Bitcoin's purpose: is it purely money, or a platform for broader applications?
 
+[**Ordinals and Inscriptions**](/docs/controversies/ordinals)
+Since 2023, Ordinals and inscriptions (data attached to satoshis via witness) have divided the community: critics call them spam that raises fees and distorts Bitcoin’s purpose; supporters argue they are legitimate, fee-paying use of blockspace and that censoring them conflicts with permissionlessness.
+
 ### External Challenges
 
 [**Energy Consumption**](/docs/controversies/energy-consumption)
@@ -47,6 +50,9 @@ Critics claim Bitcoin wastes energy; supporters argue it's the most efficient us
 
 [**Bitcoin and criminal use**](/docs/controversies/criminal-use)
 Critics claim Bitcoin is the currency of choice for criminals. In reality, Bitcoin is just money. What people do with it is their responsibility. The vast majority of illicit financial activity occurs in US dollars and the traditional banking system.
+
+[**Bitcoin ETF rejections (2017–2023)**](/docs/controversies/etf-rejections)
+The SEC repeatedly rejected or delayed spot Bitcoin ETF applications, citing manipulation, custody, and market maturity. A court ruling in the Grayscale case and political pressure helped pave the way for the January 2024 approvals.
 
 ### Historical Events
 

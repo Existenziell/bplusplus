@@ -40,9 +40,18 @@ Government-imposed regulations on Bitcoin exchanges requiring them to collect pe
 ### Ark
 A proposed Bitcoin Layer 2 scaling solution designed to allow fast, off-chain Bitcoin transactions while reducing liquidity constraints seen in other Layer 2 protocols. Ark enables users to send and receive bitcoin without requiring complex onboarding or liquidity locks.
 
+### Altcoin
+Any cryptocurrency other than Bitcoin. The term is often used when comparing Bitcoin to other digital assets. Bitcoin was the first and remains the dominant cryptocurrency by market cap, security, and adoption; altcoins typically differ in consensus rules, supply, or intended use.
+
 ---
 
 ## B
+
+### Bear Market
+A prolonged period of declining prices and pessimism. In a bear market, Bitcoin’s price tends to fall or trade sideways, and sentiment is cautious. The term is used across traditional and crypto markets.
+
+### Bull Market
+A prolonged period of rising prices and optimism. In a bull market, Bitcoin’s price tends to rise and sentiment is positive. The term is used across traditional and crypto markets; Bitcoin’s cycles are often discussed in terms of bull and bear phases.
 
 ### Batching
 Combining multiple payments into a single transaction to reduce fees by sharing the fixed overhead costs across many recipients. Multiple outputs are included in one transaction, significantly reducing the total bytes and thus fees paid. Exchanges and payment processors commonly use batching to process withdrawals efficiently.
@@ -294,6 +303,12 @@ Unilaterally closing a Lightning payment channel by broadcasting your latest com
 ### Fiat
 Government-issued money that holds value because governments mandate its use for taxes and as legal tender. Stronger fiat currencies like the U.S. dollar or euro hold value relative to other fiat currencies but are rapidly losing value against hard assets like Bitcoin due to inflation.
 
+### FOMO (Fear Of Missing Out)
+The anxiety that prices will rise and one will miss gains by not buying. FOMO often peaks during bull markets and can lead to buying at high prices. In Bitcoin, it is commonly discussed alongside [DYOR](/docs/glossary#dyor-do-your-own-research) and disciplined accumulation.
+
+### FUD (Fear, Uncertainty, and Doubt)
+Negative or misleading information spread to create fear, uncertainty, or doubt about an asset or project. In Bitcoin, "FUD" is often used to describe exaggerated criticism, regulatory scaremongering, or claims that Bitcoin has failed or will fail. The term is broader than Bitcoin but widely used in the community.
+
 ### Finality
 The assurance that a confirmed transaction cannot be reversed or altered, which in Bitcoin is probabilistic rather than absolute. Each additional confirmation makes reversal exponentially more difficult and expensive. After 6 confirmations, reversing a transaction would require an attacker to re-mine those 6 blocks plus stay ahead of the honest network. While never mathematically impossible, deep confirmations provide practical finality that approaches certainty for any realistic attacker.
 
@@ -340,6 +355,9 @@ A wallet architecture (BIP 32) that generates all keys from a single master seed
 
 ### Hardware Wallet
 A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of cold storage and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access.
+
+### HODL
+A Bitcoin culture term meaning to hold bitcoin through volatility instead of selling. It originated from a 2013 Bitcointalk post titled "I AM HODLING" (a typo for "holding") during a sharp price drop. "HODL" is often used as a verb and has come to symbolize long-term conviction and resistance to panic selling.
 
 ### HTLC (Hash Time-Locked Contract)
 A conditional payment contract that forms the foundation of Lightning Network and atomic swaps, combining a hash lock with a time lock. The payment can only be claimed by revealing a secret (preimage) that hashes to a known value, and it automatically refunds to the sender if not claimed before the timeout expires. In Lightning, HTLCs chain across multiple channels to enable multi-hop payments, creating trustless routing where either the entire payment succeeds or it fails and refunds atomically.

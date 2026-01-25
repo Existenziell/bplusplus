@@ -116,6 +116,8 @@ export const docPages: DocPage[] = [
   { path: '/docs/controversies/criminal-use', mdFile: 'app/docs/controversies/criminal-use/criminal-use.md', title: 'Bitcoin and Criminal Use', section: 'controversies' },
   { path: '/docs/controversies/mt-gox', mdFile: 'app/docs/controversies/mt-gox/mt-gox.md', title: 'Mt. Gox Collapse', section: 'controversies' },
   { path: '/docs/controversies/craig-wright', mdFile: 'app/docs/controversies/craig-wright/craig-wright.md', title: 'Craig Wright', section: 'controversies' },
+  { path: '/docs/controversies/ordinals', mdFile: 'app/docs/controversies/ordinals/ordinals.md', title: 'Ordinals and Inscriptions', section: 'controversies' },
+  { path: '/docs/controversies/etf-rejections', mdFile: 'app/docs/controversies/etf-rejections/etf-rejections.md', title: 'ETF Rejections', section: 'controversies' },
 
   { path: '/docs/advanced', mdFile: 'app/docs/advanced/overview.md', title: 'Advanced Topics', section: 'advanced' },
   { path: '/docs/advanced/atomic-swaps', mdFile: 'app/docs/advanced/atomic-swaps/atomic-swaps.md', title: 'Atomic Swaps', section: 'advanced' },

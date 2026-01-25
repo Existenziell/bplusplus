@@ -45,7 +45,19 @@
   },
   "ark": {
     "term": "Ark",
-    "definition": "A proposed Bitcoin Layer 2 scaling solution designed to allow fast, off-chain Bitcoin transactions while reducing liquidity constraints seen in other Layer 2 protocols. Ark enables users to send and receive bitcoin without requiring complex onboarding or liquidity locks. ---"
+    "definition": "A proposed Bitcoin Layer 2 scaling solution designed to allow fast, off-chain Bitcoin transactions while reducing liquidity constraints seen in other Layer 2 protocols. Ark enables users to send and receive bitcoin without requiring complex onboarding or liquidity locks."
+  },
+  "altcoin": {
+    "term": "Altcoin",
+    "definition": "Any cryptocurrency other than Bitcoin. The term is often used when comparing Bitcoin to other digital assets. Bitcoin was the first and remains the dominant cryptocurrency by market cap, security, and adoption; altcoins typically differ in consensus rules, supply, or intended use. ---"
+  },
+  "bear-market": {
+    "term": "Bear Market",
+    "definition": "A prolonged period of declining prices and pessimism. In a bear market, Bitcoin’s price tends to fall or trade sideways, and sentiment is cautious. The term is used across traditional and crypto markets."
+  },
+  "bull-market": {
+    "term": "Bull Market",
+    "definition": "A prolonged period of rising prices and optimism. In a bull market, Bitcoin’s price tends to rise and sentiment is positive. The term is used across traditional and crypto markets; Bitcoin’s cycles are often discussed in terms of bull and bear phases."
   },
   "batching": {
     "term": "Batching",
@@ -359,6 +371,14 @@
     "term": "Fiat",
     "definition": "Government-issued money that holds value because governments mandate its use for taxes and as legal tender. Stronger fiat currencies like the U.S. dollar or euro hold value relative to other fiat currencies but are rapidly losing value against hard assets like Bitcoin due to inflation."
   },
+  "fomo-fear-of-missing-out": {
+    "term": "FOMO (Fear Of Missing Out)",
+    "definition": "The anxiety that prices will rise and one will miss gains by not buying. FOMO often peaks during bull markets and can lead to buying at high prices. In Bitcoin, it is commonly discussed alongside DYOR and disciplined accumulation."
+  },
+  "fud-fear-uncertainty-and-doubt": {
+    "term": "FUD (Fear, Uncertainty, and Doubt)",
+    "definition": "Negative or misleading information spread to create fear, uncertainty, or doubt about an asset or project. In Bitcoin, \"FUD\" is often used to describe exaggerated criticism, regulatory scaremongering, or claims that Bitcoin has failed or will fail...."
+  },
   "finality": {
     "term": "Finality",
     "definition": "The assurance that a confirmed transaction cannot be reversed or altered, which in Bitcoin is probabilistic rather than absolute. Each additional confirmation makes reversal exponentially more difficult and expensive...."
@@ -410,6 +430,10 @@
   "hardware-wallet": {
     "term": "Hardware Wallet",
     "definition": "A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of cold storage and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access."
+  },
+  "hodl": {
+    "term": "HODL",
+    "definition": "A Bitcoin culture term meaning to hold bitcoin through volatility instead of selling. It originated from a 2013 Bitcointalk post titled \"I AM HODLING\" (a typo for \"holding\") during a sharp price drop...."
   },
   "htlc-hash-time-locked-contract": {
     "term": "HTLC (Hash Time-Locked Contract)",

@@ -10,7 +10,7 @@ const BITCOIN_ADDRESS = 'bc1qtu2z558uwvutm6xqjdvv7jrjcg9020hc0964wl'
 
 export default function AuthorPage() {
   const handleCopyBitcoin = () => {
-    copyToClipboard(BITCOIN_ADDRESS, 'Bitcoin address')
+    copyToClipboard(BITCOIN_ADDRESS, 'Bitcoin address', 'You are amazing <3\nBitcoin address copied to clipboard')
   }
 
   const handleCopyNostr = () => {

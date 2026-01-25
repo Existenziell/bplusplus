@@ -6,6 +6,7 @@ interface NotificationState {
   show: boolean
   text: string
   isError: boolean
+  raw: boolean
   exiting: boolean
 }
 
@@ -15,13 +16,14 @@ const NOTIFICATION_EVENT = 'app:notification'
 interface NotificationDetail {
   text: string
   isError?: boolean
+  raw?: boolean
 }
 
 /** Show notification toast. Call from anywhere. */
-export function showNotification(text: string, isError = false) {
+export function showNotification(text: string, isError = false, raw = false) {
   window.dispatchEvent(
     new CustomEvent<NotificationDetail>(NOTIFICATION_EVENT, {
-      detail: { text, isError }
+      detail: { text, isError, raw }
     })
   )
 }
@@ -44,6 +46,7 @@ export default function Notification() {
     show: false,
     text: '',
     isError: false,
+    raw: false,
     exiting: false,
   })
 
@@ -57,6 +60,7 @@ export default function Notification() {
         show: true,
         text: event.detail.text,
         isError: event.detail.isError ?? false,
+        raw: event.detail.raw ?? false,
         exiting: false,
       })
 
@@ -81,9 +85,11 @@ export default function Notification() {
 
   if (!state.show) return null
 
-  const message = state.isError
-    ? (state.text || 'Failed to copy to clipboard')
-    : `${state.text} copied to clipboard`
+  const message = state.raw
+    ? state.text
+    : state.isError
+      ? (state.text || 'Failed to copy to clipboard')
+      : `${state.text} copied to clipboard`
 
   const isError = state.isError
 
@@ -94,7 +100,7 @@ export default function Notification() {
       onAnimationEnd={handleAnimationEnd}
       className={`
         notification-toast fixed left-1/2 bottom-6 z-50 -translate-x-1/2
-        flex items-center gap-3 px-5 py-4 rounded-lg text-base font-medium
+        flex items-center justify-center gap-3 px-5 py-4 rounded-lg text-base font-medium
         shadow-lg ring-1 max-w-[calc(100vw-2rem)]
         ${state.exiting ? 'animate-toast-out' : 'animate-toast-in'}
         ${isError
@@ -104,7 +110,7 @@ export default function Notification() {
       `}
     >
       {isError ? <XIcon /> : <CheckIcon />}
-      <span>{message}</span>
+      <span className={state.raw ? 'whitespace-pre-line' : undefined}>{message}</span>
     </div>
   )
 }

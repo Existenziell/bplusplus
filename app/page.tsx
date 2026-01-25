@@ -9,7 +9,7 @@ import { ArrowRight, TerminalIcon, StackLabIcon } from '@/app/components/Icons'
 
 export default function Home() {
   return (
-    <main className="min-h-screen page-bg flex flex-col">
+    <main className="flex-1 page-bg flex flex-col">
       <div className="flex-grow">
         <div className="bg-gray-100 dark:bg-gray-800/50 border-y border-gray-200 dark:border-gray-700">
           <div className="container-content py-8 md:py-8">

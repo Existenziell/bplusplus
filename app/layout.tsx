@@ -87,12 +87,16 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={ubuntu.className}>
+      <body className={`${ubuntu.className} flex flex-col min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <GlossaryProvider>
             <Notification />
-            <Header />
-            {children}
+            <div className="flex-shrink-0">
+              <Header />
+            </div>
+            <div className="flex-1 flex flex-col">
+              {children}
+            </div>
             <Analytics />
             <SpeedInsights />
           </GlossaryProvider>

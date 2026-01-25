@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen page-bg flex flex-col">
+    <main className="flex-1 page-bg flex flex-col">
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="text-center max-w-md">
           {/* 404 Number with Bitcoin styling */}

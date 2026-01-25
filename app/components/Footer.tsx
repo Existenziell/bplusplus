@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { ExternalLinkIcon } from '@/app/components/Icons'
+import { footerNavLinks, staticNavLinks } from '@/app/utils/navigation'
 
 interface Resource {
   name: string
@@ -18,29 +19,90 @@ const resources: Resource[] = [
   { name: 'Bitcoin Visuals', url: 'https://bitcoinvisuals.com', description: 'Charts & metrics' },
 ]
 
+const internalLinks = [
+  { href: '/home', title: 'Home' },
+  { href: '/docs/fundamentals', title: 'Fundamentals' },
+  ...staticNavLinks, // Whitepaper, CLI Terminal, Stack Lab
+  { href: '/docs/fundamentals/denominations', title: 'Denominations Calculator' },
+  footerNavLinks[0], // Glossary
+  footerNavLinks[1], // About B++
+]
+
 export default function Footer() {
   return (
     <footer className='border-t border-gray-200 dark:border-gray-700 bg-gray-100/80 dark:bg-gray-800/50 overflow-hidden'>
-      <div className='container-content py-4 flex flex-col items-center'>
-        <nav aria-label='External resources' className='text-center mb-4'>
-          <h3 className="heading-section-sm mb-4">
-            More Bitcoin Resources
-          </h3>
-          <div className='flex flex-wrap justify-center gap-x-6 gap-y-2'>
-            {resources.map((resource) => (
-              <Link
-                key={resource.name}
-                href={resource.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='group inline-flex items-center gap-1.5 text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
-              >
-                <span>{resource.name}</span>
-                <ExternalLinkIcon className='w-3 h-3 flex-shrink-0' aria-hidden='true' />
-              </Link>
-            ))}
-          </div>
-        </nav>
+      <div className='container-content pt-8 pb-4'>
+        {/* 2-column layout: external resources (left), internal links (right) */}
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 mb-4'>
+          <nav aria-label='External resources' className='md:border-r border-gray-200 dark:border-gray-700 md:pr-8 text-left md:text-right'>
+            <h3 className="heading-section-sm mb-3">
+              More Resources
+            </h3>
+            <div className='flex flex-col gap-y-1'>
+              <ul className='flex flex-wrap gap-x-6 gap-y-1 justify-start md:justify-end'>
+                {resources.slice(0, Math.ceil(resources.length / 2)).map((resource) => (
+                  <li key={resource.name}>
+                    <Link
+                      href={resource.url}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='group inline-flex items-center gap-1.5 text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
+                    >
+                      <span>{resource.name}</span>
+                      <ExternalLinkIcon className='w-3 h-3 flex-shrink-0' aria-hidden='true' />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul className='flex flex-wrap gap-x-6 gap-y-1 justify-start md:justify-end'>
+                {resources.slice(Math.ceil(resources.length / 2)).map((resource) => (
+                  <li key={resource.name}>
+                    <Link
+                      href={resource.url}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='group inline-flex items-center gap-1.5 text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
+                    >
+                      <span>{resource.name}</span>
+                      <ExternalLinkIcon className='w-3 h-3 flex-shrink-0' aria-hidden='true' />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
+          <nav aria-label='Site navigation'>
+            <h3 className="heading-section-sm mb-3">
+              Explore B++
+            </h3>
+            <div className='flex flex-col gap-y-1'>
+              <ul className='flex flex-wrap gap-x-6 gap-y-1'>
+                {internalLinks.slice(0, Math.ceil(internalLinks.length / 2)).map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className='text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul className='flex flex-wrap gap-x-6 gap-y-1'>
+                {internalLinks.slice(Math.ceil(internalLinks.length / 2)).map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className='text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
+        </div>
 
         {/* Bottom bar: credit + copyright + tagline */}
         <div className='w-full border-t border-gray-200 dark:border-gray-700 pt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-secondary'>

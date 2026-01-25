@@ -13,7 +13,7 @@ test.describe('Home', () => {
       'href',
       '/terminal'
     )
-    await expect(page.getByRole('link', { name: /Stack Lab/i })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: /Stack Lab/i }).first()).toHaveAttribute(
       'href',
       '/stack-lab'
     )

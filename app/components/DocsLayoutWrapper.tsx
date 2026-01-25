@@ -26,7 +26,7 @@ export default function DocsLayoutWrapper({
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(defaultSidebarCollapsed)
 
   return (
-    <main className="min-h-screen page-bg flex flex-col">
+    <main className="flex-1 page-bg flex flex-col">
       <div className="container-content py-4 md:py-8 flex-grow">
         <div className="flex flex-col md:flex-row gap-4 md:gap-0">
           <div

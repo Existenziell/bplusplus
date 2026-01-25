@@ -24,7 +24,8 @@ const ubuntu = Ubuntu({
 
 export const metadata: Metadata = {
   title: 'B++',
-  description: 'Bitcoin Education | Open knowledge. Open source.',
+  description:
+    "Bitcoin Education | Open knowledge. Open source. A developer's guide with docs, CLI terminal, Stack Lab, and code examples. Always free.",
   icons: {
     icon: [
       { url: '/favicon/favicon.ico', sizes: 'any' },
@@ -44,7 +45,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   openGraph: {
     title: 'B++',
-    description: 'Bitcoin Education | Open knowledge. Open source.',
+    description:
+      "Bitcoin Education | Open knowledge. Open source. A developer's guide with docs, CLI terminal, Stack Lab, and code examples. Always free.",
     url: SITE_URL,
     siteName: 'B++',
     images: [
@@ -63,7 +65,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'B++',
-    description: 'Bitcoin Education | Open knowledge. Open source.',
+    description:
+      "Bitcoin Education | Open knowledge. Open source. A developer's guide with docs, CLI terminal, Stack Lab, and code examples. Always free.",
     images: [
       { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'B++ - Bitcoin Education' },
     ],

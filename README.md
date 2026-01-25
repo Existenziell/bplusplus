@@ -12,7 +12,6 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
   - [Denominations Calculator](#denominations-calculator)
 - [Code snippets](#code-snippets)
 - [Search](#search)
-- [Learning flow](#learning-flow)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
 - [Scripts](#scripts)
@@ -59,30 +58,6 @@ Many examples are shown in **five languages** (Python, Rust, C++, Go, JavaScript
 ## Search
 
 **Command+K** (Mac) or **Ctrl+K** (Windows/Linux) opens the search modal. It indexes docs, glossary terms, and key pages. Also available via the search icon in the header.
-
----
-
-## Learning flow
-
-**Fundamentals:** Problems → Cypherpunk → Blockchain → Timechain → UTXO establishes the *why*, the philosophical lens, and the core technical building blocks. Decentralization and Trust Model then explore emergent properties and the trustless ideal. Monetary Properties, Denominations, Incentive Structure, and Game Theory cover the economic and game-theoretic foundations of Bitcoin's security and monetary design.
-
-**History:** People → Halvings → Forks → BIPs moves from *who* (Satoshi, cypherpunks, key figures) to the monetary schedule (halvings), chain splits (forks), and how the protocol evolves (BIPs). The section is referential; order matters less than for protocol or development.
-
-**Setup & Infrastructure:** Install → Testing → Testnets → Libraries → Node Types → Bitcoin Core Internals follows a get-started path: run a node, verify and debug, use test networks, choose libraries, understand node architecture, then go deep into the reference implementation. Prerequisite for hands-on Bitcoin and Lightning development.
-
-**Bitcoin Protocol:** Crypto → Consensus → Script → OP Codes is in good shape and matches how many scholars and textbooks order the material. The rest of the section follows: Transaction Lifecycle (the "unit" of consensus), script-related topics (Timelocks, Sighash Types), block structure (Merkle Trees, Block Propagation, Subsidy, Fees), the Malleability → SegWit → Taproot progression, then P2P and RPC.
-
-**Bitcoin Development:** Keys → Addresses → Transactions → PSBT is the core path for building and signing transactions; it assumes Setup & Infrastructure and benefits from Bitcoin Protocol (Script, RPC). Blockchain Monitoring and Price Tracking support integration; Pool Mining targets mining software; Script Patterns → Miniscript cover advanced scripting and policy-to-script compilation.
-
-**Wallets:** HD Wallets → Address Types → Transaction Creation → Coin Selection gives key and address handling plus the core spend path. Privacy, Multisig, and Smart Contracts then cover privacy techniques, shared custody, and advanced scripting. Overlaps with Bitcoin Development (keys, addresses, transactions) from a wallet-implementation angle.
-
-**Mining:** Proof-of-Work → Difficulty establishes the mechanism. Mempool and Block Construction cover what miners work with and how they build blocks; Economics covers incentives. Pools and Hardware are operational; Attacks and Network Attacks complete the security picture. Best read after Bitcoin Protocol (consensus, blocks) and optionally Incentive Structure in Fundamentals.
-
-**Lightning:** Channels first, the 2-of-2 off-chain primitive. HTLCs → Routing Fees → MPP cover the routing layer; Invoices (BOLT11) and BOLT12 & Offers cover payment requests; Onion adds privacy. Watchtowers and Anchor Outputs address security and modern channel design. Assumes Bitcoin Protocol (Script, transactions) and ideally Setup & Infrastructure if running a node.
-
-**Advanced Topics:** A catalog of specialized topics, ordered for approachability: Governance first; then L2 and scaling (Sidechains, Statechains, Zero-Conf Channels, Trampoline Routing); smart contracts (Atomic Swaps, DLCs); data on Bitcoin (Ordinals & Inscriptions); privacy (Bloom Filters); and protocol proposals (Covenants). Prerequisites: Bitcoin Protocol, Lightning basics, Script, and Transaction construction.
-
-**Controversies:** Protocol and data debates (Blocksize Wars, OP_RETURN, Ordinals), external critiques (Energy, Criminal Use, ETF Rejections), and defining events (Mt. Gox, Craig Wright). The section explains how governance, values, and antifragility play out in practice.
 
 ---
 

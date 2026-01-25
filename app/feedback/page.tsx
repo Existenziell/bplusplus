@@ -14,14 +14,18 @@ function FeedbackForm() {
   return (
     <div className="max-w-xl mx-auto text-center">
       <h1 className="heading-page-hero">Feedback</h1>
-      <p className="text-gray-800 dark:text-gray-200 leading-7 mb-8">
-        I would love to get feedback from fellow Bitcoiners. What worked? What didn&apos;t? No login required 🧡
+      <p className="text-gray-800 dark:text-gray-200 leading-7">
+        Your feedback would mean a lot to me.
+        <br />
+        What worked for you? What didn&apos;t?
+        <br />
+        Thank you for your help! 🧡
       </p>
 
       <form
         action={FORMSPREE_ENDPOINT}
         method="POST"
-        className="space-y-4 text-left md:mt-16"
+        className="space-y-4 text-left md:mt-8"
       >
         <input
           type="hidden"
@@ -53,7 +57,7 @@ function FeedbackForm() {
             id="feedback-email"
             name="email"
             type="email"
-            placeholder="you@example.com"
+            placeholder="you@bitcoin.org"
             className={inputStyles}
           />
         </div>

@@ -30,6 +30,11 @@ const quotes = [
   "Bitcoin is the most important invention since the internet. — Charlie Shrem",
   "Bitcoin is hope, human interaction & communication. And the inevitable future of money.",
   "Bitcoin: Beauty through simplicity.",
+  "Difficulty adjusted proof of work is what makes Bitcoin a decentralized clock.",
+  "Bitcoin is not smooth jazz - Bitcoin is Punk Rock, deal with it!",
+  "Bitcoin is a shining city in cyberspace, and you can go there once you understand it.",
+  "Bitcoin is a relentless anomalie which refuses to die.",
+  "The biggest computer (network) in the world is not Google, it's Bitcoin.",
 ]
 
 // Shuffle the array using the Fisher-Yates algorithm

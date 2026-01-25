@@ -23,7 +23,7 @@ export default function AuthorPage() {
             <div className="text-center mb-12">
               <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gray-300 dark:border-gray-700">
                 <Image
-                  src="/images/existenziell.jpg"
+                  src="/images/people/existenziell.jpg"
                   alt="Existenziell"
                   fill
                   className="object-cover"

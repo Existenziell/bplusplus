@@ -24,8 +24,7 @@ const internalLinks = [
   { href: '/docs/fundamentals', title: 'Fundamentals' },
   ...staticNavLinks, // Whitepaper, CLI Terminal, Stack Lab
   { href: '/docs/fundamentals/denominations', title: 'Denominations Calculator' },
-  footerNavLinks[0], // Glossary
-  footerNavLinks[1], // About B++
+  ...footerNavLinks, // Glossary, About B++, Feedback
 ]
 
 export default function Footer() {

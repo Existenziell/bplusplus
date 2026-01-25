@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { CopyIcon } from '@/app/components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
 
@@ -36,7 +37,7 @@ export default function AuthorPage() {
               <p className="text-xl md:text-2xl text-secondary mb-1">
                 Developer & Bitcoin Educator
               </p>
-              <p className="text-sm md:text-base text-secondary mb-2">Giving back to the Bitcoin community 🧡</p>
+              <p className="text-sm md:text-base text-secondary mb-2">Giving back to the Bitcoin community</p>
             </div>
 
             {/* About Section */}
@@ -68,6 +69,9 @@ export default function AuthorPage() {
                   This site is open source, free, and will always remain so. No ads,
                   no paywalls, no tracking. Just pure Bitcoin knowledge for anyone
                   who wants to learn.
+                </p>
+                <p className="text-gray-800 dark:text-gray-200 leading-7">
+                  I would love to <Link href="/feedback" className="text-btc hover:underline">get feedback</Link> from fellow Bitcoiners. What worked? What didn&apos;t? No login required.
                 </p>
               </div>
             </section>

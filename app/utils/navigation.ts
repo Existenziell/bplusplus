@@ -199,6 +199,10 @@ export const sections: Record<string, { title: string; description: string }> = 
     title: 'About B++',
     description: 'About the B++ project and its creator.',
   },
+  feedback: {
+    title: 'Feedback',
+    description: 'Leave feedback for B++. Help us improve.',
+  },
 }
 
 export const staticNavLinks: { href: string; title: string }[] = [
@@ -210,6 +214,7 @@ export const staticNavLinks: { href: string; title: string }[] = [
 export const footerNavLinks: { href: string; title: string }[] = [
   { href: '/docs/glossary', title: 'Glossary' },
   { href: '/author', title: 'About B++' },
+  { href: '/feedback', title: 'Feedback' },
 ]
 
 export const navItems: NavSection[] = [
@@ -279,5 +284,6 @@ export const routeLabels: Record<string, string> = {
   'stack-lab': 'Stack Lab',
   whitepaper: 'Whitepaper',
   author: 'About B++',
+  feedback: 'Feedback',
   ...docRouteLabels,
 }

@@ -172,6 +172,7 @@ export default function DocsNavigation({
                           child.href === pathname && headingsByPath[pathname]
                             ? headingsByPath[pathname]
                             : []
+                        const filteredSubsections = subsections.filter((h) => !['Related Topics', 'References'].includes(h.title))
                         return (
                           <li key={child.href}>
                             <Link
@@ -180,9 +181,9 @@ export default function DocsNavigation({
                             >
                               {child.title}
                             </Link>
-                            {subsections.length > 0 && (
+                            {filteredSubsections.length > 0 && (
                               <ul className="ml-5 mt-1 space-y-0" aria-label="On this page">
-                                {subsections.map((h) => (
+                                {filteredSubsections.map((h) => (
                                   <li key={h.slug}>
                                     <Link
                                       href={`${pathname}#${h.slug}`}

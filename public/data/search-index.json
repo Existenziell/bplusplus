@@ -402,12 +402,6 @@
     "body": "Difficulty Adjustment Bitcoin's difficulty adjustment is a critical mechanism that maintains the network's target block time of approximately 10 minutes. Every 2016 blocks (~2 weeks), the network automatically adjusts the mining difficulty based on the actual time it took to mine the previous 2016 blocks. How Difficulty Adjustment Works Adjustment Formula The difficulty adjusts every 2016 blocks (approximately every 2 weeks) using the formula: New Difficulty = Old Difficulty × (Target Time / "
   },
   {
-    "path": "/docs/mining/economics",
-    "title": "Economics",
-    "section": "mining",
-    "body": "Mining Economics Understanding the economics of Bitcoin mining is essential for anyone considering participating in the network. This page covers the revenue sources, cost factors, and profitability calculations that determine whether mining is financially viable. Block Rewards The primary revenue source for miners is the block reward, which consists of two components: | Component | Description | Current Value | |-----------|-------------|---------------| | Block Subsidy | New bitcoin created "
-  },
-  {
     "path": "/docs/mining/mempool",
     "title": "Mempool",
     "section": "mining",
@@ -418,6 +412,12 @@
     "title": "Block Construction",
     "section": "mining",
     "body": "Block Construction Block construction is the process by which miners assemble a new block from pending transactions. This is where the mempool meets the blockchain. Miners must decide which transactions to include, how to order them, and how to structure the block for maximum profit while following consensus rules. Anatomy of a Block A Bitcoin block consists of two main parts: Block Header (80 bytes) ┌─────────────────────────────────────────────────┐ │ Version (4 bytes) │ "
+  },
+  {
+    "path": "/docs/mining/economics",
+    "title": "Economics",
+    "section": "mining",
+    "body": "Mining Economics Understanding the economics of Bitcoin mining is essential for anyone considering participating in the network. This page covers the revenue sources, cost factors, and profitability calculations that determine whether mining is financially viable. Block Rewards The primary revenue source for miners is the block reward, which consists of two components: | Component | Description | Current Value | |-----------|-------------|---------------| | Block Subsidy | New bitcoin created "
   },
   {
     "path": "/docs/mining/pools",
@@ -462,28 +462,28 @@
     "body": "Address Types Bitcoin has evolved through several address formats, each offering different features, security properties, and transaction costs. Understanding these types is essential for wallet development. Overview | Type | Prefix | Example Start | Introduced | |------|--------|---------------|------------| | P2PKH | 1 | 1BvBMSEYstW... | 2009 (Genesis) | | P2SH | 3 | 3J98t1WpEZ7... | 2012 (BIP16) | | P2WPKH | bc1q | bc1qw508d6q... | 2017 (BIP141) | | P2WSH | bc1q | bc1qrp33g0q... | 2017 "
   },
   {
-    "path": "/docs/wallets/coin-selection",
-    "title": "Coin Selection",
-    "section": "wallets",
-    "body": "Coin Selection Coin selection is the process of choosing which UTXOs (Unspent Transaction Outputs) to spend when creating a Bitcoin transaction. This is a critical wallet function that affects transaction fees, privacy, and efficiency. For a deeper understanding of the UTXO model, see the UTXO Model documentation. The Challenge Given: A set of available UTXOs A payment amount to send A target fee rate Select UTXOs such that: Total input value > total output value Fee rate >= required minimum "
-  },
-  {
-    "path": "/docs/wallets/multisig",
-    "title": "Multisig",
-    "section": "wallets",
-    "body": "Multisig Multi-signature (multisig) wallets require multiple signatures to spend funds. This provides enhanced security, shared custody, and flexible access control. A multisig wallet requires M-of-N signatures: M: Minimum number of signatures required N: Total number of possible signers Example: 2-of-3 means 2 signatures from 3 possible keys Common configurations: 2-of-2 (two parties must both sign, e.g. partnership), 2-of-3 (two of three parties must sign, e.g. backup key), 3-of-5 (three of "
-  },
-  {
     "path": "/docs/wallets/transactions",
     "title": "Transaction Creation",
     "section": "wallets",
     "body": "Transaction Creation Creating Bitcoin transactions programmatically involves selecting inputs, creating outputs, calculating fees, signing, and broadcasting. This guide covers the complete process. Transaction Structure Basic Components Transaction: Version: 4 bytes Input Count: VarInt Inputs: Array of inputs Output Count: VarInt Outputs: Array of outputs Locktime: 4 bytes Witness: (if SegWit) Input Structure Input: Previous TXID: 32 bytes Previous Output Index: 4 bytes Script Length: VarInt "
   },
   {
+    "path": "/docs/wallets/coin-selection",
+    "title": "Coin Selection",
+    "section": "wallets",
+    "body": "Coin Selection Coin selection is the process of choosing which UTXOs (Unspent Transaction Outputs) to spend when creating a Bitcoin transaction. This is a critical wallet function that affects transaction fees, privacy, and efficiency. For a deeper understanding of the UTXO model, see the UTXO Model documentation. The Challenge Given: A set of available UTXOs A payment amount to send A target fee rate Select UTXOs such that: Total input value > total output value Fee rate >= required minimum "
+  },
+  {
     "path": "/docs/wallets/privacy",
     "title": "Privacy Techniques",
     "section": "wallets",
     "body": "Privacy Techniques Bitcoin transactions are pseudonymous, not anonymous. Various techniques can improve privacy by breaking the linkability between transactions and making blockchain analysis more difficult. Privacy Challenges Blockchain Analysis All transactions are public: Public Information: Transaction amounts Input/output addresses Transaction graph Timing patterns Common-Input-Ownership Heuristic Analysts assume all inputs to a transaction belong to the same entity: Transaction: Input 1: "
+  },
+  {
+    "path": "/docs/wallets/multisig",
+    "title": "Multisig",
+    "section": "wallets",
+    "body": "Multisig Multi-signature (multisig) wallets require multiple signatures to spend funds. This provides enhanced security, shared custody, and flexible access control. A multisig wallet requires M-of-N signatures: M: Minimum number of signatures required N: Total number of possible signers Example: 2-of-3 means 2 signatures from 3 possible keys Common configurations: 2-of-2 (two parties must both sign, e.g. partnership), 2-of-3 (two of three parties must sign, e.g. backup key), 3-of-5 (three of "
   },
   {
     "path": "/docs/wallets/smart-contracts",
@@ -504,28 +504,22 @@
     "body": "Lightning Payment Channels Payment channels are the fundamental building block of the Lightning Network. They enable off-chain transactions between two parties with on-chain settlement. A payment channel is a 2-of-2 multisig address that locks Bitcoin between two parties. The parties can update the channel balance off-chain without broadcasting to the Bitcoin network. Key properties: 2-of-2 Multisig: Both parties must sign to spend Off-Chain Updates: Balance changes happen instantly without "
   },
   {
-    "path": "/docs/lightning/routing",
-    "title": "Routing Fees",
-    "section": "lightning",
-    "body": "Lightning Routing Fees Lightning routing fees are how nodes earn income for forwarding payments. Understanding fee calculation is essential for both routing nodes and payment senders. Fee Structure Lightning fees consist of two components: Base Fee: Fixed fee per HTLC (in millisatoshis) Proportional Fee: Percentage of payment amount (in parts per million) Fee Formula Total Fee = Base Fee + (Payment Amount × Proportional Fee / 1,000,000) :::code-group /// Calculate the fee for forwarding an "
-  },
-  {
     "path": "/docs/lightning/routing/htlc",
     "title": "HTLCs",
     "section": "lightning",
     "body": "Hash Time-Locked Contracts (HTLCs) HTLCs are the mechanism that enables payments to route through the Lightning Network. They ensure that payments can only be claimed with the correct preimage, and expire after a certain time if unclaimed. An HTLC is a conditional payment that requires: Hash Lock: Knowledge of a secret (preimage) that hashes to a known value Time Lock: Expires after a certain block height (CLTV) HTLC Conditions: If preimage is revealed before expiry → Payment goes to recipient "
   },
   {
+    "path": "/docs/lightning/routing",
+    "title": "Routing Fees",
+    "section": "lightning",
+    "body": "Lightning Routing Fees Lightning routing fees are how nodes earn income for forwarding payments. Understanding fee calculation is essential for both routing nodes and payment senders. Fee Structure Lightning fees consist of two components: Base Fee: Fixed fee per HTLC (in millisatoshis) Proportional Fee: Percentage of payment amount (in parts per million) Fee Formula Total Fee = Base Fee + (Payment Amount × Proportional Fee / 1,000,000) :::code-group /// Calculate the fee for forwarding an "
+  },
+  {
     "path": "/docs/lightning/routing/mpp",
     "title": "Multi-Part Payments",
     "section": "lightning",
     "body": "Multi-Part Payments (MPP) Multi-Part Payments allow splitting a single payment across multiple routes. This enables larger payments and improves success rates by utilizing multiple channels. Instead of sending one large payment through a single route, MPP splits the payment into multiple smaller parts that can take different routes. Example Single Payment (fails): Alice → Bob → Carol → Dave Amount: 500,000 sats Problem: Carol's channel only has 200,000 sats capacity MPP Payment (succeeds): "
-  },
-  {
-    "path": "/docs/lightning/onion",
-    "title": "Onion Routing",
-    "section": "lightning",
-    "body": "Lightning Onion Routing Lightning Network uses Sphinx onion routing to provide privacy and security for payments. Each hop in a route only knows the previous and next hop, not the full route or payment details. Onion routing encrypts data in layers, like an onion. Each hop peels off one layer, revealing only the information needed for that hop to forward the payment. Key properties: Privacy: Each hop only knows immediate neighbors Integrity: HMACs prevent tampering Source Hiding: Sender "
   },
   {
     "path": "/docs/lightning/invoices",
@@ -538,6 +532,12 @@
     "title": "BOLT12 & Offers",
     "section": "lightning",
     "body": "BOLT12 & Lightning Offers BOLT12 is a Lightning protocol extension that introduces offers (and related structures such as invoice requests and refunds) as a more flexible alternative to BOLT11 invoices. Offers allow payers to request an invoice from a payee without the payee having to be online first, support reusable payment identifiers, and enable use cases like recurring payments and better keysend-style flows. BOLT11 vs BOLT12 | Aspect | BOLT11 (Invoices) | BOLT12 (Offers) | "
+  },
+  {
+    "path": "/docs/lightning/onion",
+    "title": "Onion Routing",
+    "section": "lightning",
+    "body": "Lightning Onion Routing Lightning Network uses Sphinx onion routing to provide privacy and security for payments. Each hop in a route only knows the previous and next hop, not the full route or payment details. Onion routing encrypts data in layers, like an onion. Each hop peels off one layer, revealing only the information needed for that hop to forward the payment. Key properties: Privacy: Each hop only knows immediate neighbors Integrity: HMACs prevent tampering Source Hiding: Sender "
   },
   {
     "path": "/docs/lightning/watchtowers",
@@ -660,16 +660,22 @@
     "body": "Bitcoin Controversies Bitcoin's history is marked by intense debates that have shaped its development and philosophy. These controversies reveal the tensions inherent in a decentralized system: how do you change something designed to resist change? Who decides the rules when there is no ruler? Why Controversies Matter Every major Bitcoin controversy teaches us something about decentralized governance: The Blocksize Wars showed that users, not miners or corporations, ultimately control Bitcoin "
   },
   {
+    "path": "/docs/controversies/blocksize-wars",
+    "title": "Blocksize Wars",
+    "section": "controversies",
+    "body": "The Blocksize Wars The Blocksize Wars (2015-2017) were a period of intense debate and conflict within the Bitcoin community over whether to increase Bitcoin's block size limit. This controversy ultimately led to the hard fork that created Bitcoin Cash and fundamentally shaped Bitcoin's development philosophy. The Core Issue The Problem Bitcoin's block size was limited to 1 MB (set by Satoshi Nakamoto in 2010). As Bitcoin adoption grew, this limit became a bottleneck: Transaction Backlog: "
+  },
+  {
     "path": "/docs/controversies/op-return",
     "title": "OP_RETURN Debate",
     "section": "controversies",
     "body": "The OP_RETURN Debate: Bitcoin as Database vs. Financial Network An analysis of the ongoing debate about OP_RETURN, carrier size limits, and Bitcoin's fundamental purpose. OP_RETURN is a Bitcoin Script opcode that creates provably unspendable outputs. When executed, it immediately terminates script execution and marks the transaction as invalid. Script Pattern: OP_RETURN Key Characteristics: Outputs are unspendable: they cannot be used as inputs in future transactions Data is permanently stored "
   },
   {
-    "path": "/docs/controversies/blocksize-wars",
-    "title": "Blocksize Wars",
+    "path": "/docs/controversies/ordinals",
+    "title": "Ordinals and Inscriptions",
     "section": "controversies",
-    "body": "The Blocksize Wars The Blocksize Wars (2015-2017) were a period of intense debate and conflict within the Bitcoin community over whether to increase Bitcoin's block size limit. This controversy ultimately led to the hard fork that created Bitcoin Cash and fundamentally shaped Bitcoin's development philosophy. The Core Issue The Problem Bitcoin's block size was limited to 1 MB (set by Satoshi Nakamoto in 2010). As Bitcoin adoption grew, this limit became a bottleneck: Transaction Backlog: "
+    "body": "Ordinals and Inscriptions Controversy Ordinals and inscriptions let users attach arbitrary data—images, text, JSON—to individual satoshis using witness data. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol and related tokens (e.g. BRC-20) sparked a heated debate: are they legitimate use of block space or spam that raises fees and distorts Bitcoin’s purpose? What Are Ordinals and Inscriptions? Ordinals: A numbering scheme that assigns a unique index to each satoshi and tracks "
   },
   {
     "path": "/docs/controversies/energy-consumption",
@@ -684,6 +690,12 @@
     "body": "Bitcoin and Criminal Use Bitcoin is often framed as the currency of choice for criminals: drug dealers, ransom attacks, money launderers. Critics cite Silk Road, darknet markets, and ransomware as evidence that Bitcoin is inherently a tool for illicit activity. This framing is misleading. Bitcoin is just money. What people do with it is their decision. The vast majority of illicit financial activity globally occurs in US dollars and the traditional banking system, not in Bitcoin. Money Is "
   },
   {
+    "path": "/docs/controversies/etf-rejections",
+    "title": "ETF Rejections",
+    "section": "controversies",
+    "body": "Bitcoin ETF Rejections (2017–2023) For years, the U.S. Securities and Exchange Commission (SEC) rejected or delayed applications for a spot Bitcoin ETF. The main reasons were concerns about manipulation, custody, and market maturity. In January 2024, the SEC finally approved the first spot Bitcoin ETFs. The long refusal and eventual approval are an important part of Bitcoin’s regulatory history. What Is a Spot Bitcoin ETF? A spot Bitcoin ETF holds actual bitcoin (or claims backed by it) and "
+  },
+  {
     "path": "/docs/controversies/mt-gox",
     "title": "Mt. Gox Collapse",
     "section": "controversies",
@@ -696,22 +708,22 @@
     "body": "Craig Wright / \"Faketoshi\" Craig Steven Wright is an Australian computer scientist who has claimed since 2016 to be Satoshi Nakamoto, the pseudonymous creator of Bitcoin. Despite years of assertions, lawsuits, and media appearances, Wright has never provided cryptographic proof of his claim. This is something the real Satoshi could trivially do by signing a message with Satoshi's known private keys. The Bitcoin community overwhelmingly rejects Wright's claims, derisively calling him "
   },
   {
-    "path": "/docs/controversies/ordinals",
-    "title": "Ordinals and Inscriptions",
-    "section": "controversies",
-    "body": "Ordinals and Inscriptions Controversy Ordinals and inscriptions let users attach arbitrary data—images, text, JSON—to individual satoshis using witness data. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol and related tokens (e.g. BRC-20) sparked a heated debate: are they legitimate use of block space or spam that raises fees and distorts Bitcoin’s purpose? What Are Ordinals and Inscriptions? Ordinals: A numbering scheme that assigns a unique index to each satoshi and tracks "
-  },
-  {
-    "path": "/docs/controversies/etf-rejections",
-    "title": "ETF Rejections",
-    "section": "controversies",
-    "body": "Bitcoin ETF Rejections (2017–2023) For years, the U.S. Securities and Exchange Commission (SEC) rejected or delayed applications for a spot Bitcoin ETF. The main reasons were concerns about manipulation, custody, and market maturity. In January 2024, the SEC finally approved the first spot Bitcoin ETFs. The long refusal and eventual approval are an important part of Bitcoin’s regulatory history. What Is a Spot Bitcoin ETF? A spot Bitcoin ETF holds actual bitcoin (or claims backed by it) and "
-  },
-  {
     "path": "/docs/advanced",
     "title": "Advanced Topics",
     "section": "advanced",
     "body": "Advanced Topics This section covers advanced, experimental, and specialized Bitcoin topics that extend beyond the core protocol and standard development practices. What's in This Section Layer 2 & Scaling Solutions Sidechains & Layer 2 - Alternative scaling approaches including Liquid Network and Rootstock Statechains - Federated sidechains for state transfer Zero-Conf Channels - Experimental Lightning channels usable before confirmation Trampoline Routing - Advanced Lightning routing for "
+  },
+  {
+    "path": "/docs/advanced/governance",
+    "title": "Governance & Evolution",
+    "section": "advanced",
+    "body": "Governance & Evolution Bitcoin has no central authority. Its evolution happens through a decentralized process of rough consensus, where changes are proposed, discussed, and adopted (or rejected) by the community. How Bitcoin Evolves The Process Proposal: BIP (Bitcoin Improvement Proposal) Discussion: Community review and debate Implementation: Code written and tested Activation: Network-wide adoption Deployment: Soft fork or hard fork Key Principles Rough consensus: No formal voting, but broad "
+  },
+  {
+    "path": "/docs/advanced/sidechains",
+    "title": "Sidechains & Layer 2",
+    "section": "advanced",
+    "body": "Sidechains & Layer 2 Alternatives Sidechains are separate blockchains that are pegged to Bitcoin, allowing bitcoin to be moved between the main chain and sidechain. They provide alternative scaling solutions and specialized features. Sidechains are independent blockchains with their own consensus rules that are pegged to Bitcoin: Bitcoin Mainnet: ├── Lock bitcoin └── Receive sidechain tokens Sidechain: ├── Receive tokens ├── Use sidechain features └── Unlock to return to Bitcoin Major "
   },
   {
     "path": "/docs/advanced/atomic-swaps",
@@ -726,28 +738,22 @@
     "body": "Discreet Log Contracts (DLCs) Discreet Log Contracts (DLCs) enable Bitcoin smart contracts that depend on external data (oracles) without revealing contract details on-chain until execution. DLCs are smart contracts that: Use oracles: Depend on external data (prices, events) Privacy-preserving: Contract terms hidden until execution Trustless: No need to trust oracle (uses adaptor signatures) Bitcoin-native: Work on Bitcoin blockchain How DLCs Work Oracle Attestation Oracle signs outcome data "
   },
   {
-    "path": "/docs/advanced/sidechains",
-    "title": "Sidechains & Layer 2",
-    "section": "advanced",
-    "body": "Sidechains & Layer 2 Alternatives Sidechains are separate blockchains that are pegged to Bitcoin, allowing bitcoin to be moved between the main chain and sidechain. They provide alternative scaling solutions and specialized features. Sidechains are independent blockchains with their own consensus rules that are pegged to Bitcoin: Bitcoin Mainnet: ├── Lock bitcoin └── Receive sidechain tokens Sidechain: ├── Receive tokens ├── Use sidechain features └── Unlock to return to Bitcoin Major "
-  },
-  {
     "path": "/docs/advanced/statechains",
     "title": "Statechains",
     "section": "advanced",
     "body": "Statechains Statechains are a scaling solution that allows transferring bitcoin ownership off-chain through a federated service without requiring on-chain transactions for each transfer. Statechains enable off-chain bitcoin transfers: Concept: Lock bitcoin on-chain once Transfer ownership off-chain No on-chain transaction per transfer Federated service manages state How Statechains Work Initial Setup User locks bitcoin on-chain Creates statechain entry Federated service holds key share User "
   },
   {
+    "path": "/docs/advanced/ordinals-inscriptions",
+    "title": "Ordinals & Inscriptions",
+    "section": "advanced",
+    "body": "Ordinals & Inscriptions Ordinals and inscriptions are a method for attaching arbitrary data to individual satoshis on the Bitcoin blockchain. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol assigns unique identifiers to satoshis and allows \"inscribing\" content (images, text, JSON, or other files) into witness data that gets stored on-chain. The Ordinals protocol assigns a unique, sequential number to each satoshi based on the order it was mined. This creates a way to identify "
+  },
+  {
     "path": "/docs/advanced/bloom-filters",
     "title": "Bloom Filters",
     "section": "advanced",
     "body": "Bloom Filters Bloom filters are a probabilistic data structure used by SPV (Simplified Payment Verification) clients to request relevant transactions from full nodes without revealing exactly which addresses they're interested in. Bloom filters allow SPV clients to: Request transactions: Without revealing addresses Privacy: Partial privacy protection Efficiency: Compact representation False positives: Possible but manageable How Bloom Filters Work Construction Add addresses to filter Hash "
-  },
-  {
-    "path": "/docs/advanced/governance",
-    "title": "Governance & Evolution",
-    "section": "advanced",
-    "body": "Governance & Evolution Bitcoin has no central authority. Its evolution happens through a decentralized process of rough consensus, where changes are proposed, discussed, and adopted (or rejected) by the community. How Bitcoin Evolves The Process Proposal: BIP (Bitcoin Improvement Proposal) Discussion: Community review and debate Implementation: Code written and tested Activation: Network-wide adoption Deployment: Soft fork or hard fork Key Principles Rough consensus: No formal voting, but broad "
   },
   {
     "path": "/docs/advanced/zero-conf-channels",
@@ -760,12 +766,6 @@
     "title": "Trampoline Routing",
     "section": "advanced",
     "body": "Trampoline Routing Trampoline routing allows lightweight Lightning clients to delegate pathfinding to intermediate nodes. Instead of computing the entire route, the sender specifies trampoline nodes that find the path to the destination. The Mobile Routing Problem Standard Lightning routing requires: Downloading the entire network graph (~100MB+) Keeping the graph synchronized Computing routes through thousands of nodes Problems for mobile: Bandwidth: Downloading/syncing graph uses data "
-  },
-  {
-    "path": "/docs/advanced/ordinals-inscriptions",
-    "title": "Ordinals & Inscriptions",
-    "section": "advanced",
-    "body": "Ordinals & Inscriptions Ordinals and inscriptions are a method for attaching arbitrary data to individual satoshis on the Bitcoin blockchain. Introduced in early 2023 by Casey Rodarmor, the Ordinals protocol assigns unique identifiers to satoshis and allows \"inscribing\" content (images, text, JSON, or other files) into witness data that gets stored on-chain. The Ordinals protocol assigns a unique, sequential number to each satoshi based on the order it was mined. This creates a way to identify "
   },
   {
     "path": "/docs/advanced/covenants",

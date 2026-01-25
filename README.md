@@ -74,15 +74,15 @@ Many examples are shown in **five languages** (Python, Rust, C++, Go, JavaScript
 
 **Bitcoin Development:** Keys → Addresses → Transactions → PSBT is the core path for building and signing transactions; it assumes Setup & Infrastructure and benefits from Bitcoin Protocol (Script, RPC). Blockchain Monitoring and Price Tracking support integration; Pool Mining targets mining software; Script Patterns → Miniscript cover advanced scripting and policy-to-script compilation.
 
-**Wallets:** HD Wallets → Address Types → Coin Selection → Transaction Creation gives key and address handling plus the core spend path. Multisig, Privacy, and Smart Contracts then cover shared custody, privacy techniques, and advanced scripting. Overlaps with Bitcoin Development (keys, addresses, transactions) from a wallet-implementation angle.
+**Wallets:** HD Wallets → Address Types → Transaction Creation → Coin Selection gives key and address handling plus the core spend path. Privacy, Multisig, and Smart Contracts then cover privacy techniques, shared custody, and advanced scripting. Overlaps with Bitcoin Development (keys, addresses, transactions) from a wallet-implementation angle.
 
-**Mining:** Proof-of-Work → Difficulty → Economics establishes the mechanism and incentives. Mempool and Block Construction cover what miners work with and how they build blocks. Pools and Hardware are operational; Attacks and Network Attacks complete the security picture. Best read after Bitcoin Protocol (consensus, blocks) and optionally Incentive Structure in Fundamentals.
+**Mining:** Proof-of-Work → Difficulty establishes the mechanism. Mempool and Block Construction cover what miners work with and how they build blocks; Economics covers incentives. Pools and Hardware are operational; Attacks and Network Attacks complete the security picture. Best read after Bitcoin Protocol (consensus, blocks) and optionally Incentive Structure in Fundamentals.
 
-**Lightning:** Channels first, the 2-of-2 off-chain primitive. HTLCs → Routing Fees → MPP cover the routing layer; Onion adds privacy. Invoices (BOLT11) and BOLT12 & Offers cover payment requests; Watchtowers and Anchor Outputs address security and modern channel design. Assumes Bitcoin Protocol (Script, transactions) and ideally Setup & Infrastructure if running a node.
+**Lightning:** Channels first, the 2-of-2 off-chain primitive. HTLCs → Routing Fees → MPP cover the routing layer; Invoices (BOLT11) and BOLT12 & Offers cover payment requests; Onion adds privacy. Watchtowers and Anchor Outputs address security and modern channel design. Assumes Bitcoin Protocol (Script, transactions) and ideally Setup & Infrastructure if running a node.
 
-**Advanced Topics:** A catalog of specialized topics rather than a linear path. Smart contracts (Atomic Swaps, DLCs), L2 and scaling (Sidechains, Statechains, Zero-Conf Channels, Trampoline Routing), privacy (Bloom Filters), data on Bitcoin (Ordinals & Inscriptions), and governance and protocol proposals (Governance, Covenants). Prerequisites: Bitcoin Protocol, Lightning basics, Script, and Transaction construction.
+**Advanced Topics:** A catalog of specialized topics, ordered for approachability: Governance first; then L2 and scaling (Sidechains, Statechains, Zero-Conf Channels, Trampoline Routing); smart contracts (Atomic Swaps, DLCs); data on Bitcoin (Ordinals & Inscriptions); privacy (Bloom Filters); and protocol proposals (Covenants). Prerequisites: Bitcoin Protocol, Lightning basics, Script, and Transaction construction.
 
-**Controversies:** Protocol debates (OP_RETURN, Blocksize Wars), external critiques (Energy, Criminal Use), and defining events (Mt. Gox, Craig Wright). Order is flexible; the section explains how governance, values, and antifragility play out in practice.
+**Controversies:** Protocol and data debates (Blocksize Wars, OP_RETURN, Ordinals), external critiques (Energy, Criminal Use, ETF Rejections), and defining events (Mt. Gox, Craig Wright). The section explains how governance, values, and antifragility play out in practice.
 
 ---
 

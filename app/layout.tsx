@@ -64,7 +64,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'B++',
     description: 'Bitcoin Education | Open knowledge. Open source.',
-    images: [DEFAULT_OG_IMAGE],
+    images: [
+      { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'B++ - Bitcoin Education' },
+    ],
   },
 }
 

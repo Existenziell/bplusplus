@@ -31,7 +31,7 @@ describe('generatePageMetadata', () => {
     const custom = '/custom/og.png'
     const meta = generatePageMetadata({ title: 'T', description: 'D', ogImage: custom })
     expect(meta.openGraph?.images?.[0]?.url).toBe(custom)
-    expect(meta.twitter?.images).toContain(custom)
+    expect(meta.twitter?.images?.[0]).toMatchObject({ url: custom, width: 1200, height: 630 })
   })
 
   it('sets twitter.card to summary_large_image', () => {

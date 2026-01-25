@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 // Site and OG config
 export const SITE_URL = 'https://bplusplus.info'
-export const DEFAULT_OG_IMAGE = '/og/og.png?v=3'
+export const DEFAULT_OG_IMAGE = '/og/og.png'
 export const OG_LOGO = '/logo/logo.png'
 
 export function generatePageMetadata({
@@ -42,7 +42,7 @@ export function generatePageMetadata({
       card: 'summary_large_image',
       title: fullTitle,
       description,
-      images: [ogImage],
+      images: [{ url: ogImage, width: 1200, height: 630 }],
     },
   }
 }

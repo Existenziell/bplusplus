@@ -35,7 +35,7 @@ export default function AuthorPage() {
                 Existenziell
               </h1>
               <p className="text-xl md:text-2xl text-secondary mb-1">
-                Developer & Bitcoin Educator
+                Developer & Bitcoin Enthusiast
               </p>
               <p className="text-sm md:text-base text-secondary mb-2">Giving back to the Bitcoin community</p>
             </div>

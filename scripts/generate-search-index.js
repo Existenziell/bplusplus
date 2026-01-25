@@ -69,7 +69,7 @@ const staticPages = [
     title: 'About B++',
     section: 'author',
     body:
-      'About B++. Existenziell. Developer and Bitcoin Educator. Why B++. Bitcoin education. Open source. Free. No ads. No paywalls. Support. Donate. Bitcoin address. Nostr.',
+      'About B++. Existenziell. Developer and Bitcoin Enthusiast. Why B++. Bitcoin education. Open source. Free. No ads. No paywalls. Support. Donate. Bitcoin address. Nostr.',
     keywords: ['about', 'existenziell', 'author', 'support', 'donate'],
   },
 ]

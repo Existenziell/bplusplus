@@ -21,7 +21,7 @@ Satoshi Nakamoto published the [Bitcoin whitepaper](/whitepaper), introducing th
 - **Date**: January 3, 2009
 - **Block**: 0 ([Genesis Block](/docs/glossary#genesis-block))
 - **Block Reward**: 50 BTC
-- **Creator**: [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto)
+- **Creator**: Satoshi Nakamoto
 
 The [Genesis Block](/docs/glossary#genesis-block) was mined by Satoshi Nakamoto, marking the birth of the Bitcoin network. The block contains a hidden message in its coinbase transaction: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks": a reference to a headline from The Times newspaper, highlighting Bitcoin's purpose as an alternative to the traditional financial system.
 
@@ -48,7 +48,7 @@ The first published exchange rate valued Bitcoin at less than $0.001 per coin.
 
 - **Date**: Mid–late 2010
 
-[Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto) gradually handed over [Bitcoin](/docs/glossary#bitcoin-network) development and [repository](https://github.com/bitcoin/bitcoin) access to [Gavin Andresen](/docs/history/people) and others, then stopped appearing in forums and email. The last known public communications are from early 2011. Satoshi’s identity remains unknown, and the [protocol](/docs/bitcoin) has since been maintained by the open-source community.
+Satoshi Nakamoto gradually handed over Bitcoin development and [repository](https://github.com/bitcoin/bitcoin) access to [Gavin Andresen](/docs/history/people) and others, then stopped appearing in forums and email. The last known public communications are from early 2011. Satoshi’s identity remains unknown, and the [protocol](/docs/bitcoin) has since been maintained by the open-source community.
 
 ### Pizza Day
 
@@ -91,7 +91,7 @@ Bitcoin's first major price spike, followed by a crash to $2 by November.
 
 - **Date**: February 2011
 
-Silk Road, an online marketplace that used Bitcoin for payments, launched. It became the best-known early use case for [Bitcoin](/docs/glossary#bitcoin-network) and drew attention—both positive and negative—to [censorship resistance](/docs/glossary#censorship-resistance) and [privacy](/docs/wallets/privacy). The site was shut down by law enforcement in October 2013; the episode highlighted that [Bitcoin](/docs/glossary#bitcoin-network) is neutral infrastructure and that adoption and regulation would continue to evolve.
+Silk Road, an online marketplace that used Bitcoin for payments, launched. It became the best-known early use case for [Bitcoin](/docs/glossary#bitcoin-network) and drew attention (both positive and negative) to [censorship resistance](/docs/glossary#censorship-resistance) and [privacy](/docs/wallets/privacy). The site was shut down by law enforcement in October 2013; the episode highlighted that [Bitcoin](/docs/glossary#bitcoin-network) is neutral infrastructure and that adoption and regulation would continue to evolve.
 
 ---
 

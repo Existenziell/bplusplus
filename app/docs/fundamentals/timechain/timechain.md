@@ -70,7 +70,7 @@ This becomes exponentially more difficult as more blocks are added. The computat
 
 ### Difficulty Adjustment: Maintaining Stable Block Time
 
-For the timechain to function reliably, blocks must be created at a **predictable rate**. If blocks came too fast, the network couldn't propagate them efficiently. If blocks came too slow, the system would be unusable. Bitcoin solves this with **[difficulty adjustment](/docs/mining/difficulty)**.
+For the timechain to function reliably, blocks must be created at a **predictable rate**. If blocks came too fast, the network couldn't propagate them efficiently. If blocks came too slow, the system would be unusable. Bitcoin solves this with difficulty adjustment.
 
 Every 2016 blocks (~2 weeks), the network automatically adjusts mining difficulty based on how long it actually took to mine the previous 2016 blocks:
 

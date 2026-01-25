@@ -24,9 +24,9 @@ While eCash ultimately failed commercially (DigiCash went bankrupt in 1998), Cha
 
 **Contribution:** "A Cypherpunk's Manifesto" (1993) - Privacy through cryptography
 
-Eric Hughes is a mathematician and privacy advocate who wrote "A Cypherpunk's Manifesto" in 1993, which became one of the foundational documents of the cypherpunk movement. The manifesto articulated that privacy in an open society requires cryptography—not laws or the good intentions of institutions. Along with Timothy C. May and John Gilmore, Hughes co-founded the legendary cypherpunk mailing list where the ideas that would eventually produce Bitcoin were debated and refined.
+Eric Hughes is a mathematician and privacy advocate who wrote "A Cypherpunk's Manifesto" in 1993, which became one of the foundational documents of the cypherpunk movement. The manifesto articulated that privacy in an open society requires cryptography, not laws or the good intentions of institutions. Along with Timothy C. May and John Gilmore, Hughes co-founded the legendary cypherpunk mailing list where the ideas that would eventually produce Bitcoin were debated and refined.
 
-The manifesto's principles—that we must defend our own privacy, that cryptography enables anonymous systems, and that we cannot expect governments or corporations to grant privacy—directly shaped the worldview behind Bitcoin. The cypherpunk culture of building tools rather than petitioning authorities found its fullest expression in Satoshi's creation of a peer-to-peer electronic cash system that required no one's permission.
+The manifesto's principles, that we must defend our own privacy, that cryptography enables anonymous systems, and that we cannot expect governments or corporations to grant privacy, directly shaped the worldview behind Bitcoin. The cypherpunk culture of building tools rather than petitioning authorities found its fullest expression in Satoshi's creation of a peer-to-peer electronic cash system that required no one's permission.
 
 [More](https://en.wikipedia.org/wiki/Eric_Hughes)
 
@@ -40,7 +40,7 @@ The manifesto's principles—that we must defend our own privacy, that cryptogra
 
 Timothy C. May was an American physicist and writer who authored "The Crypto Anarchist Manifesto" (1988) and co-founded the cypherpunk mailing list with Eric Hughes and John Gilmore in 1992. His manifesto envisioned a future where cryptography would enable anonymous markets and transactions beyond the reach of governments, laying the ideological groundwork for digital cash and permissionless systems.
 
-May's writings foresaw many developments: anonymous digital currencies, reputational systems beyond national borders, and the collision of technology with traditional notions of regulation. The cypherpunk mailing list he helped create became the incubator where Chaum's eCash, Back's Hashcash, and Szabo's Bit Gold were discussed—the same community where Satoshi Nakamoto would later announce Bitcoin. May passed away in 2018.
+May's writings foresaw many developments: anonymous digital currencies, reputational systems beyond national borders, and the collision of technology with traditional notions of regulation. The cypherpunk mailing list he helped create became the incubator where Chaum's eCash, Back's Hashcash, and Szabo's Bit Gold were discussed; the same community where Satoshi Nakamoto would later announce Bitcoin. May passed away in 2018.
 
 [More](https://en.wikipedia.org/wiki/Timothy_C._May)
 
@@ -120,7 +120,7 @@ Merkle trees are fundamental to Bitcoin's [block](/docs/glossary#block) structur
 
 **Contribution:** Secure timestamps (1990-91) - "How to time-stamp a digital document"
 
-Stuart Haber and W. Scott Stornetta are cryptographers who, in a 1991 paper, solved the problem of timestamping digital documents so that they cannot be backdated or tampered with. Their scheme linked each new timestamp to the previous one in a chain—creating a cryptographically secured sequence that could prove the order and existence of records. Satoshi Nakamoto cited their work in the Bitcoin whitepaper as a direct precursor to the blockchain's design.
+Stuart Haber and W. Scott Stornetta are cryptographers who, in a 1991 paper, solved the problem of timestamping digital documents so that they cannot be backdated or tampered with. Their scheme linked each new timestamp to the previous one in a chain, creating a cryptographically secured sequence that could prove the order and existence of records. Satoshi Nakamoto cited their work in the Bitcoin whitepaper as a direct precursor to the blockchain's design.
 
 Their approach used hash pointers to create an append-only, tamper-evident log. This "chain of timestamps" is the conceptual ancestor of Bitcoin's [blockchain](/docs/glossary#blockchain): each block references the previous block's hash, and changing history would require redoing an exponentially growing amount of work. Haber and Stornetta's 1990 paper "How to Time-Stamp a Digital Document" and its 1991 follow-up established the core idea that Bitcoin would combine with proof-of-work and digital cash.
 
@@ -230,7 +230,7 @@ His role diminished after 2014, particularly following the blocksize debate and 
 
 Laszlo Hanyecz is a programmer who, on May 22, 2010, completed the first known commercial transaction using Bitcoin: he paid 10,000 BTC for two pizzas delivered to his home in Florida. The deal was arranged on the Bitcointalk forum, where Hanyecz had offered to pay BTC for pizza delivery. A participant in the UK ordered the pizzas; Hanyecz sent the bitcoin. The exchange proved that Bitcoin could be used as a medium of exchange for real goods and services.
 
-The "Bitcoin pizza" has become a celebrated moment in Bitcoin's history—May 22 is sometimes observed as Bitcoin Pizza Day—and a reminder of Bitcoin's early, experimental use. At later prices, those 10,000 BTC would be worth hundreds of millions of dollars; at the time, they were a fair price for two pizzas and a historic proof of concept. Hanyecz continued contributing to Bitcoin, including work on the GPU mining software that would precede [ASIC](/docs/glossary#asic-application-specific-integrated-circuit) miners.
+The "Bitcoin pizza" has become a celebrated moment in Bitcoin's history (May 22 is sometimes observed as Bitcoin Pizza Day) and a reminder of Bitcoin's early, experimental use. At later prices, those 10,000 BTC would be worth hundreds of millions of dollars; at the time, they were a fair price for two pizzas and a historic proof of concept. Hanyecz continued contributing to Bitcoin, including work on the GPU mining software that would precede [ASIC](/docs/glossary#asic-application-specific-integrated-circuit) miners.
 
 [More](https://en.wikipedia.org/wiki/Laszlo_Hanyecz)
 
@@ -242,9 +242,9 @@ The "Bitcoin pizza" has become a celebrated moment in Bitcoin's history—May 22
 
 **Contribution:** Bitcoin Core lead maintainer (2014-2021)
 
-Wladimir van der Laan is a software developer who served as the lead maintainer of [Bitcoin Core](/docs/glossary#bitcoin-core) from 2014 to 2021. He took over the role from Gavin Andresen during a turbulent period that included the [blocksize wars](/docs/controversies/blocksize-wars)—the intense debate over whether to increase Bitcoin's block size limit. Van der Laan maintained the Bitcoin Core repository, integrated contributions from a growing developer community, and shepherded the project through the activation of [SegWit](/docs/bitcoin/segwit) in 2017.
+Wladimir van der Laan is a software developer who served as the lead maintainer of [Bitcoin Core](/docs/glossary#bitcoin-core) from 2014 to 2021. He took over the role from Gavin Andresen during a turbulent period that included the [blocksize wars](/docs/controversies/blocksize-wars), the intense debate over whether to increase Bitcoin's block size limit. Van der Laan maintained the Bitcoin Core repository, integrated contributions from a growing developer community, and shepherded the project through the activation of [SegWit](/docs/bitcoin/segwit) in 2017.
 
-His tenure saw Bitcoin Core evolve from a smaller team into a distributed, open-source project with many regular contributors. Van der Laan emphasized process, review, and conservative change—values that have come to define Bitcoin's development culture. He stepped down as lead maintainer in 2021; the role has since been shared among several maintainers in a further decentralization of project stewardship.
+His tenure saw Bitcoin Core evolve from a smaller team into a distributed, open-source project with many regular contributors. Van der Laan emphasized process, review, and conservative change, values that have come to define Bitcoin's development culture. He stepped down as lead maintainer in 2021; the role has since been shared among several maintainers in a further decentralization of project stewardship.
 
 [More](https://en.wikipedia.org/wiki/Wladimir_van_der_Laan)
 
@@ -258,7 +258,7 @@ His tenure saw Bitcoin Core evolve from a smaller team into a distributed, open-
 
 Pieter Wuille is a Belgian software engineer and one of the most influential Bitcoin protocol developers. He is the primary author of [SegWit](/docs/bitcoin/segwit) (BIP 141), activated in 2017, which separated signature data from transaction data in the [block](/docs/glossary#block) structure, fixing [transaction malleability](/docs/bitcoin/transaction-malleability) and enabling second-layer protocols. He also co-designed [Taproot](/docs/bitcoin/taproot) (BIPs 340, 341, 342), Bitcoin's 2021 upgrade that introduced Schnorr signatures, [MAST](/docs/glossary#mast-merkle-abstract-syntax-tree), and improved privacy and flexibility for smart contracts.
 
-Wuille created and maintains libsecp256k1, the cryptographic library used by Bitcoin Core for [elliptic curve](/docs/bitcoin/cryptography) operations—faster and more secure than generic crypto libraries. His work has shaped the security, scalability, and expressiveness of the Bitcoin protocol. He is a co-founder of Blockstream and remains an active Bitcoin Core contributor.
+Wuille created and maintains libsecp256k1, the cryptographic library used by Bitcoin Core for [elliptic curve](/docs/bitcoin/cryptography) operations, faster and more secure than generic crypto libraries. His work has shaped the security, scalability, and expressiveness of the Bitcoin protocol. He is a co-founder of Blockstream and remains an active Bitcoin Core contributor.
 
 [More](https://en.wikipedia.org/wiki/Pieter_Wuille)
 

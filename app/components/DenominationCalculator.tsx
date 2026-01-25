@@ -8,7 +8,7 @@ const inputStyles =
 
 export default function DenominationCalculator() {
   const [value, setValue] = useState('')
-  const [fromUnit, setFromUnit] = useState('sat')
+  const [fromUnit, setFromUnit] = useState('btc')
 
   const sats = useCallback(() => toSats(value, fromUnit), [value, fromUnit])
 

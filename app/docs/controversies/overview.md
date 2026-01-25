@@ -9,7 +9,7 @@ Every major Bitcoin controversy teaches us something about decentralized governa
 - **The Blocksize Wars** showed that users, not miners or corporations, ultimately control Bitcoin
 - **Mt. Gox** taught us "not your keys, not your coins"
 - **Energy debates** force us to articulate why [proof-of-work](/docs/glossary#proof-of-work-pow) matters
-- **Criminal-use accusations** remind us that money is a neutral tool—and that illicit activity overwhelmingly occurs in traditional currencies
+- **Criminal-use accusations** remind us that money is a neutral tool and that illicit activity overwhelmingly occurs in traditional currencies
 - **Faketoshi claims** demonstrate the importance of cryptographic proof over authority
 
 Understanding these battles is essential for anyone who wants to understand Bitcoin's culture and design philosophy.

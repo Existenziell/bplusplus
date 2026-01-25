@@ -369,7 +369,7 @@
   },
   "fungibility": {
     "term": "Fungibility",
-    "definition": "The property that individual units of a currency or asset are interchangeable—one unit is equivalent to another. Bitcoin is fungible when one satoshi is treated the same as any other regardless of transaction history...."
+    "definition": "The property that individual units of a currency or asset are interchangeable, one unit is equivalent to another. Bitcoin is fungible when one satoshi is treated the same as any other regardless of transaction history...."
   },
   "genesis-block": {
     "term": "Genesis Block",

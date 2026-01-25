@@ -15,7 +15,7 @@ Before Bitcoin, decentralized digital currency faced seemingly insurmountable pr
 
 ## The Double-Spending Problem
 
-[Double-spending](/docs/glossary#double-spend) occurs when the same digital currency unit is spent more than once. Unlike physical cash, digital information can be perfectly copied; without protection, the same coin could be sent to multiple recipients simultaneously, destroying the currency's value.
+Double-spending occurs when the same digital currency unit is spent more than once. Unlike physical cash, digital information can be perfectly copied; without protection, the same coin could be sent to multiple recipients simultaneously, destroying the currency's value.
 
 **Traditional solution:** A central authority (bank) maintains the ledger and verifies each transaction. Problem: requires trust in that authority.
 
@@ -29,7 +29,7 @@ Alice has 1 BTC, attempts to send it to both Bob and Charlie:
 ```
 
 :::video-group
-[Video: Double Spending Problem Explained](https://www.youtube.com/watch?v=yBwDGby1yZA)
+[How Satoshi Nakamoto Solved The Double Spending Problem](https://www.youtube.com/watch?v=yBwDGby1yZA)
 [Double-Spending Problem Explained by a Developer](https://www.youtube.com/watch?v=jtc3_Gw39Ps?t=39)
 :::
 
@@ -78,8 +78,8 @@ These are often confused but address different problems:
 **In summary:** The Two Generals Problem is about **unreliable channels**, while the Byzantine Generals Problem is about **unreliable participants**. Bitcoin addresses both: proof-of-work handles unreliable communication through probabilistic finality, while the longest-chain rule and economic incentives handle potentially malicious miners.
 
 :::video-group
-[Video: The Byzantine Generals problem, and why it matters for Bitcoin](https://www.youtube.com/watch?v=Bvj72wN0OVk)
-[Video: The Byzantine Generals problem, and why it matters for Bitcoin](https://www.youtube.com/watch?v=fyf-MCz0Qoo)
+[The Byzantine Generals problem, and why it matters for Bitcoin](https://www.youtube.com/watch?v=Bvj72wN0OVk)
+[The Byzantine Generals Problem](https://www.youtube.com/watch?v=fyf-MCz0Qoo)
 :::
 
 ---

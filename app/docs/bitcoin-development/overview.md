@@ -2,7 +2,7 @@
 
 **How to build apps.**
 
-This section covers practical Bitcoin development tasks—the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more.
+This section covers practical Bitcoin development tasks, the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more.
 
 > **Prerequisites:** Before diving into these topics, make sure you're familiar with [Setup & Infrastructure](/docs/development) topics like installing Bitcoin, testing, and using libraries.
 

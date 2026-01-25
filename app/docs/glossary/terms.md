@@ -301,7 +301,7 @@ A divergence in the blockchain where two or more competing chains temporarily or
 A Bitcoin node that independently validates every transaction and block against consensus rules, maintaining a complete copy of the blockchain without trusting any external source. Full nodes download and verify ~600GB+ of historical data during initial sync, then validate new blocks as they arrive. Running a full node provides the highest level of security and privacy, as you verify your own transactions rather than trusting third parties.
 
 ### Fungibility
-The property that individual units of a currency or asset are interchangeable—one unit is equivalent to another. Bitcoin is fungible when one satoshi is treated the same as any other regardless of transaction history. Chain analysis can reduce fungibility by labeling or discriminating against certain coins based on their provenance.
+The property that individual units of a currency or asset are interchangeable, one unit is equivalent to another. Bitcoin is fungible when one satoshi is treated the same as any other regardless of transaction history. Chain analysis can reduce fungibility by labeling or discriminating against certain coins based on their provenance.
 
 ---
 

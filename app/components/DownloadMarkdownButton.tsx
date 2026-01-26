@@ -24,7 +24,6 @@ export default function DownloadMarkdownButton() {
       aria-label="Download markdown file"
     >
       <DownloadMarkdownIcon aria-hidden />
-      <span>Download .md</span>
     </button>
   )
 }

@@ -102,7 +102,7 @@ export function PanelCollapseIcon({ className, ...props }: IconProps) {
 export function DownloadMarkdownIcon({ className, ...props }: IconProps) {
   return (
     <svg
-      className={mergeClassName('w-4 h-4', className)}
+      className={mergeClassName('w-5 h-5', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"

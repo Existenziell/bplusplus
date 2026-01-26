@@ -3,7 +3,6 @@
 import { useState, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
 import Breadcrumbs from '@/app/components/Breadcrumbs'
-import DownloadMarkdownButton from '@/app/components/DownloadMarkdownButton'
 import SearchModal from '@/app/components/SearchModal'
 import { SearchIcon } from '@/app/components/Icons'
 import { useStickyScroll } from '@/app/contexts/StickyScrollContext'
@@ -52,9 +51,6 @@ export default function StickyBreadcrumbs() {
                 >
                   <SearchIcon className="w-5 h-5" />
                 </button>
-              </div>
-              <div className="hidden md:block">
-                <DownloadMarkdownButton />
               </div>
             </div>
           </div>

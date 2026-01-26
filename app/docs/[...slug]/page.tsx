@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+import DownloadMarkdownButton from '@/app/components/DownloadMarkdownButton'
 import { docPages, sections } from '@/app/utils/navigation'
 import { generatePageMetadata } from '@/app/utils/metadata'
 import mdContent from '@/public/data/md-content.json'
@@ -73,7 +74,10 @@ export default async function DocPage({ params }: PageProps) {
   }
 
   return (
-    <div>
+    <div className="relative">
+      <div className="absolute top-0 right-0 z-10 hidden md:block">
+        <DownloadMarkdownButton />
+      </div>
       <MarkdownRenderer content={entry.content} />
     </div>
   )

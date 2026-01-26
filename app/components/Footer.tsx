@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { ExternalLinkIcon } from '@/app/components/Icons'
 import { footerNavLinks, staticNavLinks } from '@/app/utils/navigation'
 
 interface Resource {
@@ -20,10 +19,8 @@ const resources: Resource[] = [
 ]
 
 const internalLinks = [
-  { href: '/home', title: 'Home' },
   { href: '/docs/fundamentals', title: 'Fundamentals' },
   ...staticNavLinks, // Whitepaper, CLI Terminal, Stack Lab
-  { href: '/docs/fundamentals/denominations', title: 'Denominations Calculator' },
   ...footerNavLinks, // Glossary, About B++, Feedback
 ]
 
@@ -32,74 +29,44 @@ export default function Footer() {
     <footer className='border-t border-gray-200 dark:border-gray-700 bg-gray-100/80 dark:bg-gray-800/50 overflow-hidden'>
       <div className='container-content pt-8 pb-4'>
         {/* 2-column layout: external resources (left), internal links (right) */}
-        <div className='grid grid-cols-2 gap-8 mb-8'>
-          <nav aria-label='External resources' className='border-r border-gray-200 dark:border-gray-700 pr-8 text-left md:text-right'>
-            <h3 className="heading-section-sm mb-3">
+        <div className='grid grid-cols-[1fr_auto_1fr] md:flex md:flex-row md:items-start gap-8 mb-8 relative'>
+          <nav aria-label='External resources' className='w-full md:flex-1'>
+            <h3 className="heading-section-sm mb-3 text-center">
               More Resources
             </h3>
-            <div className='flex flex-col gap-y-1'>
-              <ul className='flex flex-wrap gap-x-6 gap-y-1 justify-start md:justify-end'>
-                {resources.slice(0, Math.ceil(resources.length / 2)).map((resource) => (
-                  <li key={resource.name}>
-                    <Link
-                      href={resource.url}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='group inline-flex items-center gap-1.5 text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
-                    >
-                      <span>{resource.name}</span>
-                      <ExternalLinkIcon className='w-3 h-3 flex-shrink-0' aria-hidden='true' />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ul className='flex flex-wrap gap-x-6 gap-y-1 justify-start md:justify-end'>
-                {resources.slice(Math.ceil(resources.length / 2)).map((resource) => (
-                  <li key={resource.name}>
-                    <Link
-                      href={resource.url}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='group inline-flex items-center gap-1.5 text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
-                    >
-                      <span>{resource.name}</span>
-                      <ExternalLinkIcon className='w-3 h-3 flex-shrink-0' aria-hidden='true' />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ul className='flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-x-6 gap-y-1'>
+              {resources.map((resource) => (
+                <li key={resource.name} className='text-center'>
+                  <Link
+                    href={resource.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
+                  >
+                    {resource.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
-          <nav aria-label='Site navigation'>
-            <h3 className="heading-section-sm mb-3">
+          {/* Vertical divider */}
+          <div className='w-px bg-gray-200 dark:bg-gray-700 self-stretch' aria-hidden='true' />
+          <nav aria-label='Site navigation' className='w-full md:flex-1'>
+            <h3 className="heading-section-sm mb-3 text-center">
               Explore B++
             </h3>
-            <div className='flex flex-col gap-y-1'>
-              <ul className='flex flex-wrap gap-x-6 gap-y-1'>
-                {internalLinks.slice(0, Math.ceil(internalLinks.length / 2)).map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className='text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ul className='flex flex-wrap gap-x-6 gap-y-1'>
-                {internalLinks.slice(Math.ceil(internalLinks.length / 2)).map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className='text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ul className='flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-x-6 gap-y-1'>
+              {internalLinks.map((link) => (
+                <li key={link.href} className='text-center'>
+                  <Link
+                    href={link.href}
+                    className='text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
         </div>
 

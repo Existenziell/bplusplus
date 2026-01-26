@@ -798,7 +798,7 @@ Isolating a node from the real network.
 
 ## Finney Attack
 
-Named after [Hal Finney](/docs/history/people#hal-finney-1956-2014), this is a race between broadcasting blocks and transactions.
+Named after [Hal Finney](/docs/history/people#hal-finney), this is a race between broadcasting blocks and transactions.
 
 ### How It Works
 

@@ -359,6 +359,32 @@
       "slug": "related-topics"
     }
   ],
+  "/docs/fundamentals/investment": [
+    {
+      "title": "Why Consider Bitcoin?",
+      "slug": "why-consider-bitcoin"
+    },
+    {
+      "title": "Dollar Cost Averaging (DCA)",
+      "slug": "dollar-cost-averaging-dca"
+    },
+    {
+      "title": "Invest Only What You Understand",
+      "slug": "invest-only-what-you-understand"
+    },
+    {
+      "title": "Risk Considerations",
+      "slug": "risk-considerations"
+    },
+    {
+      "title": "Education First",
+      "slug": "education-first"
+    },
+    {
+      "title": "Related Topics",
+      "slug": "related-topics"
+    }
+  ],
   "/docs/history": [
     {
       "title": "2008",

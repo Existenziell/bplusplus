@@ -248,6 +248,12 @@
     "body": "Game Theory Game theory is the mathematical study of strategic decision-making. In Bitcoin, game theory explains why the network remains secure even when participants are anonymous, potentially malicious, and have no reason to trust each other. Bitcoin's design creates a system where rational self-interest naturally leads to honest behavior and network security. Why Game Theory Matters for Bitcoin Traditional financial systems rely on legal enforcement, trusted authorities, and institutional "
   },
   {
+    "path": "/docs/fundamentals/investment",
+    "title": "Bitcoin as Investment",
+    "section": "fundamentals",
+    "body": "Bitcoin as Investment Why Consider Bitcoin? Understanding Bitcoin as an investment requires recognizing both its potential and its risks. Bitcoin exhibits several characteristics that make it attractive as an investment: Scarcity: With a fixed supply cap, Bitcoin cannot be inflated or diluted. The issuance schedule is predictable and decreases over time through halvings, creating a deflationary monetary policy. Portability: Bitcoin can be transferred globally, 24/7, without intermediaries. This "
+  },
+  {
     "path": "/docs/history",
     "title": "Bitcoin History",
     "section": "history",

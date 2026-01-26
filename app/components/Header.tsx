@@ -27,7 +27,7 @@ export default function Header() {
           <div className="flex justify-between items-center">
             <Link href="/" className="flex items-center gap-2" aria-label="B++ Home">
               <Image
-                src="/icons/love.png"
+                src="/logo/logo.png"
                 alt="B++ Logo"
                 width={100}
                 height={100}

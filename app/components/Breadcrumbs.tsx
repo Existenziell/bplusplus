@@ -46,7 +46,7 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
                     aria-label="B++ Home"
                   >
                     <Image
-                      src="/icons/love.png"
+                      src="/logo/logo.png"
                       alt="B++ Logo"
                       width={42}
                       height={42}

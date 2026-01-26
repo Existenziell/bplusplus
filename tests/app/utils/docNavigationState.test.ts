@@ -17,6 +17,7 @@ const flatPages = [
 ]
 const mainPageHrefs = new Set(['/docs/bitcoin', '/docs/mining'])
 const routeLabels: Record<string, string> = {
+  docs: 'Documentation',
   bitcoin: 'The Bitcoin Protocol',
   script: 'Bitcoin Script',
   cryptography: 'Cryptography',
@@ -41,6 +42,7 @@ describe('pathnameToDocNavigationState', () => {
   it('/docs/bitcoin/script has correct breadcrumbs, prev/next, isDownloadable', () => {
     const state = pathnameToDocNavigationState('/docs/bitcoin/script', ctx)
     expect(state.breadcrumbs[0]).toEqual({ label: 'Home', href: '/' })
+    expect(state.breadcrumbs.some((b) => b.label === 'Documentation' && b.href === '/docs')).toBe(true)
     expect(state.breadcrumbs.some((b) => b.label === 'The Bitcoin Protocol' && b.href === '/docs/bitcoin')).toBe(true)
     expect(state.breadcrumbs.some((b) => b.label === 'Bitcoin Script' && b.href === '/docs/bitcoin/script')).toBe(true)
     expect(state.previousPage).toEqual({ title: 'Cryptography', href: '/docs/bitcoin/cryptography' })

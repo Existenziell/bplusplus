@@ -58,7 +58,6 @@ export function pathnameToDocNavigationState(
 
   for (const segment of pathSegments) {
     currentPath += `/${segment}`
-    if (segment === 'docs') continue
     const label =
       routeLabels[segment] ??
       segment

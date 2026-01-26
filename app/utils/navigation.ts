@@ -304,5 +304,6 @@ export const routeLabels: Record<string, string> = {
   whitepaper: 'Whitepaper',
   author: 'About B++',
   feedback: 'Feedback',
+  docs: 'Documentation',
   ...docRouteLabels,
 }

@@ -124,18 +124,33 @@ export default function DocsNavigation({
           </ul>
         </div>
 
-        {/* Collapse/expand docs tree only */}
-        <button
-          onClick={() => setIsDocsExpanded((v) => !v)}
-          className="flex items-center gap-1.5 w-full text-left text-base text-gray-700 dark:text-gray-300 mb-2 hover:text-btc transition-colors"
-          aria-expanded={isDocsExpanded}
-          aria-label={isDocsExpanded ? 'Collapse docs' : 'Expand docs'}
-        >
-          <ArrowRight
-            className={`shrink-0 w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform ${isDocsExpanded ? 'rotate-90' : ''}`}
-          />
-          <span>Docs</span>
-        </button>
+        {/* Docs link - navigates to /docs overview page */}
+        <div className="mb-2">
+          <div className="flex items-center gap-1.5 w-full text-left text-base mb-2">
+            <button
+              onClick={() => setIsDocsExpanded((v) => !v)}
+              className="flex-shrink-0 p-1 text-gray-500 dark:text-gray-400 hover:text-btc transition-colors"
+              aria-expanded={isDocsExpanded}
+              aria-label={isDocsExpanded ? 'Collapse docs tree' : 'Expand docs tree'}
+            >
+              <ArrowRight
+                className={`shrink-0 w-4 h-4 transition-transform ${
+                  isDocsExpanded ? 'rotate-90' : ''
+                }`}
+              />
+            </button>
+            <Link
+              href="/docs"
+              className={`flex-1 transition-colors ${
+                isActive('/docs')
+                  ? 'text-btc font-semibold'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-btc'
+              }`}
+            >
+              Docs
+            </Link>
+          </div>
+        </div>
         {isDocsExpanded && (
           <ul className="space-y-1">
             {navItems.map((item) => {
@@ -166,7 +181,7 @@ export default function DocsNavigation({
                     </Link>
                   </div>
                   {hasChildren && expanded && (
-                    <ul className="ml-5 mt-1 space-y-0">
+                    <ul className="ml-7 mt-1 space-y-0">
                       {item.children!.map((child) => {
                         const subsections =
                           child.href === pathname && headingsByPath[pathname]

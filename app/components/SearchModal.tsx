@@ -127,6 +127,15 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 border-b border-gray-200 dark:border-gray-700 px-6">
+          <Link
+            href="/docs"
+            onClick={onClose}
+            className="p-1.5 rounded text-gray-500 dark:text-gray-400 hover:text-btc hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Go to documentation overview"
+            title="Documentation overview"
+          >
+            <BookOpenIcon className="w-5 h-5" />
+          </Link>
           <SearchIcon className="flex-shrink-0 w-6 h-6 text-gray-500 dark:text-gray-400" />
           <input
             ref={inputRef}
@@ -134,7 +143,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search docs…"
-            className="flex-1 py-5 text-lg bg-transparent border-0 outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400 text-gray-900 dark:text-gray-100"
+            className="flex-1 py-5 text-lg bg-transparent border-0 border-none outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400 text-gray-900 dark:text-gray-100 focus:ring-0 focus:border-0"
             autoComplete="off"
             autoCorrect="off"
             aria-label="Search"

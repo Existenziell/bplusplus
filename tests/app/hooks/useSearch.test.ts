@@ -1,0 +1,200 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { renderHook, waitFor, act } from '@testing-library/react'
+import { useSearch } from '@/app/hooks/useSearch'
+import { useSearchIndex } from '@/app/hooks/useSearchIndex'
+import { search } from '@/app/utils/searchLogic'
+import type { IndexEntry } from '@/app/utils/searchLogic'
+
+// Mock dependencies
+vi.mock('@/app/hooks/useSearchIndex')
+vi.mock('@/app/utils/searchLogic')
+
+describe('useSearch', () => {
+  const mockIndex: IndexEntry[] = [
+    { path: '/docs/bitcoin', title: 'Bitcoin Protocol', section: 'bitcoin', body: 'Bitcoin overview' },
+    { path: '/docs/fundamentals', title: 'Fundamentals', section: 'fundamentals', body: 'Fundamentals content' },
+  ]
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    ;(useSearchIndex as any).mockReturnValue({
+      index: mockIndex,
+      loading: false,
+      error: null,
+    })
+  })
+
+  it('initializes with empty query and results', () => {
+    const { result } = renderHook(() => useSearch())
+
+    expect(result.current.query).toBe('')
+    expect(result.current.results).toEqual([])
+    expect(result.current.loading).toBe(false)
+  })
+
+  it('debounces search queries', async () => {
+    const mockResults = [
+      { path: '/docs/bitcoin', title: 'Bitcoin Protocol', section: 'bitcoin', snippet: 'Bitcoin overview' },
+    ]
+    ;(search as any).mockReturnValue(mockResults)
+
+    const { result } = renderHook(() => useSearch())
+
+    act(() => {
+      result.current.setQuery('bit')
+    })
+
+    expect(result.current.query).toBe('bit')
+    expect(result.current.results).toEqual([]) // Not searched yet due to debounce
+
+    // Wait for debounce (180ms)
+    await waitFor(
+      () => {
+        expect(search).toHaveBeenCalled()
+      },
+      { timeout: 300 }
+    )
+
+    expect(result.current.results).toEqual(mockResults)
+  })
+
+  it('does not search if query is too short', async () => {
+    const { result } = renderHook(() => useSearch())
+
+    act(() => {
+      result.current.setQuery('a')
+    })
+
+    await waitFor(() => {
+      expect(result.current.query).toBe('a')
+    }, { timeout: 300 })
+
+    expect(search).not.toHaveBeenCalled()
+    expect(result.current.results).toEqual([])
+  })
+
+  it('searches when query meets minimum length', async () => {
+    const mockResults = [
+      { path: '/docs/bitcoin', title: 'Bitcoin Protocol', section: 'bitcoin', snippet: 'Bitcoin overview' },
+    ]
+    ;(search as any).mockReturnValue(mockResults)
+
+    const { result } = renderHook(() => useSearch())
+
+    act(() => {
+      result.current.setQuery('bitcoin')
+    })
+
+    await waitFor(
+      () => {
+        expect(search).toHaveBeenCalledWith('bitcoin', mockIndex)
+      },
+      { timeout: 300 }
+    )
+
+    expect(result.current.results).toEqual(mockResults)
+  })
+
+  it('shows loading when index is not available', () => {
+    ;(useSearchIndex as any).mockReturnValue({
+      index: null,
+      loading: true,
+      error: null,
+    })
+
+    const { result } = renderHook(() => useSearch())
+
+    expect(result.current.loading).toBe(true)
+  })
+
+  it('shows loading when query is set but index not loaded', async () => {
+    ;(useSearchIndex as any).mockReturnValue({
+      index: null,
+      loading: false,
+      error: null,
+    })
+
+    const { result } = renderHook(() => useSearch())
+
+    act(() => {
+      result.current.setQuery('bitcoin')
+    })
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(true)
+    }, { timeout: 300 })
+  })
+
+  it('handles search errors gracefully', async () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    ;(search as any).mockImplementation(() => {
+      throw new Error('Search error')
+    })
+
+    const { result } = renderHook(() => useSearch())
+
+    act(() => {
+      result.current.setQuery('bitcoin')
+    })
+
+    await waitFor(
+      () => {
+        expect(result.current.results).toEqual([])
+      },
+      { timeout: 300 }
+    )
+
+    expect(consoleSpy).toHaveBeenCalledWith('Search error:', expect.any(Error))
+
+    consoleSpy.mockRestore()
+  })
+
+  it('propagates index error', () => {
+    const indexError = new Error('Index load failed')
+    ;(useSearchIndex as any).mockReturnValue({
+      index: null,
+      loading: false,
+      error: indexError,
+    })
+
+    const { result } = renderHook(() => useSearch())
+
+    expect(result.current.indexError).toBe(indexError)
+  })
+
+  it('updates results when index becomes available', async () => {
+    const mockResults = [
+      { path: '/docs/bitcoin', title: 'Bitcoin Protocol', section: 'bitcoin', snippet: 'Bitcoin overview' },
+    ]
+
+    // Start without index
+    ;(useSearchIndex as any).mockReturnValue({
+      index: null,
+      loading: true,
+      error: null,
+    })
+
+    const { result, rerender } = renderHook(() => useSearch())
+
+    act(() => {
+      result.current.setQuery('bitcoin')
+    })
+
+    // Now provide index
+    ;(useSearchIndex as any).mockReturnValue({
+      index: mockIndex,
+      loading: false,
+      error: null,
+    })
+    ;(search as any).mockReturnValue(mockResults)
+
+    rerender()
+
+    await waitFor(
+      () => {
+        expect(result.current.results).toEqual(mockResults)
+      },
+      { timeout: 300 }
+    )
+  })
+})

@@ -5,6 +5,9 @@ export default defineConfig({
   test: {
     include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx', 'tests/**/*.spec.ts', 'tests/**/*.test.js'],
     exclude: ['tests/e2e/**'],
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./tests/setup.ts'],
     coverage: {
       provider: 'v8',
       include: ['app/**/*.ts', 'app/**/*.tsx', 'scripts/**/*.js'],
@@ -15,5 +18,8 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './'),
     },
+  },
+  esbuild: {
+    jsx: 'automatic',
   },
 })

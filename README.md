@@ -67,7 +67,7 @@ Many examples are shown in **five languages** (Python, Rust, C++, Go, JavaScript
 - **React:** 19, **Tailwind CSS**, **TypeScript**
 - **Markdown:** react-markdown, remark-gfm, rehype-highlight, rehype-raw
 - **Theming:** next-themes
-- **Testing:** Vitest (unit), Playwright (E2E)
+- **Testing:** Vitest (unit), React Testing Library (components), Playwright (E2E)
 
 One dynamic route (`app/docs/[...slug]/page.tsx`) backed by `app/utils/navigation.ts`. Each section: `overview.md` plus `[topic]/[topic].md`. Routing and nav are defined in `navigation.ts`.
 
@@ -104,6 +104,32 @@ npm run dev    # → http://localhost:3000
 | `npm run lint` | ESLint |
 | `npm run analyze` | Bundle analysis |
 
+## Testing
+
+The project uses a comprehensive testing strategy:
+
+### Unit Tests (Vitest)
+- **Utilities** (`tests/app/utils/`): Pure functions, helpers, and business logic
+- **Hooks** (`tests/app/hooks/`): Custom React hooks with state management and side effects
+- **Contexts** (`tests/app/contexts/`): React context providers and consumers
+- **API Routes** (`tests/app/api/`): Next.js API route handlers
+- **Components** (`tests/app/components/`): React components with React Testing Library
+
+### E2E Tests (Playwright)
+- Page-level integration tests for user flows
+- Located in `tests/e2e/`
+
+### Test Coverage
+- Run `npm run test:unit:coverage` to generate coverage reports
+- Tests cover utilities, hooks, contexts, API routes, and key components
+- Focus on business logic, user interactions, and error handling
+
+### Writing Tests
+- Unit tests: Use Vitest with React Testing Library for components
+- E2E tests: Use Playwright for full user workflows
+- Test files follow the pattern: `*.test.ts` or `*.test.tsx`
+- Setup file: `tests/setup.ts` configures testing environment
+
 ---
 
 ## Contributing
@@ -112,8 +138,22 @@ Contributions are welcome. The docs are Markdown in `app/docs/`.
 
 1. Fork the repo, create a branch (`git checkout -b feature/improvement`)
 2. Add or edit files in `app/docs/`
-3. Run `npm run lint`
+3. Run `npm run lint` and `npm run test` to ensure everything passes
 4. Commit, push to your fork, and open a PR
+
+### Test Structure
+
+```
+tests/
+├── app/
+│   ├── components/     # React component tests
+│   ├── hooks/          # Custom hook tests
+│   ├── contexts/       # Context provider tests
+│   ├── api/            # API route tests
+│   └── utils/          # Utility function tests
+├── e2e/                # Playwright E2E tests
+└── scripts/            # Build script tests
+```
 
 ---
 

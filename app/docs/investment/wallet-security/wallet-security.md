@@ -1,6 +1,6 @@
 # Wallet Security & Self-Custody
 
-**[Not your keys, not your coins](/docs/glossary#not-your-keys-not-your-coins).** This fundamental principle of Bitcoin ownership means that if you don't control your private keys, you don't truly own your Bitcoin. This guide explains how to securely store your Bitcoin using [cold wallets](/docs/glossary#cold-storage-wallet), [hardware wallets](/docs/glossary#hardware-wallet), and [air-gapped](/docs/glossary#air-gapped) systems.
+**[Not your keys, not your coins](/docs/glossary#not-your-keys-not-your-coins).** This fundamental principle of Bitcoin ownership means that if you don't control your private keys, you don't truly own your Bitcoin. This guide explains how to securely store your Bitcoin using [cold wallets](/docs/glossary#cold-storage-wallet), hardware wallets, and air-gapped systems.
 
 ---
 
@@ -21,11 +21,11 @@ When you store Bitcoin on an exchange or custodial service, you're trusting a th
 
 ### Private Keys
 
-A **[private key](/docs/glossary#private-key)** is a secret cryptographic key that proves ownership of Bitcoin. Whoever controls the private key controls the Bitcoin. If you lose your private key, you lose your Bitcoin forever. There's no password recovery.
+A **private key** is a secret cryptographic key that proves ownership of Bitcoin. Whoever controls the private key controls the Bitcoin. If you lose your private key, you lose your Bitcoin forever. There's no password recovery.
 
 ### Seed Phrases
 
-A **[seed phrase](/docs/glossary#seed-phrase)** (also called a recovery phrase or mnemonic) is a human-readable backup of your private keys. It's typically 12 or 24 words that can be used to recover all your Bitcoin if you lose access to your wallet.
+A **seed phrase** (also called a recovery phrase or mnemonic) is a human-readable backup of your private keys. It's typically 12 or 24 words that can be used to recover all your Bitcoin if you lose access to your wallet.
 
 **Critical:** Your seed phrase IS your Bitcoin. Anyone who has your seed phrase can steal your Bitcoin. Protect it accordingly.
 
@@ -46,9 +46,7 @@ A **[seed phrase](/docs/glossary#seed-phrase)** (also called a recovery phrase o
 
 ## Hardware Wallets
 
-### What is a Hardware Wallet?
-
-A **[hardware wallet](/docs/glossary#hardware-wallet)** is a physical device designed specifically for storing private keys securely. It's a specialized computer that:
+A **hardware wallet** is a physical device designed specifically for storing private keys securely. It's a specialized computer that:
 
 - Generates private keys offline
 - Signs transactions without exposing keys to your computer
@@ -80,9 +78,7 @@ A **[hardware wallet](/docs/glossary#hardware-wallet)** is a physical device des
 
 ## Air-Gapped Systems
 
-### What is Air-Gapping?
-
-An **[air-gapped](/docs/glossary#air-gapped)** system is a computer or device that has never been connected to the internet. This provides the highest level of security because:
+An **air-gapped** system is a computer or device that has never been connected to the internet. This provides the highest level of security because:
 
 - No network attacks possible
 - No malware can reach the device
@@ -135,9 +131,7 @@ An **[air-gapped](/docs/glossary#air-gapped)** system is a computer or device th
 
 ## Multi-Signature Wallets
 
-### What is Multi-Signature?
-
-A **[multi-signature (multisig)](/docs/glossary#multisig-multi-signature)** wallet requires multiple private keys to authorize a transaction. For example, a [2-of-3 multisig](/docs/glossary#2-of-3-multisig) requires 2 out of 3 keys to sign.
+A **multi-signature (multisig)** wallet requires multiple private keys to authorize a transaction. For example, a [2-of-3 multisig](/docs/glossary#2-of-3-multisig) requires 2 out of 3 keys to sign.
 
 ### Benefits
 

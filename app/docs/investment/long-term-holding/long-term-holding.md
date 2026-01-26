@@ -6,7 +6,7 @@ The **HODLing** philosophy (holding Bitcoin for the long term regardless of shor
 
 ## What is HODLing?
 
-**[HODL](/docs/glossary#hodl)** (originally a typo of "hold" that became a meme) refers to the strategy of buying and holding Bitcoin for the long term, regardless of short-term price movements. The philosophy is simple: **time in the market beats timing the market.**
+**HODL** (originally a typo of "hold" that became a meme) refers to the strategy of buying and holding Bitcoin for the long term, regardless of short-term price movements. The philosophy is simple: **time in the market beats timing the market.**
 
 HODLing is based on the belief that Bitcoin's fundamental value proposition (scarcity, portability, verifiability, censorship resistance, and network effects) will appreciate over time as adoption grows.
 

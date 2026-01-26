@@ -243,8 +243,6 @@ async function getTransactionStatus(txid) {
 
 ## Reorganizations (Reorgs)
 
-### What is a Reorg?
-
 A **reorganization** occurs when the blockchain splits and a different chain becomes the longest:
 
 ```text

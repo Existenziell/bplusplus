@@ -4,8 +4,6 @@ Secure key management is the foundation of Bitcoin security. This guide covers [
 
 ## HD Wallets (BIP32)
 
-### What is an HD Wallet?
-
 Hierarchical Deterministic (HD) wallets generate an entire tree of keys from a single seed. This enables:
 
 - **Backup Simplicity**: One seed backs up all keys

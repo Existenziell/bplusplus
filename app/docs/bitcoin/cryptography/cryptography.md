@@ -37,8 +37,6 @@ Bitcoin uses cryptography for three main purposes:
 
 ## Hash Functions
 
-### What is a Hash Function?
-
 A **cryptographic hash function** takes any input data and produces a fixed-size output (the "hash" or "digest"). Hash functions are one-way: easy to compute, but practically impossible to reverse.
 
 **Properties of Cryptographic Hash Functions:**
@@ -313,8 +311,6 @@ console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
 
 ![Elliptic Curve Cryptography](/images/docs/ECC.webp)
 
-### What is ECC?
-
 **Elliptic Curve Cryptography (ECC)** is a public-key cryptography system based on the algebraic structure of elliptic curves over finite fields.
 
 **Why Bitcoin uses ECC:**
@@ -508,8 +504,6 @@ Finding `k` requires solving the **Elliptic Curve Discrete Logarithm Problem (EC
 ---
 
 ## Digital Signatures
-
-### What is a Digital Signature?
 
 A **digital signature** proves:
 1. **Authenticity**: Message came from the claimed sender
@@ -868,8 +862,6 @@ When you spend bitcoin:
 ---
 
 ## Merkle Trees
-
-### What is a Merkle Tree?
 
 A **Merkle tree** (or hash tree) is a data structure that efficiently summarizes and verifies large datasets.
 

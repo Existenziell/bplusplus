@@ -28,9 +28,7 @@ Privacy is important for several reasons:
 
 ## KYC (Know Your Customer)
 
-### What is KYC?
-
-**[KYC (Know Your Customer)](/docs/glossary#kyc-know-your-customer)** is a regulatory requirement that forces financial institutions, including Bitcoin exchanges, to verify your identity by collecting personal information such as:
+**KYC (Know Your Customer)** is a regulatory requirement that forces financial institutions, including Bitcoin exchanges, to verify your identity by collecting personal information such as:
 
 - Government-issued ID
 - Proof of address
@@ -105,8 +103,6 @@ If you want to minimize KYC exposure:
 ---
 
 ## Mixing UTXOs (CoinJoin)
-
-### What is UTXO Mixing?
 
 **UTXO mixing** (also called **[CoinJoin](/docs/glossary#coinjoin)**) is a privacy technique that combines multiple users' transactions into a single transaction, making it difficult to determine which inputs belong to which outputs.
 

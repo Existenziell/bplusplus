@@ -1,5 +1,3 @@
-# What is Bitcoin?
-
 Bitcoin is a decentralized digital currency and payment system that operates without a central authority or intermediary. It was created in 2009 by an anonymous person or group using the pseudonym [Satoshi Nakamoto](/docs/history/people#satoshi-nakamoto), who first described the system in the [Bitcoin whitepaper](/whitepaper) published on October 31, 2008.
 
 While this definition captures Bitcoin's technical foundation, Bitcoin is multifaceted. As you go down the Bitcoin rabbit hole, you'll discover that Bitcoin represents something unprecedented in human history. Bitcoin has a way of enticing you to learn more about related topics: economics, game theory, cryptography, monetary history, and the nature of trust itself.

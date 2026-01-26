@@ -6,9 +6,7 @@ Real-time blockchain monitoring allows you to detect new blocks instantly, track
 
 ## ZMQ Notifications
 
-### What is ZMQ?
-
-[ZeroMQ (ZMQ)](/docs/glossary#zmq-zeromq) provides real-time notifications for blockchain events without polling. It's much more efficient than repeatedly calling RPC commands.
+**ZeroMQ (ZMQ)** provides real-time notifications for blockchain events without polling. It's much more efficient than repeatedly calling RPC commands.
 
 ### Benefits
 

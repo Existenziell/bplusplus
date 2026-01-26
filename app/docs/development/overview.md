@@ -270,7 +270,7 @@ Long-running test network. Coins have no value.
 
 **Getting coins:**
 - [coinfaucet.eu/en/btc-testnet/](https://coinfaucet.eu/en/btc-testnet/)
-- [testnet-faucet.mempool.co/](https://testnet-faucet.mempool.co/)
+- [bitcoinfaucet.uo1.net/](https://bitcoinfaucet.uo1.net/)
 
 ### [Signet](/docs/glossary#signet)
 

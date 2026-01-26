@@ -123,7 +123,8 @@ for (const file of mdFiles) {
 async function checkExternalUrl(url, timeout = 10000, maxRedirects = 5) {
   return new Promise((resolve) => {
     let redirectCount = 0
-    const checkUrl = (currentUrl) => {
+    let triedHead = false
+    const checkUrl = (currentUrl, useGet = false) => {
       try {
         const parsed = new URL(currentUrl)
         const isHttps = parsed.protocol === 'https:'
@@ -133,7 +134,7 @@ async function checkExternalUrl(url, timeout = 10000, maxRedirects = 5) {
           hostname: parsed.hostname,
           port: parsed.port || (isHttps ? 443 : 80),
           path: parsed.pathname + parsed.search,
-          method: 'HEAD', // Use HEAD to avoid downloading full content
+          method: useGet ? 'GET' : 'HEAD', // Try HEAD first, fallback to GET
           timeout,
           headers: {
             'User-Agent': 'Mozilla/5.0 (compatible; LinkChecker/1.0)'
@@ -148,22 +149,47 @@ async function checkExternalUrl(url, timeout = 10000, maxRedirects = 5) {
               ? res.headers.location
               : `${parsed.protocol}//${parsed.host}${res.headers.location}`
             req.destroy()
-            checkUrl(redirectUrl)
+            checkUrl(redirectUrl, useGet)
+            return
+          }
+
+          // If HEAD returns 404, try GET as fallback (some sites don't support HEAD)
+          if (!useGet && !triedHead && res.statusCode === 404) {
+            triedHead = true
+            req.destroy()
+            checkUrl(currentUrl, true)
             return
           }
 
           // Consider 2xx and 3xx as success
           const isSuccess = res.statusCode >= 200 && res.statusCode < 400
-          req.destroy()
+          if (useGet) {
+            // For GET requests, just check status and abort immediately
+            res.destroy()
+          } else {
+            req.destroy()
+          }
           resolve({ success: isSuccess, statusCode: res.statusCode, url: currentUrl })
         })
 
         req.on('error', (err) => {
+          // If HEAD failed and we haven't tried GET yet, try GET
+          if (!useGet && !triedHead) {
+            triedHead = true
+            checkUrl(currentUrl, true)
+            return
+          }
           resolve({ success: false, error: err.message, url: currentUrl })
         })
 
         req.on('timeout', () => {
           req.destroy()
+          // If HEAD timed out and we haven't tried GET yet, try GET
+          if (!useGet && !triedHead) {
+            triedHead = true
+            checkUrl(currentUrl, true)
+            return
+          }
           resolve({ success: false, error: 'Timeout', url: currentUrl })
         })
 

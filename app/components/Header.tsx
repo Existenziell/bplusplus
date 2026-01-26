@@ -1,24 +1,16 @@
 'use client'
 
-import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import ThemeToggle from '@/app/components/ThemeToggle'
-import SearchModal from '@/app/components/SearchModal'
 import { SearchIcon } from '@/app/components/Icons'
 import { useStickyScroll } from '@/app/contexts/StickyScrollContext'
-import { useSearchKeyboard } from '@/app/hooks/useSearchKeyboard'
+import { useSearchModal } from '@/app/contexts/SearchModalContext'
 
 export default function Header() {
   const { isSticky, headerRef } = useStickyScroll()
-  const [searchOpen, setSearchOpen] = useState(false)
+  const { openSearch } = useSearchModal()
   const showSearchInHeader = !isSticky
-
-  const toggleSearch = useCallback(() => {
-    setSearchOpen((open) => !open)
-  }, [])
-
-  useSearchKeyboard(toggleSearch)
 
   return (
     <>
@@ -44,7 +36,7 @@ export default function Header() {
                 >
                   <button
                     type="button"
-                    onClick={() => setSearchOpen(true)}
+                    onClick={openSearch}
                     className="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
                     aria-label="Search (⌘K)"
                     title="Search (⌘K)"
@@ -57,7 +49,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   )
 }

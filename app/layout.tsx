@@ -10,8 +10,11 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Header from '@/app/components/Header'
 import StickyBar from '@/app/components/StickyBar'
 import Notification from '@/app/components/Notification'
+import SearchIndexPreloader from '@/app/components/SearchIndexPreloader'
 import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
 import { StickyScrollProvider } from '@/app/contexts/StickyScrollContext'
+import { SearchModalProvider } from '@/app/contexts/SearchModalContext'
+import SearchModalWrapper from '@/app/components/SearchModalWrapper'
 // Build-time glossary from generate-glossary-data.js
 import glossaryData from '@/public/data/glossary.json'
 
@@ -87,6 +90,8 @@ export default function RootLayout({
         {/* Preconnect to Vercel Analytics/Speed Insights origins */}
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
+        {/* Prefetch search index for faster search experience */}
+        <link rel="prefetch" href="/data/search-index.json" as="fetch" crossOrigin="anonymous" />
         {/* Inline glossary for client */}
         <script
           dangerouslySetInnerHTML={{
@@ -98,16 +103,20 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <GlossaryProvider>
             <StickyScrollProvider>
-              <Notification />
-              <div className="flex-shrink-0">
-                <Header />
-              </div>
-              <StickyBar />
-              <div className="flex-1 flex flex-col">
-                {children}
-              </div>
-              <Analytics />
-              <SpeedInsights />
+              <SearchModalProvider>
+                <SearchIndexPreloader />
+                <Notification />
+                <div className="flex-shrink-0">
+                  <Header />
+                </div>
+                <StickyBar />
+                <div className="flex-1 flex flex-col">
+                  {children}
+                </div>
+                <SearchModalWrapper />
+                <Analytics />
+                <SpeedInsights />
+              </SearchModalProvider>
             </StickyScrollProvider>
           </GlossaryProvider>
         </ThemeProvider>

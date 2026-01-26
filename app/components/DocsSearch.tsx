@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { sections } from '@/app/utils/navigation'
 import { SearchIcon, DocumentIcon } from '@/app/components/Icons'
 import { search } from '@/app/utils/searchLogic'
-import { loadSearchIndex, getCachedIndex, isIndexLoading } from '@/app/utils/searchIndexCache'
+import { getCachedIndex } from '@/app/utils/searchIndexCache'
 import type { IndexEntry } from '@/app/utils/searchLogic'
 
 type SearchResult = { path: string; title: string; section: string; snippet: string }
@@ -74,7 +74,6 @@ export default function DocsSearch() {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
-  const [indexLoading, setIndexLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const debounced = useDebounce(query, DEBOUNCE_MS)
@@ -86,47 +85,31 @@ export default function DocsSearch() {
       return
     }
 
-    // Wait for index to load
     const index = getCachedIndex()
     if (!index) {
+      // Index should be preloaded, but handle edge case
       setLoading(true)
       return
     }
 
-    setLoading(false)
+    setLoading(true)
     try {
       const searchResults = search(q, index)
       setResults(searchResults)
+      setLoading(false)
     } catch (err) {
       console.error('Search error:', err)
       setResults([])
+      setLoading(false)
     }
   }, [])
 
-  // Lazy load search index when component mounts
   useEffect(() => {
-    if (!getCachedIndex() && !isIndexLoading() && !indexLoading) {
-      setIndexLoading(true)
-      loadSearchIndex()
-        .then(() => {
-          setIndexLoading(false)
-        })
-        .catch((err) => {
-          console.error('Failed to load search index:', err)
-          setIndexLoading(false)
-        })
-    } else if (getCachedIndex()) {
-      // Index already loaded, ensure loading state is false
-      setIndexLoading(false)
-    }
-  }, [indexLoading])
-
-  useEffect(() => {
-    // Only run search if index is loaded
+    // Index should be preloaded, but run search when query changes
     if (getCachedIndex()) {
       runSearch(debounced)
     } else if (debounced.length >= MIN_QUERY_LEN) {
-      // Show loading state while index is being loaded
+      // Edge case: index not loaded yet (shouldn't happen with preloader)
       setLoading(true)
     } else {
       setLoading(false)
@@ -187,19 +170,16 @@ export default function DocsSearch() {
       </div>
 
       {/* Search Results */}
-      {indexLoading && (
-        <div className="py-12 text-center text-secondary text-sm">Loading search index…</div>
-      )}
-      {!indexLoading && loading && (
+      {loading && (
         <div className="py-12 text-center text-secondary text-sm">Searching…</div>
       )}
-      {!indexLoading && !loading && hasQuery && results.length === 0 && (
+      {!loading && hasQuery && results.length === 0 && debounced.length >= MIN_QUERY_LEN && debounced === query && (
         <div className="py-12 text-center">
           <p className="text-secondary text-sm mb-2">No results found.</p>
           <p className="text-xs text-gray-500 dark:text-gray-400">Try different keywords.</p>
         </div>
       )}
-      {!indexLoading && !loading && hasQuery && results.length > 0 && (
+      {!loading && hasQuery && results.length > 0 && (
         <div className="space-y-6">
           {Object.entries(groupedResults).map(([sectionId, sectionResults]) => {
             const sectionInfo = sections[sectionId as keyof typeof sections]
@@ -242,7 +222,7 @@ export default function DocsSearch() {
       )}
 
       {/* Featured Topics - shown when there's no search query */}
-      {!indexLoading && !loading && !hasQuery && (
+      {!loading && !hasQuery && (
         <div className="space-y-6">
           <div className="mb-2">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Featured Topics</h2>

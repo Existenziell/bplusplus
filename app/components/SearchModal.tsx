@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { SearchIcon, XIcon, DocumentIcon, BookOpenIcon, UserIcon } from '@/app/components/Icons'
 import { sections } from '@/app/utils/navigation'
 import { search } from '@/app/utils/searchLogic'
-import { loadSearchIndex, getCachedIndex, isIndexLoading } from '@/app/utils/searchIndexCache'
+import { getCachedIndex } from '@/app/utils/searchIndexCache'
 import type { IndexEntry } from '@/app/utils/searchLogic'
 
 type SearchResult = { path: string; title: string; section: string; snippet: string }
@@ -32,11 +32,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
-  const [indexLoading, setIndexLoading] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const selectedItemRef = useRef<HTMLLIElement | null>(null)
   const router = useRouter()
+  const pathname = usePathname()
+  const previousPathnameRef = useRef<string>(pathname)
 
   const debounced = useDebounce(query, DEBOUNCE_MS)
 
@@ -47,48 +48,32 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       return
     }
 
-    // Wait for index to load
     const index = getCachedIndex()
     if (!index) {
+      // Index should be preloaded, but handle edge case
       setLoading(true)
       return
     }
 
-    setLoading(false)
+    setLoading(true)
     try {
       const searchResults = search(q, index)
       setResults(searchResults)
       setSelectedIndex(0)
+      setLoading(false)
     } catch (err) {
       console.error('Search error:', err)
       setResults([])
+      setLoading(false)
     }
   }, [])
 
-  // Lazy load search index when modal opens for the first time
   useEffect(() => {
-    if (isOpen && !getCachedIndex() && !isIndexLoading() && !indexLoading) {
-      setIndexLoading(true)
-      loadSearchIndex()
-        .then(() => {
-          setIndexLoading(false)
-        })
-        .catch((err) => {
-          console.error('Failed to load search index:', err)
-          setIndexLoading(false)
-        })
-    } else if (isOpen && getCachedIndex()) {
-      // Index already loaded, ensure loading state is false
-      setIndexLoading(false)
-    }
-  }, [isOpen, indexLoading])
-
-  useEffect(() => {
-    // Only run search if index is loaded
+    // Index should be preloaded, but run search when query changes
     if (getCachedIndex()) {
       runSearch(debounced)
     } else if (debounced.length >= MIN_QUERY_LEN) {
-      // Show loading state while index is being loaded
+      // Edge case: index not loaded yet (shouldn't happen with preloader)
       setLoading(true)
     } else {
       setLoading(false)
@@ -107,6 +92,17 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   useEffect(() => {
     selectedItemRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
   }, [selectedIndex])
+
+  // Close modal when pathname changes (navigation occurred)
+  useEffect(() => {
+    if (isOpen && pathname !== previousPathnameRef.current) {
+      previousPathnameRef.current = pathname
+      onClose()
+    } else if (!isOpen) {
+      // Update ref when modal closes to track the current pathname
+      previousPathnameRef.current = pathname
+    }
+  }, [pathname, isOpen, onClose])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -183,21 +179,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           </button>
         </div>
         <div className="max-h-[min(60vh,400px)] overflow-y-auto">
-          {indexLoading && (
-            <div className="py-8 text-center text-secondary text-sm">Loading search index…</div>
-          )}
-          {!indexLoading && loading && (
+          {loading && (
             <div className="py-8 text-center text-secondary text-sm">Searching…</div>
           )}
-          {!indexLoading && !loading && query.length >= MIN_QUERY_LEN && results.length === 0 && (
+          {!loading && query.length >= MIN_QUERY_LEN && results.length === 0 && debounced.length >= MIN_QUERY_LEN && debounced === query && (
             <div className="py-8 text-center text-secondary text-sm">No results.</div>
           )}
-          {!indexLoading && !loading && query.length > 0 && query.length < MIN_QUERY_LEN && (
+          {!loading && query.length > 0 && query.length < MIN_QUERY_LEN && (
             <div className="py-6 text-center text-secondary text-sm">
               Type at least {MIN_QUERY_LEN} characters.
             </div>
           )}
-          {!indexLoading && !loading && results.length > 0 && (
+          {!loading && results.length > 0 && (
             <ul className="py-2" role="listbox">
               {results.map((r, i) => (
                 <li

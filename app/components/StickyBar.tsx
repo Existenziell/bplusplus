@@ -1,30 +1,22 @@
 'use client'
 
-import { useState, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
 import Breadcrumbs from '@/app/components/Breadcrumbs'
-import SearchModal from '@/app/components/SearchModal'
 import ThemeToggle from '@/app/components/ThemeToggle'
 import { SearchIcon } from '@/app/components/Icons'
 import { useStickyScroll } from '@/app/contexts/StickyScrollContext'
-import { useSearchKeyboard } from '@/app/hooks/useSearchKeyboard'
+import { useSearchModal } from '@/app/contexts/SearchModalContext'
 
 export default function StickyBar() {
   const pathname = usePathname()
   const { isSticky, scrollDirection } = useStickyScroll()
-  const [searchOpen, setSearchOpen] = useState(false)
+  const { openSearch } = useSearchModal()
   const showBreadcrumbs = Boolean(pathname && pathname !== '/')
   
   // Show search in sticky when sticky is active and not scrolling up
   // Hide it when scrolling up (search returns to header)
   // This makes the icons appear immediately when sticky becomes active
   const showSearchInSticky = isSticky && scrollDirection !== 'up'
-
-  const toggleSearch = useCallback(() => {
-    setSearchOpen((open) => !open)
-  }, [])
-
-  useSearchKeyboard(toggleSearch)
 
   if (!showBreadcrumbs) {
     return null
@@ -50,7 +42,7 @@ export default function StickyBar() {
               >
                 <button
                   type="button"
-                  onClick={() => setSearchOpen(true)}
+                  onClick={openSearch}
                   className="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
                   aria-label="Search (⌘K)"
                   title="Search (⌘K)"
@@ -71,7 +63,6 @@ export default function StickyBar() {
           </div>
         </div>
       </div>
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   )
 }

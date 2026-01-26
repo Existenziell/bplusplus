@@ -334,4 +334,4 @@ Zero-conf channels provide:
 ## Resources
 
 - [BOLT 2: Zero-Conf](https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-channel_type-feature)
-- [LND Zero-Conf Guide](https://docs.lightning.engineering/lightning-network-tools/lnd/zero-conf-channels)
+- [LND Zero-Conf Guide](https://docs.lightning.engineering/lightning-network-tools/pool/zero-confirmation-channels)

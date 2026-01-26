@@ -289,4 +289,4 @@ Anchor outputs provide:
 ## Resources
 
 - [BOLT 3: Anchor Outputs](https://github.com/lightning/bolts/blob/master/03-transactions.md#anchor-outputs)
-- [LND Anchor Channels Guide](https://docs.lightning.engineering/lightning-network-tools/lnd/anchor-channels)
+- [LND Anchor Channels Guide](https://docs.lightning.engineering/the-lightning-network/payment-channels/etymology#anchor-channel)

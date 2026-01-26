@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "node scripts/generate-md-content.js && node scripts/generate-glossary-data.js && node scripts/generate-search-index.js",
-    "check:glossary": "node scripts/check-glossary-links.js",
+    "check:links": "node scripts/check-links.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

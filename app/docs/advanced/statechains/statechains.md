@@ -83,4 +83,4 @@ Concept:
 
 ## Resources
 
-- [Statechains Research](https://blockstream.com/2019/02/18/en-statechains-non-custodial-off-chain-bitcoin-transfer/)
+- [Statechains Research](https://bitcoinwords.github.io/statechains-non-custodial-off-chain-bitcoin-transfer)

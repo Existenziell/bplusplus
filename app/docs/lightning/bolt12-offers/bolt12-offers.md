@@ -101,5 +101,5 @@ Wallets and merchants that support BOLT12 can publish offers (e.g., on the web, 
 ## Resources
 
 - [BOLT 12: Offer Encoding](https://github.com/lightning/bolts/blob/master/12-offer-encoding.md)
-- [Core Lightning BOLT12](https://docs.corelightning.org/docs/offers)
+- [Core Lightning BOLT12](https://docs.corelightning.org/docs/home)
 - [LDK: Offers](https://lightningdevkit.org/)

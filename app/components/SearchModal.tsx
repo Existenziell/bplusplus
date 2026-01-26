@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { SearchIcon, XIcon, DocumentIcon, BookOpenIcon, UserIcon } from '@/app/components/Icons'
 import { sections } from '@/app/utils/navigation'
+import { search } from '@/app/utils/searchLogic'
+import type { IndexEntry } from '@/app/utils/searchLogic'
 
 type SearchResult = { path: string; title: string; section: string; snippet: string }
 
@@ -29,45 +31,69 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
+  const [indexLoading, setIndexLoading] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
-  const abortControllerRef = useRef<AbortController | null>(null)
   const selectedItemRef = useRef<HTMLLIElement | null>(null)
+  const indexRef = useRef<IndexEntry[] | null>(null)
   const router = useRouter()
 
   const debounced = useDebounce(query, DEBOUNCE_MS)
 
-  const runSearch = useCallback(async (q: string) => {
+  const runSearch = useCallback((q: string) => {
     if (q.length < MIN_QUERY_LEN) {
       setResults([])
       setLoading(false)
       return
     }
-    const ac = new AbortController()
-    abortControllerRef.current?.abort()
-    abortControllerRef.current = ac
 
-    setLoading(true)
+    // Wait for index to load
+    if (!indexRef.current) {
+      setLoading(true)
+      return
+    }
+
+    setLoading(false)
     try {
-      const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`, { signal: ac.signal })
-      const data = await res.json()
-      if (!ac.signal.aborted) {
-        setResults(data.results ?? [])
-        setSelectedIndex(0)
-      }
+      const searchResults = search(q, indexRef.current)
+      setResults(searchResults)
+      setSelectedIndex(0)
     } catch (err) {
-      if (!(err instanceof DOMException && err.name === 'AbortError')) {
-        setResults([])
-      }
-    } finally {
-      if (!ac.signal.aborted) {
-        setLoading(false)
-      }
+      console.error('Search error:', err)
+      setResults([])
     }
   }, [])
 
+  // Lazy load search index when modal opens for the first time
   useEffect(() => {
-    runSearch(debounced)
+    if (isOpen && !indexRef.current && !indexLoading) {
+      setIndexLoading(true)
+      fetch('/data/search-index.json')
+        .then((res) => {
+          if (!res.ok) throw new Error('Failed to load search index')
+          return res.json()
+        })
+        .then((data: IndexEntry[]) => {
+          indexRef.current = data
+          setIndexLoading(false)
+        })
+        .catch((err) => {
+          console.error('Failed to load search index:', err)
+          setIndexLoading(false)
+        })
+    }
+  }, [isOpen, indexLoading])
+
+  useEffect(() => {
+    // Only run search if index is loaded
+    if (indexRef.current) {
+      runSearch(debounced)
+    } else if (debounced.length >= MIN_QUERY_LEN) {
+      // Show loading state while index is being loaded
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
   }, [debounced, runSearch])
 
   useEffect(() => {
@@ -158,18 +184,21 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           </button>
         </div>
         <div className="max-h-[min(60vh,400px)] overflow-y-auto">
-          {loading && (
+          {indexLoading && (
+            <div className="py-8 text-center text-secondary text-sm">Loading search index…</div>
+          )}
+          {!indexLoading && loading && (
             <div className="py-8 text-center text-secondary text-sm">Searching…</div>
           )}
-          {!loading && query.length >= MIN_QUERY_LEN && results.length === 0 && (
+          {!indexLoading && !loading && query.length >= MIN_QUERY_LEN && results.length === 0 && (
             <div className="py-8 text-center text-secondary text-sm">No results.</div>
           )}
-          {!loading && query.length > 0 && query.length < MIN_QUERY_LEN && (
+          {!indexLoading && !loading && query.length > 0 && query.length < MIN_QUERY_LEN && (
             <div className="py-6 text-center text-secondary text-sm">
               Type at least {MIN_QUERY_LEN} characters.
             </div>
           )}
-          {!loading && results.length > 0 && (
+          {!indexLoading && !loading && results.length > 0 && (
             <ul className="py-2" role="listbox">
               {results.map((r, i) => (
                 <li

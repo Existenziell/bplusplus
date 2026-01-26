@@ -110,14 +110,14 @@
     "body": "Contribution: Bitcoin (2008-2010) - Creator of Bitcoin Satoshi Nakamoto is the pseudonymous person or group who created Bitcoin. On October 31, 2008, Nakamoto published the Bitcoin whitepaper, \"Bitcoin: A Peer-to-Peer Electronic Cash System.\" On January 3, 2009, they mined the Genesis Block, embedding the message: \"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks.\" Satoshi "
   },
   {
-    "path": "/docs/history/people#hal-finney-1956-2014",
-    "title": "Hal Finney (1956-2014)",
+    "path": "/docs/history/people#hal-finney",
+    "title": "Hal Finney",
     "section": "history",
     "body": "Contribution: RPOW, PGP 2.0, first Bitcoin transaction recipient Hal Finney was a cryptographic pioneer and one of Bitcoin's most important early contributors. Before Bitcoin, he developed RPOW (Reusable Proofs of Work) in 2004, a system that allowed proof-of-work tokens to be reused as digital cash, building on Adam Back's Hashcash. He was also the lead developer of PGP 2.0 (Pretty Good "
   },
   {
-    "path": "/docs/history/people#len-sassaman-1980-2011",
-    "title": "Len Sassaman (1980-2011)",
+    "path": "/docs/history/people#len-sassaman",
+    "title": "Len Sassaman",
     "section": "history",
     "body": "Contribution: Cypherpunk, anonymous remailer developer Len Sassaman was a cypherpunk, privacy advocate, and cryptographer who made significant contributions to anonymity and privacy-preserving technologies. He was a core developer of Mixmaster, the most widely-used anonymous remailer protocol, and worked on various cryptographic privacy tools. Sassaman was embedded in the cypherpunk community "
   },

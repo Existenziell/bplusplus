@@ -4,7 +4,7 @@ Bitcoin didn't emerge from a vacuum. It was built on decades of cryptographic re
 
 **Pioneers (pre-Bitcoin):** [David Chaum](#david-chaum), [Eric Hughes](#eric-hughes), [Timothy C. May](#timothy-c-may), [John Gilmore](#john-gilmore), [Adam Back](#adam-back), [Nick Szabo](#nick-szabo), [Wei Dai](#wei-dai), [Ralph Merkle](#ralph-merkle), [Stuart Haber and Scott Stornetta](#stuart-haber-and-scott-stornetta)
 
-**Bitcoin builders:** [Satoshi Nakamoto](#satoshi-nakamoto), [Hal Finney](#hal-finney-1956-2014), [Len Sassaman](#len-sassaman-1980-2011), [Martti Malmi](#martti-malmi), [Gavin Andresen](#gavin-andresen), [Laszlo Hanyecz](#laszlo-hanyecz), [Wladimir van der Laan](#wladimir-van-der-laan), [Pieter Wuille](#pieter-wuille), [Gregory Maxwell](#gregory-maxwell), [Joseph Poon and Thaddeus Dryja](#joseph-poon-and-thaddeus-dryja)
+**Bitcoin builders:** [Satoshi Nakamoto](#satoshi-nakamoto), [Hal Finney](#hal-finney), [Len Sassaman](#len-sassaman), [Martti Malmi](#martti-malmi), [Gavin Andresen](#gavin-andresen), [Laszlo Hanyecz](#laszlo-hanyecz), [Wladimir van der Laan](#wladimir-van-der-laan), [Pieter Wuille](#pieter-wuille), [Gregory Maxwell](#gregory-maxwell), [Joseph Poon and Thaddeus Dryja](#joseph-poon-and-thaddeus-dryja)
 
 **Evangelists & beyond:** [Andreas M. Antonopoulos](#andreas-m-antonopoulos), [Roger Ver](#roger-ver), [You ?](#you)
 
@@ -168,7 +168,7 @@ The mystery of Satoshi's identity has become part of Bitcoin's mythos. Various c
 
 ---
 
-## Hal Finney (1956-2014)
+## Hal Finney
 
 ![Hal Finney](/images/people/Hal_Finney.jpg)
 
@@ -188,7 +188,7 @@ The "Finney attack" in Bitcoin is named after him: a type of [double-spend](/doc
 
 ---
 
-## Len Sassaman (1980-2011)
+## Len Sassaman
 
 ![Len Sassaman](/images/people/Len_Sassaman.jpg)
 

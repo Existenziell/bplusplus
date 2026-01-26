@@ -10,16 +10,19 @@ interface Resource {
 }
 
 const resources: Resource[] = [
-  { name: 'Bitcoin Dev Project', url: 'https://bitcoindevs.xyz', description: 'Learning & development tools' },
-  { name: 'ClarkMoody Dashboard', url: 'https://bitcoin.clarkmoody.com/dashboard/', description: 'Bitcoin analytics dashboard' },
+  { name: 'Bitcoin Devs', url: 'https://bitcoindevs.xyz', description: 'Learning & development tools' },
+  { name: 'Bitcoin.org', url: 'https://bitcoin.org', description: 'Original Bitcoin website' },
+  { name: 'Learn Me A Bitcoin', url: 'https://learnmeabitcoin.com', description: 'Bitcoin education & tutorials' },
+  { name: 'ClarkMoody', url: 'https://bitcoin.clarkmoody.com/dashboard/', description: 'Bitcoin analytics dashboard' },
   { name: 'Mempool.space', url: 'https://mempool.space', description: 'Blockchain explorer & mempool' },
-  { name: 'Blockstream.info', url: 'https://blockstream.info', description: 'Blockchain explorer' },
+  { name: 'Blockstream', url: 'https://blockstream.info', description: 'Blockchain explorer' },
   { name: 'Bitcoin Optech', url: 'https://bitcoinops.org', description: 'Technical resources' },
   { name: 'Bitcoin Visuals', url: 'https://bitcoinvisuals.com', description: 'Charts & metrics' },
 ]
 
 const internalLinks = [
-  { href: '/docs/fundamentals', title: 'Fundamentals' },
+  { href: '/docs/history', title: 'History' },
+  { href: '/docs', title: 'Search Docs' },
   ...staticNavLinks, // Whitepaper, CLI Terminal, Stack Lab
   ...footerNavLinks, // Glossary, About B++, Feedback
 ]

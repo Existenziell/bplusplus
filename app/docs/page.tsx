@@ -12,9 +12,9 @@ export default function DocsOverviewPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="heading-page mb-4">Documentation</h1>
+        <h1 className="heading-page mb-4">Documentation Search</h1>
         <p className="text-secondary text-lg max-w-3xl">
-          Welcome to the B++ documentation. Search for topics to discover content that interests you.
+          Welcome to the B++ documentation search. Search for topics to discover content that interests you.
         </p>
       </div>
       

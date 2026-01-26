@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import DocsNavigation from '@/app/components/DocsNavigation'
 import MobileNav from '@/app/components/MobileNav'
@@ -24,6 +24,23 @@ export default function DocsLayoutWrapper({
   defaultSidebarCollapsed = false,
 }: DocsLayoutWrapperProps) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(defaultSidebarCollapsed)
+
+  // Automatically collapse sidebar on screens smaller than lg (1024px)
+  useEffect(() => {
+    const checkWindowSize = () => {
+      const isSmallScreen = window.innerWidth < 1024
+      setIsSidebarCollapsed(isSmallScreen)
+    }
+
+    // Check on mount
+    checkWindowSize()
+
+    // Listen for resize events
+    window.addEventListener('resize', checkWindowSize)
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkWindowSize)
+  }, [])
 
   return (
     <main className="flex-1 page-bg flex flex-col">

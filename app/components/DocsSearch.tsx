@@ -1,18 +1,11 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import { useEffect, useRef, useMemo } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { sections } from '@/app/utils/navigation'
 import { SearchIcon, DocumentIcon } from '@/app/components/Icons'
-import { search } from '@/app/utils/searchLogic'
-import { getCachedIndex } from '@/app/utils/searchIndexCache'
-import type { IndexEntry } from '@/app/utils/searchLogic'
-
-type SearchResult = { path: string; title: string; section: string; snippet: string }
-
-const DEBOUNCE_MS = 180
-const MIN_QUERY_LEN = 2
+import { MIN_QUERY_LEN, type SearchResult } from '@/app/utils/searchLogic'
+import { useSearch } from '@/app/hooks/useSearch'
 
 // Featured topics to show when there's no search query
 const FEATURED_TOPICS: SearchResult[] = [
@@ -60,61 +53,10 @@ const FEATURED_TOPICS: SearchResult[] = [
   },
 ]
 
-function useDebounce<T>(value: T, delay: number): T {
-  const [debounced, setDebounced] = useState(value)
-  useEffect(() => {
-    const id = setTimeout(() => setDebounced(value), delay)
-    return () => clearTimeout(id)
-  }, [value, delay])
-  return debounced
-}
 
 export default function DocsSearch() {
-  const pathname = usePathname()
-  const [query, setQuery] = useState('')
-  const [results, setResults] = useState<SearchResult[]>([])
-  const [loading, setLoading] = useState(false)
+  const { query, setQuery, results, loading } = useSearch()
   const inputRef = useRef<HTMLInputElement>(null)
-
-  const debounced = useDebounce(query, DEBOUNCE_MS)
-
-  const runSearch = useCallback((q: string) => {
-    if (q.length < MIN_QUERY_LEN) {
-      setResults([])
-      setLoading(false)
-      return
-    }
-
-    const index = getCachedIndex()
-    if (!index) {
-      // Index should be preloaded, but handle edge case
-      setLoading(true)
-      return
-    }
-
-    setLoading(true)
-    try {
-      const searchResults = search(q, index)
-      setResults(searchResults)
-      setLoading(false)
-    } catch (err) {
-      console.error('Search error:', err)
-      setResults([])
-      setLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    // Index should be preloaded, but run search when query changes
-    if (getCachedIndex()) {
-      runSearch(debounced)
-    } else if (debounced.length >= MIN_QUERY_LEN) {
-      // Edge case: index not loaded yet (shouldn't happen with preloader)
-      setLoading(true)
-    } else {
-      setLoading(false)
-    }
-  }, [debounced, runSearch])
 
   // Focus the search input when component mounts
   useEffect(() => {
@@ -173,7 +115,7 @@ export default function DocsSearch() {
       {loading && (
         <div className="py-12 text-center text-secondary text-sm">Searching…</div>
       )}
-      {!loading && hasQuery && results.length === 0 && debounced.length >= MIN_QUERY_LEN && debounced === query && (
+      {!loading && hasQuery && results.length === 0 && (
         <div className="py-12 text-center">
           <p className="text-secondary text-sm mb-2">No results found.</p>
           <p className="text-xs text-gray-500 dark:text-gray-400">Try different keywords.</p>

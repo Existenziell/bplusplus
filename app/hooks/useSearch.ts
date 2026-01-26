@@ -4,22 +4,10 @@
  */
 
 import { useState, useEffect, useCallback } from 'react'
-import { search } from '@/app/utils/searchLogic'
+import { search, DEBOUNCE_MS, MIN_QUERY_LEN, type SearchResult } from '@/app/utils/searchLogic'
 import { useSearchIndex } from './useSearchIndex'
-
-export type SearchResult = { path: string; title: string; section: string; snippet: string }
-
-const DEBOUNCE_MS = 180
-const MIN_QUERY_LEN = 2
-
-function useDebounce<T>(value: T, delay: number): T {
-  const [debounced, setDebounced] = useState(value)
-  useEffect(() => {
-    const id = setTimeout(() => setDebounced(value), delay)
-    return () => clearTimeout(id)
-  }, [value, delay])
-  return debounced
-}
+import { useDebounce } from './useDebounce'
+import { handleError } from '@/app/utils/errorHandling'
 
 export function useSearch() {
   const { index, loading: indexLoading, error: indexError } = useSearchIndex()
@@ -47,7 +35,7 @@ export function useSearch() {
         const searchResults = search(q, index)
         setResults(searchResults)
       } catch (err) {
-        console.error('Search error:', err)
+        handleError(err, 'useSearch')
         setResults([])
       }
     },

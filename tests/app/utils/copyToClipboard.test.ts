@@ -1,10 +1,16 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import copyToClipboard from '@/app/utils/copyToClipboard'
 import { showNotification } from '@/app/components/Notification'
+import { handleError } from '@/app/utils/errorHandling'
 
 // Mock the notification module
 vi.mock('@/app/components/Notification', () => ({
   showNotification: vi.fn(),
+}))
+
+// Mock error handling
+vi.mock('@/app/utils/errorHandling', () => ({
+  handleError: vi.fn(),
 }))
 
 describe('copyToClipboard', () => {
@@ -42,7 +48,6 @@ describe('copyToClipboard', () => {
   })
 
   it('shows error notification when clipboard API is not available', async () => {
-    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     Object.defineProperty(navigator, 'clipboard', {
       value: undefined,
       writable: true,
@@ -51,12 +56,11 @@ describe('copyToClipboard', () => {
 
     await copyToClipboard('test', 'Test')
 
+    expect(handleError).toHaveBeenCalled()
     expect(showNotification).toHaveBeenCalledWith('Failed to copy', true)
-    consoleSpy.mockRestore()
   })
 
   it('shows error notification when writeText is not available', async () => {
-    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     Object.defineProperty(navigator, 'clipboard', {
       value: {},
       writable: true,
@@ -65,30 +69,26 @@ describe('copyToClipboard', () => {
 
     await copyToClipboard('test', 'Test')
 
+    expect(handleError).toHaveBeenCalled()
     expect(showNotification).toHaveBeenCalledWith('Failed to copy', true)
-    consoleSpy.mockRestore()
   })
 
   it('shows error notification when clipboard write fails', async () => {
-    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     const error = new Error('Clipboard write failed')
     ;(navigator.clipboard.writeText as any).mockRejectedValueOnce(error)
 
     await copyToClipboard('test', 'Test')
 
+    expect(handleError).toHaveBeenCalledWith(error, 'copyToClipboard')
     expect(showNotification).toHaveBeenCalledWith('Failed to copy', true)
-    consoleSpy.mockRestore()
   })
 
-  it('logs error to console when clipboard write fails', async () => {
-    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+  it('handles error when clipboard write fails', async () => {
     const error = new Error('Clipboard write failed')
     ;(navigator.clipboard.writeText as any).mockRejectedValueOnce(error)
 
     await copyToClipboard('test', 'Test')
 
-    expect(consoleSpy).toHaveBeenCalledWith('Failed to copy to clipboard:', error)
-
-    consoleSpy.mockRestore()
+    expect(handleError).toHaveBeenCalledWith(error, 'copyToClipboard')
   })
 })

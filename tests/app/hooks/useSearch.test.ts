@@ -3,11 +3,13 @@ import { renderHook, waitFor, act } from '@testing-library/react'
 import { useSearch } from '@/app/hooks/useSearch'
 import { useSearchIndex } from '@/app/hooks/useSearchIndex'
 import { search } from '@/app/utils/searchLogic'
+import { handleError } from '@/app/utils/errorHandling'
 import type { IndexEntry } from '@/app/utils/searchLogic'
 
 // Mock dependencies
 vi.mock('@/app/hooks/useSearchIndex')
 vi.mock('@/app/utils/searchLogic')
+vi.mock('@/app/utils/errorHandling')
 
 describe('useSearch', () => {
   const mockIndex: IndexEntry[] = [
@@ -127,9 +129,9 @@ describe('useSearch', () => {
   })
 
   it('handles search errors gracefully', async () => {
-    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const searchError = new Error('Search error')
     ;(search as any).mockImplementation(() => {
-      throw new Error('Search error')
+      throw searchError
     })
 
     const { result } = renderHook(() => useSearch())
@@ -141,14 +143,12 @@ describe('useSearch', () => {
     // Wait for debounce to complete and search to be called (which will throw)
     await waitFor(
       () => {
-        expect(consoleSpy).toHaveBeenCalledWith('Search error:', expect.any(Error))
+        expect(handleError).toHaveBeenCalledWith(searchError, 'useSearch')
       },
       { timeout: 300 }
     )
 
     expect(result.current.results).toEqual([])
-
-    consoleSpy.mockRestore()
   })
 
   it('propagates index error', () => {

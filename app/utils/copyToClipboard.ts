@@ -1,4 +1,5 @@
 import { showNotification } from '@/app/components/Notification'
+import { handleError } from './errorHandling'
 
 export default async function copyToClipboard(text: string, label: string, customSuccessMessage?: string) {
   try {
@@ -14,7 +15,7 @@ export default async function copyToClipboard(text: string, label: string, custo
       showNotification(label)
     }
   } catch (e) {
-    console.error('Failed to copy to clipboard:', e)
+    handleError(e, 'copyToClipboard')
     showNotification('Failed to copy', true)
   }
 }

@@ -6,8 +6,17 @@ export type IndexEntry = {
   keywords?: string[]
 }
 
+export type SearchResult = {
+  path: string
+  title: string
+  section: string
+  snippet: string
+}
+
 export const SNIPPET_LEN = 120
 export const MAX_RESULTS = 20
+export const DEBOUNCE_MS = 180
+export const MIN_QUERY_LEN = 2
 
 export function normalize(s: string): string {
   return s.toLowerCase().replace(/[\s\-_]+/g, '')
@@ -114,7 +123,7 @@ export function snippet(body: string): string {
   return cut.trim() + '…'
 }
 
-type Row = { path: string; title: string; section: string; snippet: string; rank: number }
+type Row = SearchResult & { rank: number }
 
 /**
  * Deduplicate results by removing overview pages when specific child results exist.
@@ -163,29 +172,73 @@ function deduplicateResults(rows: Row[]): Row[] {
   return filtered
 }
 
-// Simple result cache to avoid re-searching identical queries
-const resultCache = new Map<string, { path: string; title: string; section: string; snippet: string }[]>()
+// LRU cache implementation for search results
+class LRUCache<K, V> {
+  private cache: Map<K, V>
+  private maxSize: number
+
+  constructor(maxSize: number) {
+    this.cache = new Map()
+    this.maxSize = maxSize
+  }
+
+  get(key: K): V | undefined {
+    const value = this.cache.get(key)
+    if (value === undefined) {
+      return undefined
+    }
+    // Move to end (most recently used)
+    this.cache.delete(key)
+    this.cache.set(key, value)
+    return value
+  }
+
+  set(key: K, value: V): void {
+    if (this.cache.has(key)) {
+      // Update existing: move to end
+      this.cache.delete(key)
+    } else if (this.cache.size >= this.maxSize) {
+      // Remove least recently used (first item)
+      const firstKey = this.cache.keys().next().value
+      if (firstKey !== undefined) {
+        this.cache.delete(firstKey)
+      }
+    }
+    this.cache.set(key, value)
+  }
+
+  has(key: K): boolean {
+    return this.cache.has(key)
+  }
+}
+
+// Result cache to avoid re-searching identical queries
+const resultCache = new LRUCache<string, SearchResult[]>(100)
 
 export function search(
   q: string,
   index: IndexEntry[]
-): { path: string; title: string; section: string; snippet: string }[] {
+): SearchResult[] {
   const tokens = q.toLowerCase().split(/\s+/).filter(Boolean)
   if (tokens.length === 0) return []
 
   // Check cache first
   const cacheKey = q.toLowerCase().trim()
-  if (resultCache.has(cacheKey)) {
-    return resultCache.get(cacheKey)!
+  const cachedResult = resultCache.get(cacheKey)
+  if (cachedResult !== undefined) {
+    return cachedResult
   }
 
   const pageRows: Row[] = []
   const peopleRows: Row[] = []
   const glossaryRows: Row[] = []
 
+  // Track high-ranking results for early termination
+  let highRankCount = 0
+  const HIGH_RANK_THRESHOLD = 7 // Rank >= 7 is considered high
+  const EARLY_TERMINATION_THRESHOLD = MAX_RESULTS * 2 // Stop after finding 2x the needed results
+
   // Pre-compute searchable text once per entry for better performance
-  // Early termination: if we have enough high-ranking results, we can stop early
-  // But we still need to check all entries to ensure we have the best results
   for (const rec of index) {
     const searchableText = (
       rec.title + ' ' + 
@@ -206,6 +259,9 @@ export function search(
 
     // Only add if rank > 0 (has some relevance)
     if (row.rank > 0) {
+      if (row.rank >= HIGH_RANK_THRESHOLD) {
+        highRankCount++
+      }
       if (rec.path.startsWith('/docs/glossary#')) {
         glossaryRows.push(row)
       } else if (rec.path.startsWith('/docs/history/people#')) {
@@ -213,6 +269,12 @@ export function search(
       } else {
         pageRows.push(row)
       }
+    }
+
+    // Early termination: if we have enough high-ranking results and processed enough entries
+    // This is a heuristic - we still want to check a reasonable number of entries
+    if (highRankCount >= MAX_RESULTS && (pageRows.length + peopleRows.length + glossaryRows.length) >= EARLY_TERMINATION_THRESHOLD) {
+      break
     }
   }
 
@@ -232,12 +294,7 @@ export function search(
     .slice(0, MAX_RESULTS)
     .map(({ rank: _r, ...r }) => r)
 
-  // Cache results (limit cache size to prevent memory issues)
-  if (resultCache.size > 100) {
-    // Clear oldest entries (simple FIFO)
-    const firstKey = resultCache.keys().next().value
-    if (firstKey) resultCache.delete(firstKey)
-  }
+  // Cache results (LRU handles size limit automatically)
   resultCache.set(cacheKey, results)
 
   return results

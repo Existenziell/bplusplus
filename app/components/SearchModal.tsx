@@ -1,27 +1,12 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { SearchIcon, XIcon, DocumentIcon, BookOpenIcon, UserIcon } from '@/app/components/Icons'
 import { sections } from '@/app/utils/navigation'
-import { search } from '@/app/utils/searchLogic'
-import { getCachedIndex } from '@/app/utils/searchIndexCache'
-import type { IndexEntry } from '@/app/utils/searchLogic'
-
-type SearchResult = { path: string; title: string; section: string; snippet: string }
-
-const DEBOUNCE_MS = 180
-const MIN_QUERY_LEN = 2
-
-function useDebounce<T>(value: T, delay: number): T {
-  const [debounced, setDebounced] = useState(value)
-  useEffect(() => {
-    const id = setTimeout(() => setDebounced(value), delay)
-    return () => clearTimeout(id)
-  }, [value, delay])
-  return debounced
-}
+import { MIN_QUERY_LEN } from '@/app/utils/searchLogic'
+import { useSearch } from '@/app/hooks/useSearch'
 
 interface SearchModalProps {
   isOpen: boolean
@@ -29,9 +14,7 @@ interface SearchModalProps {
 }
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
-  const [query, setQuery] = useState('')
-  const [results, setResults] = useState<SearchResult[]>([])
-  const [loading, setLoading] = useState(false)
+  const { query, setQuery, results, loading } = useSearch()
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const selectedItemRef = useRef<HTMLLIElement | null>(null)
@@ -39,55 +22,13 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const pathname = usePathname()
   const previousPathnameRef = useRef<string>(pathname)
 
-  const debounced = useDebounce(query, DEBOUNCE_MS)
-
-  const runSearch = useCallback((q: string) => {
-    if (q.length < MIN_QUERY_LEN) {
-      setResults([])
-      setLoading(false)
-      return
-    }
-
-    const index = getCachedIndex()
-    if (!index) {
-      // Index should be preloaded, but handle edge case
-      setLoading(true)
-      return
-    }
-
-    setLoading(true)
-    try {
-      const searchResults = search(q, index)
-      setResults(searchResults)
-      setSelectedIndex(0)
-      setLoading(false)
-    } catch (err) {
-      console.error('Search error:', err)
-      setResults([])
-      setLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    // Index should be preloaded, but run search when query changes
-    if (getCachedIndex()) {
-      runSearch(debounced)
-    } else if (debounced.length >= MIN_QUERY_LEN) {
-      // Edge case: index not loaded yet (shouldn't happen with preloader)
-      setLoading(true)
-    } else {
-      setLoading(false)
-    }
-  }, [debounced, runSearch])
-
   useEffect(() => {
     if (isOpen) {
       setQuery('')
-      setResults([])
       setSelectedIndex(0)
       inputRef.current?.focus()
     }
-  }, [isOpen])
+  }, [isOpen, setQuery])
 
   useEffect(() => {
     selectedItemRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
@@ -182,7 +123,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           {loading && (
             <div className="py-8 text-center text-secondary text-sm">Searching…</div>
           )}
-          {!loading && query.length >= MIN_QUERY_LEN && results.length === 0 && debounced.length >= MIN_QUERY_LEN && debounced === query && (
+          {!loading && query.length >= MIN_QUERY_LEN && results.length === 0 && (
             <div className="py-8 text-center text-secondary text-sm">No results.</div>
           )}
           {!loading && query.length > 0 && query.length < MIN_QUERY_LEN && (

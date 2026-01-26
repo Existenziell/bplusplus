@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { sections } from '@/app/utils/navigation'
 import { SearchIcon, DocumentIcon } from '@/app/components/Icons'
+import { search } from '@/app/utils/searchLogic'
+import type { IndexEntry } from '@/app/utils/searchLogic'
 
 type SearchResult = { path: string; title: string; section: string; snippet: string }
 
@@ -71,41 +73,65 @@ export default function DocsAccordionNavigation() {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
+  const [indexLoading, setIndexLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const abortControllerRef = useRef<AbortController | null>(null)
+  const indexRef = useRef<IndexEntry[] | null>(null)
 
   const debounced = useDebounce(query, DEBOUNCE_MS)
 
-  const runSearch = useCallback(async (q: string) => {
+  const runSearch = useCallback((q: string) => {
     if (q.length < MIN_QUERY_LEN) {
       setResults([])
       setLoading(false)
       return
     }
-    const ac = new AbortController()
-    abortControllerRef.current?.abort()
-    abortControllerRef.current = ac
 
-    setLoading(true)
+    // Wait for index to load
+    if (!indexRef.current) {
+      setLoading(true)
+      return
+    }
+
+    setLoading(false)
     try {
-      const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`, { signal: ac.signal })
-      const data = await res.json()
-      if (!ac.signal.aborted) {
-        setResults(data.results ?? [])
-      }
+      const searchResults = search(q, indexRef.current)
+      setResults(searchResults)
     } catch (err) {
-      if (!(err instanceof DOMException && err.name === 'AbortError')) {
-        setResults([])
-      }
-    } finally {
-      if (!ac.signal.aborted) {
-        setLoading(false)
-      }
+      console.error('Search error:', err)
+      setResults([])
     }
   }, [])
 
+  // Lazy load search index when component mounts
   useEffect(() => {
-    runSearch(debounced)
+    if (!indexRef.current && !indexLoading) {
+      setIndexLoading(true)
+      fetch('/data/search-index.json')
+        .then((res) => {
+          if (!res.ok) throw new Error('Failed to load search index')
+          return res.json()
+        })
+        .then((data: IndexEntry[]) => {
+          indexRef.current = data
+          setIndexLoading(false)
+        })
+        .catch((err) => {
+          console.error('Failed to load search index:', err)
+          setIndexLoading(false)
+        })
+    }
+  }, [indexLoading])
+
+  useEffect(() => {
+    // Only run search if index is loaded
+    if (indexRef.current) {
+      runSearch(debounced)
+    } else if (debounced.length >= MIN_QUERY_LEN) {
+      // Show loading state while index is being loaded
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
   }, [debounced, runSearch])
 
   // Focus the search input when component mounts
@@ -162,16 +188,19 @@ export default function DocsAccordionNavigation() {
       </div>
 
       {/* Search Results */}
-      {loading && (
+      {indexLoading && (
+        <div className="py-12 text-center text-secondary text-sm">Loading search index…</div>
+      )}
+      {!indexLoading && loading && (
         <div className="py-12 text-center text-secondary text-sm">Searching…</div>
       )}
-      {!loading && hasQuery && results.length === 0 && (
+      {!indexLoading && !loading && hasQuery && results.length === 0 && (
         <div className="py-12 text-center">
           <p className="text-secondary text-sm mb-2">No results found.</p>
           <p className="text-xs text-gray-500 dark:text-gray-400">Try different keywords.</p>
         </div>
       )}
-      {!loading && hasQuery && results.length > 0 && (
+      {!indexLoading && !loading && hasQuery && results.length > 0 && (
         <div className="space-y-6">
           {Object.entries(groupedResults).map(([sectionId, sectionResults]) => {
             const sectionInfo = sections[sectionId as keyof typeof sections]
@@ -214,7 +243,7 @@ export default function DocsAccordionNavigation() {
       )}
 
       {/* Featured Topics - shown when there's no search query */}
-      {!loading && !hasQuery && (
+      {!indexLoading && !loading && !hasQuery && (
         <div className="space-y-6">
           <div className="mb-2">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Featured Topics</h2>

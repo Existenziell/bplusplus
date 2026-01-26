@@ -14,6 +14,7 @@ test.describe('Docs', () => {
 
   test('shows breadcrumbs and Download .md on a doc page', async ({ page }) => {
     await page.goto('/docs/fundamentals')
-    await expect(page.getByRole('button', { name: /Download markdown file/i })).toBeVisible()
+    // There are two download buttons (top and bottom), so use .first()
+    await expect(page.getByRole('button', { name: /Download markdown file/i }).first()).toBeVisible()
   })
 })

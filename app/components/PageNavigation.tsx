@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useDocNavigation } from '@/app/hooks/useDocNavigation'
-import { ChevronLeft, ChevronRight, UpArrow } from '@/app/components/Icons'
+import { ChevronLeft, ChevronRight, ChevronUp } from '@/app/components/Icons'
 
 export default function PageNavigation() {
   const pathname = usePathname()
@@ -15,9 +15,9 @@ export default function PageNavigation() {
       <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700 flex justify-center">
         <span
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="cursor-pointer inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+          className="cursor-pointer inline-flex items-center justify-center gap-2 text-btc transition-all"
         >
-          <UpArrow className="w-8 h-8 " />
+          <ChevronUp className="w-8 h-8 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" />
         </span>
       </div>
     )
@@ -34,9 +34,9 @@ export default function PageNavigation() {
         {previousPage ? (
           <Link
             href={previousPage.href}
-            className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+            className="inline-flex items-center gap-2 text-btc transition-all group no-underline hover:no-underline"
           >
-            <ChevronLeft />
+            <ChevronLeft className="w-8 h-8 rounded group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors" />
             <span className="hidden md:inline">{previousPage.title}</span>
           </Link>
         ) : (
@@ -44,13 +44,13 @@ export default function PageNavigation() {
         )}
       </div>
 
-      {/* Top - Centered */}
+      {/* scrollToTop - Centered */}
       <div className="flex-1 flex justify-center">
         <span
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="cursor-pointer inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+          className="cursor-pointer inline-flex items-center justify-center gap-2 text-btc transition-all"
         >
-          <UpArrow className="w-8 h-8" />
+          <ChevronUp className="w-8 h-8 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" />
         </span>
       </div>
 
@@ -59,10 +59,10 @@ export default function PageNavigation() {
         {nextPage ? (
           <Link
             href={nextPage.href}
-            className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
+            className="inline-flex items-center gap-2 text-btc transition-all group no-underline hover:no-underline"
           >
             <span className="hidden md:inline">{nextPage.title}</span>
-            <ChevronRight />
+            <ChevronRight className="w-8 h-8 rounded group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors" />
           </Link>
         ) : (
           <div />

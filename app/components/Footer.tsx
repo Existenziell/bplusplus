@@ -32,8 +32,8 @@ export default function Footer() {
     <footer className='border-t border-gray-200 dark:border-gray-700 bg-gray-100/80 dark:bg-gray-800/50 overflow-hidden'>
       <div className='container-content pt-8 pb-4'>
         {/* 2-column layout: external resources (left), internal links (right) */}
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 mb-4'>
-          <nav aria-label='External resources' className='md:border-r border-gray-200 dark:border-gray-700 md:pr-8 text-left md:text-right'>
+        <div className='grid grid-cols-2 gap-8 mb-8'>
+          <nav aria-label='External resources' className='border-r border-gray-200 dark:border-gray-700 pr-8 text-left md:text-right'>
             <h3 className="heading-section-sm mb-3">
               More Resources
             </h3>
@@ -104,17 +104,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar: credit + copyright + tagline */}
-        <div className='w-full border-t border-gray-200 dark:border-gray-700 pt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-secondary'>
+        <div className='w-full border-t border-gray-200 dark:border-gray-700 pt-4 flex flex-col md:flex-row items-center justify-center gap-y-1 md:gap-x-4 md:gap-y-0 text-sm text-secondary'>
           <Link
             href='/author'
             className='hover:text-btc transition-colors no-underline hover:underline'
           >
             Made with <span className='text-btc' aria-hidden='true'>&#9829;</span> by Chris
           </Link>
-          <span aria-hidden='true'>|</span>
-          <span>© {new Date().getFullYear()} B++</span>
-          <span aria-hidden='true'>|</span>
+          <span aria-hidden='true' className='hidden md:inline'>|</span>
           <span>Open source · No ads · No tracking</span>
+          <span aria-hidden='true' className='hidden md:inline'>|</span>
+          <span>© {new Date().getFullYear()} B++</span>
         </div>
       </div>
     </footer>

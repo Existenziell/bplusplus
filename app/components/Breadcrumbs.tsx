@@ -21,21 +21,21 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
   const showLogoInsteadOfHome = isSticky && firstCrumb?.label === 'Home'
 
   return (
-    <nav className="py-1 min-h-[42px] flex items-center" aria-label="Breadcrumb">
-      <ol className="flex items-center flex-wrap space-x-2 text-xs sm:text-sm text-secondary">
+    <nav className="py-1 min-h-[42px] flex items-center overflow-hidden" aria-label="Breadcrumb">
+      <ol className="flex items-center md:flex-wrap flex-nowrap space-x-2 text-xs sm:text-sm text-secondary overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
         {breadcrumbs.map((crumb, index) => {
           const isFirst = index === 0
           const isLast = index === breadcrumbs.length - 1
           const shouldShowLogo = isFirst && showLogoInsteadOfHome
 
           return (
-            <li key={crumb.href} className={`flex items-center ${isFirst ? 'h-[42px] relative' : ''}`}>
+            <li key={crumb.href} className={`flex items-center flex-shrink-0 ${isFirst ? 'h-[42px] relative' : ''}`}>
               {index > 0 && (
-                <span className="mx-2 text-gray-500 dark:text-gray-400">/</span>
+                <span className="mr-1 text-gray-500 dark:text-gray-400 flex-shrink-0">/</span>
               )}
               {isFirst && firstCrumb?.label === 'Home' ? (
                 <>
-                  {/* Logo - hidden on mobile, shown on desktop with transition */}
+                  {/* Logo - shown on desktop with transition */}
                   <Link
                     href={firstCrumb.href}
                     className={`hidden md:flex items-center justify-center h-[42px] hover:opacity-80 transition-all duration-200 absolute ${
@@ -53,11 +53,29 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
                       className="opacity-80 dark:invert"
                     />
                   </Link>
+                  {/* Logo - shown on mobile when sticky, with transition */}
+                  <Link
+                    href={firstCrumb.href}
+                    className={`md:hidden flex items-center justify-center h-[42px] hover:opacity-80 transition-all duration-200 absolute ${
+                      showLogoInsteadOfHome 
+                        ? 'opacity-100 scale-100' 
+                        : 'opacity-0 scale-95 pointer-events-none'
+                    }`}
+                    aria-label="B++ Home"
+                  >
+                    <Image
+                      src="/logo/logo.png"
+                      alt="B++ Logo"
+                      width={42}
+                      height={42}
+                      className="opacity-80 dark:invert"
+                    />
+                  </Link>
                   {/* Text link - shown on mobile, hidden on desktop when logo is active, with transition */}
                   <Link
                     href={firstCrumb.href}
-                    className={`md:hidden flex items-center h-[42px] hover:text-btc hover:underline transition-colors text-gray-700 dark:text-gray-400 ${
-                      showLogoInsteadOfHome ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+                    className={`md:hidden flex items-center h-[42px] hover:text-btc hover:underline transition-all duration-200 text-gray-700 dark:text-gray-400 ${
+                      showLogoInsteadOfHome ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'
                     }`}
                   >
                     {firstCrumb.label}
@@ -75,11 +93,11 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
                   </Link>
                 </>
               ) : isLast ? (
-                <span className="text-gray-800 dark:text-gray-300" aria-current="page">{crumb.label}</span>
+                <span className="text-gray-800 dark:text-gray-300 whitespace-nowrap max-w-[200px] md:max-w-none truncate" aria-current="page">{crumb.label}</span>
               ) : (
                 <Link
                   href={crumb.href}
-                  className="hover:text-btc hover:underline transition-colors text-gray-700 dark:text-gray-400"
+                  className="hover:text-btc hover:underline transition-colors text-gray-700 dark:text-gray-400 whitespace-nowrap max-w-[150px] md:max-w-none truncate"
                 >
                   {crumb.label}
                 </Link>

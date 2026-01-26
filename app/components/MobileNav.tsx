@@ -25,7 +25,7 @@ export default function MobileNav() {
       </button>
       {isOpen && (
         <div className="mt-2 bg-gray-100 dark:bg-gray-800 rounded-lg p-4 max-h-[70vh] overflow-y-auto border border-gray-300 dark:border-gray-700">
-          <DocsNavigation />
+          <DocsNavigation onLinkClick={() => setIsOpen(false)} />
         </div>
       )}
     </div>

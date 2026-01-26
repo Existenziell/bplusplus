@@ -40,11 +40,13 @@ function getLinkClassName(isActive: boolean, size: 'default' | 'sm' = 'default')
 interface DocsNavigationProps {
   isSidebarCollapsed?: boolean
   onToggleSidebar?: () => void
+  onLinkClick?: () => void
 }
 
 export default function DocsNavigation({
   isSidebarCollapsed,
   onToggleSidebar,
+  onLinkClick,
 }: DocsNavigationProps) {
   const isSidebarNarrow = isSidebarCollapsed === true && onToggleSidebar != null
   const pathname = usePathname()
@@ -116,6 +118,7 @@ export default function DocsNavigation({
                 <Link
                   href={link.href}
                   className={getLinkClassName(isActive(link.href))}
+                  onClick={onLinkClick}
                 >
                   {link.title}
                 </Link>
@@ -146,6 +149,7 @@ export default function DocsNavigation({
                   ? 'text-btc font-semibold'
                   : 'text-gray-700 dark:text-gray-300 hover:text-btc'
               }`}
+              onClick={onLinkClick}
             >
               Docs
             </Link>
@@ -174,7 +178,12 @@ export default function DocsNavigation({
                     )}
                     <Link
                       href={item.href}
-                      onClick={() => hasChildren && !expanded && toggleSection(item.href)}
+                      onClick={(e) => {
+                        if (hasChildren && !expanded) {
+                          toggleSection(item.href)
+                        }
+                        onLinkClick?.()
+                      }}
                       className={getLinkClassName(itemActive)}
                     >
                       {item.title}
@@ -193,6 +202,7 @@ export default function DocsNavigation({
                             <Link
                               href={child.href}
                               className={getLinkClassName(isActive(child.href), 'sm')}
+                              onClick={onLinkClick}
                             >
                               {child.title}
                             </Link>
@@ -203,6 +213,7 @@ export default function DocsNavigation({
                                     <Link
                                       href={`${pathname}#${h.slug}`}
                                       className={getLinkClassName(false, 'sm')}
+                                      onClick={onLinkClick}
                                     >
                                       {h.title}
                                     </Link>
@@ -228,6 +239,7 @@ export default function DocsNavigation({
                 <Link
                   href={link.href}
                   className={getLinkClassName(isActive(link.href))}
+                  onClick={onLinkClick}
                 >
                   {link.title}
                 </Link>

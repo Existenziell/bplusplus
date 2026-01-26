@@ -27,27 +27,27 @@ export default function DocsLayoutWrapper({
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(defaultSidebarCollapsed)
   const pathname = usePathname()
 
-  // Automatically collapse sidebar on screens smaller than lg (1024px)
+  // Automatically collapse sidebar on screens smaller than lg (1024px) when resizing
   // Only run this on /docs routes to avoid conflicting with defaultSidebarCollapsed on other pages
+  // Never expands automatically, only collapses on resize
   useEffect(() => {
-    // Only apply auto-collapse/expand behavior on /docs routes
+    // Only apply auto-collapse behavior on /docs routes
     if (!pathname.startsWith('/docs')) {
       return
     }
 
-    const checkWindowSize = () => {
-      const isSmallScreen = window.innerWidth < 1024
-      setIsSidebarCollapsed(isSmallScreen)
+    const handleResize = () => {
+      // Only collapse if window is small, never expand automatically
+      if (window.innerWidth < 1024) {
+        setIsSidebarCollapsed(true)
+      }
     }
 
-    // Check on mount
-    checkWindowSize()
-
-    // Listen for resize events
-    window.addEventListener('resize', checkWindowSize)
+    // Listen for resize events only
+    window.addEventListener('resize', handleResize)
 
     // Cleanup
-    return () => window.removeEventListener('resize', checkWindowSize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [pathname])
 
   return (

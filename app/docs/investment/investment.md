@@ -1,13 +1,10 @@
-# Bitcoin as Investment
+# Why Consider Bitcoin?
 
 ![Bitcoin Icon](/icons/bitcoin.png)
 
 ---
 
-## Why Consider Bitcoin?
-
-Understanding Bitcoin as an investment requires recognizing both its potential and its risks.
-Bitcoin exhibits several characteristics that make it attractive as an investment:
+Understanding Bitcoin as an investment requires recognizing both its potential and its risks. Bitcoin exhibits several characteristics that make it attractive as an investment:
 
 **Scarcity:** With a fixed supply cap, Bitcoin cannot be inflated or diluted. The issuance schedule is predictable and decreases over time through [halvings](/docs/history/halvings), creating a deflationary monetary policy.
 
@@ -20,30 +17,6 @@ Bitcoin exhibits several characteristics that make it attractive as an investmen
 **Network Effects:** As adoption grows, Bitcoin's value proposition strengthens. More users, merchants, and institutions accepting Bitcoin increases its utility and potential value.
 
 For more on Bitcoin's monetary properties, see [Monetary Properties](/docs/fundamentals/monetary-properties).
-
----
-
-## Dollar Cost Averaging (DCA)
-
-**Dollar Cost Averaging (DCA)** is an investment strategy where you invest a fixed amount of money at regular intervals, regardless of the asset's price. This approach helps reduce the impact of volatility and removes the need to time the market.
-
-Instead of investing a large lump sum at once, DCA involves:
-
-1. **Regular intervals:** Weekly, bi-weekly, or monthly purchases
-2. **Fixed amounts:** The same dollar amount each time
-3. **Automatic execution:** Reduces emotional decision-making
-
-### Benefits of DCA for Bitcoin
-
-**Reduces timing risk:** You don't need to predict when Bitcoin is at its lowest price. By buying consistently, you average out the purchase price over time.
-
-**Disciplined approach:** Regular, automated purchases help maintain a long-term perspective and avoid panic selling during market downturns.
-
-**Psychological comfort:** Smaller, regular investments feel less risky than large lump-sum purchases, making it easier to stick with the strategy during volatility.
-
-**Volatility smoothing:** Bitcoin's price can be highly volatile. DCA helps smooth out the impact of short-term price swings.
-
-This approach helps avoid the common mistake of buying too much during euphoric highs or missing opportunities during fear-driven lows.
 
 ---
 
@@ -85,24 +58,6 @@ This approach aligns your investment size with your knowledge, reducing the risk
 
 ---
 
-## Risk Considerations
-
-Investing in Bitcoin carries significant risks that every investor should understand:
-
-**Volatility:** Bitcoin's price can experience dramatic swings. Short-term volatility can be 20-50% or more. Only invest what you can afford to lose.
-
-**Regulatory risk:** Government regulations can impact Bitcoin's price and accessibility. Regulations vary by jurisdiction and can change.
-
-**Technical risk:** While Bitcoin's network has been secure since 2009, technical vulnerabilities, bugs, or protocol changes could theoretically impact the network.
-
-**Custody risk:** Holding Bitcoin requires securing private keys. Loss of keys means permanent loss of funds. Consider using reputable custodians or learning proper [key management](/docs/wallets/keys) practices.
-
-**Market risk:** Bitcoin is still a relatively new asset class. Adoption could stall, or competing technologies could emerge.
-
-**No guarantees:** Unlike traditional investments, Bitcoin has no backing, no dividends, and no intrinsic value beyond what the market assigns. Its value depends entirely on adoption and network effects.
-
----
-
 ## Education First
 
 Before investing, prioritize education:
@@ -111,7 +66,7 @@ Before investing, prioritize education:
 2. **Study the economics:** Understand monetary policy, supply dynamics, and network effects
 3. **Review the history:** Study Bitcoin's evolution, major events, and market cycles
 4. **Practice with small amounts:** Start with small investments while learning
-5. **Secure your holdings:** Learn about [wallet security](/docs/wallets) and best practices
+5. **Secure your holdings:** Learn about [wallet security](/docs/investment/wallet-security) and best practices
 
 The more you learn, the better equipped you'll be to make informed investment decisions. Bitcoin rewards those who take the time to understand it deeply.
 
@@ -122,9 +77,11 @@ The more you learn, the better equipped you'll be to make informed investment de
 - [Bitcoin Fundamentals](/docs/fundamentals) - Core concepts and principles
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - Economic characteristics of Bitcoin
 - [Halvings](/docs/history/halvings) - Supply reduction events and their impact
-- [Wallet Development](/docs/wallets) - Securing your Bitcoin holdings
+- [Wallet Security & Self-Custody](/docs/investment/wallet-security) - Securing your Bitcoin holdings
+- [Dollar Cost Averaging](/docs/investment/dollar-cost-averaging) - Investment strategy for building a position
+- [Risk Management](/docs/investment/risk-management) - Understanding and managing investment risks
+- [Long-term Holding Strategies](/docs/investment/long-term-holding) - HODLing philosophy and time horizons
+- [Understanding Market Cycles](/docs/investment/market-cycles) - Navigating volatility and market psychology
 - [Trust Model](/docs/fundamentals/trust-model) - Understanding Bitcoin's security model
 
 ---
-
-Stay humble, stack sats.

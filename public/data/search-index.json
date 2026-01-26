@@ -248,12 +248,6 @@
     "body": "Game Theory Game theory is the mathematical study of strategic decision-making. In Bitcoin, game theory explains why the network remains secure even when participants are anonymous, potentially malicious, and have no reason to trust each other. Bitcoin's design creates a system where rational self-interest naturally leads to honest behavior and network security. Why Game Theory Matters for Bitcoin Traditional financial systems rely on legal enforcement, trusted authorities, and institutional "
   },
   {
-    "path": "/docs/fundamentals/investment",
-    "title": "Bitcoin as Investment",
-    "section": "fundamentals",
-    "body": "Bitcoin as Investment Why Consider Bitcoin? Understanding Bitcoin as an investment requires recognizing both its potential and its risks. Bitcoin exhibits several characteristics that make it attractive as an investment: Scarcity: With a fixed supply cap, Bitcoin cannot be inflated or diluted. The issuance schedule is predictable and decreases over time through halvings, creating a deflationary monetary policy. Portability: Bitcoin can be transferred globally, 24/7, without intermediaries. This "
-  },
-  {
     "path": "/docs/history",
     "title": "Bitcoin History",
     "section": "history",
@@ -780,6 +774,60 @@
     "body": "Covenants Covenants are a proposed type of Bitcoin Script constraint that would restrict how outputs from a transaction can be spent in future transactions. Unlike today’s scripts, which only define “who can spend and under what conditions,” covenants would allow “this UTXO may only be spent in a transaction that looks like X” (e.g., only to certain address types, or only after passing through a timelocked recovery path). No covenant opcodes are in consensus today. This page describes the "
   },
   {
+    "path": "/docs/investment",
+    "title": "Bitcoin as Investment",
+    "section": "investment",
+    "body": "Bitcoin as Investment Bitcoin represents a unique investment opportunity that combines technological innovation with monetary properties never before seen in human history. This section explores Bitcoin from an investment perspective, covering strategies, security, risk management, and the long-term outlook. Whether you're considering your first Bitcoin purchase or looking to deepen your understanding of Bitcoin as an asset, these guides will help you make informed decisions. Topics Covered Why "
+  },
+  {
+    "path": "/docs/investment/investment",
+    "title": "Why Consider Bitcoin?",
+    "section": "investment",
+    "body": "Why Consider Bitcoin? Understanding Bitcoin as an investment requires recognizing both its potential and its risks. Bitcoin exhibits several characteristics that make it attractive as an investment: Scarcity: With a fixed supply cap, Bitcoin cannot be inflated or diluted. The issuance schedule is predictable and decreases over time through halvings, creating a deflationary monetary policy. Portability: Bitcoin can be transferred globally, 24/7, without intermediaries. This makes it valuable for "
+  },
+  {
+    "path": "/docs/investment/risk-management",
+    "title": "Risk Management",
+    "section": "investment",
+    "body": "Risk Management Investing in Bitcoin carries significant risks that every investor should understand. This guide helps you identify, assess, and manage these risks appropriately. Key Risks Volatility Risk What it is: Bitcoin's price can experience dramatic swings. Short-term volatility can be 20-50% or more in a single day. Why it happens: Bitcoin is a relatively new asset class with a smaller market cap than traditional assets. Lower liquidity and market sentiment can cause significant price "
+  },
+  {
+    "path": "/docs/investment/wallet-security",
+    "title": "Wallet Security & Self-Custody",
+    "section": "investment",
+    "body": "Wallet Security & Self-Custody Not your keys, not your coins. This fundamental principle of Bitcoin ownership means that if you don't control your private keys, you don't truly own your Bitcoin. This guide explains how to securely store your Bitcoin using cold wallets, hardware wallets, and air-gapped systems. Why Self-Custody Matters When you store Bitcoin on an exchange or custodial service, you're trusting a third party with your funds. While this may be convenient, it comes with significant "
+  },
+  {
+    "path": "/docs/investment/tools",
+    "title": "Tools & Resources for Bitcoin Investors",
+    "section": "investment",
+    "body": "Tools & Resources for Bitcoin Investors This guide provides an overview of essential tools and resources for Bitcoin investors, from exchanges and wallets to blockchain explorers and educational materials. The focus is on reputable, well-established tools that can help you invest, manage, and learn about Bitcoin. Exchanges Exchanges are platforms where you can buy, sell, and trade Bitcoin. Understanding the different types of exchanges and their trade-offs is essential for making informed "
+  },
+  {
+    "path": "/docs/investment/privacy",
+    "title": "Privacy for Bitcoin Investors",
+    "section": "investment",
+    "body": "Privacy for Bitcoin Investors Bitcoin transactions are pseudonymous, not anonymous. While Bitcoin addresses don't directly reveal your identity, sophisticated blockchain analysis can link transactions and potentially identify you. This guide covers practical privacy considerations for Bitcoin investors, helping you understand the risks and tools available to protect your financial privacy. Understanding Bitcoin Privacy Pseudonymity vs Anonymity Pseudonymity means your transactions are linked to "
+  },
+  {
+    "path": "/docs/investment/dollar-cost-averaging",
+    "title": "Dollar Cost Averaging",
+    "section": "investment",
+    "body": "Dollar Cost Averaging (DCA) Dollar Cost Averaging (DCA) is an investment strategy where you invest a fixed amount of money at regular intervals, regardless of the asset's price. This approach helps reduce the impact of volatility and removes the need to time the market. Instead of investing a large lump sum at once, DCA involves: Regular intervals: Weekly, bi-weekly, or monthly purchases Fixed amounts: The same dollar amount each time Automatic execution: Reduces emotional decision-making "
+  },
+  {
+    "path": "/docs/investment/long-term-holding",
+    "title": "Long-term Holding Strategies",
+    "section": "investment",
+    "body": "Long-term Holding Strategies The HODLing philosophy (holding Bitcoin for the long term regardless of short-term price volatility) has become a cornerstone of Bitcoin investment strategy. This guide explores why long-term holding aligns with Bitcoin's monetary properties and how to maintain psychological resilience through market cycles. What is HODLing? HODL (originally a typo of \"hold\" that became a meme) refers to the strategy of buying and holding Bitcoin for the long term, regardless of "
+  },
+  {
+    "path": "/docs/investment/market-cycles",
+    "title": "Understanding Market Cycles",
+    "section": "investment",
+    "body": "Understanding Market Cycles Bitcoin's price is characterized by extreme volatility and cyclical patterns. Understanding these cycles (driven by halving events, market psychology, and adoption waves) can help you navigate Bitcoin's market without making emotional decisions. Bitcoin's Volatility Why Bitcoin is Volatile Bitcoin's volatility comes from several factors: Small market cap: Compared to traditional assets, Bitcoin's market cap is relatively small. This means large buy or sell orders can "
+  },
+  {
     "path": "/docs/glossary",
     "title": "Glossary",
     "section": "glossary",
@@ -802,6 +850,12 @@
     "title": "21 Million",
     "section": "glossary",
     "body": "The maximum supply of Bitcoin that will ever exist, enforced by the protocol's consensus rules and achieved through the halving schedule, with the last satoshi expected to be mined around the year 2140...."
+  },
+  {
+    "path": "/docs/glossary#air-gapped",
+    "title": "Air-Gapped",
+    "section": "glossary",
+    "body": "A computer or device that has never been connected to the internet, providing the highest level of security for Bitcoin wallets. Air-gapped systems cannot be attacked remotely, making them ideal for generating private keys, creating transactions, and signing them offline...."
   },
   {
     "path": "/docs/glossary#absolute-time-lock",
@@ -1431,7 +1485,13 @@
     "path": "/docs/glossary#hardware-wallet",
     "title": "Hardware Wallet",
     "section": "glossary",
-    "body": "A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of cold storage and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access."
+    "body": "A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of cold storage and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access...."
+  },
+  {
+    "path": "/docs/glossary#hot-wallet",
+    "title": "Hot Wallet",
+    "section": "glossary",
+    "body": "A Bitcoin wallet that is connected to the internet, such as mobile apps, desktop software, or web wallets. Hot wallets are convenient for frequent transactions and daily use but are more vulnerable to hacking, malware, and online attacks since private keys are stored on internet-connected devices...."
   },
   {
     "path": "/docs/glossary#hodl",
@@ -1972,6 +2032,12 @@
     "title": "Seed Phrase",
     "section": "glossary",
     "body": "A human-readable backup of a wallet's master secret, typically consisting of 12-24 words from a standardized BIP39 wordlist of 2048 words. This mnemonic phrase encodes the entropy used to derive all wallet keys through hierarchical deterministic (HD) derivation, allowing complete wallet recovery..."
+  },
+  {
+    "path": "/docs/glossary#self-custody",
+    "title": "Self-Custody",
+    "section": "glossary",
+    "body": "The practice of controlling your own private keys rather than entrusting them to a third party like an exchange or custodial service. Self-custody means you have true ownership of your Bitcoin, as expressed by the principle \"not your keys, not your coins.\" While self-custody provides full control..."
   },
   {
     "path": "/docs/glossary#share",

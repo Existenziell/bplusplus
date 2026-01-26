@@ -11,6 +11,10 @@
     "term": "21 Million",
     "definition": "The maximum supply of Bitcoin that will ever exist, enforced by the protocol's consensus rules and achieved through the halving schedule, with the last satoshi expected to be mined around the year 2140...."
   },
+  "air-gapped": {
+    "term": "Air-Gapped",
+    "definition": "A computer or device that has never been connected to the internet, providing the highest level of security for Bitcoin wallets. Air-gapped systems cannot be attacked remotely, making them ideal for generating private keys, creating transactions, and signing them offline...."
+  },
   "absolute-time-lock": {
     "term": "Absolute Time Lock",
     "definition": "A time lock that prevents a transaction from being spent until a specific block height or Unix timestamp is reached, implemented using the OP_CHECKLOCKTIMEVERIFY (CLTV) opcode. Unlike relative time locks, absolute locks reference a fixed point in time rather than being relative to when the UTXO was..."
@@ -429,7 +433,11 @@
   },
   "hardware-wallet": {
     "term": "Hardware Wallet",
-    "definition": "A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of cold storage and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access."
+    "definition": "A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of cold storage and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access...."
+  },
+  "hot-wallet": {
+    "term": "Hot Wallet",
+    "definition": "A Bitcoin wallet that is connected to the internet, such as mobile apps, desktop software, or web wallets. Hot wallets are convenient for frequent transactions and daily use but are more vulnerable to hacking, malware, and online attacks since private keys are stored on internet-connected devices...."
   },
   "hodl": {
     "term": "HODL",
@@ -790,6 +798,10 @@
   "seed-phrase": {
     "term": "Seed Phrase",
     "definition": "A human-readable backup of a wallet's master secret, typically consisting of 12-24 words from a standardized BIP39 wordlist of 2048 words. This mnemonic phrase encodes the entropy used to derive all wallet keys through hierarchical deterministic (HD) derivation, allowing complete wallet recovery..."
+  },
+  "self-custody": {
+    "term": "Self-Custody",
+    "definition": "The practice of controlling your own private keys rather than entrusting them to a third party like an exchange or custodial service. Self-custody means you have true ownership of your Bitcoin, as expressed by the principle \"not your keys, not your coins.\" While self-custody provides full control..."
   },
   "share": {
     "term": "Share",

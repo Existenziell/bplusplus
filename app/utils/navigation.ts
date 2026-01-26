@@ -37,7 +37,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/fundamentals/denominations', mdFile: 'app/docs/fundamentals/denominations/denominations.md', title: 'Denominations', section: 'fundamentals' },
   { path: '/docs/fundamentals/incentives', mdFile: 'app/docs/fundamentals/incentives/incentives.md', title: 'Incentive Structure', section: 'fundamentals' },
   { path: '/docs/fundamentals/game-theory', mdFile: 'app/docs/fundamentals/game-theory/game-theory.md', title: 'Game Theory', section: 'fundamentals' },
-  { path: '/docs/fundamentals/investment', mdFile: 'app/docs/fundamentals/investment/investment.md', title: 'Bitcoin as Investment', section: 'fundamentals' },
 
   { path: '/docs/history', mdFile: 'app/docs/history/overview.md', title: 'Bitcoin History', section: 'history' },
   { path: '/docs/history/people', mdFile: 'app/docs/history/people/people.md', title: 'People', section: 'history' },
@@ -135,6 +134,16 @@ export const docPages: DocPage[] = [
   { path: '/docs/advanced/trampoline-routing', mdFile: 'app/docs/advanced/trampoline-routing/trampoline-routing.md', title: 'Trampoline Routing', section: 'advanced' },
   { path: '/docs/advanced/covenants', mdFile: 'app/docs/advanced/covenants/covenants.md', title: 'Covenants', section: 'advanced' },
 
+  { path: '/docs/investment', mdFile: 'app/docs/investment/overview.md', title: 'Bitcoin as Investment', section: 'investment' },
+  { path: '/docs/investment/investment', mdFile: 'app/docs/investment/investment.md', title: 'Why Consider Bitcoin?', section: 'investment' },
+  { path: '/docs/investment/risk-management', mdFile: 'app/docs/investment/risk-management/risk-management.md', title: 'Risk Management', section: 'investment' },
+  { path: '/docs/investment/wallet-security', mdFile: 'app/docs/investment/wallet-security/wallet-security.md', title: 'Wallet Security & Self-Custody', section: 'investment' },
+  { path: '/docs/investment/tools', mdFile: 'app/docs/investment/tools/tools.md', title: 'Tools & Resources for Bitcoin Investors', section: 'investment' },
+  { path: '/docs/investment/privacy', mdFile: 'app/docs/investment/privacy/privacy.md', title: 'Privacy for Bitcoin Investors', section: 'investment' },
+  { path: '/docs/investment/dollar-cost-averaging', mdFile: 'app/docs/investment/dollar-cost-averaging/dollar-cost-averaging.md', title: 'Dollar Cost Averaging', section: 'investment' },
+  { path: '/docs/investment/long-term-holding', mdFile: 'app/docs/investment/long-term-holding/long-term-holding.md', title: 'Long-term Holding Strategies', section: 'investment' },
+  { path: '/docs/investment/market-cycles', mdFile: 'app/docs/investment/market-cycles/market-cycles.md', title: 'Understanding Market Cycles', section: 'investment' },
+
   { path: '/docs/glossary', mdFile: 'app/docs/glossary/terms.md', title: 'Glossary', section: 'glossary' },
 ]
 
@@ -179,6 +188,10 @@ export const sections: Record<string, { title: string; description: string }> = 
   advanced: {
     title: 'Advanced Topics',
     description: 'Advanced Bitcoin topics including atomic swaps, DLCs, sidechains, statechains, governance mechanisms, and experimental features.',
+  },
+  investment: {
+    title: 'Bitcoin as Investment',
+    description: 'Investment strategies, security practices, risk management, and long-term holding strategies for Bitcoin investors.',
   },
   glossary: {
     title: 'Bitcoin Glossary',
@@ -268,6 +281,11 @@ export const navItems: NavSection[] = [
     title: 'Controversies',
     href: '/docs/controversies',
     children: docPages.filter(p => p.section === 'controversies' && p.path !== '/docs/controversies').map(p => ({ title: p.title, href: p.path })),
+  },
+  {
+    title: 'Investment',
+    href: '/docs/investment',
+    children: docPages.filter(p => p.section === 'investment' && p.path !== '/docs/investment').map(p => ({ title: p.title, href: p.path })),
   },
 ]
 

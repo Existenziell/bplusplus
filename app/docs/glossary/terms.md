@@ -13,6 +13,9 @@ The maximum supply of Bitcoin that will ever exist, enforced by the protocol's c
 
 ## A
 
+### Air-Gapped
+A computer or device that has never been connected to the internet, providing the highest level of security for Bitcoin wallets. Air-gapped systems cannot be attacked remotely, making them ideal for generating private keys, creating transactions, and signing them offline. The transaction is then transferred to an internet-connected device for broadcasting. This approach eliminates the risk of malware, network attacks, and key theft through online means.
+
 ### Absolute Time Lock
 A time lock that prevents a transaction from being spent until a specific block height or Unix timestamp is reached, implemented using the OP_CHECKLOCKTIMEVERIFY (CLTV) opcode. Unlike relative time locks, absolute locks reference a fixed point in time rather than being relative to when the UTXO was created.
 
@@ -354,7 +357,10 @@ A protocol change that loosens consensus rules, making previously invalid blocks
 A wallet architecture (BIP 32) that generates all keys from a single master seed, typically represented as a 12-24 word mnemonic phrase for backup. The hierarchical structure allows deriving billions of addresses in an organized tree, with branches for different accounts, purposes (receiving vs. change), and address types. HD wallets revolutionized Bitcoin usability by making backups simple (one seed phrase backs up all past and future addresses) while also improving privacy by making fresh address generation trivial.
 
 ### Hardware Wallet
-A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of cold storage and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access.
+A physical device used to store private keys securely offline, providing protection from online hacks or malware. Hardware wallets are a form of [cold storage](/docs/glossary#cold-storage-wallet) and are widely used by Bitcoin holders for long-term storage, ensuring that their private keys remain safe from unauthorized access. Private keys never leave the device, and transactions are signed on the device itself, making them secure even when connected to compromised computers.
+
+### Hot Wallet
+A Bitcoin wallet that is connected to the internet, such as mobile apps, desktop software, or web wallets. Hot wallets are convenient for frequent transactions and daily use but are more vulnerable to hacking, malware, and online attacks since private keys are stored on internet-connected devices. Best practice is to use hot wallets only for small amounts and keep significant holdings in [cold storage wallets](/docs/glossary#cold-storage-wallet) or [hardware wallets](/docs/glossary#hardware-wallet).
 
 ### HODL
 A Bitcoin culture term meaning to hold bitcoin through volatility instead of selling. It originated from a 2013 Bitcointalk post titled "I AM HODLING" (a typo for "holding") during a sharp price drop. "HODL" is often used as a verb and has come to symbolize long-term conviction and resistance to panic selling.
@@ -660,7 +666,10 @@ A satoshi, or "sat," is the smallest unit of bitcoin, equal to one hundred-milli
 The pseudonymous creator of Bitcoin. He released the Bitcoin whitepaper in 2008 by mailing it to the Cypherpunk mailing list and mined the Genesis Block in 2009. Satoshi remained active until mid-2010, when he handed over control of Bitcoin's development to others and gradually disappeared. His identity remains unknown.
 
 ### Seed Phrase
-A human-readable backup of a wallet's master secret, typically consisting of 12-24 words from a standardized BIP39 wordlist of 2048 words. This mnemonic phrase encodes the entropy used to derive all wallet keys through hierarchical deterministic (HD) derivation, allowing complete wallet recovery from just these words. Seed phrases should be stored securely offline and never entered into computers except during recovery.
+A human-readable backup of a wallet's master secret, typically consisting of 12-24 words from a standardized BIP39 wordlist of 2048 words. This mnemonic phrase encodes the entropy used to derive all wallet keys through hierarchical deterministic (HD) derivation, allowing complete wallet recovery from just these words. Seed phrases should be stored securely offline and never entered into computers except during recovery. Also called a recovery phrase or mnemonic phrase.
+
+### Self-Custody
+The practice of controlling your own private keys rather than entrusting them to a third party like an exchange or custodial service. Self-custody means you have true ownership of your Bitcoin, as expressed by the principle "not your keys, not your coins." While self-custody provides full control and eliminates counterparty risk, it requires proper security practices including secure [seed phrase](/docs/glossary#seed-phrase) storage, [hardware wallet](/docs/glossary#hardware-wallet) usage, and understanding of security best practices.
 
 ### Share
 A proof-of-work submission from a miner to a mining pool that meets the pool's difficulty target (lower than the actual network difficulty). Shares prove the miner is doing work without requiring them to find actual blocks, enabling fair reward distribution. Share counting allows pools to distribute block rewards proportionally to contributed hash power, dramatically reducing individual miner variance.

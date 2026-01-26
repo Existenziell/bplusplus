@@ -132,7 +132,7 @@ export default function DocsNavigation({
           <div className="flex items-center gap-1.5 w-full text-left text-base mb-2">
             <button
               onClick={() => setIsDocsExpanded((v) => !v)}
-              className="flex-shrink-0 p-1 text-gray-500 dark:text-gray-400 hover:text-btc transition-colors"
+              className="flex-shrink-0 p-1 pl-0 text-gray-500 dark:text-gray-400 hover:text-btc transition-colors"
               aria-expanded={isDocsExpanded}
               aria-label={isDocsExpanded ? 'Collapse docs tree' : 'Expand docs tree'}
             >

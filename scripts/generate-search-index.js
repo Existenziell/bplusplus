@@ -20,14 +20,121 @@ const glossary = JSON.parse(fs.readFileSync(glossaryPath, 'utf-8'))
 const navContent = fs.readFileSync(navPath, 'utf-8')
 const docPages = parseDocPages(navContent) // [{ path, mdFile, title, section }]
 
-// Optional keywords per page or glossary term: alternative spellings, synonyms, and terms
-// that may not appear in the body (e.g. "sha256" when the text uses "SHA-256"). Add more
-// path → keywords or slug → keywords as needed.
-const pathKeywords = {
-  '/docs/bitcoin/cryptography': ['sha256', 'sha-256'],
+// Comprehensive term aliases map for common Bitcoin technical term variations
+// Maps canonical terms to their common variations/abbreviations
+const termAliases = {
+  // Hash functions
+  'sha-256': ['sha256', 'sha 256', 'sha_256'],
+  'ripemd-160': ['ripemd160', 'ripemd 160', 'ripemd_160'],
+  
+  // Address types
+  'p2pkh': ['p2pkh', 'pay-to-pubkey-hash', 'pay to pubkey hash'],
+  'p2sh': ['p2sh', 'pay-to-script-hash', 'pay to script hash'],
+  'p2wpkh': ['p2wpkh', 'pay-to-witness-pubkey-hash', 'pay to witness pubkey hash'],
+  'p2wsh': ['p2wsh', 'pay-to-witness-script-hash', 'pay to witness script hash'],
+  'p2tr': ['p2tr', 'pay-to-taproot', 'pay to taproot'],
+  
+  // Protocol upgrades
+  'segwit': ['segwit', 'seg wit', 'segregated witness'],
+  'taproot': ['taproot', 'tap root'],
+  
+  // Lightning Network
+  'lightning network': ['lightning network', 'ln', 'lightning'],
+  'htlc': ['htlc', 'hash time locked contract', 'hash-time-locked-contract'],
+  'bolt': ['bolt', 'basis of lightning technology'],
+  
+  // Cryptography
+  'ecdsa': ['ecdsa', 'elliptic curve digital signature algorithm'],
+  'schnorr': ['schnorr', 'schnorr signature', 'schnorr signatures'],
+  
+  // Common abbreviations
+  'bip': ['bip', 'bitcoin improvement proposal', 'bitcoin improvement proposals'],
+  'spv': ['spv', 'simplified payment verification'],
+  'utxo': ['utxo', 'unspent transaction output', 'unspent transaction outputs'],
+  'hd wallet': ['hd wallet', 'hierarchical deterministic wallet', 'hd wallets'],
+  'rpc': ['rpc', 'remote procedure call'],
+  'psbt': ['psbt', 'partially signed bitcoin transaction', 'partially signed bitcoin transactions'],
+  'mast': ['mast', 'merkle abstract syntax tree', 'merkle abstract syntax trees'],
+  'musig': ['musig', 'multisig schnorr', 'multisignature schnorr'],
+  
+  // Encoding
+  'bech32': ['bech32', 'bech32m'],
+  'base58': ['base58', 'base58check'],
+  
+  // Other common terms
+  'opcode': ['opcode', 'op code', 'op codes', 'opcodes'],
+  'script': ['script', 'bitcoin script', 'locking script', 'unlocking script'],
+  'mempool': ['mempool', 'memory pool', 'transaction pool'],
+  'mainnet': ['mainnet', 'main net'],
+  'testnet': ['testnet', 'test net'],
 }
+
+// Helper function to get aliases for a term
+function getTermAliases(term) {
+  const lowerTerm = term.toLowerCase()
+  // Check direct match
+  if (termAliases[lowerTerm]) {
+    return termAliases[lowerTerm]
+  }
+  // Check if term contains any key
+  for (const [key, aliases] of Object.entries(termAliases)) {
+    if (lowerTerm.includes(key) || key.includes(lowerTerm)) {
+      return aliases
+    }
+  }
+  return []
+}
+
+// Optional keywords per page: alternative spellings, synonyms, and terms
+// that may not appear in the body (e.g. "sha256" when the text uses "SHA-256").
+const pathKeywords = {
+  '/docs/bitcoin/cryptography': ['sha256', 'sha-256', 'ripemd-160', 'ripemd160', 'ecdsa', 'schnorr'],
+  '/docs/bitcoin/segwit': ['segwit', 'seg wit', 'segregated witness'],
+  '/docs/bitcoin/taproot': ['taproot', 'tap root', 'schnorr', 'mast', 'musig'],
+  '/docs/bitcoin/script': ['script', 'bitcoin script', 'opcode', 'op codes', 'opcodes', 'locking script', 'unlocking script'],
+  '/docs/bitcoin/op-codes': ['opcode', 'op codes', 'opcodes'],
+  '/docs/bitcoin/rpc': ['rpc', 'remote procedure call', 'json-rpc', 'bitcoin core rpc'],
+  '/docs/lightning': ['lightning network', 'ln', 'lightning'],
+  '/docs/lightning/channels': ['lightning channel', 'payment channel', 'channel'],
+  '/docs/lightning/routing/htlc': ['htlc', 'hash time locked contract', 'hash-time-locked-contract'],
+  '/docs/lightning/invoices': ['invoice', 'bolt11', 'bolt 11', 'lightning invoice'],
+  '/docs/lightning/bolt12-offers': ['bolt12', 'bolt 12', 'offers', 'lightning offers'],
+  '/docs/lightning/onion': ['onion routing', 'onion', 'sphinx'],
+  '/docs/wallets/address-types': ['p2pkh', 'p2sh', 'p2wpkh', 'p2wsh', 'p2tr', 'address type', 'address types'],
+  '/docs/wallets/hd-wallets': ['hd wallet', 'hierarchical deterministic wallet', 'hd wallets', 'bip32', 'bip 32'],
+  '/docs/fundamentals/utxos': ['utxo', 'utxos', 'unspent transaction output', 'unspent transaction outputs'],
+  '/docs/mining/mempool': ['mempool', 'memory pool', 'transaction pool'],
+  '/docs/bitcoin-development/psbt': ['psbt', 'partially signed bitcoin transaction', 'partially signed bitcoin transactions'],
+  '/docs/history/bips': ['bip', 'bips', 'bitcoin improvement proposal', 'bitcoin improvement proposals'],
+  '/docs/development/testnets': ['testnet', 'test net', 'testnet3', 'regtest', 'signet'],
+}
+
+// Optional keywords per glossary term: alternative spellings and synonyms
 const slugKeywords = {
-  'sha-256': ['sha256'],
+  'sha-256': ['sha256', 'sha 256', 'sha_256'],
+  'ripemd-160': ['ripemd160', 'ripemd 160', 'ripemd_160'],
+  'p2pkh-pay-to-pubkey-hash': ['p2pkh', 'pay-to-pubkey-hash', 'pay to pubkey hash'],
+  'p2sh-pay-to-script-hash': ['p2sh', 'pay-to-script-hash', 'pay to script hash'],
+  'p2wpkh-pay-to-witness-pubkey-hash': ['p2wpkh', 'pay-to-witness-pubkey-hash', 'pay to witness pubkey hash'],
+  'p2wsh-pay-to-witness-script-hash': ['p2wsh', 'pay-to-witness-script-hash', 'pay to witness script hash'],
+  'p2tr-pay-to-taproot': ['p2tr', 'pay-to-taproot', 'pay to taproot'],
+  'ecdsa-elliptic-curve-digital-signature-algorithm': ['ecdsa', 'elliptic curve digital signature algorithm'],
+  'bip-bitcoin-improvement-proposal': ['bip', 'bips', 'bitcoin improvement proposal', 'bitcoin improvement proposals'],
+  'htlc-hash-time-locked-contract': ['htlc', 'hash time locked contract', 'hash-time-locked-contract'],
+  'lightning-network': ['lightning network', 'ln', 'lightning'],
+  'bolt-basis-of-lightning-technology': ['bolt', 'basis of lightning technology'],
+  'spv': ['spv', 'simplified payment verification'],
+  'hd-wallet-hierarchical-deterministic-wallet': ['hd wallet', 'hierarchical deterministic wallet', 'hd wallets'],
+  'rpc-remote-procedure-call': ['rpc', 'remote procedure call'],
+  'psbt-partially-signed-bitcoin-transaction': ['psbt', 'partially signed bitcoin transaction', 'partially signed bitcoin transactions'],
+  'mast-merkle-abstract-syntax-tree': ['mast', 'merkle abstract syntax tree', 'merkle abstract syntax trees'],
+  'musig': ['musig', 'multisig schnorr', 'multisignature schnorr'],
+  'bech32': ['bech32', 'bech32m'],
+  'base58': ['base58', 'base58check'],
+  'opcode': ['opcode', 'op code', 'op codes', 'opcodes'],
+  'mempool': ['mempool', 'memory pool', 'transaction pool'],
+  'mainnet': ['mainnet', 'main net'],
+  'testnet': ['testnet', 'test net'],
 }
 
 function addEntry(entry) {

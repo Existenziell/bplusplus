@@ -28,7 +28,7 @@ The [Genesis Block](/docs/glossary#genesis-block) was mined by Satoshi Nakamoto,
 ### First Transaction
 
 - **Date**: January 12, 2009
-- **Details**: Satoshi Nakamoto sent 10 BTC to [Hal Finney](/docs/history/people#hal-finney-1956-2014)
+- **Details**: Satoshi Nakamoto sent 10 BTC to [Hal Finney](/docs/history/people#hal-finney)
 - **Block**: 170
 
 This transaction marked the first time Bitcoin was sent from one person to another, demonstrating the peer-to-peer nature of the network.

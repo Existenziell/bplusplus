@@ -27,6 +27,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       setQuery('')
       setSelectedIndex(0)
       inputRef.current?.focus()
+    } else {
+      // Clear query when modal closes to ensure fresh state on next open
+      setQuery('')
     }
   }, [isOpen, setQuery])
 
@@ -34,16 +37,17 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     selectedItemRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
   }, [selectedIndex])
 
-  // Close modal when pathname changes (navigation occurred)
+  // Close modal and clear query when pathname changes (navigation occurred)
   useEffect(() => {
     if (isOpen && pathname !== previousPathnameRef.current) {
       previousPathnameRef.current = pathname
+      setQuery('')
       onClose()
     } else if (!isOpen) {
       // Update ref when modal closes to track the current pathname
       previousPathnameRef.current = pathname
     }
-  }, [pathname, isOpen, onClose])
+  }, [pathname, isOpen, onClose, setQuery])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

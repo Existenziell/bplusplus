@@ -17,6 +17,14 @@ export function useSearch() {
 
   const debouncedQuery = useDebounce(query, DEBOUNCE_MS)
 
+  // Clear results immediately when query is empty (don't wait for debounce)
+  useEffect(() => {
+    if (query.length === 0) {
+      setResults([])
+      setLoading(false)
+    }
+  }, [query])
+
   const runSearch = useCallback(
     (q: string) => {
       if (q.length < MIN_QUERY_LEN) {

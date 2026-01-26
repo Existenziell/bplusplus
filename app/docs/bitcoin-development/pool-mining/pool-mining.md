@@ -332,7 +332,7 @@ Understanding pool mining helps explain Bitcoin's security model and economic in
 
 ## Related Topics
 
-- [What is Mining?](/docs/mining) - Mining fundamentals
+- [Bitcoin Mining](/docs/mining) - Mining fundamentals
 - [Proof-of-Work](/docs/mining/proof-of-work) - The consensus mechanism
 - [Mining Pools](/docs/mining/pools) - How pools coordinate miners
 - [Mining Economics](/docs/mining/economics) - Profitability and incentives

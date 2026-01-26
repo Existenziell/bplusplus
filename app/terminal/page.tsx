@@ -485,7 +485,7 @@ export default function TerminalPage() {
               <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-500/80" />
               <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-500/80" />
             </div>
-            <span className="text-gray-600 dark:text-gray-200 text-xs md:text-sm font-mono ml-2">bitcoin-cli — mainnet</span>
+            <span className="text-gray-600 dark:text-gray-300 text-xs md:text-sm font-mono ml-2">bitcoin-cli — mainnet</span>
           </div>
 
           <div
@@ -511,7 +511,7 @@ export default function TerminalPage() {
                 <pre className="text-red-400 dark:text-red-300 whitespace-pre-wrap">{line.content}</pre>
               )}
               {line.type === 'info' && (
-                <pre className="text-green-500 dark:text-gray-200 whitespace-pre-wrap">{line.content}</pre>
+                <pre className="text-green-500 dark:text-gray-300 whitespace-pre-wrap">{line.content}</pre>
               )}
               {line.type === 'usage' && (
                 <div className="flex items-center gap-2 group flex-wrap">
@@ -534,13 +534,13 @@ export default function TerminalPage() {
             ))}
 
             {isLoading && (
-              <div className="text-green-400 dark:text-gray-200 animate-pulse">Loading...</div>
+              <div className="text-green-400 dark:text-gray-300 animate-pulse">Loading...</div>
             )}
           </div>
 
           <form onSubmit={handleSubmit} className="bg-black dark:bg-gray-900 border-t border-green-800 dark:border-gray-800 p-2 md:p-4 flex items-center gap-1 md:gap-2 flex-shrink-0">
             <span className="text-green-400 dark:text-btc font-mono text-xs md:text-sm">$</span>
-            <span className="text-green-500 dark:text-gray-200 font-mono text-xs md:text-sm hidden sm:inline">bitcoin-cli</span>
+            <span className="text-green-500 dark:text-gray-300 font-mono text-xs md:text-sm hidden sm:inline">bitcoin-cli</span>
             <input
               ref={inputRef}
               type="text"
@@ -548,7 +548,7 @@ export default function TerminalPage() {
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
-              className="flex-1 bg-transparent text-green-400 dark:text-gray-100 font-mono text-xs md:text-sm outline-none placeholder-green-700 dark:placeholder-gray-600 min-w-0"
+              className="flex-1 bg-transparent text-green-400 dark:text-gray-200 font-mono text-xs md:text-sm outline-none placeholder-green-700 dark:placeholder-gray-600 min-w-0"
               placeholder={isLoading ? 'executing...' : 'enter command...'}
               autoFocus
               spellCheck={false}

@@ -95,7 +95,7 @@ export default function AuthorPage() {
                 </p>
                 {/* Bitcoin On-Chain */}
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-200">
                     Bitcoin (On-Chain)
                   </h3>
                   <div className="author-address-box">
@@ -114,7 +114,7 @@ export default function AuthorPage() {
 
                 {/* Lightning Network via Nostr */}
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-200">
                     Lightning Network
                   </h3>
                   <div className="author-address-box">

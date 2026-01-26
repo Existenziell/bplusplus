@@ -164,7 +164,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search docs…"
-            className="flex-1 py-5 text-lg bg-transparent border-0 border-none outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400 text-gray-900 dark:text-gray-100 focus:ring-0 focus:border-0"
+            className="flex-1 py-5 text-lg bg-transparent border-0 border-none outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400 text-gray-900 dark:text-gray-200 focus:ring-0 focus:border-0"
             autoComplete="off"
             autoCorrect="off"
             aria-label="Search"
@@ -205,8 +205,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     onClick={onClose}
                     className={`flex gap-3 px-4 py-2.5 text-left transition-colors no-underline hover:no-underline ${
                       i === selectedIndex
-                        ? 'bg-btc/20 dark:bg-btc/25 text-gray-900 dark:text-gray-100'
-                        : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ? 'bg-btc/20 dark:bg-btc/25 text-gray-900 dark:text-gray-200'
+                        : 'text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                     }`}
                   >
                     <span

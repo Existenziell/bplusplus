@@ -161,7 +161,7 @@ export default function DocsSearch() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search documentation…"
-            className="w-full pl-12 pr-4 py-4 text-base bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-btc focus:ring-2 focus:ring-btc/20 transition-colors text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400"
+            className="w-full pl-12 pr-4 py-4 text-base bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-btc focus:ring-2 focus:ring-btc/20 transition-colors text-gray-900 dark:text-gray-200 placeholder:text-gray-500 dark:placeholder:text-gray-400"
             autoComplete="off"
             autoCorrect="off"
             aria-label="Search documentation"
@@ -186,7 +186,7 @@ export default function DocsSearch() {
             return (
               <div key={sectionId} className="pb-6">
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-200 mb-1">
                     {sectionInfo?.title || sectionId}
                   </h3>
                   {sectionInfo?.description && (
@@ -203,7 +203,7 @@ export default function DocsSearch() {
                         <div className="flex items-start gap-3">
                           <DocumentIcon className="flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500 mt-0.5 group-hover:text-btc transition-colors" />
                           <div className="min-w-0 flex-1">
-                            <div className="font-medium text-gray-900 dark:text-gray-100 group-hover:text-btc transition-colors">
+                            <div className="font-medium text-gray-900 dark:text-gray-200 group-hover:text-btc transition-colors">
                               {result.title}
                             </div>
                             <div className="text-sm text-secondary mt-1 line-clamp-2">
@@ -225,7 +225,7 @@ export default function DocsSearch() {
       {!loading && !hasQuery && (
         <div className="space-y-6">
           <div className="mb-2">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Featured Topics</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-200">Featured Topics</h2>
             <p className="text-sm text-secondary mt-1">Explore these popular topics to get started</p>
           </div>
           {Object.entries(groupedFeaturedTopics).map(([sectionId, sectionTopics]) => {
@@ -233,7 +233,7 @@ export default function DocsSearch() {
             return (
               <div key={sectionId} className="pb-6">
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-200 mb-1">
                     {sectionInfo?.title || sectionId}
                   </h3>
                 </div>
@@ -247,7 +247,7 @@ export default function DocsSearch() {
                         <div className="flex items-start gap-3">
                           <DocumentIcon className="flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500 mt-0.5 group-hover:text-btc transition-colors" />
                           <div className="min-w-0 flex-1">
-                            <div className="font-medium text-gray-900 dark:text-gray-100 group-hover:text-btc transition-colors">
+                            <div className="font-medium text-gray-900 dark:text-gray-200 group-hover:text-btc transition-colors">
                               {topic.title}
                             </div>
                             <div className="text-sm text-secondary mt-1 line-clamp-2">

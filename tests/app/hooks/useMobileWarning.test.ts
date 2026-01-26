@@ -109,16 +109,20 @@ describe('useMobileWarning', () => {
     expect(result.current.showWarning).toBe(false)
 
     // Resize to mobile
-    mockInnerWidth(500)
-    window.dispatchEvent(new Event('resize'))
+    act(() => {
+      mockInnerWidth(500)
+      window.dispatchEvent(new Event('resize'))
+    })
 
     await waitFor(() => {
       expect(result.current.showWarning).toBe(true)
     })
 
     // Resize back to desktop
-    mockInnerWidth(1024)
-    window.dispatchEvent(new Event('resize'))
+    act(() => {
+      mockInnerWidth(1024)
+      window.dispatchEvent(new Event('resize'))
+    })
 
     await waitFor(() => {
       expect(result.current.showWarning).toBe(false)

@@ -1,7 +1,7 @@
 import GlossaryRenderer from '@/app/components/GlossaryRenderer'
-import { readMarkdown } from '@/app/utils/readMarkdown'
 import { sections } from '@/app/utils/navigation'
 import { generatePageMetadata } from '@/app/utils/metadata'
+import mdContent from '@/public/data/md-content.json'
 
 export const metadata = generatePageMetadata({
   title: 'Glossary',
@@ -10,8 +10,9 @@ export const metadata = generatePageMetadata({
 })
 
 export default async function GlossaryPage() {
-  // Read the glossary markdown file
-  const content = await readMarkdown('app/docs/glossary/terms.md')
+  // Get glossary content from pre-generated md-content.json (same as other doc pages)
+  const entry = (mdContent as Record<string, { content: string }>)['/docs/glossary']
+  const content = entry?.content || ''
 
   return (
     <div>

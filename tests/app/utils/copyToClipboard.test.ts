@@ -42,6 +42,7 @@ describe('copyToClipboard', () => {
   })
 
   it('shows error notification when clipboard API is not available', async () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     Object.defineProperty(navigator, 'clipboard', {
       value: undefined,
       writable: true,
@@ -51,9 +52,11 @@ describe('copyToClipboard', () => {
     await copyToClipboard('test', 'Test')
 
     expect(showNotification).toHaveBeenCalledWith('Failed to copy', true)
+    consoleSpy.mockRestore()
   })
 
   it('shows error notification when writeText is not available', async () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     Object.defineProperty(navigator, 'clipboard', {
       value: {},
       writable: true,
@@ -63,15 +66,18 @@ describe('copyToClipboard', () => {
     await copyToClipboard('test', 'Test')
 
     expect(showNotification).toHaveBeenCalledWith('Failed to copy', true)
+    consoleSpy.mockRestore()
   })
 
   it('shows error notification when clipboard write fails', async () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     const error = new Error('Clipboard write failed')
     ;(navigator.clipboard.writeText as any).mockRejectedValueOnce(error)
 
     await copyToClipboard('test', 'Test')
 
     expect(showNotification).toHaveBeenCalledWith('Failed to copy', true)
+    consoleSpy.mockRestore()
   })
 
   it('logs error to console when clipboard write fails', async () => {

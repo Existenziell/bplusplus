@@ -26,7 +26,8 @@ describe('DenominationCalculator', () => {
 
     // Should show converted values
     expect(screen.queryByText('Enter an amount')).not.toBeInTheDocument()
-    expect(screen.getByText(/sats/i)).toBeInTheDocument()
+    // Check for the Satoshi result value (100,000,000 sats = 1 BTC)
+    expect(screen.getByText('100,000,000')).toBeInTheDocument()
   })
 
   it('updates results when value changes', async () => {
@@ -36,11 +37,11 @@ describe('DenominationCalculator', () => {
     const input = screen.getByLabelText('Amount to convert')
     
     await user.type(input, '1')
-    const firstResult = screen.getByText(/sats/i).textContent
+    const firstResult = screen.getByText('100,000,000').textContent
 
     await user.clear(input)
     await user.type(input, '2')
-    const secondResult = screen.getByText(/sats/i).textContent
+    const secondResult = screen.getByText('200,000,000').textContent
 
     expect(firstResult).not.toBe(secondResult)
   })
@@ -54,11 +55,12 @@ describe('DenominationCalculator', () => {
 
     await user.type(input, '1000000')
     
-    // Change from BTC to sats
-    await user.selectOptions(select, 'sats')
+    // Change from BTC to sat (the option value is 'sat', not 'sats')
+    await user.selectOptions(select, 'sat')
 
-    // Results should update
-    expect(screen.getByText(/btc/i)).toBeInTheDocument()
+    // Results should update - should show BTC in results (not in select options)
+    // Look for the BTC result value which should be 0.01 (1,000,000 sats = 0.01 BTC)
+    expect(screen.getByText('0.01')).toBeInTheDocument()
   })
 
   it('shows separator for current unit', async () => {
@@ -80,10 +82,8 @@ describe('DenominationCalculator', () => {
     const input = screen.getByLabelText('Amount to convert')
     await user.type(input, 'abc')
 
-    // Should show "Enter an amount" or handle gracefully
-    const results = screen.queryByText(/sats/i)
-    // Either shows placeholder or empty results
-    expect(results === null || screen.getByText('Enter an amount')).toBeTruthy()
+    // Should show "Enter an amount" when input is invalid
+    expect(screen.getByText('Enter an amount')).toBeInTheDocument()
   })
 
   it('handles empty input', () => {
@@ -100,6 +100,6 @@ describe('DenominationCalculator', () => {
 
     expect(options.length).toBeGreaterThan(0)
     expect(options.some(opt => opt.textContent?.includes('BTC'))).toBe(true)
-    expect(options.some(opt => opt.textContent?.includes('sats'))).toBe(true)
+    expect(options.some(opt => opt.textContent?.includes('Satoshi'))).toBe(true)
   })
 })

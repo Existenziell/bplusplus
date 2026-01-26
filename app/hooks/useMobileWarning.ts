@@ -17,7 +17,11 @@ export function useMobileWarning(storageKey: string) {
       return
     }
     const checkMobile = () => {
-      if (window.innerWidth < 768) setShowWarning(true)
+      if (window.innerWidth < 768) {
+        setShowWarning(true)
+      } else {
+        setShowWarning(false)
+      }
     }
     checkMobile()
     window.addEventListener('resize', checkMobile)

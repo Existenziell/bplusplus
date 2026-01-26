@@ -120,9 +120,10 @@ describe('useSearch', () => {
       result.current.setQuery('bitcoin')
     })
 
+    // Wait for debounce to complete (180ms) and loading state to update
     await waitFor(() => {
       expect(result.current.loading).toBe(true)
-    }, { timeout: 300 })
+    }, { timeout: 400 })
   })
 
   it('handles search errors gracefully', async () => {
@@ -137,14 +138,15 @@ describe('useSearch', () => {
       result.current.setQuery('bitcoin')
     })
 
+    // Wait for debounce to complete and search to be called (which will throw)
     await waitFor(
       () => {
-        expect(result.current.results).toEqual([])
+        expect(consoleSpy).toHaveBeenCalledWith('Search error:', expect.any(Error))
       },
       { timeout: 300 }
     )
 
-    expect(consoleSpy).toHaveBeenCalledWith('Search error:', expect.any(Error))
+    expect(result.current.results).toEqual([])
 
     consoleSpy.mockRestore()
   })

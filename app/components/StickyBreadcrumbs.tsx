@@ -32,7 +32,7 @@ export default function StickyBreadcrumbs() {
   return (
     <>
       <div className="sticky top-0 z-50 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm">
-        <div className="container-content py-3">
+        <div className="container-content py-2">
           <div className="flex items-center justify-between">
             <Breadcrumbs isSticky={isSticky} />
             <div className="flex items-center gap-1">

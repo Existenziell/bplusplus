@@ -126,7 +126,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         className="w-full max-w-2xl rounded-lg shadow-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-3 border-b border-gray-200 dark:border-gray-700 px-6">
+        <div className="flex items-center gap-3 px-6">
           <Link
             href="/docs"
             onClick={onClose}

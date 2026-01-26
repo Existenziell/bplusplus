@@ -19,7 +19,7 @@ export default function DownloadMarkdownButton() {
   return (
     <button
       onClick={handleDownload}
-      className="inline-flex items-center gap-1 px-2 py-1 text-xs text-gray-500 dark:text-gray-500 hover:text-btc dark:hover:text-btc transition-colors"
+      className="inline-flex items-center gap-1 px-2 py-1 text-xs text-secondary hover:text-btc dark:hover:text-btc transition-colors"
       title="Download markdown file"
       aria-label="Download markdown file"
     >

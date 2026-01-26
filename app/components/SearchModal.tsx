@@ -123,18 +123,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       aria-label="Search documentation"
     >
       <div
-        className="w-full max-w-xl rounded-lg shadow-xl bg-gray-50 dark:bg-gray-900 overflow-hidden"
+        className="w-full max-w-2xl rounded-lg shadow-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 px-4">
-          <SearchIcon className="flex-shrink-0 text-gray-500" />
+        <div className="flex items-center gap-3 border-b border-gray-200 dark:border-gray-700 px-6">
+          <SearchIcon className="flex-shrink-0 w-6 h-6 text-gray-500 dark:text-gray-400" />
           <input
             ref={inputRef}
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search docs…"
-            className="flex-1 py-3 bg-transparent border-0 outline-none placeholder:text-gray-500 text-gray-900 dark:text-gray-100"
+            className="flex-1 py-5 text-lg bg-transparent border-0 outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400 text-gray-900 dark:text-gray-100"
             autoComplete="off"
             autoCorrect="off"
             aria-label="Search"
@@ -142,10 +142,10 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded text-gray-500 hover:text-gray-700 dark:hover:text-gray-400"
+            className="p-1 rounded text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
             aria-label="Close"
           >
-            <XIcon className="w-5 h-5" />
+            <XIcon className="w-6 h-6" />
           </button>
         </div>
         <div className="max-h-[min(60vh,400px)] overflow-y-auto">

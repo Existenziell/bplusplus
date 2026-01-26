@@ -1,75 +1,63 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
 import ThemeToggle from '@/app/components/ThemeToggle'
-import Breadcrumbs from '@/app/components/Breadcrumbs'
-import DownloadMarkdownButton from '@/app/components/DownloadMarkdownButton'
 import SearchModal from '@/app/components/SearchModal'
 import { SearchIcon } from '@/app/components/Icons'
+import { useStickyScroll } from '@/app/contexts/StickyScrollContext'
+import { useSearchKeyboard } from '@/app/hooks/useSearchKeyboard'
 
 export default function Header() {
-  const pathname = usePathname()
-  const showBreadcrumbs = Boolean(pathname && pathname !== '/')
+  const { isSticky, headerRef } = useStickyScroll()
   const [searchOpen, setSearchOpen] = useState(false)
+  const showSearchInHeader = !isSticky
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault()
-        setSearchOpen((open) => !open)
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+  const toggleSearch = useCallback(() => {
+    setSearchOpen((open) => !open)
   }, [])
+
+  useSearchKeyboard(toggleSearch)
 
   return (
     <>
-      <header className="pb-4 page-bg">
-        <div className="container-content pt-4">
+      <header ref={headerRef} className="page-bg">
+        <div className="container-content py-4">
           <div className="flex justify-between items-center">
-              <Link href="/" className="text-center" aria-label="B++ Home">
-                <Image src="/logo/logo.png" alt="" width={80} height={80} />
-              </Link>
+            <Link href="/" className="flex items-center gap-2" aria-label="B++ Home">
               <Image
                 src="/icons/love.png"
-                alt=""
-                width={80}
-                height={80}
-                className="opacity-40 translate-x-16 dark:invert"
+                alt="B++ Logo"
+                width={100}
+                height={100}
+                className="opacity-80 dark:invert"
               />
+              </Link>
               <div className="flex-shrink-0 flex items-center gap-1">
-                <button
-                  type="button"
-                  onClick={() => setSearchOpen(true)}
-                  className="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
-                  aria-label="Search (⌘K)"
-                  title="Search (⌘K)"
+                <div 
+                  className={`transition-all duration-200 will-change-transform ${
+                    showSearchInHeader 
+                      ? 'opacity-100 translate-x-0' 
+                      : 'opacity-0 translate-x-2 pointer-events-none'
+                  }`}
                 >
-                  <SearchIcon className="w-5 h-5" />
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => setSearchOpen(true)}
+                    className="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
+                    aria-label="Search (⌘K)"
+                    title="Search (⌘K)"
+                  >
+                    <SearchIcon className="w-5 h-5" />
+                  </button>
+                </div>
                 <ThemeToggle />
               </div>
           </div>
         </div>
       </header>
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-      {/* Sticky Breadcrumbs - outside header so it can stick to viewport */}
-      {showBreadcrumbs && (
-        <div className="sticky top-0 z-10 page-bg">
-          <div className="container-content">
-            <div className="flex items-center justify-between">
-              <Breadcrumbs />
-              <div className="hidden md:block">
-                <DownloadMarkdownButton />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   )
 }

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { SearchIcon, XIcon, DocumentIcon, BookOpenIcon, UserIcon } from '@/app/components/Icons'
 import { sections } from '@/app/utils/navigation'
 import { search } from '@/app/utils/searchLogic'
+import { loadSearchIndex, getCachedIndex, isIndexLoading } from '@/app/utils/searchIndexCache'
 import type { IndexEntry } from '@/app/utils/searchLogic'
 
 type SearchResult = { path: string; title: string; section: string; snippet: string }
@@ -35,7 +36,6 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const selectedItemRef = useRef<HTMLLIElement | null>(null)
-  const indexRef = useRef<IndexEntry[] | null>(null)
   const router = useRouter()
 
   const debounced = useDebounce(query, DEBOUNCE_MS)
@@ -48,14 +48,15 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
 
     // Wait for index to load
-    if (!indexRef.current) {
+    const index = getCachedIndex()
+    if (!index) {
       setLoading(true)
       return
     }
 
     setLoading(false)
     try {
-      const searchResults = search(q, indexRef.current)
+      const searchResults = search(q, index)
       setResults(searchResults)
       setSelectedIndex(0)
     } catch (err) {
@@ -66,27 +67,25 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   // Lazy load search index when modal opens for the first time
   useEffect(() => {
-    if (isOpen && !indexRef.current && !indexLoading) {
+    if (isOpen && !getCachedIndex() && !isIndexLoading() && !indexLoading) {
       setIndexLoading(true)
-      fetch('/data/search-index.json')
-        .then((res) => {
-          if (!res.ok) throw new Error('Failed to load search index')
-          return res.json()
-        })
-        .then((data: IndexEntry[]) => {
-          indexRef.current = data
+      loadSearchIndex()
+        .then(() => {
           setIndexLoading(false)
         })
         .catch((err) => {
           console.error('Failed to load search index:', err)
           setIndexLoading(false)
         })
+    } else if (isOpen && getCachedIndex()) {
+      // Index already loaded, ensure loading state is false
+      setIndexLoading(false)
     }
   }, [isOpen, indexLoading])
 
   useEffect(() => {
     // Only run search if index is loaded
-    if (indexRef.current) {
+    if (getCachedIndex()) {
       runSearch(debounced)
     } else if (debounced.length >= MIN_QUERY_LEN) {
       // Show loading state while index is being loaded

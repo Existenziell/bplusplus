@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { navItems, staticNavLinks, footerNavLinks } from '@/app/utils/navigation'
 import { toggleInSet } from '@/app/utils/setUtils'
-import { ChevronDown, ArrowRight } from '@/app/components/Icons'
+import { ChevronDown, ChevronRight } from '@/app/components/Icons'
 
 export default function HorizontalNav() {
   const [isOpen, setIsOpen] = useState(false)
@@ -64,7 +64,7 @@ export default function HorizontalNav() {
                           className="mr-1 p-1 text-gray-500 hover:text-btc transition-colors"
                           aria-label={isExpanded ? 'Collapse section' : 'Expand section'}
                         >
-                          <ArrowRight className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                          <ChevronRight className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
                         </button>
                       )}
                       {!hasChildren && <span className="w-5" />}

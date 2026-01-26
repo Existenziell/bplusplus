@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useDocNavigation } from '@/app/hooks/useDocNavigation'
-import { ArrowLeft, ArrowRight, UpArrow } from '@/app/components/Icons'
+import { ChevronLeft, ChevronRight, UpArrow } from '@/app/components/Icons'
 
 export default function PageNavigation() {
   const pathname = usePathname()
@@ -36,7 +36,7 @@ export default function PageNavigation() {
             href={previousPage.href}
             className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
           >
-            <ArrowLeft />
+            <ChevronLeft />
             <span className="hidden md:inline">{previousPage.title}</span>
           </Link>
         ) : (
@@ -62,7 +62,7 @@ export default function PageNavigation() {
             className="inline-flex items-center gap-2 text-btc hover:underline transition-colors"
           >
             <span className="hidden md:inline">{nextPage.title}</span>
-            <ArrowRight />
+            <ChevronRight />
           </Link>
         ) : (
           <div />

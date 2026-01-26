@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Footer from '@/app/components/Footer'
-import { ArrowRight, HomeIcon } from '@/app/components/Icons'
+import { ChevronRight, HomeIcon } from '@/app/components/Icons'
 
 export const metadata = {
   title: '404 - Block Not Found | B++',
@@ -41,7 +41,7 @@ export default function NotFound() {
               className="btn-secondary"
             >
               Start Learning
-              <ArrowRight />
+              <ChevronRight />
             </Link>
           </div>
         </div>

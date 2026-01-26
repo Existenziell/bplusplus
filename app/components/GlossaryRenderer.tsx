@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import Link from 'next/link'
-import { ArrowRight, ExternalLinkIcon } from '@/app/components/Icons'
+import { ChevronRight, ExternalLinkIcon } from '@/app/components/Icons'
 import relatedArticles from '@/app/docs/glossary/related-articles.json'
 
 interface GlossaryRendererProps {
@@ -239,7 +239,7 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
               >
                 <summary className="glossary-summary cursor-pointer list-none flex items-center gap-2 py-2 px-4 rounded-lg bg-gray-100 dark:bg-gray-800/50 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
                   {/* Chevron icon */}
-                  <ArrowRight className="w-4 h-4 text-secondary transition-transform duration-200 group-open:rotate-90 flex-shrink-0" />
+                  <ChevronRight className="w-4 h-4 text-secondary transition-transform duration-200 group-open:rotate-90 flex-shrink-0" />
                   <h3 className="">
                     {entry.term}
                   </h3>
@@ -254,7 +254,7 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
                         className="text-btc hover:underline inline-flex items-center gap-1"
                       >
                         Related article
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <ChevronRight className="w-3.5 h-3.5" />
                       </Link>
                     </p>
                   )}

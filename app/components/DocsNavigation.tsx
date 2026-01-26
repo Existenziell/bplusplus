@@ -8,7 +8,7 @@ import headingsByPathData from '@/public/data/headings.json'
 
 const headingsByPath = headingsByPathData as HeadingsByPath
 import { toggleInSet } from '@/app/utils/setUtils'
-import { ArrowRight, PanelCollapseIcon, PanelExpandIcon } from '@/app/components/Icons'
+import { ChevronRight, PanelCollapseIcon, PanelExpandIcon } from '@/app/components/Icons'
 
 function matchesPath(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(href + '/')
@@ -136,7 +136,7 @@ export default function DocsNavigation({
               aria-expanded={isDocsExpanded}
               aria-label={isDocsExpanded ? 'Collapse docs tree' : 'Expand docs tree'}
             >
-              <ArrowRight
+              <ChevronRight
                 className={`shrink-0 w-4 h-4 transition-transform ${
                   isDocsExpanded ? 'rotate-90' : ''
                 }`}
@@ -171,7 +171,7 @@ export default function DocsNavigation({
                         className="mr-1 p-1 text-gray-500 hover:text-btc transition-colors"
                         aria-label={expanded ? 'Collapse section' : 'Expand section'}
                       >
-                        <ArrowRight
+                        <ChevronRight
                           className={`w-3 h-3 transition-transform ${expanded ? 'rotate-90' : ''}`}
                         />
                       </button>

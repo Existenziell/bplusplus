@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { sections } from '@/app/utils/navigation'
 import { SearchIcon, DocumentIcon } from '@/app/components/Icons'
 import { search } from '@/app/utils/searchLogic'
+import { loadSearchIndex, getCachedIndex, isIndexLoading } from '@/app/utils/searchIndexCache'
 import type { IndexEntry } from '@/app/utils/searchLogic'
 
 type SearchResult = { path: string; title: string; section: string; snippet: string }
@@ -68,14 +69,13 @@ function useDebounce<T>(value: T, delay: number): T {
   return debounced
 }
 
-export default function DocsAccordionNavigation() {
+export default function DocsSearch() {
   const pathname = usePathname()
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
   const [indexLoading, setIndexLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const indexRef = useRef<IndexEntry[] | null>(null)
 
   const debounced = useDebounce(query, DEBOUNCE_MS)
 
@@ -87,14 +87,15 @@ export default function DocsAccordionNavigation() {
     }
 
     // Wait for index to load
-    if (!indexRef.current) {
+    const index = getCachedIndex()
+    if (!index) {
       setLoading(true)
       return
     }
 
     setLoading(false)
     try {
-      const searchResults = search(q, indexRef.current)
+      const searchResults = search(q, index)
       setResults(searchResults)
     } catch (err) {
       console.error('Search error:', err)
@@ -104,27 +105,25 @@ export default function DocsAccordionNavigation() {
 
   // Lazy load search index when component mounts
   useEffect(() => {
-    if (!indexRef.current && !indexLoading) {
+    if (!getCachedIndex() && !isIndexLoading() && !indexLoading) {
       setIndexLoading(true)
-      fetch('/data/search-index.json')
-        .then((res) => {
-          if (!res.ok) throw new Error('Failed to load search index')
-          return res.json()
-        })
-        .then((data: IndexEntry[]) => {
-          indexRef.current = data
+      loadSearchIndex()
+        .then(() => {
           setIndexLoading(false)
         })
         .catch((err) => {
           console.error('Failed to load search index:', err)
           setIndexLoading(false)
         })
+    } else if (getCachedIndex()) {
+      // Index already loaded, ensure loading state is false
+      setIndexLoading(false)
     }
   }, [indexLoading])
 
   useEffect(() => {
     // Only run search if index is loaded
-    if (indexRef.current) {
+    if (getCachedIndex()) {
       runSearch(debounced)
     } else if (debounced.length >= MIN_QUERY_LEN) {
       // Show loading state while index is being loaded

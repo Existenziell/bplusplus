@@ -19,7 +19,7 @@ function mergeClassName(defaultClass: string, passedClass?: string): string {
  * Default size classes are preserved when additional classes are passed.
  */
 
-export function ArrowRight({ className, ...props }: IconProps) {
+export function ChevronRight({ className, ...props }: IconProps) {
   return (
     <svg
       className={mergeClassName('w-4 h-4', className)}
@@ -33,7 +33,7 @@ export function ArrowRight({ className, ...props }: IconProps) {
   )
 }
 
-export function ArrowLeft({ className, ...props }: IconProps) {
+export function ChevronLeft({ className, ...props }: IconProps) {
   return (
     <svg
       className={mergeClassName('w-4 h-4', className)}

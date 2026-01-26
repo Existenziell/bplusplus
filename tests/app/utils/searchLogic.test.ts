@@ -9,30 +9,50 @@ describe('normalize', () => {
 })
 
 describe('rank', () => {
-  it('returns 3 when normalized title equals query', () => {
-    const rec: IndexEntry = { path: '/a', title: 'Exact Title', section: 's', body: 'x' }
-    expect(rank(rec, 'exacttitle')).toBe(3)
+  it('returns 10 when phrase matches in title', () => {
+    const rec: IndexEntry = { path: '/a', title: 'Exact Title Match', section: 's', body: 'x' }
+    expect(rank(rec, 'Exact Title Match', ['exact', 'title', 'match'])).toBe(10)
   })
 
-  it('returns 3 when a keyword matches query', () => {
+  it('returns 9 when phrase matches in keywords', () => {
     const rec: IndexEntry = {
       path: '/a',
       title: 'Other',
       section: 's',
       body: 'x',
-      keywords: ['exactkey'],
+      keywords: ['exact key phrase'],
     }
-    expect(rank(rec, 'exactkey')).toBe(3)
+    expect(rank(rec, 'exact key phrase', ['exact', 'key', 'phrase'])).toBe(9)
   })
 
-  it('returns 2 when title includes query', () => {
+  it('returns 10 when phrase matches in title', () => {
     const rec: IndexEntry = { path: '/a', title: 'Partial Match Here', section: 's', body: 'x' }
-    expect(rank(rec, 'partial')).toBe(2)
+    expect(rank(rec, 'partial match', ['partial', 'match'])).toBe(10)
   })
 
-  it('returns 1 when no title or keyword match', () => {
+  it('returns 7 when all tokens in title but not as phrase', () => {
+    const rec: IndexEntry = { path: '/a', title: 'Match Partial Here', section: 's', body: 'x' }
+    expect(rank(rec, 'partial match', ['partial', 'match'])).toBe(7)
+  })
+
+  it('returns 5 when tokens in body are close together', () => {
+    const rec: IndexEntry = { path: '/a', title: 'Other', section: 's', body: 'some body text with match' }
+    expect(rank(rec, 'body match', ['body', 'match'])).toBe(5)
+  })
+
+  it('returns 4 when all tokens in body but far apart', () => {
+    const rec: IndexEntry = { 
+      path: '/a', 
+      title: 'Other', 
+      section: 's', 
+      body: 'some body text with many many many many many many many many many many words in between and then match appears later' 
+    }
+    expect(rank(rec, 'body match', ['body', 'match'])).toBe(4)
+  })
+
+  it('returns 0 when no match', () => {
     const rec: IndexEntry = { path: '/a', title: 'Other', section: 's', body: 'x' }
-    expect(rank(rec, 'nomatch')).toBe(1)
+    expect(rank(rec, 'nomatch', ['nomatch'])).toBe(0)
   })
 })
 

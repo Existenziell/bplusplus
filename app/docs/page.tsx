@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { generatePageMetadata } from '@/app/utils/metadata'
-import DocsAccordionNavigation from '@/app/components/DocsAccordionNavigation'
+import DocsSearch from '@/app/components/DocsSearch'
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'Documentation',
@@ -18,7 +18,7 @@ export default function DocsOverviewPage() {
         </p>
       </div>
       
-      <DocsAccordionNavigation />
+      <DocsSearch />
     </div>
   )
 }

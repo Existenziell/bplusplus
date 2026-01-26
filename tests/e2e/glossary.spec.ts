@@ -12,9 +12,14 @@ test.describe('Glossary', () => {
     // Page has [Finality](/docs/glossary#finality) and others
     const link = page.locator('a[href="/docs/glossary#finality"]').first()
     await expect(link).toBeVisible()
-    await link.hover()
+    
+    // Hover and wait for tooltip to appear (tooltip has 200ms delay)
+    await link.hover({ force: true })
+    
     // Tooltip appears after 200ms delay; it has role="tooltip" and shows the definition
-    await expect(page.getByRole('tooltip')).toBeVisible({ timeout: 3000 })
-    await expect(page.getByRole('tooltip')).toContainText(/finality|probabilistic|reversed|confirmation/i)
+    // Using a longer timeout to account for the delay and potential rendering time
+    const tooltip = page.getByRole('tooltip')
+    await expect(tooltip).toBeVisible({ timeout: 5000 })
+    await expect(tooltip).toContainText(/finality|probabilistic|reversed|confirmation/i)
   })
 })

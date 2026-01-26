@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
+import { usePathname } from 'next/navigation'
 import DocsNavigation from '@/app/components/DocsNavigation'
 import MobileNav from '@/app/components/MobileNav'
 import PageNavigation from '@/app/components/PageNavigation'
@@ -24,9 +25,16 @@ export default function DocsLayoutWrapper({
   defaultSidebarCollapsed = false,
 }: DocsLayoutWrapperProps) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(defaultSidebarCollapsed)
+  const pathname = usePathname()
 
   // Automatically collapse sidebar on screens smaller than lg (1024px)
+  // Only run this on /docs routes to avoid conflicting with defaultSidebarCollapsed on other pages
   useEffect(() => {
+    // Only apply auto-collapse/expand behavior on /docs routes
+    if (!pathname.startsWith('/docs')) {
+      return
+    }
+
     const checkWindowSize = () => {
       const isSmallScreen = window.innerWidth < 1024
       setIsSidebarCollapsed(isSmallScreen)
@@ -40,7 +48,7 @@ export default function DocsLayoutWrapper({
 
     // Cleanup
     return () => window.removeEventListener('resize', checkWindowSize)
-  }, [])
+  }, [pathname])
 
   return (
     <main className="flex-1 page-bg flex flex-col">

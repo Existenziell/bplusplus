@@ -12,7 +12,7 @@ const inputStyles =
 
 function FeedbackForm() {
   return (
-    <div className="max-w-xl mx-auto text-center">
+    <div className="max-w-xl mx-auto text-center pb-20">
       <h1 className="heading-page-hero">Feedback</h1>
       <p className="text-gray-800 dark:text-gray-200 leading-7">
         Your feedback would mean a lot to me.

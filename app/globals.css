@@ -466,7 +466,7 @@ main > div > div > h1:first-child {
 }
 
 .glossary-entry {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 20px;
 }
 
 /* Hide default marker/arrow on summary */

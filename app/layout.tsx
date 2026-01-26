@@ -8,7 +8,7 @@ import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Header from '@/app/components/Header'
-import StickyBreadcrumbs from '@/app/components/StickyBreadcrumbs'
+import StickyBar from '@/app/components/StickyBar'
 import Notification from '@/app/components/Notification'
 import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
 import { StickyScrollProvider } from '@/app/contexts/StickyScrollContext'
@@ -102,7 +102,7 @@ export default function RootLayout({
               <div className="flex-shrink-0">
                 <Header />
               </div>
-              <StickyBreadcrumbs />
+              <StickyBar />
               <div className="flex-1 flex flex-col">
                 {children}
               </div>

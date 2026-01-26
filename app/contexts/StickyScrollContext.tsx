@@ -37,8 +37,9 @@ export function StickyScrollProvider({ children }: { children: ReactNode }) {
         const shouldBeSticky = currentScrollY > headerHeight.current
         setIsSticky(shouldBeSticky)
         
-        // Determine scroll direction with small threshold to avoid flickering
-        const scrollThreshold = 5
+        // Determine scroll direction with minimal threshold to avoid flickering
+        // Reduced threshold for more immediate response
+        const scrollThreshold = 1
         const scrollDelta = currentScrollY - lastScrollY.current
         
         if (scrollDelta > scrollThreshold) {
@@ -46,6 +47,7 @@ export function StickyScrollProvider({ children }: { children: ReactNode }) {
         } else if (scrollDelta < -scrollThreshold) {
           setScrollDirection('up')
         }
+        // If scrollDelta is 0 or within threshold, keep previous direction
         
         lastScrollY.current = currentScrollY
       })

@@ -4,19 +4,21 @@ import { useState, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
 import Breadcrumbs from '@/app/components/Breadcrumbs'
 import SearchModal from '@/app/components/SearchModal'
+import ThemeToggle from '@/app/components/ThemeToggle'
 import { SearchIcon } from '@/app/components/Icons'
 import { useStickyScroll } from '@/app/contexts/StickyScrollContext'
 import { useSearchKeyboard } from '@/app/hooks/useSearchKeyboard'
 
-export default function StickyBreadcrumbs() {
+export default function StickyBar() {
   const pathname = usePathname()
   const { isSticky, scrollDirection } = useStickyScroll()
   const [searchOpen, setSearchOpen] = useState(false)
   const showBreadcrumbs = Boolean(pathname && pathname !== '/')
   
-  // Show search in sticky when sticky is active and user is scrolling down
+  // Show search in sticky when sticky is active and not scrolling up
   // Hide it when scrolling up (search returns to header)
-  const showSearchInSticky = isSticky && scrollDirection === 'down'
+  // This makes the icons appear immediately when sticky becomes active
+  const showSearchInSticky = isSticky && scrollDirection !== 'up'
 
   const toggleSearch = useCallback(() => {
     setSearchOpen((open) => !open)
@@ -51,6 +53,15 @@ export default function StickyBreadcrumbs() {
                 >
                   <SearchIcon className="w-5 h-5" />
                 </button>
+              </div>
+              <div 
+                className={`hidden md:block transition-all duration-200 will-change-transform ${
+                  showSearchInSticky 
+                    ? 'opacity-100 translate-x-0' 
+                    : 'opacity-0 translate-x-2 pointer-events-none'
+                }`}
+              >
+                <ThemeToggle />
               </div>
             </div>
           </div>

@@ -94,12 +94,12 @@ export default function LiveStats() {
     {
       label: 'Mempool Txs',
       value: mempoolInfo?.size ? formatNumber(mempoolInfo.size) : null,
-      href: '/docs/mining/mempool',
+      href: '/block-visual',
     },
     {
       label: 'Mempool Size',
       value: mempoolInfo?.bytes ? formatBytes(mempoolInfo.bytes) : null,
-      href: '/docs/glossary#block-size',
+      href: '/docs/mining/mempool',
     },
     {
       label: 'Hex',

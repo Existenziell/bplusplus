@@ -1,0 +1,36 @@
+import type { Metadata } from 'next'
+import BlockVisualization from '@/app/components/BlockVisualization'
+import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
+import { SITE_URL } from '@/app/utils/metadata'
+
+export const metadata: Metadata = {
+  title: 'Block Visual | B++',
+  description: 'Live Bitcoin blockchain visualization showing the latest block with transaction treemap. Explore transactions, fee rates, and block data in real-time.',
+  openGraph: {
+    title: 'Block Visual | B++',
+    description: 'Live Bitcoin blockchain visualization showing the latest block with transaction treemap.',
+    url: `${SITE_URL}/block-visual`,
+  },
+}
+
+export default function MempoolPage() {
+  return (
+    <DocsLayoutWrapper defaultSidebarCollapsed={true}>
+      <div className="mb-8">
+        <h1 className="heading-page mb-4">Block Visualization</h1>
+        <p className="text-secondary max-w-3xl">
+          Explore the latest Bitcoin block with an interactive transaction treemap. 
+          Each rectangle represents a transaction, sized by vBytes, value, or fee. 
+          Hover over transactions to see detailed information. Click on any transaction 
+          to view its inputs, outputs, and flow visualization.
+        </p>
+        <p className="text-secondary text-sm mt-2 max-w-3xl">
+          Observing <span className="font-semibold text-btc">Bitcoin mainnet</span> via PublicNode. 
+          Blocks update automatically when new blocks are found (~10 minutes).
+        </p>
+      </div>
+
+      <BlockVisualization />
+    </DocsLayoutWrapper>
+  )
+}

@@ -221,6 +221,7 @@ export const staticNavLinks: { href: string; title: string }[] = [
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/terminal', title: 'CLI Terminal' },
   { href: '/stack-lab', title: 'Stack Lab' },
+  { href: '/block-visual', title: 'Block Visual' },
 ]
 
 export const footerNavLinks: { href: string; title: string }[] = [
@@ -299,6 +300,7 @@ const docRouteLabels = Object.fromEntries(
 export const routeLabels: Record<string, string> = {
   terminal: 'CLI Terminal',
   'stack-lab': 'Stack Lab',
+  'block-visual': 'Block Visual',
   whitepaper: 'Whitepaper',
   author: 'About B++',
   feedback: 'Feedback',

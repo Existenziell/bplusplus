@@ -566,7 +566,9 @@ Common in DeFi on other chains, less relevant for Bitcoin's simpler transactions
 
 ## Mempool Tools and Resources
 
-> **Query the mempool yourself!** Try `getmempoolinfo` and `getrawmempool` in the [Bitcoin CLI Terminal](/terminal). Real mainnet data, no setup required.
+> **Query the mempool yourself!** Try `getmempoolinfo` and `getrawmempool` in the [Bitcoin CLI Terminal](/terminal).
+
+> **Explore visually!** See transactions flowing into blocks with our interactive [Block Visual](/block-visual).
 
 ### Mempool Explorers
 

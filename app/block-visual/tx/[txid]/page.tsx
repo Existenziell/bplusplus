@@ -29,15 +29,15 @@ export default async function TransactionPage({ params }: PageProps) {
   }
 
   return (
-    <>
-      <main className="flex-1 page-bg">
+    <main className="flex-1 page-bg flex flex-col">
+      <div className="flex-grow">
         <div className="container-content py-8 md:py-12">
           <div className="max-w-7xl mx-auto">
             <TransactionDetail txid={txid} />
           </div>
         </div>
-      </main>
+      </div>
       <Footer />
-    </>
+    </main>
   )
 }

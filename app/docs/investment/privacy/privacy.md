@@ -1,4 +1,4 @@
-# Privacy for Bitcoin Investors
+# Privacy
 
 Bitcoin transactions are **pseudonymous, not anonymous**. While Bitcoin addresses don't directly reveal your identity, sophisticated blockchain analysis can link transactions and potentially identify you. This guide covers practical privacy considerations for Bitcoin investors, helping you understand the risks and tools available to protect your financial privacy.
 

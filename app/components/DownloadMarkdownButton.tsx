@@ -4,7 +4,7 @@ import { useDocNavigation } from '@/app/hooks/useDocNavigation'
 import { DownloadMarkdownIcon } from '@/app/components/Icons'
 
 export default function DownloadMarkdownButton() {
-  const { pathname, isDownloadable } = useDocNavigation()
+  const { pathname, isDownloadable, isMainSectionPage } = useDocNavigation()
 
   // Don't show button if current page doesn't have downloadable content
   if (!isDownloadable) {
@@ -12,7 +12,17 @@ export default function DownloadMarkdownButton() {
   }
 
   const handleDownload = () => {
-    const downloadUrl = `/api/download-md?path=${encodeURIComponent(pathname)}`
+    let downloadUrl = `/api/download-md?path=${encodeURIComponent(pathname)}`
+    
+    // If this is a top-level section overview page, prepend section name to filename
+    if (isMainSectionPage) {
+      // Extract section name from pathname (e.g., "history" from "/docs/history")
+      const pathSegments = pathname.split('/').filter(Boolean)
+      const sectionName = pathSegments[pathSegments.length - 1] // Get last segment after "docs"
+      const filename = `${sectionName}-overview.md`
+      downloadUrl += `&filename=${encodeURIComponent(filename)}`
+    }
+    
     window.location.href = downloadUrl
   }
 

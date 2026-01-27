@@ -167,7 +167,7 @@
     "path": "/docs/history/people#andreas-m-antonopoulos",
     "title": "Andreas M. Antonopoulos",
     "section": "history",
-    "body": "Contribution: Author, educator, Bitcoin evangelist Andreas M. Antonopoulos is a Greek-British author, speaker, and educator who has become one of the most influential voices in Bitcoin and blockchain education. He is best known for his book \"Mastering Bitcoin\" (2014), a comprehensive technical guide that has become the standard reference for Bitcoin developers. His other works include: \"The "
+    "body": "Contribution: Author, educator, Bitcoin evangelist Andreas M. Antonopoulos is a Greek-British author, speaker, and educator who has become one of the most influential voices in Bitcoin and blockchain education. He is best known for his book \"Mastering Bitcoin\" (2014), a detailed technical guide that has become the standard reference for Bitcoin developers. His other works include: \"The Internet "
   },
   {
     "path": "/docs/history/people#roger-ver",
@@ -275,7 +275,7 @@
     "path": "/docs/history/forks",
     "title": "Forks",
     "section": "history",
-    "body": "Forks History Bitcoin has undergone several protocol upgrades through both soft forks and hard forks. This document provides a comprehensive table of all major forks in Bitcoin's history. Understanding Forks The fundamental difference between soft forks and hard forks comes down to one thing: are the consensus rules being tightened or loosened? | | Soft Fork | Hard Fork | |---|-----------|-----------| | Consensus rules | Tightened (more restrictive) | Loosened (more permissive) | | Old nodes | "
+    "body": "Forks History Bitcoin has undergone several protocol upgrades through both soft forks and hard forks. This document provides a table of all major forks in Bitcoin's history. Understanding Forks The fundamental difference between soft forks and hard forks comes down to one thing: are the consensus rules being tightened or loosened? | | Soft Fork | Hard Fork | |---|-----------|-----------| | Consensus rules | Tightened (more restrictive) | Loosened (more permissive) | | Old nodes | Accept new "
   },
   {
     "path": "/docs/history/bips",
@@ -340,7 +340,7 @@
     "path": "/docs/bitcoin/op-codes",
     "title": "OP Codes",
     "section": "bitcoin",
-    "body": "OP Codes The instruction set for Bitcoin. Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive reference of Bitcoin OP codes with explanations and code examples. Try these opcodes in Stack Lab. OP Code Categories | Category | Description | Examples | |----------|-------------|----------| | Stack Operations | Manipulate the stack | OP_DUP, OP_DROP, OP_SWAP | | Arithmetic | ",
+    "body": "OP Codes The instruction set for Bitcoin. Bitcoin Script uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a complete reference of Bitcoin OP codes with explanations and code examples. Try these opcodes in Stack Lab. OP Code Categories | Category | Description | Examples | |----------|-------------|----------| | Stack Operations | Manipulate the stack | OP_DUP, OP_DROP, OP_SWAP | | Arithmetic | Mathematical ",
     "keywords": [
       "opcode",
       "op codes",
@@ -890,13 +890,7 @@
     "path": "/docs/investment",
     "title": "Bitcoin as Investment",
     "section": "investment",
-    "body": "Bitcoin as Investment Bitcoin represents a unique investment opportunity that combines technological innovation with monetary properties never before seen in human history. This section explores Bitcoin from an investment perspective, covering strategies, security, risk management, and the long-term outlook. Whether you're considering your first Bitcoin purchase or looking to deepen your understanding of Bitcoin as an asset, these guides will help you make informed decisions. Topics Covered Why "
-  },
-  {
-    "path": "/docs/investment/investment",
-    "title": "Why Consider Bitcoin?",
-    "section": "investment",
-    "body": "Why Consider Bitcoin? Understanding Bitcoin as an investment requires recognizing both its potential and its risks. Bitcoin exhibits several characteristics that make it attractive as an investment: Scarcity: With a fixed supply cap, Bitcoin cannot be inflated or diluted. The issuance schedule is predictable and decreases over time through halvings, creating a deflationary monetary policy. Portability: Bitcoin can be transferred globally, 24/7, without intermediaries. This makes it valuable for "
+    "body": "Bitcoin as Investment Bitcoin represents a unique investment opportunity that combines technological innovation with monetary properties never before seen in human history. Whether you're considering your first Bitcoin purchase or looking to deepen your understanding of Bitcoin as an asset, these guides will help you make informed decisions. Why Consider Bitcoin? Understanding Bitcoin as an investment requires recognizing both its potential and its risks. Bitcoin exhibits several "
   },
   {
     "path": "/docs/investment/risk-management",
@@ -905,34 +899,28 @@
     "body": "Risk Management Investing in Bitcoin carries significant risks that every investor should understand. This guide helps you identify, assess, and manage these risks appropriately. Key Risks Volatility Risk What it is: Bitcoin's price can experience dramatic swings. Short-term volatility can be 20-50% or more in a single day. Why it happens: Bitcoin is a relatively new asset class with a smaller market cap than traditional assets. Lower liquidity and market sentiment can cause significant price "
   },
   {
+    "path": "/docs/investment-strategy",
+    "title": "Investment Strategy",
+    "section": "investment",
+    "body": "Investment Strategy Investment strategies for Bitcoin focus on disciplined approaches that help you build and maintain a position over time, regardless of short-term market volatility. This guide covers proven strategies used by long-term Bitcoin investors. Dollar Cost Averaging Dollar Cost Averaging (DCA) is an investment strategy where you invest a fixed amount of money at regular intervals, regardless of the asset's price. This approach helps reduce the impact of volatility and removes the "
+  },
+  {
+    "path": "/docs/investment/tools",
+    "title": "Tools & Resources",
+    "section": "investment",
+    "body": "Tools & Resources This guide provides an overview of essential tools and resources for Bitcoin investors, from exchanges and wallets to blockchain explorers and educational materials. The focus is on reputable, well-established tools that can help you invest, manage, and learn about Bitcoin. Exchanges Exchanges are platforms where you can buy, sell, and trade Bitcoin. Understanding the different types of exchanges and their trade-offs is essential for making informed decisions. Centralized "
+  },
+  {
     "path": "/docs/investment/wallet-security",
     "title": "Wallet Security & Self-Custody",
     "section": "investment",
     "body": "Wallet Security & Self-Custody Not your keys, not your coins. This fundamental principle of Bitcoin ownership means that if you don't control your private keys, you don't truly own your Bitcoin. This guide explains how to securely store your Bitcoin using cold wallets, hardware wallets, and air-gapped systems. Why Self-Custody Matters When you store Bitcoin on an exchange or custodial service, you're trusting a third party with your funds. While this may be convenient, it comes with significant "
   },
   {
-    "path": "/docs/investment/tools",
-    "title": "Tools & Resources for Bitcoin Investors",
-    "section": "investment",
-    "body": "Tools & Resources for Bitcoin Investors This guide provides an overview of essential tools and resources for Bitcoin investors, from exchanges and wallets to blockchain explorers and educational materials. The focus is on reputable, well-established tools that can help you invest, manage, and learn about Bitcoin. Exchanges Exchanges are platforms where you can buy, sell, and trade Bitcoin. Understanding the different types of exchanges and their trade-offs is essential for making informed "
-  },
-  {
     "path": "/docs/investment/privacy",
-    "title": "Privacy for Bitcoin Investors",
+    "title": "Privacy",
     "section": "investment",
-    "body": "Privacy for Bitcoin Investors Bitcoin transactions are pseudonymous, not anonymous. While Bitcoin addresses don't directly reveal your identity, sophisticated blockchain analysis can link transactions and potentially identify you. This guide covers practical privacy considerations for Bitcoin investors, helping you understand the risks and tools available to protect your financial privacy. Understanding Bitcoin Privacy Pseudonymity vs Anonymity Pseudonymity means your transactions are linked to "
-  },
-  {
-    "path": "/docs/investment/dollar-cost-averaging",
-    "title": "Dollar Cost Averaging",
-    "section": "investment",
-    "body": "Dollar Cost Averaging (DCA) Dollar Cost Averaging (DCA) is an investment strategy where you invest a fixed amount of money at regular intervals, regardless of the asset's price. This approach helps reduce the impact of volatility and removes the need to time the market. Instead of investing a large lump sum at once, DCA involves: Regular intervals: Weekly, bi-weekly, or monthly purchases Fixed amounts: The same dollar amount each time Automatic execution: Reduces emotional decision-making "
-  },
-  {
-    "path": "/docs/investment/long-term-holding",
-    "title": "Long-term Holding Strategies",
-    "section": "investment",
-    "body": "Long-term Holding Strategies The HODLing philosophy (holding Bitcoin for the long term regardless of short-term price volatility) has become a cornerstone of Bitcoin investment strategy. This guide explores why long-term holding aligns with Bitcoin's monetary properties and how to maintain psychological resilience through market cycles. What is HODLing? HODL (originally a typo of \"hold\" that became a meme) refers to the strategy of buying and holding Bitcoin for the long term, regardless of "
+    "body": "Privacy Bitcoin transactions are pseudonymous, not anonymous. While Bitcoin addresses don't directly reveal your identity, sophisticated blockchain analysis can link transactions and potentially identify you. This guide covers practical privacy considerations for Bitcoin investors, helping you understand the risks and tools available to protect your financial privacy. Understanding Bitcoin Privacy Pseudonymity vs Anonymity Pseudonymity means your transactions are linked to addresses, not your "
   },
   {
     "path": "/docs/investment/market-cycles",

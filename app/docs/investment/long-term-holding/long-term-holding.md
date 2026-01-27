@@ -73,7 +73,7 @@ Since Bitcoin's creation in 2009, long-term holders have been consistently rewar
 - Historically strong returns
 
 **Strategy:**
-- Use [Dollar Cost Averaging](/docs/investment/dollar-cost-averaging) to build position
+- Use [Dollar Cost Averaging](/docs/investment-strategy) to build position
 - Hold through bear markets
 - Take profits if needed, but maintain core position
 - Focus on Bitcoin's fundamentals, not price
@@ -201,68 +201,9 @@ HODLing is psychologically difficult because:
 
 ---
 
-## Practical HODLing Strategies
-
-### Buy and Hold
-
-**Strategy:** Buy Bitcoin and hold it indefinitely. Don't sell unless you need the money.
-
-**Best for:** Maximum conviction, long-term wealth preservation, simplicity.
-
-### Dollar Cost Averaging + HODL
-
-**Strategy:** Use [Dollar Cost Averaging](/docs/investment/dollar-cost-averaging) to build your position, then hold everything you've accumulated.
-
-**Best for:** Building a position over time, reducing timing risk, maintaining discipline.
-
-### Core + Satellite
-
-**Strategy:** Hold a core position long-term (HODL), but allow yourself to trade a smaller "satellite" portion if you want to be more active.
-
-**Best for:** Those who want to HODL but also want some trading flexibility.
-
-### Gradual Profit-Taking
-
-**Strategy:** Hold long-term, but take small profits at predetermined milestones (e.g., sell 10% at 2x, 20% at 5x).
-
-**Best for:** Those who want to lock in some gains while maintaining a core position.
-
----
-
-## When to Consider Selling
-
-While HODLing is generally recommended, there are legitimate reasons to sell:
-
-**You need the money:** If you need funds for essential expenses, selling is appropriate.
-
-**Your thesis has changed:** If you no longer believe in Bitcoin's long-term value proposition, selling makes sense.
-
-**Risk management:** If your Bitcoin allocation has grown too large relative to your risk tolerance, taking profits is reasonable.
-
-**Life changes:** Major life events (retirement, buying a house, etc.) may require selling some Bitcoin.
-
-**Important:** Have a plan for when you might sell. Don't make emotional decisions during market volatility.
-
----
-
-## Common HODLing Mistakes
-
-**Panic selling during downturns:** This is the opposite of HODLing. If you're going to HODL, commit to it through bear markets.
-
-**FOMO buying during euphoria:** Buying more when prices are surging often leads to buying at the top. Stick to your plan.
-
-**Checking prices constantly:** This increases stress and emotional volatility. Check less frequently.
-
-**Not having a plan:** HODLing without a clear plan or time horizon makes it harder to stick with the strategy.
-
-**Ignoring security:** HODLing means you'll hold Bitcoin for a long time. Proper [wallet security](/docs/investment/wallet-security) is essential.
-
----
-
 ## Related Topics
 
-- [Why Consider Bitcoin?](/docs/investment/investment) - Understanding Bitcoin's investment thesis
-- [Dollar Cost Averaging](/docs/investment/dollar-cost-averaging) - Building a position over time
+- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies
 - [Understanding Market Cycles](/docs/investment/market-cycles) - Navigating bull and bear markets
 - [Wallet Security & Self-Custody](/docs/investment/wallet-security) - Securing your long-term holdings
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - Why Bitcoin's properties reward holding

@@ -250,10 +250,9 @@ While self-custody is generally recommended, custodial services may make sense f
 
 ## Related Topics
 
-- [Why Consider Bitcoin?](/docs/investment/investment) - Understanding Bitcoin's investment thesis
 - [Risk Management](/docs/investment/risk-management) - Understanding investment risks, including custody risk
-- [Privacy for Bitcoin Investors](/docs/investment/privacy) - Privacy considerations for protecting your financial information
-- [Tools & Resources for Bitcoin Investors](/docs/investment/tools) - Wallet tools and other helpful resources
+- [Privacy](/docs/investment/privacy) - Privacy considerations for protecting your financial information
+- [Tools & Resources](/docs/investment/tools) - Wallet tools and other helpful resources
 - [Wallet Development](/docs/wallets) - Technical wallet development (for developers)
 - [Key Management](/docs/bitcoin-development/keys) - Technical key management (for developers)
 

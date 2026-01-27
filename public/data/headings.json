@@ -3863,19 +3863,9 @@
   ],
   "/docs/investment": [
     {
-      "title": "Topics Covered",
-      "slug": "topics-covered"
+      "title": "Why Consider Bitcoin?",
+      "slug": "why-consider-bitcoin"
     },
-    {
-      "title": "Key Principles",
-      "slug": "key-principles"
-    },
-    {
-      "title": "Related Topics",
-      "slug": "related-topics"
-    }
-  ],
-  "/docs/investment/investment": [
     {
       "title": "Invest Only What You Understand",
       "slug": "invest-only-what-you-understand"
@@ -3905,6 +3895,58 @@
     {
       "title": "Common Risk Management Mistakes",
       "slug": "common-risk-management-mistakes"
+    },
+    {
+      "title": "Related Topics",
+      "slug": "related-topics"
+    }
+  ],
+  "/docs/investment-strategy": [
+    {
+      "title": "Dollar Cost Averaging",
+      "slug": "dollar-cost-averaging"
+    },
+    {
+      "title": "HODLing",
+      "slug": "hodling"
+    },
+    {
+      "title": "Combining DCA and HODLing",
+      "slug": "combining-dca-and-hodling"
+    },
+    {
+      "title": "Related Topics",
+      "slug": "related-topics"
+    }
+  ],
+  "/docs/investment/tools": [
+    {
+      "title": "Exchanges",
+      "slug": "exchanges"
+    },
+    {
+      "title": "Wallet Tools",
+      "slug": "wallet-tools"
+    },
+    {
+      "title": "Blockchain Explorers",
+      "slug": "blockchain-explorers"
+    },
+    {
+      "title": "Price Tracking & Analytics",
+      "slug": "price-tracking-analytics"
+    },
+    {
+      "title": "Educational Resources",
+      "slug": "educational-resources"
+    },
+    {
+      "title": "Other Helpful Tools",
+      "slug": "other-helpful-tools"
+    },
+    {
+      "title": "Tool Selection Criteria",
+      "slug": "tool-selection-criteria"
     },
     {
       "title": "Related Topics",
@@ -3969,40 +4011,6 @@
       "slug": "related-topics"
     }
   ],
-  "/docs/investment/tools": [
-    {
-      "title": "Exchanges",
-      "slug": "exchanges"
-    },
-    {
-      "title": "Wallet Tools",
-      "slug": "wallet-tools"
-    },
-    {
-      "title": "Blockchain Explorers",
-      "slug": "blockchain-explorers"
-    },
-    {
-      "title": "Price Tracking & Analytics",
-      "slug": "price-tracking-analytics"
-    },
-    {
-      "title": "Educational Resources",
-      "slug": "educational-resources"
-    },
-    {
-      "title": "Other Helpful Tools",
-      "slug": "other-helpful-tools"
-    },
-    {
-      "title": "Tool Selection Criteria",
-      "slug": "tool-selection-criteria"
-    },
-    {
-      "title": "Related Topics",
-      "slug": "related-topics"
-    }
-  ],
   "/docs/investment/privacy": [
     {
       "title": "Understanding Bitcoin Privacy",
@@ -4027,78 +4035,6 @@
     {
       "title": "Privacy Best Practices for Investors",
       "slug": "privacy-best-practices-for-investors"
-    },
-    {
-      "title": "Related Topics",
-      "slug": "related-topics"
-    }
-  ],
-  "/docs/investment/dollar-cost-averaging": [
-    {
-      "title": "Benefits of DCA for Bitcoin",
-      "slug": "benefits-of-dca-for-bitcoin"
-    },
-    {
-      "title": "How DCA Works",
-      "slug": "how-dca-works"
-    },
-    {
-      "title": "DCA vs Lump Sum",
-      "slug": "dca-vs-lump-sum"
-    },
-    {
-      "title": "Implementing DCA",
-      "slug": "implementing-dca"
-    },
-    {
-      "title": "Common DCA Mistakes",
-      "slug": "common-dca-mistakes"
-    },
-    {
-      "title": "Combining DCA with Other Strategies",
-      "slug": "combining-dca-with-other-strategies"
-    },
-    {
-      "title": "Related Topics",
-      "slug": "related-topics"
-    }
-  ],
-  "/docs/investment/long-term-holding": [
-    {
-      "title": "What is HODLing?",
-      "slug": "what-is-hodling"
-    },
-    {
-      "title": "Why Long-term Holding Makes Sense",
-      "slug": "why-long-term-holding-makes-sense"
-    },
-    {
-      "title": "Time Horizons",
-      "slug": "time-horizons"
-    },
-    {
-      "title": "The HODLing Philosophy",
-      "slug": "the-hodling-philosophy"
-    },
-    {
-      "title": "Psychological Resilience",
-      "slug": "psychological-resilience"
-    },
-    {
-      "title": "HODLing vs Trading",
-      "slug": "hodling-vs-trading"
-    },
-    {
-      "title": "Practical HODLing Strategies",
-      "slug": "practical-hodling-strategies"
-    },
-    {
-      "title": "When to Consider Selling",
-      "slug": "when-to-consider-selling"
-    },
-    {
-      "title": "Common HODLing Mistakes",
-      "slug": "common-hodling-mistakes"
     },
     {
       "title": "Related Topics",

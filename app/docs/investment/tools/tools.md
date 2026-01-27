@@ -1,4 +1,4 @@
-# Tools & Resources for Bitcoin Investors
+# Tools & Resources
 
 This guide provides an overview of essential tools and resources for Bitcoin investors, from exchanges and wallets to blockchain explorers and educational materials. The focus is on reputable, well-established tools that can help you invest, manage, and learn about Bitcoin.
 
@@ -455,10 +455,9 @@ Wallets are essential for storing and managing your Bitcoin. For detailed inform
 
 ## Related Topics
 
-- [Why Consider Bitcoin?](/docs/investment/investment) - Understanding Bitcoin's investment thesis
 - [Wallet Security & Self-Custody](/docs/investment/wallet-security) - Securing your Bitcoin holdings
-- [Privacy for Investors](/docs/investment/privacy) - Privacy considerations and tools
-- [Dollar Cost Averaging](/docs/investment/dollar-cost-averaging) - Investment strategy using DCA tools
+- [Privacy](/docs/investment/privacy) - Privacy considerations and tools
+- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies
 - [Risk Management](/docs/investment/risk-management) - Understanding and managing investment risks
 
 ---

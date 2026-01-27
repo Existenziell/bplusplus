@@ -43,20 +43,24 @@ Halvings are programmed into Bitcoin's code and will continue until the block su
 
 ### Historical Halvings
 
-**2012 Halving:** Block reward reduced from 50 BTC to 25 BTC  
-**2016 Halving:** Block reward reduced from 25 BTC to 12.5 BTC  
-**2020 Halving:** Block reward reduced from 12.5 BTC to 6.25 BTC  
-**2024 Halving:** Block reward reduced from 6.25 BTC to 3.125 BTC
+| Year | Block Reward Before | Block Reward After | Block Height |
+|------|-------------------|-------------------|--------------|
+| 2012 | 50 BTC | 25 BTC | 210,000 |
+| 2016 | 25 BTC | 12.5 BTC | 420,000 |
+| 2020 | 12.5 BTC | 6.25 BTC | 630,000 |
+| 2024 | 6.25 BTC | 3.125 BTC | 840,000 |
 
 ### The Four-Year Cycle
 
 Bitcoin tends to follow a four-year cycle aligned with halvings:
 
-1. **Halving Event:** Supply growth rate is cut in half
-2. **Bull Market (12-18 months):** Price appreciation as reduced supply meets growing demand
-3. **Peak:** Price reaches new all-time high
-4. **Bear Market (12-18 months):** Price correction and consolidation
-5. **Accumulation Phase:** Price stabilizes, new cycle begins
+| Phase | Duration | Description |
+|-------|----------|------------|
+| **Halving Event** | Day 0 | Supply growth rate is cut in half |
+| **Bull Market** | 12-18 months | Price appreciation as reduced supply meets growing demand |
+| **Peak** | Variable | Price reaches new all-time high |
+| **Bear Market** | 12-18 months | Price correction and consolidation |
+| **Accumulation Phase** | Variable | Price stabilizes, new cycle begins |
 
 **Important:** This is a general pattern, not a guarantee. Each cycle is different, and past performance doesn't guarantee future results.
 
@@ -80,18 +84,20 @@ Bitcoin tends to follow a four-year cycle aligned with halvings:
 
 Bitcoin markets follow a predictable emotional cycle:
 
-1. **Optimism:** Early price appreciation creates optimism
-2. **Excitement:** Rapid price gains create excitement and FOMO
-3. **Euphoria:** Prices peak, media attention peaks, everyone wants Bitcoin
-4. **Anxiety:** Prices start to decline, early euphoria turns to anxiety
-5. **Denial:** Investors deny the decline, thinking it's temporary
-6. **Fear:** Prices continue falling, fear sets in
-7. **Desperation:** Investors panic, looking for someone to blame
-8. **Capitulation:** Investors give up and sell at a loss
-9. **Depression:** Prices bottom, media turns negative, few want Bitcoin
-10. **Hope:** Prices stabilize, early signs of recovery
-11. **Relief:** Prices begin to recover, relief sets in
-12. **Optimism:** Cycle begins again
+| Phase | Emotion | Market Condition | Investor Behavior |
+|-------|---------|------------------|-------------------|
+| 1 | **Optimism** | Early price appreciation | Early buyers enter |
+| 2 | **Excitement** | Rapid price gains | FOMO begins |
+| 3 | **Euphoria** | Prices peak, media attention peaks | Everyone wants Bitcoin |
+| 4 | **Anxiety** | Prices start to decline | Early euphoria turns to anxiety |
+| 5 | **Denial** | Continued decline | Investors deny the decline |
+| 6 | **Fear** | Prices continue falling | Fear sets in |
+| 7 | **Desperation** | Significant losses | Investors panic |
+| 8 | **Capitulation** | Bottom approaches | Investors give up and sell |
+| 9 | **Depression** | Prices bottom | Media turns negative |
+| 10 | **Hope** | Prices stabilize | Early signs of recovery |
+| 11 | **Relief** | Prices begin to recover | Relief sets in |
+| 12 | **Optimism** | Recovery continues | Cycle begins again |
 
 **Understanding this cycle helps you:**
 - Recognize when you're in euphoria (be cautious)
@@ -101,15 +107,13 @@ Bitcoin markets follow a predictable emotional cycle:
 
 ### Common Psychological Patterns
 
-**FOMO (Fear of Missing Out):** Buying when prices are surging because you're afraid of missing gains. Often leads to buying at the top.
-
-**FUD (Fear, Uncertainty, Doubt):** Selling when prices are dropping because of fear. Often leads to selling at the bottom.
-
-**Anchoring:** Fixating on a previous price (like an all-time high) and making decisions based on that anchor rather than current fundamentals.
-
-**Recency bias:** Overweighting recent price movements and assuming they'll continue indefinitely.
-
-**Confirmation bias:** Seeking information that confirms your existing beliefs while ignoring contradictory information.
+| Pattern | Description | Risk |
+|---------|-------------|------|
+| **FOMO** (Fear of Missing Out) | Buying when prices are surging because you're afraid of missing gains | Often leads to buying at the top |
+| **FUD** (Fear, Uncertainty, Doubt) | Selling when prices are dropping because of fear | Often leads to selling at the bottom |
+| **Anchoring** | Fixating on a previous price (like an all-time high) and making decisions based on that anchor | Decisions based on past, not current fundamentals |
+| **Recency bias** | Overweighting recent price movements and assuming they'll continue | Assumes current trend will continue indefinitely |
+| **Confirmation bias** | Seeking information that confirms your existing beliefs while ignoring contradictory information | Prevents objective analysis |
 
 **Avoid these patterns:** Stick to your plan, focus on fundamentals, and maintain a long-term perspective.
 
@@ -119,29 +123,24 @@ Bitcoin markets follow a predictable emotional cycle:
 
 ### Characteristics
 
-**Rising prices:** Sustained upward price movement over months or years.
-
-**High volume:** Increased trading volume as more participants enter the market.
-
-**Media attention:** Positive media coverage and mainstream adoption stories.
-
-**FOMO:** Fear of missing out drives new buyers into the market.
-
-**Euphoria:** Extreme optimism, "this time is different" narratives.
-
-**New all-time highs:** Price breaks previous records.
+| Indicator | Description |
+|-----------|-------------|
+| **Rising prices** | Sustained upward price movement over months or years |
+| **High volume** | Increased trading volume as more participants enter |
+| **Media attention** | Positive media coverage and mainstream adoption stories |
+| **FOMO** | Fear of missing out drives new buyers into the market |
+| **Euphoria** | Extreme optimism, "this time is different" narratives |
+| **New all-time highs** | Price breaks previous records |
 
 ### Warning Signs
 
-**Extreme euphoria:** When everyone is talking about Bitcoin and predicting continued gains, be cautious.
-
-**Rapid price appreciation:** Unsustainable price growth often precedes corrections.
-
-**Media frenzy:** When mainstream media is overwhelmingly positive, the top may be near.
-
-**New investor influx:** When many new, inexperienced investors enter, the market may be overheated.
-
-**Leverage and speculation:** High levels of leverage and speculation often precede corrections.
+| Warning Sign | What It Means | Action |
+|--------------|---------------|--------|
+| **Extreme euphoria** | Everyone is talking about Bitcoin and predicting continued gains | Be cautious |
+| **Rapid price appreciation** | Unsustainable price growth | Often precedes corrections |
+| **Media frenzy** | Mainstream media is overwhelmingly positive | The top may be near |
+| **New investor influx** | Many new, inexperienced investors enter | Market may be overheated |
+| **Leverage and speculation** | High levels of leverage and speculation | Often precedes corrections |
 
 ### How to Navigate Bull Markets
 
@@ -149,7 +148,7 @@ Bitcoin markets follow a predictable emotional cycle:
 
 **Take profits if needed:** If your allocation has grown too large, consider taking some profits.
 
-**Avoid FOMO:** Don't buy more just because prices are rising. Stick to your [Dollar Cost Averaging](/docs/investment/dollar-cost-averaging) plan.
+**Avoid FOMO:** Don't buy more just because prices are rising. Stick to your [Dollar Cost Averaging](/docs/investment-strategy) plan.
 
 **Maintain perspective:** Remember that bull markets don't last forever. Corrections are normal.
 
@@ -161,29 +160,24 @@ Bitcoin markets follow a predictable emotional cycle:
 
 ### Characteristics
 
-**Falling prices:** Sustained downward price movement over months or years.
-
-**Low volume:** Reduced trading volume as participants exit or wait.
-
-**Negative media:** Negative media coverage and "Bitcoin is dead" narratives.
-
-**FUD:** Fear, uncertainty, and doubt dominate market sentiment.
-
-**Capitulation:** Investors give up and sell at a loss.
-
-**Price consolidation:** Prices stabilize at lower levels.
+| Indicator | Description |
+|-----------|-------------|
+| **Falling prices** | Sustained downward price movement over months or years |
+| **Low volume** | Reduced trading volume as participants exit or wait |
+| **Negative media** | Negative media coverage and "Bitcoin is dead" narratives |
+| **FUD** | Fear, uncertainty, and doubt dominate market sentiment |
+| **Capitulation** | Investors give up and sell at a loss |
+| **Price consolidation** | Prices stabilize at lower levels |
 
 ### Opportunities
 
-**Buying opportunities:** Bear markets create buying opportunities for those with a long-term perspective.
-
-**Lower prices:** You can accumulate Bitcoin at lower prices.
-
-**Weeding out weak hands:** Bear markets separate long-term holders from short-term speculators.
-
-**Building conviction:** Surviving bear markets builds conviction and resilience.
-
-**Network continues:** Bitcoin's network continues to operate and improve, regardless of price.
+| Opportunity | Benefit |
+|------------|---------|
+| **Buying opportunities** | Bear markets create buying opportunities for those with a long-term perspective |
+| **Lower prices** | You can accumulate Bitcoin at lower prices |
+| **Weeding out weak hands** | Bear markets separate long-term holders from short-term speculators |
+| **Building conviction** | Surviving bear markets builds conviction and resilience |
+| **Network continues** | Bitcoin's network continues to operate and improve, regardless of price |
 
 ### How to Navigate Bear Markets
 
@@ -191,7 +185,7 @@ Bitcoin markets follow a predictable emotional cycle:
 
 **Focus on fundamentals:** Bitcoin's technology and properties haven't changed. Focus on fundamentals, not price.
 
-**Continue DCA:** [Dollar Cost Averaging](/docs/investment/dollar-cost-averaging) is particularly effective during bear markets.
+**Continue DCA:** [Dollar Cost Averaging](/docs/investment-strategy) is particularly effective during bear markets.
 
 **Avoid panic selling:** Don't make emotional decisions. Stick to your long-term plan.
 
@@ -203,45 +197,12 @@ Bitcoin markets follow a predictable emotional cycle:
 
 ## Market Phases
 
-### Accumulation Phase
-
-**Characteristics:**
-- Prices are low and stable
-- Low media attention
-- Few new investors
-- Long-term holders accumulate
-
-**Strategy:** This is an ideal time to build your position through Dollar Cost Averaging.
-
-### Markup Phase
-
-**Characteristics:**
-- Prices begin to rise
-- Increasing media attention
-- More investors enter
-- Optimism grows
-
-**Strategy:** Continue your accumulation strategy. Don't let FOMO drive decisions.
-
-### Distribution Phase
-
-**Characteristics:**
-- Prices peak
-- Maximum media attention
-- Euphoria and FOMO
-- Everyone wants Bitcoin
-
-**Strategy:** Be cautious. Consider taking profits if your allocation has grown too large. Avoid buying more due to FOMO.
-
-### Markdown Phase
-
-**Characteristics:**
-- Prices decline
-- Negative media coverage
-- Investors exit
-- Fear and capitulation
-
-**Strategy:** This is a buying opportunity for those with a long-term perspective. Avoid panic selling.
+| Phase | Characteristics | Strategy |
+|-------|----------------|----------|
+| **Accumulation** | • Prices are low and stable<br>• Low media attention<br>• Few new investors<br>• Long-term holders accumulate | This is an ideal time to build your position through Dollar Cost Averaging. |
+| **Markup** | • Prices begin to rise<br>• Increasing media attention<br>• More investors enter<br>• Optimism grows | Continue your accumulation strategy. Don't let FOMO drive decisions. |
+| **Distribution** | • Prices peak<br>• Maximum media attention<br>• Euphoria and FOMO<br>• Everyone wants Bitcoin | Be cautious. Consider taking profits if your allocation has grown too large. Avoid buying more due to FOMO. |
+| **Markdown** | • Prices decline<br>• Negative media coverage<br>• Investors exit<br>• Fear and capitulation | This is a buying opportunity for those with a long-term perspective. Avoid panic selling. |
 
 ---
 
@@ -251,7 +212,7 @@ Bitcoin markets follow a predictable emotional cycle:
 
 **Before investing:**
 - Define your time horizon
-- Set your investment strategy ([DCA](/docs/investment/dollar-cost-averaging), lump sum, etc.)
+- Set your investment strategy ([DCA](/docs/investment-strategy), lump sum, etc.)
 - Determine your risk tolerance
 - Decide when you might sell (if ever)
 
@@ -296,23 +257,27 @@ Bitcoin markets follow a predictable emotional cycle:
 
 ### Past Cycles
 
-**2010-2013:** Early adoption, first major bull run, peak around $1,000  
-**2014-2016:** Bear market, consolidation, accumulation  
-**2017:** Major bull run, peak around $20,000  
-**2018-2019:** Bear market, consolidation, accumulation  
-**2020-2021:** Major bull run, peak around $69,000  
-**2022-2023:** Bear market, consolidation, accumulation  
-**2024-present:** New cycle beginning
+| Period | Cycle Phase | Key Events | Peak Price |
+|--------|-------------|------------|------------|
+| **2010-2013** | Early adoption, first major bull run | First exchanges, early adoption | ~$1,000 |
+| **2014-2016** | Bear market, consolidation | Mt. Gox collapse, accumulation phase | - |
+| **2017** | Major bull run | ICO boom, mainstream attention | ~$20,000 |
+| **2018-2019** | Bear market, consolidation | Regulatory uncertainty, accumulation | - |
+| **2020-2021** | Major bull run | Institutional adoption, ETF approval | ~$69,000 |
+| **2022-2023** | Bear market, consolidation | Macroeconomic headwinds, accumulation | - |
+| **2024-present** | New cycle beginning | Halving event, continued adoption | TBD |
 
 **Key Insight:** Each cycle is different, but the general pattern of bull markets followed by bear markets followed by accumulation has repeated. However, past performance doesn't guarantee future results.
 
 ### What's Different Each Cycle
 
-- **Market cap:** Each cycle starts with a larger market cap
-- **Adoption:** More people and institutions adopt Bitcoin each cycle
-- **Infrastructure:** Better infrastructure and tools each cycle
-- **Regulation:** Evolving regulatory environment
-- **Media attention:** Increasing mainstream attention
+| Factor | How It Changes |
+|--------|----------------|
+| **Market cap** | Each cycle starts with a larger market cap |
+| **Adoption** | More people and institutions adopt Bitcoin each cycle |
+| **Infrastructure** | Better infrastructure and tools each cycle |
+| **Regulation** | Evolving regulatory environment |
+| **Media attention** | Increasing mainstream attention |
 
 **Important:** While patterns repeat, each cycle is unique. Don't assume the next cycle will be exactly like previous ones.
 
@@ -320,25 +285,20 @@ Bitcoin markets follow a predictable emotional cycle:
 
 ## Common Mistakes During Cycles
 
-**Buying at the top:** FOMO-driven purchases during euphoria often lead to buying at peaks.
-
-**Selling at the bottom:** Panic selling during bear markets locks in losses.
-
-**Trying to time the market:** Attempting to predict cycle tops and bottoms is extremely difficult and often leads to worse results than simply holding.
-
-**Emotional decisions:** Making decisions based on fear or greed rather than your plan.
-
-**Ignoring fundamentals:** Focusing on price instead of Bitcoin's fundamental properties.
-
-**Over-leveraging:** Using too much leverage during bull markets often leads to liquidation during corrections.
+| Mistake | Why It's Problematic | Better Approach |
+|---------|----------------------|-----------------|
+| **Buying at the top** | FOMO-driven purchases during euphoria often lead to buying at peaks | Stick to your DCA plan |
+| **Selling at the bottom** | Panic selling during bear markets locks in losses | Maintain long-term perspective |
+| **Trying to time the market** | Extremely difficult and often leads to worse results than holding | Focus on time in market, not timing |
+| **Emotional decisions** | Decisions based on fear or greed rather than your plan | Stick to your predetermined strategy |
+| **Ignoring fundamentals** | Focusing on price instead of Bitcoin's fundamental properties | Focus on Bitcoin's properties |
+| **Over-leveraging** | Using too much leverage during bull markets often leads to liquidation | Avoid excessive leverage |
 
 ---
 
 ## Related Topics
 
-- [Why Consider Bitcoin?](/docs/investment/investment) - Understanding Bitcoin's investment thesis
-- [Dollar Cost Averaging](/docs/investment/dollar-cost-averaging) - Building a position over time, regardless of cycles
-- [Long-term Holding Strategies](/docs/investment/long-term-holding) - HODLing through market cycles
+- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies for navigating cycles
 - [Risk Management](/docs/investment/risk-management) - Understanding and managing investment risks
 - [Halvings](/docs/history/halvings) - Understanding Bitcoin's halving events and their impact
 

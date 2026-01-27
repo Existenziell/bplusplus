@@ -1,6 +1,6 @@
 # Dollar Cost Averaging (DCA)
 
-**[Dollar Cost Averaging (DCA)](/docs/glossary#dca-dollar-cost-averaging)** is an investment strategy where you invest a fixed amount of money at regular intervals, regardless of the asset's price. This approach helps reduce the impact of volatility and removes the need to time the market.
+**Dollar Cost Averaging (DCA)** is an investment strategy where you invest a fixed amount of money at regular intervals, regardless of the asset's price. This approach helps reduce the impact of volatility and removes the need to time the market.
 
 Instead of investing a large lump sum at once, DCA involves:
 
@@ -118,10 +118,9 @@ DCA can be combined with other investment approaches:
 
 ## Related Topics
 
-- [Why Consider Bitcoin?](/docs/investment/investment) - Understanding Bitcoin's investment thesis
 - [Risk Management](/docs/investment/risk-management) - Understanding investment risks
-- [Long-term Holding Strategies](/docs/investment/long-term-holding) - HODLing philosophy and time horizons
+- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies
 - [Understanding Market Cycles](/docs/investment/market-cycles) - Navigating volatility and market psychology
-- [Tools & Resources for Bitcoin Investors](/docs/investment/tools) - DCA automation services and exchange options
+- [Tools & Resources](/docs/investment/tools) - DCA automation services and exchange options
 
 ---

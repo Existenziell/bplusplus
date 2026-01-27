@@ -135,13 +135,11 @@ export const docPages: DocPage[] = [
   { path: '/docs/advanced/covenants', mdFile: 'app/docs/advanced/covenants/covenants.md', title: 'Covenants', section: 'advanced' },
 
   { path: '/docs/investment', mdFile: 'app/docs/investment/overview.md', title: 'Bitcoin as Investment', section: 'investment' },
-  { path: '/docs/investment/investment', mdFile: 'app/docs/investment/investment.md', title: 'Why Consider Bitcoin?', section: 'investment' },
   { path: '/docs/investment/risk-management', mdFile: 'app/docs/investment/risk-management/risk-management.md', title: 'Risk Management', section: 'investment' },
+  { path: '/docs/investment-strategy', mdFile: 'app/docs/investment-strategy/overview.md', title: 'Investment Strategy', section: 'investment' },
+  { path: '/docs/investment/tools', mdFile: 'app/docs/investment/tools/tools.md', title: 'Tools & Resources', section: 'investment' },
   { path: '/docs/investment/wallet-security', mdFile: 'app/docs/investment/wallet-security/wallet-security.md', title: 'Wallet Security & Self-Custody', section: 'investment' },
-  { path: '/docs/investment/tools', mdFile: 'app/docs/investment/tools/tools.md', title: 'Tools & Resources for Bitcoin Investors', section: 'investment' },
-  { path: '/docs/investment/privacy', mdFile: 'app/docs/investment/privacy/privacy.md', title: 'Privacy for Bitcoin Investors', section: 'investment' },
-  { path: '/docs/investment/dollar-cost-averaging', mdFile: 'app/docs/investment/dollar-cost-averaging/dollar-cost-averaging.md', title: 'Dollar Cost Averaging', section: 'investment' },
-  { path: '/docs/investment/long-term-holding', mdFile: 'app/docs/investment/long-term-holding/long-term-holding.md', title: 'Long-term Holding Strategies', section: 'investment' },
+  { path: '/docs/investment/privacy', mdFile: 'app/docs/investment/privacy/privacy.md', title: 'Privacy', section: 'investment' },
   { path: '/docs/investment/market-cycles', mdFile: 'app/docs/investment/market-cycles/market-cycles.md', title: 'Understanding Market Cycles', section: 'investment' },
 
   { path: '/docs/glossary', mdFile: 'app/docs/glossary/terms.md', title: 'Glossary', section: 'glossary' },

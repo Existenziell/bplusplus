@@ -13,10 +13,8 @@ export default function StickyBar() {
   const { openSearch } = useSearchModal()
   const showBreadcrumbs = Boolean(pathname && pathname !== '/')
   
-  // Show search in sticky when sticky is active and not scrolling up
-  // Hide it when scrolling up (search returns to header)
-  // This makes the icons appear immediately when sticky becomes active
-  const showSearchInSticky = isSticky && scrollDirection !== 'up'
+  // Show search in sticky when sticky is active
+  const showSearchInSticky = isSticky
 
   if (!showBreadcrumbs) {
     return null

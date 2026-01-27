@@ -6,6 +6,8 @@ import { CopyIcon } from '@/app/components/Icons'
 import copyToClipboard from '@/app/utils/copyToClipboard'
 import { bitcoinRpc } from '@/app/utils/bitcoinRpc'
 import { useMobileWarning } from '@/app/hooks/useMobileWarning'
+import MatrixAnimation from '@/app/components/MatrixAnimation'
+import { SECRET_TRIGGERS, SYSTEM_ERROR_MESSAGES } from '@/app/secret/page'
 import {
   COMMANDS,
   parseCommand,
@@ -64,6 +66,7 @@ export default function TerminalPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [exampleBlockHash, setExampleBlockHash] = useState<string>('')
   const [exampleTxId, setExampleTxId] = useState<string>('')
+  const [showMatrix, setShowMatrix] = useState(false)
   const { showWarning: showMobileWarning, dismissed: mobileWarningDismissed, dismiss: handleDismissMobileWarning } = useMobileWarning('terminal-mobile-warning-dismissed')
   const inputRef = useRef<HTMLInputElement>(null)
   const outputRef = useRef<HTMLDivElement>(null)
@@ -232,6 +235,38 @@ export default function TerminalPage() {
 
     setCommandHistory(prev => [...prev, trimmedCmd])
     setHistoryIndex(-1)
+
+    // Check for secret triggers (case-insensitive)
+    const lowerCmd = trimmedCmd.toLowerCase()
+    const isEasterEgg = SECRET_TRIGGERS.some(trigger => 
+      lowerCmd.includes(trigger.toLowerCase())
+    )
+
+    if (isEasterEgg) {
+      // Display all error messages at once
+      const allMessages = SYSTEM_ERROR_MESSAGES.join('\n')
+      
+      setOutput(prev => [
+        ...prev,
+        {
+          type: 'error',
+          content: `error code: -1\nerror message:\n${allMessages}\n\nSystem integrity compromised...\nInitiating emergency protocols...`,
+          timestamp: new Date(),
+        },
+      ])
+
+      // Start Matrix animation after a short delay
+      setTimeout(() => {
+        setShowMatrix(true)
+      }, 500)
+
+      // Redirect after animation completes
+      setTimeout(() => {
+        router.push('/secret')
+      }, 4500) // 4.5 seconds (4s animation + 0.5s buffer)
+
+      return
+    }
 
     const { method, params } = parseCommand(trimmedCmd)
 
@@ -467,6 +502,12 @@ export default function TerminalPage() {
 
   return (
     <>
+      {showMatrix && (
+        <MatrixAnimation
+          duration={4000}
+          onComplete={() => setShowMatrix(false)}
+        />
+      )}
        <h1 className="heading-page text-center mb-1">
         Bitcoin CLI Terminal
       </h1>
@@ -491,7 +532,7 @@ export default function TerminalPage() {
           <div
             ref={outputRef}
             onClick={handleOutputClick}
-            className="bg-black dark:bg-gray-950 p-2 md:p-4 overflow-y-auto font-mono text-xs md:text-sm cursor-text flex-1"
+            className="bg-black dark:bg-gray-950 p-2 md:p-4 overflow-y-auto font-mono text-xs md:text-sm cursor-text flex-1 relative"
           >
             {output.map((line, i) => (
             <div key={i} className={line.type === 'log' ? 'mb-0.5' : 'mb-1 md:mb-2'}>

@@ -99,7 +99,7 @@ export default function BlockVisualization({ initialBlockHash }: BlockVisualizat
 
   if (loading && !blockData) {
     return (
-      <div className="w-full flex items-center justify-center py-12">
+      <div className="w-full flex items-center justify-start py-12">
         <div className="text-center">
           <div className="animate-pulse text-btc text-lg mb-2">Loading block data...</div>
           <div className="text-secondary text-sm">Fetching latest block from blockchain</div>

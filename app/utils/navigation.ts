@@ -224,7 +224,7 @@ export const sections: Record<string, { title: string; description: string }> = 
 
 // Home page CTA links
 export const ctaLinks: { href: string; title: string }[] = [
-  { href: '/docs/fundamentals', title: 'Start Reading' },
+  { href: '/docs/fundamentals', title: 'Start Learning' },
   { href: '/terminal', title: 'Bitcoin CLI' },
   { href: '/stack-lab', title: 'Stack Lab' },
 ]
@@ -246,11 +246,10 @@ export const docsNavLinksBottom: { href: string; title: string }[] = [
 
 // Horizontal nav - quick links at bottom
 export const horizontalNavLinksBottom: { href: string; title: string }[] = [
-  { href: '/terminal', title: 'CLI Terminal' },
-  { href: '/stack-lab', title: 'Stack Lab' },
   { href: '/block-visual', title: 'Block Visual' },
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/author', title: 'About B++' },
+  { href: '/feedback', title: 'Feedback' },
 ]
 
 // Footer - External resources (left side)

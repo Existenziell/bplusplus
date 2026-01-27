@@ -38,7 +38,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Start Reading CTA */}
+        {/* Start Learning CTA */}
         <div className="container-content py-8 md:py-8">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="heading-page mb-1">

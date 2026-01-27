@@ -10,8 +10,8 @@
 # testing
 /coverage
 /logs
-/test-results
-/playwright-report
+/tests/test-results
+/tests/playwright-report
 /blob-report
 /playwright/.cache
 

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { navItems, staticNavLinks, footerNavLinks } from '@/app/utils/navigation'
+import { navItems, docsNavLinksBottom, horizontalNavLinksBottom } from '@/app/utils/navigation'
 import { toggleInSet } from '@/app/utils/setUtils'
 import { ChevronDown, ChevronRight } from '@/app/components/Icons'
 
@@ -95,21 +95,21 @@ export default function HorizontalNav() {
                 )
               })}
               <Link
-                href={footerNavLinks[0].href}
+                href={docsNavLinksBottom[0].href}
                 className="font-medium text-gray-800 dark:text-gray-200 hover:text-btc transition-colors pl-7"
               >
-                {footerNavLinks[0].title}
+                {docsNavLinksBottom[0].title}
               </Link>
             </div>
 
             {/* Quick Links Section - Prominent at the bottom */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
               <div className="flex flex-wrap justify-center gap-4">
-                {[staticNavLinks[1], staticNavLinks[2], staticNavLinks[0], footerNavLinks[1]].map((link) => (
+                {horizontalNavLinksBottom.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="btn-secondary-sm min-w-[10rem]"
+                    className="btn-secondary-sm min-w-[8rem]"
                   >
                     {link.title}
                   </Link>

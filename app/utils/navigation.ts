@@ -1,10 +1,15 @@
 /**
- * Single source of truth for all documentation navigation and routing data.
- * This file is used by:
- * - DocsNavigation component (sidebar navigation)
+ * Single source of truth for all navigation and link data.
+ * 
+ * Used by:
+ * - Home page (ctaLinks)
+ * - DocsNavigation (docsNavLinksTop, docsNavLinksBottom, navItems)
+ * - HorizontalNav (horizontalNavLinksBottom, navItems)
+ * - Footer (footerLinksExternal, footerLinksExplore)
+ * - Breadcrumbs (routeLabels)
  * - DownloadMarkdownButton (via downloadablePaths in useDocNavigation)
- * - Breadcrumbs component (route labels)
- * - generate-md-content and generate-search-index (parse docPages via parse-doc-pages)
+ * - generate-md-content and generate-search-index scripts (parse docPages via parse-doc-pages)
+ * 
  * Note: /api/download-md and docs/[...slug] both use md-content.json (keyed by path), not pathToMdFile.
  */
 
@@ -217,14 +222,57 @@ export const sections: Record<string, { title: string; description: string }> = 
   },
 }
 
-export const staticNavLinks: { href: string; title: string }[] = [
+// Home page CTA links
+export const ctaLinks: { href: string; title: string }[] = [
+  { href: '/docs/fundamentals', title: 'Start Reading' },
+  { href: '/terminal', title: 'Bitcoin CLI' },
+  { href: '/stack-lab', title: 'Stack Lab' },
+]
+
+// Docs sidebar - top section (interactive tools)
+export const docsNavLinksTop: { href: string; title: string }[] = [
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/terminal', title: 'CLI Terminal' },
   { href: '/stack-lab', title: 'Stack Lab' },
   { href: '/block-visual', title: 'Block Visual' },
 ]
 
-export const footerNavLinks: { href: string; title: string }[] = [
+// Docs sidebar - bottom section (site utilities)
+export const docsNavLinksBottom: { href: string; title: string }[] = [
+  { href: '/docs/glossary', title: 'Glossary' },
+  { href: '/author', title: 'About B++' },
+  { href: '/feedback', title: 'Feedback' },
+]
+
+// Horizontal nav - quick links at bottom
+export const horizontalNavLinksBottom: { href: string; title: string }[] = [
+  { href: '/terminal', title: 'CLI Terminal' },
+  { href: '/stack-lab', title: 'Stack Lab' },
+  { href: '/block-visual', title: 'Block Visual' },
+  { href: '/whitepaper', title: 'Whitepaper' },
+  { href: '/author', title: 'About B++' },
+]
+
+// Footer - External resources (left side)
+export const footerLinksExternal: { name: string; url: string }[] = [
+  { name: 'Bitcoin Devs', url: 'https://bitcoindevs.xyz' },
+  { name: 'Bitcoin.org', url: 'https://bitcoin.org' },
+  { name: 'Learn Me A Bitcoin', url: 'https://learnmeabitcoin.com' },
+  { name: 'ClarkMoody', url: 'https://bitcoin.clarkmoody.com/dashboard/' },
+  { name: 'Mempool.space', url: 'https://mempool.space' },
+  { name: 'Blockstream', url: 'https://blockstream.info' },
+  { name: 'Bitcoin Optech', url: 'https://bitcoinops.org' },
+  { name: 'Bitcoin Visuals', url: 'https://bitcoinvisuals.com' },
+]
+
+// Footer - Explore B++ section (right side)
+export const footerLinksExplore: { href: string; title: string }[] = [
+  { href: '/docs/history', title: 'History' },
+  { href: '/docs', title: 'Search Docs' },
+  { href: '/whitepaper', title: 'Whitepaper' },
+  { href: '/terminal', title: 'CLI Terminal' },
+  { href: '/stack-lab', title: 'Stack Lab' },
+  { href: '/block-visual', title: 'Block Visual' },
   { href: '/docs/glossary', title: 'Glossary' },
   { href: '/author', title: 'About B++' },
   { href: '/feedback', title: 'Feedback' },

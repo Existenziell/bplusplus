@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { navItems, staticNavLinks, footerNavLinks, type HeadingsByPath } from '@/app/utils/navigation'
+import { navItems, docsNavLinksTop, docsNavLinksBottom, type HeadingsByPath } from '@/app/utils/navigation'
 import headingsByPathData from '@/public/data/headings.json'
 
 const headingsByPath = headingsByPathData as HeadingsByPath
@@ -113,7 +113,7 @@ export default function DocsNavigation({
 
         <div className="mb-6">
           <ul className="space-y-1">
-            {staticNavLinks.map((link) => (
+            {docsNavLinksTop.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -234,7 +234,7 @@ export default function DocsNavigation({
 
         <div className="mt-6">
           <ul className="space-y-1">
-            {footerNavLinks.map((link) => (
+            {docsNavLinksBottom.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}

@@ -1,11 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Footer from '@/app/components/Footer'
-import Header from '@/app/components/Header'
 import QuoteRotator from '@/app/components/QuoteRotator'
 import LiveStats from '@/app/components/LiveStats'
 import HorizontalNav from '@/app/components/HorizontalNav'
 import { ChevronRight, TerminalIcon, StackLabIcon } from '@/app/components/Icons'
+import { ctaLinks } from '@/app/utils/navigation'
+
+// Map icons to CTA links by href
+const ctaIcons: Record<string, React.ReactNode> = {
+  '/docs/fundamentals': <ChevronRight />,
+  '/terminal': <TerminalIcon />,
+  '/stack-lab': <StackLabIcon />,
+}
 
 export default function Home() {
   return (
@@ -41,27 +48,16 @@ export default function Home() {
               Open source and always free.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/docs/fundamentals"
-                className="btn-primary"
-              >
-                Start Reading
-                <ChevronRight />
-              </Link>
-              <Link
-                href="/terminal"
-                className="btn-secondary"
-              >
-                Bitcoin CLI
-                <TerminalIcon />
-              </Link>
-              <Link
-                href="/stack-lab"
-                className="btn-secondary"
-              >
-                Stack Lab
-                <StackLabIcon />
-              </Link>
+              {ctaLinks.map((link, index) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={index === 0 ? 'btn-primary' : 'btn-secondary'}
+                >
+                  {link.title}
+                  {ctaIcons[link.href]}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

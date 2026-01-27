@@ -9,6 +9,7 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 - [Interactive Tools](#interactive-tools)
   - [Bitcoin CLI Terminal](#bitcoin-cli-terminal)
   - [Stack Lab](#stack-lab)
+  - [Block Visual](#block-visual)
   - [Denominations Calculator](#denominations-calculator)
 - [Code snippets](#code-snippets)
 - [Search](#search)
@@ -26,6 +27,7 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 - **Whitepaper**: Satoshi’s Bitcoin whitepaper.
 - **Bitcoin CLI Terminal**: Run Bitcoin Core RPC commands in the browser against a public mainnet node. No node setup. `/terminal`
 - **Stack Lab**: Interactive Bitcoin Script playground. Build and run locking/unlocking scripts in the browser; same model as on-chain validation. `/stack-lab`
+- **Block Visual**: Interactive block visualization with transaction treemap. Explore the latest Bitcoin block, click transactions to see inputs/outputs. `/block-visual`
 - **Denominations Calculator**: Convert between satoshis, bits, mBTC, BTC, and other units. `/docs/fundamentals/denominations`
 - **Glossary**: Browse 200+ Bitcoin terms A–Z at `/docs/glossary`. Linked terms in the docs show a hover tooltip with the definition.
 
@@ -33,7 +35,7 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 
 ## Interactive Tools
 
-The page includes **Bitcoin CLI Terminal**, **Stack Lab**, and a **Denominations Calculator**. They let you run commands, build scripts, and convert units in the browser, without the need for a local node, IDE, or extra setup. Use them to try concepts as you read, debug your mental model, or prepare for real tooling.
+The site includes **Bitcoin CLI Terminal**, **Stack Lab**, **Block Visual**, and a **Denominations Calculator**. They let you run commands, build scripts, explore blocks, and convert units in the browser, without the need for a local node, IDE, or extra setup. Use them to try concepts as you read, debug your mental model, or prepare for real tooling.
 
 ### Bitcoin CLI Terminal
 
@@ -42,6 +44,10 @@ Run `getblockcount`, `getblock`, `getrawtransaction`, `getmempoolinfo`, and othe
 ### Stack Lab
 
 Interactive Bitcoin Script playground. Unlocking script runs first (pushes data onto the stack), then the locking script; the spend is valid if the stack ends in a non-zero value (typically `1`). Same model as on-chain validation.
+
+### Block Visual
+
+Interactive block visualization showing the latest Bitcoin block as a transaction treemap. Each rectangle represents a transaction, sized by vBytes, value, or fee. Hover for details, click to explore inputs, outputs, and transaction flow. Connects to mainnet via PublicNode.
 
 ### Denominations Calculator
 

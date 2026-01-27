@@ -1,32 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { footerNavLinks, staticNavLinks } from '@/app/utils/navigation'
+import { footerLinksExplore, footerLinksExternal } from '@/app/utils/navigation'
 import { ExternalLinkIcon } from '@/app/components/Icons'
-
-interface Resource {
-  name: string
-  url: string
-  description: string
-}
-
-const resources: Resource[] = [
-  { name: 'Bitcoin Devs', url: 'https://bitcoindevs.xyz', description: 'Learning & development tools' },
-  { name: 'Bitcoin.org', url: 'https://bitcoin.org', description: 'Original Bitcoin website' },
-  { name: 'Learn Me A Bitcoin', url: 'https://learnmeabitcoin.com', description: 'Bitcoin education & tutorials' },
-  { name: 'ClarkMoody', url: 'https://bitcoin.clarkmoody.com/dashboard/', description: 'Bitcoin analytics dashboard' },
-  { name: 'Mempool.space', url: 'https://mempool.space', description: 'Blockchain explorer & mempool' },
-  { name: 'Blockstream', url: 'https://blockstream.info', description: 'Blockchain explorer' },
-  { name: 'Bitcoin Optech', url: 'https://bitcoinops.org', description: 'Technical resources' },
-  { name: 'Bitcoin Visuals', url: 'https://bitcoinvisuals.com', description: 'Charts & metrics' },
-]
-
-const internalLinks = [
-  { href: '/docs/history', title: 'History' },
-  { href: '/docs', title: 'Search Docs' },
-  ...staticNavLinks, // Whitepaper, CLI Terminal, Stack Lab
-  ...footerNavLinks, // Glossary, About B++, Feedback
-]
 
 export default function Footer() {
   return (
@@ -39,7 +15,7 @@ export default function Footer() {
               More Resources
             </h3>
             <ul className='flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-x-6 gap-y-1'>
-              {resources.map((resource) => (
+              {footerLinksExternal.map((resource) => (
                 <li key={resource.name} className='text-center'>
                   <Link
                     href={resource.url}
@@ -63,7 +39,7 @@ export default function Footer() {
               Explore B++
             </h3>
             <ul className='flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-x-6 gap-y-1'>
-              {internalLinks.map((link) => (
+              {footerLinksExplore.map((link) => (
                 <li key={link.href} className='text-center'>
                   <Link
                     href={link.href}

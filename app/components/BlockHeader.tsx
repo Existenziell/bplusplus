@@ -25,7 +25,7 @@ export default function BlockHeader({
   isRefreshing = false,
 }: BlockHeaderProps) {
   const handleCopyHash = () => {
-    copyToClipboard(hash, 'Block hash copied to clipboard')
+    copyToClipboard(hash, 'Block hash')
   }
 
   return (

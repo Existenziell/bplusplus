@@ -90,7 +90,7 @@ export default function TransactionDetail({ txid }: TransactionDetailProps) {
   }, [txid])
 
   const handleCopy = (text: string, label: string) => {
-    copyToClipboard(text, `${label} copied to clipboard`)
+    copyToClipboard(text, label)
   }
 
   if (loading) {

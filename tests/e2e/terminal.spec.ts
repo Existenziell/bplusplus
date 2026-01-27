@@ -44,7 +44,6 @@ test.describe('Terminal', () => {
   })
 
   test('getblockcount returns JSON number', async ({ page }) => {
-    test.skip(!!process.env.CI, 'RPC requires network')
     await page.goto('/terminal')
     await page.getByPlaceholder(/enter command/i).fill('getblockcount')
     await page.getByRole('button', { name: 'Run' }).click()

@@ -5,7 +5,7 @@ test.describe('Home', () => {
     await page.goto('/')
     await expect(page).toHaveTitle(/B\+\+/)
 
-    await expect(page.getByRole('link', { name: /Start Reading/i })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: /Start Learning/i })).toHaveAttribute(
       'href',
       '/docs/fundamentals'
     )

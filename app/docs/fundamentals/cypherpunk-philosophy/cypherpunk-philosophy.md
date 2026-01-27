@@ -15,6 +15,8 @@ The cypherpunk movement emerged in the late 1980s and early 1990s, as the intern
 
 ### Privacy Through Cryptography
 
+![Cypherpunk Manifesto](/images/docs/cypherpunk.webp)
+
 Cypherpunks believe that privacy is essential for an open society, but it cannot be granted by governments or corporations; it must be **enforced through mathematics**. As [Eric Hughes](/docs/history/people#eric-hughes) wrote in "A Cypherpunk's Manifesto" (1993):
 
 > "Privacy is necessary for an open society in the electronic age. Privacy is not secrecy. A private matter is something one doesn't want the whole world to know, but a secret matter is something one doesn't want anybody to know. Privacy is the power to selectively reveal oneself to the world."
@@ -91,7 +93,7 @@ The mailing list was where many foundational ideas were discussed, including:
 - Digital cash proposals
 - Privacy-preserving protocols
 
-### The Cypherpunk Manifesto
+### The Crypto Anarchist Manifesto
 
 In 1992, [Timothy C. May](/docs/history/people#timothy-c-may) published "The Crypto Anarchist Manifesto," which outlined a vision of cryptography enabling:
 - Anonymous transactions

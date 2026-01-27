@@ -10,10 +10,16 @@ import { useSearch } from '@/app/hooks/useSearch'
 // Featured topics to show when there's no search query
 const FEATURED_TOPICS: SearchResult[] = [
   {
-    path: '/docs/fundamentals',
-    title: 'Bitcoin Fundamentals',
+    path: '/docs/fundamentals/utxos',
+    title: 'UTXO Model',
     section: 'fundamentals',
-    snippet: 'Learn the core concepts that make Bitcoin work: decentralization, trust models, monetary properties, and the foundational principles of digital money.',
+    snippet: 'Understand Bitcoin\'s Unspent Transaction Output model and how it differs from account-based systems, enabling better privacy and scalability.',
+  },
+  {
+    path: '/docs/history',
+    title: 'Bitcoin History',
+    section: 'history',
+    snippet: 'Explore Bitcoin\'s history from the Genesis Block to future halvings, including key milestones, events, forks, and the complete halving and supply schedule.',
   },
   {
     path: '/docs/bitcoin/script',
@@ -32,12 +38,6 @@ const FEATURED_TOPICS: SearchResult[] = [
     title: 'Difficulty Adjustment',
     section: 'mining',
     snippet: 'Learn how Bitcoin automatically adjusts mining difficulty to maintain consistent block times, ensuring network stability and security.',
-  },
-  {
-    path: '/docs/fundamentals/utxos',
-    title: 'UTXO Model',
-    section: 'fundamentals',
-    snippet: 'Understand Bitcoin\'s Unspent Transaction Output model and how it differs from account-based systems, enabling better privacy and scalability.',
   },
   {
     path: '/docs/bitcoin/transaction-lifecycle',

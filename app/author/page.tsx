@@ -69,8 +69,7 @@ export default function AuthorPage() {
                 </h2>
                 <p className="text-gray-800 dark:text-gray-200 leading-7 mb-4">
                   Bitcoin education is fragmented. Some resources are too technical,
-                  others too superficial. I created B++ to bridge that gap, providing
-                  comprehensive, accurate, and accessible documentation that covers
+                  others too superficial. I created B++ to bridge that gap, providing accessible documentation that covers
                   everything from fundamental concepts to advanced protocol details.
                   This site is open source, free, and will always remain so. No ads,
                   no paywalls, no tracking. Just pure Bitcoin knowledge for anyone

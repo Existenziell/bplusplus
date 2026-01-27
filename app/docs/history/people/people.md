@@ -313,7 +313,7 @@ Joseph Poon and Thaddeus Dryja authored "The Bitcoin Lightning Network: Scalable
 
 **Contribution:** Author, educator, Bitcoin evangelist
 
-Andreas M. Antonopoulos is a Greek-British author, speaker, and educator who has become one of the most influential voices in Bitcoin and blockchain education. He is best known for his book "Mastering Bitcoin" (2014), a comprehensive technical guide that has become the standard reference for Bitcoin developers.
+Andreas M. Antonopoulos is a Greek-British author, speaker, and educator who has become one of the most influential voices in Bitcoin and blockchain education. He is best known for his book "Mastering Bitcoin" (2014), a detailed technical guide that has become the standard reference for Bitcoin developers.
 
 His other works include:
 - "The Internet of Money" series (collected talks)

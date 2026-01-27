@@ -1,6 +1,6 @@
 # OP Codes
 
-The instruction set for Bitcoin. Bitcoin [Script](/docs/glossary#script) uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a comprehensive reference of Bitcoin OP codes with explanations and code examples. Try these opcodes in [Stack Lab](/stack-lab).
+The instruction set for Bitcoin. Bitcoin [Script](/docs/glossary#script) uses a stack-based programming language with various opcodes (operation codes) that perform different functions. This document provides a complete reference of Bitcoin OP codes with explanations and code examples. Try these opcodes in [Stack Lab](/stack-lab).
 
 ## OP Code Categories
 
@@ -783,6 +783,6 @@ OP_ENDIF
 
 ## Resources
 
-- **[Bitcoin Wiki: Script](https://en.bitcoin.it/wiki/Script)**: Comprehensive script reference
+- **[Bitcoin Wiki: Script](https://en.bitcoin.it/wiki/Script)**: Complete script reference
 - **[BIP 342: Tapscript](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki)**: Tapscript specification
 - **[Learn Me a Bitcoin: Script](https://learnmeabitcoin.com/technical/script/)**: Visual script explanations

@@ -29,7 +29,7 @@ When a miner finds a new block:
 
 ### 3. Block Validation Process
 
-Each full node performs comprehensive validation:
+Each full node performs complete validation:
 
 1. **Header Validation**
    - Proof-of-work meets [difficulty](/docs/glossary#difficulty) target

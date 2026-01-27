@@ -17,7 +17,7 @@ The reference implementation of Bitcoin is written in C++.
 - Consensus code
 
 **Key libraries:**
-- **libbitcoin**: Comprehensive Bitcoin library
+- **libbitcoin**: Full-featured Bitcoin library
 - **libsecp256k1**: Optimized elliptic curve library (used by Bitcoin Core)
 
 **When to use:**

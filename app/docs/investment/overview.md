@@ -26,7 +26,7 @@ Understanding the risks of investing in Bitcoin: volatility, regulatory risk, te
 
 ### [Tools & Resources for Bitcoin Investors](/docs/investment/tools)
 
-A comprehensive guide to essential tools for Bitcoin investors, including exchanges (CEX, DEX, P2P), wallets, blockchain explorers, price tracking tools, educational resources, and other helpful services.
+A guide to essential tools for Bitcoin investors, including exchanges (CEX, DEX, P2P), wallets, blockchain explorers, price tracking tools, educational resources, and other helpful services.
 
 ### [Privacy for Bitcoin Investors](/docs/investment/privacy)
 

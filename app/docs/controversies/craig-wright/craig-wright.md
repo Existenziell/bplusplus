@@ -68,7 +68,7 @@ Wright launched an aggressive legal campaign:
 
 ### 2024: The Verdict
 
-In the COPA v. Wright trial, UK High Court Justice Mellor delivered a comprehensive ruling:
+In the COPA v. Wright trial, UK High Court Justice Mellor delivered a detailed ruling:
 
 - Craig Wright is **not Satoshi Nakamoto**
 - Wright **forged documents** on a "grand scale"

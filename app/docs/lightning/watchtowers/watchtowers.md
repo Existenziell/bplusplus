@@ -317,7 +317,7 @@ Watchtowers provide:
 1. **Use multiple watchtowers** from different operators
 2. **Run your own tower** if possible for maximum privacy
 3. **Verify tower reliability** before trusting with real funds
-4. **Combine with backups** for comprehensive protection
+4. **Combine with backups** for complete protection
 5. **Monitor tower connections** to ensure they're active
 
 ---

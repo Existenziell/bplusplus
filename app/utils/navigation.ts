@@ -195,7 +195,7 @@ export const sections: Record<string, { title: string; description: string }> = 
   },
   glossary: {
     title: 'Bitcoin Glossary',
-    description: 'A comprehensive glossary of Bitcoin development terms, from ASIC to ZMQ.',
+    description: 'A glossary of Bitcoin development terms, from ASIC to ZMQ.',
   },
   whitepaper: {
     title: 'Whitepaper',

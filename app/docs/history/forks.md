@@ -1,6 +1,6 @@
 # Forks History
 
-Bitcoin has undergone several protocol upgrades through both soft forks and hard forks. This document provides a comprehensive table of all major forks in Bitcoin's history.
+Bitcoin has undergone several protocol upgrades through both soft forks and hard forks. This document provides a table of all major forks in Bitcoin's history.
 
 ## Understanding Forks
 

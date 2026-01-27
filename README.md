@@ -106,7 +106,7 @@ npm run dev    # → http://localhost:3000
 
 ## Testing
 
-The project uses a comprehensive testing strategy:
+The project uses a testing strategy:
 
 ### Unit Tests (Vitest)
 - **Utilities** (`tests/app/utils/`): Pure functions, helpers, and business logic

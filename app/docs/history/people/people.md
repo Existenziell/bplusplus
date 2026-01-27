@@ -346,8 +346,6 @@ Roger Ver is an early Bitcoin investor and promoter who became known as "Bitcoin
 
 **Contribution:** The future of Bitcoin - Your story is still being written
 
-Bitcoin's history is still being written. The network continues to evolve, and its future will be shaped by those who participate today. Developers contributing code, educators sharing knowledge, users running nodes, and builders creating on Bitcoin's foundation.
-
 The pioneers on this page laid the groundwork, but Bitcoin's true potential will be realized by the collective efforts of its global community. Whether you're building infrastructure, creating applications, educating others, or simply using Bitcoin as peer-to-peer electronic cash, you are part of this ongoing experiment in decentralized money.
 
 The question is not whether you can be a Bitcoin pioneer. It's what kind of pioneer you will choose to be.

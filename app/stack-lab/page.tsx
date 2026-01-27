@@ -247,7 +247,6 @@ export default function StackLabPage() {
             {isFlowExplanationExpanded && (
               <div className="mt-3 space-y-4">
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">How to Use</h4>
                   <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                     <strong className="text-gray-600 dark:text-gray-300">1. Build Scripts:</strong><br />Drag OP codes from the palette to the Unlocking Script (runs first) and Locking Script (runs second). 
                     You can also push data (numbers, hex strings) using the &quot;+ Push Data&quot; button or load an example template.

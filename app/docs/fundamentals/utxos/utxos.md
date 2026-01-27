@@ -35,6 +35,8 @@ Bitcoin's UTXO model differs fundamentally from traditional account-based system
 
 Understanding the lifecycle is crucial:
 
+The UTXO lifecycle follows this flow:
+
 ```
 Transaction Output (in a block)
   ↓

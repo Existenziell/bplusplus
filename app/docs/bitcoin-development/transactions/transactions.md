@@ -22,6 +22,8 @@ A transaction with 6 confirmations is generally considered irreversible.
 
 ## Transaction Structure
 
+![Raw Bitcoin Transaction Bytes](/images/docs/raw-bitcoin-transacation-byte.jpg)
+
 ### Components
 
 ```
@@ -54,6 +56,8 @@ Virtual size (vbytes) = (base_size × 3 + total_size) / 4
 ---
 
 ## Building Transactions
+
+![Transaction Binary Map](/images/docs/tx-binary-map.png)
 
 :::code-group
 ```rust

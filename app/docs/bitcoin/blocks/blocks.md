@@ -2,6 +2,19 @@
 
 This document explains how blocks propagate through the Bitcoin network, including the [gossip protocol](/docs/glossary#gossip-protocol), validation process, and [orphan block](/docs/glossary#orphan-block) handling.
 
+## Block Structure
+
+![Bitcoin Block Overview](/images/docs/bitcoin-block-overview.jpg)
+
+A Bitcoin block consists of:
+- **Block Header** (80 bytes): Contains version, previous block hash, merkle root, timestamp, difficulty target, and nonce
+- **Transaction Count**: Variable-length integer indicating number of transactions
+- **Transactions**: List of transactions, starting with the coinbase transaction
+
+The block header is hashed twice with SHA-256 to produce the block hash, which must meet the difficulty target for the block to be valid.
+
+---
+
 ## Block Propagation Flow
 
 ### 1. Block Discovery and Initial Broadcast

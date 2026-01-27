@@ -272,6 +272,28 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     p: ({ children, ...props }: any) => {
       const childrenArray = React.Children.toArray(children)
 
+      // Check for standalone tx-binary-map.png image
+      for (const child of childrenArray) {
+        if (React.isValidElement(child)) {
+          const childProps = child.props as { src?: string }
+          const src = childProps?.src
+          
+          if (src && src.includes('tx-binary-map.png')) {
+            const otherChildren = childrenArray.filter(c => c !== child)
+            const otherText = otherChildren.map(extractText).join('').trim()
+            
+            // Standalone image → wrap in div with background
+            if (otherText === '' || childrenArray.length === 1) {
+              return (
+                <div className="bg-white rounded-lg p-4 my-4">
+                  {child}
+                </div>
+              )
+            }
+          }
+        }
+      }
+
       for (const child of childrenArray) {
         if (React.isValidElement(child)) {
           const childProps = child.props as { 'data-youtube-embed'?: string; 'data-youtube-title'?: string }
@@ -398,6 +420,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           {children}
         </pre>
       )
+    },
+    img: ({ src, alt, ...props }: any) => {
+      return <img src={src} alt={alt} className="max-w-full h-auto my-4" {...props} />
     },
   }), [codeGroupMap, videoGroupMap, glossaryData])
 

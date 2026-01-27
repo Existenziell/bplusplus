@@ -713,6 +713,10 @@
   ],
   "/docs/bitcoin/transaction-lifecycle": [
     {
+      "title": "Transaction Structure",
+      "slug": "transaction-structure"
+    },
+    {
       "title": "Transaction States",
       "slug": "transaction-states"
     },
@@ -940,6 +944,10 @@
     }
   ],
   "/docs/bitcoin/blocks": [
+    {
+      "title": "Block Structure",
+      "slug": "block-structure"
+    },
     {
       "title": "Block Propagation Flow",
       "slug": "block-propagation-flow"
@@ -4077,6 +4085,142 @@
     {
       "title": "Common Mistakes During Cycles",
       "slug": "common-mistakes-during-cycles"
+    },
+    {
+      "title": "Related Topics",
+      "slug": "related-topics"
+    }
+  ],
+  "/docs/adoption": [
+    {
+      "title": "Why Real-World Examples Matter",
+      "slug": "why-real-world-examples-matter"
+    },
+    {
+      "title": "Adoption Stories",
+      "slug": "adoption-stories"
+    },
+    {
+      "title": "The Adoption Cycle",
+      "slug": "the-adoption-cycle"
+    },
+    {
+      "title": "Related Topics",
+      "slug": "related-topics"
+    }
+  ],
+  "/docs/adoption/stranded-energy": [
+    {
+      "title": "What is Stranded Energy?",
+      "slug": "what-is-stranded-energy"
+    },
+    {
+      "title": "Flared Natural Gas",
+      "slug": "flared-natural-gas"
+    },
+    {
+      "title": "Excess Renewable Energy",
+      "slug": "excess-renewable-energy"
+    },
+    {
+      "title": "Environmental Benefits",
+      "slug": "environmental-benefits"
+    },
+    {
+      "title": "Economic Model",
+      "slug": "economic-model"
+    },
+    {
+      "title": "Challenges and Limitations",
+      "slug": "challenges-and-limitations"
+    },
+    {
+      "title": "Future Potential",
+      "slug": "future-potential"
+    },
+    {
+      "title": "Related Topics",
+      "slug": "related-topics"
+    }
+  ],
+  "/docs/adoption/rural-communities": [
+    {
+      "title": "The Banking Gap",
+      "slug": "the-banking-gap"
+    },
+    {
+      "title": "Remittances",
+      "slug": "remittances"
+    },
+    {
+      "title": "Savings and Store of Value",
+      "slug": "savings-and-store-of-value"
+    },
+    {
+      "title": "Daily Payments",
+      "slug": "daily-payments"
+    },
+    {
+      "title": "El Salvador: National Adoption",
+      "slug": "el-salvador-national-adoption"
+    },
+    {
+      "title": "Challenges and Solutions",
+      "slug": "challenges-and-solutions"
+    },
+    {
+      "title": "Future Potential",
+      "slug": "future-potential"
+    },
+    {
+      "title": "Related Topics",
+      "slug": "related-topics"
+    }
+  ],
+  "/docs/adoption/use-cases": [
+    {
+      "title": "Remittances",
+      "slug": "remittances"
+    },
+    {
+      "title": "Store of Value",
+      "slug": "store-of-value"
+    },
+    {
+      "title": "Corporate Adoption",
+      "slug": "corporate-adoption"
+    },
+    {
+      "title": "Country-Level Adoption",
+      "slug": "country-level-adoption"
+    },
+    {
+      "title": "Humanitarian Aid",
+      "slug": "humanitarian-aid"
+    },
+    {
+      "title": "Individual Adoption Stories",
+      "slug": "individual-adoption-stories"
+    },
+    {
+      "title": "Business Integration",
+      "slug": "business-integration"
+    },
+    {
+      "title": "Investment and Speculation",
+      "slug": "investment-and-speculation"
+    },
+    {
+      "title": "Adoption Metrics",
+      "slug": "adoption-metrics"
+    },
+    {
+      "title": "Challenges to Adoption",
+      "slug": "challenges-to-adoption"
+    },
+    {
+      "title": "Future Potential",
+      "slug": "future-potential"
     },
     {
       "title": "Related Topics",

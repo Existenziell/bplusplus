@@ -2,6 +2,23 @@
 
 Understanding the complete lifecycle of a Bitcoin transaction helps developers build robust applications and users understand what happens when they send bitcoin.
 
+## Transaction Structure
+
+![Raw Bitcoin Transaction Bytes](/images/docs/raw-bitcoin-transacation-byte.jpg)
+
+![Transaction Binary Map](/images/docs/tx-binary-map.png)
+
+A Bitcoin transaction consists of:
+- **Version**: Identifies consensus rules
+- **Inputs**: References to previous transaction outputs (UTXOs)
+- **Outputs**: Creates new UTXOs with spending conditions
+- **Locktime**: Optional time-based spending restriction
+- **Witness Data** (SegWit): Signature data separated from transaction
+
+For detailed transaction construction, see [Transaction Construction](/docs/bitcoin-development/transactions).
+
+---
+
 ## Transaction States
 
 A transaction goes through several states:

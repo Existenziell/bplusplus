@@ -147,6 +147,11 @@ export const docPages: DocPage[] = [
   { path: '/docs/investment/privacy', mdFile: 'app/docs/investment/privacy/privacy.md', title: 'Privacy', section: 'investment' },
   { path: '/docs/investment/market-cycles', mdFile: 'app/docs/investment/market-cycles/market-cycles.md', title: 'Understanding Market Cycles', section: 'investment' },
 
+  { path: '/docs/adoption', mdFile: 'app/docs/adoption/overview.md', title: 'Bitcoin Adoption', section: 'adoption' },
+  { path: '/docs/adoption/stranded-energy', mdFile: 'app/docs/adoption/stranded-energy/stranded-energy.md', title: 'Stranded Energy and Flared Gas', section: 'adoption' },
+  { path: '/docs/adoption/rural-communities', mdFile: 'app/docs/adoption/rural-communities/rural-communities.md', title: 'Rural Communities and Financial Inclusion', section: 'adoption' },
+  { path: '/docs/adoption/use-cases', mdFile: 'app/docs/adoption/use-cases/use-cases.md', title: 'Bitcoin Use Cases', section: 'adoption' },
+
   { path: '/docs/glossary', mdFile: 'app/docs/glossary/terms.md', title: 'Glossary', section: 'glossary' },
 ]
 
@@ -195,6 +200,10 @@ export const sections: Record<string, { title: string; description: string }> = 
   investment: {
     title: 'Bitcoin as Investment',
     description: 'Investment strategies, security practices, risk management, and long-term holding strategies for Bitcoin investors.',
+  },
+  adoption: {
+    title: 'Bitcoin Adoption',
+    description: 'Real-world examples of Bitcoin adoption, from stranded energy mining to financial inclusion in rural communities.',
   },
   glossary: {
     title: 'Bitcoin Glossary',
@@ -332,6 +341,11 @@ export const navItems: NavSection[] = [
     title: 'Investment',
     href: '/docs/investment',
     children: docPages.filter(p => p.section === 'investment' && p.path !== '/docs/investment').map(p => ({ title: p.title, href: p.path })),
+  },
+  {
+    title: 'Adoption',
+    href: '/docs/adoption',
+    children: docPages.filter(p => p.section === 'adoption' && p.path !== '/docs/adoption').map(p => ({ title: p.title, href: p.path })),
   },
 ]
 

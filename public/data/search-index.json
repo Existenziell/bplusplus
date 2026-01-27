@@ -319,7 +319,7 @@
     "path": "/docs/bitcoin/transaction-lifecycle",
     "title": "Transaction Lifecycle",
     "section": "bitcoin",
-    "body": "Transaction Lifecycle Understanding the complete lifecycle of a Bitcoin transaction helps developers build robust applications and users understand what happens when they send bitcoin. Transaction States A transaction goes through several states: Created → 2. Signed → 3. Broadcast → 4. Mempool → Pending → 6. Confirmed → 7. Deeply Confirmed State Transitions 1. Created Transaction is constructed but not signed: Status: Created Inputs selected Outputs defined Fees calculated Not yet signed 2. "
+    "body": "Transaction Lifecycle Understanding the complete lifecycle of a Bitcoin transaction helps developers build robust applications and users understand what happens when they send bitcoin. Transaction Structure A Bitcoin transaction consists of: Version: Identifies consensus rules Inputs: References to previous transaction outputs (UTXOs) Outputs: Creates new UTXOs with spending conditions Locktime: Optional time-based spending restriction Witness Data (SegWit): Signature data separated from "
   },
   {
     "path": "/docs/bitcoin/script",
@@ -369,7 +369,7 @@
     "path": "/docs/bitcoin/blocks",
     "title": "Block Propagation",
     "section": "bitcoin",
-    "body": "Block Propagation This document explains how blocks propagate through the Bitcoin network, including the gossip protocol, validation process, and orphan block handling. Block Propagation Flow 1. Block Discovery and Initial Broadcast When a miner finds a new block: Miner solves proof-of-work puzzle: Finds a valid nonce Creates valid block: Includes transactions from mempool Immediately broadcasts: Sends to all connected peers (8-10 first-hop nodes) First-hop nodes validate: Each node checks the "
+    "body": "Block Propagation This document explains how blocks propagate through the Bitcoin network, including the gossip protocol, validation process, and orphan block handling. Block Structure A Bitcoin block consists of: Block Header (80 bytes): Contains version, previous block hash, merkle root, timestamp, difficulty target, and nonce Transaction Count: Variable-length integer indicating number of transactions Transactions: List of transactions, starting with the coinbase transaction The block header "
   },
   {
     "path": "/docs/bitcoin/subsidy",
@@ -705,7 +705,7 @@
     "path": "/docs/bitcoin-development",
     "title": "Bitcoin Development",
     "section": "bitcoin-development",
-    "body": "Bitcoin Development How to build apps. This section covers practical Bitcoin development tasks, the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more. Core Development Tasks Key Management Securely generate, store, and manage Bitcoin private keys. Learn about key derivation, encryption, and hardware wallet "
+    "body": "Bitcoin Development This section covers practical Bitcoin development tasks, the building blocks you'll use when creating Bitcoin applications. These guides focus on hands-on implementation: constructing transactions, managing keys, generating addresses, working with PSBTs, monitoring the blockchain, and more. Core Development Tasks Key Management Securely generate, store, and manage Bitcoin private keys. Learn about key derivation, encryption, and hardware wallet integration. Key topics: "
   },
   {
     "path": "/docs/bitcoin-development/keys",
@@ -927,6 +927,30 @@
     "title": "Understanding Market Cycles",
     "section": "investment",
     "body": "Understanding Market Cycles Bitcoin's price is characterized by extreme volatility and cyclical patterns. Understanding these cycles (driven by halving events, market psychology, and adoption waves) can help you navigate Bitcoin's market without making emotional decisions. Bitcoin's Volatility Why Bitcoin is Volatile Bitcoin's volatility comes from several factors: Small market cap: Compared to traditional assets, Bitcoin's market cap is relatively small. This means large buy or sell orders can "
+  },
+  {
+    "path": "/docs/adoption",
+    "title": "Bitcoin Adoption",
+    "section": "adoption",
+    "body": "Bitcoin Adoption Bitcoin is more than code and cryptography. It's a tool being used by real people to solve real problems. From energy producers monetizing waste to rural communities accessing financial services, Bitcoin adoption is happening in diverse and innovative ways around the world. Why Real-World Examples Matter Understanding Bitcoin's technical foundations is essential, but seeing how Bitcoin is actually used reveals its practical value: Energy Innovation: Bitcoin mining is turning "
+  },
+  {
+    "path": "/docs/adoption/stranded-energy",
+    "title": "Stranded Energy and Flared Gas",
+    "section": "adoption",
+    "body": "Stranded Energy and Flared Gas Bitcoin mining has a unique property: it can monetize energy that would otherwise be wasted. This creates economic value from stranded energy sources like flared natural gas, excess hydroelectric capacity, and curtailed renewable generation. Bitcoin mine in remote Zambia What is Stranded Energy? Stranded energy is energy that is produced but cannot be economically used, stored, or transmitted. Common sources include: Flared natural gas: Gas produced at oil wells "
+  },
+  {
+    "path": "/docs/adoption/rural-communities",
+    "title": "Rural Communities and Financial Inclusion",
+    "section": "adoption",
+    "body": "Rural Communities and Financial Inclusion Bitcoin, combined with the Lightning Network, is enabling financial services for communities that traditional banking has failed to serve. From remittances to savings to daily payments, Bitcoin is providing financial access to billions of people worldwide. The Banking Gap The Problem Over 1.7 billion adults worldwide lack access to traditional banking services. They face: No bank accounts: Banks don't operate in remote or underserved areas High fees: "
+  },
+  {
+    "path": "/docs/adoption/use-cases",
+    "title": "Bitcoin Use Cases",
+    "section": "adoption",
+    "body": "Bitcoin Use Cases Bitcoin adoption spans individuals, businesses, and nations. From remittances to corporate treasuries to national adoption, Bitcoin is being used in diverse and innovative ways. Remittances The Global Remittance Market Remittances (money sent by migrant workers to their families) total over $800 billion annually. Traditional remittances face: High fees: Average 6-10%, often much higher for small amounts Slow transfers: Can take days or weeks Limited access: Recipients may need "
   },
   {
     "path": "/docs/glossary",

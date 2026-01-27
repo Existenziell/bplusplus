@@ -8,7 +8,7 @@ export interface ProcessedTransaction {
   vsize: number // Virtual size in vBytes
   fee: number // Fee in BTC
   feeRate: number // Fee rate in sat/vB
-  value: number // Total output value in BTC
+  value: number // Total input value in BTC (economic value being moved)
 }
 
 export interface ProcessedBlock {
@@ -35,13 +35,49 @@ export function calculateTransactionFeeRate(tx: {
 }
 
 /**
- * Calculate total output value from transaction outputs.
+ * Calculate total input value from transaction inputs.
+ * This represents the total economic value being moved in the transaction.
+ * For coinbase transactions (which have no inputs), returns the output value.
  */
-export function calculateTransactionValue(vout: Array<{ value?: number }>): number {
-  if (!vout || vout.length === 0) {
-    return 0
+export function calculateTransactionValue(
+  vin: Array<{ prevout?: { value?: number }; coinbase?: string }> | undefined,
+  vout: Array<{ value?: number }> | undefined,
+  fee?: number
+): number {
+  // For coinbase transactions (first tx in block, has coinbase field instead of inputs)
+  // Use output value (block reward + fees)
+  if (vin && vin.length > 0 && vin[0].coinbase) {
+    if (!vout || vout.length === 0) {
+      return 0
+    }
+    return vout.reduce((sum, output) => sum + (output.value || 0), 0)
   }
-  return vout.reduce((sum, output) => sum + (output.value || 0), 0)
+
+  // For regular transactions, calculate from inputs (total value being moved)
+  // This is more accurate than summing outputs, which includes change
+  if (vin && vin.length > 0) {
+    const inputValue = vin.reduce((sum, input) => {
+      if (input.prevout && input.prevout.value !== undefined) {
+        return sum + input.prevout.value
+      }
+      return sum
+    }, 0)
+    
+    // If we have input values, use them (more accurate)
+    if (inputValue > 0) {
+      return inputValue
+    }
+  }
+
+  // Fallback: if inputs aren't available, calculate from outputs + fee
+  // This approximates input value but is less accurate
+  if (vout && vout.length > 0) {
+    const outputValue = vout.reduce((sum, output) => sum + (output.value || 0), 0)
+    // Add fee to get approximate input value
+    return outputValue + (fee || 0)
+  }
+
+  return 0
 }
 
 /**
@@ -56,12 +92,13 @@ export function processBlockData(block: {
     txid: string
     vsize: number
     fee?: number
+    vin?: Array<{ prevout?: { value?: number }; coinbase?: string }>
     vout: Array<{ value?: number }>
   }>
 }): ProcessedBlock {
   const transactions: ProcessedTransaction[] = block.tx.map((tx) => {
     const feeRate = calculateTransactionFeeRate(tx)
-    const value = calculateTransactionValue(tx.vout)
+    const value = calculateTransactionValue(tx.vin, tx.vout, tx.fee)
 
     return {
       txid: tx.txid,

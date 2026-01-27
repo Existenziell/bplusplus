@@ -39,6 +39,7 @@ export default function BlockVisualization({ initialBlockHash }: BlockVisualizat
           txid: string
           vsize: number
           fee?: number
+          vin?: Array<{ prevout?: { value?: number }; coinbase?: string }>
           vout: Array<{ value?: number }>
         }>
       }

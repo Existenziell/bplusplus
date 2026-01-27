@@ -274,8 +274,8 @@ export default function TransactionTreemap({
                 width={rectWidth}
                 height={rectHeight}
                 fill={color}
-                stroke={isHovered ? '#f2a900' : 'rgba(255, 255, 255, 0.1)'}
-                strokeWidth={isHovered ? 2 : 0.5}
+                stroke="rgba(255, 255, 255, 0.1)"
+                strokeWidth={0.5}
                 opacity={isHovered ? 0.9 : 0.8}
                 onMouseEnter={() => setHoveredTx(node.data)}
                 onMouseLeave={() => setHoveredTx(null)}

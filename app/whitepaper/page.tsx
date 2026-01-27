@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { DownloadPDFIcon } from '@/app/components/Icons'
+import { DownloadPDFIcon, ExternalLinkIcon } from '@/app/components/Icons'
 
 export default function WhitepaperPage() {
   return (
@@ -16,9 +16,12 @@ export default function WhitepaperPage() {
               href="https://www.metzdowd.com/pipermail/cryptography/2008-October/014810.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-btc hover:underline"
+              className="external group inline-flex items-center text-btc hover:underline"
             >
               cryptography mailing list
+              <span className="inline-block w-0 group-hover:w-3 overflow-hidden transition-all duration-200 ml-0.5">
+                <ExternalLinkIcon className="opacity-0 group-hover:opacity-70 transition-opacity duration-200" />
+              </span>
             </a>
             {' '}on October 31, 2008.
             The Bitcoin network launched on January 3, 2009, when Satoshi mined the{' '}
@@ -26,9 +29,12 @@ export default function WhitepaperPage() {
               href="https://www.blockchain.com/explorer/blocks/btc/0"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-btc hover:underline"
+              className="external group inline-flex items-center text-btc hover:underline"
             >
               Genesis Block
+              <span className="inline-block w-0 group-hover:w-3 overflow-hidden transition-all duration-200 ml-0.5">
+                <ExternalLinkIcon className="opacity-0 group-hover:opacity-70 transition-opacity duration-200" />
+              </span>
             </a>.
           </p>
       </div>
@@ -39,7 +45,7 @@ export default function WhitepaperPage() {
           href="/data/bitcoin.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-primary"
+          className="btn-primary inline-flex items-center"
         >
           <DownloadPDFIcon />
           Open PDF

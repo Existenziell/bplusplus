@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { footerNavLinks, staticNavLinks } from '@/app/utils/navigation'
+import { ExternalLinkIcon } from '@/app/components/Icons'
 
 interface Resource {
   name: string
@@ -44,9 +45,12 @@ export default function Footer() {
                     href={resource.url}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
+                    className='external group inline-flex items-center text-sm text-secondary hover:text-btc transition-colors no-underline hover:underline'
                   >
                     {resource.name}
+                    <span className="inline-block w-0 group-hover:w-3 overflow-hidden transition-all duration-200 ml-0.5">
+                      <ExternalLinkIcon className="opacity-0 group-hover:opacity-70 transition-opacity duration-200" />
+                    </span>
                   </Link>
                 </li>
               ))}

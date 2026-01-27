@@ -351,7 +351,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="external-link group inline-flex items-center"
+          className="external group inline-flex items-center"
           {...props}
         >
           {children}

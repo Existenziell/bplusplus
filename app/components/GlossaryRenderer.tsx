@@ -117,7 +117,7 @@ function DefinitionRenderer({ content }: { content: string }) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-btc hover:underline external-link group inline-flex items-center"
+              className="external group inline-flex items-center text-btc hover:underline"
             >
               {children}
               <span className="inline-block w-0 group-hover:w-3 overflow-hidden transition-all duration-200 ml-0.5">

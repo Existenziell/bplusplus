@@ -114,6 +114,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             autoCorrect="off"
             aria-label="Search"
           />
+          <code className="code-inline px-3">
+            <span className="text-lg inline-block align-middle">⌘</span> + K
+          </code>
           <button
             type="button"
             onClick={onClose}

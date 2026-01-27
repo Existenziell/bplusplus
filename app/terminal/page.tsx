@@ -567,7 +567,7 @@ export default function TerminalPage() {
       </div>
 
       <p className="text-sm text-gray-600 dark:text-gray-400 text-center mt-12 max-w-2xl mx-auto">
-        This emulates <code className="font-mono text-xs bg-gray-200 dark:bg-gray-800 px-1.5 py-0.5 rounded">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.<br />Tab autocomplete is available.
+        This emulates <code className="code-inline text-xs">bitcoin-cli</code>.<br />Commands are sent as JSON-RPC to a public mainnet node.<br />Only read-only RPC methods are available.<br />Tab autocomplete is available.
       </p>
 
       {showMobileWarning && !mobileWarningDismissed && (

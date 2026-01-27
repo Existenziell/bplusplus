@@ -104,6 +104,11 @@ body {
   .modal-card {
     @apply rounded-lg p-6 max-w-md w-full bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700;
   }
+
+  /* Inline code badge - for displaying code/keyboard shortcuts inline */
+  .code-inline {
+    @apply font-mono bg-gray-200 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm text-gray-900 dark:text-gray-300;
+  }
 }
 
 @layer utilities {}

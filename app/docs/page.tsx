@@ -14,7 +14,11 @@ export default function DocsOverviewPage() {
       <div className="mb-8">
         <h1 className="heading-page mb-4">Documentation Search</h1>
         <p className="text-secondary text-lg max-w-3xl">
-          Welcome to the B++ documentation search. Search for topics to discover content that interests you.
+          Welcome to the B++ documentation search. You can also use{` `}
+          <code className="code-inline">
+            <span className="text-lg inline-block align-middle">⌘</span> + K
+          </code>
+          {` `}to open the search modal from anywhere.
         </p>
       </div>
       

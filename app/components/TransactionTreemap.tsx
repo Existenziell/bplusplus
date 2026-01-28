@@ -147,11 +147,14 @@ export default function TransactionTreemap({
       tx: ProcessedTransaction
     }
 
+    const hierarchyData = transactions.map(tx => ({
+      value: getMetricValue(tx), // Use selected metric as the value for treemap sizing
+      tx,
+    }))
+
+
     const root = hierarchy<HierarchyData>({
-      children: transactions.map(tx => ({
-        value: getMetricValue(tx), // Use selected metric as the value for treemap sizing
-        tx,
-      })),
+      children: hierarchyData,
     } as any)
       .sum((d: any) => (d.data?.value || d.value || 0))
       .sort((a: any, b: any) => ((b.value || 0) - (a.value || 0)))

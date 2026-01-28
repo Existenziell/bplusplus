@@ -23,8 +23,9 @@ export default function BlockVisualization({ initialBlockHash }: BlockVisualizat
       setIsRefreshing(true)
       setError(null)
 
-      // Fetch full block with transactions (verbosity 2)
-      const blockResponse = await bitcoinRpc('getblock', [blockHash, 2])
+      // Fetch full block with transactions and prevout data (verbosity 3)
+      // Verbosity 2 doesn't include prevout data, verbosity 3 does (requires undo info)
+      const blockResponse = await bitcoinRpc('getblock', [blockHash, 3])
 
       if (blockResponse.error) {
         throw new Error(blockResponse.error.message || 'Failed to fetch block data')

@@ -244,7 +244,7 @@ export const docsNavLinksTop: { href: string; title: string }[] = [
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/terminal', title: 'CLI Terminal' },
   { href: '/stack-lab', title: 'Stack Lab' },
-  { href: '/block-visual', title: 'Block Visual' },
+  { href: '/block-visualizer', title: 'Block Visualizer' },
 ]
 
 // Docs sidebar - bottom section (site utilities)
@@ -256,7 +256,7 @@ export const docsNavLinksBottom: { href: string; title: string }[] = [
 
 // Horizontal nav - quick links at bottom
 export const horizontalNavLinksBottom: { href: string; title: string }[] = [
-  { href: '/block-visual', title: 'Block Visual' },
+  { href: '/block-visualizer', title: 'Block Visualizer' },
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/author', title: 'About B++' },
   { href: '/feedback', title: 'Feedback' },
@@ -281,7 +281,7 @@ export const footerLinksExplore: { href: string; title: string }[] = [
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/terminal', title: 'CLI Terminal' },
   { href: '/stack-lab', title: 'Stack Lab' },
-  { href: '/block-visual', title: 'Block Visual' },
+  { href: '/block-visualizer', title: 'Block Visualizer' },
   { href: '/docs/glossary', title: 'Glossary' },
   { href: '/author', title: 'About B++' },
   { href: '/feedback', title: 'Feedback' },
@@ -362,7 +362,7 @@ const docRouteLabels = Object.fromEntries(
 export const routeLabels: Record<string, string> = {
   terminal: 'CLI Terminal',
   'stack-lab': 'Stack Lab',
-  'block-visual': 'Block Visual',
+  'block-visualizer': 'Block Visualizer',
   whitepaper: 'Whitepaper',
   author: 'About B++',
   feedback: 'Feedback',

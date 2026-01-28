@@ -94,7 +94,7 @@ export default function LiveStats() {
     {
       label: 'Mempool Txs',
       value: mempoolInfo?.size ? formatNumber(mempoolInfo.size) : null,
-      href: '/block-visual',
+      href: '/block-visualizer',
     },
     {
       label: 'Mempool Size',

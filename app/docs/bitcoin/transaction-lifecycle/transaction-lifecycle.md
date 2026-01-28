@@ -329,7 +329,7 @@ Orphan Transaction:
 ## Related Topics
 
 - [Mempool](/docs/mining/mempool) - Where transactions wait
-- [Block Visual](/block-visual) - See transactions flowing into blocks
+- [Block Visualizer](/block-visualizer) - See transactions flowing into blocks
 - [Transaction Fees](/docs/bitcoin/transaction-fees) - Fee calculation
 - [Block Propagation](/docs/bitcoin/blocks) - How blocks spread
 

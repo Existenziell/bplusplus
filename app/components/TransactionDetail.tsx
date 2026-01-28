@@ -110,8 +110,8 @@ export default function TransactionDetail({ txid }: TransactionDetailProps) {
         <div className="text-center">
           <div className="text-red-600 dark:text-red-400 text-lg mb-2">Error</div>
           <div className="text-secondary text-sm mb-4">{error || 'Transaction not found'}</div>
-          <Link href="/block-visual" className="btn-primary">
-            Back to Block Visualization
+          <Link href="/block-visualizer" className="btn-primary">
+            Back to Block Visualizer
           </Link>
         </div>
       </div>
@@ -128,9 +128,9 @@ export default function TransactionDetail({ txid }: TransactionDetailProps) {
       {/* Header */}
       <div className="flex items-center gap-4 mb-6">
         <Link
-          href="/block-visual"
+          href="/block-visualizer"
           className="p-2 text-secondary hover:text-btc hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all"
-          aria-label="Back to block visualization"
+          aria-label="Back to block visualizer"
         >
           <ChevronLeft className="w-8 h-8" />
         </Link>

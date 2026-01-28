@@ -6,11 +6,11 @@ import { processBlockData, ProcessedBlock } from '@/app/utils/blockUtils'
 import BlockHeader from '@/app/components/BlockHeader'
 import TransactionTreemap from '@/app/components/TransactionTreemap'
 
-interface BlockVisualizationProps {
+interface BlockVisualizerProps {
   initialBlockHash?: string
 }
 
-export default function BlockVisualization({ initialBlockHash }: BlockVisualizationProps) {
+export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerProps) {
   const [blockData, setBlockData] = useState<ProcessedBlock | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `Transaction ${txid.slice(0, 8)}... | B++`,
       description: `Bitcoin transaction details`,
-      url: `${SITE_URL}/block-visual/tx/${txid}`,
+      url: `${SITE_URL}/block-visualizer/tx/${txid}`,
     },
   }
 }

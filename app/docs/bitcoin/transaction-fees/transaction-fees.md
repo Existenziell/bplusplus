@@ -405,7 +405,7 @@ Fees fluctuate based on:
 ## Related Topics
 
 - [Mempool](/docs/mining/mempool) - Where transactions wait
-- [Block Visual](/block-visual) - See transactions flowing into blocks
+- [Block Visualizer](/block-visualizer) - See transactions flowing into blocks
 - [Block Construction](/docs/mining/block-construction) - How miners select transactions
 - [SegWit](/docs/bitcoin/segwit) - Lower fees through weight units
 - [Transaction Lifecycle](/docs/bitcoin/transaction-lifecycle) - Transaction states

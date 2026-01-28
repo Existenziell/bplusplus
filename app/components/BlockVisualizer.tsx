@@ -20,61 +20,64 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
   const [showNewBlockNotification, setShowNewBlockNotification] = useState(false)
   const [newBlockHeight, setNewBlockHeight] = useState<number | null>(null)
 
-  const fetchBlockData = useCallback(async (blockHash: string) => {
-    try {
-      setIsRefreshing(true)
-      setError(null)
+  const fetchBlockData = useCallback(
+    async (blockHash: string) => {
+      try {
+        setIsRefreshing(true)
+        setError(null)
 
-      // Fetch full block with transactions and prevout data (verbosity 3)
-      // Verbosity 2 doesn't include prevout data, verbosity 3 does (requires undo info)
-      const blockResponse = await bitcoinRpc('getblock', [blockHash, 3])
+        // Fetch full block with transactions and prevout data (verbosity 3)
+        // Verbosity 2 doesn't include prevout data, verbosity 3 does (requires undo info)
+        const blockResponse = await bitcoinRpc('getblock', [blockHash, 3])
 
-      if (blockResponse.error) {
-        throw new Error(blockResponse.error.message || 'Failed to fetch block data')
+        if (blockResponse.error) {
+          throw new Error(blockResponse.error.message || 'Failed to fetch block data')
+        }
+
+        const rawBlock = blockResponse.result as {
+          height: number
+          hash: string
+          time: number
+          size: number
+          tx: Array<{
+            txid: string
+            vsize: number
+            fee?: number
+            vin?: Array<{ prevout?: { value?: number }; coinbase?: string }>
+            vout: Array<{ value?: number }>
+          }>
+        }
+
+        const processed = processBlockData(rawBlock)
+
+        // Check if this is a new block (not initial load)
+        const isNewBlock = currentBlockHash !== null && blockHash !== currentBlockHash
+
+        if (isNewBlock) {
+          // Show new block notification
+          setNewBlockHeight(processed.height)
+          setShowNewBlockNotification(true)
+
+          // Hide notification after animation completes
+          setTimeout(() => {
+            setShowNewBlockNotification(false)
+          }, 3000) // Show for 3 seconds
+        }
+
+        setBlockData(processed)
+        setCurrentBlockHash(blockHash)
+        setLastUpdated(new Date())
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Failed to fetch block data'
+        setError(errorMessage)
+        console.error('Error fetching block data:', err)
+      } finally {
+        setLoading(false)
+        setIsRefreshing(false)
       }
-
-      const rawBlock = blockResponse.result as {
-        height: number
-        hash: string
-        time: number
-        size: number
-        tx: Array<{
-          txid: string
-          vsize: number
-          fee?: number
-          vin?: Array<{ prevout?: { value?: number }; coinbase?: string }>
-          vout: Array<{ value?: number }>
-        }>
-      }
-
-      const processed = processBlockData(rawBlock)
-      
-      // Check if this is a new block (not initial load)
-      const isNewBlock = currentBlockHash !== null && blockHash !== currentBlockHash
-      
-      if (isNewBlock) {
-        // Show new block notification
-        setNewBlockHeight(processed.height)
-        setShowNewBlockNotification(true)
-        
-        // Hide notification after animation completes
-        setTimeout(() => {
-          setShowNewBlockNotification(false)
-        }, 3000) // Show for 3 seconds
-      }
-      
-      setBlockData(processed)
-      setCurrentBlockHash(blockHash)
-      setLastUpdated(new Date())
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch block data'
-      setError(errorMessage)
-      console.error('Error fetching block data:', err)
-    } finally {
-      setLoading(false)
-      setIsRefreshing(false)
-    }
-  }, [])
+    },
+    [currentBlockHash]
+  )
 
   const fetchLatestBlock = useCallback(async () => {
     try {

@@ -555,6 +555,14 @@
     "term": "MPP (Multi-Part Payment)",
     "definition": "A Lightning Network feature that allows splitting a large payment into multiple smaller parts that route independently through different paths, then recombine at the destination. This improves payment success rates by utilizing multiple channels' liquidity simultaneously and enables payments larger..."
   },
+  "magic-internet-money": {
+    "term": "Magic Internet Money",
+    "definition": "A satirical term used to describe Bitcoin, often employed both by Bitcoiners (as self-deprecating humor) and critics (as dismissal). The phrase acknowledges Bitcoin's seemingly impossible nature (digital scarcity without a central issuer, global transfers without intermediaries) while hinting at..."
+  },
+  "meme": {
+    "term": "Meme",
+    "definition": "In Richard Dawkins' original definition, a meme is a unit of cultural transmission—an idea, behavior, or style that spreads from person to person within a culture. Bitcoin functions as a powerful meme: an idea that replicates itself through human minds, spreading from person to person, generation..."
+  },
   "miniscript": {
     "term": "Miniscript",
     "definition": "A structured language for writing Bitcoin Scripts that is easier to analyze, compose, and reason about than raw Script. Miniscript maps to a subset of valid Bitcoin Script but provides guarantees about spending conditions, costs, and required signatures that would be difficult to determine from raw..."
@@ -618,6 +626,10 @@
   "op-return": {
     "term": "OP_RETURN",
     "definition": "An opcode that marks a transaction output as provably unspendable, allowing data to be embedded in transactions without bloating the UTXO set. Since OP_RETURN outputs can never be spent, nodes can safely discard them rather than tracking them forever...."
+  },
+  "orange-pill": {
+    "term": "Orange Pill",
+    "definition": "A reference to The Matrix, where taking the red pill means seeing reality as it truly is. The \"orange pill\" refers to the process of someone \"waking up\" to Bitcoin's implications: recognizing Bitcoin's unique properties, understanding its potential, and becoming convinced of its importance...."
   },
   "opcode": {
     "term": "OPCODE",

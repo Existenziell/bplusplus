@@ -77,6 +77,7 @@ We're still in the early stages of this cycle. Each new use case strengthens Bit
 - [Lightning Network](/docs/lightning) - Fast, cheap payments
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin enables trustless transactions
 - [Decentralization](/docs/fundamentals/decentralization) - Why Bitcoin can't be stopped
+- [Bitcoin, the Meme](/docs/fundamentals/bitcoin-meme) - How ideas and culture drive adoption
 
 ---
 

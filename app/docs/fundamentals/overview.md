@@ -112,6 +112,8 @@ It unlocks the **true power of human cooperation**: voluntary exchange based on 
 
 Once the concept of sound, digital, decentralized money enters someone's mind, it cannot be unseen. It spreads from person to person, generation to generation, border to border.
 
+See [Bitcoin, the Meme](/docs/fundamentals/bitcoin-meme) for how these ideas spread and the cultural memes that have emerged.
+
 ### The Threat
 
 Bitcoin is under **constant attack** from the most sophisticated entities on this planet:
@@ -143,3 +145,4 @@ Dive deeper into the core concepts that make Bitcoin work:
 - [Denominations](/docs/fundamentals/denominations) - Bitcoin units from satoshis to BTC and how to convert between them
 - [Incentive Structure](/docs/fundamentals/incentives) - How economic incentives shape Bitcoin's security
 - [Game Theory](/docs/fundamentals/game-theory) - How strategic decision-making secures the Bitcoin network
+- [Bitcoin, the Meme](/docs/fundamentals/bitcoin-meme) - How Bitcoin functions as a powerful idea that spreads through culture

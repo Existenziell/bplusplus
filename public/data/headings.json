@@ -359,6 +359,24 @@
       "slug": "related-topics"
     }
   ],
+  "/docs/fundamentals/bitcoin-meme": [
+    {
+      "title": "The Orange Pill",
+      "slug": "the-orange-pill"
+    },
+    {
+      "title": "\"Magic Internet Money\" & Other Memes",
+      "slug": "magic-internet-money-other-memes"
+    },
+    {
+      "title": "Memes, Education, and Adoption",
+      "slug": "memes-education-and-adoption"
+    },
+    {
+      "title": "Related Topics",
+      "slug": "related-topics"
+    }
+  ],
   "/docs/history": [
     {
       "title": "2008",

@@ -42,6 +42,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/fundamentals/denominations', mdFile: 'app/docs/fundamentals/denominations/denominations.md', title: 'Denominations', section: 'fundamentals' },
   { path: '/docs/fundamentals/incentives', mdFile: 'app/docs/fundamentals/incentives/incentives.md', title: 'Incentive Structure', section: 'fundamentals' },
   { path: '/docs/fundamentals/game-theory', mdFile: 'app/docs/fundamentals/game-theory/game-theory.md', title: 'Game Theory', section: 'fundamentals' },
+  { path: '/docs/fundamentals/bitcoin-meme', mdFile: 'app/docs/fundamentals/bitcoin-meme/bitcoin-meme.md', title: 'Bitcoin, the Meme', section: 'fundamentals' },
 
   { path: '/docs/history', mdFile: 'app/docs/history/overview.md', title: 'Bitcoin History', section: 'history' },
   { path: '/docs/history/people', mdFile: 'app/docs/history/people/people.md', title: 'People', section: 'history' },

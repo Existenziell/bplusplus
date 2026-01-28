@@ -254,6 +254,12 @@
     "body": "Game Theory Game theory is the mathematical study of strategic decision-making. In Bitcoin, game theory explains why the network remains secure even when participants are anonymous, potentially malicious, and have no reason to trust each other. Bitcoin's design creates a system where rational self-interest naturally leads to honest behavior and network security. Why Game Theory Matters for Bitcoin Traditional financial systems rely on legal enforcement, trusted authorities, and institutional "
   },
   {
+    "path": "/docs/fundamentals/bitcoin-meme",
+    "title": "Bitcoin, the Meme",
+    "section": "fundamentals",
+    "body": "Bitcoin, the Meme Bitcoin is more than code and cryptography. It's a meme in the original sense: an idea that replicates itself through human minds, spreading from person to person, generation to generation, border to border. As described in Bitcoin Fundamentals, Bitcoin embodies the idea that a fixed set of rules can exist around which entire societies can be built, rules that no government, corporation, or individual can change. Once the concept of sound, digital, decentralized money enters "
+  },
+  {
     "path": "/docs/history",
     "title": "Bitcoin History",
     "section": "history",
@@ -1849,6 +1855,18 @@
     "body": "A Lightning Network feature that allows splitting a large payment into multiple smaller parts that route independently through different paths, then recombine at the destination. This improves payment success rates by utilizing multiple channels' liquidity simultaneously and enables payments larger..."
   },
   {
+    "path": "/docs/glossary#magic-internet-money",
+    "title": "Magic Internet Money",
+    "section": "glossary",
+    "body": "A satirical term used to describe Bitcoin, often employed both by Bitcoiners (as self-deprecating humor) and critics (as dismissal). The phrase acknowledges Bitcoin's seemingly impossible nature (digital scarcity without a central issuer, global transfers without intermediaries) while hinting at..."
+  },
+  {
+    "path": "/docs/glossary#meme",
+    "title": "Meme",
+    "section": "glossary",
+    "body": "In Richard Dawkins' original definition, a meme is a unit of cultural transmission—an idea, behavior, or style that spreads from person to person within a culture. Bitcoin functions as a powerful meme: an idea that replicates itself through human minds, spreading from person to person, generation..."
+  },
+  {
     "path": "/docs/glossary#miniscript",
     "title": "Miniscript",
     "section": "glossary",
@@ -1943,6 +1961,12 @@
     "title": "OP_RETURN",
     "section": "glossary",
     "body": "An opcode that marks a transaction output as provably unspendable, allowing data to be embedded in transactions without bloating the UTXO set. Since OP_RETURN outputs can never be spent, nodes can safely discard them rather than tracking them forever...."
+  },
+  {
+    "path": "/docs/glossary#orange-pill",
+    "title": "Orange Pill",
+    "section": "glossary",
+    "body": "A reference to The Matrix, where taking the red pill means seeing reality as it truly is. The \"orange pill\" refers to the process of someone \"waking up\" to Bitcoin's implications: recognizing Bitcoin's unique properties, understanding its potential, and becoming convinced of its importance...."
   },
   {
     "path": "/docs/glossary#opcode",

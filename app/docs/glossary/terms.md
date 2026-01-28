@@ -465,6 +465,12 @@ A multi-signature scheme using Schnorr signatures that allows multiple parties t
 ### MPP (Multi-Part Payment)
 A Lightning Network feature that allows splitting a large payment into multiple smaller parts that route independently through different paths, then recombine at the destination. This improves payment success rates by utilizing multiple channels' liquidity simultaneously and enables payments larger than any single channel's capacity. The receiver waits until all parts arrive before revealing the preimage, ensuring atomicity: either the entire payment completes or none of it does.
 
+### Magic Internet Money
+A satirical term used to describe Bitcoin, often employed both by Bitcoiners (as self-deprecating humor) and critics (as dismissal). The phrase acknowledges Bitcoin's seemingly impossible nature (digital scarcity without a central issuer, global transfers without intermediaries) while hinting at its power. Despite the humorous framing, Bitcoin represents serious technology: cryptography, proof-of-work, and game-theoretic security. See [Bitcoin, the Meme](/docs/fundamentals/bitcoin-meme) for how memes function in Bitcoin culture.
+
+### Meme
+In Richard Dawkins' original definition, a meme is a unit of cultural transmission—an idea, behavior, or style that spreads from person to person within a culture. Bitcoin functions as a powerful meme: an idea that replicates itself through human minds, spreading from person to person, generation to generation, border to border. Bitcoin's memetic power comes from simple core narratives (21 million, "don't trust, verify"), clear antagonists (inflation, censorship), and visible success (network uptime, adoption growth). See [Bitcoin, the Meme](/docs/fundamentals/bitcoin-meme) for how Bitcoin functions as a meme and the cultural expressions that have emerged.
+
 ### Miniscript
 A structured language for writing Bitcoin Scripts that is easier to analyze, compose, and reason about than raw Script. Miniscript maps to a subset of valid Bitcoin Script but provides guarantees about spending conditions, costs, and required signatures that would be difficult to determine from raw opcodes. Wallets can automatically analyze Miniscript policies to determine all possible spending paths and compute worst-case transaction sizes for fee estimation.
 
@@ -520,6 +526,9 @@ A well-known phrase in Bitcoin, stressing that if you don't control your private
 
 ### OP_RETURN
 An opcode that marks a transaction output as provably unspendable, allowing data to be embedded in transactions without bloating the UTXO set. Since OP_RETURN outputs can never be spent, nodes can safely discard them rather than tracking them forever. This provides a way to store small amounts of data (up to 80 bytes per output) on the blockchain for timestamping, asset protocols, or other applications.
+
+### Orange Pill
+A reference to *The Matrix*, where taking the red pill means seeing reality as it truly is. The "orange pill" refers to the process of someone "waking up" to Bitcoin's implications: recognizing Bitcoin's unique properties, understanding its potential, and becoming convinced of its importance. The journey typically moves from skepticism to curiosity to deep investigation of Bitcoin's technical and economic foundations. The color orange references Bitcoin's logo and branding, but also represents the "awakening" process. See [Bitcoin, the Meme](/docs/fundamentals/bitcoin-meme) for how the orange pill process drives adoption and education.
 
 ### OPCODE
 A single operation in Bitcoin's stack-based scripting language, used to define spending conditions for transaction outputs. Each opcode performs a specific function: OP_DUP duplicates the top stack item, OP_HASH160 hashes it, OP_CHECKSIG verifies a signature, OP_IF enables conditional execution, and so on. Standard transactions use well-known opcode patterns (like P2PKH or P2WPKH), while more complex contracts combine opcodes to create multisig, time locks, or hash locks.

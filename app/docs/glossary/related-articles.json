@@ -6,5 +6,8 @@
   "miniscript": "/docs/bitcoin-development/miniscript",
   "psbt-partially-signed-bitcoin-transaction": "/docs/bitcoin-development/psbt",
   "taproot": "/docs/bitcoin/taproot",
-  "segwit-segregated-witness": "/docs/bitcoin/segwit"
+  "segwit-segregated-witness": "/docs/bitcoin/segwit",
+  "orange-pill": "/docs/fundamentals/bitcoin-meme",
+  "magic-internet-money": "/docs/fundamentals/bitcoin-meme",
+  "meme": "/docs/fundamentals/bitcoin-meme"
 }

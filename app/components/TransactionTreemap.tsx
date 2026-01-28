@@ -6,22 +6,41 @@ import { hierarchy, treemap } from 'd3-hierarchy'
 import { scaleSequential } from 'd3-scale'
 import { interpolateRgb } from 'd3-interpolate'
 import { ProcessedTransaction } from '@/app/utils/blockUtils'
-import { formatNumber } from '@/app/utils/formatting'
+import { formatNumber, formatPrice } from '@/app/utils/formatting'
 import { truncateHash } from '@/app/utils/blockUtils'
 
 // Modern poppy color palettes - one for each metric
+// Using multiple color stops for wider gradient range
 const COLOR_PALETTES = {
   vbytes: {
-    light: '#a5f3fc', // Light cyan
-    bright: '#06b6d4', // Bright cyan
+    stops: [
+      '#e0f7fa', // Very light cyan
+      '#b2ebf2', // Light cyan
+      '#4dd0e1', // Medium cyan
+      '#00bcd4', // Cyan
+      '#0097a7', // Dark cyan
+      '#006064', // Very dark cyan
+    ],
   },
   value: {
-    light: '#fbcfe8', // Light pink/magenta
-    bright: '#ec4899', // Bright pink/magenta
+    stops: [
+      '#fce4ec', // Very light pink
+      '#f8bbd0', // Light pink
+      '#f48fb1', // Medium pink
+      '#ec407a', // Pink
+      '#c2185b', // Dark pink
+      '#880e4f', // Very dark pink
+    ],
   },
   fee: {
-    light: '#e9d5ff', // Light purple
-    bright: '#a855f7', // Bright purple
+    stops: [
+      '#f3e5f5', // Very light purple
+      '#e1bee7', // Light purple
+      '#ce93d8', // Medium purple
+      '#ba68c8', // Purple
+      '#9c27b0', // Dark purple
+      '#6a1b9a', // Very dark purple
+    ],
   },
 }
 
@@ -51,8 +70,26 @@ export default function TransactionTreemap({
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [containerWidth, setContainerWidth] = useState(800)
   const [sizeMetric, setSizeMetric] = useState<SizeMetric>('vbytes')
+  const [btcPrice, setBtcPrice] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
+
+  // Fetch BTC price for USD conversion
+  useEffect(() => {
+    const fetchBtcPrice = async () => {
+      try {
+        const response = await fetch('/api/btc-price')
+        const data = await response.json()
+        if (data.price) {
+          setBtcPrice(data.price)
+        }
+      } catch (error) {
+        console.error('Failed to fetch BTC price:', error)
+      }
+    }
+
+    fetchBtcPrice()
+  }, [])
 
   // Calculate responsive width
   useEffect(() => {
@@ -120,20 +157,28 @@ export default function TransactionTreemap({
     return [min, max]
   }, [transactions, sizeMetric])
 
-  // Monochromatic color interpolator based on selected metric
-  const monochromaticInterpolator = (t: number): string => {
+  // Multi-stop color interpolator for wider gradient range
+  const multiStopInterpolator = (t: number): string => {
     const palette = COLOR_PALETTES[sizeMetric]
-    // Interpolate from light to bright color for a modern monochromatic look
-    return interpolateRgb(palette.light, palette.bright)(t)
+    const stops = palette.stops
+    const numStops = stops.length
+    
+    // Calculate which segment of the gradient we're in
+    const segmentSize = 1 / (numStops - 1)
+    const segmentIndex = Math.min(Math.floor(t / segmentSize), numStops - 2)
+    const segmentT = (t - segmentIndex * segmentSize) / segmentSize
+    
+    // Interpolate between the two stops in this segment
+    return interpolateRgb(stops[segmentIndex], stops[segmentIndex + 1])(segmentT)
   }
 
-  // Create color scale based on selected metric using appropriate color palette
+  // Create color scale based on selected metric using multi-stop palette
   const colorScale = useMemo(() => {
     const palette = COLOR_PALETTES[sizeMetric]
     if (metricRange[1] === metricRange[0]) {
-      return () => palette.bright // Default bright color if all same
+      return () => palette.stops[palette.stops.length - 1] // Default to darkest color if all same
     }
-    return scaleSequential(monochromaticInterpolator)
+    return scaleSequential(multiStopInterpolator)
       .domain([metricRange[0], metricRange[1]])
   }, [metricRange, sizeMetric])
 
@@ -238,7 +283,7 @@ export default function TransactionTreemap({
       <div className="mb-4 flex items-center justify-between flex-wrap gap-4">
         <div className="flex items-center gap-2">
           <label htmlFor="size-metric" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Size blocks by:
+            Sort tx blocks by:
           </label>
           <select
             id="size-metric"
@@ -246,9 +291,9 @@ export default function TransactionTreemap({
             onChange={(e) => setSizeMetric(e.target.value as SizeMetric)}
             className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent"
           >
-            <option value="vbytes">Transaction vBytes</option>
-            <option value="value">Transaction BTC Amount</option>
-            <option value="fee">Transaction Fee</option>
+            <option value="vbytes">vBytes</option>
+            <option value="value">BTC Amount</option>
+            <option value="fee">Fee</option>
           </select>
         </div>
       </div>
@@ -320,22 +365,28 @@ export default function TransactionTreemap({
               <span className="text-gray-400">TXID:</span>{' '}
               <code className="text-xs break-all">{hoveredTx.txid}</code>
             </div>
-            <div>
-              <span className="text-gray-400">Size:</span>{' '}
+            <div className={sizeMetric === 'vbytes' ? 'font-semibold text-white bg-gray-700 dark:bg-gray-600 rounded px-1.5 py-0.5' : ''}>
+              <span className={sizeMetric === 'vbytes' ? 'text-gray-300' : 'text-gray-400'}>Size:</span>{' '}
               {formatNumber(hoveredTx.vsize)} vB
             </div>
             <div>
               <span className="text-gray-400">Fee Rate:</span>{' '}
               {formatNumber(hoveredTx.feeRate)} sat/vB
             </div>
-            <div>
-              <span className="text-gray-400">Fee:</span>{' '}
+            <div className={sizeMetric === 'fee' ? 'font-semibold text-white bg-gray-700 dark:bg-gray-600 rounded px-1.5 py-0.5' : ''}>
+              <span className={sizeMetric === 'fee' ? 'text-gray-300' : 'text-gray-400'}>Fee:</span>{' '}
               {(hoveredTx.fee * 100000000).toFixed(0)} sats
+              {btcPrice && (
+                <span> ({formatPrice(hoveredTx.fee * btcPrice)})</span>
+              )}
             </div>
             {hoveredTx.value > 0 && (
-              <div>
-                <span className="text-gray-400">Value:</span>{' '}
+              <div className={sizeMetric === 'value' ? 'font-semibold text-white bg-gray-700 dark:bg-gray-600 rounded px-1.5 py-0.5' : ''}>
+                <span className={sizeMetric === 'value' ? 'text-gray-300' : 'text-gray-400'}>Value:</span>{' '}
                 {hoveredTx.value.toFixed(8)} BTC
+                {btcPrice && (
+                  <span> ({formatPrice(hoveredTx.value * btcPrice)})</span>
+                )}
               </div>
             )}
           </div>
@@ -347,13 +398,13 @@ export default function TransactionTreemap({
         <div className="flex items-center gap-4 flex-wrap">
           <div className="flex items-center gap-2">
             {sizeMetric === 'vbytes' && (
-              <div className="w-4 h-4 rounded bg-gradient-to-r from-cyan-200 to-cyan-500"></div>
+              <div className="w-4 h-4 rounded bg-gradient-to-r from-cyan-100 via-cyan-300 to-cyan-600"></div>
             )}
             {sizeMetric === 'value' && (
-              <div className="w-4 h-4 rounded bg-gradient-to-r from-pink-200 to-pink-500"></div>
+              <div className="w-4 h-4 rounded bg-gradient-to-r from-pink-100 via-pink-300 to-pink-600"></div>
             )}
             {sizeMetric === 'fee' && (
-              <div className="w-4 h-4 rounded bg-gradient-to-r from-purple-200 to-purple-500"></div>
+              <div className="w-4 h-4 rounded bg-gradient-to-r from-purple-100 via-purple-300 to-purple-600"></div>
             )}
             <span className="text-secondary">Color = {getColorLabel()}</span>
           </div>

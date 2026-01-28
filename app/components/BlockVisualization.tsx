@@ -17,6 +17,8 @@ export default function BlockVisualization({ initialBlockHash }: BlockVisualizat
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [currentBlockHash, setCurrentBlockHash] = useState<string | null>(initialBlockHash || null)
+  const [showNewBlockNotification, setShowNewBlockNotification] = useState(false)
+  const [newBlockHeight, setNewBlockHeight] = useState<number | null>(null)
 
   const fetchBlockData = useCallback(async (blockHash: string) => {
     try {
@@ -46,6 +48,21 @@ export default function BlockVisualization({ initialBlockHash }: BlockVisualizat
       }
 
       const processed = processBlockData(rawBlock)
+      
+      // Check if this is a new block (not initial load)
+      const isNewBlock = currentBlockHash !== null && blockHash !== currentBlockHash
+      
+      if (isNewBlock) {
+        // Show new block notification
+        setNewBlockHeight(processed.height)
+        setShowNewBlockNotification(true)
+        
+        // Hide notification after animation completes
+        setTimeout(() => {
+          setShowNewBlockNotification(false)
+        }, 3000) // Show for 3 seconds
+      }
+      
       setBlockData(processed)
       setCurrentBlockHash(blockHash)
       setLastUpdated(new Date())
@@ -132,7 +149,46 @@ export default function BlockVisualization({ initialBlockHash }: BlockVisualizat
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
+      {/* New Block Notification */}
+      {showNewBlockNotification && newBlockHeight !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl border-2 border-btc max-w-md w-full mx-4 animate-scaleIn">
+            <div className="text-center">
+              {/* Animated Block Icon */}
+              <div className="mb-6 flex justify-center">
+                <div className="relative">
+                  <div className="w-20 h-20 bg-btc rounded-lg shadow-lg animate-bounce flex items-center justify-center">
+                    <svg
+                      className="w-12 h-12 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                      />
+                    </svg>
+                  </div>
+                  {/* Pulse effect */}
+                  <div className="absolute inset-0 w-20 h-20 bg-btc rounded-lg opacity-20 animate-ping"></div>
+                </div>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-btc mb-2">New Block Mined!</h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-1">
+                Block #{newBlockHeight.toLocaleString()}
+              </p>
+              <p className="text-sm text-secondary">Loading block data...</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <BlockHeader
         height={blockData.height}
         hash={blockData.hash}

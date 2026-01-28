@@ -363,7 +363,7 @@ export default function TransactionTreemap({
           <div className="space-y-1">
             <div>
               <span className="text-gray-400">TXID:</span>{' '}
-              <code className="text-xs break-all">{hoveredTx.txid}</code>
+              <code className="text-xs break-all">{truncateHash(hoveredTx.txid)}</code>
             </div>
             <div className={sizeMetric === 'vbytes' ? 'font-semibold text-white bg-gray-700 dark:bg-gray-600 rounded px-1.5 py-0.5' : ''}>
               <span className={sizeMetric === 'vbytes' ? 'text-gray-300' : 'text-gray-400'}>Size:</span>{' '}

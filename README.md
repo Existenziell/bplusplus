@@ -1,11 +1,11 @@
-# B++
+# BitcoinDev
 
 Bitcoin Education without borders.
 An open-source developer's guide to Bitcoin, from fundamentals to advanced protocol, built to be always free and open source.
 
 ## Contents
 
-- [What is B++](#what-is-b)
+- [What is BitcoinDev](#what-is-bitcoindev)
 - [Interactive Tools](#interactive-tools)
   - [Bitcoin CLI Terminal](#bitcoin-cli-terminal)
   - [Stack Lab](#stack-lab)
@@ -21,7 +21,7 @@ An open-source developer's guide to Bitcoin, from fundamentals to advanced proto
 
 ---
 
-## What is B++
+## What is BitcoinDev
 
 - **Documentation**: A Developer's Guide to Bitcoin
 - **Whitepaper**: Satoshi’s Bitcoin whitepaper.
@@ -84,8 +84,8 @@ One dynamic route (`app/docs/[...slug]/page.tsx`) backed by `app/utils/navigatio
 **Prerequisites:** Node.js 20.9+, npm / yarn / pnpm / bun
 
 ```bash
-git clone https://github.com/Existenziell/bplusplus.git
-cd bplusplus
+git clone https://github.com/Existenziell/bitcoindev.git
+cd bitcoindev
 npm install
 npm run dev    # → http://localhost:3000
 ```

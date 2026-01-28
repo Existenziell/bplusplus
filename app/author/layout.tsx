@@ -4,7 +4,7 @@ import { generatePageMetadata } from '@/app/utils/metadata'
 import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
 
 export const metadata: Metadata = generatePageMetadata({
-  title: 'About B++',
+  title: 'About BitcoinDev',
   description:
     'Giving back to the Bitcoin community 💛',
   path: '/author',

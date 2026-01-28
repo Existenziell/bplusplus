@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 test.describe('Home', () => {
   test('loads with title and primary CTAs', async ({ page }) => {
     await page.goto('/')
-    await expect(page).toHaveTitle(/B\+\+/)
+    await expect(page).toHaveTitle(/BitcoinDev/)
 
     await expect(page.getByRole('link', { name: /Start Learning/i })).toHaveAttribute(
       'href',
@@ -19,9 +19,9 @@ test.describe('Home', () => {
     )
   })
 
-  test('Explore B++ expands HorizontalNav', async ({ page }) => {
+  test('Explore BitcoinDev expands HorizontalNav', async ({ page }) => {
     await page.goto('/')
-    const toggle = page.getByRole('button', { name: /Explore B\+\+/i })
+    const toggle = page.getByRole('button', { name: /Explore BitcoinDev/i })
     await expect(toggle).toBeVisible()
 
     await toggle.click()

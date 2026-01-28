@@ -17,10 +17,10 @@ export default function Header() {
       <header ref={headerRef} className="page-bg">
         <div className="container-content py-4">
           <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-2" aria-label="B++ Home">
+            <Link href="/" className="flex items-center gap-2" aria-label="BitcoinDev Home">
               <Image
                 src="/logo/logo.png"
-                alt="B++ Logo"
+                alt="BitcoinDev Logo"
                 width={100}
                 height={100}
                 className="opacity-80 dark:invert"

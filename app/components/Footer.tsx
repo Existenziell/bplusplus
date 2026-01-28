@@ -36,7 +36,7 @@ export default function Footer() {
           <div className='w-px bg-gray-200 dark:bg-gray-700 self-stretch' aria-hidden='true' />
           <nav aria-label='Site navigation' className='w-full md:flex-1'>
             <h3 className="heading-section-sm mb-3 text-center">
-              Explore B++
+              Explore BitcoinDev
             </h3>
             <ul className='flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-x-6 gap-y-1'>
               {footerLinksExplore.map((link) => (
@@ -64,7 +64,7 @@ export default function Footer() {
           <span aria-hidden='true' className='hidden md:inline'>|</span>
           <span>Open source · No ads · No tracking</span>
           <span aria-hidden='true' className='hidden md:inline'>|</span>
-          <span>© {new Date().getFullYear()} B++</span>
+          <span>© {new Date().getFullYear()} BitcoinDev</span>
         </div>
       </div>
     </footer>

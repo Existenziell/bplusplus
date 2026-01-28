@@ -5,7 +5,7 @@ import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'Feedback',
-  description: 'Leave feedback for B++. Help us improve.',
+  description: 'Leave feedback for BitcoinDev. Help us improve.',
   path: '/feedback',
 })
 

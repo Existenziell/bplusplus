@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     // Make RPC call to PublicNode
     const rpcPayload = {
       jsonrpc: '1.0',
-      id: 'bplusplus',
+      id: 'bitcoindev',
       method,
       params,
     }

@@ -181,10 +181,10 @@ const staticPages = [
   },
   {
     path: '/author',
-    title: 'About B++',
+    title: 'About BitcoinDev',
     section: 'author',
     body:
-      'About B++. Existenziell. Developer and Bitcoin Enthusiast. Why B++. Bitcoin education. Open source. Free. No ads. No paywalls. Support. Donate. Bitcoin address. Nostr.',
+      'About BitcoinDev. Existenziell. Developer and Bitcoin Enthusiast. Why BitcoinDev. Bitcoin education. Open source. Free. No ads. No paywalls. Support. Donate. Bitcoin address. Nostr.',
     keywords: ['about', 'existenziell', 'author', 'support', 'donate'],
   },
   {
@@ -192,7 +192,7 @@ const staticPages = [
     title: 'Feedback',
     section: 'feedback',
     body:
-      'Feedback. Share your thoughts about B++. What worked for you? What didn\'t? Help us improve Bitcoin education. Your feedback helps us make B++ better.',
+      'Feedback. Share your thoughts about BitcoinDev. What worked for you? What didn\'t? Help us improve Bitcoin education. Your feedback helps us make BitcoinDev better.',
     keywords: ['feedback', 'suggestions', 'improvements', 'contact', 'help'],
   },
 ]

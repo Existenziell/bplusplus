@@ -1,11 +1,11 @@
-# robots.txt for bplusplus.info
+# robots.txt for bitcoindev.info
 
 # Allow all legitimate crawlers
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://bplusplus.info/sitemap.xml
+Sitemap: https://bitcoindev.info/sitemap.xml
 
 # AI Crawlers - see ai.txt for detailed policy
 # Note: Many AI crawlers don't respect robots.txt, but we document our preferences

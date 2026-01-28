@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { generatePageMetadata, SITE_URL, DEFAULT_OG_IMAGE } from '@/app/utils/metadata'
 
 describe('generatePageMetadata', () => {
-  it('returns fullTitle as "Title | B++"', () => {
+  it('returns fullTitle as "Title | BitcoinDev"', () => {
     const meta = generatePageMetadata({ title: 'Foo', description: 'Desc' })
-    expect(meta.title).toBe('Foo | B++')
+    expect(meta.title).toBe('Foo | BitcoinDev')
   })
 
   it('returns description as given', () => {

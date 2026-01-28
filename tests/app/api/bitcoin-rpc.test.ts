@@ -60,7 +60,7 @@ describe('bitcoin-rpc API route', () => {
         ok: true,
         json: async () => ({
           result: 123456,
-          id: 'bplusplus',
+          id: 'bitcoindev',
         }),
       })
 
@@ -83,7 +83,7 @@ describe('bitcoin-rpc API route', () => {
           },
           body: JSON.stringify({
             jsonrpc: '1.0',
-            id: 'bplusplus',
+            id: 'bitcoindev',
             method: 'getblockcount',
             params: [],
           }),
@@ -97,7 +97,7 @@ describe('bitcoin-rpc API route', () => {
         ok: true,
         json: async () => ({
           error: { code: -32602, message: 'Invalid params' },
-          id: 'bplusplus',
+          id: 'bitcoindev',
         }),
       })
 

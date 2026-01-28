@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 // Site and OG config
-export const SITE_URL = 'https://bplusplus.info'
+export const SITE_URL = 'https://bitcoindev.info'
 export const DEFAULT_OG_IMAGE = '/og/og.png'
 export const OG_LOGO = '/logo/logo.png'
 
@@ -16,7 +16,7 @@ export function generatePageMetadata({
   path?: string
   ogImage?: string
 }): Metadata {
-  const fullTitle = `${title} | B++`
+  const fullTitle = `${title} | BitcoinDev`
   const url = `${SITE_URL}${path}`
 
   return {
@@ -26,7 +26,7 @@ export function generatePageMetadata({
       title: fullTitle,
       description,
       url,
-      siteName: 'B++',
+      siteName: 'BitcoinDev',
       images: [
         {
           url: ogImage,

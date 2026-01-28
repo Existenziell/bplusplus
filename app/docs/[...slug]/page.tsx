@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Handle case where slug might be undefined or empty
   if (!slug || !Array.isArray(slug) || slug.length === 0) {
     return {
-      title: 'Page Not Found | B++',
+      title: 'Page Not Found | BitcoinDev',
     }
   }
 
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!page) {
     return {
-      title: 'Page Not Found | B++',
+      title: 'Page Not Found | BitcoinDev',
     }
   }
 

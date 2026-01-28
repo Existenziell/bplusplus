@@ -43,11 +43,11 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
                         ? 'opacity-100 scale-100' 
                         : 'opacity-0 scale-95 pointer-events-none'
                     }`}
-                    aria-label="B++ Home"
+                    aria-label="BitcoinDev Home"
                   >
                     <Image
                       src="/logo/logo.png"
-                      alt="B++ Logo"
+                      alt="BitcoinDev Logo"
                       width={42}
                       height={42}
                       className="opacity-80 dark:invert"
@@ -61,11 +61,11 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
                         ? 'opacity-100 scale-100' 
                         : 'opacity-0 scale-95 pointer-events-none'
                     }`}
-                    aria-label="B++ Home"
+                    aria-label="BitcoinDev Home"
                   >
                     <Image
                       src="/logo/logo.png"
-                      alt="B++ Logo"
+                      alt="BitcoinDev Logo"
                       width={42}
                       height={42}
                       className="opacity-80 dark:invert"

@@ -1,14 +1,14 @@
 {
-  "name": "bplusplus",
+  "name": "bitcoindev",
   "version": "0.1.0",
   "description": "Bitcoin Education. Open knowledge. Open source.",
   "author": "Existenziell",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Existenziell/bplusplus.git"
+    "url": "https://github.com/Existenziell/bitcoindev.git"
   },
-  "homepage": "https://bplusplus.info",
+  "homepage": "https://bitcoindev.info",
   "scripts": {
     "dev": "next dev",
     "prebuild": "node scripts/generate-md-content.js && node scripts/generate-glossary-data.js && node scripts/generate-search-index.js",

@@ -4,10 +4,10 @@ import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
 import { SITE_URL } from '@/app/utils/metadata'
 
 export const metadata: Metadata = {
-  title: 'Block Visualizer | B++',
+  title: 'Block Visualizer | BitcoinDev',
   description: 'Live Bitcoin blockchain visualization showing the latest block with transaction treemap. Explore transactions, fee rates, and block data in real-time.',
   openGraph: {
-    title: 'Block Visualizer | B++',
+    title: 'Block Visualizer | BitcoinDev',
     description: 'Live Bitcoin blockchain visualization showing the latest block with transaction treemap.',
     url: `${SITE_URL}/block-visualizer`,
   },

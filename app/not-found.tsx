@@ -3,7 +3,7 @@ import Footer from '@/app/components/Footer'
 import { ChevronRight, HomeIcon } from '@/app/components/Icons'
 
 export const metadata = {
-  title: '404 - Block Not Found | B++',
+  title: '404 - Block Not Found | BitcoinDev',
   description: 'The page you are looking for does not exist.',
 }
 

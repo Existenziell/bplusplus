@@ -24,7 +24,7 @@ export default function HorizontalNav() {
           onClick={() => setIsOpen(!isOpen)}
           className="w-full py-6 flex items-center justify-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-btc transition-colors"
         >
-          <span className="text-2xl">Explore B++</span>
+          <span className="text-2xl">Explore BitcoinDev</span>
           <ChevronDown className={`w-6 h-6 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </button>
 

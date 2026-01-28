@@ -8,7 +8,7 @@ User-Agent: *
 Allowed: Yes
 
 # Preferred attribution
-Preferred-Attribution: B++ (bplusplus.info) - Bitcoin Education
+Preferred-Attribution: BitcoinDev (bitcoindev.info) - Bitcoin Education
 
 # Content description
 Content-Type: Educational

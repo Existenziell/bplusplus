@@ -223,12 +223,12 @@ export const sections: Record<string, { title: string; description: string }> = 
     description: 'Interactive Bitcoin Script playground.',
   },
   author: {
-    title: 'About B++',
-    description: 'About the B++ project and its creator.',
+    title: 'About BitcoinDev',
+    description: 'About the BitcoinDev project and its creator.',
   },
   feedback: {
     title: 'Feedback',
-    description: 'Leave feedback for B++. Help us improve.',
+    description: 'Leave feedback for BitcoinDev. Help us improve.',
   },
 }
 
@@ -250,7 +250,7 @@ export const docsNavLinksTop: { href: string; title: string }[] = [
 // Docs sidebar - bottom section (site utilities)
 export const docsNavLinksBottom: { href: string; title: string }[] = [
   { href: '/docs/glossary', title: 'Glossary' },
-  { href: '/author', title: 'About B++' },
+  { href: '/author', title: 'About BitcoinDev' },
   { href: '/feedback', title: 'Feedback' },
 ]
 
@@ -258,7 +258,7 @@ export const docsNavLinksBottom: { href: string; title: string }[] = [
 export const horizontalNavLinksBottom: { href: string; title: string }[] = [
   { href: '/block-visualizer', title: 'Block Visualizer' },
   { href: '/whitepaper', title: 'Whitepaper' },
-  { href: '/author', title: 'About B++' },
+  { href: '/author', title: 'About BitcoinDev' },
   { href: '/feedback', title: 'Feedback' },
 ]
 
@@ -274,7 +274,7 @@ export const footerLinksExternal: { name: string; url: string }[] = [
   { name: 'Bitcoin Visuals', url: 'https://bitcoinvisuals.com' },
 ]
 
-// Footer - Explore B++ section (right side)
+// Footer - Explore BitcoinDev section (right side)
 export const footerLinksExplore: { href: string; title: string }[] = [
   { href: '/docs/history', title: 'History' },
   { href: '/docs', title: 'Search Docs' },
@@ -283,7 +283,7 @@ export const footerLinksExplore: { href: string; title: string }[] = [
   { href: '/stack-lab', title: 'Stack Lab' },
   { href: '/block-visualizer', title: 'Block Visualizer' },
   { href: '/docs/glossary', title: 'Glossary' },
-  { href: '/author', title: 'About B++' },
+  { href: '/author', title: 'About BitcoinDev' },
   { href: '/feedback', title: 'Feedback' },
 ]
 
@@ -364,7 +364,7 @@ export const routeLabels: Record<string, string> = {
   'stack-lab': 'Stack Lab',
   'block-visualizer': 'Block Visualizer',
   whitepaper: 'Whitepaper',
-  author: 'About B++',
+  author: 'About BitcoinDev',
   feedback: 'Feedback',
   docs: 'Documentation',
   ...docRouteLabels,

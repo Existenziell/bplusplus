@@ -32,7 +32,7 @@ function FeedbackForm() {
           name="_next"
           value={`${SITE_URL}/feedback?thanks=1`}
         />
-        <input type="hidden" name="_subject" value="B++ Feedback" />
+        <input type="hidden" name="_subject" value="BitcoinDev Feedback" />
 
         <div>
           <label htmlFor="feedback-message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -79,7 +79,7 @@ function FeedbackContent() {
       <div className="max-w-xl mx-auto text-center">
         <h1 className="heading-page-hero">Thank you</h1>
         <p className="text-gray-800 dark:text-gray-200 leading-7 mb-6">
-          Your feedback helps us improve B++. We appreciate you taking the time to share your thoughts.
+          Your feedback helps us improve BitcoinDev. We appreciate you taking the time to share your thoughts.
         </p>
         <Link href="/" className="btn-primary">
           Back to home

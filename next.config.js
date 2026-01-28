@@ -2,6 +2,17 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
+/**
+ * Canonical domain
+ *
+ * The canonical site is https://bitcoindev.info.
+ * Legacy domains: bitcoin-dev.info, bitcoindev.fyi, bplusplus.info
+ * 308-redirect to https://bitcoindev.info at the edge (Vercel Domains / project settings).
+ *
+ * The app itself does not implement host-based redirects (no middleware/next redirects),
+ * so dev/preview environments are unaffected.
+ */
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,

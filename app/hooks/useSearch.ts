@@ -10,12 +10,13 @@ import { useDebounce } from './useDebounce'
 import { handleError } from '@/app/utils/errorHandling'
 
 export function useSearch() {
-  const { index, loading: indexLoading, error: indexError } = useSearchIndex()
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
 
   const debouncedQuery = useDebounce(query, DEBOUNCE_MS)
+  const shouldLoadIndex = debouncedQuery.length >= MIN_QUERY_LEN
+  const { index, loading: indexLoading, error: indexError } = useSearchIndex({ enabled: shouldLoadIndex })
 
   // Clear results immediately when query is empty (don't wait for debounce)
   useEffect(() => {

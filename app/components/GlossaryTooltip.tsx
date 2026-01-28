@@ -12,9 +12,10 @@ interface GlossaryTooltipProps {
   href: string
   children: React.ReactNode
   glossaryData: Record<string, GlossaryEntry>
+  glossaryLoading?: boolean
 }
 
-export default function GlossaryTooltip({ href, children, glossaryData }: GlossaryTooltipProps) {
+export default function GlossaryTooltip({ href, children, glossaryData, glossaryLoading = false }: GlossaryTooltipProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [position, setPosition] = useState<'top' | 'bottom'>('top')
   const linkRef = useRef<HTMLAnchorElement>(null)
@@ -67,14 +68,7 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
     }
   }, [])
 
-  // If no glossary entry found, render as regular link
-  if (!entry) {
-    return (
-      <Link href={href}>
-        {children}
-      </Link>
-    )
-  }
+  const shouldShowTooltip = Boolean(entry) || glossaryLoading
 
   return (
     <span className="relative inline">
@@ -82,16 +76,16 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
         ref={linkRef}
         href={href}
         className="glossary-link"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onFocus={handleMouseEnter}
-        onBlur={handleMouseLeave}
-        aria-describedby={isVisible ? `glossary-tooltip-${slug}` : undefined}
+        onMouseEnter={shouldShowTooltip ? handleMouseEnter : undefined}
+        onMouseLeave={shouldShowTooltip ? handleMouseLeave : undefined}
+        onFocus={shouldShowTooltip ? handleMouseEnter : undefined}
+        onBlur={shouldShowTooltip ? handleMouseLeave : undefined}
+        aria-describedby={shouldShowTooltip && isVisible ? `glossary-tooltip-${slug}` : undefined}
       >
         {children}
       </Link>
 
-      {isVisible && (
+      {shouldShowTooltip && isVisible && (
         <span
           ref={tooltipRef}
           id={`glossary-tooltip-${slug}`}
@@ -131,28 +125,39 @@ export default function GlossaryTooltip({ href, children, glossaryData }: Glossa
 
           {/* Content */}
           <span className="relative block font-normal">
-            <span className="block font-medium text-btc mb-1 text-base">
-              {entry.term}
-            </span>
-            <span className="block text-sm font-normal" style={{ lineHeight: 1.4 }}>
-              {entry.definition}
-              {entry.definition.endsWith('...') && (
-                <Link
-                  href={href}
-                  className="ml-1 text-btc hover:underline font-medium"
-                  onClick={(e) => {
-                    // Close tooltip when clicking "more"
-                    setIsVisible(false)
-                  }}
-                  onMouseDown={(e) => {
-                    // Prevent tooltip from closing on mousedown
-                    e.stopPropagation()
-                  }}
-                >
-                  more
-                </Link>
-              )}
-            </span>
+            {entry ? (
+              <>
+                <span className="block font-medium text-btc mb-1 text-base">
+                  {entry.term}
+                </span>
+                <span className="block text-sm font-normal" style={{ lineHeight: 1.4 }}>
+                  {entry.definition}
+                  {entry.definition.endsWith('...') && (
+                    <Link
+                      href={href}
+                      className="ml-1 text-btc hover:underline font-medium"
+                      onClick={() => {
+                        // Close tooltip when clicking "more"
+                        setIsVisible(false)
+                      }}
+                      onMouseDown={(e) => {
+                        // Prevent tooltip from closing on mousedown
+                        e.stopPropagation()
+                      }}
+                    >
+                      more
+                    </Link>
+                  )}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="block font-medium text-btc mb-1 text-base">Loading…</span>
+                <span className="block text-sm font-normal" style={{ lineHeight: 1.4 }}>
+                  Fetching glossary definition.
+                </span>
+              </>
+            )}
           </span>
         </span>
       )}

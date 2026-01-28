@@ -4,6 +4,7 @@
  */
 
 import type { IndexEntry } from './searchLogic'
+import { withBuildId } from '@/app/utils/buildId'
 
 type CacheState = {
   index: IndexEntry[] | null
@@ -38,7 +39,7 @@ export function loadSearchIndex(): Promise<IndexEntry[]> {
   // Start loading
   cache.loading = true
   cache.error = null
-  cache.promise = fetch('/data/search-index.json')
+  cache.promise = fetch(withBuildId('/data/search-index.json'))
     .then((res) => {
       if (!res.ok) throw new Error('Failed to load search index')
       return res.json()

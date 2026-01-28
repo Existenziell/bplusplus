@@ -1,23 +1,31 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { render, renderHook, act } from '@testing-library/react'
-import { GlossaryProvider, useGlossary } from '@/app/contexts/GlossaryContext'
+import { render, renderHook, waitFor } from '@testing-library/react'
+import { GlossaryProvider, useGlossary, clearGlossaryCache } from '@/app/contexts/GlossaryContext'
 
 describe('GlossaryContext', () => {
   beforeEach(() => {
-    // Reset window.__GLOSSARY_DATA__
-    delete (window as any).__GLOSSARY_DATA__
+    vi.restoreAllMocks()
+    clearGlossaryCache()
   })
 
-  it('provides default empty glossary data', () => {
+  it('provides default empty glossary data', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ({}),
+    } as any)
+
     const { result } = renderHook(() => useGlossary(), {
       wrapper: GlossaryProvider,
     })
 
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false)
+    })
+
     expect(result.current.glossaryData).toEqual({})
-    expect(result.current.isLoading).toBe(false)
   })
 
-  it('loads glossary data from window.__GLOSSARY_DATA__', () => {
+  it('loads glossary data from /data/glossary.json', async () => {
     const mockGlossaryData = {
       bitcoin: {
         term: 'Bitcoin',
@@ -29,37 +37,60 @@ describe('GlossaryContext', () => {
       },
     }
 
-    ;(window as any).__GLOSSARY_DATA__ = mockGlossaryData
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => mockGlossaryData,
+    } as any)
 
     const { result } = renderHook(() => useGlossary(), {
       wrapper: GlossaryProvider,
+    })
+
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false)
     })
 
     expect(result.current.glossaryData).toEqual(mockGlossaryData)
-    expect(result.current.isLoading).toBe(false)
   })
 
-  it('sets isLoading to false after loading', () => {
+  it('sets isLoading to false after loading', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ({}),
+    } as any)
+
     const { result } = renderHook(() => useGlossary(), {
       wrapper: GlossaryProvider,
     })
 
-    // Initially should be false (set in useEffect)
-    expect(result.current.isLoading).toBe(false)
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false)
+    })
   })
 
-  it('handles missing window.__GLOSSARY_DATA__', () => {
-    delete (window as any).__GLOSSARY_DATA__
+  it('handles fetch errors by falling back to empty data', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: false,
+      json: async () => ({}),
+    } as any)
 
     const { result } = renderHook(() => useGlossary(), {
       wrapper: GlossaryProvider,
+    })
+
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false)
     })
 
     expect(result.current.glossaryData).toEqual({})
-    expect(result.current.isLoading).toBe(false)
   })
 
-  it('provides context to child components', () => {
+  it('provides context to child components', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ({}),
+    } as any)
+
     const TestComponent = () => {
       const { glossaryData, isLoading } = useGlossary()
       return (
@@ -76,32 +107,28 @@ describe('GlossaryContext', () => {
       </GlossaryProvider>
     )
 
-    expect(getByTestId('loading')).toHaveTextContent('loaded')
+    await waitFor(() => {
+      expect(getByTestId('loading')).toHaveTextContent('loaded')
+    })
     expect(getByTestId('count')).toHaveTextContent('0')
   })
 
-  it('updates when window.__GLOSSARY_DATA__ changes', () => {
-    const initialData = {
-      bitcoin: { term: 'Bitcoin', definition: 'Currency' },
-    }
+  it('caches glossary data (does not refetch for subsequent consumers)', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ({ bitcoin: { term: 'Bitcoin', definition: 'Currency' } }),
+    } as any)
 
-    ;(window as any).__GLOSSARY_DATA__ = initialData
-
-    const { result, rerender } = renderHook(() => useGlossary(), {
-      wrapper: GlossaryProvider,
+    const { result } = renderHook(() => useGlossary(), { wrapper: GlossaryProvider })
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false)
     })
 
-    expect(result.current.glossaryData).toEqual(initialData)
+    const { result: result2 } = renderHook(() => useGlossary(), { wrapper: GlossaryProvider })
+    await waitFor(() => {
+      expect(result2.current.isLoading).toBe(false)
+    })
 
-    const updatedData = {
-      ...initialData,
-      blockchain: { term: 'Blockchain', definition: 'Ledger' },
-    }
-
-    ;(window as any).__GLOSSARY_DATA__ = updatedData
-
-    // Note: The context doesn't re-read on window change, but we can test the initial load
-    // In a real scenario, the data is set at build time
-    expect(result.current.glossaryData).toEqual(initialData)
+    expect(fetchSpy).toHaveBeenCalledTimes(1)
   })
 })

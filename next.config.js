@@ -17,6 +17,17 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   reactStrictMode: true,
 
+  env: {
+    // Used to version static JSON fetches so long-lived caching is safe across deploys.
+    // Prefer provider-specific IDs when available.
+    NEXT_PUBLIC_BUILD_ID:
+      process.env.NEXT_PUBLIC_BUILD_ID ||
+      process.env.VERCEL_DEPLOYMENT_ID ||
+      process.env.VERCEL_GIT_COMMIT_SHA ||
+      process.env.GITHUB_SHA ||
+      '',
+  },
+
   experimental: {
     optimizePackageImports: ['react-markdown', 'highlight.js'],
     optimizeCss: true,
@@ -37,6 +48,17 @@ const nextConfig = {
       {
         source: '/logo/:path*',
         headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/data/:path*',
+        headers: [
+          // Versioned via `?v=${NEXT_PUBLIC_BUILD_ID}` in client fetches.
+          // Long-lived caching is OK because each deploy changes the cache key.
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',

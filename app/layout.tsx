@@ -10,13 +10,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Header from '@/app/components/Header'
 import StickyBar from '@/app/components/StickyBar'
 import Notification from '@/app/components/Notification'
-import SearchIndexPreloader from '@/app/components/SearchIndexPreloader'
 import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
 import { StickyScrollProvider } from '@/app/contexts/StickyScrollContext'
 import { SearchModalProvider } from '@/app/contexts/SearchModalContext'
 import SearchModalWrapper from '@/app/components/SearchModalWrapper'
-// Build-time glossary from generate-glossary-data.js
-import glossaryData from '@/public/data/glossary.json'
 
 const ubuntu = Ubuntu({
   weight: '400',
@@ -90,21 +87,12 @@ export default function RootLayout({
         {/* Preconnect to Vercel Analytics/Speed Insights origins */}
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
-        {/* Prefetch search index for faster search experience */}
-        <link rel="prefetch" href="/data/search-index.json" as="fetch" crossOrigin="anonymous" />
-        {/* Inline glossary for client */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.__GLOSSARY_DATA__ = ${JSON.stringify(glossaryData)};`,
-          }}
-        />
       </head>
       <body className={`${ubuntu.className} flex flex-col min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <GlossaryProvider>
             <StickyScrollProvider>
               <SearchModalProvider>
-                <SearchIndexPreloader />
                 <Notification />
                 <div className="flex-shrink-0">
                   <Header />

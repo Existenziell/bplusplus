@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react'
 import { useSearchKeyboard } from '@/app/hooks/useSearchKeyboard'
+import { loadSearchIndex } from '@/app/utils/searchIndexCache'
 
 interface SearchModalContextType {
   isOpen: boolean
@@ -17,6 +18,19 @@ export function SearchModalProvider({ children }: { children: ReactNode }) {
 
   const openSearch = useCallback(() => {
     setIsOpen(true)
+
+    // Load the search index on user intent (opening search), but avoid blocking UI.
+    const run = () => {
+      loadSearchIndex().catch(() => {
+        // Silently fail; search UI will show loading/error and still work once available.
+      })
+    }
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      ;(window as any).requestIdleCallback(run, { timeout: 1500 })
+    } else {
+      setTimeout(run, 0)
+    }
   }, [])
 
   const closeSearch = useCallback(() => {

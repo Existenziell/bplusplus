@@ -219,7 +219,7 @@ const createHeading = (level: number) => {
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  const { glossaryData } = useGlossary()
+  const { glossaryData, isLoading: glossaryLoading } = useGlossary()
 
   // Memoize code/video group and denomination calculator parsing (expensive)
   const { processedContent, codeGroupMap, videoGroupMap } = useMemo(() => {
@@ -349,7 +349,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       }
       if (href?.startsWith('/docs/glossary#')) {
         return (
-          <GlossaryTooltip href={href} glossaryData={glossaryData}>
+          <GlossaryTooltip href={href} glossaryData={glossaryData} glossaryLoading={glossaryLoading}>
             {children}
           </GlossaryTooltip>
         )

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react'
+import { withBuildId } from '@/app/utils/buildId'
 
 interface GlossaryEntry {
   term: string
@@ -14,10 +15,46 @@ interface GlossaryContextType {
   isLoading: boolean
 }
 
-// Read glossary data from window.__GLOSSARY_DATA__ (set at build time in layout)
-function getGlossaryData(): GlossaryData {
-  if (typeof window === 'undefined') return {}
-  return (window as unknown as { __GLOSSARY_DATA__?: GlossaryData }).__GLOSSARY_DATA__ ?? {}
+type GlossaryCacheState = {
+  data: GlossaryData | null
+  promise: Promise<GlossaryData> | null
+  error: Error | null
+}
+
+const glossaryCache: GlossaryCacheState = {
+  data: null,
+  promise: null,
+  error: null,
+}
+
+export function clearGlossaryCache(): void {
+  glossaryCache.data = null
+  glossaryCache.promise = null
+  glossaryCache.error = null
+}
+
+async function loadGlossaryData(): Promise<GlossaryData> {
+  if (glossaryCache.data) return glossaryCache.data
+  if (glossaryCache.promise) return glossaryCache.promise
+
+  glossaryCache.error = null
+  glossaryCache.promise = fetch(withBuildId('/data/glossary.json'))
+    .then((res) => {
+      if (!res.ok) throw new Error('Failed to load glossary data')
+      return res.json()
+    })
+    .then((data: GlossaryData) => {
+      glossaryCache.data = data
+      glossaryCache.promise = null
+      return data
+    })
+    .catch((err) => {
+      glossaryCache.error = err
+      glossaryCache.promise = null
+      throw err
+    })
+
+  return glossaryCache.promise
 }
 
 const GlossaryContext = createContext<GlossaryContextType>({
@@ -30,10 +67,25 @@ export function GlossaryProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Only read glossary data on client after mount to avoid hydration mismatch
-    const data = getGlossaryData()
-    setGlossaryData(data)
-    setIsLoading(false)
+    let cancelled = false
+
+    setIsLoading(true)
+    loadGlossaryData()
+      .then((data) => {
+        if (cancelled) return
+        setGlossaryData(data)
+        setIsLoading(false)
+      })
+      .catch(() => {
+        // Silently fail: glossary tooltips will just render as normal links.
+        if (cancelled) return
+        setGlossaryData({})
+        setIsLoading(false)
+      })
+
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   return (

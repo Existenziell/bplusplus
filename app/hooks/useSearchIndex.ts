@@ -7,12 +7,20 @@ import { useState, useEffect } from 'react'
 import { loadSearchIndex, getCachedIndex, isIndexLoading } from '@/app/utils/searchIndexCache'
 import type { IndexEntry } from '@/app/utils/searchLogic'
 
-export function useSearchIndex() {
+export function useSearchIndex({ enabled = true }: { enabled?: boolean } = {}) {
   const [index, setIndex] = useState<IndexEntry[] | null>(getCachedIndex())
   const [loading, setLoading] = useState(isIndexLoading())
   const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
+    if (!enabled) {
+      // Keep state in sync if another consumer loaded the cache.
+      const cached = getCachedIndex()
+      if (cached) setIndex((prev) => prev ?? cached)
+      setLoading(isIndexLoading())
+      return
+    }
+
     // If index is already cached, use it
     const cached = getCachedIndex()
     if (cached) {
@@ -49,7 +57,7 @@ export function useSearchIndex() {
         setError(err)
         setLoading(false)
       })
-  }, [])
+  }, [enabled])
 
   return { index, loading, error }
 }

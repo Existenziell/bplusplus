@@ -50,7 +50,7 @@ export function useKeyboardNavigation<T>({
 
   // Keyboard event handler
   useEffect(() => {
-    if (!enabled || items.length === 0) return
+    if (!enabled) return
 
     const onKey = (e: KeyboardEvent) => {
       const activeElement = document.activeElement
@@ -60,6 +60,9 @@ export function useKeyboardNavigation<T>({
         onEscape()
         return
       }
+
+      // Only handle navigation keys when there are items
+      if (items.length === 0) return
 
       if (e.key === 'ArrowDown') {
         const shouldHandle = allowNavigationWithoutFocus

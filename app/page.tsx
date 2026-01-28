@@ -4,6 +4,7 @@ import Footer from '@/app/components/Footer'
 import QuoteRotator from '@/app/components/QuoteRotator'
 import LiveStats from '@/app/components/LiveStats'
 import HorizontalNav from '@/app/components/HorizontalNav'
+import BitcoinHistoryBanner from '@/app/components/BitcoinHistoryBanner'
 import { ChevronRight, TerminalIcon, StackLabIcon } from '@/app/components/Icons'
 import { ctaLinks } from '@/app/utils/navigation'
 
@@ -61,6 +62,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Bitcoin History Banner */}
+        <BitcoinHistoryBanner />
 
         {/* Horizontal Navigation */}
         <HorizontalNav />

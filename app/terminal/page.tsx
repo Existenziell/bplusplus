@@ -64,6 +64,7 @@ export default function TerminalPage() {
   const [commandHistory, setCommandHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [isLoading, setIsLoading] = useState(false)
+  const [isLocked, setIsLocked] = useState(false) // Lock input after secret easter egg
   const [exampleBlockHash, setExampleBlockHash] = useState<string>('')
   const [exampleTxId, setExampleTxId] = useState<string>('')
   const [showMatrix, setShowMatrix] = useState(false)
@@ -146,14 +147,15 @@ export default function TerminalPage() {
 
   // Refocus after command finishes
   useEffect(() => {
-    if (!isLoading && inputRef.current && document.activeElement !== inputRef.current) {
+    if (!isLoading && !isLocked && inputRef.current && document.activeElement !== inputRef.current) {
       requestAnimationFrame(() => {
         inputRef.current?.focus()
       })
     }
-  }, [isLoading])
+  }, [isLoading, isLocked])
 
   const handleOutputClick = () => {
+    if (isLocked) return
     const selection = window.getSelection()
     if (!selection || selection.toString().length === 0) {
       inputRef.current?.focus()
@@ -243,6 +245,9 @@ export default function TerminalPage() {
     )
 
     if (isEasterEgg) {
+      // Permanently lock the terminal input
+      setIsLocked(true)
+      setInput('')
       // Display all error messages at once
       const allMessages = SYSTEM_ERROR_MESSAGES.join('\n')
       
@@ -450,6 +455,7 @@ export default function TerminalPage() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    if (isLocked) return
     if (!isLoading && input.trim()) {
       executeCommand(input)
       setInput('')
@@ -460,6 +466,10 @@ export default function TerminalPage() {
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (isLocked) {
+      e.preventDefault()
+      return
+    }
     if (e.key === 'ArrowUp') {
       e.preventDefault()
       if (commandHistory.length > 0) {
@@ -588,7 +598,7 @@ export default function TerminalPage() {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              disabled={isLoading}
+              disabled={isLoading || isLocked}
               className="flex-1 bg-transparent text-green-400 dark:text-gray-200 font-mono text-xs md:text-sm outline-none placeholder-green-700 dark:placeholder-gray-600 min-w-0"
               placeholder={isLoading ? 'executing...' : 'enter command...'}
               autoFocus
@@ -599,7 +609,7 @@ export default function TerminalPage() {
             />
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || isLocked}
               className="px-2 md:px-3 py-1 bg-green-600 dark:bg-btc text-white dark:text-gray-900 font-mono text-xs md:text-sm rounded hover:bg-green-500 dark:hover:bg-btc/80 disabled:opacity-50"
             >
               Run

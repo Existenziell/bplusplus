@@ -17,7 +17,7 @@ export default function MempoolPage() {
   return (
     <DocsLayoutWrapper defaultSidebarCollapsed={true}>
       <div className="mb-8">
-        <h1 className="heading-page mb-4">Block Visualization</h1>
+        <h1 className="heading-page mb-4">Block Visualization (beta)</h1>
         <p className="text-secondary max-w-3xl">
           Explore the latest Bitcoin block with an interactive transaction treemap. 
           Each rectangle represents a transaction, sized by vBytes, value, or fee. 
@@ -25,7 +25,7 @@ export default function MempoolPage() {
           to view its inputs, outputs, and flow visualization.
         </p>
         <p className="text-secondary text-sm mt-2 max-w-3xl">
-          Observing <span className="font-semibold text-btc">Bitcoin mainnet</span> via PublicNode. 
+          Observing <span className="font-semibold">Bitcoin mainnet</span> via PublicNode. 
           Blocks update automatically when new blocks are found (~10 minutes).
         </p>
       </div>

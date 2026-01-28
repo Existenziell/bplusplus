@@ -406,7 +406,7 @@ export default function TransactionTreemap({
             {sizeMetric === 'fee' && (
               <div className="w-4 h-4 rounded bg-gradient-to-r from-purple-100 via-purple-300 to-purple-600"></div>
             )}
-            <span className="text-secondary">Color = {getColorLabel()}</span>
+            <span className="text-secondary">Color / Size = {getColorLabel()}</span>
           </div>
           <div className="text-secondary">
             {sizeMetric === 'vbytes' && (
@@ -419,9 +419,6 @@ export default function TransactionTreemap({
               <>Low: {metricRange[0].toFixed(8)} BTC → High: {metricRange[1].toFixed(8)} BTC</>
             )}
           </div>
-        </div>
-        <div className="text-secondary">
-          Size = {getMetricLabel()}
         </div>
       </div>
     </div>

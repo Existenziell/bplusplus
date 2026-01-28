@@ -172,12 +172,28 @@ const staticPages = [
     keywords: ['script', 'op codes', 'opcode', 'stack', 'script builder', 'interpreter'],
   },
   {
+    path: '/block-visualizer',
+    title: 'Block Visualizer',
+    section: 'block-visualizer',
+    body:
+      'Block Visualizer. Live Bitcoin blockchain visualization showing the latest block with transaction treemap. Explore transactions, fee rates, and block data in real-time. Interactive transaction treemap. Each rectangle represents a transaction, sized by vBytes, value, or fee. Click on transactions to view inputs and outputs.',
+    keywords: ['visualizer', 'visualiser', 'block visualizer', 'block visualiser', 'blockchain visualization', 'transaction treemap', 'block explorer', 'block data'],
+  },
+  {
     path: '/author',
     title: 'About B++',
     section: 'author',
     body:
       'About B++. Existenziell. Developer and Bitcoin Enthusiast. Why B++. Bitcoin education. Open source. Free. No ads. No paywalls. Support. Donate. Bitcoin address. Nostr.',
     keywords: ['about', 'existenziell', 'author', 'support', 'donate'],
+  },
+  {
+    path: '/feedback',
+    title: 'Feedback',
+    section: 'feedback',
+    body:
+      'Feedback. Share your thoughts about B++. What worked for you? What didn\'t? Help us improve Bitcoin education. Your feedback helps us make B++ better.',
+    keywords: ['feedback', 'suggestions', 'improvements', 'contact', 'help'],
   },
 ]
 for (const p of staticPages) {

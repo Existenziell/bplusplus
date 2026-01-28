@@ -22,7 +22,7 @@ export default function MempoolPage() {
           Explore the latest Bitcoin block with an interactive transaction treemap. 
           Each rectangle represents a transaction, sized by vBytes, value, or fee. 
           Hover over transactions to see detailed information. Click on any transaction 
-          to view its inputs, outputs, and flow visualization.
+          to view its inputs andoutputs.
         </p>
         <p className="text-secondary text-sm mt-2 max-w-3xl">
           Observing <span className="font-semibold">Bitcoin mainnet</span> via PublicNode. 

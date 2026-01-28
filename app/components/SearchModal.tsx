@@ -1,12 +1,13 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { SearchIcon, XIcon, DocumentIcon, BookOpenIcon, UserIcon } from '@/app/components/Icons'
 import { sections } from '@/app/utils/navigation'
 import { MIN_QUERY_LEN } from '@/app/utils/searchLogic'
 import { useSearch } from '@/app/hooks/useSearch'
+import { useKeyboardNavigation } from '@/app/hooks/useKeyboardNavigation'
 
 interface SearchModalProps {
   isOpen: boolean
@@ -15,27 +16,32 @@ interface SearchModalProps {
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const { query, setQuery, results, loading } = useSearch()
-  const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
-  const selectedItemRef = useRef<HTMLLIElement | null>(null)
   const router = useRouter()
   const pathname = usePathname()
   const previousPathnameRef = useRef<string>(pathname)
 
+  const { selectedIndex, setSelectedIndex, selectedItemRef } = useKeyboardNavigation({
+    items: results,
+    inputRef,
+    enabled: isOpen,
+    resetDeps: [query],
+    onEscape: onClose,
+    onNavigate: (item) => {
+      onClose()
+      router.push(item.path)
+    },
+  })
+
   useEffect(() => {
     if (isOpen) {
       setQuery('')
-      setSelectedIndex(0)
       inputRef.current?.focus()
     } else {
       // Clear query when modal closes to ensure fresh state on next open
       setQuery('')
     }
   }, [isOpen, setQuery])
-
-  useEffect(() => {
-    selectedItemRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-  }, [selectedIndex])
 
   // Close modal and clear query when pathname changes (navigation occurred)
   useEffect(() => {
@@ -48,33 +54,6 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       previousPathnameRef.current = pathname
     }
   }, [pathname, isOpen, onClose, setQuery])
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose()
-        return
-      }
-      if (!isOpen) return
-      if (e.key === 'ArrowDown') {
-        e.preventDefault()
-        setSelectedIndex((i) => Math.min(i + 1, results.length - 1))
-        return
-      }
-      if (e.key === 'ArrowUp') {
-        e.preventDefault()
-        setSelectedIndex((i) => Math.max(i - 1, 0))
-        return
-      }
-      if (e.key === 'Enter' && results[selectedIndex]) {
-        e.preventDefault()
-        onClose()
-        router.push(results[selectedIndex].path)
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [isOpen, onClose, results, selectedIndex, router])
 
   if (!isOpen) return null
 
@@ -143,7 +122,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               {results.map((r, i) => (
                 <li
                   key={r.path + r.title}
-                  ref={i === selectedIndex ? selectedItemRef : null}
+                  ref={i === selectedIndex ? (selectedItemRef as React.RefObject<HTMLLIElement>) : null}
                   role="option"
                   aria-selected={i === selectedIndex}
                   onMouseEnter={() => setSelectedIndex(i)}

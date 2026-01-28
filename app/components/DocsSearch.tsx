@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useMemo } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { sections } from '@/app/utils/navigation'
 import { SearchIcon, DocumentIcon } from '@/app/components/Icons'
 import { MIN_QUERY_LEN, type SearchResult } from '@/app/utils/searchLogic'
 import { useSearch } from '@/app/hooks/useSearch'
+import { useKeyboardNavigation } from '@/app/hooks/useKeyboardNavigation'
 
 // Featured topics to show when there's no search query
 const FEATURED_TOPICS: SearchResult[] = [
@@ -57,11 +59,7 @@ const FEATURED_TOPICS: SearchResult[] = [
 export default function DocsSearch() {
   const { query, setQuery, results, loading } = useSearch()
   const inputRef = useRef<HTMLInputElement>(null)
-
-  // Focus the search input when component mounts
-  useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
+  const router = useRouter()
 
   // Group search results by section
   const groupedResults = useMemo(() => {
@@ -87,6 +85,33 @@ export default function DocsSearch() {
       groups[section].push(topic)
     })
     return groups
+  }, [])
+
+  // Flatten all items into a single array for keyboard navigation
+  const allItems = useMemo(() => {
+    const hasQuery = query.trim().length >= MIN_QUERY_LEN
+    if (hasQuery) {
+      // Flatten grouped results
+      return Object.values(groupedResults).flat()
+    } else {
+      // Flatten featured topics
+      return Object.values(groupedFeaturedTopics).flat()
+    }
+  }, [query, groupedResults, groupedFeaturedTopics])
+
+  const { selectedIndex, setSelectedIndex, selectedItemRef } = useKeyboardNavigation({
+    items: allItems,
+    inputRef,
+    resetDeps: [query],
+    allowNavigationWithoutFocus: true,
+    onNavigate: (item) => {
+      router.push(item.path)
+    },
+  })
+
+  // Focus the search input when component mounts
+  useEffect(() => {
+    inputRef.current?.focus()
   }, [])
 
   const hasQuery = query.trim().length >= MIN_QUERY_LEN
@@ -136,26 +161,45 @@ export default function DocsSearch() {
                   )}
                 </div>
                 <ul className="space-y-2">
-                  {sectionResults.map((result) => (
-                    <li key={result.path}>
-                      <Link
-                        href={result.path}
-                        className="block p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-btc transition-colors group no-underline hover:no-underline"
-                      >
-                        <div className="flex items-start gap-3">
-                          <DocumentIcon className="flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500 mt-0.5 group-hover:text-btc transition-colors" />
-                          <div className="min-w-0 flex-1">
-                            <div className="font-medium text-gray-900 dark:text-gray-200 group-hover:text-btc transition-colors">
-                              {result.title}
-                            </div>
-                            <div className="text-sm text-secondary mt-1 line-clamp-2">
-                              {result.snippet}
+                  {sectionResults.map((result, resultIndex) => {
+                    // Find the index in the flattened allItems array
+                    const globalIndex = allItems.findIndex(item => item.path === result.path && item.title === result.title)
+                    const isSelected = globalIndex === selectedIndex
+                    return (
+                      <li key={result.path}>
+                        <Link
+                          ref={isSelected ? (selectedItemRef as React.RefObject<HTMLAnchorElement>) : null}
+                          href={result.path}
+                          onMouseEnter={() => setSelectedIndex(globalIndex)}
+                          className={`block p-3 rounded-lg border transition-colors group no-underline hover:no-underline ${
+                            isSelected
+                              ? 'bg-btc/20 dark:bg-btc/25 border-btc'
+                              : 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-btc'
+                          }`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <DocumentIcon className={`flex-shrink-0 w-5 h-5 mt-0.5 transition-colors ${
+                              isSelected
+                                ? 'text-btc'
+                                : 'text-gray-400 dark:text-gray-500 group-hover:text-btc'
+                            }`} />
+                            <div className="min-w-0 flex-1">
+                              <div className={`font-medium transition-colors ${
+                                isSelected
+                                  ? 'text-btc'
+                                  : 'text-gray-900 dark:text-gray-200 group-hover:text-btc'
+                              }`}>
+                                {result.title}
+                              </div>
+                              <div className="text-sm text-secondary mt-1 line-clamp-2">
+                                {result.snippet}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
+                        </Link>
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
             )
@@ -180,26 +224,45 @@ export default function DocsSearch() {
                   </h3>
                 </div>
                 <ul className="space-y-2">
-                  {sectionTopics.map((topic) => (
-                    <li key={topic.path}>
-                      <Link
-                        href={topic.path}
-                        className="block p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-btc transition-colors group no-underline hover:no-underline"
-                      >
-                        <div className="flex items-start gap-3">
-                          <DocumentIcon className="flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500 mt-0.5 group-hover:text-btc transition-colors" />
-                          <div className="min-w-0 flex-1">
-                            <div className="font-medium text-gray-900 dark:text-gray-200 group-hover:text-btc transition-colors">
-                              {topic.title}
-                            </div>
-                            <div className="text-sm text-secondary mt-1 line-clamp-2">
-                              {topic.snippet}
+                  {sectionTopics.map((topic) => {
+                    // Find the index in the flattened allItems array
+                    const globalIndex = allItems.findIndex(item => item.path === topic.path && item.title === topic.title)
+                    const isSelected = globalIndex === selectedIndex
+                    return (
+                      <li key={topic.path}>
+                        <Link
+                          ref={isSelected ? (selectedItemRef as React.RefObject<HTMLAnchorElement>) : null}
+                          href={topic.path}
+                          onMouseEnter={() => setSelectedIndex(globalIndex)}
+                          className={`block p-3 rounded-lg border transition-colors group no-underline hover:no-underline ${
+                            isSelected
+                              ? 'bg-btc/20 dark:bg-btc/25 border-btc'
+                              : 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-btc'
+                          }`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <DocumentIcon className={`flex-shrink-0 w-5 h-5 mt-0.5 transition-colors ${
+                              isSelected
+                                ? 'text-btc'
+                                : 'text-gray-400 dark:text-gray-500 group-hover:text-btc'
+                            }`} />
+                            <div className="min-w-0 flex-1">
+                              <div className={`font-medium transition-colors ${
+                                isSelected
+                                  ? 'text-btc'
+                                  : 'text-gray-900 dark:text-gray-200 group-hover:text-btc'
+                              }`}>
+                                {topic.title}
+                              </div>
+                              <div className="text-sm text-secondary mt-1 line-clamp-2">
+                                {topic.snippet}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
+                        </Link>
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
             )

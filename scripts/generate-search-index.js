@@ -1,8 +1,9 @@
+#!/usr/bin/env node
 /**
  * Build script to generate a search index from md-content, glossary, and docPages.
  * Run after generate-md-content and generate-glossary-data in prebuild.
  *
- * Run with: node scripts/generate-search-index.js
+ * Run with: ./scripts/generate-search-index.js or node scripts/generate-search-index.js
  */
 
 const fs = require('fs')

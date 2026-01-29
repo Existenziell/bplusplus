@@ -1,8 +1,9 @@
+#!/usr/bin/env node
 /**
  * Build script to generate glossary lookup data for tooltips.
  * Parses terms.md and creates a JSON map of {slug: {term, definition}}
  *
- * Run with: node scripts/generate-glossary-data.js
+ * Run with: ./scripts/generate-glossary-data.js or node scripts/generate-glossary-data.js
  */
 
 const fs = require('fs')

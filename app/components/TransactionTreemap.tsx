@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState, useRef, useEffect } from 'react'
+import { useMemo, useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { hierarchy, treemap } from 'd3-hierarchy'
 import { scaleSequential } from 'd3-scale'
@@ -72,7 +72,7 @@ export default function TransactionTreemap({
   const [btcPrice, setBtcPrice] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
-  const [flyInActive, setFlyInActive] = useState(false)
+  const [flyInActive, setFlyInActive] = useState(true)
   const hasInitializedRef = useRef(false)
   const prevAnimationTriggerRef = useRef<number | undefined>(animationTrigger)
   /** Bottom-right origin (viewBox coords) at fly-in start; set when triggering so we use real layout size. */
@@ -100,6 +100,18 @@ export default function TransactionTreemap({
 
     fetchBtcPrice()
   }, [])
+
+  // Before paint: when we have transactions and (first load or trigger changed), show "from" state
+  // so the user never sees the treemap fully visible before the fly-in runs.
+  useLayoutEffect(() => {
+    if (transactions.length === 0) return
+    const isFirstLoad = !hasInitializedRef.current
+    const triggerChanged =
+      animationTrigger !== undefined && prevAnimationTriggerRef.current !== animationTrigger
+    if (isFirstLoad || triggerChanged) {
+      setFlyInActive(true)
+    }
+  }, [transactions, animationTrigger])
 
   // Trigger fly-in only on first page load or when parent signals (e.g. new block via animationTrigger).
   // Read container size from DOM when triggering so the origin uses real layout dimensions.
@@ -373,7 +385,7 @@ export default function TransactionTreemap({
                 transformOrigin: `${origin.x}px ${origin.y}px`,
                 transformBox: 'view-box',
                 opacity: flyInActive ? 0 : 1,
-                transition: `transform 0.18s ease-in ${staggerMs}ms, opacity 0.18s ease-in ${staggerMs}ms`,
+                transition: `transform 0.22s cubic-bezier(0.65, 0, 1, 1) ${staggerMs}ms, opacity 0.22s cubic-bezier(0.65, 0, 1, 1) ${staggerMs}ms`,
               }}
             >
               <rect

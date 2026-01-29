@@ -102,8 +102,13 @@ function inferMinerFromCoinbase(coinbaseHex?: string): { name: string; identifie
   // Fallback: persist a readable tag even if we don't recognize it yet.
   const cleaned = asciiRaw.replace(/\s+/g, ' ').trim()
   if (!cleaned) return undefined
+  // Plausible: alphanumeric, spaces, hyphens, slashes; no backticks or control chars; 2–40 chars.
+  const plausible = /^[\w\s\-/]{2,40}$/.test(cleaned) && !/`|[\x00-\x1f]/.test(cleaned)
+  if (!plausible) return undefined
   const tag = cleaned.length > 40 ? `${cleaned.slice(0, 40)}…` : cleaned
-  return { name: tag, identifier: tag }
+  const identifier = tag.toLowerCase().replace(/[^a-z0-9]/g, '')
+  if (identifier.length < 2) return undefined
+  return { name: tag, identifier }
 }
 
 /**

@@ -1,9 +1,10 @@
+#!/usr/bin/env node
 /**
  * Build script to generate a JSON file containing all markdown content.
  * This is run at build time to bundle markdown files for the download API.
  * Also extracts h2 headings for each page and writes public/data/headings.json.
  *
- * Run with: node scripts/generate-md-content.js
+ * Run with: ./scripts/generate-md-content.js or node scripts/generate-md-content.js
  */
 
 const fs = require('fs')

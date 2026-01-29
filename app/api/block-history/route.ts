@@ -153,6 +153,7 @@ export async function POST() {
     }
 
     if (list.length > 0 && newBlock.height > topHeight + 1) {
+      // Fill the entire gap so the stored list remains contiguous (no gaps).
       console.log('[block-history] POST: gap (new', newBlock.height, ', top', topHeight, '), filling from RPC')
       const missingHeights = Array.from(
         { length: newBlock.height - topHeight },
@@ -166,6 +167,13 @@ export async function POST() {
           console.error('[block-history] POST: fetch block', h, 'failed', e)
           break
         }
+      }
+      if (missing.length !== missingHeights.length) {
+        console.error('[block-history] POST: gap-fill partial (got', missing.length, 'of', missingHeights.length, '), not writing')
+        return NextResponse.json(
+          { error: 'Failed to fetch all missing blocks; retry later' },
+          { status: 503 }
+        )
       }
       const updated = [...missing, ...list]
       await writeBlockHistoryToBlob(updated)

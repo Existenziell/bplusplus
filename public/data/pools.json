@@ -149,6 +149,12 @@
         "identifier": "poolin",
         "signatures": ["Poolin", "POOLIN", "poolin", "poolin.com", "Poolin Pool", "Poolin"],
         "icon": "poolin.svg"
+      },
+      {
+        "name": "NiceHash",
+        "identifier": "nicehash",
+        "signatures": ["NiceHash", "NICEHASH", "nicehash", "nicehash.com", "NiceHash Pool", "NiceHash", "NiceHashSolo", "NiceHashMining/"],
+        "icon": "nicehash.svg"
       }
     ]
   }

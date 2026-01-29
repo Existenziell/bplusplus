@@ -136,7 +136,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
         console.log('[BlockVisualizer] New block detected, height', tipHeight)
         setNewBlockHeight(tipHeight)
         setShowNewBlockNotification(true)
-        setTreemapAnimationTrigger((t) => t + 1)
         setTimeout(() => setShowNewBlockNotification(false), 3000)
         fetch('/api/block-history', { method: 'POST', cache: 'no-store' })
           .then((res) => {
@@ -185,6 +184,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       const template = processMempoolBlockData(verboseMempool, { tipHeight })
 
       setBlockData(template)
+      setTreemapAnimationTrigger((t) => t + 1)
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch mempool template'
       setError(errorMessage)
@@ -351,16 +351,18 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
                   <span className="text-btc text-base font-medium truncate">{formatNumber(snap.height)}</span>
                 </div>
                 <div
-                  className="relative flex-shrink-0 w-48 h-48 overflow-hidden rounded-none border border-gray-200 dark:border-gray-700 bg-gradient-to-b from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/20 dark:to-purple-500/20 p-3 text-sm"
+                  className="relative flex-shrink-0 w-44 h-44 overflow-hidden rounded-none border border-gray-200 dark:border-gray-700 bg-gradient-to-b from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/20 dark:to-purple-500/20 p-3 text-sm"
                 >
-                <div className="space-y-1 text-secondary">
-                  <div className="text-xs font-mono">{truncateHash(snap.hash)}</div>
+                <div className="text-xs">
+                  <div className="mb-2">{getRelativeTime(snap.timestamp)}</div>
+                  <div className="font-mono">{truncateHash(snap.hash)}</div>
                   <div>Transactions: {formatNumber(snap.txCount)}</div>
                   <div>Size: {formatBlockSize(snap.size)}</div>
                   <div>Weight: {formatBlockWeight(snap.weight ?? 0)}</div>
                   <div>Fees: {snap.totalFeesBTC.toFixed(4)} BTC</div>
-                  <div>Range: {snap.feeSpanMin} – {snap.feeSpanMax} sat/vB</div>
-                  <div className="absolute bottom-2 left-3 flex items-center gap-2">
+                  <div className="mb-2">Range: {snap.feeSpanMin} – {snap.feeSpanMax} sat/vB</div>
+                  <div className="flex items-center gap-2">
+                    <div>{snap.minerName ?? snap.miner ?? '—'}</div>
                     <Image
                       src={getPoolIconSrc(snap.miner)}
                       alt={snap.minerName ?? snap.miner ?? 'Unknown miner'}
@@ -369,9 +371,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
                       height={16}
                       className="w-4 h-4"
                     />
-                    <div className="text-xs text-secondary">{snap.minerName ?? snap.miner ?? '—'}</div>
                   </div>
-                  <span className="absolute bottom-2 right-2 text-[11px] text-secondary shrink-0">{getRelativeTime(snap.timestamp)}</span>
                 </div>
                 </div>
               </div>
@@ -394,7 +394,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       <div
         className="flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300 mt-0"
       >
-        <div className="flex-shrink-0 min-w-48">
+        <div className="flex-shrink-0 w-44">
           <BlockHeader
             height={blockData.height}
             txCount={blockData.txCount}

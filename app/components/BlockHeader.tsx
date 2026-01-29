@@ -15,11 +15,11 @@ export default function BlockHeader({
   size,
 }: BlockHeaderProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 w-48 h-48 px-6 py-4 shadow-sm border border-gray-200 dark:border-gray-700">
+    <div className="bg-white dark:bg-gray-800 w-44 h-44 px-6 py-4 shadow-sm border border-gray-200 dark:border-gray-700">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         {/* Block Info */}
         <div className="flex-1">
-          <div className="flex flex-col gap-2 mb-3">
+          <div className="flex flex-col gap-2 text-sm">
             <div>
               <div className="text-secondary">Blockheight</div>
               <div className="text-gray-800 dark:text-gray-200 font-semibold">

@@ -30,17 +30,17 @@ export const metadata: Metadata = {
     "Bitcoin Education | Open knowledge. Open source. A developer's guide with docs, CLI terminal, Stack Lab, and code examples. Always free.",
   icons: {
     icon: [
-      { url: '/favicon/favicon.ico', sizes: 'any' },
-      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/icons/favicon/favicon.ico', sizes: 'any' },
+      { url: '/icons/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icons/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
     ],
     apple: [
-      { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icons/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
     other: [
       {
         rel: 'manifest',
-        url: '/favicon/site.webmanifest',
+        url: '/icons/favicon/site.webmanifest',
       },
     ],
   },

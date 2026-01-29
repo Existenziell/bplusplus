@@ -19,7 +19,7 @@ export default function Header() {
           <div className="flex justify-between items-center">
             <Link href="/" className="flex items-center gap-2" aria-label="BitcoinDev Home">
               <Image
-                src="/logo/logo.png"
+                src="/icons/logo/logo.png"
                 alt="BitcoinDev Logo"
                 width={100}
                 height={100}

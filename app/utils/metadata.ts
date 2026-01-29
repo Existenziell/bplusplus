@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 
 // Site and OG config
 export const SITE_URL = 'https://bitcoindev.info'
-export const DEFAULT_OG_IMAGE = '/og/og.png'
-export const OG_LOGO = '/logo/logo.png'
+export const DEFAULT_OG_IMAGE = '/images/og/og.png'
+export const OG_LOGO = '/icons/logo/logo.png'
 
 /** JSON-LD for WebSite + Organization (root layout). */
 export function getSiteStructuredData(): string {

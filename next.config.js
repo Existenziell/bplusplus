@@ -46,7 +46,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/logo/:path*',
+        source: '/icons/logo/:path*',
         headers: [
           {
             key: 'Cache-Control',
@@ -75,7 +75,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/og/:path*',
+        source: '/images/og/:path*',
         headers: [
           {
             key: 'Cache-Control',

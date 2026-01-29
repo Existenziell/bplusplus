@@ -46,7 +46,7 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
                     aria-label="BitcoinDev Home"
                   >
                     <Image
-                      src="/logo/logo.png"
+                      src="/icons/logo/logo.png"
                       alt="BitcoinDev Logo"
                       width={42}
                       height={42}
@@ -64,7 +64,7 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
                     aria-label="BitcoinDev Home"
                   >
                     <Image
-                      src="/logo/logo.png"
+                      src="/icons/logo/logo.png"
                       alt="BitcoinDev Logo"
                       width={42}
                       height={42}

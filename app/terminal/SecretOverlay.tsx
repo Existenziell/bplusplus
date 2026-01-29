@@ -108,14 +108,15 @@ export default function SecretOverlay({ visible, onClose, onGoHome }: SecretOver
   if (!visible) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden page-bg">
+    <div className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden page-bg min-h-dvh animate-fadeIn">
       {/* Animated background effect */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-btc/20 via-transparent to-btc/20 animate-pulse" />
       </div>
 
-      <div className="max-w-2xl mx-auto text-center relative z-10 space-y-8">
-        <h1 className="heading-page text-6xl md:text-8xl font-bold relative">
+      <div className="relative z-10 flex min-h-full items-center justify-center px-4 py-6 sm:py-8">
+        <div className="max-w-2xl mx-auto w-full text-center space-y-5 sm:space-y-6 md:space-y-8">
+        <h1 className="heading-page text-5xl sm:text-6xl md:text-8xl font-bold relative">
           <span className="absolute inset-0 text-btc/30 blur-sm animate-pulse">
             SECRET
           </span>
@@ -152,8 +153,8 @@ export default function SecretOverlay({ visible, onClose, onGoHome }: SecretOver
           </button>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700">
-          <p className="text-xs text-gray-400 dark:text-gray-600 font-mono">
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-300 dark:border-gray-700">
+          <p className="text-xs text-gray-400 dark:text-gray-600 font-mono break-all">
             Block Height: 0 | Hash:
             000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
           </p>
@@ -161,6 +162,7 @@ export default function SecretOverlay({ visible, onClose, onGoHome }: SecretOver
             &quot;The Times 03/Jan/2009 Chancellor on brink of second bailout
             for banks&quot;
           </p>
+        </div>
         </div>
       </div>
     </div>

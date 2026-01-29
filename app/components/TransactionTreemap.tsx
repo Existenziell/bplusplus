@@ -50,6 +50,11 @@ interface TransactionTreemapProps {
   transactions: ProcessedTransaction[]
   width?: number
   height?: number
+  sizeMetric?: SizeMetric
+  onSizeMetricChange?: (metric: SizeMetric) => void
+  showMetricSelector?: boolean
+  /** When this value changes, fly-in runs (e.g. new block). Omit to use transactions-ref only. */
+  animationTrigger?: number
 }
 
 interface TreemapNode {
@@ -64,15 +69,28 @@ export default function TransactionTreemap({
   transactions,
   width: propWidth,
   height = 600,
+  sizeMetric: controlledSizeMetric,
+  onSizeMetricChange,
+  showMetricSelector = true,
+  animationTrigger,
 }: TransactionTreemapProps) {
   const router = useRouter()
   const [hoveredTx, setHoveredTx] = useState<ProcessedTransaction | null>(null)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [containerWidth, setContainerWidth] = useState(800)
-  const [sizeMetric, setSizeMetric] = useState<SizeMetric>('vbytes')
+  const [uncontrolledSizeMetric, setUncontrolledSizeMetric] = useState<SizeMetric>('vbytes')
   const [btcPrice, setBtcPrice] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
+  const [flyInActive, setFlyInActive] = useState(false)
+  const hasInitializedRef = useRef(false)
+  const prevAnimationTriggerRef = useRef<number | undefined>(animationTrigger)
+
+  const sizeMetric = controlledSizeMetric ?? uncontrolledSizeMetric
+  const setSizeMetric = (m: SizeMetric) => {
+    if (onSizeMetricChange) onSizeMetricChange(m)
+    if (controlledSizeMetric === undefined) setUncontrolledSizeMetric(m)
+  }
 
   // Fetch BTC price for USD conversion
   useEffect(() => {
@@ -90,6 +108,27 @@ export default function TransactionTreemap({
 
     fetchBtcPrice()
   }, [])
+
+  // Trigger fly-in only on first page load or when parent signals (e.g. new block via animationTrigger)
+  useEffect(() => {
+    if (transactions.length === 0) return
+    const isFirstLoad = !hasInitializedRef.current
+    const triggerChanged =
+      animationTrigger !== undefined && prevAnimationTriggerRef.current !== animationTrigger
+    prevAnimationTriggerRef.current = animationTrigger
+    if (isFirstLoad) hasInitializedRef.current = true
+    if (!isFirstLoad && !triggerChanged) return
+    setFlyInActive(true)
+  }, [transactions, animationTrigger])
+
+  // After painting "from" state, switch to "to" so CSS transition runs
+  useEffect(() => {
+    if (!flyInActive) return
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setFlyInActive(false))
+    })
+    return () => cancelAnimationFrame(id)
+  }, [flyInActive])
 
   // Calculate responsive width
   useEffect(() => {
@@ -280,30 +319,32 @@ export default function TransactionTreemap({
   return (
     <div ref={containerRef} className="relative w-full">
       {/* Size Metric Selector */}
-      <div className="mb-4 flex items-center justify-between flex-wrap gap-4">
-        <div className="flex items-center gap-2">
-          <label htmlFor="size-metric" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Sort tx blocks by:
-          </label>
-          <select
-            id="size-metric"
-            value={sizeMetric}
-            onChange={(e) => setSizeMetric(e.target.value as SizeMetric)}
-            className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent"
-          >
-            <option value="vbytes">vBytes</option>
-            <option value="value">BTC Amount</option>
-            <option value="fee">Fee</option>
-          </select>
+      {showMetricSelector && (
+        <div className="mb-4 flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-2">
+            <label htmlFor="size-metric" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Sort tx blocks by:
+            </label>
+            <select
+              id="size-metric"
+              value={sizeMetric}
+              onChange={(e) => setSizeMetric(e.target.value as SizeMetric)}
+              className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent"
+            >
+              <option value="vbytes">vBytes</option>
+              <option value="value">BTC Amount</option>
+              <option value="fee">Fee</option>
+            </select>
+          </div>
         </div>
-      </div>
+      )}
 
       <svg
         ref={svgRef}
         width="100%"
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        className="bg-gray-50 dark:bg-gray-900"
+        className="bg-gray-50 dark:bg-gray-900 treemap-rect-transition"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setHoveredTx(null)}
         aria-label="Transaction treemap visualization"
@@ -313,12 +354,26 @@ export default function TransactionTreemap({
           const rectHeight = node.y1 - node.y0
           const color = colorScale(getMetricValue(node.data))
           const isHovered = hoveredTx?.txid === node.data.txid
+          const centerX = width / 2
+          const centerY = height / 2
+          const fromTransform = `translate(${centerX}px, ${centerY}px) scale(0)`
+          const toTransform = `translate(${node.x0}px, ${node.y0}px) scale(1)`
+          const startDelayMs = 250
+          const staggerMs = startDelayMs + index * 6
 
           return (
-            <g key={node.data.txid}>
+            <g
+              key={node.data.txid}
+              style={{
+                transform: flyInActive ? fromTransform : toTransform,
+                transformOrigin: '0 0',
+                opacity: flyInActive ? 0 : 1,
+                transition: `transform 0.18s ease-in ${staggerMs}ms, opacity 0.18s ease-in ${staggerMs}ms`,
+              }}
+            >
               <rect
-                x={node.x0}
-                y={node.y0}
+                x={0}
+                y={0}
                 width={rectWidth}
                 height={rectHeight}
                 fill={color}
@@ -328,14 +383,14 @@ export default function TransactionTreemap({
                 onMouseEnter={() => setHoveredTx(node.data)}
                 onMouseLeave={() => setHoveredTx(null)}
                 onClick={() => router.push(`/block-visualizer/tx/${node.data.txid}`)}
-                className="cursor-pointer transition-opacity"
+                className="cursor-pointer"
                 aria-label={`Transaction ${truncateHash(node.data.txid)} - Click to view details`}
               />
               {/* Show txid if rectangle is large enough */}
               {rectWidth > 60 && rectHeight > 20 && (
                 <text
-                  x={node.x0 + rectWidth / 2}
-                  y={node.y0 + rectHeight / 2}
+                  x={rectWidth / 2}
+                  y={rectHeight / 2}
                   textAnchor="middle"
                   dominantBaseline="middle"
                   className="text-xs font-mono fill-gray-900 dark:fill-gray-100 pointer-events-none"

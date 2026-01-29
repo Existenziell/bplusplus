@@ -3,6 +3,8 @@
  * Transforms Bitcoin RPC responses into formats suitable for visualization.
  */
 
+import poolsData from '@/public/data/pools.json'
+
 export interface ProcessedTransaction {
   txid: string
   vsize: number // Virtual size in vBytes
@@ -16,8 +18,130 @@ export interface ProcessedBlock {
   hash: string
   timestamp: number
   size: number
+  weight: number
   txCount: number
+  /** Pool identifier (for icon lookup). */
+  miner?: string
+  /** Pool display name. */
+  minerName?: string
   transactions: ProcessedTransaction[]
+}
+
+/** Block or mempool template; template has hash "pending" and no miner. */
+export type ProcessedBlockOrTemplate = ProcessedBlock & { isTemplate?: boolean }
+
+/** Verbose mempool entry from getrawmempool(true). */
+export interface VerboseMempoolEntry {
+  vsize: number
+  weight?: number
+  fee?: number
+  fees?: { base: number }
+  time?: number
+}
+
+/** Options for building a block template from the mempool. */
+export interface ProcessMempoolBlockOptions {
+  tipHeight: number
+  maxBlockWeight?: number
+}
+
+/** Snapshot of a block for localStorage history (overview + detail). */
+export interface BlockSnapshot {
+  height: number
+  hash: string
+  timestamp: number
+  size: number
+  weight: number
+  txCount: number
+  feeSpanMin: number
+  feeSpanMax: number
+  medianFeeRate: number
+  totalFeesBTC: number
+  totalValueBTC: number
+  subsidyPlusFeesBTC: number
+  /** Pool identifier (for icon lookup). */
+  miner?: string
+  /** Pool display name. */
+  minerName?: string
+}
+
+function hexToAscii(hex: string): string {
+  try {
+    const clean = hex.startsWith('0x') ? hex.slice(2) : hex
+    let out = ''
+    for (let i = 0; i < clean.length - 1; i += 2) {
+      const byte = parseInt(clean.slice(i, i + 2), 16)
+      // keep printable ASCII, replace others with space to preserve separators
+      out += byte >= 32 && byte <= 126 ? String.fromCharCode(byte) : ' '
+    }
+    return out
+  } catch {
+    return ''
+  }
+}
+
+/**
+ * Best-effort miner/pool attribution from coinbase script.
+ * Bitcoin Core does not provide pool attribution directly; this is heuristic.
+ * Returns { name, identifier } for display and icon lookup (e.g. in localStorage).
+ */
+function inferMinerFromCoinbase(coinbaseHex?: string): { name: string; identifier: string } | undefined {
+  if (!coinbaseHex) return undefined
+  const asciiRaw = hexToAscii(coinbaseHex)
+  // Normalize whitespace because coinbase decoding replaces non-printables with spaces.
+  const asciiNorm = asciiRaw.replace(/\s+/g, ' ').trim().toLowerCase()
+
+  const pools = (poolsData as { pools: Array<{ identifier: string; signatures: string[]; name: string }> }).pools
+  for (const pool of pools) {
+    for (const sig of pool.signatures) {
+      const normalizedSig = sig.replaceAll('/', '').replace(/\s+/g, ' ').trim().toLowerCase()
+      if (!normalizedSig) continue
+      if (asciiNorm.includes(normalizedSig)) {
+        return { name: pool.name, identifier: pool.identifier }
+      }
+    }
+  }
+
+  // Fallback: persist a readable tag even if we don't recognize it yet.
+  const cleaned = asciiRaw.replace(/\s+/g, ' ').trim()
+  if (!cleaned) return undefined
+  const tag = cleaned.length > 40 ? `${cleaned.slice(0, 40)}…` : cleaned
+  return { name: tag, identifier: tag }
+}
+
+/**
+ * Build a BlockSnapshot from a ProcessedBlock for storage/display.
+ */
+export function buildBlockSnapshot(block: ProcessedBlock): BlockSnapshot {
+  const { transactions } = block
+  const feeRates = transactions.map(tx => tx.feeRate).filter(r => r > 0)
+  const sortedRates = [...feeRates].sort((a, b) => a - b)
+  const feeSpanMin = sortedRates[0] ?? 0
+  const feeSpanMax = sortedRates[sortedRates.length - 1] ?? 0
+  const medianFeeRate =
+    sortedRates.length === 0
+      ? 0
+      : sortedRates[Math.floor(sortedRates.length / 2)] ?? 0
+  const totalFeesBTC = transactions.reduce((sum, tx) => sum + tx.fee, 0)
+  const totalValueBTC = transactions.reduce((sum, tx) => sum + tx.value, 0)
+  const subsidyPlusFeesBTC = transactions[0]?.value ?? 0
+
+  return {
+    height: block.height,
+    hash: block.hash,
+    timestamp: block.timestamp,
+    size: block.size,
+    weight: block.weight,
+    txCount: block.txCount,
+    feeSpanMin,
+    feeSpanMax,
+    medianFeeRate,
+    totalFeesBTC,
+    totalValueBTC,
+    subsidyPlusFeesBTC,
+    miner: block.miner,
+    minerName: block.minerName,
+  }
 }
 
 /**
@@ -32,6 +156,19 @@ export function calculateTransactionFeeRate(tx: {
   }
   // Fee is in BTC, convert to sats and divide by vsize
   return Math.round((tx.fee * 100000000) / tx.vsize)
+}
+
+/** Max plausible BTC (supply cap). Values above this are treated as satoshis. */
+const MAX_PLAUSIBLE_BTC = 21e6
+
+/**
+ * Normalize value to BTC: if value is impossibly large for BTC, assume it was in satoshis.
+ */
+function normalizeValueToBtc(value: number, txid?: string): number {
+  if (value <= MAX_PLAUSIBLE_BTC) {
+    return value
+  }
+  return value / 1e8
 }
 
 /**
@@ -51,7 +188,8 @@ export function calculateTransactionValue(
     if (!vout || vout.length === 0) {
       return 0
     }
-    return vout.reduce((sum, output) => sum + (output.value || 0), 0)
+    const coinbaseValue = vout.reduce((sum, output) => sum + (output.value || 0), 0)
+    return normalizeValueToBtc(coinbaseValue)
   }
 
   // For regular transactions, calculate from inputs (total value being moved)
@@ -68,38 +206,8 @@ export function calculateTransactionValue(
     
     // If we have input values, use them (more accurate)
     if (inputValue > 0) {
-      // [BlockUtils] Debug: Log details for high-value transactions
-      if (inputValue > 1000) {
-        const sampleInputs = vin.slice(0, 3).map((input, idx) => ({
-          index: idx,
-          hasPrevout: !!input.prevout,
-          prevoutValue: input.prevout?.value,
-        }))
-        console.log('[BlockUtils] High-value transaction (using inputs):', {
-          txid: txid || 'unknown',
-          totalInputValue: inputValue,
-          inputCount: vin.length,
-          inputsWithValues: inputValues.length,
-          sampleInputValues: inputValues.slice(0, 10), // First 10 input values
-          sampleInputs: sampleInputs,
-          averageInputValue: inputValues.length > 0 ? inputValue / inputValues.length : 0,
-        })
-      }
-      
-      // [BlockUtils] Sanity check: warn if value seems unreasonably high
-      // Typical large transactions are < 10,000 BTC. If we see > 1,000,000, might be satoshis
-      if (inputValue > 1000000) {
-        console.warn('[BlockUtils] WARNING: Suspiciously high input value detected:', {
-          txid: txid || 'unknown',
-          value: inputValue,
-          valueInBTC: inputValue,
-          valueInSats: inputValue * 100000000,
-          possibleIssue: inputValue > 100000000 ? 'Value might be in satoshis instead of BTC!' : 'Unusually large transaction',
-          inputCount: vin.length,
-          sampleInputValues: inputValues.slice(0, 5), // Only show first 5
-        })
-      }
-      return inputValue
+      // Normalize: if value is impossibly large for BTC (e.g. > 21M), assume RPC returned satoshis
+      return normalizeValueToBtc(inputValue, txid)
     }
   }
 
@@ -109,34 +217,7 @@ export function calculateTransactionValue(
   if (vout && vout.length > 0) {
     const outputValues = vout.map(output => output.value || 0)
     const largestOutput = Math.max(...outputValues)
-    
-    // [BlockUtils] Debug: Log fallback calculation (should be rare with verbosity 3)
-    if (largestOutput > 1000) {
-      console.log('[BlockUtils] High-value transaction (using fallback - largest output):', {
-        txid: txid || 'unknown',
-        calculatedValue: largestOutput,
-        outputCount: vout.length,
-        allOutputValues: outputValues,
-        largestOutput: largestOutput,
-        sumOfAllOutputs: outputValues.reduce((a, b) => a + b, 0),
-        fee: fee || 0,
-        inputCount: vin?.length || 0,
-        hasPrevoutValues: vin?.some(input => input.prevout?.value !== undefined) || false,
-        note: 'Using largest output as approximation (prevout data not available)',
-      })
-    }
-    
-    // [BlockUtils] Sanity check for fallback value
-    if (largestOutput > 1000000) {
-      console.warn('[BlockUtils] WARNING: Suspiciously high fallback value detected:', {
-        txid: txid || 'unknown',
-        value: largestOutput,
-        possibleIssue: largestOutput > 100000000 ? 'Value might be in satoshis instead of BTC!' : 'Unusually large transaction',
-        outputCount: vout.length,
-        sampleOutputValues: outputValues.slice(0, 5), // Only show first 5
-      })
-    }
-    return largestOutput
+    return normalizeValueToBtc(largestOutput, txid)
   }
 
   return 0
@@ -144,12 +225,14 @@ export function calculateTransactionValue(
 
 /**
  * Process raw block data from RPC into visualization format.
+ * getblock (verbosity 2/3) returns size (bytes) and weight (WU).
  */
 export function processBlockData(block: {
   height: number
   hash: string
   time: number
   size: number
+  weight?: number
   tx: Array<{
     txid: string
     vsize: number
@@ -158,6 +241,9 @@ export function processBlockData(block: {
     vout: Array<{ value?: number }>
   }>
 }): ProcessedBlock {
+  const coinbaseHex = block.tx?.[0]?.vin?.[0]?.coinbase
+  const minerInfo = inferMinerFromCoinbase(coinbaseHex)
+
   const transactions: ProcessedTransaction[] = block.tx.map((tx) => {
     const feeRate = calculateTransactionFeeRate(tx)
     const value = calculateTransactionValue(tx.vin, tx.vout, tx.fee, tx.txid)
@@ -171,14 +257,68 @@ export function processBlockData(block: {
     }
   })
 
-
   return {
     height: block.height,
     hash: block.hash,
     timestamp: block.time,
     size: block.size,
+    weight: block.weight ?? 0,
     txCount: block.tx.length,
+    miner: minerInfo?.identifier,
+    minerName: minerInfo?.name,
     transactions,
+  }
+}
+
+const DEFAULT_MAX_BLOCK_WEIGHT = 4_000_000
+
+/**
+ * Build a block template from verbose mempool: sort by fee rate, fill up to maxBlockWeight.
+ * Returns a ProcessedBlock-like object with hash "pending", no miner, and transactions with value 0.
+ */
+export function processMempoolBlockData(
+  verboseMempool: Record<string, VerboseMempoolEntry>,
+  options: ProcessMempoolBlockOptions
+): ProcessedBlock & { isTemplate: true } {
+  const { tipHeight, maxBlockWeight = DEFAULT_MAX_BLOCK_WEIGHT } = options
+
+  const entries = Object.entries(verboseMempool).map(([txid, entry]) => {
+    const feeBtc = entry.fee ?? entry.fees?.base ?? 0
+    const vsize = entry.vsize || 1
+    const feeRate = vsize > 0 ? Math.round((feeBtc * 100_000_000) / vsize) : 0
+    const weight = entry.weight ?? vsize * 4
+    return { txid, vsize, fee: feeBtc, feeRate, weight }
+  })
+
+  entries.sort((a, b) => b.feeRate - a.feeRate)
+
+  let totalWeight = 0
+  const selected: Array<{ txid: string; vsize: number; fee: number; feeRate: number }> = []
+  for (const e of entries) {
+    if (totalWeight + e.weight > maxBlockWeight) continue
+    totalWeight += e.weight
+    selected.push({ txid: e.txid, vsize: e.vsize, fee: e.fee, feeRate: e.feeRate })
+  }
+
+  const transactions: ProcessedTransaction[] = selected.map((t) => ({
+    txid: t.txid,
+    vsize: t.vsize,
+    fee: t.fee,
+    feeRate: t.feeRate,
+    value: 0,
+  }))
+
+  const size = selected.reduce((s, t) => s + t.vsize, 0)
+
+  return {
+    height: tipHeight + 1,
+    hash: 'pending',
+    timestamp: 0,
+    size,
+    weight: totalWeight,
+    txCount: selected.length,
+    transactions,
+    isTemplate: true,
   }
 }
 
@@ -193,6 +333,19 @@ export function formatBlockSize(bytes: number): string {
     return `${(bytes / 1e3).toFixed(0)} KB`
   }
   return `${bytes} B`
+}
+
+/**
+ * Format block weight for display (WU → MWU).
+ */
+export function formatBlockWeight(weightWu: number): string {
+  if (weightWu >= 1e6) {
+    return `${(weightWu / 1e6).toFixed(2)} MWU`
+  }
+  if (weightWu >= 1e3) {
+    return `${(weightWu / 1e3).toFixed(1)} KWU`
+  }
+  return `${weightWu} WU`
 }
 
 /**

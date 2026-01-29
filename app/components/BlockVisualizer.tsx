@@ -1,10 +1,53 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import Image from 'next/image'
 import { bitcoinRpc } from '@/app/utils/bitcoinRpc'
-import { processBlockData, ProcessedBlock } from '@/app/utils/blockUtils'
+import {
+  processMempoolBlockData,
+  ProcessedBlock,
+  BlockSnapshot,
+  formatBlockSize,
+  formatBlockWeight,
+  truncateHash,
+} from '@/app/utils/blockUtils'
+import { formatNumber } from '@/app/utils/formatting'
 import BlockHeader from '@/app/components/BlockHeader'
 import TransactionTreemap from '@/app/components/TransactionTreemap'
+import { ChevronLeft, ChevronRight } from '@/app/components/Icons'
+import poolsData from '@/public/data/pools.json'
+
+const BLOCKS_PER_PAGE = 10
+
+type SizeMetric = 'vbytes' | 'value' | 'fee'
+
+/** Build identifier -> icon filename map from pools.json (single source of truth). */
+const POOL_ICON_MAP: Record<string, string> = (() => {
+  const pools = (poolsData as { pools: Array<{ identifier: string; icon?: string }> }).pools
+  const map: Record<string, string> = {}
+  for (const pool of pools) {
+    const norm = pool.identifier.toLowerCase().replace(/[^a-z0-9]/g, '')
+    map[norm] = pool.icon ?? 'default.svg'
+  }
+  return map
+})()
+
+function getPoolIconSrc(miner?: string): string {
+  if (!miner) return '/icons/pools/default.svg'
+  const norm = miner.toLowerCase().replace(/[^a-z0-9]/g, '')
+  const filename = POOL_ICON_MAP[norm] ?? 'default.svg'
+  return `/icons/pools/${filename}`
+}
+
+function getRelativeTime(timestamp: number): string {
+  const secs = Math.floor(Date.now() / 1000 - timestamp)
+  if (secs < 60) return `${secs} seconds ago`
+  const mins = Math.floor(secs / 60)
+  if (mins < 60) return `${mins} minute${mins !== 1 ? 's' : ''} ago`
+  const hours = Math.floor(mins / 60)
+  const remainderMins = mins % 60
+  return `${hours}:${String(remainderMins).padStart(2, '0')} ago`
+}
 
 interface BlockVisualizerProps {
   initialBlockHash?: string
@@ -16,115 +59,171 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
   const [error, setError] = useState<string | null>(null)
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
-  const [currentBlockHash, setCurrentBlockHash] = useState<string | null>(initialBlockHash || null)
+  const [previousBlocks, setPreviousBlocks] = useState<BlockSnapshot[]>([])
+  const [isLoadingBlockHistory, setIsLoadingBlockHistory] = useState(false)
+  const [blockHistoryError, setBlockHistoryError] = useState<string | null>(null)
+  const [sizeMetric, setSizeMetric] = useState<SizeMetric>('vbytes')
   const [showNewBlockNotification, setShowNewBlockNotification] = useState(false)
   const [newBlockHeight, setNewBlockHeight] = useState<number | null>(null)
+  const [blockJustUpdated, setBlockJustUpdated] = useState(false)
+  const [treemapAnimationTrigger, setTreemapAnimationTrigger] = useState(0)
 
-  const fetchBlockData = useCallback(
-    async (blockHash: string) => {
-      try {
-        setIsRefreshing(true)
-        setError(null)
+  const lastKnownBlockHashRef = useRef<string | null>(null)
+  const previousBlocksScrollRef = useRef<HTMLDivElement>(null)
+  const [scrollIndicators, setScrollIndicators] = useState({ left: false, right: false })
 
-        // Fetch full block with transactions and prevout data (verbosity 3)
-        // Verbosity 2 doesn't include prevout data, verbosity 3 does (requires undo info)
-        const blockResponse = await bitcoinRpc('getblock', [blockHash, 3])
+  const isTemplate = Boolean(blockData && 'isTemplate' in blockData && blockData.isTemplate)
 
-        if (blockResponse.error) {
-          throw new Error(blockResponse.error.message || 'Failed to fetch block data')
-        }
+  const updateScrollIndicators = useCallback(() => {
+    const el = previousBlocksScrollRef.current
+    if (!el) return
+    const canScrollLeft = el.scrollLeft > 0
+    const canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 1
+    setScrollIndicators((prev) =>
+      prev.left !== canScrollLeft || prev.right !== canScrollRight
+        ? { left: canScrollLeft, right: canScrollRight }
+        : prev
+    )
+  }, [])
 
-        const rawBlock = blockResponse.result as {
-          height: number
-          hash: string
-          time: number
-          size: number
-          tx: Array<{
-            txid: string
-            vsize: number
-            fee?: number
-            vin?: Array<{ prevout?: { value?: number }; coinbase?: string }>
-            vout: Array<{ value?: number }>
-          }>
-        }
+  const scrollPreviousBlocks = useCallback((direction: 'left' | 'right') => {
+    const el = previousBlocksScrollRef.current
+    if (!el) return
+    const delta = direction === 'left' ? -280 : 280
+    el.scrollBy({ left: delta, behavior: 'smooth' })
+  }, [])
 
-        const processed = processBlockData(rawBlock)
-
-        // Check if this is a new block (not initial load)
-        const isNewBlock = currentBlockHash !== null && blockHash !== currentBlockHash
-
-        if (isNewBlock) {
-          // Show new block notification
-          setNewBlockHeight(processed.height)
-          setShowNewBlockNotification(true)
-
-          // Hide notification after animation completes
-          setTimeout(() => {
-            setShowNewBlockNotification(false)
-          }, 3000) // Show for 3 seconds
-        }
-
-        setBlockData(processed)
-        setCurrentBlockHash(blockHash)
-        setLastUpdated(new Date())
-      } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Failed to fetch block data'
-        setError(errorMessage)
-        console.error('Error fetching block data:', err)
-      } finally {
-        setLoading(false)
-        setIsRefreshing(false)
-      }
-    },
-    [currentBlockHash]
-  )
-
-  const fetchLatestBlock = useCallback(async () => {
+  const fetchBlockHistory = useCallback(async (beforeHeight: number | null = null) => {
+    const append = beforeHeight !== null
+    setIsLoadingBlockHistory(true)
+    setBlockHistoryError(null)
     try {
-      const chainInfo = await bitcoinRpc('getblockchaininfo')
+      const url =
+        beforeHeight !== null
+          ? `/api/block-history?limit=${BLOCKS_PER_PAGE}&beforeHeight=${beforeHeight}`
+          : `/api/block-history?limit=${BLOCKS_PER_PAGE}`
+      const res = await fetch(url, { cache: 'no-store' })
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}))
+        setBlockHistoryError((errBody as { error?: string }).error ?? `Failed to load (${res.status})`)
+        if (!append) setPreviousBlocks([])
+        return
+      }
+      const data = await res.json()
+      const list = Array.isArray(data?.blocks) ? data.blocks : []
+      setPreviousBlocks((prev) => (append ? [...prev, ...list] : list))
+    } catch (err) {
+      setBlockHistoryError(err instanceof Error ? err.message : 'Failed to load previous blocks')
+      if (!append) setPreviousBlocks([])
+    } finally {
+      setIsLoadingBlockHistory(false)
+    }
+  }, [])
 
+  const fetchMempoolTemplate = useCallback(async () => {
+    try {
+      setIsRefreshing(true)
+      setError(null)
+
+      const chainInfo = await bitcoinRpc('getblockchaininfo')
       if (chainInfo.error) {
         throw new Error(chainInfo.error.message || 'Failed to fetch blockchain info')
       }
+      const result = chainInfo.result as { blocks: number; bestblockhash: string }
+      const tipHeight = result.blocks
+      const bestBlockHash = result.bestblockhash
 
-      const bestBlockHash = (chainInfo.result as { bestblockhash: string }).bestblockhash
-
-      // Only fetch if block hash changed
-      if (bestBlockHash !== currentBlockHash) {
-        await fetchBlockData(bestBlockHash)
+      // Detect new block: show overlay and persist to Blob
+      const lastKnown = lastKnownBlockHashRef.current
+      if (lastKnown !== null && bestBlockHash !== lastKnown) {
+        console.log('[BlockVisualizer] New block detected, height', tipHeight)
+        setNewBlockHeight(tipHeight)
+        setShowNewBlockNotification(true)
+        setTreemapAnimationTrigger((t) => t + 1)
+        setTimeout(() => setShowNewBlockNotification(false), 3000)
+        fetch('/api/block-history', { method: 'POST', cache: 'no-store' })
+          .then((res) => {
+            if (!res.ok) {
+              console.log('[BlockVisualizer] POST block-history failed:', res.status)
+              return null
+            }
+            return res.json()
+          })
+          .then((data) => {
+            if (data?.blocks && Array.isArray(data.blocks)) {
+              console.log('[BlockVisualizer] POST block-history success, blocks:', data.blocks.length)
+              setPreviousBlocks(data.blocks)
+            }
+          })
+          .catch((err) => {
+            console.log('[BlockVisualizer] POST block-history error:', err)
+          })
       }
+      lastKnownBlockHashRef.current = bestBlockHash
+
+      const mempoolResponse = await bitcoinRpc('getrawmempool', [true])
+      if (mempoolResponse.error) {
+        throw new Error(mempoolResponse.error.message || 'Failed to fetch mempool')
+      }
+
+      const verboseMempool = mempoolResponse.result as Record<
+        string,
+        { vsize: number; weight?: number; fee?: number; fees?: { base: number }; time?: number }
+      >
+      const template = processMempoolBlockData(verboseMempool, { tipHeight })
+
+      setBlockData(template)
+      setLastUpdated(new Date())
+      setBlockJustUpdated(true)
+      setTimeout(() => setBlockJustUpdated(false), 500)
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch latest block'
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch mempool template'
       setError(errorMessage)
-      console.error('Error fetching latest block:', err)
+    } finally {
+      setLoading(false)
+      setIsRefreshing(false)
     }
-  }, [currentBlockHash, fetchBlockData])
+  }, [])
 
   // Initial load
   useEffect(() => {
-    if (initialBlockHash) {
-      fetchBlockData(initialBlockHash)
-    } else {
-      fetchLatestBlock()
-    }
+    fetchMempoolTemplate()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Only run on mount
 
-  // Auto-refresh polling
+  // Load first 10 previous blocks on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    fetchBlockHistory(null)
+  }, [fetchBlockHistory])
+
+  // Auto-refresh polling (mempool changes often)
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchLatestBlock()
-    }, 30000) // Poll every 30 seconds
+      fetchMempoolTemplate()
+    }, 10000) // Poll every 10 seconds
 
     return () => clearInterval(interval)
-  }, [fetchLatestBlock])
+  }, [fetchMempoolTemplate])
+
+  // Update scroll indicators when previous blocks change or container resizes
+  useEffect(() => {
+    if (previousBlocks.length === 0) return
+    const el = previousBlocksScrollRef.current
+    if (!el) return
+    const run = () => requestAnimationFrame(updateScrollIndicators)
+    run()
+    const ro = new ResizeObserver(run)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [previousBlocks, updateScrollIndicators])
 
   if (loading && !blockData) {
     return (
       <div className="w-full flex items-center justify-start py-12">
         <div className="text-center">
-          <div className="animate-pulse text-btc text-lg mb-2">Loading block data...</div>
-          <div className="text-secondary text-sm">Fetching latest block from blockchain</div>
+          <div className="animate-pulse text-btc text-lg mb-2">Loading block template...</div>
+          <div className="text-secondary text-sm">Fetching mempool from node</div>
         </div>
       </div>
     )
@@ -137,7 +236,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
           <div className="text-red-600 dark:text-red-400 text-lg mb-2">Error</div>
           <div className="text-secondary text-sm mb-4">{error}</div>
           <button
-            onClick={() => fetchLatestBlock()}
+            onClick={() => fetchMempoolTemplate()}
             className="btn-primary"
           >
             Retry
@@ -153,12 +252,11 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
 
   return (
     <div className="space-y-6 relative">
-      {/* New Block Notification */}
+      {/* New block mined notification */}
       {showNewBlockNotification && newBlockHeight !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fadeIn">
           <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl border-2 border-btc max-w-md w-full mx-4 animate-scaleIn">
             <div className="text-center">
-              {/* Animated Block Icon */}
               <div className="mb-6 flex justify-center">
                 <div className="relative">
                   <div className="w-20 h-20 bg-btc rounded-lg shadow-lg animate-bounce flex items-center justify-center">
@@ -177,32 +275,153 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
                       />
                     </svg>
                   </div>
-                  {/* Pulse effect */}
-                  <div className="absolute inset-0 w-20 h-20 bg-btc rounded-lg opacity-20 animate-ping"></div>
+                  <div className="absolute inset-0 w-20 h-20 bg-btc rounded-lg opacity-20 animate-ping" />
                 </div>
               </div>
-              
               <h3 className="text-2xl font-bold text-btc mb-2">New Block Mined!</h3>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-1">
                 Block #{newBlockHeight.toLocaleString()}
               </p>
-              <p className="text-sm text-secondary">Loading block data...</p>
+              <p className="text-sm text-secondary">Current block template will refresh below.</p>
             </div>
           </div>
         </div>
       )}
 
-      <BlockHeader
-        height={blockData.height}
-        hash={blockData.hash}
-        timestamp={blockData.timestamp}
-        txCount={blockData.txCount}
-        size={blockData.size}
-        lastUpdated={lastUpdated || undefined}
-        isRefreshing={isRefreshing}
-      />
+      {/* Previous blocks overview */}
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium text-secondary">Previous blocks</h3>
+        {blockHistoryError ? (
+          <div className="py-4 flex flex-col items-center justify-center gap-2 text-secondary text-sm">
+            <span>{blockHistoryError}</span>
+            <button
+              type="button"
+              onClick={() => fetchBlockHistory(null)}
+              className="text-btc hover:text-btc/80 underline underline-offset-2"
+            >
+              Retry
+            </button>
+          </div>
+        ) : null}
+        {previousBlocks.length > 0 ? (
+          <div className="relative">
+            {scrollIndicators.left && (
+              <button
+                type="button"
+                onClick={() => scrollPreviousBlocks('left')}
+                className="absolute left-0 top-0 bottom-8 z-10 flex items-center justify-center w-10 bg-gradient-to-r from-white dark:from-gray-900 to-transparent text-secondary hover:text-btc transition-colors"
+                aria-label="Scroll previous blocks left"
+              >
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+            )}
+            <div
+              ref={previousBlocksScrollRef}
+              onScroll={updateScrollIndicators}
+              className="flex gap-4 overflow-x-auto pb-2 scroll-smooth"
+            >
+            {[...previousBlocks].reverse().map((snap) => (
+              <div
+                key={snap.hash}
+                className="relative flex-shrink-0 w-52 h-52 overflow-hidden rounded-none border border-gray-200 dark:border-gray-700 bg-gradient-to-b from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/20 dark:to-purple-500/20 px-4 py-2 text-sm"
+              >
+                <div className="absolute top-2 right-2 text-[11px] text-secondary">
+                  {getRelativeTime(snap.timestamp)}
+                </div>
+                <div className="space-y-1 text-secondary">
+                  <div className="text-btc text-base">{formatNumber(snap.height)}</div>
+                  <div className="text-xs font-mono">{truncateHash(snap.hash)}</div>
+                  <div>Transactions: {formatNumber(snap.txCount)}</div>
+                  <div>Size: {formatBlockSize(snap.size)}</div>
+                  <div>Weight: {formatBlockWeight(snap.weight ?? 0)}</div>
+                  <div>Fees: {snap.totalFeesBTC.toFixed(4)} BTC</div>
+                  <div>Fee range: {snap.feeSpanMin} – {snap.feeSpanMax} sat/vB</div>
+                  <div className="flex items-center gap-2">
+                    <Image
+                      src={getPoolIconSrc(snap.miner)}
+                      alt={snap.minerName ?? snap.miner ?? 'Unknown miner'}
+                      title={snap.minerName ?? snap.miner ?? 'Unknown miner'}
+                      width={16}
+                      height={16}
+                      className="w-4 h-4"
+                    />
+                    <div className="text-xs text-secondary">{snap.minerName ?? snap.miner ?? '—'}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            </div>
+            {scrollIndicators.right && (
+              <button
+                type="button"
+                onClick={() => scrollPreviousBlocks('right')}
+                className="absolute right-0 top-0 bottom-8 z-10 flex items-center justify-center w-10 bg-gradient-to-l from-white dark:from-gray-900 to-transparent text-secondary hover:text-btc transition-colors"
+                aria-label="Scroll previous blocks right"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
+            )}
+          </div>
+        ) : null}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() =>
+              fetchBlockHistory(
+                previousBlocks.length > 0 ? Math.min(...previousBlocks.map((b) => b.height)) : null
+              )
+            }
+            disabled={isLoadingBlockHistory}
+            className="text-sm text-btc hover:text-btc/80 underline underline-offset-2 disabled:opacity-50 disabled:no-underline"
+          >
+            {isLoadingBlockHistory ? 'Loading…' : previousBlocks.length > 0 ? 'Fetch more' : 'Fetch previous blocks'}
+          </button>
+        </div>
+      </div>
 
-      <TransactionTreemap transactions={blockData.transactions} />
+      <div
+        className={`flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300 ${blockJustUpdated ? 'animate-block-update' : ''}`}
+      >
+        <div className="flex-shrink-0 min-w-52">
+          <BlockHeader
+            height={blockData.height}
+            hash={blockData.hash}
+            timestamp={blockData.timestamp}
+            txCount={blockData.txCount}
+            size={blockData.size}
+            compact={true}
+            lastUpdated={lastUpdated || undefined}
+            isRefreshing={isRefreshing}
+            miner={blockData.minerName ?? blockData.miner}
+            isTemplate={isTemplate}
+          />
+
+          <div className="mt-4 flex items-center justify-between gap-2">
+            <label htmlFor="size-metric" className="w-24 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              Sort by:
+            </label>
+            <select
+              id="size-metric"
+              value={sizeMetric}
+              onChange={(e) => setSizeMetric(e.target.value as SizeMetric)}
+              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent"
+            >
+              <option value="vbytes">vBytes</option>
+              {!isTemplate && <option value="value">BTC Amount</option>}
+              <option value="fee">Fee</option>
+            </select>
+          </div>
+        </div>
+        <div className="flex-1 min-w-0">
+          <TransactionTreemap
+            transactions={blockData.transactions}
+            sizeMetric={sizeMetric}
+            onSizeMetricChange={setSizeMetric}
+            showMetricSelector={false}
+            animationTrigger={treemapAnimationTrigger}
+          />
+        </div>
+      </div>
 
       {error && blockData && (
         <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 text-sm text-yellow-800 dark:text-yellow-200">

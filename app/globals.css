@@ -95,6 +95,46 @@ body {
     @apply text-lg font-semibold text-gray-500 dark:text-gray-300;
   }
 
+  /* Block visualizer: one-shot pulse when block data refreshes */
+  @keyframes block-update {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    35% {
+      opacity: 0.88;
+      transform: scale(0.995);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .animate-block-update {
+    animation: block-update 0.5s ease-out;
+  }
+
+  /* Treemap: brief redraw pulse when transaction data updates */
+  @keyframes treemap-update {
+    0% {
+      opacity: 1;
+    }
+    30% {
+      opacity: 0.75;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .animate-treemap-update {
+    animation: treemap-update 0.4s ease-out;
+  }
+
+  /* Treemap rects: smooth fill/opacity when metric or data changes */
+  .treemap-rect-transition rect {
+    transition: fill 0.35s ease-out, opacity 0.25s ease-out;
+  }
+
   /* Modal overlay - use with flex/align/padding as needed per modal */
   .modal-overlay {
     @apply fixed inset-0 z-[60] bg-black/60;

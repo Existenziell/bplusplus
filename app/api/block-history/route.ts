@@ -1,0 +1,170 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { list, put } from '@vercel/blob'
+import { bitcoinRpcServer } from '@/app/utils/bitcoinRpcServer'
+import { processBlockData, buildBlockSnapshot, type BlockSnapshot } from '@/app/utils/blockUtils'
+
+const BLOCK_HISTORY_BLOB_PATH = 'block-history.json'
+const MAX_BLOB_BLOCKS = 100
+const DEFAULT_LIMIT = 10
+const MAX_LIMIT = 50
+
+/** Revalidate cached response every 10 minutes. */
+export const revalidate = 600
+
+type RawBlock = {
+  height: number
+  hash: string
+  time: number
+  size: number
+  weight?: number
+  tx: Array<{
+    txid: string
+    vsize: number
+    fee?: number
+    vin?: Array<{ prevout?: { value?: number }; coinbase?: string }>
+    vout: Array<{ value?: number }>
+  }>
+}
+
+/** Read block history from Blob. Returns null if blob does not exist or parse fails. */
+async function readBlockHistoryFromBlob(): Promise<BlockSnapshot[] | null> {
+  try {
+    const { blobs } = await list({ prefix: BLOCK_HISTORY_BLOB_PATH })
+    const blob = blobs.find((b) => b.pathname === BLOCK_HISTORY_BLOB_PATH) ?? blobs[0]
+    if (!blob?.url) {
+      console.log('[block-history] Blob not found or no url')
+      return null
+    }
+    const res = await fetch(blob.url, { cache: 'no-store' })
+    if (!res.ok) {
+      console.log('[block-history] Blob fetch failed:', res.status)
+      return null
+    }
+    const data = await res.json()
+    const parsed = Array.isArray(data) ? data : Array.isArray(data?.blocks) ? data.blocks : null
+    if (!parsed || parsed.length === 0) {
+      console.log('[block-history] Blob empty or invalid')
+      return null
+    }
+    console.log('[block-history] Read from Blob:', parsed.length, 'blocks')
+    return parsed as BlockSnapshot[]
+  } catch (err) {
+    console.log('[block-history] readBlockHistoryFromBlob error:', err)
+    return null
+  }
+}
+
+/** Write block history to Blob. List must be newest-first, contiguous. */
+async function writeBlockHistoryToBlob(blocks: BlockSnapshot[]): Promise<void> {
+  console.log('[block-history] Writing to Blob:', blocks.length, 'blocks')
+  await put(BLOCK_HISTORY_BLOB_PATH, JSON.stringify(blocks), {
+    access: 'public',
+    addRandomSuffix: false,
+  })
+}
+
+/** Seed Blob with last MAX_BLOB_BLOCKS blocks from RPC. Returns the list. */
+async function seedBlockHistoryFromRpc(): Promise<BlockSnapshot[]> {
+  console.log('[block-history] Seeding from RPC...')
+  const chainInfo = await bitcoinRpcServer('getblockchaininfo')
+  const tipHeight = (chainInfo as { blocks: number }).blocks
+  const startHeight = Math.max(0, tipHeight - MAX_BLOB_BLOCKS + 1)
+  const heights = Array.from({ length: tipHeight - startHeight + 1 }, (_, i) => tipHeight - i)
+
+  const hashes = await Promise.all(
+    heights.map((h) => bitcoinRpcServer('getblockhash', [h]) as Promise<string>)
+  )
+
+  const blocksRaw: RawBlock[] = await Promise.all(
+    hashes.map((hash) => bitcoinRpcServer('getblock', [hash, 3]) as Promise<RawBlock>)
+  )
+
+  const blocks: BlockSnapshot[] = blocksRaw
+    .map((raw) => {
+      if (!raw?.height) return null
+      return buildBlockSnapshot(processBlockData(raw))
+    })
+    .filter((s): s is BlockSnapshot => Boolean(s))
+
+  await writeBlockHistoryToBlob(blocks)
+  console.log('[block-history] Seed complete:', blocks.length, 'blocks')
+  return blocks
+}
+
+/** Fetch a single block at height from RPC and return BlockSnapshot. */
+async function fetchBlockSnapshotAtHeight(height: number): Promise<BlockSnapshot> {
+  const hash = (await bitcoinRpcServer('getblockhash', [height])) as string
+  const raw = (await bitcoinRpcServer('getblock', [hash, 3])) as RawBlock
+  return buildBlockSnapshot(processBlockData(raw))
+}
+
+/** Apply limit and beforeHeight to full list; return paginated slice. */
+function paginate(list: BlockSnapshot[], limit: number, beforeHeight: number | null): BlockSnapshot[] {
+  if (beforeHeight !== null && !Number.isNaN(beforeHeight)) {
+    const filtered = list.filter((b) => b.height < beforeHeight)
+    return filtered.slice(0, limit)
+  }
+  return list.slice(0, limit)
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const limit = Math.min(
+      Math.max(1, parseInt(searchParams.get('limit') ?? String(DEFAULT_LIMIT), 10) || DEFAULT_LIMIT),
+      MAX_LIMIT
+    )
+    const beforeHeightParam = searchParams.get('beforeHeight')
+    const beforeHeight = beforeHeightParam ? parseInt(beforeHeightParam, 10) : null
+
+    let list = await readBlockHistoryFromBlob()
+    if (list === null) {
+      list = await seedBlockHistoryFromRpc()
+    }
+
+    const blocks = paginate(list, limit, beforeHeight)
+    console.log('[block-history] GET returning', blocks.length, 'blocks (limit=', limit, ', beforeHeight=', beforeHeight, ')')
+    return NextResponse.json({ blocks })
+  } catch (err) {
+    console.error('Block history API error:', err)
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : 'Failed to fetch block history' },
+      { status: 500 }
+    )
+  }
+}
+
+export async function POST() {
+  try {
+    const chainInfo = await bitcoinRpcServer('getblockchaininfo')
+    const tipHeight = (chainInfo as { blocks: number }).blocks
+
+    console.log('[block-history] POST: new block at height', tipHeight)
+    const newBlock = await fetchBlockSnapshotAtHeight(tipHeight)
+
+    let list = await readBlockHistoryFromBlob()
+    if (list === null) list = []
+
+    const topHeight = list[0]?.height ?? null
+    if (topHeight !== null && newBlock.height === topHeight) {
+      console.log('[block-history] POST: idempotent (block', newBlock.height, 'already in list)')
+      return NextResponse.json({ blocks: list })
+    }
+    if (list.length > 0 && newBlock.height !== topHeight + 1) {
+      console.log('[block-history] POST: gap (new', newBlock.height, ', top', topHeight, '), skipping')
+      return NextResponse.json({ blocks: list })
+    }
+
+    const updated = [newBlock, ...list].slice(0, MAX_BLOB_BLOCKS)
+    await writeBlockHistoryToBlob(updated)
+    console.log('[block-history] POST: prepended block', newBlock.height, ', list length', updated.length)
+
+    return NextResponse.json({ blocks: updated })
+  } catch (err) {
+    console.error('Block history POST error:', err)
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : 'Failed to append block history' },
+      { status: 500 }
+    )
+  }
+}

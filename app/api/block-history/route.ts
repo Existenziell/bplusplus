@@ -121,6 +121,34 @@ export async function GET(request: NextRequest) {
     let list = await readBlockHistoryFromBlob()
     if (list === null) {
       list = await seedBlockHistoryFromRpc()
+    } else if (list.length > 0) {
+      // If chain tip is ahead of our top block, fetch missing blocks and write to blob
+      const chainInfo = await bitcoinRpcServer('getblockchaininfo')
+      const tipHeight = (chainInfo as { blocks: number }).blocks
+      const topHeight = list[0].height
+      if (tipHeight > topHeight) {
+        console.log('[block-history] GET: gap (tip', tipHeight, ', top', topHeight, '), filling from RPC')
+        const missingHeights = Array.from(
+          { length: tipHeight - topHeight },
+          (_, i) => tipHeight - i
+        )
+        const missing: BlockSnapshot[] = []
+        for (const h of missingHeights) {
+          try {
+            missing.push(await fetchBlockSnapshotAtHeight(h))
+          } catch (e) {
+            console.error('[block-history] GET: fetch block', h, 'failed', e)
+            break
+          }
+        }
+        if (missing.length === missingHeights.length) {
+          list = [...missing, ...list]
+          await writeBlockHistoryToBlob(list)
+          console.log('[block-history] GET: filled gap, prepended', missing.length, 'blocks, list length', list.length)
+        } else {
+          console.error('[block-history] GET: gap-fill partial (got', missing.length, 'of', missingHeights.length, ')')
+        }
+      }
     }
 
     const blocks = paginate(list, limit, beforeHeight)

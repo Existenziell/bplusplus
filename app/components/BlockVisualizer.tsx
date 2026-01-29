@@ -49,11 +49,7 @@ function getRelativeTime(timestamp: number): string {
   return `${hours}:${String(remainderMins).padStart(2, '0')} ago`
 }
 
-interface BlockVisualizerProps {
-  initialBlockHash?: string
-}
-
-export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerProps) {
+export default function BlockVisualizer() {
   const [blockData, setBlockData] = useState<ProcessedBlock | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -68,7 +64,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
 
   const lastKnownBlockHashRef = useRef<string | null>(null)
   const previousBlocksScrollRef = useRef<HTMLDivElement>(null)
-  const scrollToEndAfterLoadMoreRef = useRef(false)
   const [scrollIndicators, setScrollIndicators] = useState({ left: false, right: false })
 
   const updateScrollIndicators = useCallback(() => {
@@ -108,7 +103,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       }
       const data = await res.json()
       const list = Array.isArray(data?.blocks) ? data.blocks : []
-      if (append && list.length > 0) scrollToEndAfterLoadMoreRef.current = true
       setPreviousBlocks((prev) => (append ? [...prev, ...list] : list))
     } catch (err) {
       setBlockHistoryError(err instanceof Error ? err.message : 'Failed to load previous blocks')
@@ -118,17 +112,19 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
     }
   }, [])
 
+  // Always scroll to the right so the last (newest) previous block is visible
   useEffect(() => {
-    if (!isLoadingBlockHistory && scrollToEndAfterLoadMoreRef.current) {
-      scrollToEndAfterLoadMoreRef.current = false
-      const el = previousBlocksScrollRef.current
-      if (el) {
-        el.scrollTo({
-          left: el.scrollWidth - el.clientWidth,
-          behavior: 'smooth',
-        })
-      }
+    if (previousBlocks.length === 0 || isLoadingBlockHistory) return
+    const el = previousBlocksScrollRef.current
+    if (!el) return
+    const scrollToEnd = () => {
+      el.scrollTo({
+        left: el.scrollWidth - el.clientWidth,
+        behavior: 'smooth',
+      })
     }
+    const id = requestAnimationFrame(scrollToEnd)
+    return () => cancelAnimationFrame(id)
   }, [previousBlocks, isLoadingBlockHistory])
 
   const fetchMempoolTemplate = useCallback(async () => {
@@ -366,6 +362,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
                   <span className="text-btc text-base font-medium truncate">{formatNumber(snap.height)}</span>
                 </div>
                 <div
+                  title={`Value: ${snap.totalValueBTC.toFixed(4)} BTC`}
                   className="relative flex-shrink-0 w-44 h-44 overflow-hidden rounded-none border border-gray-200 dark:border-gray-700 bg-gradient-to-b from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/20 dark:to-purple-500/20 p-3 text-sm"
                 >
                 <div className="text-xs">

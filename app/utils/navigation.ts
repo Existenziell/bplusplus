@@ -369,3 +369,21 @@ export const routeLabels: Record<string, string> = {
   docs: 'Documentation',
   ...docRouteLabels,
 }
+
+/** Build breadcrumb items for a path (for JSON-LD and server use). */
+export function getBreadcrumbsForPath(pathname: string): { label: string; href: string }[] {
+  const pathSegments = pathname.split('/').filter(Boolean)
+  const breadcrumbs: { label: string; href: string }[] = [{ label: 'Home', href: '/' }]
+  let currentPath = ''
+  for (const segment of pathSegments) {
+    currentPath += `/${segment}`
+    const label =
+      routeLabels[segment] ??
+      segment
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+    breadcrumbs.push({ label, href: currentPath })
+  }
+  return breadcrumbs
+}

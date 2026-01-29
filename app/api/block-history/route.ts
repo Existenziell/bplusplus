@@ -2,12 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { list, put } from '@vercel/blob'
 import { bitcoinRpcServer } from '@/app/utils/bitcoinRpcServer'
 import { processBlockData, buildBlockSnapshot, type BlockSnapshot } from '@/app/utils/blockUtils'
+import { DEFAULT_LIMIT, MAX_LIMIT } from '@/app/utils/constants'
 
 const BLOCK_HISTORY_BLOB_PATH = 'block-history.json'
 /** Only used when blob is empty and we seed from RPC (avoid fetching entire chain). */
 const INITIAL_SEED_LIMIT = 100
-const DEFAULT_LIMIT = 10
-const MAX_LIMIT = 50
 
 /** Revalidate cached response every 10 minutes. */
 export const revalidate = 600

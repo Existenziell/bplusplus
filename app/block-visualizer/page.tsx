@@ -6,6 +6,7 @@ import { SITE_URL } from '@/app/utils/metadata'
 export const metadata: Metadata = {
   title: 'Block Visualizer | BitcoinDev',
   description: 'Live Bitcoin blockchain visualization showing the latest block with transaction treemap. Explore transactions, fee rates, and block data in real-time.',
+  alternates: { canonical: `${SITE_URL}/block-visualizer` },
   openGraph: {
     title: 'Block Visualizer | BitcoinDev',
     description: 'Live Bitcoin blockchain visualization showing the latest block with transaction treemap.',

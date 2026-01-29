@@ -18,7 +18,7 @@ import { ChevronLeft, ChevronRight } from '@/app/components/Icons'
 import { useMobileWarning } from '@/app/hooks/useMobileWarning'
 import poolsData from '@/public/data/pools.json'
 
-const BLOCKS_PER_PAGE = 10
+import { BLOCKS_PAGE_SIZE } from '@/app/utils/constants'
 
 type SizeMetric = 'vbytes' | 'fee'
 
@@ -95,8 +95,8 @@ export default function BlockVisualizer() {
     try {
       const url =
         beforeHeight !== null
-          ? `/api/block-history?limit=${BLOCKS_PER_PAGE}&beforeHeight=${beforeHeight}`
-          : `/api/block-history?limit=${BLOCKS_PER_PAGE}`
+          ? `/api/block-history?limit=${BLOCKS_PAGE_SIZE}&beforeHeight=${beforeHeight}`
+          : `/api/block-history?limit=${BLOCKS_PAGE_SIZE}`
       const res = await fetch(url, { cache: 'no-store' })
       if (!res.ok) {
         const errBody = await res.json().catch(() => ({}))

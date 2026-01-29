@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
 import DownloadMarkdownButton from '@/app/components/DownloadMarkdownButton'
-import { docPages, sections } from '@/app/utils/navigation'
-import { generatePageMetadata } from '@/app/utils/metadata'
+import { docPages, getBreadcrumbsForPath, sections } from '@/app/utils/navigation'
+import { generatePageMetadata, getDocPageStructuredData } from '@/app/utils/metadata'
 import mdContent from '@/public/data/md-content.json'
 
 // Generate static params for all doc pages at build time
@@ -73,15 +73,36 @@ export default async function DocPage({ params }: PageProps) {
     notFound()
   }
 
+  const page = docPages.find((p) => p.path === path)
+  const sectionInfo = page ? sections[page.section] : null
+  const description = sectionInfo
+    ? sectionInfo.description
+    : page
+      ? `${page.title} - Bitcoin development documentation`
+      : ''
+  const breadcrumbs = getBreadcrumbsForPath(path)
+  const docStructuredData = getDocPageStructuredData(
+    path,
+    page?.title ?? '',
+    description,
+    breadcrumbs
+  )
+
   return (
-    <div className="relative">
-      <div className="absolute top-0 right-0 z-10 hidden md:block">
-        <DownloadMarkdownButton />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: docStructuredData }}
+      />
+      <div className="relative">
+        <div className="absolute top-0 right-0 z-10 hidden md:block">
+          <DownloadMarkdownButton />
+        </div>
+        <MarkdownRenderer content={entry.content} />
+        <div className="absolute -bottom-4 right-0 z-10 hidden md:block">
+          <DownloadMarkdownButton />
+        </div>
       </div>
-      <MarkdownRenderer content={entry.content} />
-      <div className="absolute -bottom-4 right-0 z-10 hidden md:block">
-        <DownloadMarkdownButton />
-      </div>
-    </div>
+    </>
   )
 }

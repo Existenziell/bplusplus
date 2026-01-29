@@ -2,7 +2,7 @@ import { Ubuntu } from 'next/font/google'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
-import { DEFAULT_OG_IMAGE, OG_LOGO, SITE_URL } from '@/app/utils/metadata'
+import { DEFAULT_OG_IMAGE, OG_LOGO, SITE_URL, getSiteStructuredData } from '@/app/utils/metadata'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
@@ -45,6 +45,7 @@ export const metadata: Metadata = {
     ],
   },
   metadataBase: new URL(SITE_URL),
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'BitcoinDev',
     description:
@@ -84,6 +85,10 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <meta property="og:logo" content={`${SITE_URL}${OG_LOGO}`} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: getSiteStructuredData() }}
+        />
         {/* Preconnect to Vercel Analytics/Speed Insights origins */}
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />

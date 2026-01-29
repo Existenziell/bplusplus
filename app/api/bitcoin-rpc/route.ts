@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCacheTime, validateRpcRequest, ALLOWED_COMMANDS } from '@/app/utils/bitcoinRpcCache'
+import { BITCOIN_RPC_URL } from '@/app/utils/constants'
 
 // Commands not supported by PublicNode (we simulate them)
 const SIMULATED_COMMANDS: Record<string, () => unknown> = {
@@ -9,9 +10,6 @@ const SIMULATED_COMMANDS: Record<string, () => unknown> = {
     return days * 24 * 60 * 60
   },
 }
-
-// PublicNode Bitcoin RPC endpoint
-const RPC_URL = 'https://bitcoin-rpc.publicnode.com'
 
 interface RpcRequest {
   method: string
@@ -83,7 +81,7 @@ export async function POST(request: NextRequest) {
       fetchOptions.next = { revalidate: getCacheTime(method) }
     }
 
-    const response = await fetch(RPC_URL, fetchOptions)
+    const response = await fetch(BITCOIN_RPC_URL, fetchOptions)
 
     if (!response.ok) {
       // Try to parse error response from the RPC server

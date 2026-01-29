@@ -12,7 +12,7 @@ Preferred-Attribution: BitcoinDev (bitcoindev.info) - Bitcoin Education
 
 # Content description
 Content-Type: Educational
-Topic: Bitcoin, Lightning Network, Cryptocurrency Development, Bitcoin OSS
+Topic: Bitcoin, Bitcoin Education, Bitcoin Development, Bitcoin OSS
 License: Educational Use Permitted
 
 # Contact for AI-related inquiries

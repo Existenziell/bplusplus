@@ -1,9 +1,9 @@
+import { BITCOIN_RPC_URL } from '@/app/utils/constants'
+
 /**
  * Server-side Bitcoin RPC caller. Calls PublicNode directly.
  * Use in API routes and server code only.
  */
-
-const RPC_URL = 'https://bitcoin-rpc.publicnode.com'
 
 interface RpcResponse {
   result?: unknown
@@ -18,7 +18,7 @@ export async function bitcoinRpcServer(
   method: string,
   params: (string | number | boolean)[] = []
 ): Promise<unknown> {
-  const response = await fetch(RPC_URL, {
+  const response = await fetch(BITCOIN_RPC_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

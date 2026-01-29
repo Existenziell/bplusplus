@@ -9,38 +9,44 @@ interface BlockHeaderProps {
   size: number
 }
 
+const statRow = (
+  label: string,
+  value: string | number,
+) => ({ label, value })
+
 export default function BlockHeader({
   height,
   txCount,
   size,
 }: BlockHeaderProps) {
+  const stats = [
+    statRow('Block height', formatNumber(height)),
+    statRow('Transactions', formatNumber(txCount)),
+    statRow('Block size', formatBlockSize(size)),
+  ]
+
   return (
-    <div className="bg-white dark:bg-gray-800 w-44 h-44 px-6 py-4 shadow-sm border border-gray-200 dark:border-gray-700">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        {/* Block Info */}
-        <div className="flex-1">
-          <div className="flex flex-col gap-2 text-sm">
-            <div>
-              <div className="text-secondary">Blockheight</div>
-              <div className="text-gray-800 dark:text-gray-200 font-semibold">
-                {formatNumber(height)}
-              </div>
-            </div>
-            <div>
-              <div className="text-secondary">Transactions</div>
-              <div className="text-gray-800 dark:text-gray-200 font-semibold">
-                {formatNumber(txCount)}
-              </div>
-            </div>
-            <div>
-              <div className="text-secondary">Block Size</div>
-              <div className="text-gray-800 dark:text-gray-200 font-semibold">
-                {formatBlockSize(size)}
-              </div>
-            </div>
+    <div
+      className="
+        bg-white dark:bg-gray-800
+        border border-gray-200 dark:border-gray-700
+        shadow-sm rounded-lg
+        px-4 py-3
+        w-full min-w-0
+      "
+    >
+      <dl className="grid grid-cols-3 lg:grid-cols-1 gap-x-4 gap-y-3 lg:gap-y-2.5">
+        {stats.map(({ label, value }) => (
+          <div key={label} className="min-w-0">
+            <dt className="text-secondary text-xs font-medium truncate">
+              {label}
+            </dt>
+            <dd className="text-gray-800 dark:text-gray-200 font-semibold text-sm truncate">
+              {value}
+            </dd>
           </div>
-        </div>
-      </div>
+        ))}
+      </dl>
     </div>
   )
 }

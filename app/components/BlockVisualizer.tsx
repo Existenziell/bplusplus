@@ -409,21 +409,24 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       <div
         className="flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300 mt-0"
       >
-        <div className="flex-shrink-0 w-44">
+        <div className="flex flex-col flex-shrink-0 w-full lg:w-44 gap-4 lg:gap-0">
           <BlockHeader
             height={blockData.height}
             txCount={blockData.txCount}
             size={blockData.size}
           />
 
-          <div className="mt-4 flex items-center justify-between gap-2">
-            <label htmlFor="size-metric" className="w-24 block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <div className="flex items-center justify-between gap-2 lg:mt-4 w-max md:w-full">
+            <label htmlFor="size-metric" className="flex-shrink-0 text-sm font-medium text-gray-700 dark:text-gray-300">
               Sort by:
             </label>
             <select
               id="size-metric"
               value={sizeMetric}
-              onChange={(e) => setSizeMetric(e.target.value as SizeMetric)}
+              onChange={(e) => {
+                setSizeMetric(e.target.value as SizeMetric)
+                setTreemapAnimationTrigger((t) => t + 1)
+              }}
               className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent"
             >
               <option value="vbytes">vBytes</option>

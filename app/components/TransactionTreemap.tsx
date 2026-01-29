@@ -101,6 +101,11 @@ export default function TransactionTreemap({
     fetchBtcPrice()
   }, [])
 
+  // When trigger changed, hide tiles from the very first render so we never paint a scrambled frame.
+  const triggerJustChanged =
+    animationTrigger !== undefined && prevAnimationTriggerRef.current !== animationTrigger
+  const shouldHideForFlyIn = triggerJustChanged || flyInActive
+
   // Before paint: when we have transactions and (first load or trigger changed), show "from" state
   // so the user never sees the treemap fully visible before the fly-in runs.
   useLayoutEffect(() => {
@@ -286,6 +291,16 @@ export default function TransactionTreemap({
     return nodes
   }, [transactions, width, height, sizeMetric])
 
+  // Animation order: biggest first (by area). Map txid -> animation index (0 = biggest).
+  const animationIndexByTxid = useMemo(() => {
+    const byArea = [...treemapNodes].sort(
+      (a, b) => (b.x1 - b.x0) * (b.y1 - b.y0) - (a.x1 - a.x0) * (a.y1 - a.y0)
+    )
+    const map = new Map<string, number>()
+    byArea.forEach((node, i) => map.set(node.data.txid, i))
+    return map
+  }, [treemapNodes])
+
   // Handle mouse move for tooltip positioning
   const handleMouseMove = (event: React.MouseEvent<SVGSVGElement>) => {
     if (containerRef.current) {
@@ -366,26 +381,31 @@ export default function TransactionTreemap({
         onMouseLeave={() => setHoveredTx(null)}
         aria-label="Transaction treemap visualization"
       >
-        {treemapNodes.map((node, index) => {
+        {treemapNodes.map((node) => {
           const rectWidth = node.x1 - node.x0
           const rectHeight = node.y1 - node.y0
           const color = colorScale(getMetricValue(node.data))
           const isHovered = hoveredTx?.txid === node.data.txid
-          const origin = flyInActive && flyInOriginRef.current ? flyInOriginRef.current : { x: width, y: height }
+          const origin = shouldHideForFlyIn && flyInOriginRef.current ? flyInOriginRef.current : { x: width, y: height }
           const fromTransform = `translate(${origin.x}px, ${origin.y}px) scale(0)`
           const toTransform = `translate(${node.x0}px, ${node.y0}px) scale(1)`
-          const startDelayMs = 250
-          const staggerMs = startDelayMs + index * 6
+          const n = treemapNodes.length
+          const animIndex = animationIndexByTxid.get(node.data.txid) ?? 0
+          const totalStaggerMs = 400
+          const k = 1.8
+          const staggerMs =
+            n <= 1 ? 0 : totalStaggerMs * (1 - ((n - 1 - animIndex) / (n - 1)) ** k)
+          const durationMs = 1000
 
           return (
             <g
               key={node.data.txid}
               style={{
-                transform: flyInActive ? fromTransform : toTransform,
+                transform: shouldHideForFlyIn ? fromTransform : toTransform,
                 transformOrigin: `${origin.x}px ${origin.y}px`,
                 transformBox: 'view-box',
-                opacity: flyInActive ? 0 : 1,
-                transition: `transform 0.22s cubic-bezier(0.65, 0, 1, 1) ${staggerMs}ms, opacity 0.22s cubic-bezier(0.65, 0, 1, 1) ${staggerMs}ms`,
+                opacity: shouldHideForFlyIn ? 0 : 1,
+                transition: `transform ${durationMs}ms ease-in-out ${staggerMs}ms, opacity ${durationMs}ms ease-in-out ${staggerMs}ms`,
               }}
             >
               <rect

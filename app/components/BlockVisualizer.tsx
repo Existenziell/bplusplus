@@ -64,7 +64,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
   const [sizeMetric, setSizeMetric] = useState<SizeMetric>('vbytes')
   const [showNewBlockNotification, setShowNewBlockNotification] = useState(false)
   const [newBlockHeight, setNewBlockHeight] = useState<number | null>(null)
-  const [blockJustUpdated, setBlockJustUpdated] = useState(false)
   const [treemapAnimationTrigger, setTreemapAnimationTrigger] = useState(0)
 
   const lastKnownBlockHashRef = useRef<string | null>(null)
@@ -186,8 +185,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       const template = processMempoolBlockData(verboseMempool, { tipHeight })
 
       setBlockData(template)
-      setBlockJustUpdated(true)
-      setTimeout(() => setBlockJustUpdated(false), 500)
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch mempool template'
       setError(errorMessage)
@@ -213,7 +210,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
   useEffect(() => {
     const interval = setInterval(() => {
       fetchMempoolTemplate()
-    }, 10000) // Poll every 10 seconds
+    }, 20000) // Poll every 20 seconds
 
     return () => clearInterval(interval)
   }, [fetchMempoolTemplate])
@@ -393,7 +390,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       </div>
 
       <div
-        className={`flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300 ${blockJustUpdated ? 'animate-block-update' : ''}`}
+        className="flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300"
       >
         <div className="flex-shrink-0 min-w-48">
           <BlockHeader

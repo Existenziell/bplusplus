@@ -95,25 +95,6 @@ body {
     @apply text-lg font-semibold text-gray-500 dark:text-gray-300;
   }
 
-  /* Block visualizer: one-shot pulse when block data refreshes */
-  @keyframes block-update {
-    0% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    35% {
-      opacity: 0.88;
-      transform: scale(0.995);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  .animate-block-update {
-    animation: block-update 0.5s ease-out;
-  }
-
   /* Treemap: brief redraw pulse when transaction data updates */
   @keyframes treemap-update {
     0% {

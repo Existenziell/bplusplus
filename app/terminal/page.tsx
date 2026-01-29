@@ -7,7 +7,8 @@ import copyToClipboard from '@/app/utils/copyToClipboard'
 import { bitcoinRpc } from '@/app/utils/bitcoinRpc'
 import { useMobileWarning } from '@/app/hooks/useMobileWarning'
 import MatrixAnimation from '@/app/components/MatrixAnimation'
-import { SECRET_TRIGGERS, SYSTEM_ERROR_MESSAGES } from '@/app/secret/page'
+import SecretOverlay, { playSecretSpeech } from '@/app/terminal/SecretOverlay'
+import { SECRET_TRIGGERS, SYSTEM_ERROR_MESSAGES } from '@/app/terminal/secretConstants'
 import {
   COMMANDS,
   parseCommand,
@@ -57,24 +58,7 @@ const STARTUP_LOGS = [
   'Type \'help\' for available commands.',
 ]
 
-export default function TerminalPage() {
-  const router = useRouter()
-  const [input, setInput] = useState('')
-  const [output, setOutput] = useState<OutputLine[]>([])
-  const [commandHistory, setCommandHistory] = useState<string[]>([])
-  const [historyIndex, setHistoryIndex] = useState(-1)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isLocked, setIsLocked] = useState(false) // Lock input after secret easter egg
-  const [exampleBlockHash, setExampleBlockHash] = useState<string>('')
-  const [exampleTxId, setExampleTxId] = useState<string>('')
-  const [showMatrix, setShowMatrix] = useState(false)
-  const { showWarning: showMobileWarning, dismissed: mobileWarningDismissed, dismiss: handleDismissMobileWarning } = useMobileWarning('terminal-mobile-warning-dismissed')
-  const inputRef = useRef<HTMLInputElement>(null)
-  const outputRef = useRef<HTMLDivElement>(null)
-  const lastTabPressRef = useRef<number>(0)
-
-  useEffect(() => {
-    const bitcoinLogo = `
+const BITCOIN_LOGO = `
      ⣿⡇⠀⢸⣿⡇⠀⠀⠀⠀
   ⠿⣿⣿⣿⡿⠿⠿⣿⣿⣿⣶⣄⠀
   ⠀⠀⢸⣿⣿⡇⠀⠀⠀⠈⣿⣿⣿⠀
@@ -86,10 +70,36 @@ export default function TerminalPage() {
   ⠀⠀⠀⣿⡇⠀⢸⣿⡇
     `
 
+function getInitialOutput(): OutputLine[] {
+  const now = new Date()
+  return [
+    { type: 'logo', content: BITCOIN_LOGO, timestamp: now },
+    ...STARTUP_LOGS.map((content) => ({ type: 'log' as const, content, timestamp: now })),
+  ]
+}
+
+export default function TerminalPage() {
+  const router = useRouter()
+  const [input, setInput] = useState('')
+  const [output, setOutput] = useState<OutputLine[]>([])
+  const [commandHistory, setCommandHistory] = useState<string[]>([])
+  const [historyIndex, setHistoryIndex] = useState(-1)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLocked, setIsLocked] = useState(false) // Lock input after secret easter egg
+  const [exampleBlockHash, setExampleBlockHash] = useState<string>('')
+  const [exampleTxId, setExampleTxId] = useState<string>('')
+  const [showMatrix, setShowMatrix] = useState(false)
+  const [showSecretOverlay, setShowSecretOverlay] = useState(false)
+  const { showWarning: showMobileWarning, dismissed: mobileWarningDismissed, dismiss: handleDismissMobileWarning } = useMobileWarning('terminal-mobile-warning-dismissed')
+  const inputRef = useRef<HTMLInputElement>(null)
+  const outputRef = useRef<HTMLDivElement>(null)
+  const lastTabPressRef = useRef<number>(0)
+
+  useEffect(() => {
     setOutput([
       {
         type: 'logo',
-        content: bitcoinLogo,
+        content: BITCOIN_LOGO,
         timestamp: new Date(),
       },
     ])
@@ -265,10 +275,11 @@ export default function TerminalPage() {
         setShowMatrix(true)
       }, 500)
 
-      // Redirect after animation completes
+      // Start voice at half the Matrix animation (2s into the 4s animation)
+      const matrixDuration = 4000
       setTimeout(() => {
-        router.push('/secret')
-      }, 4500) // 4.5 seconds (4s animation + 0.5s buffer)
+        playSecretSpeech()
+      }, 500 + matrixDuration / 2)
 
       return
     }
@@ -513,9 +524,31 @@ export default function TerminalPage() {
   return (
     <>
       {showMatrix && (
-        <MatrixAnimation
-          duration={4000}
-          onComplete={() => setShowMatrix(false)}
+        <>
+          <MatrixAnimation
+            duration={4000}
+            onComplete={() => {
+              setShowMatrix(false)
+              setShowSecretOverlay(true)
+            }}
+          />
+          {/* Invisible overlay blocks nav and page interaction during Matrix animation */}
+          <div
+            className="fixed inset-0 z-50 pointer-events-auto"
+            aria-hidden
+          />
+        </>
+      )}
+      {showSecretOverlay && (
+        <SecretOverlay
+          visible={showSecretOverlay}
+          onClose={() => {
+            setShowSecretOverlay(false)
+            setIsLocked(false)
+            setOutput(getInitialOutput())
+            setTimeout(() => inputRef.current?.focus(), 0)
+          }}
+          onGoHome={() => router.push('/')}
         />
       )}
        <h1 className="heading-page text-center mb-1">

@@ -1,6 +1,5 @@
 # robots.txt for bitcoindev.info
 
-# Allow all crawlers (including AI); see /ai.txt for AI policy
 User-agent: *
 Allow: /
 

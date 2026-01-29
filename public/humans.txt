@@ -1,5 +1,5 @@
 /* TEAM */
-Developer: Chris
+Developer: Existenziell
 Site: bitcoindev.info
 Contact: npub1v7vslj3ewmdlqpzh3ta3glut80xg4vendfyvkypulydsqfmgc6kq90w3he (Nostr)
 

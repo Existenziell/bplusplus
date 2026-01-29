@@ -1,6 +1,14 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Terminal', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.speak = () => {}
+      }
+    })
+  })
+
   test('page loads with heading, input, and Run button', async ({ page }) => {
     await page.goto('/terminal')
     await expect(page.getByRole('heading', { level: 1, name: /Bitcoin CLI Terminal/i })).toBeVisible()
@@ -48,5 +56,52 @@ test.describe('Terminal', () => {
     await page.getByPlaceholder(/enter command/i).fill('getblockcount')
     await page.getByRole('button', { name: 'Run' }).click()
     await expect(page.locator('pre').filter({ hasText: /^\d+$/ })).toBeVisible({ timeout: 15000 })
+  })
+
+  test('secret trigger shows fake error then SECRET overlay', async ({ page }) => {
+    await page.goto('/terminal')
+    await page.getByPlaceholder(/enter command/i).fill('pizza')
+    await page.getByRole('button', { name: 'Run' }).click()
+
+    await expect(
+      page.getByText(/Kernel Panic|Quantum Entanglement|System Overload/)
+    ).toBeVisible({ timeout: 10000 })
+
+    await expect(
+      page.getByRole('button', { name: 'Back to Terminal' })
+    ).toBeVisible({ timeout: 10000 })
+    await expect(
+      page.getByRole('button', { name: 'Return Home' })
+    ).toBeVisible()
+  })
+
+  test('Back to Terminal closes secret overlay', async ({ page }) => {
+    await page.goto('/terminal')
+    await page.getByPlaceholder(/enter command/i).fill('nakamoto')
+    await page.getByRole('button', { name: 'Run' }).click()
+
+    await expect(
+      page.getByRole('button', { name: 'Back to Terminal' })
+    ).toBeVisible({ timeout: 10000 })
+    await page.getByRole('button', { name: 'Back to Terminal' }).click()
+
+    await expect(
+      page.getByRole('button', { name: 'Back to Terminal' })
+    ).not.toBeVisible()
+    await expect(page.getByPlaceholder(/enter command/i)).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Run' })).toBeVisible()
+  })
+
+  test('Return Home navigates away from terminal', async ({ page }) => {
+    await page.goto('/terminal')
+    await page.getByPlaceholder(/enter command/i).fill('secret')
+    await page.getByRole('button', { name: 'Run' }).click()
+
+    await expect(
+      page.getByRole('button', { name: 'Return Home' })
+    ).toBeVisible({ timeout: 10000 })
+    await page.getByRole('button', { name: 'Return Home' }).click()
+
+    await expect(page).toHaveURL('/')
   })
 })

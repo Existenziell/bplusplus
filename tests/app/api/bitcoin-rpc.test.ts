@@ -211,8 +211,21 @@ describe('bitcoin-rpc API route', () => {
       const response = await POST(request)
       const data = await response.json()
 
-      expect(response.status).toBe(500)
-      expect(data.error).toBeDefined()
+      expect(response.status).toBe(400)
+      expect(data.error).toEqual({ code: -32700, message: 'Invalid JSON in request body' })
+    })
+
+    it('handles empty request body', async () => {
+      const request = new NextRequest('http://localhost/api/bitcoin-rpc', {
+        method: 'POST',
+        body: '',
+      })
+
+      const response = await POST(request)
+      const data = await response.json()
+
+      expect(response.status).toBe(400)
+      expect(data.error).toEqual({ code: -32700, message: 'Empty request body' })
     })
   })
 

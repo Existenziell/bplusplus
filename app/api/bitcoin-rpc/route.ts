@@ -29,7 +29,27 @@ interface RpcResponse {
 
 export async function POST(request: NextRequest) {
   try {
-    const body: RpcRequest = await request.json()
+    let body: RpcRequest
+    try {
+      const raw = await request.text()
+      if (!raw?.trim()) {
+        return NextResponse.json(
+          { error: { code: -32700, message: 'Empty request body' } },
+          { status: 400 }
+        )
+      }
+      body = JSON.parse(raw) as RpcRequest
+    } catch (parseError) {
+      const message =
+        parseError instanceof SyntaxError
+          ? 'Invalid JSON in request body'
+          : 'Invalid or empty request body'
+      return NextResponse.json(
+        { error: { code: -32700, message } },
+        { status: 400 }
+      )
+    }
+
     const { method, params = [] } = body
 
     const validation = validateRpcRequest({ method, params })

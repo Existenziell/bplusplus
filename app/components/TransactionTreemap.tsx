@@ -441,8 +441,8 @@ export default function TransactionTreemap({
         })}
       </svg>
 
-      {/* Tooltip */}
-      {hoveredTx && (
+      {/* Tooltip — only show after fly-in animation has finished */}
+      {hoveredTx && !shouldHideForFlyIn && (
         <div
           className="absolute z-10 bg-gray-900 dark:bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg border border-gray-700 pointer-events-none"
           style={{

@@ -2,7 +2,7 @@ import { Ubuntu } from 'next/font/google'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
-import { DEFAULT_OG_IMAGE, OG_LOGO, SITE_URL, getSiteStructuredData } from '@/app/utils/metadata'
+import { DEFAULT_OG_IMAGE, OG_LOGO, getSiteStructuredData } from '@/app/utils/metadata'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
@@ -14,6 +14,7 @@ import { GlossaryProvider } from '@/app/contexts/GlossaryContext'
 import { StickyScrollProvider } from '@/app/contexts/StickyScrollContext'
 import { SearchModalProvider } from '@/app/contexts/SearchModalContext'
 import SearchModalWrapper from '@/app/components/SearchModalWrapper'
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from './utils/constants'
 
 const ubuntu = Ubuntu({
   weight: '400',
@@ -25,9 +26,9 @@ const ubuntu = Ubuntu({
 })
 
 export const metadata: Metadata = {
-  title: 'BitcoinDev',
+  title: SITE_NAME,
   description:
-    "Bitcoin Education | Open knowledge. Open source. A developer's guide with docs, CLI terminal, Stack Lab, and code examples. Always free.",
+    SITE_DESCRIPTION,
   icons: {
     icon: [
       { url: '/icons/favicon/favicon.ico', sizes: 'any' },
@@ -47,17 +48,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'BitcoinDev',
+    title: SITE_NAME,
     description:
-      "Bitcoin Education | Open knowledge. Open source. A developer's guide with docs, CLI terminal, Stack Lab, and code examples. Always free.",
+      SITE_DESCRIPTION,
     url: SITE_URL,
-    siteName: 'BitcoinDev',
+    siteName: SITE_NAME,
     images: [
       {
         url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: 'BitcoinDev - Bitcoin Education',
+        alt: `${SITE_NAME} | ${SITE_DESCRIPTION}`,
       },
     ],
     locale: 'en_US',
@@ -67,9 +68,9 @@ export const metadata: Metadata = {
   } as import('next').Metadata['openGraph'] & { logo?: string },
   twitter: {
     card: 'summary_large_image',
-    title: 'BitcoinDev',
+    title: SITE_NAME,
     description:
-      "Bitcoin Education | Open knowledge. Open source. A developer's guide with docs, CLI terminal, Stack Lab, and code examples. Always free.",
+      SITE_DESCRIPTION,
     images: [
       { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'BitcoinDev - Bitcoin Education' },
     ],

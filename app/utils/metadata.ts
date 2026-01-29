@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from './constants'
+
+// Re-export for consumers that import from metadata (layout, sitemap, etc.)
+export { SITE_URL }
 
 // Site and OG config
-export const SITE_URL = 'https://bitcoindev.info'
 export const DEFAULT_OG_IMAGE = '/images/og/og.png'
 export const OG_LOGO = '/icons/logo/logo.png'
 
@@ -11,13 +14,13 @@ export function getSiteStructuredData(): string {
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'BitcoinDev',
+      name: SITE_NAME,
       url: SITE_URL,
       description:
-        "Bitcoin Education | Open knowledge. Open source. A developer's guide with docs, CLI terminal, Stack Lab, and code examples. Always free.",
+        `${SITE_NAME} | ${SITE_DESCRIPTION}`,
       publisher: {
         '@type': 'Organization',
-        name: 'BitcoinDev',
+        name: SITE_NAME,
         url: SITE_URL,
         logo: { '@type': 'ImageObject', url: `${SITE_URL}${OG_LOGO}` },
       },
@@ -25,7 +28,7 @@ export function getSiteStructuredData(): string {
     {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'BitcoinDev',
+      name: SITE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}${OG_LOGO}`,
     },
@@ -58,7 +61,7 @@ export function getDocPageStructuredData(
       headline: title,
       description,
       url,
-      publisher: { '@type': 'Organization', name: 'BitcoinDev', url: SITE_URL },
+      publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
     },
   ]
   return JSON.stringify(data)
@@ -75,7 +78,7 @@ export function generatePageMetadata({
   path?: string
   ogImage?: string
 }): Metadata {
-  const fullTitle = `${title} | BitcoinDev`
+  const fullTitle = `${title} | ${SITE_NAME}`
   const url = `${SITE_URL}${path}`
 
   return {
@@ -86,7 +89,7 @@ export function generatePageMetadata({
       title: fullTitle,
       description,
       url,
-      siteName: 'BitcoinDev',
+      siteName: SITE_NAME,
       images: [
         {
           url: ogImage,

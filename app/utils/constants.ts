@@ -16,3 +16,12 @@ export const MAX_LIMIT = 50
 
 /** Number of blocks per page in the block visualizer UI. */
 export const BLOCKS_PAGE_SIZE = 10
+
+/** Site name. */
+export const SITE_NAME = 'BitcoinDev'
+
+/** Canonical site URL (used in metadata, sitemap, OG, canonical links). */
+export const SITE_URL = 'https://bitcoindev.info'
+
+/** Site description. */
+export const SITE_DESCRIPTION = "A developer's guide to Bitcoin. Open knowledge. Open source. With CLI terminal, StackLab, Block Visualizer, and code examples. No ads. No tracking. Always free."

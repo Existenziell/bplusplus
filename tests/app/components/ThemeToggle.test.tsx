@@ -19,11 +19,13 @@ describe('ThemeToggle', () => {
     })
   })
 
-  it('renders theme toggle buttons', () => {
+  it('renders theme toggle buttons', async () => {
     render(<ThemeToggle />)
 
+    // Wait for mount (placeholder has no role/buttons)
+    const lightButton = await screen.findByLabelText('Light theme')
+    expect(lightButton).toBeInTheDocument()
     expect(screen.getByRole('group', { name: /theme/i })).toBeInTheDocument()
-    expect(screen.getByLabelText('Light theme')).toBeInTheDocument()
     expect(screen.getByLabelText('Dark theme')).toBeInTheDocument()
     expect(screen.getByLabelText('System theme')).toBeInTheDocument()
   })
@@ -41,7 +43,7 @@ describe('ThemeToggle', () => {
     const user = userEvent.setup()
     render(<ThemeToggle />)
 
-    const lightButton = screen.getByLabelText('Light theme')
+    const lightButton = await screen.findByLabelText('Light theme')
     await user.click(lightButton)
 
     expect(mockSetTheme).toHaveBeenCalledWith('light')
@@ -51,7 +53,7 @@ describe('ThemeToggle', () => {
     const user = userEvent.setup()
     render(<ThemeToggle />)
 
-    const darkButton = screen.getByLabelText('Dark theme')
+    const darkButton = await screen.findByLabelText('Dark theme')
     await user.click(darkButton)
 
     expect(mockSetTheme).toHaveBeenCalledWith('dark')
@@ -61,13 +63,13 @@ describe('ThemeToggle', () => {
     const user = userEvent.setup()
     render(<ThemeToggle />)
 
-    const systemButton = screen.getByLabelText('System theme')
+    const systemButton = await screen.findByLabelText('System theme')
     await user.click(systemButton)
 
     expect(mockSetTheme).toHaveBeenCalledWith('system')
   })
 
-  it('highlights active theme', () => {
+  it('highlights active theme', async () => {
     ;(useTheme as any).mockReturnValue({
       theme: 'dark',
       setTheme: mockSetTheme,
@@ -75,11 +77,11 @@ describe('ThemeToggle', () => {
 
     render(<ThemeToggle />)
 
-    const darkButton = screen.getByLabelText('Dark theme')
+    const darkButton = await screen.findByLabelText('Dark theme')
     expect(darkButton.className).toContain('bg-btc')
   })
 
-  it('does not highlight inactive themes', () => {
+  it('does not highlight inactive themes', async () => {
     ;(useTheme as any).mockReturnValue({
       theme: 'light',
       setTheme: mockSetTheme,
@@ -87,7 +89,7 @@ describe('ThemeToggle', () => {
 
     render(<ThemeToggle />)
 
-    const darkButton = screen.getByLabelText('Dark theme')
+    const darkButton = await screen.findByLabelText('Dark theme')
     expect(darkButton.className).not.toContain('bg-btc')
   })
 })

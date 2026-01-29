@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { renderHook, act } from '@testing-library/react'
+import { renderHook, act, waitFor } from '@testing-library/react'
 import { useKeyboardNavigation } from '@/app/hooks/useKeyboardNavigation'
 
 interface TestItem {
@@ -309,7 +309,7 @@ describe('useKeyboardNavigation', () => {
     expect(onEscape).toHaveBeenCalledTimes(1)
   })
 
-  it('resets selectedIndex to -1 when items change', () => {
+  it('resets selectedIndex to -1 when items change', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -342,13 +342,15 @@ describe('useKeyboardNavigation', () => {
     })
     expect(result.current.selectedIndex).toBe(1)
 
-    // Change items - should reset to -1
+    // Change items - should reset to -1 (effect uses queueMicrotask)
     rerender({ items: [{ path: '/docs/new', title: 'New Item' }] })
 
-    expect(result.current.selectedIndex).toBe(-1)
+    await waitFor(() => {
+      expect(result.current.selectedIndex).toBe(-1)
+    })
   })
 
-  it('resets selectedIndex to -1 when resetDeps change', () => {
+  it('resets selectedIndex to -1 when resetDeps change', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -377,10 +379,12 @@ describe('useKeyboardNavigation', () => {
     })
     expect(result.current.selectedIndex).toBe(0)
 
-    // Change resetDeps - should reset to -1
+    // Change resetDeps - should reset to -1 (effect uses queueMicrotask)
     rerender({ query: 'mining' })
 
-    expect(result.current.selectedIndex).toBe(-1)
+    await waitFor(() => {
+      expect(result.current.selectedIndex).toBe(-1)
+    })
   })
 
   it('does not handle keyboard events when disabled', () => {

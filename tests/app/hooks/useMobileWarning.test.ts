@@ -61,14 +61,16 @@ describe('useMobileWarning', () => {
     expect(result.current.dismissed).toBe(false)
   })
 
-  it('does not show warning if previously dismissed in localStorage', () => {
+  it('does not show warning if previously dismissed in localStorage', async () => {
     localStorageMock.setItem('test-key', 'true')
     mockInnerWidth(500)
 
     const { result } = renderHook(() => useMobileWarning('test-key'))
 
     expect(result.current.showWarning).toBe(false)
-    expect(result.current.dismissed).toBe(true)
+    await waitFor(() => {
+      expect(result.current.dismissed).toBe(true)
+    })
   })
 
   it('dismisses warning without remembering', () => {

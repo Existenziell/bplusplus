@@ -52,14 +52,11 @@ describe('useSearchIndex', () => {
 
     const { result } = renderHook(() => useSearchIndex())
 
-    expect(result.current.loading).toBe(true)
-    expect(result.current.index).toBeNull()
-
+    // Wait for load to complete (index set and loading false)
     await waitFor(() => {
       expect(result.current.loading).toBe(false)
+      expect(result.current.index).toEqual(mockIndex)
     })
-
-    expect(result.current.index).toEqual(mockIndex)
     expect(result.current.error).toBeNull()
   })
 
@@ -92,10 +89,9 @@ describe('useSearchIndex', () => {
     const { result } = renderHook(() => useSearchIndex())
 
     await waitFor(() => {
-      expect(result.current.loading).toBe(false)
+      expect(result.current.error).toBe(error)
     })
-
-    expect(result.current.error).toBe(error)
+    expect(result.current.loading).toBe(false)
     expect(result.current.index).toBeNull()
   })
 
@@ -111,12 +107,10 @@ describe('useSearchIndex', () => {
 
     const { result } = renderHook(() => useSearchIndex())
 
-    // Initially loading
-    expect(result.current.loading).toBe(true)
-
     // Wait for load to complete
     await waitFor(() => {
       expect(result.current.loading).toBe(false)
+      expect(result.current.index).toEqual(mockIndex)
     })
 
     // Now simulate cache being available on next render

@@ -27,9 +27,6 @@ export interface ProcessedBlock {
   transactions: ProcessedTransaction[]
 }
 
-/** Block or mempool template; template has hash "pending" and no miner. */
-export type ProcessedBlockOrTemplate = ProcessedBlock & { isTemplate?: boolean }
-
 /** Verbose mempool entry from getrawmempool(true). */
 export interface VerboseMempoolEntry {
   vsize: number
@@ -279,7 +276,7 @@ const DEFAULT_MAX_BLOCK_WEIGHT = 4_000_000
 export function processMempoolBlockData(
   verboseMempool: Record<string, VerboseMempoolEntry>,
   options: ProcessMempoolBlockOptions
-): ProcessedBlock & { isTemplate: true } {
+): ProcessedBlock {
   const { tipHeight, maxBlockWeight = DEFAULT_MAX_BLOCK_WEIGHT } = options
 
   const entries = Object.entries(verboseMempool).map(([txid, entry]) => {
@@ -318,7 +315,6 @@ export function processMempoolBlockData(
     weight: totalWeight,
     txCount: selected.length,
     transactions,
-    isTemplate: true,
   }
 }
 

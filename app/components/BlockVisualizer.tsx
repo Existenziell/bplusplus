@@ -19,7 +19,7 @@ import poolsData from '@/public/data/pools.json'
 
 const BLOCKS_PER_PAGE = 10
 
-type SizeMetric = 'vbytes' | 'value' | 'fee'
+type SizeMetric = 'vbytes' | 'fee'
 
 /** Build identifier -> icon filename map from pools.json (single source of truth). */
 const POOL_ICON_MAP: Record<string, string> = (() => {
@@ -58,7 +58,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [previousBlocks, setPreviousBlocks] = useState<BlockSnapshot[]>([])
   const [isLoadingBlockHistory, setIsLoadingBlockHistory] = useState(false)
   const [blockHistoryError, setBlockHistoryError] = useState<string | null>(null)
@@ -71,8 +70,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
   const lastKnownBlockHashRef = useRef<string | null>(null)
   const previousBlocksScrollRef = useRef<HTMLDivElement>(null)
   const [scrollIndicators, setScrollIndicators] = useState({ left: false, right: false })
-
-  const isTemplate = Boolean(blockData && 'isTemplate' in blockData && blockData.isTemplate)
 
   const updateScrollIndicators = useCallback(() => {
     const el = previousBlocksScrollRef.current
@@ -133,9 +130,10 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       const tipHeight = result.blocks
       const bestBlockHash = result.bestblockhash
 
-      // Detect new block: show overlay and persist to Blob
       const lastKnown = lastKnownBlockHashRef.current
-      if (lastKnown !== null && bestBlockHash !== lastKnown) {
+      const newBlockDetected = lastKnown !== null && bestBlockHash !== lastKnown
+
+      if (newBlockDetected) {
         console.log('[BlockVisualizer] New block detected, height', tipHeight)
         setNewBlockHeight(tipHeight)
         setShowNewBlockNotification(true)
@@ -158,6 +156,21 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
           .catch((err) => {
             console.log('[BlockVisualizer] POST block-history error:', err)
           })
+      } else if (previousBlocks.length > 0) {
+        const maxPrevHeight = Math.max(...previousBlocks.map((b) => b.height))
+        if (tipHeight > maxPrevHeight + 1) {
+          fetch('/api/block-history', { method: 'POST', cache: 'no-store' })
+            .then((res) => {
+              if (!res.ok) return null
+              return res.json()
+            })
+            .then((data) => {
+              if (data?.blocks && Array.isArray(data.blocks)) {
+                setPreviousBlocks(data.blocks)
+              }
+            })
+            .catch(() => {})
+        }
       }
       lastKnownBlockHashRef.current = bestBlockHash
 
@@ -173,7 +186,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       const template = processMempoolBlockData(verboseMempool, { tipHeight })
 
       setBlockData(template)
-      setLastUpdated(new Date())
       setBlockJustUpdated(true)
       setTimeout(() => setBlockJustUpdated(false), 500)
     } catch (err) {
@@ -183,7 +195,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       setLoading(false)
       setIsRefreshing(false)
     }
-  }, [])
+  }, [previousBlocks])
 
   // Initial load
   useEffect(() => {
@@ -321,22 +333,21 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
               className="flex gap-4 overflow-x-auto pb-2 scroll-smooth"
             >
             {[...previousBlocks].reverse().map((snap) => (
-              <div
-                key={snap.hash}
-                className="relative flex-shrink-0 w-52 h-52 overflow-hidden rounded-none border border-gray-200 dark:border-gray-700 bg-gradient-to-b from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/20 dark:to-purple-500/20 px-4 py-2 text-sm"
-              >
-                <div className="absolute top-2 right-2 text-[11px] text-secondary">
-                  {getRelativeTime(snap.timestamp)}
+              <div key={snap.hash} className="flex-shrink-0 flex flex-col gap-1">
+                <div className="flex items-baseline justify-between gap-2 min-w-0">
+                  <span className="text-btc text-base font-medium truncate">{formatNumber(snap.height)}</span>
                 </div>
+                <div
+                  className="relative flex-shrink-0 w-48 h-48 overflow-hidden rounded-none border border-gray-200 dark:border-gray-700 bg-gradient-to-b from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/20 dark:to-purple-500/20 p-3 text-sm"
+                >
                 <div className="space-y-1 text-secondary">
-                  <div className="text-btc text-base">{formatNumber(snap.height)}</div>
                   <div className="text-xs font-mono">{truncateHash(snap.hash)}</div>
                   <div>Transactions: {formatNumber(snap.txCount)}</div>
                   <div>Size: {formatBlockSize(snap.size)}</div>
                   <div>Weight: {formatBlockWeight(snap.weight ?? 0)}</div>
                   <div>Fees: {snap.totalFeesBTC.toFixed(4)} BTC</div>
-                  <div>Fee range: {snap.feeSpanMin} – {snap.feeSpanMax} sat/vB</div>
-                  <div className="flex items-center gap-2">
+                  <div>Range: {snap.feeSpanMin} – {snap.feeSpanMax} sat/vB</div>
+                  <div className="absolute bottom-2 left-3 flex items-center gap-2">
                     <Image
                       src={getPoolIconSrc(snap.miner)}
                       alt={snap.minerName ?? snap.miner ?? 'Unknown miner'}
@@ -347,6 +358,8 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
                     />
                     <div className="text-xs text-secondary">{snap.minerName ?? snap.miner ?? '—'}</div>
                   </div>
+                  <span className="absolute bottom-2 right-2 text-[11px] text-secondary shrink-0">{getRelativeTime(snap.timestamp)}</span>
+                </div>
                 </div>
               </div>
             ))}
@@ -382,18 +395,11 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       <div
         className={`flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300 ${blockJustUpdated ? 'animate-block-update' : ''}`}
       >
-        <div className="flex-shrink-0 min-w-52">
+        <div className="flex-shrink-0 min-w-48">
           <BlockHeader
             height={blockData.height}
-            hash={blockData.hash}
-            timestamp={blockData.timestamp}
             txCount={blockData.txCount}
             size={blockData.size}
-            compact={true}
-            lastUpdated={lastUpdated || undefined}
-            isRefreshing={isRefreshing}
-            miner={blockData.minerName ?? blockData.miner}
-            isTemplate={isTemplate}
           />
 
           <div className="mt-4 flex items-center justify-between gap-2">
@@ -407,7 +413,6 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
               className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent"
             >
               <option value="vbytes">vBytes</option>
-              {!isTemplate && <option value="value">BTC Amount</option>}
               <option value="fee">Fee</option>
             </select>
           </div>

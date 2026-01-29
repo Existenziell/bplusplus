@@ -4,7 +4,8 @@ import { bitcoinRpcServer } from '@/app/utils/bitcoinRpcServer'
 import { processBlockData, buildBlockSnapshot, type BlockSnapshot } from '@/app/utils/blockUtils'
 
 const BLOCK_HISTORY_BLOB_PATH = 'block-history.json'
-const MAX_BLOB_BLOCKS = 100
+/** Only used when blob is empty and we seed from RPC (avoid fetching entire chain). */
+const INITIAL_SEED_LIMIT = 100
 const DEFAULT_LIMIT = 10
 const MAX_LIMIT = 50
 
@@ -63,12 +64,12 @@ async function writeBlockHistoryToBlob(blocks: BlockSnapshot[]): Promise<void> {
   })
 }
 
-/** Seed Blob with last MAX_BLOB_BLOCKS blocks from RPC. Returns the list. */
+/** Seed Blob with last INITIAL_SEED_LIMIT blocks from RPC when blob is empty. Returns the list. */
 async function seedBlockHistoryFromRpc(): Promise<BlockSnapshot[]> {
   console.log('[block-history] Seeding from RPC...')
   const chainInfo = await bitcoinRpcServer('getblockchaininfo')
   const tipHeight = (chainInfo as { blocks: number }).blocks
-  const startHeight = Math.max(0, tipHeight - MAX_BLOB_BLOCKS + 1)
+  const startHeight = Math.max(0, tipHeight - INITIAL_SEED_LIMIT + 1)
   const heights = Array.from({ length: tipHeight - startHeight + 1 }, (_, i) => tipHeight - i)
 
   const hashes = await Promise.all(
@@ -150,12 +151,29 @@ export async function POST() {
       console.log('[block-history] POST: idempotent (block', newBlock.height, 'already in list)')
       return NextResponse.json({ blocks: list })
     }
-    if (list.length > 0 && newBlock.height !== topHeight + 1) {
-      console.log('[block-history] POST: gap (new', newBlock.height, ', top', topHeight, '), skipping')
-      return NextResponse.json({ blocks: list })
+
+    if (list.length > 0 && newBlock.height > topHeight + 1) {
+      console.log('[block-history] POST: gap (new', newBlock.height, ', top', topHeight, '), filling from RPC')
+      const missingHeights = Array.from(
+        { length: newBlock.height - topHeight },
+        (_, i) => newBlock.height - i
+      )
+      const missing: BlockSnapshot[] = []
+      for (const h of missingHeights) {
+        try {
+          missing.push(await fetchBlockSnapshotAtHeight(h))
+        } catch (e) {
+          console.error('[block-history] POST: fetch block', h, 'failed', e)
+          break
+        }
+      }
+      const updated = [...missing, ...list]
+      await writeBlockHistoryToBlob(updated)
+      console.log('[block-history] POST: filled gap, prepended', missing.length, 'blocks, list length', updated.length)
+      return NextResponse.json({ blocks: updated })
     }
 
-    const updated = [newBlock, ...list].slice(0, MAX_BLOB_BLOCKS)
+    const updated = [newBlock, ...list]
     await writeBlockHistoryToBlob(updated)
     console.log('[block-history] POST: prepended block', newBlock.height, ', list length', updated.length)
 

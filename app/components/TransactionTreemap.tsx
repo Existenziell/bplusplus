@@ -22,16 +22,6 @@ const COLOR_PALETTES = {
       '#006064', // Very dark cyan
     ],
   },
-  value: {
-    stops: [
-      '#fce4ec', // Very light pink
-      '#f8bbd0', // Light pink
-      '#f48fb1', // Medium pink
-      '#ec407a', // Pink
-      '#c2185b', // Dark pink
-      '#880e4f', // Very dark pink
-    ],
-  },
   fee: {
     stops: [
       '#f3e5f5', // Very light purple
@@ -44,7 +34,7 @@ const COLOR_PALETTES = {
   },
 }
 
-type SizeMetric = 'vbytes' | 'value' | 'fee'
+type SizeMetric = 'vbytes' | 'fee'
 
 interface TransactionTreemapProps {
   transactions: ProcessedTransaction[]
@@ -85,6 +75,8 @@ export default function TransactionTreemap({
   const [flyInActive, setFlyInActive] = useState(false)
   const hasInitializedRef = useRef(false)
   const prevAnimationTriggerRef = useRef<number | undefined>(animationTrigger)
+  /** Bottom-right origin (viewBox coords) at fly-in start; set when triggering so we use real layout size. */
+  const flyInOriginRef = useRef<{ x: number; y: number } | null>(null)
 
   const sizeMetric = controlledSizeMetric ?? uncontrolledSizeMetric
   const setSizeMetric = (m: SizeMetric) => {
@@ -109,7 +101,8 @@ export default function TransactionTreemap({
     fetchBtcPrice()
   }, [])
 
-  // Trigger fly-in only on first page load or when parent signals (e.g. new block via animationTrigger)
+  // Trigger fly-in only on first page load or when parent signals (e.g. new block via animationTrigger).
+  // Read container size from DOM when triggering so the origin uses real layout dimensions.
   useEffect(() => {
     if (transactions.length === 0) return
     const isFirstLoad = !hasInitializedRef.current
@@ -118,14 +111,29 @@ export default function TransactionTreemap({
     prevAnimationTriggerRef.current = animationTrigger
     if (isFirstLoad) hasInitializedRef.current = true
     if (!isFirstLoad && !triggerChanged) return
-    setFlyInActive(true)
-  }, [transactions, animationTrigger])
+
+    const startFlyIn = () => {
+      const w = containerRef.current?.clientWidth ?? 0
+      if (w <= 0) {
+        requestAnimationFrame(startFlyIn)
+        return
+      }
+      flyInOriginRef.current = { x: w, y: height }
+      setFlyInActive(true)
+    }
+    // Defer one frame so layout (and resize effect) have run and we have real dimensions
+    const id = requestAnimationFrame(startFlyIn)
+    return () => cancelAnimationFrame(id)
+  }, [transactions, animationTrigger, height])
 
   // After painting "from" state, switch to "to" so CSS transition runs
   useEffect(() => {
     if (!flyInActive) return
     const id = requestAnimationFrame(() => {
-      requestAnimationFrame(() => setFlyInActive(false))
+      requestAnimationFrame(() => {
+        setFlyInActive(false)
+        flyInOriginRef.current = null
+      })
     })
     return () => cancelAnimationFrame(id)
   }, [flyInActive])
@@ -143,15 +151,17 @@ export default function TransactionTreemap({
     return () => window.removeEventListener('resize', updateWidth)
   }, [])
 
-  const width = propWidth || containerWidth
+  // When fly-in is active use the stored origin width so viewBox, layout and transform origin match
+  const width =
+    flyInActive && flyInOriginRef.current
+      ? flyInOriginRef.current.x
+      : propWidth || containerWidth
 
   // Get value for selected metric
   const getMetricValue = (tx: ProcessedTransaction): number => {
     switch (sizeMetric) {
       case 'vbytes':
         return tx.vsize
-      case 'value':
-        return tx.value
       case 'fee':
         return tx.fee
       default:
@@ -164,8 +174,6 @@ export default function TransactionTreemap({
     switch (sizeMetric) {
       case 'vbytes':
         return 'Transaction vBytes'
-      case 'value':
-        return 'Transaction BTC Amount'
       case 'fee':
         return 'Transaction Fee'
       default:
@@ -178,8 +186,6 @@ export default function TransactionTreemap({
     switch (sizeMetric) {
       case 'vbytes':
         return 'Transaction vBytes'
-      case 'value':
-        return 'Transaction BTC Amount'
       case 'fee':
         return 'Transaction Fee'
       default:
@@ -332,7 +338,6 @@ export default function TransactionTreemap({
               className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent"
             >
               <option value="vbytes">vBytes</option>
-              <option value="value">BTC Amount</option>
               <option value="fee">Fee</option>
             </select>
           </div>
@@ -354,9 +359,8 @@ export default function TransactionTreemap({
           const rectHeight = node.y1 - node.y0
           const color = colorScale(getMetricValue(node.data))
           const isHovered = hoveredTx?.txid === node.data.txid
-          const centerX = width / 2
-          const centerY = height / 2
-          const fromTransform = `translate(${centerX}px, ${centerY}px) scale(0)`
+          const origin = flyInActive && flyInOriginRef.current ? flyInOriginRef.current : { x: width, y: height }
+          const fromTransform = `translate(${origin.x}px, ${origin.y}px) scale(0)`
           const toTransform = `translate(${node.x0}px, ${node.y0}px) scale(1)`
           const startDelayMs = 250
           const staggerMs = startDelayMs + index * 6
@@ -366,7 +370,8 @@ export default function TransactionTreemap({
               key={node.data.txid}
               style={{
                 transform: flyInActive ? fromTransform : toTransform,
-                transformOrigin: '0 0',
+                transformOrigin: `${origin.x}px ${origin.y}px`,
+                transformBox: 'view-box',
                 opacity: flyInActive ? 0 : 1,
                 transition: `transform 0.18s ease-in ${staggerMs}ms, opacity 0.18s ease-in ${staggerMs}ms`,
               }}
@@ -436,8 +441,8 @@ export default function TransactionTreemap({
               )}
             </div>
             {hoveredTx.value > 0 && (
-              <div className={sizeMetric === 'value' ? 'font-semibold text-white bg-gray-700 dark:bg-gray-600 rounded px-1.5 py-0.5' : ''}>
-                <span className={sizeMetric === 'value' ? 'text-gray-300' : 'text-gray-400'}>Value:</span>{' '}
+              <div>
+                <span className="text-gray-400">Value:</span>{' '}
                 {hoveredTx.value.toFixed(8)} BTC
                 {btcPrice && (
                   <span> ({formatPrice(hoveredTx.value * btcPrice)})</span>
@@ -455,9 +460,6 @@ export default function TransactionTreemap({
             {sizeMetric === 'vbytes' && (
               <div className="w-4 h-4 rounded bg-gradient-to-r from-cyan-100 via-cyan-300 to-cyan-600"></div>
             )}
-            {sizeMetric === 'value' && (
-              <div className="w-4 h-4 rounded bg-gradient-to-r from-pink-100 via-pink-300 to-pink-600"></div>
-            )}
             {sizeMetric === 'fee' && (
               <div className="w-4 h-4 rounded bg-gradient-to-r from-purple-100 via-purple-300 to-purple-600"></div>
             )}
@@ -466,9 +468,6 @@ export default function TransactionTreemap({
           <div className="text-secondary">
             {sizeMetric === 'vbytes' && (
               <>Low: {formatNumber(metricRange[0])} vB → High: {formatNumber(metricRange[1])} vB</>
-            )}
-            {sizeMetric === 'value' && (
-              <>Low: {metricRange[0].toFixed(8)} BTC → High: {metricRange[1].toFixed(8)} BTC</>
             )}
             {sizeMetric === 'fee' && (
               <>Low: {metricRange[0].toFixed(8)} BTC → High: {metricRange[1].toFixed(8)} BTC</>

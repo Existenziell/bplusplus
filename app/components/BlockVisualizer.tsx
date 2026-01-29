@@ -57,6 +57,7 @@ export default function BlockVisualizer() {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [previousBlocks, setPreviousBlocks] = useState<BlockSnapshot[]>([])
   const [isLoadingBlockHistory, setIsLoadingBlockHistory] = useState(false)
+  const [blockHistorySettled, setBlockHistorySettled] = useState(false)
   const [blockHistoryError, setBlockHistoryError] = useState<string | null>(null)
   const [sizeMetric, setSizeMetric] = useState<SizeMetric>('vbytes')
   const [showNewBlockNotification, setShowNewBlockNotification] = useState(false)
@@ -65,6 +66,7 @@ export default function BlockVisualizer() {
   const [btcPrice, setBtcPrice] = useState<number | null>(null)
 
   const lastKnownBlockHashRef = useRef<string | null>(null)
+  const initialCurrentBlockFetchedRef = useRef(false)
   const previousBlocksScrollRef = useRef<HTMLDivElement>(null)
   const [scrollIndicators, setScrollIndicators] = useState({ left: false, right: false })
   const { showWarning: showMobileWarning, dismissed: mobileWarningDismissed, dismiss: handleDismissMobileWarning } = useMobileWarning('block-visualizer-mobile-warning-dismissed')
@@ -112,6 +114,7 @@ export default function BlockVisualizer() {
       if (!append) setPreviousBlocks([])
     } finally {
       setIsLoadingBlockHistory(false)
+      if (!append) setBlockHistorySettled(true)
     }
   }, [])
 
@@ -208,17 +211,19 @@ export default function BlockVisualizer() {
     }
   }, [previousBlocks])
 
-  // Initial load
-  useEffect(() => {
-    fetchMempoolTemplate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) // Only run on mount
-
-  // Load first 10 previous blocks on mount
+  // Load previous blocks first so layout is stable before current block (avoids treemap measuring 0 width)
   useEffect(() => {
     if (typeof window === 'undefined') return
     fetchBlockHistory(null)
   }, [fetchBlockHistory])
+
+  // Initial current-block load only after previous blocks have settled (success or error)
+  useEffect(() => {
+    if (!blockHistorySettled || initialCurrentBlockFetchedRef.current) return
+    initialCurrentBlockFetchedRef.current = true
+    fetchMempoolTemplate()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blockHistorySettled])
 
   // Fetch BTC price for USD conversion in previous blocks
   useEffect(() => {

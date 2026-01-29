@@ -161,17 +161,27 @@ export default function TransactionTreemap({
     return () => cancelAnimationFrame(id)
   }, [flyInActive])
 
-  // Calculate responsive width
+  // Calculate responsive width. Never use 0 so treemap always has valid dimensions
+  // (on client-side nav the container can be 0 until layout settles).
   useEffect(() => {
     const updateWidth = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.clientWidth)
-      }
+      if (!containerRef.current) return
+      const w = containerRef.current.clientWidth
+      if (w > 0) setContainerWidth(w)
     }
 
     updateWidth()
+    const el = containerRef.current
+    let ro: ResizeObserver | null = null
+    if (el) {
+      ro = new ResizeObserver(updateWidth)
+      ro.observe(el)
+    }
     window.addEventListener('resize', updateWidth)
-    return () => window.removeEventListener('resize', updateWidth)
+    return () => {
+      window.removeEventListener('resize', updateWidth)
+      ro?.disconnect()
+    }
   }, [])
 
   // When fly-in is active use the stored origin width so viewBox, layout and transform origin match

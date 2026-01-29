@@ -260,7 +260,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
   }
 
   return (
-    <div className="space-y-6 relative">
+    <div className="relative">
       {/* New block mined notification */}
       {showNewBlockNotification && newBlockHeight !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fadeIn">
@@ -299,7 +299,23 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
 
       {/* Previous blocks overview */}
       <div className="space-y-2">
-        <h3 className="text-sm font-medium text-secondary">Previous blocks</h3>
+        <div className="flex items-center justify-between">
+        <h2 className="heading-section-muted">Previous blocks</h2>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() =>
+              fetchBlockHistory(
+                previousBlocks.length > 0 ? Math.min(...previousBlocks.map((b) => b.height)) : null
+              )
+            }
+            disabled={isLoadingBlockHistory}
+            className="text-sm text-btc hover:text-btc/80 hover:no-underline underline-offset-2 disabled:opacity-50 disabled:no-underline"
+          >
+            {isLoadingBlockHistory ? 'Loading…' : 'Load more'}
+          </button>
+        </div>
+        </div>
         {blockHistoryError ? (
           <div className="py-4 flex flex-col items-center justify-center gap-2 text-secondary text-sm">
             <span>{blockHistoryError}</span>
@@ -373,24 +389,10 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
             )}
           </div>
         ) : null}
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() =>
-              fetchBlockHistory(
-                previousBlocks.length > 0 ? Math.min(...previousBlocks.map((b) => b.height)) : null
-              )
-            }
-            disabled={isLoadingBlockHistory}
-            className="text-sm text-btc hover:text-btc/80 underline underline-offset-2 disabled:opacity-50 disabled:no-underline"
-          >
-            {isLoadingBlockHistory ? 'Loading…' : previousBlocks.length > 0 ? 'Fetch more' : 'Fetch previous blocks'}
-          </button>
-        </div>
       </div>
-
+      <h2 className="heading-section-muted mt-4 mb-2">Current Block</h2>
       <div
-        className="flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300"
+        className="flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300 mt-0"
       >
         <div className="flex-shrink-0 min-w-48">
           <BlockHeader

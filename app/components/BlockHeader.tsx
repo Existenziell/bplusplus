@@ -21,7 +21,7 @@ export default function BlockHeader({
         <div className="flex-1">
           <div className="flex flex-col gap-2 mb-3">
             <div>
-              <div className="text-secondary">Current Block</div>
+              <div className="text-secondary">Blockheight</div>
               <div className="text-gray-800 dark:text-gray-200 font-semibold">
                 {formatNumber(height)}
               </div>

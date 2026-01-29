@@ -61,13 +61,15 @@ export default function DocsNavigation({
 
   useEffect(() => {
     if (activeSection) {
-      setExpandedSections(prev => {
-        if (!prev.has(activeSection)) {
-          const newSet = new Set(prev)
-          newSet.add(activeSection)
-          return newSet
-        }
-        return prev
+      queueMicrotask(() => {
+        setExpandedSections(prev => {
+          if (!prev.has(activeSection)) {
+            const newSet = new Set(prev)
+            newSet.add(activeSection)
+            return newSet
+          }
+          return prev
+        })
       })
     }
   }, [activeSection])

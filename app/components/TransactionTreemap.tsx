@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState, useRef, useEffect, useLayoutEffect } from 'react'
+import { useMemo, useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { hierarchy, treemap } from 'd3-hierarchy'
 import { scaleSequential } from 'd3-scale'
@@ -73,6 +73,8 @@ export default function TransactionTreemap({
   const containerRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const [flyInActive, setFlyInActive] = useState(true)
+  const [prevTriggerForRender, setPrevTriggerForRender] = useState<number | undefined>(animationTrigger)
+  const [flyInOriginState, setFlyInOriginState] = useState<{ x: number; y: number } | null>(null)
   const hasInitializedRef = useRef(false)
   const prevAnimationTriggerRef = useRef<number | undefined>(animationTrigger)
   /** Bottom-right origin (viewBox coords) at fly-in start; set when triggering so we use real layout size. */
@@ -103,7 +105,7 @@ export default function TransactionTreemap({
 
   // When trigger changed, hide tiles from the very first render so we never paint a scrambled frame.
   const triggerJustChanged =
-    animationTrigger !== undefined && prevAnimationTriggerRef.current !== animationTrigger
+    animationTrigger !== undefined && prevTriggerForRender !== animationTrigger
   const shouldHideForFlyIn = triggerJustChanged || flyInActive
 
   // Before paint: when we have transactions and (first load or trigger changed), show "from" state
@@ -114,8 +116,9 @@ export default function TransactionTreemap({
     const triggerChanged =
       animationTrigger !== undefined && prevAnimationTriggerRef.current !== animationTrigger
     if (isFirstLoad || triggerChanged) {
-      setFlyInActive(true)
+      queueMicrotask(() => setFlyInActive(true))
     }
+    queueMicrotask(() => setPrevTriggerForRender(animationTrigger))
   }, [transactions, animationTrigger])
 
   // Trigger fly-in only on first page load or when parent signals (e.g. new block via animationTrigger).
@@ -135,7 +138,9 @@ export default function TransactionTreemap({
         requestAnimationFrame(startFlyIn)
         return
       }
-      flyInOriginRef.current = { x: w, y: height }
+      const origin = { x: w, y: height }
+      flyInOriginRef.current = origin
+      setFlyInOriginState(origin)
       setFlyInActive(true)
     }
     // Defer one frame so layout (and resize effect) have run and we have real dimensions
@@ -150,6 +155,7 @@ export default function TransactionTreemap({
       requestAnimationFrame(() => {
         setFlyInActive(false)
         flyInOriginRef.current = null
+        setFlyInOriginState(null)
       })
     })
     return () => cancelAnimationFrame(id)
@@ -170,12 +176,12 @@ export default function TransactionTreemap({
 
   // When fly-in is active use the stored origin width so viewBox, layout and transform origin match
   const width =
-    flyInActive && flyInOriginRef.current
-      ? flyInOriginRef.current.x
+    flyInActive && flyInOriginState
+      ? flyInOriginState.x
       : propWidth || containerWidth
 
   // Get value for selected metric
-  const getMetricValue = (tx: ProcessedTransaction): number => {
+  const getMetricValue = useCallback((tx: ProcessedTransaction): number => {
     switch (sizeMetric) {
       case 'vbytes':
         return tx.vsize
@@ -184,7 +190,7 @@ export default function TransactionTreemap({
       default:
         return tx.vsize
     }
-  }
+  }, [sizeMetric])
 
   // Get label for selected metric
   const getMetricLabel = (): string => {
@@ -217,22 +223,22 @@ export default function TransactionTreemap({
     const min = Math.min(...values)
     const max = Math.max(...values)
     return [min, max]
-  }, [transactions, sizeMetric])
+  }, [transactions, getMetricValue])
 
   // Multi-stop color interpolator for wider gradient range
-  const multiStopInterpolator = (t: number): string => {
+  const multiStopInterpolator = useCallback((t: number): string => {
     const palette = COLOR_PALETTES[sizeMetric]
     const stops = palette.stops
     const numStops = stops.length
-    
+
     // Calculate which segment of the gradient we're in
     const segmentSize = 1 / (numStops - 1)
     const segmentIndex = Math.min(Math.floor(t / segmentSize), numStops - 2)
     const segmentT = (t - segmentIndex * segmentSize) / segmentSize
-    
+
     // Interpolate between the two stops in this segment
     return interpolateRgb(stops[segmentIndex], stops[segmentIndex + 1])(segmentT)
-  }
+  }, [sizeMetric])
 
   // Create color scale based on selected metric using multi-stop palette
   const colorScale = useMemo(() => {
@@ -242,7 +248,7 @@ export default function TransactionTreemap({
     }
     return scaleSequential(multiStopInterpolator)
       .domain([metricRange[0], metricRange[1]])
-  }, [metricRange, sizeMetric])
+  }, [metricRange, sizeMetric, multiStopInterpolator])
 
   // Generate treemap layout
   const treemapNodes = useMemo(() => {
@@ -289,7 +295,7 @@ export default function TransactionTreemap({
     })
 
     return nodes
-  }, [transactions, width, height, sizeMetric])
+  }, [transactions, width, height, getMetricValue])
 
   // Animation order: biggest first (by area). Map txid -> animation index (0 = biggest).
   const animationIndexByTxid = useMemo(() => {
@@ -386,7 +392,7 @@ export default function TransactionTreemap({
           const rectHeight = node.y1 - node.y0
           const color = colorScale(getMetricValue(node.data))
           const isHovered = hoveredTx?.txid === node.data.txid
-          const origin = shouldHideForFlyIn && flyInOriginRef.current ? flyInOriginRef.current : { x: width, y: height }
+          const origin = shouldHideForFlyIn && flyInOriginState ? flyInOriginState : { x: width, y: height }
           const fromTransform = `translate(${origin.x}px, ${origin.y}px) scale(0)`
           const toTransform = `translate(${node.x0}px, ${node.y0}px) scale(1)`
           const n = treemapNodes.length
@@ -472,15 +478,6 @@ export default function TransactionTreemap({
                 <span> ({formatPrice(hoveredTx.fee * btcPrice)})</span>
               )}
             </div>
-            {hoveredTx.value > 0 && (
-              <div>
-                <span className="text-gray-400">Value:</span>{' '}
-                {hoveredTx.value.toFixed(8)} BTC
-                {btcPrice && (
-                  <span> ({formatPrice(hoveredTx.value * btcPrice)})</span>
-                )}
-              </div>
-            )}
           </div>
         </div>
       )}

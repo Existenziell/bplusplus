@@ -125,13 +125,15 @@ export function MultiLanguageCodeBlock({ languages }: MultiLanguageCodeBlockProp
     }
 
     // Show escaped code immediately, then highlight
-    setHighlightedLanguages(
-      languages.map(({ lang, code, className }) => ({
-        lang,
-        highlighted: escapeHtml(code),
-        className,
-      }))
-    )
+    queueMicrotask(() => {
+      setHighlightedLanguages(
+        languages.map(({ lang, code, className }) => ({
+          lang,
+          highlighted: escapeHtml(code),
+          className,
+        }))
+      )
+    })
 
     highlightCode()
 

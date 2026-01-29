@@ -69,7 +69,7 @@ export function GlossaryProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let cancelled = false
 
-    setIsLoading(true)
+    queueMicrotask(() => setIsLoading(true))
     loadGlossaryData()
       .then((data) => {
         if (cancelled) return

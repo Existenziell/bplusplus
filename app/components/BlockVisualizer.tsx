@@ -11,7 +11,7 @@ import {
   formatBlockWeight,
   truncateHash,
 } from '@/app/utils/blockUtils'
-import { formatNumber } from '@/app/utils/formatting'
+import { formatNumber, formatPrice } from '@/app/utils/formatting'
 import BlockHeader from '@/app/components/BlockHeader'
 import TransactionTreemap from '@/app/components/TransactionTreemap'
 import { ChevronLeft, ChevronRight } from '@/app/components/Icons'
@@ -61,6 +61,7 @@ export default function BlockVisualizer() {
   const [showNewBlockNotification, setShowNewBlockNotification] = useState(false)
   const [newBlockHeight, setNewBlockHeight] = useState<number | null>(null)
   const [treemapAnimationTrigger, setTreemapAnimationTrigger] = useState(0)
+  const [btcPrice, setBtcPrice] = useState<number | null>(null)
 
   const lastKnownBlockHashRef = useRef<string | null>(null)
   const previousBlocksScrollRef = useRef<HTMLDivElement>(null)
@@ -217,6 +218,20 @@ export default function BlockVisualizer() {
     fetchBlockHistory(null)
   }, [fetchBlockHistory])
 
+  // Fetch BTC price for USD conversion in previous blocks
+  useEffect(() => {
+    const fetchBtcPrice = async () => {
+      try {
+        const res = await fetch('/api/btc-price')
+        const data = await res.json()
+        if (data.price) setBtcPrice(data.price)
+      } catch {
+        // ignore
+      }
+    }
+    fetchBtcPrice()
+  }, [])
+
   // Auto-refresh polling (mempool changes often)
   useEffect(() => {
     const interval = setInterval(() => {
@@ -362,7 +377,6 @@ export default function BlockVisualizer() {
                   <span className="text-btc text-base font-medium truncate">{formatNumber(snap.height)}</span>
                 </div>
                 <div
-                  title={`Value: ${snap.totalValueBTC.toFixed(4)} BTC`}
                   className="relative flex-shrink-0 w-44 h-44 overflow-hidden rounded-none border border-gray-200 dark:border-gray-700 bg-gradient-to-b from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/20 dark:to-purple-500/20 p-3 text-sm"
                 >
                 <div className="text-xs">
@@ -371,7 +385,7 @@ export default function BlockVisualizer() {
                   <div>Transactions: {formatNumber(snap.txCount)}</div>
                   <div>Size: {formatBlockSize(snap.size)}</div>
                   <div>Weight: {formatBlockWeight(snap.weight ?? 0)}</div>
-                  <div>Fees: {snap.totalFeesBTC.toFixed(4)} BTC</div>
+                  <div>Fees: {snap.totalFeesBTC.toFixed(4)} BTC{btcPrice != null && ` (${formatPrice(snap.totalFeesBTC * btcPrice)})`}</div>
                   <div className="mb-2">Range: {snap.feeSpanMin} – {snap.feeSpanMax} sat/vB</div>
                   <div className="flex items-center gap-2">
                     <div>{snap.minerName ?? snap.miner ?? '—'}</div>

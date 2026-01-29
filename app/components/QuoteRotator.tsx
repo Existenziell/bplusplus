@@ -62,10 +62,12 @@ function QuoteRotator() {
 
   useEffect(() => {
     // Client-only
-    setIsMounted(true)
-    setQuote(getNextQuote())
-    setIsVisible(true)
-    
+    queueMicrotask(() => {
+      setIsMounted(true)
+      setQuote(getNextQuote())
+      setIsVisible(true)
+    })
+
     const interval = setInterval(() => {
       setIsVisible(false)
       setTimeout(() => {

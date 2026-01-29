@@ -8,7 +8,7 @@ export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
+    queueMicrotask(() => setMounted(true))
   }, [])
 
   // Avoid hydration mismatch by not rendering theme-dependent classes until mounted

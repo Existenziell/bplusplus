@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import Link from 'next/link'
 
 interface GlossaryEntry {
@@ -15,9 +15,16 @@ interface GlossaryTooltipProps {
   glossaryLoading?: boolean
 }
 
+interface TooltipCoords {
+  left: number
+  bottom?: number
+  top?: number
+}
+
 export default function GlossaryTooltip({ href, children, glossaryData, glossaryLoading = false }: GlossaryTooltipProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [position, setPosition] = useState<'top' | 'bottom'>('top')
+  const [tooltipCoords, setTooltipCoords] = useState<TooltipCoords | null>(null)
   const linkRef = useRef<HTMLAnchorElement>(null)
   const tooltipRef = useRef<HTMLSpanElement>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -26,19 +33,25 @@ export default function GlossaryTooltip({ href, children, glossaryData, glossary
   const slug = href.split('#')[1] || ''
   const entry = glossaryData[slug]
 
-  // Determine if tooltip should appear above or below the link
-  useEffect(() => {
-    if (isVisible && linkRef.current) {
-      const rect = linkRef.current.getBoundingClientRect()
-      const spaceAbove = rect.top
-      const tooltipHeight = 150 // Approximate max tooltip height
-
-      if (spaceAbove < tooltipHeight + 20) {
-        setPosition('bottom')
-      } else {
-        setPosition('top')
-      }
+  // Measure link position and decide top/bottom when tooltip becomes visible (no refs during render)
+  useLayoutEffect(() => {
+    if (!isVisible || !linkRef.current) {
+      queueMicrotask(() => setTooltipCoords(null))
+      return
     }
+    const rect = linkRef.current.getBoundingClientRect()
+    const spaceAbove = rect.top
+    const tooltipHeight = 150 // Approximate max tooltip height
+    const placeBottom = spaceAbove < tooltipHeight + 20
+    queueMicrotask(() => {
+      setPosition(placeBottom ? 'bottom' : 'top')
+      setTooltipCoords({
+        left: rect.left + rect.width / 2,
+        ...(placeBottom
+          ? { top: rect.bottom + 8 }
+          : { bottom: window.innerHeight - rect.top + 8 }),
+      })
+    })
   }, [isVisible])
 
   const handleMouseEnter = () => {
@@ -99,12 +112,9 @@ export default function GlossaryTooltip({ href, children, glossaryData, glossary
             transition-opacity duration-150
           `}
           style={{
-            left: linkRef.current ? linkRef.current.getBoundingClientRect().left + linkRef.current.getBoundingClientRect().width / 2 : 0,
+            left: tooltipCoords?.left ?? 0,
             transform: 'translateX(-50%)',
-            ...(position === 'top'
-              ? { bottom: linkRef.current ? window.innerHeight - linkRef.current.getBoundingClientRect().top + 8 : 0 }
-              : { top: linkRef.current ? linkRef.current.getBoundingClientRect().bottom + 8 : 0 }
-            ),
+            ...(tooltipCoords && (tooltipCoords.bottom !== undefined ? { bottom: tooltipCoords.bottom } : { top: tooltipCoords.top })),
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}

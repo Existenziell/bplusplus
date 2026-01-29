@@ -13,14 +13,14 @@ export default function BitcoinHistoryBanner() {
 
   useEffect(() => {
     // Client-only: check date after mount to avoid hydration mismatches
-    setIsMounted(true)
     const todayEvent = getTodayBitcoinEvent()
-    setEvent(todayEvent)
-    
-    // Trigger fade-in animation after a brief delay
-    if (todayEvent) {
-      setTimeout(() => setIsVisible(true), 100)
-    }
+    queueMicrotask(() => {
+      setIsMounted(true)
+      setEvent(todayEvent)
+      if (todayEvent) {
+        setTimeout(() => setIsVisible(true), 100)
+      }
+    })
   }, [])
 
   // Don't render anything until mounted (client-side only)

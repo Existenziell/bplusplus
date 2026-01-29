@@ -21,8 +21,10 @@ export function useSearch() {
   // Clear results immediately when query is empty (don't wait for debounce)
   useEffect(() => {
     if (query.length === 0) {
-      setResults([])
-      setLoading(false)
+      queueMicrotask(() => {
+        setResults([])
+        setLoading(false)
+      })
     }
   }, [query])
 
@@ -52,13 +54,15 @@ export function useSearch() {
   )
 
   useEffect(() => {
-    if (index) {
-      runSearch(debouncedQuery)
-    } else if (debouncedQuery.length >= MIN_QUERY_LEN) {
-      setLoading(true)
-    } else {
-      setLoading(false)
-    }
+    queueMicrotask(() => {
+      if (index) {
+        runSearch(debouncedQuery)
+      } else if (debouncedQuery.length >= MIN_QUERY_LEN) {
+        setLoading(true)
+      } else {
+        setLoading(false)
+      }
+    })
   }, [debouncedQuery, index, runSearch])
 
   return {

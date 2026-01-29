@@ -10,9 +10,10 @@ interface MatrixAnimationProps {
 export default function MatrixAnimation({ duration = 4000, onComplete }: MatrixAnimationProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number>(null)
-  const startTimeRef = useRef<number>(Date.now())
+  const startTimeRef = useRef<number | null>(null)
 
   useEffect(() => {
+    startTimeRef.current = Date.now()
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -52,8 +53,10 @@ export default function MatrixAnimation({ duration = 4000, onComplete }: MatrixA
 
     // Animation function
     const animate = () => {
-      const elapsed = Date.now() - startTimeRef.current
-      
+      const start = startTimeRef.current
+      if (start === null) return
+      const elapsed = Date.now() - start
+
       if (elapsed >= duration) {
         if (onComplete) {
           onComplete()

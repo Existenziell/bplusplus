@@ -148,11 +148,13 @@ export default function SecretPage() {
 
   // Set random message on client side only to avoid hydration mismatch
   useEffect(() => {
-    setRandomMessage(
-      mysteriousMessages[
-        Math.floor(Math.random() * mysteriousMessages.length)
-      ]
-    )
+    queueMicrotask(() => {
+      setRandomMessage(
+        mysteriousMessages[
+          Math.floor(Math.random() * mysteriousMessages.length)
+        ]
+      )
+    })
   }, [])
 
   return (
@@ -189,7 +191,7 @@ export default function SecretPage() {
           </div>
 
           <div className="space-y-2 text-gray-600 dark:text-gray-400 font-mono text-sm">
-            <p className="text-btc font-semibold">Don't trust, verify.</p>
+            <p className="text-btc font-semibold">Don&apos;t trust, verify.</p>
           </div>
         </div>
 

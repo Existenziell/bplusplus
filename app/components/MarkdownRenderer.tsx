@@ -421,10 +421,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         </pre>
       )
     },
-    img: ({ src, alt, ...props }: any) => {
-      return <img src={src} alt={alt} className="max-w-full h-auto my-4" {...props} />
-    },
-  }), [codeGroupMap, videoGroupMap, glossaryData])
+    img: ({ src, alt, ...props }: any) => (
+      // Markdown images: src/alt are dynamic; next/image requires known dimensions or unoptimized
+      // eslint-disable-next-line @next/next/no-img-element -- dynamic markdown content
+      <img src={src} alt={alt} className="max-w-full h-auto my-4" {...props} />
+    ),
+  }), [codeGroupMap, videoGroupMap, glossaryData, glossaryLoading])
 
   return (
     <div className="markdown-content prose dark:prose-invert max-w-none">

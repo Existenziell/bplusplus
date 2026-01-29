@@ -76,7 +76,7 @@ export default function AuthorPage() {
                   who wants to learn.
                 </p>
                 <p className="text-gray-800 dark:text-gray-200 leading-7">
-                  I would love to <Link href="/feedback" className="text-btc hover:underline">get feedback</Link> from fellow Bitcoiners. I'm still learning every day :)
+                  I would love to <Link href="/feedback" className="text-btc hover:underline">get feedback</Link> from fellow Bitcoiners. I&apos;m still learning every day :)
                 </p>
               </div>
             </section>

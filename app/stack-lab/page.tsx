@@ -40,7 +40,7 @@ export default function StackLabPage() {
 
   // Client-only to avoid hydration mismatch
   useEffect(() => {
-    setIsMounted(true)
+    queueMicrotask(() => setIsMounted(true))
   }, [])
 
   const handleDragEnd = (event: DragEndEvent) => {

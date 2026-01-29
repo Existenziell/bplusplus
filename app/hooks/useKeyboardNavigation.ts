@@ -38,7 +38,9 @@ export function useKeyboardNavigation<T>({
 
   // Reset selected index when items change or resetDeps change
   useEffect(() => {
-    setSelectedIndex(-1)
+    queueMicrotask(() => setSelectedIndex(-1))
+    // resetDeps is intentionally spread so callers can pass arbitrary deps that reset selection
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- resetDeps is dynamic
   }, [items.length, ...resetDeps])
 
   // Auto-scroll selected item into view (only when an item is selected)

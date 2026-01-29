@@ -14,24 +14,27 @@ export function useSearchIndex({ enabled = true }: { enabled?: boolean } = {}) {
 
   useEffect(() => {
     if (!enabled) {
-      // Keep state in sync if another consumer loaded the cache.
-      const cached = getCachedIndex()
-      if (cached) setIndex((prev) => prev ?? cached)
-      setLoading(isIndexLoading())
+      queueMicrotask(() => {
+        const cached = getCachedIndex()
+        if (cached) setIndex((prev) => prev ?? cached)
+        setLoading(isIndexLoading())
+      })
       return
     }
 
     // If index is already cached, use it
     const cached = getCachedIndex()
     if (cached) {
-      setIndex(cached)
-      setLoading(false)
+      queueMicrotask(() => {
+        setIndex(cached)
+        setLoading(false)
+      })
       return
     }
 
     // If already loading, wait for it
     if (isIndexLoading()) {
-      setLoading(true)
+      queueMicrotask(() => setLoading(true))
       loadSearchIndex()
         .then((data) => {
           setIndex(data)
@@ -46,7 +49,7 @@ export function useSearchIndex({ enabled = true }: { enabled?: boolean } = {}) {
     }
 
     // Start loading
-    setLoading(true)
+    queueMicrotask(() => setLoading(true))
     loadSearchIndex()
       .then((data) => {
         setIndex(data)

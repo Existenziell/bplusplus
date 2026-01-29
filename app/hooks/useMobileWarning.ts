@@ -13,7 +13,7 @@ export function useMobileWarning(storageKey: string) {
 
   useEffect(() => {
     if (localStorage.getItem(storageKey) === 'true') {
-      setDismissed(true)
+      queueMicrotask(() => setDismissed(true))
       return
     }
     const checkMobile = () => {

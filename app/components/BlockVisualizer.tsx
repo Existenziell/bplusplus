@@ -63,6 +63,8 @@ export default function BlockVisualizer() {
   const [showNewBlockNotification, setShowNewBlockNotification] = useState(false)
   const [newBlockHeight, setNewBlockHeight] = useState<number | null>(null)
   const [treemapAnimationTrigger, setTreemapAnimationTrigger] = useState(0)
+  /** Bump when a new block is detected so the current block section re-mounts and re-draws. */
+  const [currentBlockDrawKey, setCurrentBlockDrawKey] = useState(0)
   const [btcPrice, setBtcPrice] = useState<number | null>(null)
 
   const lastKnownBlockHashRef = useRef<string | null>(null)
@@ -153,6 +155,7 @@ export default function BlockVisualizer() {
         console.log('[BlockVisualizer] New block detected, height', tipHeight)
         setNewBlockHeight(tipHeight)
         setShowNewBlockNotification(true)
+        setCurrentBlockDrawKey((k) => k + 1)
         setTimeout(() => setShowNewBlockNotification(false), 3000)
         fetch('/api/block-history', { method: 'POST', cache: 'no-store' })
           .then((res) => {
@@ -453,6 +456,7 @@ export default function BlockVisualizer() {
       </div>
       <h2 className="heading-section-muted mt-4 mb-2">Current Block</h2>
       <div
+        key={`current-block-${blockData.height}-${currentBlockDrawKey}`}
         className="flex flex-col lg:flex-row gap-4 items-stretch transition-opacity duration-300 mt-0"
       >
         <div className="flex flex-col flex-shrink-0 w-full lg:w-44 gap-4 lg:gap-0">

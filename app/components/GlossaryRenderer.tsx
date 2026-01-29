@@ -237,7 +237,7 @@ export default function GlossaryRenderer({ content }: GlossaryRendererProps) {
                   handleTermClick(entry.slug, details.open)
                 }}
               >
-                <summary className="glossary-summary cursor-pointer list-none flex items-center gap-2 py-2 px-4 rounded-lg bg-gray-100 dark:bg-gray-800/50 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                <summary className="glossary-summary">
                   {/* Chevron icon */}
                   <ChevronRight className="w-4 h-4 text-secondary transition-transform duration-200 group-open:rotate-90 flex-shrink-0" />
                   <h3 className="">

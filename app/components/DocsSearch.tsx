@@ -128,7 +128,7 @@ export default function DocsSearch() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search documentation…"
-            className="w-full pl-12 pr-4 py-4 text-base bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-btc focus:ring-2 focus:ring-btc/20 transition-colors text-gray-900 dark:text-gray-200 placeholder:text-gray-500 dark:placeholder:text-gray-400"
+            className="input-panel-ring w-full pl-12 pr-4 py-4 text-base rounded-lg border-2 border-gray-200 dark:border-gray-700 focus:ring-btc/20 placeholder:text-gray-500 dark:placeholder:text-gray-400"
             autoComplete="off"
             autoCorrect="off"
             aria-label="Search documentation"

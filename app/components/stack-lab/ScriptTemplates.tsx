@@ -116,7 +116,7 @@ export default function ScriptTemplates({ onLoadTemplate }: ScriptTemplatesProps
             <button
               key={index}
               onClick={() => onLoadTemplate(template)}
-              className="text-left p-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded hover:border-btc hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+              className="text-left p-2 panel-base-hover"
             >
               <div className="font-semibold text-gray-800 dark:text-gray-200 text-xs mb-0.5">
                 {template.name}

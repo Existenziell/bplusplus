@@ -3,9 +3,6 @@
 import { useState, useCallback } from 'react'
 import { UNITS, toSats, fromSats, formatForUnit } from '@/app/utils/denominationUtils'
 
-const inputStyles =
-  'px-3 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-800 dark:text-gray-200 focus:outline-none focus:border-btc'
-
 export default function DenominationCalculator() {
   const [value, setValue] = useState('')
   const [fromUnit, setFromUnit] = useState('btc')
@@ -42,7 +39,7 @@ export default function DenominationCalculator() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="Enter amount"
-            className={`${inputStyles} min-w-[10rem]`}
+            className="input-panel px-3 py-2 min-w-[10rem]"
             aria-label="Amount to convert"
           />
           <label htmlFor="denom-unit" className="sr-only">
@@ -52,7 +49,7 @@ export default function DenominationCalculator() {
             id="denom-unit"
             value={fromUnit}
             onChange={(e) => setFromUnit(e.target.value)}
-            className={`${inputStyles} min-w-[8rem]`}
+            className="input-panel px-3 py-2 min-w-[8rem]"
             aria-label="Unit to convert from"
           >
             {UNITS.map((u) => (

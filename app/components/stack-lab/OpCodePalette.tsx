@@ -70,7 +70,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
           placeholder="Search OP codes..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-3 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-sm text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-btc"
+          className="input-panel w-full px-3 py-2 text-sm placeholder-gray-500"
         />
       </div>
 
@@ -109,7 +109,7 @@ export default function OpCodePalette({ onAddData }: OpCodePaletteProps) {
       {onAddData && (
         <button
           onClick={onAddData}
-          className="mb-3 w-full px-3 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-sm text-gray-800 dark:text-gray-200 hover:border-btc hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+          className="panel-base-hover mb-3 w-full px-3 py-2 text-sm"
         >
           + Push Data
         </button>

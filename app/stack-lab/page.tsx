@@ -388,7 +388,7 @@ export default function StackLabPage() {
                   setShowDataModal(false)
                 }
               }}
-              className="w-full px-3 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-800 dark:text-gray-200 mb-4 focus:outline-none focus:border-btc"
+              className="input-panel w-full px-3 py-2 mb-4"
               placeholder="Enter data..."
               autoFocus
             />

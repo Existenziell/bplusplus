@@ -54,7 +54,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar: credit + copyright + tagline */}
-        <div className='w-full border-t border-gray-200 dark:border-gray-700 pt-4 flex flex-col md:flex-row items-center justify-center gap-y-1 md:gap-x-4 md:gap-y-0 text-sm text-secondary'>
+        <div className='footer-bar'>
           <Link
             href='/author'
             className='hover:text-btc transition-colors no-underline hover:underline'

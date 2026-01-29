@@ -41,7 +41,7 @@ export default function StickyBar() {
                 <button
                   type="button"
                   onClick={openSearch}
-                  className="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
+                  className="btn-icon"
                   aria-label="Search (⌘K)"
                   title="Search (⌘K)"
                 >

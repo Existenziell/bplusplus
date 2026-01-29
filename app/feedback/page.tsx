@@ -7,9 +7,6 @@ import { SITE_URL } from '@/app/utils/metadata'
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvzkeedd'
 
-const inputStyles =
-  'px-3 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-800 dark:text-gray-200 focus:outline-none focus:border-btc w-full'
-
 function FeedbackForm() {
   return (
     <div className="max-w-xl mx-auto text-center pb-20">
@@ -44,7 +41,7 @@ function FeedbackForm() {
             required
             rows={5}
             placeholder="Your feedback..."
-            className={`${inputStyles} md:min-h-[20rem] resize-y`}
+            className="input-panel w-full px-3 py-2 md:min-h-[20rem] resize-y"
             aria-required="true"
           />
         </div>
@@ -58,7 +55,7 @@ function FeedbackForm() {
             name="email"
             type="email"
             placeholder="you@bitcoin.org"
-            className={inputStyles}
+            className="input-panel w-full px-3 py-2"
           />
         </div>
 

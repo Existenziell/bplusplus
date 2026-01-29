@@ -130,6 +130,36 @@ body {
   .code-inline {
     @apply font-mono bg-gray-200 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm text-gray-900 dark:text-gray-300;
   }
+
+  /* Form input base - gray panel, focus border */
+  .input-panel {
+    @apply bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-800 dark:text-gray-200 focus:outline-none focus:border-btc;
+  }
+
+  /* Form input base - white/gray-800, focus ring */
+  .input-panel-ring {
+    @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent;
+  }
+
+  /* Icon button - header/nav actions */
+  .btn-icon {
+    @apply p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors;
+  }
+
+  /* Gray panel - no focus (add px/py/size as needed) */
+  .panel-base {
+    @apply bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-800 dark:text-gray-200;
+  }
+
+  /* Gray panel with hover accent */
+  .panel-base-hover {
+    @apply bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-800 dark:text-gray-200 hover:border-btc hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors;
+  }
+
+  /* Footer top bar - border, flex layout */
+  .footer-bar {
+    @apply w-full border-t border-gray-200 dark:border-gray-700 pt-4 flex flex-col md:flex-row items-center justify-center gap-y-1 md:gap-x-4 md:gap-y-0 text-sm text-secondary;
+  }
 }
 
 @layer utilities {}
@@ -493,6 +523,11 @@ main > div > div > h1:first-child {
 
 .glossary-entry {
   scroll-margin-top: 20px;
+}
+
+/* Glossary accordion summary - layout and colors */
+.glossary-summary {
+  @apply cursor-pointer list-none flex items-center gap-2 py-2 px-4 rounded-lg bg-gray-100 dark:bg-gray-800/50 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors;
 }
 
 /* Hide default marker/arrow on summary */

@@ -15,6 +15,7 @@ import { formatNumber, formatPrice } from '@/app/utils/formatting'
 import BlockHeader from '@/app/components/BlockHeader'
 import TransactionTreemap from '@/app/components/TransactionTreemap'
 import { ChevronLeft, ChevronRight } from '@/app/components/Icons'
+import { useMobileWarning } from '@/app/hooks/useMobileWarning'
 import poolsData from '@/public/data/pools.json'
 
 const BLOCKS_PER_PAGE = 10
@@ -66,6 +67,7 @@ export default function BlockVisualizer() {
   const lastKnownBlockHashRef = useRef<string | null>(null)
   const previousBlocksScrollRef = useRef<HTMLDivElement>(null)
   const [scrollIndicators, setScrollIndicators] = useState({ left: false, right: false })
+  const { showWarning: showMobileWarning, dismissed: mobileWarningDismissed, dismiss: handleDismissMobileWarning } = useMobileWarning('block-visualizer-mobile-warning-dismissed')
 
   const updateScrollIndicators = useCallback(() => {
     const el = previousBlocksScrollRef.current
@@ -287,6 +289,34 @@ export default function BlockVisualizer() {
 
   return (
     <div className="relative">
+      {/* Mobile Warning Modal */}
+      {showMobileWarning && !mobileWarningDismissed && (
+        <div className="modal-overlay flex items-center justify-center p-4">
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+              Block Visualizer is not optimized for small screens. The block explorer and treemap work best on desktop or tablet devices with larger screens.
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+              You can still use Block Visualizer on mobile, but the experience may be limited. For the best experience, please use a desktop or tablet.
+            </p>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => handleDismissMobileWarning(false)}
+                className="btn-primary-sm w-full"
+              >
+                Continue Anyway
+              </button>
+              <button
+                onClick={() => handleDismissMobileWarning(true)}
+                className="btn-secondary-sm w-full"
+              >
+                Continue & Don&apos;t Show Again
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* New block mined notification */}
       {showNewBlockNotification && newBlockHeight !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fadeIn">
@@ -438,7 +468,7 @@ export default function BlockVisualizer() {
                 setSizeMetric(e.target.value as SizeMetric)
                 setTreemapAnimationTrigger((t) => t + 1)
               }}
-              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-btc focus:border-transparent"
+              className="input-panel-ring w-full px-3 py-2 text-sm"
             >
               <option value="vbytes">vBytes</option>
               <option value="fee">Fee</option>

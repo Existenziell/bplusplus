@@ -70,17 +70,20 @@ export async function POST(request: NextRequest) {
       params,
     }
 
-    const response = await fetch(RPC_URL, {
+    // Methods that can return >2MB (Next.js data cache limit) must not use fetch cache
+    const largeResponseMethods = new Set(['getblock', 'getrawtransaction'])
+    const fetchOptions: RequestInit & { next?: { revalidate: number } } = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(rpcPayload),
-      // Cache certain responses
-      next: {
-        revalidate: getCacheTime(method),
-      },
-    })
+    }
+    if (!largeResponseMethods.has(method)) {
+      fetchOptions.next = { revalidate: getCacheTime(method) }
+    }
+
+    const response = await fetch(RPC_URL, fetchOptions)
 
     if (!response.ok) {
       // Try to parse error response from the RPC server

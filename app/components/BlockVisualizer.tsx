@@ -461,7 +461,7 @@ export default function BlockVisualizer() {
       >
         <div className="flex flex-col flex-shrink-0 w-full lg:w-44 gap-4 lg:gap-0">
           <BlockHeader
-            height={blockData.height}
+            height={newBlockHeight ?? blockData.height}
             txCount={blockData.txCount}
             size={blockData.size}
           />
@@ -484,13 +484,14 @@ export default function BlockVisualizer() {
             </select>
           </div>
         </div>
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 aspect-square">
           <TransactionTreemap
             transactions={blockData.transactions}
             sizeMetric={sizeMetric}
             onSizeMetricChange={setSizeMetric}
             showMetricSelector={false}
             animationTrigger={treemapAnimationTrigger}
+            square
           />
         </div>
       </div>

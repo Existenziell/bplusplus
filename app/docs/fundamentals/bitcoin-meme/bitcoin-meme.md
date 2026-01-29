@@ -137,7 +137,7 @@ The responsible approach to Bitcoin memes is to use them as doorways, not destin
 
 ### Memes and Responsible Adoption
 
-Memes can drive adoption, but responsible adoption requires education. See [Risk Management](/docs/investment/risk-management) for how to approach Bitcoin investment responsibly, and [Investment Strategy](/docs/investment-strategy) for long-term thinking.
+Memes can drive adoption, but responsible adoption requires education. See [Risk Management](/docs/investment/risk-management) for how to approach Bitcoin investment responsibly, and [Investment Strategy](/docs/investment/investment-strategy) for long-term thinking.
 
 The best memes lead to understanding. They're hooks that draw people in, but the real value comes from learning Bitcoin's technical, economic, and social foundations.
 

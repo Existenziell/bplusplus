@@ -80,7 +80,7 @@ The more you learn, the better equipped you'll be to make informed investment de
 
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - Economic characteristics of Bitcoin
 - [Wallet Security & Self-Custody](/docs/investment/wallet-security) - Securing your Bitcoin holdings
-- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies
+- [Investment Strategy](/docs/investment/investment-strategy) - DCA and long-term holding strategies
 - [Understanding Market Cycles](/docs/investment/market-cycles) - Navigating volatility and market psychology
 - [Trust Model](/docs/fundamentals/trust-model) - Understanding Bitcoin's security model
 

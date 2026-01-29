@@ -14,6 +14,13 @@ describe('useKeyboardNavigation', () => {
     { path: '/docs/mining', title: 'Mining' },
   ]
 
+  /** Flush the hook's initial reset effect microtask so updates run inside act() */
+  async function flushMicrotasks() {
+    await act(async () => {
+      await Promise.resolve()
+    })
+  }
+
   beforeEach(() => {
     vi.clearAllMocks()
     // Reset document.activeElement
@@ -32,7 +39,7 @@ describe('useKeyboardNavigation', () => {
     })
   })
 
-  it('initializes with selectedIndex -1 (no selection)', () => {
+  it('initializes with selectedIndex -1 (no selection)', async () => {
     const onNavigate = vi.fn()
     const { result } = renderHook(() =>
       useKeyboardNavigation({
@@ -40,11 +47,12 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     expect(result.current.selectedIndex).toBe(-1)
   })
 
-  it('navigates down with ArrowDown key', () => {
+  it('navigates down with ArrowDown key', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -63,6 +71,8 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+
+    await flushMicrotasks()
 
     // First ArrowDown should go from -1 to 0
     act(() => {
@@ -77,7 +87,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(1)
   })
 
-  it('navigates up with ArrowUp key', () => {
+  it('navigates up with ArrowUp key', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -96,6 +106,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     // First move down twice to get to index 1
     act(() => {
@@ -111,7 +122,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(0)
   })
 
-  it('stays at -1 when ArrowUp is pressed with no selection', () => {
+  it('stays at -1 when ArrowUp is pressed with no selection', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -129,6 +140,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     // Should start at -1
     expect(result.current.selectedIndex).toBe(-1)
@@ -141,7 +153,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(-1)
   })
 
-  it('goes back to -1 when ArrowUp is pressed at first item', () => {
+  it('goes back to -1 when ArrowUp is pressed at first item', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -159,6 +171,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     // First move down to select first item
     act(() => {
@@ -173,7 +186,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(-1)
   })
 
-  it('does not go above items.length - 1 with ArrowDown', () => {
+  it('does not go above items.length - 1 with ArrowDown', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -192,6 +205,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     // Move to last item
     act(() => {
@@ -210,7 +224,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(mockItems.length - 1)
   })
 
-  it('does not call onNavigate when Enter is pressed with no selection', () => {
+  it('does not call onNavigate when Enter is pressed with no selection', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -229,6 +243,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     act(() => {
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
@@ -237,7 +252,7 @@ describe('useKeyboardNavigation', () => {
     expect(onNavigate).not.toHaveBeenCalled()
   })
 
-  it('calls onNavigate when Enter is pressed with a selected item', () => {
+  it('calls onNavigate when Enter is pressed with a selected item', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -256,6 +271,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     // First select an item
     act(() => {
@@ -270,7 +286,7 @@ describe('useKeyboardNavigation', () => {
     expect(onNavigate).toHaveBeenCalledWith(mockItems[0], 0)
   })
 
-  it('does not call onNavigate when Enter is pressed and input is not focused', () => {
+  it('does not call onNavigate when Enter is pressed and input is not focused', async () => {
     const onNavigate = vi.fn()
     const inputRef = { current: document.createElement('input') }
     // Don't focus the input
@@ -282,6 +298,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     act(() => {
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
@@ -290,7 +307,7 @@ describe('useKeyboardNavigation', () => {
     expect(onNavigate).not.toHaveBeenCalled()
   })
 
-  it('calls onEscape when Escape key is pressed', () => {
+  it('calls onEscape when Escape key is pressed', async () => {
     const onNavigate = vi.fn()
     const onEscape = vi.fn()
 
@@ -301,6 +318,7 @@ describe('useKeyboardNavigation', () => {
         onEscape,
       })
     )
+    await flushMicrotasks()
 
     act(() => {
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
@@ -330,6 +348,7 @@ describe('useKeyboardNavigation', () => {
         }),
       { initialProps: { items: mockItems } }
     )
+    await flushMicrotasks()
 
     // Move selection
     act(() => {
@@ -372,6 +391,7 @@ describe('useKeyboardNavigation', () => {
         }),
       { initialProps: { query: 'bitcoin' } }
     )
+    await flushMicrotasks()
 
     // Move selection
     act(() => {
@@ -387,7 +407,7 @@ describe('useKeyboardNavigation', () => {
     })
   })
 
-  it('does not handle keyboard events when disabled', () => {
+  it('does not handle keyboard events when disabled', async () => {
     const onNavigate = vi.fn()
     const { result } = renderHook(() =>
       useKeyboardNavigation({
@@ -396,6 +416,7 @@ describe('useKeyboardNavigation', () => {
         enabled: false,
       })
     )
+    await flushMicrotasks()
 
     act(() => {
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
@@ -404,7 +425,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(-1)
   })
 
-  it('does not handle keyboard events when items array is empty', () => {
+  it('does not handle keyboard events when items array is empty', async () => {
     const onNavigate = vi.fn()
     const { result } = renderHook(() =>
       useKeyboardNavigation({
@@ -412,6 +433,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     act(() => {
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
@@ -420,7 +442,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(-1)
   })
 
-  it('allows navigation without focus when allowNavigationWithoutFocus is true', () => {
+  it('allows navigation without focus when allowNavigationWithoutFocus is true', async () => {
     const onNavigate = vi.fn()
     const { result } = renderHook(() =>
       useKeyboardNavigation({
@@ -429,6 +451,7 @@ describe('useKeyboardNavigation', () => {
         allowNavigationWithoutFocus: true,
       })
     )
+    await flushMicrotasks()
 
     // Ensure no input is focused
     Object.defineProperty(document, 'activeElement', {
@@ -450,7 +473,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(1)
   })
 
-  it('does not allow navigation without focus when allowNavigationWithoutFocus is false', () => {
+  it('does not allow navigation without focus when allowNavigationWithoutFocus is false', async () => {
     const onNavigate = vi.fn()
     const inputRef = { current: document.createElement('input') }
 
@@ -462,6 +485,7 @@ describe('useKeyboardNavigation', () => {
         allowNavigationWithoutFocus: false,
       })
     )
+    await flushMicrotasks()
 
     // Ensure no input is focused
     Object.defineProperty(document, 'activeElement', {
@@ -477,7 +501,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(-1)
   })
 
-  it('does not navigate when typing in another input', () => {
+  it('does not navigate when typing in another input', async () => {
     const onNavigate = vi.fn()
     const inputRef = { current: document.createElement('input') }
     const otherInput = document.createElement('input')
@@ -498,6 +522,7 @@ describe('useKeyboardNavigation', () => {
         allowNavigationWithoutFocus: true,
       })
     )
+    await flushMicrotasks()
 
     act(() => {
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
@@ -508,7 +533,7 @@ describe('useKeyboardNavigation', () => {
     document.body.removeChild(otherInput)
   })
 
-  it('allows navigation when typing in the provided inputRef', () => {
+  it('allows navigation when typing in the provided inputRef', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     document.body.appendChild(input)
@@ -528,6 +553,7 @@ describe('useKeyboardNavigation', () => {
         allowNavigationWithoutFocus: true,
       })
     )
+    await flushMicrotasks()
 
     // First ArrowDown should go from -1 to 0
     act(() => {
@@ -538,7 +564,7 @@ describe('useKeyboardNavigation', () => {
     document.body.removeChild(input)
   })
 
-  it('allows manual selection via setSelectedIndex', () => {
+  it('allows manual selection via setSelectedIndex', async () => {
     const onNavigate = vi.fn()
     const { result } = renderHook(() =>
       useKeyboardNavigation({
@@ -546,6 +572,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     act(() => {
       result.current.setSelectedIndex(2)
@@ -554,7 +581,7 @@ describe('useKeyboardNavigation', () => {
     expect(result.current.selectedIndex).toBe(2)
   })
 
-  it('provides selectedItemRef for scrolling', () => {
+  it('provides selectedItemRef for scrolling', async () => {
     const onNavigate = vi.fn()
     const { result } = renderHook(() =>
       useKeyboardNavigation({
@@ -562,12 +589,13 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     expect(result.current.selectedItemRef).toBeDefined()
     expect(result.current.selectedItemRef.current).toBeNull()
   })
 
-  it('cleans up event listener on unmount', () => {
+  it('cleans up event listener on unmount', async () => {
     const addEventListenerSpy = vi.spyOn(window, 'addEventListener')
     const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener')
     const onNavigate = vi.fn()
@@ -578,6 +606,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     expect(addEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function))
 
@@ -586,7 +615,7 @@ describe('useKeyboardNavigation', () => {
     expect(removeEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function))
   })
 
-  it('prevents default behavior on arrow keys', () => {
+  it('prevents default behavior on arrow keys', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -605,6 +634,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     const event = new KeyboardEvent('keydown', { key: 'ArrowDown', cancelable: true })
     const preventDefaultSpy = vi.spyOn(event, 'preventDefault')
@@ -616,7 +646,7 @@ describe('useKeyboardNavigation', () => {
     expect(preventDefaultSpy).toHaveBeenCalled()
   })
 
-  it('prevents default behavior on Enter key when input is focused and item is selected', () => {
+  it('prevents default behavior on Enter key when input is focused and item is selected', async () => {
     const onNavigate = vi.fn()
     const input = document.createElement('input')
     const inputRef = { current: input }
@@ -635,6 +665,7 @@ describe('useKeyboardNavigation', () => {
         onNavigate,
       })
     )
+    await flushMicrotasks()
 
     // First select an item
     act(() => {

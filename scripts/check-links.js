@@ -250,7 +250,7 @@ async function runChecks() {
   // Report internal link errors
   if (invalidInternalLinks.length > 0) {
     hasErrors = true
-    console.error('ERROR: Internal links that point to non-existent pages:\n')
+    console.error('\x1b[31mERROR: Internal links that point to non-existent pages:\x1b[0m\n')
     for (const linkPath of invalidInternalLinks.sort()) {
       const occurrences = internalLinks.get(linkPath)
       for (const { file, lineNum, fullLink } of occurrences) {

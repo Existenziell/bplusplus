@@ -73,7 +73,7 @@ Since Bitcoin's creation in 2009, long-term holders have been consistently rewar
 - Historically strong returns
 
 **Strategy:**
-- Use [Dollar Cost Averaging](/docs/investment-strategy) to build position
+- Use [Dollar Cost Averaging](/docs/investment/investment-strategy) to build position
 - Hold through bear markets
 - Take profits if needed, but maintain core position
 - Focus on Bitcoin's fundamentals, not price
@@ -203,7 +203,7 @@ HODLing is psychologically difficult because:
 
 ## Related Topics
 
-- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies
+- [Investment Strategy](/docs/investment/investment-strategy) - DCA and long-term holding strategies
 - [Understanding Market Cycles](/docs/investment/market-cycles) - Navigating bull and bear markets
 - [Wallet Security & Self-Custody](/docs/investment/wallet-security) - Securing your long-term holdings
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - Why Bitcoin's properties reward holding

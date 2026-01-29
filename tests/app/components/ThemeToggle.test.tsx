@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ThemeToggle from '@/app/components/ThemeToggle'
 import { useTheme } from 'next-themes'
@@ -30,13 +30,17 @@ describe('ThemeToggle', () => {
     expect(screen.getByLabelText('System theme')).toBeInTheDocument()
   })
 
-  it('shows placeholder before mount to avoid hydration mismatch', () => {
-    // Simulate unmounted state by not calling useEffect
+  it('shows placeholder before mount to avoid hydration mismatch', async () => {
     const { container } = render(<ThemeToggle />)
-    
-    // Should show placeholder divs
+
+    // Should show placeholder divs on first paint
     const placeholder = container.querySelector('div > div')
     expect(placeholder).toBeInTheDocument()
+
+    // Flush mount effect (queueMicrotask) inside act to avoid act warning
+    await act(async () => {
+      await Promise.resolve()
+    })
   })
 
   it('calls setTheme when light button is clicked', async () => {

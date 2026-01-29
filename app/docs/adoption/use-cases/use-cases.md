@@ -60,7 +60,7 @@ Bitcoin's fixed supply and predictable issuance make it attractive as a store of
 
 ### Long-Term Holding
 
-Many investors hold Bitcoin as a long-term store of value, similar to gold but with digital advantages. See [Long-Term Holding](/docs/investment/long-term-holding) for strategies.
+Many investors hold Bitcoin as a long-term store of value, similar to gold but with digital advantages. See [Long-Term Holding](/docs/investment/investment-strategy) for strategies.
 
 ---
 

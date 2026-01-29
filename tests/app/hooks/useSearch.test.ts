@@ -6,9 +6,12 @@ import { search } from '@/app/utils/searchLogic'
 import { handleError } from '@/app/utils/errorHandling'
 import type { IndexEntry } from '@/app/utils/searchLogic'
 
-// Mock dependencies
+// Mock dependencies; preserve searchLogic constants (DEBOUNCE_MS, MIN_QUERY_LEN) so debounce works
+vi.mock('@/app/utils/searchLogic', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@/app/utils/searchLogic')>()
+  return { ...mod, search: vi.fn() }
+})
 vi.mock('@/app/hooks/useSearchIndex')
-vi.mock('@/app/utils/searchLogic')
 vi.mock('@/app/utils/errorHandling')
 
 describe('useSearch', () => {
@@ -26,8 +29,13 @@ describe('useSearch', () => {
     })
   })
 
-  it('initializes with empty query and results', () => {
+  it('initializes with empty query and results', async () => {
     const { result } = renderHook(() => useSearch())
+
+    // useSearch schedules state updates in queueMicrotask; flush them inside act
+    await act(async () => {
+      await Promise.resolve()
+    })
 
     expect(result.current.query).toBe('')
     expect(result.current.results).toEqual([])
@@ -97,7 +105,7 @@ describe('useSearch', () => {
     expect(result.current.results).toEqual(mockResults)
   })
 
-  it('shows loading when index is not available', () => {
+  it('shows loading when index is not available', async () => {
     ;(useSearchIndex as any).mockReturnValue({
       index: null,
       loading: true,
@@ -105,6 +113,10 @@ describe('useSearch', () => {
     })
 
     const { result } = renderHook(() => useSearch())
+
+    await act(async () => {
+      await Promise.resolve()
+    })
 
     expect(result.current.loading).toBe(true)
   })
@@ -151,7 +163,7 @@ describe('useSearch', () => {
     expect(result.current.results).toEqual([])
   })
 
-  it('propagates index error', () => {
+  it('propagates index error', async () => {
     const indexError = new Error('Index load failed')
     ;(useSearchIndex as any).mockReturnValue({
       index: null,
@@ -160,6 +172,10 @@ describe('useSearch', () => {
     })
 
     const { result } = renderHook(() => useSearch())
+
+    await act(async () => {
+      await Promise.resolve()
+    })
 
     expect(result.current.indexError).toBe(indexError)
   })

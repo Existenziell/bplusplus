@@ -45,6 +45,8 @@ interface TransactionTreemapProps {
   showMetricSelector?: boolean
   /** When this value changes, fly-in runs (e.g. new block). Omit to use transactions-ref only. */
   animationTrigger?: number
+  /** Use equal width and height (square) from container. */
+  square?: boolean
 }
 
 interface TreemapNode {
@@ -63,11 +65,13 @@ export default function TransactionTreemap({
   onSizeMetricChange,
   showMetricSelector = true,
   animationTrigger,
+  square = false,
 }: TransactionTreemapProps) {
   const router = useRouter()
   const [hoveredTx, setHoveredTx] = useState<ProcessedTransaction | null>(null)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [containerWidth, setContainerWidth] = useState(800)
+  const [containerHeight, setContainerHeight] = useState(600)
   const [uncontrolledSizeMetric, setUncontrolledSizeMetric] = useState<SizeMetric>('vbytes')
   const [btcPrice, setBtcPrice] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -133,12 +137,16 @@ export default function TransactionTreemap({
     if (!isFirstLoad && !triggerChanged) return
 
     const startFlyIn = () => {
-      const w = containerRef.current?.clientWidth ?? 0
-      if (w <= 0) {
+      const el = containerRef.current
+      const w = el?.clientWidth ?? 0
+      const h = el?.clientHeight ?? 0
+      if (w <= 0 || (square && h <= 0)) {
         requestAnimationFrame(startFlyIn)
         return
       }
-      const origin = { x: w, y: height }
+      const size = square ? Math.min(w, h) : w
+      const originY = square ? size : height
+      const origin = { x: size, y: originY }
       flyInOriginRef.current = origin
       setFlyInOriginState(origin)
       setFlyInActive(true)
@@ -146,7 +154,7 @@ export default function TransactionTreemap({
     // Defer one frame so layout (and resize effect) have run and we have real dimensions
     const id = requestAnimationFrame(startFlyIn)
     return () => cancelAnimationFrame(id)
-  }, [transactions, animationTrigger, height])
+  }, [transactions, animationTrigger, height, square])
 
   // After painting "from" state, switch to "to" so CSS transition runs
   useEffect(() => {
@@ -161,34 +169,43 @@ export default function TransactionTreemap({
     return () => cancelAnimationFrame(id)
   }, [flyInActive])
 
-  // Calculate responsive width. Never use 0 so treemap always has valid dimensions
+  // Calculate responsive width and height. Never use 0 so treemap always has valid dimensions
   // (on client-side nav the container can be 0 until layout settles).
   useEffect(() => {
-    const updateWidth = () => {
+    const updateSize = () => {
       if (!containerRef.current) return
       const w = containerRef.current.clientWidth
+      const h = containerRef.current.clientHeight
       if (w > 0) setContainerWidth(w)
+      if (h > 0) setContainerHeight(h)
     }
 
-    updateWidth()
+    updateSize()
     const el = containerRef.current
     let ro: ResizeObserver | null = null
     if (el) {
-      ro = new ResizeObserver(updateWidth)
+      ro = new ResizeObserver(updateSize)
       ro.observe(el)
     }
-    window.addEventListener('resize', updateWidth)
+    window.addEventListener('resize', updateSize)
     return () => {
-      window.removeEventListener('resize', updateWidth)
+      window.removeEventListener('resize', updateSize)
       ro?.disconnect()
     }
   }, [])
 
-  // When fly-in is active use the stored origin width so viewBox, layout and transform origin match
+  // When square, use same size for width and height; otherwise use container width and prop height
+  const effectiveSize = square
+    ? Math.min(containerWidth, containerHeight)
+    : null
   const width =
     flyInActive && flyInOriginState
       ? flyInOriginState.x
-      : propWidth || containerWidth
+      : effectiveSize ?? propWidth ?? containerWidth
+  const heightUsed =
+    flyInActive && flyInOriginState
+      ? flyInOriginState.y
+      : effectiveSize ?? height
 
   // Get value for selected metric
   const getMetricValue = useCallback((tx: ProcessedTransaction): number => {
@@ -284,7 +301,7 @@ export default function TransactionTreemap({
 
     // Generate treemap layout
     const treemapLayout = treemap<any>()
-      .size([width, height])
+      .size([width, heightUsed])
       .padding(1)
       .round(true)
 
@@ -305,7 +322,7 @@ export default function TransactionTreemap({
     })
 
     return nodes
-  }, [transactions, width, height, getMetricValue])
+  }, [transactions, width, heightUsed, getMetricValue])
 
   // Animation order: biggest first (by area). Map txid -> animation index (0 = biggest).
   const animationIndexByTxid = useMemo(() => {
@@ -390,8 +407,8 @@ export default function TransactionTreemap({
       <svg
         ref={svgRef}
         width="100%"
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
+        height={square ? '100%' : heightUsed}
+        viewBox={`0 0 ${width} ${heightUsed}`}
         className="bg-gray-50 dark:bg-gray-900 treemap-rect-transition"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setHoveredTx(null)}
@@ -402,7 +419,7 @@ export default function TransactionTreemap({
           const rectHeight = node.y1 - node.y0
           const color = colorScale(getMetricValue(node.data))
           const isHovered = hoveredTx?.txid === node.data.txid
-          const origin = shouldHideForFlyIn && flyInOriginState ? flyInOriginState : { x: width, y: height }
+          const origin = shouldHideForFlyIn && flyInOriginState ? flyInOriginState : { x: width, y: heightUsed }
           const fromTransform = `translate(${origin.x}px, ${origin.y}px) scale(0)`
           const toTransform = `translate(${node.x0}px, ${node.y0}px) scale(1)`
           const n = treemapNodes.length

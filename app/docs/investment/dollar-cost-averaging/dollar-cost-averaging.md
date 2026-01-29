@@ -119,7 +119,7 @@ DCA can be combined with other investment approaches:
 ## Related Topics
 
 - [Risk Management](/docs/investment/risk-management) - Understanding investment risks
-- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies
+- [Investment Strategy](/docs/investment/investment-strategy) - DCA and long-term holding strategies
 - [Understanding Market Cycles](/docs/investment/market-cycles) - Navigating volatility and market psychology
 - [Tools & Resources](/docs/investment/tools) - DCA automation services and exchange options
 

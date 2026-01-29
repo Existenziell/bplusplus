@@ -142,7 +142,7 @@ export const docPages: DocPage[] = [
 
   { path: '/docs/investment', mdFile: 'app/docs/investment/overview.md', title: 'Bitcoin as Investment', section: 'investment' },
   { path: '/docs/investment/risk-management', mdFile: 'app/docs/investment/risk-management/risk-management.md', title: 'Risk Management', section: 'investment' },
-  { path: '/docs/investment-strategy', mdFile: 'app/docs/investment-strategy/overview.md', title: 'Investment Strategy', section: 'investment' },
+  { path: '/docs/investment/investment-strategy', mdFile: 'app/docs/investment/investment-strategy/overview.md', title: 'Investment Strategy', section: 'investment' },
   { path: '/docs/investment/tools', mdFile: 'app/docs/investment/tools/tools.md', title: 'Tools & Resources', section: 'investment' },
   { path: '/docs/investment/wallet-security', mdFile: 'app/docs/investment/wallet-security/wallet-security.md', title: 'Wallet Security & Self-Custody', section: 'investment' },
   { path: '/docs/investment/privacy', mdFile: 'app/docs/investment/privacy/privacy.md', title: 'Privacy', section: 'investment' },

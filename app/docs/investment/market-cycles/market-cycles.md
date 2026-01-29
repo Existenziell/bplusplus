@@ -148,7 +148,7 @@ Bitcoin markets follow a predictable emotional cycle:
 
 **Take profits if needed:** If your allocation has grown too large, consider taking some profits.
 
-**Avoid FOMO:** Don't buy more just because prices are rising. Stick to your [Dollar Cost Averaging](/docs/investment-strategy) plan.
+**Avoid FOMO:** Don't buy more just because prices are rising. Stick to your [Dollar Cost Averaging](/docs/investment/investment-strategy) plan.
 
 **Maintain perspective:** Remember that bull markets don't last forever. Corrections are normal.
 
@@ -185,7 +185,7 @@ Bitcoin markets follow a predictable emotional cycle:
 
 **Focus on fundamentals:** Bitcoin's technology and properties haven't changed. Focus on fundamentals, not price.
 
-**Continue DCA:** [Dollar Cost Averaging](/docs/investment-strategy) is particularly effective during bear markets.
+**Continue DCA:** [Dollar Cost Averaging](/docs/investment/investment-strategy) is particularly effective during bear markets.
 
 **Avoid panic selling:** Don't make emotional decisions. Stick to your long-term plan.
 
@@ -212,7 +212,7 @@ Bitcoin markets follow a predictable emotional cycle:
 
 **Before investing:**
 - Define your time horizon
-- Set your investment strategy ([DCA](/docs/investment-strategy), lump sum, etc.)
+- Set your investment strategy ([DCA](/docs/investment/investment-strategy), lump sum, etc.)
 - Determine your risk tolerance
 - Decide when you might sell (if ever)
 
@@ -298,7 +298,7 @@ Bitcoin markets follow a predictable emotional cycle:
 
 ## Related Topics
 
-- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies for navigating cycles
+- [Investment Strategy](/docs/investment/investment-strategy) - DCA and long-term holding strategies for navigating cycles
 - [Risk Management](/docs/investment/risk-management) - Understanding and managing investment risks
 - [Halvings](/docs/history/halvings) - Understanding Bitcoin's halving events and their impact
 

@@ -15,7 +15,7 @@ Investing in Bitcoin carries significant risks that every investor should unders
 **How to manage:**
 - Only invest what you can afford to lose
 - Take a long-term perspective (volatility decreases over longer time horizons)
-- Use [Dollar Cost Averaging](/docs/investment-strategy) to smooth out volatility
+- Use [Dollar Cost Averaging](/docs/investment/investment-strategy) to smooth out volatility
 - Avoid checking prices constantly (reduces emotional stress)
 - Understand that volatility is part of Bitcoin's nature
 
@@ -172,7 +172,7 @@ Proper wallet security and self-custody practices are essential. Learn about [wa
 ## Related Topics
 
 - [Wallet Security & Self-Custody](/docs/investment/wallet-security) - Securing your Bitcoin holdings
-- [Investment Strategy](/docs/investment-strategy) - DCA and long-term holding strategies
+- [Investment Strategy](/docs/investment/investment-strategy) - DCA and long-term holding strategies
 - [Understanding Market Cycles](/docs/investment/market-cycles) - Navigating volatility and market psychology
 - [Privacy](/docs/investment/privacy) - Privacy considerations and regulatory implications
 - [Tools & Resources](/docs/investment/tools) - Exchange selection and security considerations

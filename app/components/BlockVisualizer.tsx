@@ -68,6 +68,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
 
   const lastKnownBlockHashRef = useRef<string | null>(null)
   const previousBlocksScrollRef = useRef<HTMLDivElement>(null)
+  const scrollToEndAfterLoadMoreRef = useRef(false)
   const [scrollIndicators, setScrollIndicators] = useState({ left: false, right: false })
 
   const updateScrollIndicators = useCallback(() => {
@@ -107,6 +108,7 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       }
       const data = await res.json()
       const list = Array.isArray(data?.blocks) ? data.blocks : []
+      if (append && list.length > 0) scrollToEndAfterLoadMoreRef.current = true
       setPreviousBlocks((prev) => (append ? [...prev, ...list] : list))
     } catch (err) {
       setBlockHistoryError(err instanceof Error ? err.message : 'Failed to load previous blocks')
@@ -115,6 +117,19 @@ export default function BlockVisualizer({ initialBlockHash }: BlockVisualizerPro
       setIsLoadingBlockHistory(false)
     }
   }, [])
+
+  useEffect(() => {
+    if (!isLoadingBlockHistory && scrollToEndAfterLoadMoreRef.current) {
+      scrollToEndAfterLoadMoreRef.current = false
+      const el = previousBlocksScrollRef.current
+      if (el) {
+        el.scrollTo({
+          left: el.scrollWidth - el.clientWidth,
+          behavior: 'smooth',
+        })
+      }
+    }
+  }, [previousBlocks, isLoadingBlockHistory])
 
   const fetchMempoolTemplate = useCallback(async () => {
     try {

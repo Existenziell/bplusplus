@@ -519,10 +519,6 @@ main > div > div > h1:first-child {
   @apply bg-green-100 dark:bg-green-900 bg-opacity-50 dark:bg-opacity-30;
 }
 
-.markdown-content .hljs-emphasis {
-  /* italic disabled for testing */
-}
-
 .markdown-content .hljs-strong {
   @apply font-bold;
 }

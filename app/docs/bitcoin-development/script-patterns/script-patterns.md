@@ -1,6 +1,6 @@
 # Bitcoin Script Patterns
 
-Common Bitcoin Script patterns provide reusable templates for building smart contracts. Understanding these patterns helps developers implement common use cases efficiently. Build these patterns in [Stack Lab](/stack-lab).
+[Bitcoin Script](/docs/bitcoin/script) defines spending conditions in locking scripts; [Smart Contracts & Advanced Scripting](/docs/wallets/smart-contracts) describes how those conditions act as contracts. The patterns here are reusable templates you can turn into scriptPubKeys and use in [address generation](/docs/bitcoin-development/addresses) and [transaction construction](/docs/bitcoin-development/transactions). You can build and experiment with them in [Stack Lab](/stack-lab). For a policy language that compiles to Script, see [Miniscript](/docs/bitcoin-development/miniscript).
 
 ## Common Patterns
 

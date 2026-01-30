@@ -1,6 +1,6 @@
 # Pool Mining Setup and Monitoring
 
-Pool mining allows you to contribute [hash rate](/docs/glossary#hash-rate) to a [mining pool](/docs/glossary#mining-pool) and receive proportional rewards. This guide covers setup, monitoring, and optimization.
+[Incentives](/docs/fundamentals/incentives) and [proof-of-work](/docs/glossary#proof-of-work-pow) make mining secure but also very competitive; difficulty is so high that solo mining is rarely profitable. Mining pools let participants combine [hash rate](/docs/glossary#hash-rate) and share rewards proportionally, aligning with the same incentive structure. This guide covers how to connect your mining software to a pool (e.g. Stratum), configure payouts, and monitor your contribution.
 
 ## Mining Architecture
 

@@ -1,6 +1,6 @@
 # Transaction Construction
 
-Building Bitcoin transactions from scratch requires understanding inputs, outputs, fees, and signing. This guide covers the complete process from [UTXO](/docs/fundamentals/utxos) selection to broadcasting.
+Building a transaction is the direct application of the [UTXO model](/docs/fundamentals/utxos): you select unspent outputs as inputs, create new outputs (recipient and change), and sign to prove ownership. The [transaction lifecycle](/docs/bitcoin/transaction-lifecycle) (create, sign, broadcast, mempool, confirmed) is what your code drives; fee choice ties into the [incentive structure](/docs/fundamentals/incentives) of the network. This guide covers the complete process from UTXO selection to broadcasting.
 
 ## Transaction Lifecycle
 

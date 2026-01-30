@@ -1,6 +1,6 @@
 # Miniscript
 
-**Miniscript** is a structured language for writing [Bitcoin Script](/docs/bitcoin/script) that is easier to analyze, compose, and reason about than raw Script. It maps to a well-defined subset of Script and provides guarantees about spending conditions, costs, and the number and type of signatures required.
+**Miniscript** is a structured language for writing [Bitcoin Script](/docs/bitcoin/script) that is easier to analyze, compose, and reason about than raw Script. It maps to a well-defined subset of Script and provides guarantees about spending conditions, costs, and the number and type of signatures required. It sits on top of [Bitcoin Script](/docs/bitcoin/script) and the same [smart contract](/docs/wallets/smart-contracts) spending conditions, giving you a policy language that compiles to correct Script.
 
 ## Why Miniscript?
 
@@ -93,9 +93,9 @@ Miniscript has been extended (see [BIP 382](https://github.com/bitcoin/bips/blob
 
 ## Tools and Libraries
 
-- **[miniscript.bitcoin.sipa.be](https://bitcoin.sipa.be/miniscript/)** – Playground and reference
-- **rust-miniscript** – Rust; used in [BDK](https://github.com/bitcoindevkit/bdk) and other wallets
-- **C++ miniscript** – In [Bitcoin Core](https://github.com/bitcoin/bitcoin) (e.g., for descriptors and output script analysis)
+- **[miniscript.bitcoin.sipa.be](https://bitcoin.sipa.be/miniscript/)**: Playground and reference
+- **rust-miniscript**: Rust; used in [BDK](https://github.com/bitcoindevkit/bdk) and other wallets
+- **C++ miniscript**: In [Bitcoin Core](https://github.com/bitcoin/bitcoin) (e.g., for descriptors and output script analysis)
 - **Policy-to-Miniscript**: Higher-level policy languages can target Miniscript, which then compiles to Script
 
 ---

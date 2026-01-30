@@ -919,6 +919,10 @@
     "term": "Time Lock",
     "definition": "A mechanism built into Bitcoin transactions that prevents funds from being spent until specified conditions are met, enabling time-based smart contracts. Absolute time locks (CLTV) prevent spending until a specific block height or Unix timestamp...."
   },
+  "tor": {
+    "term": "Tor",
+    "definition": "An anonymity network that routes traffic through volunteer relays so that observers cannot see who is talking to whom. With Bitcoin, Tor is used to hide a user's IP when running a node or using wallets, mitigating network-level surveillance and eclipse risks...."
+  },
   "tlv-type-length-value": {
     "term": "TLV (Type-Length-Value)",
     "definition": "A flexible encoding format used extensively in Lightning Network protocol messages (BOLT specifications) that allows for extensible and forward-compatible data structures. Each TLV record contains a type identifier (what kind of data), a length (how many bytes), and the value itself...."

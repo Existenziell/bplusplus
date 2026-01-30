@@ -2,6 +2,12 @@
 
 Bitcoin uses a peer-to-peer (P2P) network protocol for nodes to communicate, share blocks, and propagate transactions. Understanding the P2P protocol is essential for running nodes and understanding network behavior.
 
+## Design context
+
+Bitcoin's P2P design was inspired by the same P2P ideas and era (early 2000s), including BitTorrent's success—decentralization, no single point of failure, and censorship resistance. Bitcoin does not use BitTorrent's protocol; it has its own messages and peer discovery.
+
+Satoshi wrote that governments are good at cutting off centrally controlled networks like Napster, but that "pure P2P networks like Gnutella and Tor" hold their own—so the design philosophy aligns with that lineage.
+
 ## Network Architecture
 
 ### Node Types
@@ -309,6 +315,14 @@ Mitigated by:
 - Requiring proof-of-work for blocks
 - Independent validation by all nodes
 - No trust in individual peers
+
+---
+
+## Tor and Bitcoin
+
+**Tor** is an anonymity network that routes traffic through volunteer relays so that observers cannot see who is talking to whom. Satoshi cited Tor (with Gnutella) as an example of a resilient pure P2P network.
+
+Running a Bitcoin node or wallet over Tor hides a user's IP from peers and mitigates some network-level surveillance and eclipse risks. Many nodes support Tor (e.g. via `.onion` addresses). Lightning's [onion routing](/docs/lightning/onion) is inspired by Tor's design.
 
 ---
 

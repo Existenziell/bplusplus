@@ -1215,6 +1215,10 @@
   ],
   "/docs/bitcoin/p2p-protocol": [
     {
+      "title": "Design context",
+      "slug": "design-context"
+    },
+    {
       "title": "Network Architecture",
       "slug": "network-architecture"
     },
@@ -1237,6 +1241,10 @@
     {
       "title": "Network Security",
       "slug": "network-security"
+    },
+    {
+      "title": "Tor and Bitcoin",
+      "slug": "tor-and-bitcoin"
     },
     {
       "title": "Compact Blocks (BIP 152)",

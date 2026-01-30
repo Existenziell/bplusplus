@@ -288,7 +288,7 @@ When you spend Bitcoin, you often create a **change output** that goes back to y
 **The problem:** When you broadcast transactions or query nodes, your IP address can be logged.
 
 **Solutions:**
-- **Tor:** Route Bitcoin traffic through Tor network
+- **Tor:** Tor is an anonymity network that routes your traffic through relays to hide your IP. See [Tor and Bitcoin](/docs/bitcoin/p2p-protocol#tor-and-bitcoin) for context and node usage.
 - **VPN:** Use a VPN (though less private than Tor)
 - **Run your own node:** Eliminates third-party IP exposure
 - **Lightning Network:** Off-chain transactions don't reveal on-chain IPs

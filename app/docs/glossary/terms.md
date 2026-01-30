@@ -762,6 +762,9 @@ A public Bitcoin network using worthless test coins, designed for development an
 ### Time Lock
 A mechanism built into Bitcoin transactions that prevents funds from being spent until specified conditions are met, enabling time-based smart contracts. Absolute time locks (CLTV) prevent spending until a specific block height or Unix timestamp. Relative time locks (CSV) prevent spending until a certain time has passed since the UTXO was created. Time locks are fundamental to Lightning Network (for HTLC refunds), inheritance planning, vesting schedules, and various escrow arrangements.
 
+### Tor
+An anonymity network that routes traffic through volunteer relays so that observers cannot see who is talking to whom. With Bitcoin, Tor is used to hide a user's IP when running a node or using wallets, mitigating network-level surveillance and eclipse risks. Satoshi cited Tor (with Gnutella) as an example of a resilient pure P2P network. See the [P2P protocol](/docs/bitcoin/p2p-protocol#tor-and-bitcoin) doc for context and node usage.
+
 ### TLV (Type-Length-Value)
 A flexible encoding format used extensively in Lightning Network protocol messages (BOLT specifications) that allows for extensible and forward-compatible data structures. Each TLV record contains a type identifier (what kind of data), a length (how many bytes), and the value itself. Nodes can safely ignore TLV types they don't understand while processing ones they do, enabling smooth protocol upgrades.
 

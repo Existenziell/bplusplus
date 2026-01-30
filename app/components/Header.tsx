@@ -27,7 +27,7 @@ export default function Header() {
               />
             </Link>
             <span
-              className="absolute left-1/2 -translate-x-1/2 font-extrabold engraved text-6xl hidden md:block pointer-events-none pt-4"
+              className="absolute left-1/2 -translate-x-1/2 font-extrabold engraved text-6xl hidden md:block pointer-events-none"
               aria-label="BitcoinDev"
             >
               BitcoinDev

@@ -12,6 +12,15 @@ HD wallets, defined in [BIP32](/docs/glossary#bip-bitcoin-improvement-proposal),
 - Watch-only wallets using extended public keys
 - Deterministic key generation across devices
 
+```mermaid
+flowchart LR
+  Seed[Seed]
+  Account["m/44'/0'/0'"]
+  Index["m/44'/0'/0'/0"]
+  Addr[Addresses]
+  Seed --> Account --> Index --> Addr
+```
+
 ---
 
 ## BIP39: Mnemonic Seed Phrases

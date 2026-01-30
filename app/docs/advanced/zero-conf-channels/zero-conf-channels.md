@@ -263,26 +263,18 @@ Implementation Checklist:
 
 ## Flow Diagram
 
-```text
-Zero-Conf Channel Open:
-
-User                    LSP
-  │                      │
-  │───Request channel───>│
-  │                      │
-  │<──Accept (zero-conf)─│
-  │                      │
-  │<──Funding tx created─│
-  │                      │
-  │<──Channel active!────│  (no wait)
-  │                      │
-  │   Use channel...     │
-  │                      │
-  │   (Meanwhile...)     │
-  │                      │
-  │<──Funding confirmed──│  (background)
-  │                      │
-  │   Full functionality │
+```mermaid
+sequenceDiagram
+  participant User
+  participant LSP
+  User->>LSP: Request channel
+  LSP->>User: Accept (zero-conf)
+  LSP->>User: Funding tx created
+  LSP->>User: Channel active! (no wait)
+  Note over User,LSP: Use channel...
+  Note over User,LSP: Meanwhile...
+  LSP->>User: Funding confirmed (background)
+  Note over User,LSP: Full functionality
 ```
 
 ---

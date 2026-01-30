@@ -63,7 +63,7 @@ body {
 
   /* Code Block Header */
   .code-block-header {
-    @apply bg-gray-200 dark:bg-gray-800 px-4 py-2 rounded-t-lg border-b border-gray-300 dark:border-gray-700;
+    @apply bg-gray-200 dark:bg-gray-800 px-4 py-2 rounded-t-lg;
   }
 
   /* Heading Styles */
@@ -397,6 +397,65 @@ main > div > div > h1:first-child {
 
 .markdown-content .multi-language-code-block pre {
   @apply mb-0 rounded-t-none;
+}
+
+/* Mermaid: prevent text cutoff; default theme keeps original background */
+.markdown-content .mermaid-diagram {
+  overflow: visible;
+}
+.markdown-content .mermaid-diagram svg {
+  overflow: visible;
+  max-width: 100%;
+  height: auto;
+  font-size: 16px !important;
+}
+/* foreignObject: full height + flexbox so label text is vertically centered */
+.markdown-content .mermaid-diagram foreignObject {
+  overflow: visible;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box;
+  padding: 0 !important;
+}
+.markdown-content .mermaid-diagram foreignObject body {
+  overflow: visible;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100% !important;
+  height: 100% !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+.markdown-content .mermaid-diagram foreignObject > div,
+.markdown-content .mermaid-diagram foreignObject body > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100% !important;
+  height: 100% !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+.markdown-content .mermaid-diagram foreignObject div:has(> .nodeLabel) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100% !important;
+  height: 100% !important;
+}
+/* Vertically center label via flex on foreignObject and .nodeLabel; no negative margin. */
+.markdown-content .mermaid-diagram .nodeLabel {
+  line-height: 1.15;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle;
+  box-sizing: border-box;
 }
 
 .markdown-content table {

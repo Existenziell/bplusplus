@@ -18,22 +18,17 @@ Atomic Swap:
 
 ### Process
 
-```text
-1. Alice creates HTLC on Bitcoin chain
-   - Locks BTC with hash lock
-   - Time lock for refund
-
-2. Bob creates HTLC on Litecoin chain
-   - Locks LTC with same hash
-   - Shorter time lock
-
-3. Alice reveals secret (preimage)
-   - Claims LTC from Bob's HTLC
-   - Reveals hash to Bob
-
-4. Bob uses secret to claim BTC
-   - Claims BTC from Alice's HTLC
-   - Swap complete
+```mermaid
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>Alice: Creates HTLC on Bitcoin (locks BTC, hash lock, time lock)
+  Bob->>Bob: Creates HTLC on Litecoin (same hash, shorter time lock)
+  Alice->>Bob: Reveals secret (preimage)
+  Alice->>Alice: Claims LTC from Bob HTLC
+  Bob->>Alice: Bob sees hash
+  Bob->>Alice: Claims BTC from Alice HTLC with secret
+  Note over Alice,Bob: Swap complete
 ```
 
 ### Safety

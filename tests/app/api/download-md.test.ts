@@ -92,6 +92,25 @@ describe('download-md API route', () => {
     expect(data.error).toBe('Path is required')
   })
 
+  it('strips Mermaid blocks from downloaded content', async () => {
+    const mockContent = '# Doc\n\n```mermaid\nflowchart TD\n  A[Root]\n  B[Child]\n  A --> B\n```\n\nText after.'
+    ;(getMarkdownForPath as any).mockReturnValue({
+      content: mockContent,
+      filename: 'doc.md',
+    })
+
+    const request = new NextRequest('http://localhost/api/download-md?path=/docs/doc')
+    const response = await GET(request)
+    const text = await response.text()
+
+    expect(response.status).toBe(200)
+    expect(text).toContain('# Doc')
+    expect(text).toContain('Text after.')
+    expect(text).not.toContain('```mermaid')
+    expect(text).not.toContain('flowchart TD')
+    expect(text).not.toContain('A[Root]')
+  })
+
   it('handles special characters in filename', async () => {
     const mockContent = '# Test'
     const mockFilename = 'test-file (1).md'

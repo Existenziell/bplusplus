@@ -17,6 +17,14 @@ When you spend bitcoin, the network executes both scripts together:
 2. **Locking script runs second** (verifies the data satisfies the conditions)
 3. **If the stack ends with `1` (true)**, the spend is valid
 
+```mermaid
+flowchart LR
+  Unlock[Unlocking script runs]
+  Lock[Locking script runs]
+  Result[Stack ends with 1 = valid]
+  Unlock --> Lock --> Result
+```
+
 Scripts execute on a stack ([LIFO](/docs/glossary#lifo-last-in-first-out)). They are intentionally not Turing-complete: no loops means every script terminates, preventing denial-of-service attacks. Fewer features also means fewer vulnerabilities. Build and run scripts in [Stack Lab](/stack-lab).
 
 ---
@@ -32,7 +40,7 @@ Scripts execute **when spending**, not when receiving. The locking script is sto
 Bitcoin Script has evolved over time, introducing new output types (address formats) that improve security, privacy, and efficiency. Each script type represents a different way to lock and unlock bitcoin.
 
 | Script Type | Full Name | Introduced | Block | BIP | Encoding | Prefix | Key Feature |
-|-------------|-----------|------------|-------|:---:|----------|--------|-------------|
+|-------------|-----------|------------|-------|-----|----------|--------|-------------|
 | **P2PK** | Pay&#8209;to&#8209;Pubkey | Jan 2009 | 0 | - | - | - | Earliest type. Locks directly to public key. No address format (raw pubkey in script). Rarely used today. |
 | **P2PKH** | Pay&#8209;to&#8209;Pubkey&#8209;Hash | Jan 2009 | 0 | - | [Base58](/docs/glossary#base58) | `1` | Original address type. Locks to hash of public key. More private than P2PK. |
 | **P2MS** | Pay&#8209;to&#8209;Multisig | Jan 2009 | 0 | - | - | - | Bare [multisig](/docs/glossary#multisig-multi-signature) (m-of-n). No address format. Limited to 3 keys for standardness. Superseded by P2SH. |

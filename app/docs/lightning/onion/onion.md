@@ -25,15 +25,13 @@ Lightning uses the Sphinx protocol (adapted from Tor's design) for payment routi
 3. **Final hop**: Receives payment details and claims HTLC
 4. **Response**: Preimage propagates back through same path
 
-```text
-Onion Packet Structure:
-┌─────────────────────────────────────┐
-│ Version (1 byte)                    │
-│ Public Key (33 bytes)               │
-│ Encrypted Payload (1300 bytes)      │
-│ HMAC (32 bytes)                     │
-└─────────────────────────────────────┘
-Total: 1366 bytes
+```mermaid
+flowchart TD
+  Onion[Onion Packet Structure - 1366 bytes]
+  Onion --> Ver[Version 1 byte]
+  Onion --> PK[Public Key 33 bytes]
+  Onion --> Payload[Encrypted Payload 1300 bytes]
+  Onion --> HMAC[HMAC 32 bytes]
 ```
 
 ---

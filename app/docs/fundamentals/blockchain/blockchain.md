@@ -15,28 +15,29 @@ Unlike a traditional database where records can be modified or deleted, the bloc
 
 Each block in Bitcoin contains a header with several fields, including a critical reference to the previous block:
 
-```
-Block Header Structure:
-├── Version (4 bytes)
-├── Previous Block Hash (32 bytes) ← Links to previous block
-├── Merkle Root (32 bytes)
-├── Timestamp (4 bytes)
-├── Difficulty Target (4 bytes)
-└── Nonce (4 bytes)
+```mermaid
+flowchart TD
+  BH[Block Header Structure]
+  BH --> V["Version (4 bytes)"]
+  BH --> Prev["Previous Block Hash (32 bytes) - links to previous block"]
+  BH --> MR["Merkle Root (32 bytes)"]
+  BH --> TS["Timestamp (4 bytes)"]
+  BH --> Diff["Difficulty Target (4 bytes)"]
+  BH --> Nonce["Nonce (4 bytes)"]
 ```
 
 The **Previous Block Hash** field is what creates the chain. Each block contains the hash of the previous block's header, creating an unbreakable link:
 
-```
-Block 0 (Genesis)
-    ↓ (hash: 000000000019d6...)
-Block 1
-    ↓ (hash: 00000000839a8e...)
-Block 2
-    ↓ (hash: 000000006a625f...)
-Block 3
-    ↓
-...
+```mermaid
+flowchart LR
+  B0[Block 0 Genesis]
+  B1[Block 1]
+  B2[Block 2]
+  B3[Block 3]
+  B0 -->|"hash: 000000000019d6..."| B1
+  B1 -->|"hash: 00000000839a8e..."| B2
+  B2 -->|"hash: 000000006a625f..."| B3
+  B3 --> More[...]
 ```
 
 ### How Hash Linking Works

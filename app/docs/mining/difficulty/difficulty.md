@@ -22,6 +22,18 @@ Where:
 - **If blocks were mined too slow** (more than 2 weeks): Difficulty decreases
 - **Maximum adjustment**: ±4x per period (prevents extreme swings)
 
+```mermaid
+flowchart LR
+  Actual[Actual time for 2016 blocks]
+  Target[Target: 2 weeks]
+  Compare[Compare actual vs target]
+  NewDiff[Compute new difficulty]
+  Next[Next 2016 blocks]
+  Actual --> Compare
+  Target --> Compare
+  Compare --> NewDiff --> Next
+```
+
 ---
 
 ## Why Difficulty Adjustment Exists

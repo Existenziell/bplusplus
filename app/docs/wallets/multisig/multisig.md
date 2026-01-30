@@ -8,6 +8,19 @@ Multi-signature (multisig) wallets require multiple signatures to spend funds. T
 
 Common configurations: **2-of-2** (two parties must both sign, e.g. partnership), **2-of-3** (two of three parties must sign, e.g. backup key), **3-of-5** (three of five, e.g. corporate), or flexible **M-of-N**.
 
+```mermaid
+sequenceDiagram
+  participant Creator
+  participant Signer1
+  participant Signer2
+  participant Combiner
+  Creator->>Signer1: Unsigned PSBT
+  Signer1->>Signer2: Partially signed
+  Signer2->>Combiner: Partially signed
+  Combiner->>Combiner: Combine signatures
+  Combiner->>Creator: Final transaction broadcast
+```
+
 ---
 
 ## Multisig Script Patterns

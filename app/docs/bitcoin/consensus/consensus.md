@@ -45,6 +45,18 @@ The elegant solution combines cryptographic proof (making fraud detectable) with
 - The current state of the blockchain (who owns what)
 - Which blocks form the canonical chain
 
+```mermaid
+flowchart TD
+  Receive[Receive block]
+  Validate[Validate block]
+  Longer[Longer chain?]
+  Append[Append to chain]
+  Orphan[Orphan block]
+  Receive --> Validate --> Longer
+  Longer -->|Yes| Append
+  Longer -->|No| Orphan
+```
+
 ---
 
 ## How Bitcoin Achieves Consensus

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getMarkdownForPath } from '@/app/utils/getMarkdownForPath'
+import { stripMermaidBlocks } from '@/app/utils/markdownUtils'
 import mdContent from '@/public/data/md-content.json'
 
 const mdContentTyped = mdContent as Record<string, { content: string; filename: string }>
@@ -11,9 +12,10 @@ export async function GET(request: NextRequest) {
   const result = getMarkdownForPath(path, mdContentTyped)
 
   if ('content' in result) {
+    const content = stripMermaidBlocks(result.content)
     // Use custom filename if provided, otherwise use the default from the JSON
     const filename = customFilename || result.filename
-    return new NextResponse(result.content, {
+    return new NextResponse(content, {
       headers: {
         'Content-Type': 'text/markdown; charset=utf-8',
         'Content-Disposition': `attachment; filename="${filename}"`,

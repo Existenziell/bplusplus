@@ -19,14 +19,15 @@ Payment channels are the fundamental building block of the Lightning Network. Th
 - Broadcast to Bitcoin network
 - Wait for confirmation (typically 3-6 blocks)
 
-```text
-Opening Process:
-1. Alice and Bob agree to open channel
-2. Create funding transaction (2-of-2 multisig)
-3. Exchange initial commitment transactions
-4. Broadcast funding transaction
-5. Wait for confirmation
-6. Channel becomes active
+```mermaid
+flowchart LR
+  A1[Alice and Bob agree]
+  A2[Create funding tx 2-of-2 multisig]
+  A3[Exchange initial commitments]
+  A4[Broadcast funding tx]
+  A5[Wait for confirmation]
+  A6[Channel active]
+  A1 --> A2 --> A3 --> A4 --> A5 --> A6
 ```
 
 ### 2. Channel Active
@@ -37,15 +38,14 @@ Opening Process:
 - No blockchain transaction needed
 - Instant and free
 
-```text
-Update Process:
-1. Alice wants to send 10,000 sats to Bob
-2. Create new commitment transaction:
-   - Old: Alice 50,000, Bob 50,000
-   - New: Alice 40,000, Bob 60,000
-3. Exchange signatures on new commitments
-4. Exchange revocation secrets for old state
-5. Balance updated (off-chain)
+```mermaid
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>Bob: New commitment: Alice 40k, Bob 60k
+  Bob->>Alice: Signatures on new commitments
+  Alice->>Bob: Revocation secrets for old state
+  Note over Alice,Bob: Balance updated off-chain
 ```
 
 ### 3. Channel Closing
@@ -64,12 +64,14 @@ Update Process:
 
 Each commitment transaction represents the current channel state:
 
-```text
-Input: Funding transaction output (2-of-2 multisig)
-Outputs:
-  - Alice's balance (to_local or to_remote)
-  - Bob's balance (to_local or to_remote)
-  - Any pending HTLCs
+```mermaid
+flowchart TD
+  Commit[Commitment Transaction]
+  In[Input: Funding tx output 2-of-2 multisig]
+  Commit --> In
+  Commit --> O1[Alice balance to_local or to_remote]
+  Commit --> O2[Bob balance to_local or to_remote]
+  Commit --> O3[Any pending HTLCs]
 ```
 
 ### Asymmetric Commitments

@@ -23,6 +23,15 @@ The Merkle root is stored in the block header, providing a compact commitment to
 3. **Repeat**: Continue until single root hash
 4. **Store root**: Root hash goes in block header
 
+```mermaid
+flowchart TD
+  Tx[Hash each transaction]
+  Pair[Pair and hash]
+  Repeat[Repeat until one hash]
+  Root[Merkle root in block header]
+  Tx --> Pair --> Repeat --> Root
+```
+
 ### Verification
 
 To prove transaction inclusion:
@@ -246,19 +255,22 @@ SPV Client:
 
 ### Merkle Proof
 
-```text
-To prove Tx2 is in block:
-├── Hash of Tx2 (leaf)
-├── Hash of Tx1 (sibling)
-├── Hash CD (parent sibling)
-└── Root hash (from block header)
+```mermaid
+flowchart LR
+  Tx2[Hash of Tx2 leaf]
+  Tx1[Hash of Tx1 sibling]
+  CD[Hash CD parent sibling]
+  Root[Root hash from block header]
+  Tx2 --> Tx1
+  Tx1 --> CD
+  CD --> Root
+```
 
 Verification:
 1. Hash(Tx2) = leaf hash
 2. Hash(Hash(Tx1) + Hash(Tx2)) = Hash AB
 3. Hash(Hash AB + Hash CD) = Root
 4. Root matches block header ✓
-```
 
 ---
 
@@ -266,14 +278,15 @@ Verification:
 
 Merkle root is stored in block header:
 
-```text
-Block Header (80 bytes):
-├── Version (4 bytes)
-├── Previous Block Hash (32 bytes)
-├── Merkle Root (32 bytes) ← Merkle tree root
-├── Timestamp (4 bytes)
-├── Difficulty Target (4 bytes)
-└── Nonce (4 bytes)
+```mermaid
+flowchart TD
+  BH[Block Header 80 bytes]
+  BH --> V["Version (4 bytes)"]
+  BH --> Prev["Previous Block Hash (32 bytes)"]
+  BH --> MR["Merkle Root (32 bytes) - Merkle tree root"]
+  BH --> TS["Timestamp (4 bytes)"]
+  BH --> Diff["Difficulty Target (4 bytes)"]
+  BH --> Nonce["Nonce (4 bytes)"]
 ```
 
 ---

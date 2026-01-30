@@ -24,6 +24,18 @@ HTLC Conditions:
 5. **Preimage propagates back**: Each hop claims their incoming HTLC
 6. **Settlement complete**: All HTLCs resolved atomically
 
+```mermaid
+sequenceDiagram
+  participant Sender
+  participant Hop
+  participant Recipient
+  Sender->>Hop: Create HTLC with hash
+  Hop->>Recipient: Create HTLC with same hash
+  Recipient->>Recipient: Reveal preimage to claim
+  Recipient->>Hop: Preimage propagates back
+  Hop->>Sender: Settle HTLCs
+```
+
 ### Example Route
 
 ```text

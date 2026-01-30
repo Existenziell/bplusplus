@@ -249,20 +249,22 @@ function createCSVScript(relativeBlocks, pubkeyHash) {
 
 Transaction-level absolute timelock:
 
-```text
-Transaction:
-├── nLockTime: Block height or timestamp
-└── nSequence: Must be < 0xFFFFFFFF for nLockTime to work
+```mermaid
+flowchart TD
+  Tx[Transaction]
+  Tx --> Lock[nLockTime: Block height or timestamp]
+  Tx --> Seq["nSequence: Must be < 0xFFFFFFFF for nLockTime to work"]
 ```
 
 ### nSequence
 
 Transaction-level relative timelock (when used with CSV):
 
-```text
-Transaction:
-├── nSequence: Relative locktime value
-└── Script: OP_CHECKSEQUENCEVERIFY
+```mermaid
+flowchart TD
+  Tx[Transaction]
+  Tx --> Seq[nSequence: Relative locktime value]
+  Tx --> Script[Script: OP_CHECKSEQUENCEVERIFY]
 ```
 
 ---
@@ -291,16 +293,17 @@ Transaction:
 
 Lightning uses timelocks for HTLCs:
 
-```text
-HTLC Structure:
-├── Hash lock: Reveal preimage
-└── Time lock: Refund if not claimed
+```mermaid
+flowchart TD
+  HTLC[HTLC Structure]
+  HTLC --> Hash[Hash lock: Reveal preimage]
+  HTLC --> Time[Time lock: Refund if not claimed]
+```
 
 Timelock ensures:
 - Payments don't get stuck forever
 - Refunds are possible
 - Routing nodes have time to respond
-```
 
 ### Channel Timelocks
 

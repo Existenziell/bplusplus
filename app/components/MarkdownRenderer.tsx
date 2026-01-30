@@ -6,8 +6,10 @@ import type { Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
+import { visit } from 'unist-util-visit'
 import Link from 'next/link'
 import CodeBlock, { MultiLanguageCodeBlock } from '@/app/components/CodeBlock'
+import MermaidDiagram from '@/app/components/MermaidDiagram'
 import DenominationCalculator from '@/app/components/DenominationCalculator'
 import GlossaryTooltip from '@/app/components/GlossaryTooltip'
 import { ChevronDown, ExternalLinkIcon } from '@/app/components/Icons'
@@ -63,6 +65,18 @@ function parseVideoGroups(content: string): { processedContent: string; videoGro
   })
 
   return { processedContent, videoGroups }
+}
+
+function parseMermaidDiagrams(content: string): { processedContent: string; mermaidDiagrams: { id: string; source: string }[] } {
+  const mermaidDiagrams: { id: string; source: string }[] = []
+  let counter = 0
+  const regex = /```mermaid\s*\n([\s\S]*?)```/g
+  const processedContent = content.replace(regex, (_, source) => {
+    const id = `mermaid-${counter++}`
+    mermaidDiagrams.push({ id, source: source.trim() })
+    return `<div data-mermaid-id="${id}"></div>`
+  })
+  return { processedContent, mermaidDiagrams }
 }
 
 function parseCodeGroups(content: string): { processedContent: string; codeGroups: CodeGroupBlock[] } {
@@ -197,8 +211,24 @@ function YouTubeEmbed({
 
 // Memoize plugin arrays at module level to prevent recreation
 const remarkPlugins = [remarkGfm]
-// rehype-highlight runs at BUILD TIME for static pages (not runtime) - this is optimal
-const rehypePlugins = [rehypeRaw, rehypeHighlight]
+
+// Mark mermaid code blocks as no-highlight so rehype-highlight skips them (we render as diagrams)
+function rehypeMermaidNoHighlight() {
+  return (tree: Parameters<typeof visit>[0]) => {
+    visit(tree, 'element', (node: { tagName?: string; properties?: { className?: unknown[] } }, _index, parent: { type?: string; tagName?: string } | null) => {
+      if (node.tagName !== 'code' || !parent || parent.type !== 'element' || parent.tagName !== 'pre') return
+      const classes = node.properties?.className
+      if (!Array.isArray(classes)) return
+      const hasMermaid = classes.some((c: unknown) => String(c).startsWith('language-') && String(c).slice(9) === 'mermaid')
+      if (hasMermaid) {
+        node.properties = node.properties || {}
+        node.properties.className = [...classes, 'no-highlight']
+      }
+    })
+  }
+}
+
+const rehypePlugins = [rehypeRaw, rehypeMermaidNoHighlight, rehypeHighlight]
 
 // any ok: react-markdown internals, we pass props through
 const createHeading = (level: number) => {
@@ -221,19 +251,25 @@ const createHeading = (level: number) => {
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   const { glossaryData, isLoading: glossaryLoading } = useGlossary()
 
-  // Memoize code/video group and denomination calculator parsing (expensive)
-  const { processedContent, codeGroupMap, videoGroupMap } = useMemo(() => {
-    const { processedContent: afterCode, codeGroups } = parseCodeGroups(content)
+  // Memoize mermaid/code/video group and denomination calculator parsing (expensive)
+  const { processedContent, codeGroupMap, videoGroupMap, mermaidDiagramMap } = useMemo(() => {
+    const { processedContent: afterMermaid, mermaidDiagrams } = parseMermaidDiagrams(content)
+    const { processedContent: afterCode, codeGroups } = parseCodeGroups(afterMermaid)
     const { processedContent: afterVideo, videoGroups } = parseVideoGroups(afterCode)
     const finalContent = parseDenominationCalculator(afterVideo)
     const codeGroupMap = new Map(codeGroups.map(g => [g.id, g]))
     const videoGroupMap = new Map(videoGroups.map(g => [g.id, g]))
-    return { processedContent: finalContent, codeGroupMap, videoGroupMap }
+    const mermaidDiagramMap = new Map(mermaidDiagrams.map(d => [d.id, d.source]))
+    return { processedContent: finalContent, codeGroupMap, videoGroupMap, mermaidDiagramMap }
   }, [content])
 
   // Memoize components; any ok for react-markdown pass-through
   const components = useMemo<Components>(() => ({
     div: ({ node, children, ...props }: any) => {
+      const mermaidId = props['data-mermaid-id']
+      if (mermaidId && mermaidDiagramMap.has(mermaidId)) {
+        return <MermaidDiagram source={mermaidDiagramMap.get(mermaidId)!} />
+      }
       const codeGroupId = props['data-code-group-id']
       if (codeGroupId && codeGroupMap.has(codeGroupId)) {
         const group = codeGroupMap.get(codeGroupId)!
@@ -406,11 +442,19 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         const className = (codeElement.props as { className?: string })?.className || ''
         const match = /language-(\w+)/.exec(className)
         const language = match ? match[1] : ''
+        const codeChildren = (codeElement.props as { children?: React.ReactNode })?.children
+        const raw = codeChildren != null ? (typeof codeChildren === 'string' ? codeChildren : extractText(codeChildren)) : ''
+        const source = typeof raw === 'string' ? raw : ''
+        const looksLikeMermaid = /^\s*(flowchart|sequenceDiagram|graph|stateDiagram|classDiagram|erDiagram|journey|gantt|pie|requirement)/m.test(source)
+
+        if (language === 'mermaid' || looksLikeMermaid) {
+          return <MermaidDiagram source={source} />
+        }
 
         // CodeBlock to avoid pre-in-p
         return (
           <CodeBlock language={language} className={className} {...props}>
-            {(codeElement.props as { children?: React.ReactNode })?.children}
+            {codeChildren}
           </CodeBlock>
         )
       }
@@ -426,7 +470,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       // eslint-disable-next-line @next/next/no-img-element -- dynamic markdown content
       <img src={src} alt={alt} className="max-w-full h-auto my-4" {...props} />
     ),
-  }), [codeGroupMap, videoGroupMap, glossaryData, glossaryLoading])
+  }), [codeGroupMap, videoGroupMap, mermaidDiagramMap, glossaryData, glossaryLoading])
 
   return (
     <div className="markdown-content prose dark:prose-invert max-w-none">

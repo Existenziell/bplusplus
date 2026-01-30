@@ -24,20 +24,22 @@ Anchor outputs solve this by:
 2. Adding small "anchor" outputs that either party can spend
 3. Using CPFP (Child Pays for Parent) to boost fees at broadcast time
 
-```text
-Commitment Transaction (with anchors):
-├── Input: Funding output
-├── Output 1: to_local (your balance)
-├── Output 2: to_remote (peer's balance)
-├── Output 3: Alice's anchor (330 sats)
-├── Output 4: Bob's anchor (330 sats)
-└── Fee: Minimum (1 sat/vB)
-
-Fee Bumping:
-├── Child Transaction
-│   ├── Input: Anchor output (330 sats)
-│   ├── Input: Your UTXO (for fee payment)
-│   └── Fee: Whatever needed for confirmation
+```mermaid
+flowchart TD
+  subgraph commitBlock [Commitment Transaction with anchors]
+    In[Input: Funding output]
+    O1[Output 1: to_local]
+    O2[Output 2: to_remote]
+    O3[Output 3: Alice anchor 330 sats]
+    O4[Output 4: Bob anchor 330 sats]
+    Fee[Fee: Minimum 1 sat/vB]
+  end
+  subgraph bumpBlock [Fee Bumping]
+    Child[Child Transaction]
+    Child --> AIn[Input: Anchor output 330 sats]
+    Child --> UIn[Input: Your UTXO for fee]
+    Child --> CFee[Fee: Whatever needed]
+  end
 ```
 
 ---

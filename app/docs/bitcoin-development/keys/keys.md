@@ -13,19 +13,25 @@ Hierarchical Deterministic (HD) wallets generate an entire tree of keys from a s
 
 ### Key Derivation
 
-```
-Master Seed
-    └── Master Key (m)
-        ├── Account 0 (m/44'/0'/0')
-        │   ├── External Chain (m/44'/0'/0'/0)
-        │   │   ├── Address 0 (m/44'/0'/0'/0/0)
-        │   │   ├── Address 1 (m/44'/0'/0'/0/1)
-        │   │   └── ...
-        │   └── Internal Chain (m/44'/0'/0'/1)
-        │       ├── Change 0 (m/44'/0'/0'/1/0)
-        │       └── ...
-        └── Account 1 (m/44'/0'/1')
-            └── ...
+```mermaid
+flowchart TD
+  MS[Master Seed]
+  MK[Master Key m]
+  A0["Account 0 (m/44'/0'/0')"]
+  A1["Account 1 (m/44'/0'/1')"]
+  Ext["External Chain (m/44'/0'/0'/0)"]
+  Int["Internal Chain (m/44'/0'/0'/1)"]
+  Addr0["Address 0 (m/44'/0'/0'/0/0)"]
+  Addr1["Address 1 (m/44'/0'/0'/0/1)"]
+  Ch0["Change 0 (m/44'/0'/0'/1/0)"]
+  MS --> MK
+  MK --> A0
+  MK --> A1
+  A0 --> Ext
+  A0 --> Int
+  Ext --> Addr0
+  Ext --> Addr1
+  Int --> Ch0
 ```
 
 ### HD Wallet Implementation

@@ -121,18 +121,18 @@ export default function LiveStats() {
   const StatCard = memo(({ stat }: { stat: StatItem }) => {
     const content = (
       <>
-        <div className="text-lg md:text-xl font-bold text-btc min-h-[2rem] flex items-center justify-center" aria-live="polite" aria-atomic="true">
+        <span className="block text-lg md:text-xl font-bold text-btc min-h-[2rem] flex items-center justify-center" aria-live="polite" aria-atomic="true">
           {loading && !stat.value ? (
-            <span className="animate-pulse text-gray-400" aria-label="Loading">...</span>
+            <span className="animate-pulse text-gray-400">...</span>
           ) : stat.value ? (
             stat.value
           ) : (
-            <span className="text-gray-400" aria-label="No data available">—</span>
+            <span className="text-gray-400">—</span>
           )}
-        </div>
-        <div className="text-xs text-secondary group-hover:text-btc transition-colors">
+        </span>
+        <span className="block text-xs text-secondary group-hover:text-btc transition-colors">
           {stat.label}
-        </div>
+        </span>
       </>
     )
 

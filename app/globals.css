@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  font-family: var(--font-ubuntu), sans-serif;
+  font-family: var(--font-ubuntu, "Ubuntu"), "sans-serif";
 }
 
 @layer base {

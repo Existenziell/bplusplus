@@ -13,7 +13,7 @@ const LIGHT_THEME = {
   primaryTextColor: '#111827',
   primaryBorderColor: '#e5e7eb',
   lineColor: '#4b5563',
-  fontFamily: 'Ubuntu, sans-serif',
+  fontFamily: '"Ubuntu", "sans-serif"',
   fontSize: '16px',
 }
 
@@ -23,7 +23,7 @@ const DARK_THEME = {
   primaryTextColor: '#e5e7eb',
   primaryBorderColor: '#374151',
   lineColor: '#9ca3af',
-  fontFamily: 'Ubuntu, sans-serif',
+  fontFamily: '"Ubuntu", "sans-serif"',
   fontSize: '16px',
 }
 
@@ -110,11 +110,11 @@ export default function MermaidDiagram({ source }: MermaidDiagramProps) {
           const html = el as HTMLElement
           if (html.style) {
             html.style.setProperty('font-size', '16px', 'important')
-            html.style.setProperty('font-family', 'Ubuntu, sans-serif', 'important')
+            html.style.setProperty('font-family', '"Ubuntu", "sans-serif"', 'important')
           }
           if (el instanceof SVGElement) {
             el.setAttribute('font-size', '16')
-            el.setAttribute('font-family', 'Ubuntu, sans-serif')
+            el.setAttribute('font-family', '"Ubuntu", "sans-serif"')
           }
         }
         root.querySelectorAll('.nodeLabel, .edgeLabel, .cluster-label, .label, [class*="label"], [class*="Label"]').forEach(setFont)

@@ -35,9 +35,7 @@ export default function Header() {
             {isHomePage ? (
               <h1 className={siteTitleClassName}>BitcoinDev</h1>
             ) : (
-              <span className={siteTitleClassName} aria-label="BitcoinDev">
-                BitcoinDev
-              </span>
+              <span className={siteTitleClassName}>BitcoinDev</span>
             )}
             <div className="flex-shrink-0 flex items-center gap-1">
                 <div 

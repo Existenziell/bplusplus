@@ -42,7 +42,6 @@ function FeedbackForm() {
             rows={5}
             placeholder="Your feedback..."
             className="input-panel w-full px-3 py-2 md:min-h-[20rem] resize-y"
-            aria-required="true"
           />
         </div>
 

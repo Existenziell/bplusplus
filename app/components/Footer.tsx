@@ -11,9 +11,9 @@ export default function Footer() {
         {/* 2-column layout: external resources (left), internal links (right) */}
         <div className='grid grid-cols-[1fr_auto_1fr] md:flex md:flex-row md:items-start gap-8 mb-8 relative'>
           <nav aria-label='External resources' className='w-full md:flex-1'>
-            <h3 className="heading-section-sm mb-3 text-center">
+            <h2 className="heading-section-sm mb-3 text-center">
               More Resources
-            </h3>
+            </h2>
             <ul className='flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-x-6 gap-y-1'>
               {footerLinksExternal.map((resource) => (
                 <li key={resource.name} className='text-center'>
@@ -35,9 +35,9 @@ export default function Footer() {
           {/* Vertical divider */}
           <div className='w-px bg-gray-200 dark:bg-gray-700 self-stretch' aria-hidden='true' />
           <nav aria-label='Site navigation' className='w-full md:flex-1'>
-            <h3 className="heading-section-sm mb-3 text-center">
+            <h2 className="heading-section-sm mb-3 text-center">
               Explore BitcoinDev
-            </h3>
+            </h2>
             <ul className='flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-x-6 gap-y-1'>
               {footerLinksExplore.map((link) => (
                 <li key={link.href} className='text-center'>

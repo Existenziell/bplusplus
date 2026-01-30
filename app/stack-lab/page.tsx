@@ -236,7 +236,7 @@ export default function StackLabPage() {
               className="w-full flex items-center justify-between text-left"
             >
               <div className="flex items-center gap-2">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">How Stack Lab Works</h3>
+                <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">How Stack Lab Works</h2>
               </div>
               <ChevronDown
                 className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform ${

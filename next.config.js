@@ -17,6 +17,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   reactStrictMode: true,
 
+  turbopack: {
+    root: __dirname,
+  },
+
   env: {
     // Used to version static JSON fetches so long-lived caching is safe across deploys.
     // Prefer provider-specific IDs when available.

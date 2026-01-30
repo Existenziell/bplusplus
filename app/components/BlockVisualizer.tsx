@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { bitcoinRpc } from '@/app/utils/bitcoinRpc'
 import {
   processMempoolBlockData,
@@ -71,6 +72,7 @@ export default function BlockVisualizer() {
   const initialCurrentBlockFetchedRef = useRef(false)
   const previousBlocksScrollRef = useRef<HTMLDivElement>(null)
   const [scrollIndicators, setScrollIndicators] = useState({ left: false, right: false })
+  const router = useRouter()
   const { showWarning: showMobileWarning, dismissed: mobileWarningDismissed, dismiss: handleDismissMobileWarning } = useMobileWarning('block-visualizer-mobile-warning-dismissed')
 
   const updateScrollIndicators = useCallback(() => {
@@ -263,41 +265,11 @@ export default function BlockVisualizer() {
     return () => ro.disconnect()
   }, [previousBlocks, updateScrollIndicators])
 
-  if (loading && !blockData) {
-    return (
-      <div className="w-full flex items-center justify-start py-12">
-        <div className="text-center">
-          <div className="animate-pulse text-btc text-lg mb-2">Loading block template...</div>
-          <div className="text-secondary text-sm">Fetching mempool from node</div>
-        </div>
-      </div>
-    )
-  }
-
-  if (error && !blockData) {
-    return (
-      <div className="w-full flex items-center justify-center py-12">
-        <div className="text-center">
-          <div className="text-red-600 dark:text-red-400 text-lg mb-2">Error</div>
-          <div className="text-secondary text-sm mb-4">{error}</div>
-          <button
-            onClick={() => fetchMempoolTemplate()}
-            className="btn-primary"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  if (!blockData) {
-    return null
-  }
+  if (!blockData && !loading && !error) return null
 
   return (
     <div className="relative">
-      {/* Mobile Warning Modal */}
+      {/* Mobile Warning Modal – shown first on mobile, before blocks load */}
       {showMobileWarning && !mobileWarningDismissed && (
         <div className="modal-overlay flex items-center justify-center p-4">
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
@@ -320,11 +292,43 @@ export default function BlockVisualizer() {
               >
                 Continue & Don&apos;t Show Again
               </button>
+              <button
+                onClick={() => router.back()}
+                className="btn-secondary-sm w-full"
+              >
+                Back
+              </button>
             </div>
           </div>
         </div>
       )}
 
+      {loading && !blockData && (
+        <div className="w-full flex items-center justify-start py-12">
+          <div className="text-center">
+            <div className="animate-pulse text-btc text-lg mb-2">Loading block template...</div>
+            <div className="text-secondary text-sm">Fetching mempool from node</div>
+          </div>
+        </div>
+      )}
+
+      {error && !blockData && (
+        <div className="w-full flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="text-red-600 dark:text-red-400 text-lg mb-2">Error</div>
+            <div className="text-secondary text-sm mb-4">{error}</div>
+            <button
+              onClick={() => fetchMempoolTemplate()}
+              className="btn-primary"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      )}
+
+      {blockData && (
+        <>
       {/* New block mined notification */}
       {showNewBlockNotification && newBlockHeight !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fadeIn">
@@ -501,6 +505,8 @@ export default function BlockVisualizer() {
           <div className="font-semibold mb-1">Warning</div>
           <div>{error}</div>
         </div>
+      )}
+        </>
       )}
     </div>
   )

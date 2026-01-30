@@ -72,9 +72,13 @@ export default function MermaidDiagram({ source }: MermaidDiagramProps) {
         containerRef.current.innerHTML = svg
         const svgEl = containerRef.current.querySelector('svg')
         if (svgEl && bindFunctions) bindFunctions(containerRef.current)
-        // Force single font size/family everywhere (mermaid uses 12px/14px/18px in different places
-        // and applies font-size with !important in inline styles, which overrides our CSS)
+        // Force single font size/family in every diagram (Mermaid uses diagram-type-specific sizes)
         const root = containerRef.current
+        if (svgEl) {
+          const style = document.createElementNS('http://www.w3.org/2000/svg', 'style')
+          style.textContent = `svg * { font-size: ${theme.fontSize} !important; font-family: ${theme.fontFamily} !important; }`
+          svgEl.insertBefore(style, svgEl.firstChild)
+        }
         const stripFontFromStyle = (el: Element) => {
           const html = el as HTMLElement
           if (html.style?.cssText) {
@@ -114,9 +118,9 @@ export default function MermaidDiagram({ source }: MermaidDiagramProps) {
           }
         }
         root.querySelectorAll('.nodeLabel, .edgeLabel, .cluster-label, .label, [class*="label"], [class*="Label"]').forEach(setFont)
-        root.querySelectorAll('foreignObject span, foreignObject div, foreignObject .nodeLabel, foreignObject .edgeLabel').forEach(setFont)
+        root.querySelectorAll('.actor, .messageText, .labelText, .loopText, .noteText, .section0, .section1, .section2, .pieCircle, .state-title, [class*="section"]').forEach(setFont)
+        root.querySelectorAll('foreignObject *').forEach(setFont)
         root.querySelectorAll('text').forEach(setFont)
-        // Set font on root SVG so all descendants inherit 16px
         if (svgEl) setFont(svgEl)
       } catch (err) {
         if (!cancelled) setError(err instanceof Error ? err.message : String(err))

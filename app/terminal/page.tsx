@@ -551,7 +551,7 @@ export default function TerminalPage() {
           onGoHome={() => router.push('/')}
         />
       )}
-       <h1 className="heading-page text-center mb-1">
+       <h1 className="heading-page text-center">
         Bitcoin CLI Terminal
       </h1>
       <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">

@@ -18,15 +18,15 @@ export default function MempoolPage() {
   return (
     <DocsLayoutWrapper defaultSidebarCollapsed={true}>
       <div className="mb-8">
-        <h1 className="heading-page mb-4">Block Visualizer (beta)</h1>
-        <p className="text-secondary max-w-3xl">
-          Explore the latest Bitcoin blocks and their transactions. 
-          Each rectangle represents a transaction, sized by vBytes or fee. 
-          Hover over transactions to see detailed information. Click on any transaction 
+        <h1 className="heading-page text-center">Block Visualizer (beta)</h1>
+        <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">
+          Explore the latest Bitcoin blocks and their transactions.
+          Each rectangle represents a transaction, sized by vBytes or fee.
+          Hover over transactions to see detailed information. Click on any transaction
           to view its inputs and outputs.
         </p>
-        <p className="text-secondary text-sm mt-2 max-w-3xl">
-          Observing <span className="font-semibold">Bitcoin mainnet</span> via PublicNode. 
+        <p className="text-secondary text-sm text-center max-w-2xl mx-auto">
+          Observing <span className="font-semibold">Bitcoin mainnet</span> via PublicNode.
           Blocks update automatically when new blocks are found (~10 minutes).
         </p>
       </div>

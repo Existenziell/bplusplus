@@ -201,7 +201,7 @@ export default function StackLabPage() {
   if (!isMounted) {
     return (
       <>
-        <h1 className="heading-page text-center mb-1">
+        <h1 className="heading-page text-center">
           Stack Lab
         </h1>
         <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">
@@ -214,7 +214,7 @@ export default function StackLabPage() {
 
   return (
     <>
-      <h1 className="heading-page text-center mb-1">
+      <h1 className="heading-page text-center">
         Stack Lab
       </h1>
       <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">

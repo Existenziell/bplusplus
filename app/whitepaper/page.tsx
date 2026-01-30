@@ -10,7 +10,7 @@ export default function WhitepaperPage() {
           Bitcoin Whitepaper
         </h1>
           {/* History */}
-          <p className="text-center text-sm text-secondary max-w-lg mx-auto leading-relaxed mt-4">
+          <p className="text-center text-sm text-secondary max-w-lg mx-auto leading-relaxed">
             Satoshi Nakamoto announced the whitepaper on the{' '}
             <a
               href="https://www.metzdowd.com/pipermail/cryptography/2008-October/014810.html"

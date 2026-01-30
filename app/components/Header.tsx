@@ -29,7 +29,7 @@ export default function Header() {
                 alt="BitcoinDev Logo"
                 width={100}
                 height={100}
-                className="opacity-80 dark:invert"
+                className="opacity-75 dark:invert hover:opacity-100 transition-opacity duration-200"
               />
             </Link>
             {isHomePage ? (

@@ -99,7 +99,7 @@ export default async function DocPage({ params }: PageProps) {
           <DownloadMarkdownButton />
         </div>
         <MarkdownRenderer content={entry.content} />
-        <div className="absolute -bottom-4 right-0 z-10 hidden md:block">
+        <div className="absolute -bottom-8 right-0 z-10 hidden md:block">
           <DownloadMarkdownButton />
         </div>
       </div>

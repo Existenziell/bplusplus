@@ -81,7 +81,7 @@ export default function TransactionTreemap({
   const [flyInOriginState, setFlyInOriginState] = useState<{ x: number; y: number } | null>(null)
   const hasInitializedRef = useRef(false)
   const prevAnimationTriggerRef = useRef<number | undefined>(animationTrigger)
-  /** Bottom-right origin (viewBox coords) at fly-in start; set when triggering so we use real layout size. */
+  /** Top-left origin (viewBox coords) at fly-in start; set when triggering so we use real layout size. */
   const flyInOriginRef = useRef<{ x: number; y: number } | null>(null)
 
   const sizeMetric = controlledSizeMetric ?? uncontrolledSizeMetric
@@ -144,9 +144,7 @@ export default function TransactionTreemap({
         requestAnimationFrame(startFlyIn)
         return
       }
-      const size = square ? Math.min(w, h) : w
-      const originY = square ? size : height
-      const origin = { x: size, y: originY }
+      const origin = { x: 0, y: 0 }
       flyInOriginRef.current = origin
       setFlyInOriginState(origin)
       setFlyInActive(true)
@@ -419,7 +417,7 @@ export default function TransactionTreemap({
           const rectHeight = node.y1 - node.y0
           const color = colorScale(getMetricValue(node.data))
           const isHovered = hoveredTx?.txid === node.data.txid
-          const origin = shouldHideForFlyIn && flyInOriginState ? flyInOriginState : { x: width, y: heightUsed }
+          const origin = shouldHideForFlyIn && flyInOriginState ? flyInOriginState : { x: 0, y: 0 }
           const fromTransform = `translate(${origin.x}px, ${origin.y}px) scale(0)`
           const toTransform = `translate(${node.x0}px, ${node.y0}px) scale(1)`
           const n = treemapNodes.length

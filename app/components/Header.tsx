@@ -2,15 +2,21 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import ThemeToggle from '@/app/components/ThemeToggle'
 import { SearchIcon } from '@/app/components/Icons'
 import { useStickyScroll } from '@/app/contexts/StickyScrollContext'
 import { useSearchModal } from '@/app/contexts/SearchModalContext'
 
+const siteTitleClassName =
+  'absolute left-1/2 -translate-x-1/2 pl-11 font-extrabold engraved text-6xl hidden lg:block pointer-events-none'
+
 export default function Header() {
+  const pathname = usePathname()
   const { isSticky, headerRef } = useStickyScroll()
   const { openSearch } = useSearchModal()
   const showSearchInHeader = !isSticky
+  const isHomePage = pathname === '/'
 
   return (
     <>
@@ -26,12 +32,13 @@ export default function Header() {
                 className="opacity-80 dark:invert"
               />
             </Link>
-            <span
-              className="absolute left-1/2 -translate-x-1/2 pl-11 font-extrabold engraved text-6xl hidden lg:block pointer-events-none"
-              aria-label="BitcoinDev"
-            >
-              BitcoinDev
-            </span>
+            {isHomePage ? (
+              <h1 className={siteTitleClassName}>BitcoinDev</h1>
+            ) : (
+              <span className={siteTitleClassName} aria-label="BitcoinDev">
+                BitcoinDev
+              </span>
+            )}
             <div className="flex-shrink-0 flex items-center gap-1">
                 <div 
                   className={`transition-all duration-200 will-change-transform ${

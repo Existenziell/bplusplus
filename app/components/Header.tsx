@@ -14,10 +14,10 @@ export default function Header() {
 
   return (
     <>
-      <header ref={headerRef} className="page-bg">
+      <header ref={headerRef} className="page-bg relative">
         <div className="container-content py-4">
-          <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-2" aria-label="BitcoinDev Home">
+          <div className="flex justify-between items-center relative">
+            <Link href="/" className="flex items-center gap-2 flex-shrink-0" aria-label="BitcoinDev Home">
               <Image
                 src="/icons/logo/logo.png"
                 alt="BitcoinDev Logo"
@@ -25,8 +25,14 @@ export default function Header() {
                 height={100}
                 className="opacity-80 dark:invert"
               />
-              </Link>
-              <div className="flex-shrink-0 flex items-center gap-1">
+            </Link>
+            <span
+              className="absolute left-1/2 -translate-x-1/2 font-extrabold engraved text-6xl hidden md:block pointer-events-none pt-4"
+              aria-label="BitcoinDev"
+            >
+              BitcoinDev
+            </span>
+            <div className="flex-shrink-0 flex items-center gap-1">
                 <div 
                   className={`transition-all duration-200 will-change-transform ${
                     showSearchInHeader 

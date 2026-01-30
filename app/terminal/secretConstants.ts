@@ -14,6 +14,9 @@ export const SECRET_TRIGGERS = [
   'xxx',
   'abracadabra',
   'simsalabim',
+  'exit',
+  'quit',
+  'shutdown',
 ]
 
 // System error messages for Easter egg

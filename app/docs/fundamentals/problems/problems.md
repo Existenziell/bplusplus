@@ -11,6 +11,21 @@ Before Bitcoin, decentralized digital currency faced seemingly insurmountable pr
 - **Byzantine failures:** Some participants may be malicious or send conflicting information
 - **Timing:** No synchronized clocks or central time source to order events (see [Bitcoin as Timechain](/docs/fundamentals/timechain) for how this is solved)
 
+| Problem | Traditional approach | Bitcoin |
+|---------|----------------------|--------|
+| Double-spend | Central authority (bank) verifies | Public blockchain; PoW; longest chain; first spend wins |
+| Byzantine / agreement | Trusted coordinator | Nakamoto consensus; economic incentives |
+| Timing / ordering | Central time source | Proof-of-work; block sequence as time |
+
+```mermaid
+flowchart LR
+  Problem[Double-spend / Byzantine]
+  BitcoinSol[Bitcoin solution]
+  PoW[Proof-of-Work]
+  Chain[Longest chain]
+  Problem --> BitcoinSol --> PoW --> Chain
+```
+
 ---
 
 ## The Double-Spending Problem

@@ -10,6 +10,16 @@ Bitcoin Improvement Proposals are the formal mechanism for proposing changes to 
 | **Informational** | Design issues, guidelines, or general information | BIP 2 (BIP Process) |
 | **Process** | Changes to the BIP process itself | BIP 1, BIP 2 |
 
+| Status | Meaning |
+|--------|---------|
+| **Draft** | Work in progress; not yet proposed for acceptance |
+| **Proposed** | Under review; may be widely adopted before Final |
+| **Final** | Accepted; included in consensus or widely deployed |
+| **Active** | Process/document BIPs that are in use (e.g. BIP 1, BIP 2) |
+| **Withdrawn / Replaced** | Superseded or abandoned |
+
+Anyone can submit a BIP; see [BIP 2](https://github.com/bitcoin/bips/blob/master/bip-0002.mediawiki) for the process.
+
 ---
 
 ## Consensus & Protocol BIPs

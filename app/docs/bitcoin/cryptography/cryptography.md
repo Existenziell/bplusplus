@@ -33,6 +33,33 @@ Bitcoin uses cryptography for three main purposes:
 2. **Integrity**: Ensuring data hasn't been tampered with
 3. **Proof-of-Work**: Securing the blockchain through computational work
 
+| Primitive | Purpose | Used in |
+|-----------|---------|---------|
+| **Hash (SHA-256, SHA256D)** | Integrity, commitments, PoW | Block hashes, TXIDs, Merkle trees, mining |
+| **ECDSA** | Signatures (legacy) | P2PKH, P2SH, pre-Taproot outputs |
+| **Schnorr (BIP 340)** | Signatures (Taproot) | P2TR outputs, signature aggregation |
+
+```mermaid
+flowchart LR
+  subgraph Sign[Sign]
+    PK1[Private key]
+    Msg1[Message]
+    Sig[Signature]
+    PK1 --> Sig
+    Msg1 --> Sig
+  end
+  subgraph Verify[Verify]
+    Sig2[Signature]
+    Msg2[Message]
+    Pub[Public key]
+    Result[Valid or Invalid]
+    Sig2 --> Result
+    Msg2 --> Result
+    Pub --> Result
+  end
+  Sign --> Verify
+```
+
 ---
 
 ## Hash Functions

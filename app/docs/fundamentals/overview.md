@@ -36,6 +36,27 @@ Bitcoin consists of several key components that work together to create a decent
 
 **Economic Rules:** The [subsidy equation](/docs/bitcoin/subsidy) mathematically guarantees Bitcoin's fixed supply, creating a predictable monetary policy that approaches 21 million coins.
 
+| Component | Purpose |
+|-----------|---------|
+| [Blockchain](/docs/fundamentals/blockchain) | Distributed ledger; cryptographically linked blocks; immutable, verifiable history |
+| [Cryptography](/docs/bitcoin/cryptography) | Digital signatures, hashes; ownership and integrity without trust |
+| [Consensus](/docs/bitcoin/consensus) | Nodes agree on transaction history via proof-of-work; no central coordinator |
+| [Script](/docs/bitcoin/script) | Spending conditions; multisig, timelocks, smart contracts |
+| [OP Codes](/docs/bitcoin/op-codes) | Instruction set for Script; validation and program execution |
+| [Blocks](/docs/bitcoin/blocks) | Units of the ledger; Merkle trees for efficient verification |
+| [Subsidy](/docs/bitcoin/subsidy) | Fixed supply; predictable monetary policy toward 21 million |
+
+```mermaid
+flowchart LR
+  Wallet[User / Wallet]
+  Tx[Transaction]
+  Mempool[Mempool]
+  Miner[Miner]
+  Block[Block]
+  Chain[Chain]
+  Wallet --> Tx --> Mempool --> Miner --> Block --> Chain
+```
+
 ---
 
 ## Technical Innovation

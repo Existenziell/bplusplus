@@ -458,7 +458,7 @@
     "path": "/docs/bitcoin/rpc",
     "title": "RPC Commands",
     "section": "bitcoin",
-    "body": "RPC Commands Reference This document provides a guide for interacting with your Bitcoin node using both curl and bitcoin-cli commands via RPC. Try it live! Test these commands directly in the Bitcoin CLI Terminal. Connected to mainnet, no setup required. RPC Configuration bitcoin.conf Setup Add these settings to your bitcoin.conf file: RPC Server Settings server=1 rpcuser=your_username rpcpassword=your_secure_password rpcport=8332 Restrict RPC to localhost (recommended) rpcbind=127.0.0.1 ",
+    "body": "RPC Commands Reference This document provides a guide for interacting with your Bitcoin node using both curl and bitcoin-cli commands via RPC. Try it live! Test these commands directly in the Bitcoin CLI Terminal. Connected to mainnet, no setup required. | Command | Purpose | |---------|---------| | getblockchaininfo | Chain tip, verification progress, network name | | getblock | Block data by hash or verbosity | | getblockhash | Block hash by height | | getrawtransaction | Transaction hex or ",
     "keywords": [
       "rpc",
       "remote procedure call",
@@ -691,7 +691,7 @@
     "path": "/docs/development",
     "title": "Setup & Infrastructure",
     "section": "development",
-    "body": "Setup & Infrastructure This section covers the setup and infrastructure needed for Bitcoin development: installing Bitcoin Core, testing and debugging, working with test networks, choosing libraries, understanding node architecture, and exploring Bitcoin Core internals. Hands-on learning: Try Bitcoin RPC commands directly in the Bitcoin CLI Terminal. No node setup required. Programming Languages in Bitcoin C++ (Bitcoin Core) The reference implementation of Bitcoin is written in C++. Used for: "
+    "body": "Setup & Infrastructure This section covers the setup and infrastructure needed for Bitcoin development: installing Bitcoin Core, testing and debugging, working with test networks, choosing libraries, understanding node architecture, and exploring Bitcoin Core internals. Hands-on learning: Try Bitcoin RPC commands directly in the Bitcoin CLI Terminal. No node setup required. | Topic | Page | |-------|------| | Installing Bitcoin | Install Bitcoin | | Testing & debugging | Testing | | Test "
   },
   {
     "path": "/docs/development/install-bitcoin",
@@ -901,7 +901,7 @@
     "path": "/docs/advanced/bloom-filters",
     "title": "Bloom Filters",
     "section": "advanced",
-    "body": "Bloom Filters Bloom filters are a probabilistic data structure used by SPV (Simplified Payment Verification) clients to request relevant transactions from full nodes without revealing exactly which addresses they're interested in. Bloom filters allow SPV clients to: Request transactions: Without revealing addresses Privacy: Partial privacy protection Efficiency: Compact representation False positives: Possible but manageable How Bloom Filters Work Construction Add addresses to filter Hash "
+    "body": "Bloom Filters Bloom filters are a probabilistic data structure used by SPV (Simplified Payment Verification) clients to request relevant transactions from full nodes without revealing exactly which addresses they're interested in. Bloom filters allow SPV clients to: Request transactions: Without revealing addresses Privacy: Partial privacy protection Efficiency: Compact representation False positives: Possible but manageable sequenceDiagram participant SPV as SPV client participant Node as Full "
   },
   {
     "path": "/docs/advanced/zero-conf-channels",

@@ -59,6 +59,12 @@ to get both one-off templates and more flexible, multi-step covenant flows.
 
 ## Status
 
+| Covenant | In consensus? | Proposal |
+|----------|----------------|----------|
+| **OP_CTV** | No | BIP 119; discussion on [bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev) |
+| **SIGHASH_ANYPREVOUT (APO)** | No | Active design; would enable reusable signatures and covenant-like behavior |
+| **OP_CAT** | No (disabled) | Re-enable or constrained variants discussed |
+
 As of this writing:
 
 - **OP_CTV**: BIP 119 exists; no [soft fork](/docs/glossary#soft-fork) has been adopted. Discussion continues on [bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).

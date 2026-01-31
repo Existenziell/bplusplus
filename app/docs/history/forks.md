@@ -28,6 +28,22 @@ A **hard fork** **loosens** the consensus rules (or changes them incompatibly). 
 
 **Example**: Bitcoin Cash increased the [block size](/docs/glossary#block-size) limit from 1 MB to 8 MB. Old nodes reject these larger blocks as invalid, guaranteeing a chain split.
 
+```mermaid
+flowchart LR
+  subgraph SoftFork [Soft fork]
+    A1[Old block]
+    A2[New block valid under both]
+    A1 --> A2
+  end
+  subgraph HardFork [Hard fork]
+    B1[Old chain]
+    B2[Chain A]
+    B3[Chain B]
+    B1 --> B2
+    B1 --> B3
+  end
+```
+
 ---
 
 ## Complete Fork History Table

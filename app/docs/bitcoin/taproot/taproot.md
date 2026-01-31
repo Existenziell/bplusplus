@@ -17,7 +17,7 @@ Taproot is a major Bitcoin protocol upgrade activated in November 2021 (block 70
 Schnorr signatures replace ECDSA for Taproot outputs:
 
 **Benefits**:
-- **Linear**: Enables signature aggregation (MuSig)
+- **Linear**: Enables signature aggregation ([MuSig](https://github.com/bitcoin/bips/blob/master/bip-0327.mediawiki): multiple signers produce a single Schnorr signature for a combined key; see BIP 327 for MuSig2)
 - **Smaller**: 64 bytes vs 71-72 bytes for ECDSA
 - **Batch verification**: Verify multiple signatures faster
 - **Proven security**: Simpler mathematics, better understood

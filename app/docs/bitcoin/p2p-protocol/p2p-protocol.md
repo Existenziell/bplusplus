@@ -47,6 +47,16 @@ Nodes establish connections through a handshake:
 3. Connection established
 ```
 
+```mermaid
+sequenceDiagram
+  participant A as Node A
+  participant B as Node B
+  A->>B: version
+  B->>A: verack
+  A->>B: verack
+  Note over A,B: getblocks / inv / getdata follow
+```
+
 ### Core Messages
 
 | Message | Purpose |

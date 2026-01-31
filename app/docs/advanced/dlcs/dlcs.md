@@ -37,6 +37,21 @@ Adaptor Signature:
 
 ## Use Cases
 
+### Sports Bet (Concrete Example)
+
+Two parties create a DLC: "Team A wins" vs "Team B wins." An oracle attests to the match result. The contract settles automatically: the winner's key can spend the funds; the loser's key cannot. No on-chain reveal of the bet amount or teams until settlement.
+
+```mermaid
+sequenceDiagram
+  participant A as Party A
+  participant B as Party B
+  participant O as Oracle
+  A->>B: Create DLC (terms + adaptor sigs)
+  B->>A: Sign contract
+  O->>A: Attest outcome
+  A->>B: Settle (winner spends)
+```
+
 ### Prediction Markets
 
 ```text

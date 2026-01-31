@@ -70,6 +70,95 @@ A Miniscript policy is compiled down to [Script](/docs/bitcoin/script) (and thus
 
 Libraries such as `rust-miniscript` and `miniscript` (C++) (and the reference `miniscript` site) perform this compilation.
 
+### Code: Policy to Descriptor
+
+:::code-group
+```rust
+// Cargo: miniscript = "11", bitcoin = "0.32"
+use miniscript::policy::Concrete;
+use std::str::FromStr;
+
+fn policy_to_descriptor(policy_str: &str) -> Result<String, Box<dyn std::error::Error>> {
+    let policy = Concrete::<bitcoin::PublicKey>::from_str(policy_str)?;
+    let ms = policy.compile()?;
+    let desc = ms.to_string();
+    Ok(format!("wsh({})", desc))
+}
+
+fn main() {
+    // Simple policy: single key
+    let policy = "pk(0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798)";
+    match policy_to_descriptor(policy) {
+        Ok(desc) => println!("Descriptor: {}", desc),
+        Err(e) => eprintln!("Error: {}", e),
+    }
+}
+```
+
+```python
+# Policy-to-script compilation is typically done via rust-miniscript (e.g. in BDK).
+# This example shows the policy string and output shape; use bdk or the reference
+# miniscript.bitcoin.sipa.be API for full compilation.
+
+def policy_to_descriptor_usage():
+    policy = "pk(0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798)"
+    # In practice: use BDK's miniscript or call rust-miniscript
+    # descriptor = compile_policy(policy)  # e.g. wsh(pk(...))
+    return "Policy: " + policy + " -> compile to wsh(...) descriptor"
+```
+
+```cpp
+// Bitcoin Core has miniscript in src/script/miniscript.h
+// This illustrates the idea; use the actual Miniscript API in production.
+
+#include <script/miniscript.h>
+#include <string>
+
+std::string policy_to_descriptor(const std::string& policy_str) {
+    using namespace miniscript;
+    auto fragment = Miniscript::FromString(policy_str, CONVERTER);
+    if (!fragment) return "";
+    return "wsh(" + fragment->ToScript().ToString() + ")";
+}
+
+// Example: policy_to_descriptor("pk(0279be66...)") -> "wsh(...)"
+```
+
+```go
+// Miniscript compilation in Go is often done by calling rust-miniscript
+// or the reference compiler. This shows the policy and expected output.
+
+package main
+
+import "fmt"
+
+func policyToDescriptor(policy string) string {
+    // Use rust-miniscript bindings or external tool for real compilation.
+    // Policy e.g. "pk(0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798)"
+    return fmt.Sprintf("wsh(compiled from %s)", policy)
+}
+
+func main() {
+    policy := "pk(0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798)"
+    fmt.Println(policyToDescriptor(policy))
+}
+```
+
+```javascript
+// Miniscript compilation in JS is available via wasm (e.g. rust-miniscript)
+// or the reference miniscript.bitcoin.sipa.be. This shows the structure.
+
+function policyToDescriptor(policy) {
+  // In practice: use a wasm build of rust-miniscript or call reference API
+  // Policy e.g. "pk(0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798)"
+  return `wsh(compiled from ${policy})`;
+}
+
+const policy = "pk(0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798)";
+console.log(policyToDescriptor(policy));
+```
+:::
+
 ---
 
 ## Use Cases

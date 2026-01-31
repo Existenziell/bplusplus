@@ -9,6 +9,15 @@ Bloom filters are a probabilistic data structure used by SPV (Simplified Payment
 - **Efficiency**: Compact representation
 - **False positives**: Possible but manageable
 
+```mermaid
+sequenceDiagram
+  participant SPV as SPV client
+  participant Node as Full node
+  SPV->>Node: Bloom filter
+  Node->>Node: Filter transactions
+  Node->>SPV: Filtered blocks / matching txs
+```
+
 ---
 
 ## How Bloom Filters Work

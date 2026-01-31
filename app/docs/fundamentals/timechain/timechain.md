@@ -15,6 +15,12 @@ In any distributed system, especially one handling financial transactions, the o
 
 Traditional systems solve this with **centralized time sources**: banks use synchronized clocks, databases use timestamps from authoritative servers, and payment processors rely on trusted time services. But in a decentralized system, there is no central authority to provide trusted time.
 
+| Challenge | Traditional approach | Bitcoin |
+|-----------|----------------------|--------|
+| Order events | Central time server or synchronized clocks | Proof-of-work; block sequence as time |
+| Verify order | Trust authority | Longest chain; anyone can verify |
+| No central time | N/A (assumes central time) | Blocks as temporal units; ~10 min spacing |
+
 ---
 
 ## The Problem: No Synchronized Clocks

@@ -61,6 +61,8 @@ Draft → Proposed → Final → Withdrawn/Replaced
 - Or acceptance of chain split
 - Rarely used (Bitcoin Cash split)
 
+For the full history of Bitcoin upgrades (soft and hard forks), see [Forks](/docs/history/forks).
+
 ---
 
 ## Key Stakeholders

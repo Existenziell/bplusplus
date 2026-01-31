@@ -175,7 +175,7 @@ Bitcoin's security is fundamentally economic. Miners receive [block rewards](/do
 | **Temporary fork** | Two blocks found simultaneously | Next block determines winner |
 | **Stale block** | Valid block orphaned by longer chain | Transactions return to mempool |
 
-These situations are normal and resolve automatically. The longest chain rule ensures eventual consistency without human intervention: a critical property for a trustless system.
+These situations are normal and resolve automatically. The longest chain rule ensures eventual consistency without human intervention: a critical property for a trustless system. Protocol upgrades that change consensus rules are deployed via [soft forks](/docs/history/forks) (tightening rules) or [hard forks](/docs/history/forks) (loosening rules); see [Forks](/docs/history/forks) for Bitcoin's upgrade history.
 
 ---
 

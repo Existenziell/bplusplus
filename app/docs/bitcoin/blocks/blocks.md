@@ -30,6 +30,22 @@ When a miner finds a new block:
 7. **Your node validates**: Thoroughly checks the block
 8. **Your node forwards**: Sends to peers who haven't seen it yet
 
+| Step | Actor | Action |
+|------|-------|--------|
+| 1 | Miner | Solve PoW; build block from mempool |
+| 2 | Miner | Broadcast block to connected peers |
+| 3 | First-hop nodes | Validate block; forward to their peers |
+| 4 | Receiving node | Validate; forward to peers that have not seen it |
+
+```mermaid
+flowchart LR
+  Miner[Miner]
+  Peer1[First-hop peers]
+  Peer2[Second-hop peers]
+  Node[Your node]
+  Miner --> Peer1 --> Peer2 --> Node
+```
+
 ### 2. Gossip Protocol Mechanism
 
 **Key Rule**: Nodes never re-broadcast blocks back to the peer that sent them.

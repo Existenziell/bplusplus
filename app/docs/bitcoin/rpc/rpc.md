@@ -4,6 +4,25 @@ This document provides a guide for interacting with your Bitcoin node using both
 
 > **Try it live!** Test these commands directly in the [Bitcoin CLI Terminal](/terminal). Connected to mainnet, no setup required.
 
+| Command | Purpose |
+|---------|---------|
+| `getblockchaininfo` | Chain tip, verification progress, network name |
+| `getblock` | Block data by hash or verbosity |
+| `getblockhash` | Block hash by height |
+| `getrawtransaction` | Transaction hex or JSON (requires `txindex=1` for non-wallet txs) |
+| `sendrawtransaction` | Broadcast a signed transaction |
+| `estimatesmartfee` | Fee rate estimate for a target confirmation block count |
+| `getmempoolinfo` | Mempool size and fee stats |
+| `gettxout` | Check whether an output is spent; get scriptPubKey and value |
+
+```mermaid
+sequenceDiagram
+  participant Client
+  participant Core as Bitcoin Core RPC
+  Client->>Core: HTTP/JSON request
+  Core->>Client: JSON response
+```
+
 ---
 
 ## RPC Configuration

@@ -14,6 +14,17 @@ Every major Bitcoin controversy teaches us something about decentralized governa
 
 Understanding these battles is essential for anyone who wants to understand Bitcoin's culture and design philosophy.
 
+| Topic | Description | Link |
+|-------|--------------|------|
+| Blocksize Wars | Scaling debate; SegWit vs larger blocks; Bitcoin Cash fork | [Blocksize Wars](/docs/controversies/blocksize-wars) |
+| OP_RETURN | Data on Bitcoin; blockspace purpose | [OP_RETURN Debate](/docs/controversies/op-return) |
+| Ordinals | Inscriptions and BRC-20; fees and permissionlessness | [Ordinals](/docs/controversies/ordinals) |
+| Energy consumption | Proof-of-work and environmental criticism | [Energy](/docs/controversies/energy-consumption) |
+| Criminal use | Bitcoin and illicit activity | [Criminal Use](/docs/controversies/criminal-use) |
+| ETF rejections | SEC rejections (2017-2023) and 2024 approvals | [ETF Rejections](/docs/controversies/etf-rejections) |
+| Mt. Gox | Exchange collapse; "not your keys, not your coins" | [Mt. Gox](/docs/controversies/mt-gox) |
+| Craig Wright | "Faketoshi" claims; UK court ruling | [Craig Wright](/docs/controversies/craig-wright) |
+
 ---
 
 ## The Nature of Bitcoin Debates

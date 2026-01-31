@@ -9,6 +9,14 @@ Bitcoin didn't emerge from a vacuum. It was born from a decades-long movement of
 
 The cypherpunk movement emerged in the late 1980s and early 1990s, as the internet was becoming mainstream and governments began discussing encryption regulations. Cypherpunks saw cryptography as a tool for protecting individual rights in the digital age.
 
+| Principle | How Bitcoin implements it |
+|-----------|---------------------------|
+| Privacy through cryptography | Pseudonymity; public-key crypto; no mandatory KYC; coin mixing, address reuse avoidance |
+| Trust in code, not institutions | Digital signatures; open-source; consensus rules enforced by code; no trusted third parties |
+| Decentralization | No central authority; distributed nodes; permissionless participation; censorship-resistant |
+| Permissionless participation | No account or identity required; key pair only; global access; no gatekeepers |
+| Censorship resistance | No single point to block transactions; distributed network; economic incentives for miners |
+
 ---
 
 ## Core Principles

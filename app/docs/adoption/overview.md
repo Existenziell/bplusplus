@@ -17,6 +17,12 @@ Understanding Bitcoin's technical foundations is essential, but seeing how Bitco
 
 These use cases demonstrate Bitcoin's unique properties in action: [censorship resistance](/docs/fundamentals/trust-model), [portability](/docs/fundamentals/monetary-properties), [verifiability](/docs/bitcoin/cryptography), and [decentralization](/docs/fundamentals/decentralization).
 
+| Topic | Description | Link |
+|-------|--------------|------|
+| Stranded energy & flared gas | Mining with otherwise wasted energy | [Stranded Energy](/docs/adoption/stranded-energy) |
+| Rural communities | Financial inclusion without banks | [Rural Communities](/docs/adoption/rural-communities) |
+| Use cases | Remittances, savings, corporate adoption, aid | [Use Cases](/docs/adoption/use-cases) |
+
 ---
 
 ## Adoption Stories

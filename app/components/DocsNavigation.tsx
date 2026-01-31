@@ -113,7 +113,7 @@ export default function DocsNavigation({
           </button>
         )}
 
-        <div className="mb-6">
+        <div className="mb-2">
           <ul className="space-y-1">
             {docsNavLinksTop.map((link) => (
               <li key={link.href}>
@@ -130,8 +130,8 @@ export default function DocsNavigation({
         </div>
 
         {/* Docs link - navigates to /docs overview page */}
-        <div className="mb-2">
-          <div className="flex items-center gap-1.5 w-full text-left text-base mb-2">
+        <div className="mb-1">
+          <div className="flex items-center gap-1.5 w-full text-left text-base mb-1">
             <button
               onClick={() => setIsDocsExpanded((v) => !v)}
               className="flex-shrink-0 p-1 pl-0 text-gray-500 dark:text-gray-400 hover:text-btc transition-colors"
@@ -234,7 +234,7 @@ export default function DocsNavigation({
           </ul>
         )}
 
-        <div className="mt-6">
+        <div className="mt-2">
           <ul className="space-y-1">
             {docsNavLinksBottom.map((link) => (
               <li key={link.href}>

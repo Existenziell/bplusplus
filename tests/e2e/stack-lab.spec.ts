@@ -70,4 +70,13 @@ test.describe('Stack Lab', () => {
 
     await expect(page.getByText('1').first()).toBeVisible()
   })
+
+  test('Challenges tab shows challenge list and difficulty filters', async ({ page }) => {
+    await page.goto('/stack-lab')
+    await expect(page.getByText('Simple Addition').first()).toBeVisible({ timeout: 10000 })
+
+    await page.getByRole('tab', { name: /Challenges/i }).click()
+    await expect(page.getByText(/Test your script knowledge|Select a challenge/i)).toBeVisible({ timeout: 5000 })
+    await expect(page.getByRole('button', { name: /Easy|Medium|Hard/i }).first()).toBeVisible()
+  })
 })

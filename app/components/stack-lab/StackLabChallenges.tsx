@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect, useRef, useMemo } from 'react'
+import { useState, useCallback, useEffect, useRef, useMemo, startTransition } from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { DndContext, DragEndEvent, DragOverlay, closestCenter } from '@dnd-kit/core'
 import StackVisualization from '@/app/components/stack-lab/StackVisualization'
@@ -113,21 +113,23 @@ export default function StackLabChallenges() {
   // Sync selected challenge from URL (challengeId) when params or currentChallenges change
   useEffect(() => {
     const challengeIdParam = searchParams.get('challengeId')
-    if (!challengeIdParam) {
-      setSelectedChallenge(null)
-      return
-    }
-    const challenge = currentChallenges.find((c) => c.id === challengeIdParam)
-    if (challenge) {
-      setSelectedChallenge(challenge)
-    } else {
-      setSelectedChallenge(null)
-      const params = new URLSearchParams(searchParams.toString())
-      params.delete('challengeId')
-      if (params.toString() !== searchParams.toString()) {
-        router.replace(params.toString() ? `${pathname}?${params.toString()}` : pathname, { scroll: false })
+    startTransition(() => {
+      if (!challengeIdParam) {
+        setSelectedChallenge(null)
+        return
       }
-    }
+      const challenge = currentChallenges.find((c) => c.id === challengeIdParam)
+      if (challenge) {
+        setSelectedChallenge(challenge)
+      } else {
+        setSelectedChallenge(null)
+        const params = new URLSearchParams(searchParams.toString())
+        params.delete('challengeId')
+        if (params.toString() !== searchParams.toString()) {
+          router.replace(params.toString() ? `${pathname}?${params.toString()}` : pathname, { scroll: false })
+        }
+      }
+    })
   }, [searchParams, pathname, router, selectedDifficulty, currentChallenges])
 
   const [userUnlockingScript, setUserUnlockingScript] = useState<Array<string | StackItem>>([])

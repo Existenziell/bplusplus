@@ -264,7 +264,7 @@ export const docsNavLinksTop: { href: string; title: string }[] = [
 // Docs sidebar - bottom section (site utilities)
 export const docsNavLinksBottom: { href: string; title: string }[] = [
   { href: '/docs/glossary', title: 'Glossary' },
-  { href: '/author', title: 'About BitcoinDev' },
+  { href: '/author', title: 'About' },
   { href: '/feedback', title: 'Feedback' },
 ]
 
@@ -273,7 +273,7 @@ export const horizontalNavLinksBottom: { href: string; title: string }[] = [
   { href: '/tools', title: 'Tools' },
   { href: '/block-visualizer', title: 'Block Visualizer' },
   { href: '/whitepaper', title: 'Whitepaper' },
-  { href: '/author', title: 'About BitcoinDev' },
+  { href: '/author', title: 'About' },
 ]
 
 // Footer - External resources (left side)
@@ -298,7 +298,7 @@ export const footerLinksExplore: { href: string; title: string }[] = [
   { href: '/stack-lab', title: 'Stack Lab' },
   { href: '/block-visualizer', title: 'Block Visualizer' },
   { href: '/docs/glossary', title: 'Glossary' },
-  { href: '/author', title: 'About BitcoinDev' },
+  { href: '/author', title: 'About' },
   { href: '/feedback', title: 'Feedback' },
 ]
 

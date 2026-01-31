@@ -109,7 +109,7 @@ export default function HorizontalNav() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="btn-secondary-sm min-w-[8rem]"
+                    className="btn-secondary-sm min-w-[9rem]"
                   >
                     {link.title}
                   </Link>

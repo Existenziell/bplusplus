@@ -19,7 +19,7 @@ export default function MempoolPage() {
     <DocsLayoutWrapper defaultSidebarCollapsed={true}>
       <div className="mb-8">
         <h1 className="heading-page text-center">Block Visualizer (beta)</h1>
-        <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">
+        <p className="text-secondary text-center mb-2 max-w-2xl mx-auto">
           Explore the latest Bitcoin blocks and their transactions.
           Each rectangle represents a transaction, sized by vBytes or fee.
           Hover over transactions to see detailed information. Click on any transaction

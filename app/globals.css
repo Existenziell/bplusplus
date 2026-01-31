@@ -242,31 +242,14 @@ h1, h2, h3, h4, h5, h6 {
   @apply text-gray-900 dark:text-gray-200;
 }
 
-/* Engraved text: nearly same color as background, carved-in depth (shadow top-left, highlight bottom-right) */
-.engraved {
-  color: rgb(243 244 246); /* gray-100 – lighter, close to gray-50 background */
-  text-shadow:
-    /* Top-left: shadow cast into the groove */
-    -3px -3px 2px rgba(0 0 0 / 0.15),
-    -2px -2px 1px rgba(0 0 0 / 0.12),
-    -1px -1px 0 rgba(0 0 0 / 0.08),
-    /* Bottom-right: light catching the lower edge */
-    3px 3px 2px rgba(255 255 255 / 0.85),
-    2px 2px 1px rgba(255 255 255 / 0.5),
-    1px 1px 0 rgba(255 255 255 / 0.25);
+.embossed {
+  @apply text-gray-50;
+  text-shadow: 0 -4px 3px rgba(255, 255, 255, 0.3), 0 3px 4px rgba(0, 0, 0, 0.2);
 }
 
-.dark .engraved {
-  color: rgb(31 41 55); /* gray-800 – close to gray-900 background */
-  text-shadow:
-    /* Top-left: shadow in the groove */
-    -3px -3px 2px rgba(0 0 0 / 0.5),
-    -2px -2px 1px rgba(0 0 0 / 0.35),
-    -1px -1px 0 rgba(0 0 0 / 0.2),
-    /* Bottom-right: subtle highlight */
-    3px 3px 2px rgba(255 255 255 / 0.1),
-    2px 2px 1px rgba(255 255 255 / 0.06),
-    1px 1px 0 rgba(255 255 255 / 0.03);
+.dark .embossed {
+  @apply text-gray-800;
+  text-shadow: 0 2px 3px rgba(255, 255, 255, 0.3), 0 -1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Remove top margin from first h1 in content area (not header) */

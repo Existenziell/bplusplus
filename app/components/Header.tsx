@@ -9,7 +9,7 @@ import { useStickyScroll } from '@/app/contexts/StickyScrollContext'
 import { useSearchModal } from '@/app/contexts/SearchModalContext'
 
 const siteTitleClassName =
-  'font-extrabold engraved text-6xl pl-6 hidden lg:block'
+  'font-extrabold embossed text-6xl pl-6 hidden lg:block'
 
 export default function Header() {
   const pathname = usePathname()

@@ -26,9 +26,11 @@ function StackLabTabsAndContent({ children }: { children: ReactNode }) {
 
   const handleTabChange = useCallback(
     (tab: 'sandbox' | 'challenges') => {
-      router.replace(`${pathname}?mode=${tab}`, { scroll: false })
+      const params = new URLSearchParams(searchParams.toString())
+      params.set('mode', tab)
+      router.push(`${pathname}?${params.toString()}`, { scroll: false })
     },
-    [pathname, router]
+    [pathname, router, searchParams]
   )
 
   useEffect(() => {

@@ -91,7 +91,8 @@ export default function StackLabChallenges() {
     (difficulty: Difficulty) => {
       const params = new URLSearchParams(searchParams.toString())
       params.set('difficulty', difficulty)
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+      params.delete('challengeId')
+      router.push(`${pathname}?${params.toString()}`, { scroll: false })
       setSelectedChallenge(null)
     },
     [pathname, router, searchParams]
@@ -108,6 +109,26 @@ export default function StackLabChallenges() {
   }, [])
 
   const currentChallenges = challengesByDifficulty[selectedDifficulty]
+
+  // Sync selected challenge from URL (challengeId) when params or currentChallenges change
+  useEffect(() => {
+    const challengeIdParam = searchParams.get('challengeId')
+    if (!challengeIdParam) {
+      setSelectedChallenge(null)
+      return
+    }
+    const challenge = currentChallenges.find((c) => c.id === challengeIdParam)
+    if (challenge) {
+      setSelectedChallenge(challenge)
+    } else {
+      setSelectedChallenge(null)
+      const params = new URLSearchParams(searchParams.toString())
+      params.delete('challengeId')
+      if (params.toString() !== searchParams.toString()) {
+        router.replace(params.toString() ? `${pathname}?${params.toString()}` : pathname, { scroll: false })
+      }
+    }
+  }, [searchParams, pathname, router, selectedDifficulty, currentChallenges])
 
   const [userUnlockingScript, setUserUnlockingScript] = useState<Array<string | StackItem>>([])
   const [userLockingScript, setUserLockingScript] = useState<Array<string | StackItem>>([])
@@ -131,17 +152,31 @@ export default function StackLabChallenges() {
     }
   }, [])
 
-  const openChallenge = useCallback((c: Challenge) => {
-    setSelectedChallenge(c)
-    setUserUnlockingScript([])
-    setUserLockingScript([])
-    setCheckResult(null)
-    setExecutionSteps([])
-    setDisplayStack([])
-    setPredictValidAnswer(null)
-    setTraceOptions([])
-    setSelectedTraceOption(-1)
-  }, [])
+  const openChallenge = useCallback(
+    (c: Challenge) => {
+      setSelectedChallenge(c)
+      setUserUnlockingScript([])
+      setUserLockingScript([])
+      setCheckResult(null)
+      setExecutionSteps([])
+      setDisplayStack([])
+      setPredictValidAnswer(null)
+      setTraceOptions([])
+      setSelectedTraceOption(-1)
+      const params = new URLSearchParams(searchParams.toString())
+      params.set('challengeId', c.id)
+      params.set('difficulty', selectedDifficulty)
+      router.push(`${pathname}?${params.toString()}`, { scroll: false })
+    },
+    [pathname, router, searchParams, selectedDifficulty]
+  )
+
+  const closeChallenge = useCallback(() => {
+    setSelectedChallenge(null)
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete('challengeId')
+    router.push(params.toString() ? `${pathname}?${params.toString()}` : pathname, { scroll: false })
+  }, [pathname, router, searchParams])
 
   useEffect(() => {
     if (!selectedChallenge || !isTrace(selectedChallenge) || selectedChallenge.question.type !== 'stack_after_step' || !interpreterRef.current) {
@@ -430,7 +465,7 @@ export default function StackLabChallenges() {
       <div className="space-y-4 pb-12">
         <button
           type="button"
-          onClick={() => setSelectedChallenge(null)}
+          onClick={closeChallenge}
           className="btn-secondary-sm"
         >
           ← Back to list
@@ -560,7 +595,7 @@ export default function StackLabChallenges() {
       <div className="space-y-4 pb-12">
         <button
           type="button"
-          onClick={() => setSelectedChallenge(null)}
+          onClick={closeChallenge}
           className="btn-secondary-sm"
         >
           ← Back to list
@@ -589,7 +624,7 @@ export default function StackLabChallenges() {
       <div className="space-y-4 pb-12">
         <button
           type="button"
-          onClick={() => setSelectedChallenge(null)}
+          onClick={closeChallenge}
           className="btn-secondary-sm"
         >
           ← Back to list

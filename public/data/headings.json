@@ -5,6 +5,14 @@
       "slug": "core-components"
     },
     {
+      "title": "How Bitcoin works",
+      "slug": "how-bitcoin-works"
+    },
+    {
+      "title": "First steps",
+      "slug": "first-steps"
+    },
+    {
       "title": "Technical Innovation",
       "slug": "technical-innovation"
     },
@@ -767,6 +775,24 @@
       "slug": "resources"
     }
   ],
+  "/docs/bitcoin/transaction-structure": [
+    {
+      "title": "Input fields",
+      "slug": "input-fields"
+    },
+    {
+      "title": "Output fields",
+      "slug": "output-fields"
+    },
+    {
+      "title": "Serialization notes",
+      "slug": "serialization-notes"
+    },
+    {
+      "title": "Related",
+      "slug": "related"
+    }
+  ],
   "/docs/bitcoin/script": [
     {
       "title": "How Does It Work?",
@@ -1015,7 +1041,29 @@
       "slug": "resources"
     }
   ],
+  "/docs/bitcoin/coinbase-transaction": [
+    {
+      "title": "Structure",
+      "slug": "structure"
+    },
+    {
+      "title": "Uniqueness",
+      "slug": "uniqueness"
+    },
+    {
+      "title": "Maturity",
+      "slug": "maturity"
+    },
+    {
+      "title": "Related",
+      "slug": "related"
+    }
+  ],
   "/docs/bitcoin/subsidy": [
+    {
+      "title": "Block Reward",
+      "slug": "block-reward"
+    },
     {
       "title": "The Equation",
       "slug": "the-equation"
@@ -1109,6 +1157,10 @@
       "slug": "the-fix-segwit"
     },
     {
+      "title": "wTXID",
+      "slug": "wtxid"
+    },
+    {
       "title": "Historical Context",
       "slug": "historical-context"
     },
@@ -1169,6 +1221,20 @@
     {
       "title": "Resources",
       "slug": "resources"
+    }
+  ],
+  "/docs/bitcoin/witness": [
+    {
+      "title": "Where witness lives",
+      "slug": "where-witness-lives"
+    },
+    {
+      "title": "Why it matters",
+      "slug": "why-it-matters"
+    },
+    {
+      "title": "Related",
+      "slug": "related"
     }
   ],
   "/docs/bitcoin/taproot": [
@@ -1261,6 +1327,28 @@
     {
       "title": "Resources",
       "slug": "resources"
+    }
+  ],
+  "/docs/bitcoin/data-encoding": [
+    {
+      "title": "Bytes and hexadecimal",
+      "slug": "bytes-and-hexadecimal"
+    },
+    {
+      "title": "Little-endian",
+      "slug": "little-endian"
+    },
+    {
+      "title": "Compact size (VarInt)",
+      "slug": "compact-size-varint"
+    },
+    {
+      "title": "Block and transaction layout",
+      "slug": "block-and-transaction-layout"
+    },
+    {
+      "title": "Related",
+      "slug": "related"
     }
   ],
   "/docs/bitcoin/rpc": [
@@ -1457,6 +1545,10 @@
     {
       "title": "The Coinbase Transaction",
       "slug": "the-coinbase-transaction"
+    },
+    {
+      "title": "Candidate Block",
+      "slug": "candidate-block"
     },
     {
       "title": "Transaction Selection",
@@ -2521,6 +2613,24 @@
       "slug": "resources"
     }
   ],
+  "/docs/lightning/resources": [
+    {
+      "title": "LSPs & Services",
+      "slug": "lsps-services"
+    },
+    {
+      "title": "Dashboards & Monitoring",
+      "slug": "dashboards-monitoring"
+    },
+    {
+      "title": "Routing & Liquidity",
+      "slug": "routing-liquidity"
+    },
+    {
+      "title": "Learning & Development",
+      "slug": "learning-development"
+    }
+  ],
   "/docs/development": [
     {
       "title": "Programming Languages in Bitcoin",
@@ -2785,6 +2895,28 @@
     {
       "title": "Resources",
       "slug": "resources"
+    }
+  ],
+  "/docs/development/resources": [
+    {
+      "title": "Node Software",
+      "slug": "node-software"
+    },
+    {
+      "title": "Node Hardware",
+      "slug": "node-hardware"
+    },
+    {
+      "title": "Explorers & APIs",
+      "slug": "explorers-apis"
+    },
+    {
+      "title": "Utilities",
+      "slug": "utilities"
+    },
+    {
+      "title": "Further Curation",
+      "slug": "further-curation"
     }
   ],
   "/docs/bitcoin-development": [
@@ -4251,6 +4383,50 @@
     {
       "title": "Related Topics",
       "slug": "related-topics"
+    }
+  ],
+  "/docs/learning-resources": [
+    {
+      "title": "Notes & Docs",
+      "slug": "notes-docs"
+    },
+    {
+      "title": "Books",
+      "slug": "books"
+    },
+    {
+      "title": "Courses & Training",
+      "slug": "courses-training"
+    },
+    {
+      "title": "Certifications",
+      "slug": "certifications"
+    },
+    {
+      "title": "More",
+      "slug": "more"
+    }
+  ],
+  "/docs/community": [
+    {
+      "title": "Discussions",
+      "slug": "discussions"
+    },
+    {
+      "title": "Podcasts",
+      "slug": "podcasts"
+    },
+    {
+      "title": "Conferences & Meetups",
+      "slug": "conferences-meetups"
+    },
+    {
+      "title": "Contribution",
+      "slug": "contribution"
+    },
+    {
+      "title": "Funding & Jobs",
+      "slug": "funding-jobs"
     }
   ],
   "/docs/glossary": [

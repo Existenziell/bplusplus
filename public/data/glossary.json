@@ -199,9 +199,9 @@
     "term": "CSV (CheckSequenceVerify)",
     "definition": "An opcode (OP_CHECKSEQUENCEVERIFY) that enforces relative time locks, preventing a UTXO from being spent until a specified number of blocks or time has passed since it was confirmed...."
   },
-  "compact-block": {
-    "term": "Compact Block",
-    "definition": "A block relay protocol (BIP 152) that dramatically reduces bandwidth by sending only block headers and short transaction IDs instead of full transaction data. Since most transactions in a new block are already in a node's mempool, the node can reconstruct the full block locally using these short..."
+  "candidate-block": {
+    "term": "Candidate Block",
+    "definition": "The block a miner is currently hashing, built from a block template. The miner fills in the header (version, previous block hash, merkle root, timestamp, difficulty target, nonce), includes the coinbase transaction and selected transactions, then repeatedly changes the nonce (and optionally..."
   },
   "chain-reorganization": {
     "term": "Chain Reorganization",
@@ -210,6 +210,14 @@
   "checktemplateverify-ctv": {
     "term": "CheckTemplateVerify (CTV)",
     "definition": "A proposed Bitcoin opcode enabling basic covenants by allowing users to predefine how their bitcoin can be spent in future transactions. Through transaction templates, CTV can enforce specific spending paths, enhancing security for applications like vault wallets and improving scalability."
+  },
+  "compact-block": {
+    "term": "Compact Block",
+    "definition": "A block relay protocol (BIP 152) that dramatically reduces bandwidth by sending only block headers and short transaction IDs instead of full transaction data. Since most transactions in a new block are already in a node's mempool, the node can reconstruct the full block locally using these short..."
+  },
+  "compact-size": {
+    "term": "Compact Size",
+    "definition": "A variable-length encoding (VarInt) used in Bitcoin serialization for lengths and counts, such as the number of inputs or outputs in a transaction, or the length of a script. The first byte determines how many bytes follow: 0–252 means the value is that single byte; 253 means the next 2 bytes..."
   },
   "cold-storage-wallet": {
     "term": "Cold Storage Wallet",
@@ -523,6 +531,10 @@
     "term": "Mainnet",
     "definition": "The production Bitcoin network where real Bitcoin with actual monetary value is transacted, as opposed to test networks used for development. Mainnet addresses start with \"1\" (legacy), \"3\" (P2SH), or \"bc1\" (SegWit/Taproot), distinguishing them from testnet addresses...."
   },
+  "magic-bytes": {
+    "term": "Magic Bytes",
+    "definition": "The fixed 4-byte value at the start of each P2P message on the Bitcoin wire protocol, used to identify the network (mainnet, testnet, signet, regtest) and help nodes detect message boundaries. Mainnet magic is 0xF9BEB4D9 (little-endian)...."
+  },
   "mempool": {
     "term": "Mempool",
     "definition": "The collection of valid, unconfirmed transactions that a node has received and is holding in memory, waiting to be included in a block. Each node maintains its own mempool, and they may differ slightly based on when transactions were received and node-specific policies...."
@@ -831,6 +843,10 @@
     "term": "ScriptSig",
     "definition": "The unlocking script in a transaction input that provides the data needed to satisfy the referenced output's scriptPubKey conditions. For P2PKH outputs, the scriptSig contains the signature and public key; for P2SH, it contains the serialized redeem script and any necessary signatures...."
   },
+  "sequence": {
+    "term": "Sequence",
+    "definition": "A 32-bit field (nSequence) in each transaction input, used for relative locktime (OP_CHECKSEQUENCEVERIFY) and RBF signaling. For relative locktime, the sequence value encodes a block count or time unit that must pass before the input can be spent...."
+  },
   "segwit-segregated-witness": {
     "term": "SegWit (Segregated Witness)",
     "definition": "A major protocol upgrade activated in August 2017 (BIP 141) that moves signature data (\"witness\") outside the base transaction structure, fixing several important issues. SegWit resolved transaction malleability (which had blocked Lightning Network development), increased effective block capacity..."
@@ -990,6 +1006,10 @@
   "witness-discount": {
     "term": "Witness Discount",
     "definition": "A feature introduced in Bitcoin's SegWit upgrade, which reduces the cost of storing certain types of data, specifically witness data, by giving it a lower \"weight\" in terms of transaction fees...."
+  },
+  "wtxid-witness-transaction-id": {
+    "term": "wTXID (Witness Transaction ID)",
+    "definition": "The hash of the full transaction including witness data, used in SegWit and Taproot contexts where the full committed transaction identity matters (e.g. compact block relay). Unlike the TXID, which hashes only the base transaction (excluding witness), the wTXID changes if witness data changes...."
   },
   "xbt": {
     "term": "XBT",

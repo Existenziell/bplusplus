@@ -72,6 +72,14 @@ A Bitcoin wallet is a software application or device that allows users to store,
 3. **Address Creation**: Address generated from public key using hash functions
 4. **Address Types**: [P2PKH](/docs/glossary#p2pkh-pay-to-pubkey-hash), [P2SH](/docs/glossary#p2sh-pay-to-script-hash), [P2WPKH](/docs/glossary#p2wpkh-pay-to-witness-pubkey-hash), [P2TR](/docs/glossary#p2tr-pay-to-taproot) (Taproot)
 
+### Getting your first bitcoin
+
+You can buy bitcoin on [exchanges](/docs/glossary#exchange) (often with identity checks) or at some ATMs, then withdraw to your own wallet. Withdrawing to a non-custodial wallet gives you self-custody.
+
+### Sending safely
+
+Before sending, double-check the recipient [address](/docs/glossary#address) (Bitcoin addresses are long; a typo can lose funds). Check current [fee](/docs/bitcoin/transaction-fees) conditions so your transaction is included in a reasonable time. See [Transaction Lifecycle](/docs/bitcoin/transaction-lifecycle) for how confirmations work.
+
 ### Transaction Process
 
 1. **UTXO Selection**: Wallet chooses which UTXOs to spend ([coin selection](/docs/glossary#coin-selection))

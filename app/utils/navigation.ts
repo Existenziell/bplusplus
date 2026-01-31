@@ -54,18 +54,22 @@ export const docPages: DocPage[] = [
   { path: '/docs/bitcoin/cryptography', mdFile: 'app/docs/bitcoin/cryptography/cryptography.md', title: 'Cryptography', section: 'bitcoin' },
   { path: '/docs/bitcoin/consensus', mdFile: 'app/docs/bitcoin/consensus/consensus.md', title: 'Consensus Mechanism', section: 'bitcoin' },
   { path: '/docs/bitcoin/transaction-lifecycle', mdFile: 'app/docs/bitcoin/transaction-lifecycle/transaction-lifecycle.md', title: 'Transaction Lifecycle', section: 'bitcoin' },
+  { path: '/docs/bitcoin/transaction-structure', mdFile: 'app/docs/bitcoin/transaction-structure/transaction-structure.md', title: 'Transaction Structure', section: 'bitcoin' },
   { path: '/docs/bitcoin/script', mdFile: 'app/docs/bitcoin/script/script.md', title: 'Bitcoin Script', section: 'bitcoin' },
   { path: '/docs/bitcoin/op-codes', mdFile: 'app/docs/bitcoin/op-codes/op-codes.md', title: 'OP Codes', section: 'bitcoin' },
   { path: '/docs/bitcoin/timelocks', mdFile: 'app/docs/bitcoin/timelocks/timelocks.md', title: 'Timelocks', section: 'bitcoin' },
   { path: '/docs/bitcoin/sighash-types', mdFile: 'app/docs/bitcoin/sighash-types/sighash-types.md', title: 'Sighash Types', section: 'bitcoin' },
   { path: '/docs/bitcoin/merkle-trees', mdFile: 'app/docs/bitcoin/merkle-trees/merkle-trees.md', title: 'Merkle Trees', section: 'bitcoin' },
   { path: '/docs/bitcoin/blocks', mdFile: 'app/docs/bitcoin/blocks/blocks.md', title: 'Block Propagation', section: 'bitcoin' },
+  { path: '/docs/bitcoin/coinbase-transaction', mdFile: 'app/docs/bitcoin/coinbase-transaction/coinbase-transaction.md', title: 'Coinbase Transaction', section: 'bitcoin' },
   { path: '/docs/bitcoin/subsidy', mdFile: 'app/docs/bitcoin/subsidy/subsidy.md', title: 'Block Subsidy', section: 'bitcoin' },
   { path: '/docs/bitcoin/transaction-fees', mdFile: 'app/docs/bitcoin/transaction-fees/transaction-fees.md', title: 'Transaction Fees', section: 'bitcoin' },
   { path: '/docs/bitcoin/transaction-malleability', mdFile: 'app/docs/bitcoin/transaction-malleability/transaction-malleability.md', title: 'Transaction Malleability', section: 'bitcoin' },
   { path: '/docs/bitcoin/segwit', mdFile: 'app/docs/bitcoin/segwit/segwit.md', title: 'SegWit', section: 'bitcoin' },
+  { path: '/docs/bitcoin/witness', mdFile: 'app/docs/bitcoin/witness/witness.md', title: 'Witness', section: 'bitcoin' },
   { path: '/docs/bitcoin/taproot', mdFile: 'app/docs/bitcoin/taproot/taproot.md', title: 'Taproot', section: 'bitcoin' },
   { path: '/docs/bitcoin/p2p-protocol', mdFile: 'app/docs/bitcoin/p2p-protocol/p2p-protocol.md', title: 'P2P Network Protocol', section: 'bitcoin' },
+  { path: '/docs/bitcoin/data-encoding', mdFile: 'app/docs/bitcoin/data-encoding/data-encoding.md', title: 'Data Encoding', section: 'bitcoin' },
   { path: '/docs/bitcoin/rpc', mdFile: 'app/docs/bitcoin/rpc/rpc.md', title: 'RPC Commands', section: 'bitcoin' },
 
   { path: '/docs/mining', mdFile: 'app/docs/mining/overview.md', title: 'Mining', section: 'mining' },
@@ -98,6 +102,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/lightning/onion', mdFile: 'app/docs/lightning/onion/onion.md', title: 'Onion Routing', section: 'lightning' },
   { path: '/docs/lightning/watchtowers', mdFile: 'app/docs/lightning/watchtowers/watchtowers.md', title: 'Watchtowers', section: 'lightning' },
   { path: '/docs/lightning/anchor-outputs', mdFile: 'app/docs/lightning/anchor-outputs/anchor-outputs.md', title: 'Anchor Outputs', section: 'lightning' },
+  { path: '/docs/lightning/resources', mdFile: 'app/docs/lightning/resources/resources.md', title: 'Lightning Resources', section: 'lightning' },
 
   { path: '/docs/development', mdFile: 'app/docs/development/overview.md', title: 'Setup & Infrastructure', section: 'development' },
   { path: '/docs/development/install-bitcoin', mdFile: 'app/docs/development/install-bitcoin/install-bitcoin.md', title: 'Installing Bitcoin', section: 'development' },
@@ -106,6 +111,7 @@ export const docPages: DocPage[] = [
   { path: '/docs/development/libraries', mdFile: 'app/docs/development/libraries/libraries.md', title: 'Libraries & SDKs', section: 'development' },
   { path: '/docs/development/node-types', mdFile: 'app/docs/development/node-types/node-types.md', title: 'Node Types & Architecture', section: 'development' },
   { path: '/docs/development/bitcoin-core-internals', mdFile: 'app/docs/development/bitcoin-core-internals/bitcoin-core-internals.md', title: 'Bitcoin Core Internals', section: 'development' },
+  { path: '/docs/development/resources', mdFile: 'app/docs/development/resources/resources.md', title: 'Developer Resources', section: 'development' },
 
   { path: '/docs/bitcoin-development', mdFile: 'app/docs/bitcoin-development/overview.md', title: 'Bitcoin Development', section: 'bitcoin-development' },
   { path: '/docs/bitcoin-development/keys', mdFile: 'app/docs/bitcoin-development/keys/keys.md', title: 'Key Management', section: 'bitcoin-development' },
@@ -152,6 +158,9 @@ export const docPages: DocPage[] = [
   { path: '/docs/adoption/stranded-energy', mdFile: 'app/docs/adoption/stranded-energy/stranded-energy.md', title: 'Stranded Energy and Flared Gas', section: 'adoption' },
   { path: '/docs/adoption/rural-communities', mdFile: 'app/docs/adoption/rural-communities/rural-communities.md', title: 'Rural Communities and Financial Inclusion', section: 'adoption' },
   { path: '/docs/adoption/use-cases', mdFile: 'app/docs/adoption/use-cases/use-cases.md', title: 'Bitcoin Use Cases', section: 'adoption' },
+
+  { path: '/docs/learning-resources', mdFile: 'app/docs/learning-resources/overview.md', title: 'Learning Resources', section: 'resources' },
+  { path: '/docs/community', mdFile: 'app/docs/community/overview.md', title: 'Community', section: 'resources' },
 
   { path: '/docs/glossary', mdFile: 'app/docs/glossary/terms.md', title: 'Glossary', section: 'glossary' },
 ]
@@ -206,6 +215,10 @@ export const sections: Record<string, { title: string; description: string }> = 
     title: 'Bitcoin Adoption',
     description: 'Real-world examples of Bitcoin adoption, from stranded energy mining to financial inclusion in rural communities.',
   },
+  resources: {
+    title: 'Resources & Community',
+    description: 'Learning resources, developer resources, and community links: books, courses, podcasts, conferences, contribution, and jobs.',
+  },
   glossary: {
     title: 'Bitcoin Glossary',
     description: 'A glossary of Bitcoin development terms, from ASIC to ZMQ.',
@@ -241,6 +254,7 @@ export const ctaLinks: { href: string; title: string }[] = [
 
 // Docs sidebar - top section (interactive tools)
 export const docsNavLinksTop: { href: string; title: string }[] = [
+  { href: '/tools', title: 'Tools' },
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/terminal', title: 'CLI Terminal' },
   { href: '/stack-lab', title: 'Stack Lab' },
@@ -256,6 +270,7 @@ export const docsNavLinksBottom: { href: string; title: string }[] = [
 
 // Horizontal nav - quick links at bottom
 export const horizontalNavLinksBottom: { href: string; title: string }[] = [
+  { href: '/tools', title: 'Tools' },
   { href: '/block-visualizer', title: 'Block Visualizer' },
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/author', title: 'About BitcoinDev' },
@@ -278,6 +293,7 @@ export const footerLinksExternal: { name: string; url: string }[] = [
 export const footerLinksExplore: { href: string; title: string }[] = [
   { href: '/docs/history', title: 'History' },
   { href: '/docs', title: 'Search Docs' },
+  { href: '/tools', title: 'Tools' },
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/terminal', title: 'CLI Terminal' },
   { href: '/stack-lab', title: 'Stack Lab' },
@@ -348,6 +364,11 @@ export const navItems: NavSection[] = [
     href: '/docs/adoption',
     children: docPages.filter(p => p.section === 'adoption' && p.path !== '/docs/adoption').map(p => ({ title: p.title, href: p.path })),
   },
+  {
+    title: 'Resources & Community',
+    href: '/docs/learning-resources',
+    children: docPages.filter(p => p.section === 'resources').map(p => ({ title: p.title, href: p.path })),
+  },
 ]
 
 export const downloadablePaths: Set<string> = new Set(docPages.map(p => p.path))
@@ -360,6 +381,8 @@ const docRouteLabels = Object.fromEntries(
   })
 )
 export const routeLabels: Record<string, string> = {
+  tools: 'Tools',
+  hash: 'Hash Tool',
   terminal: 'CLI Terminal',
   'stack-lab': 'Stack Lab',
   'block-visualizer': 'Block Visualizer',

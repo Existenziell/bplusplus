@@ -1627,6 +1627,7 @@ Bitcoin's security relies on these assumptions holding true:
 
 ## Resources
 
+- **[Tools](/tools)** - Interactive tools (Stack Lab for script, Block Visualizer for blocks, [Hash tool](/tools/hash) for SHA-256 / HASH256 / HASH160)
 - **[Bitcoin Developer Guide - Transactions](https://developer.bitcoin.org/devguide/transactions.html)** - Official documentation on transaction signing
 - **[Learn Me a Bitcoin](https://learnmeabitcoin.com)** - Visual explanations of Bitcoin cryptography
 - **[BIP-340: Schnorr Signatures](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)** - Schnorr signature specification

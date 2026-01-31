@@ -357,6 +357,12 @@
     "body": "Transaction Lifecycle Understanding the complete lifecycle of a Bitcoin transaction helps developers build robust applications and users understand what happens when they send bitcoin. Transaction Structure A Bitcoin transaction consists of: Version: Identifies consensus rules Inputs: References to previous transaction outputs (UTXOs) Outputs: Creates new UTXOs with spending conditions Locktime: Optional time-based spending restriction Witness Data (SegWit): Signature data separated from "
   },
   {
+    "path": "/docs/bitcoin/transaction-structure",
+    "title": "Transaction Structure",
+    "section": "bitcoin",
+    "body": "Transaction Structure A Bitcoin transaction is a serialized structure with a version, a list of inputs, a list of outputs, a locktime, and (for SegWit/Taproot) witness data. This page summarizes the main fields so you can read raw transactions or build them correctly. Input fields Each input references one UTXO and provides data to satisfy its spending conditions. | Field | Description | |-------|-------------| | Previous output (outpoint) | The transaction ID (txid) of the transaction that "
+  },
+  {
     "path": "/docs/bitcoin/script",
     "title": "Bitcoin Script",
     "section": "bitcoin",
@@ -407,10 +413,16 @@
     "body": "Block Propagation This document explains how blocks propagate through the Bitcoin network, including the gossip protocol, validation process, and orphan block handling. Block Structure A Bitcoin block consists of: Block Header (80 bytes): Contains version, previous block hash, merkle root, timestamp, difficulty target, and nonce Transaction Count: Variable-length integer indicating number of transactions Transactions: List of transactions, starting with the coinbase transaction The block header "
   },
   {
+    "path": "/docs/bitcoin/coinbase-transaction",
+    "title": "Coinbase Transaction",
+    "section": "bitcoin",
+    "body": "Coinbase Transaction The coinbase transaction is the first transaction in every block. It has no inputs and creates new bitcoin as the block reward (subsidy plus fees). Miners construct it to pay themselves; it is the only transaction type that can create new coins. Structure Inputs: No previous outpoint. Normal inputs reference a (txid, vout); the coinbase input has no such reference. Coinbase data: Arbitrary data, up to 100 bytes. BIP 34 requires that block height be encoded here. Miners "
+  },
+  {
     "path": "/docs/bitcoin/subsidy",
     "title": "Block Subsidy",
     "section": "bitcoin",
-    "body": "Block Subsidy The Bitcoin block subsidy is the amount of new Bitcoin created with each block. It follows a predictable mathematical formula that halves every 210,000 blocks, creating Bitcoin's fixed supply schedule. The Equation Mathematical Formula Block Subsidy = 50 / (2^halvings) Where: halvings = floor(block_height / 210,000) Bitcoin Core Implementation In Bitcoin Core (validation.cpp), the subsidy is calculated using bit shifting for efficiency: CAmount GetBlockSubsidy(int nHeight, const "
+    "body": "Block Subsidy The Bitcoin block subsidy is the amount of new Bitcoin created with each block. It follows a predictable mathematical formula that halves every 210,000 blocks, creating Bitcoin's fixed supply schedule. Block Reward The block reward is what the miner receives for mining a valid block: the block subsidy (new bitcoin created) plus the transaction fees from all transactions included in the block. Over time, the subsidy shrinks (halving every 210,000 blocks) and fees will make up a "
   },
   {
     "path": "/docs/bitcoin/transaction-fees",
@@ -436,6 +448,12 @@
     ]
   },
   {
+    "path": "/docs/bitcoin/witness",
+    "title": "Witness",
+    "section": "bitcoin",
+    "body": "Witness The witness is the part of a Bitcoin transaction that contains unlocking data (signatures, public keys, and other data) that proves authorization to spend inputs. SegWit (2017) moved witness data out of the base transaction into a separate structure, so it is no longer part of the data hashed for the TXID. That fixed transaction malleability and enabled the witness discount for fee calculation. Where witness lives In a SegWit or Taproot transaction, each input can have witness data. The "
+  },
+  {
     "path": "/docs/bitcoin/taproot",
     "title": "Taproot",
     "section": "bitcoin",
@@ -453,6 +471,12 @@
     "title": "P2P Network Protocol",
     "section": "bitcoin",
     "body": "P2P Network Protocol Bitcoin uses a peer-to-peer (P2P) network protocol for nodes to communicate, share blocks, and propagate transactions. Understanding the P2P protocol is essential for running nodes and understanding network behavior. Design context Bitcoin's P2P design was inspired by the same P2P ideas and era (early 2000s), including BitTorrent's success—decentralization, no single point of failure, and censorship resistance. Bitcoin does not use BitTorrent's protocol; it has its own "
+  },
+  {
+    "path": "/docs/bitcoin/data-encoding",
+    "title": "Data Encoding",
+    "section": "bitcoin",
+    "body": "Data Encoding Bitcoin serializes transactions and blocks as byte sequences. When you read or write raw data (e.g. parsing a transaction, building a block header), you need to know how numbers and variable-length fields are encoded. Bytes and hexadecimal Raw transaction and block data are sequences of bytes (8-bit values, 0–255). They are often shown in hexadecimal (base-16): each byte is two hex digits (0–9, A–F). For example, the 32-byte TXID is 64 hex characters. Little-endian Multi-byte "
   },
   {
     "path": "/docs/bitcoin/rpc",
@@ -688,6 +712,12 @@
     "body": "Anchor Outputs Anchor outputs are a modern channel format that allows commitment transactions to have their fees adjusted after broadcast. This solves the fee estimation problem in Lightning channels. The Fee Problem In original Lightning channels, commitment transaction fees were set at channel creation: Problems: Fees must be pre-committed before broadcast Can't predict future fee rates accurately High pre-set fees waste money during low congestion Low pre-set fees may cause transactions to "
   },
   {
+    "path": "/docs/lightning/resources",
+    "title": "Lightning Resources",
+    "section": "lightning",
+    "body": "Lightning Resources Curated links to Lightning Network tools, LSPs, dashboards, and routing/liquidity resources. For protocol docs, see Lightning Network and the BOLT specs. LSPs & Services Lightning Network+ (LNG) – Enterprise LSP and infrastructure. Voltage – Cloud Lightning node hosting and LSP. LNBits – Free, self-hostable Lightning wallet and extension server. Dashboards & Monitoring Amboss – Lightning network explorer and node analytics. 1ML – Lightning network statistics and node search. "
+  },
+  {
     "path": "/docs/development",
     "title": "Setup & Infrastructure",
     "section": "development",
@@ -735,6 +765,12 @@
     "title": "Bitcoin Core Internals",
     "section": "development",
     "body": "Bitcoin Core Internals Bitcoin Core is the reference implementation of Bitcoin. Understanding its internal architecture helps developers contribute to Bitcoin Core, build compatible software, and debug issues. Architecture Overview Core Components Bitcoin Core: ├── Consensus Engine │ ├── Validation │ ├── Block processing │ └── Chain state ├── Network Layer │ ├── P2P protocol │ ├── Peer management │ └── Message handling ├── Wallet System │ ├── Key management │ ├── Transaction creation │ └── UTXO "
+  },
+  {
+    "path": "/docs/development/resources",
+    "title": "Developer Resources",
+    "section": "development",
+    "body": "Developer Resources Curated links to Bitcoin development tools, node software, hardware, explorers, and APIs. For libraries and code examples, see Libraries & SDKs. Node Software Bitcoin Core – Reference implementation; run a full node and use the RPC API. Knots – Bitcoin Core with additional patches and features. Node Hardware Start9 – Hardware and software for running nodes at home. Nodl – Plug-and-play Bitcoin (and Lightning) nodes. Explorers & APIs Mempool.space – Block explorer, API, and "
   },
   {
     "path": "/docs/bitcoin-development",
@@ -986,6 +1022,18 @@
     "title": "Bitcoin Use Cases",
     "section": "adoption",
     "body": "Bitcoin Use Cases Bitcoin adoption spans individuals, businesses, and nations. From remittances to corporate treasuries to national adoption, Bitcoin is being used in diverse and innovative ways. Remittances The Global Remittance Market Remittances (money sent by migrant workers to their families) total over $800 billion annually. Traditional remittances face: High fees: Average 6-10%, often much higher for small amounts Slow transfers: Can take days or weeks Limited access: Recipients may need "
+  },
+  {
+    "path": "/docs/learning-resources",
+    "title": "Learning Resources",
+    "section": "resources",
+    "body": "Learning Resources Books, courses, certifications, and sites for learning Bitcoin and Lightning development. This site’s docs and Tools cover protocol and scripting; the links below point to deeper or structured learning. Notes & Docs Learn Me A Bitcoin – Technical explanations and interactive tools. Bitcoin.org – Developer Documentation – Guides and reference. Bitcoin Optech – Upgrades, scaling, and operator topics. Books Programming Bitcoin – Build Bitcoin tooling from scratch (Python). "
+  },
+  {
+    "path": "/docs/community",
+    "title": "Community",
+    "section": "resources",
+    "body": "Community Podcasts, conferences, meetups, discussions, contribution, funding, and jobs in the Bitcoin and Lightning ecosystem. Discussions bitcoin-dev – Mailing list for protocol and development. Lightning-dev – Lightning protocol and implementation. Bitcoin Stack Exchange – Q&A for developers and users. Podcasts Bitcoin Optech – Weekly technical summary. Stephan Livera Podcast – Bitcoin and Lightning interviews and topics. What Bitcoin Did – Interviews and ecosystem coverage. Conferences & "
   },
   {
     "path": "/docs/glossary",
@@ -1312,10 +1360,10 @@
     "body": "An opcode (OP_CHECKSEQUENCEVERIFY) that enforces relative time locks, preventing a UTXO from being spent until a specified number of blocks or time has passed since it was confirmed...."
   },
   {
-    "path": "/docs/glossary#compact-block",
-    "title": "Compact Block",
+    "path": "/docs/glossary#candidate-block",
+    "title": "Candidate Block",
     "section": "glossary",
-    "body": "A block relay protocol (BIP 152) that dramatically reduces bandwidth by sending only block headers and short transaction IDs instead of full transaction data. Since most transactions in a new block are already in a node's mempool, the node can reconstruct the full block locally using these short..."
+    "body": "The block a miner is currently hashing, built from a block template. The miner fills in the header (version, previous block hash, merkle root, timestamp, difficulty target, nonce), includes the coinbase transaction and selected transactions, then repeatedly changes the nonce (and optionally..."
   },
   {
     "path": "/docs/glossary#chain-reorganization",
@@ -1328,6 +1376,18 @@
     "title": "CheckTemplateVerify (CTV)",
     "section": "glossary",
     "body": "A proposed Bitcoin opcode enabling basic covenants by allowing users to predefine how their bitcoin can be spent in future transactions. Through transaction templates, CTV can enforce specific spending paths, enhancing security for applications like vault wallets and improving scalability."
+  },
+  {
+    "path": "/docs/glossary#compact-block",
+    "title": "Compact Block",
+    "section": "glossary",
+    "body": "A block relay protocol (BIP 152) that dramatically reduces bandwidth by sending only block headers and short transaction IDs instead of full transaction data. Since most transactions in a new block are already in a node's mempool, the node can reconstruct the full block locally using these short..."
+  },
+  {
+    "path": "/docs/glossary#compact-size",
+    "title": "Compact Size",
+    "section": "glossary",
+    "body": "A variable-length encoding (VarInt) used in Bitcoin serialization for lengths and counts, such as the number of inputs or outputs in a transaction, or the length of a script. The first byte determines how many bytes follow: 0–252 means the value is that single byte; 253 means the next 2 bytes..."
   },
   {
     "path": "/docs/glossary#cold-storage-wallet",
@@ -1819,6 +1879,12 @@
       "mainnet",
       "main net"
     ]
+  },
+  {
+    "path": "/docs/glossary#magic-bytes",
+    "title": "Magic Bytes",
+    "section": "glossary",
+    "body": "The fixed 4-byte value at the start of each P2P message on the Bitcoin wire protocol, used to identify the network (mainnet, testnet, signet, regtest) and help nodes detect message boundaries. Mainnet magic is 0xF9BEB4D9 (little-endian)...."
   },
   {
     "path": "/docs/glossary#mempool",
@@ -2343,6 +2409,12 @@
     "body": "The unlocking script in a transaction input that provides the data needed to satisfy the referenced output's scriptPubKey conditions. For P2PKH outputs, the scriptSig contains the signature and public key; for P2SH, it contains the serialized redeem script and any necessary signatures...."
   },
   {
+    "path": "/docs/glossary#sequence",
+    "title": "Sequence",
+    "section": "glossary",
+    "body": "A 32-bit field (nSequence) in each transaction input, used for relative locktime (OP_CHECKSEQUENCEVERIFY) and RBF signaling. For relative locktime, the sequence value encodes a block count or time unit that must pass before the input can be spent...."
+  },
+  {
     "path": "/docs/glossary#segwit-segregated-witness",
     "title": "SegWit (Segregated Witness)",
     "section": "glossary",
@@ -2590,6 +2662,12 @@
     "title": "Witness Discount",
     "section": "glossary",
     "body": "A feature introduced in Bitcoin's SegWit upgrade, which reduces the cost of storing certain types of data, specifically witness data, by giving it a lower \"weight\" in terms of transaction fees...."
+  },
+  {
+    "path": "/docs/glossary#wtxid-witness-transaction-id",
+    "title": "wTXID (Witness Transaction ID)",
+    "section": "glossary",
+    "body": "The hash of the full transaction including witness data, used in SegWit and Taproot contexts where the full committed transaction identity matters (e.g. compact block relay). Unlike the TXID, which hashes only the base transaction (excluding witness), the wTXID changes if witness data changes...."
   },
   {
     "path": "/docs/glossary#xbt",

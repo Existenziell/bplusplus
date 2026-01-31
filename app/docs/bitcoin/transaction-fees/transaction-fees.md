@@ -28,6 +28,8 @@ Example:
 - Total fee: 2,500 satoshis (0.000025 BTC)
 ```
 
+For unit conversion (sats, BTC, etc.), see [Denominations](/docs/fundamentals/denominations) or the [Tools](/tools) hub.
+
 ### Virtual Size (vbytes)
 
 Since SegWit, transactions use **virtual size** instead of raw bytes:

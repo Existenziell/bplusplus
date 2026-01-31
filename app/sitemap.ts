@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/',
     '/docs',
     '/docs/glossary',
+    '/tools',
+    '/tools/hash',
     '/whitepaper',
     '/terminal',
     '/stack-lab',

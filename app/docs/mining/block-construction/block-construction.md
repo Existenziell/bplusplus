@@ -58,6 +58,12 @@ Coinbase outputs cannot be spent until 100 blocks have passed. This prevents iss
 
 ---
 
+## Candidate Block
+
+A **candidate block** is the block a miner is currently hashing. It is built from a [block template](/docs/glossary#block-template): the miner fills in the header (version, previous block hash, merkle root, timestamp, [difficulty target](/docs/glossary#difficulty-target), [nonce](/docs/glossary#nonce)), includes the [coinbase transaction](/docs/glossary#coinbase-transaction) and selected transactions, then repeatedly changes the nonce (and optionally coinbase data) and hashes the header until the hash is below the target. Each attempt is a candidate block; the first one that meets the [proof-of-work](/docs/glossary#proof-of-work-pow) requirement is broadcast as the new block.
+
+---
+
 ## Transaction Selection
 
 Miners want to maximize revenue, which means selecting transactions that pay the highest fees per unit of block space.

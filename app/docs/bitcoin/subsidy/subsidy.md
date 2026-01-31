@@ -2,6 +2,10 @@
 
 The Bitcoin block subsidy is the amount of new Bitcoin created with each block. It follows a predictable mathematical formula that [halves](/docs/glossary#halving) every 210,000 blocks, creating Bitcoin's fixed supply schedule.
 
+## Block Reward
+
+The [block reward](/docs/glossary#block-reward) is what the miner receives for mining a valid block: the **block subsidy** (new bitcoin created) plus the **transaction fees** from all transactions included in the block. Over time, the subsidy shrinks (halving every 210,000 blocks) and fees will make up a larger share of miner revenue.
+
 ## The Equation
 
 ### Mathematical Formula

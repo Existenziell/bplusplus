@@ -72,6 +72,10 @@ sequenceDiagram
 | `getheaders` | Request block headers |
 | `ping` / `pong` | Keep connection alive |
 
+### Magic Bytes
+
+Each P2P message on the wire starts with **magic bytes**, a fixed 4-byte value that identifies the network (mainnet, testnet, signet, regtest). They help nodes detect message boundaries and reject messages intended for other networks. Mainnet magic is `0xF9BEB4D9` (little-endian). The message format is: magic (4 bytes) + command string (12 bytes) + payload length (4 bytes) + checksum (4 bytes) + payload. See the [Bitcoin P2P protocol](https://developer.bitcoin.org/reference/p2p_networking.html) for the full wire format.
+
 ---
 
 ## Code Examples

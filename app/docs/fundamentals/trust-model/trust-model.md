@@ -59,7 +59,7 @@ Satoshi's disappearance was the ultimate act of decentralization: they created t
 
 **Use open-source software:** Code is publicly auditable with no hidden functionality.
 
-**Self-custody:** Control your own private keys; no third-party can freeze or seize your funds. See [wallets](/docs/glossary#wallet) for more.
+**Self-custody:** Control your own private keys; no third-party can freeze or seize your funds. "Not your keys, not your coins" means that when an [exchange](/docs/glossary#exchange) or custodian holds your keys, they control your bitcoin. Self-custody shifts responsibility (and risk) to you. See [wallets](/docs/glossary#wallet) for more.
 
 ---
 

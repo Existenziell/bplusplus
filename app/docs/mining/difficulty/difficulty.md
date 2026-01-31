@@ -86,6 +86,10 @@ flowchart LR
 - **Difficulty**: Adjusts every 2016 blocks
 - **Adjustment Frequency**: Approximately every 2 weeks
 
+### Target (difficulty encoding)
+
+The [difficulty target](/docs/glossary#difficulty-target) is stored in the block header in the **nBits** (or "bits") field, a compact 4-byte representation. Miners hash the block header; the resulting hash must be numerically below the target for the block to be valid. A lower target means higher difficulty (fewer valid hashes); a higher target means lower difficulty. The target is decoded from nBits into a 256-bit value for comparison. See [Block Header](/docs/glossary#block-header) for the six header fields.
+
 ### Difficulty Calculation
 
 The difficulty target is calculated from the block header:

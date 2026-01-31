@@ -6,12 +6,23 @@ import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
 import { sha256 } from '@noble/hashes/sha2.js'
 import { ripemd160 } from '@noble/hashes/legacy.js'
 
+const HEX_RE = /^[0-9a-fA-F\s]*$/
+
 function hexToBytes(hex: string): Uint8Array {
   const clean = hex.replace(/\s/g, '')
-  if (clean.length % 2 !== 0) throw new Error('Hex length must be even')
+  if (clean.length % 2 !== 0) {
+    throw new Error('Hex must have an even number of characters (each byte is two hex digits).')
+  }
+  if (!HEX_RE.test(clean)) {
+    throw new Error('Hex may only contain 0–9 and a–f (or A–F). Remove any other characters.')
+  }
   const bytes = new Uint8Array(clean.length / 2)
   for (let i = 0; i < bytes.length; i++) {
-    bytes[i] = parseInt(clean.slice(i * 2, i * 2 + 2), 16)
+    const byte = parseInt(clean.slice(i * 2, i * 2 + 2), 16)
+    if (Number.isNaN(byte)) {
+      throw new Error(`Invalid hex at position ${i * 2}: "${clean.slice(i * 2, i * 2 + 2)}" is not a valid hex byte.`)
+    }
+    bytes[i] = byte
   }
   return bytes
 }
@@ -39,16 +50,15 @@ export default function HashToolPage() {
   const [inputMode, setInputMode] = useState<'text' | 'hex'>('text')
   const [error, setError] = useState<string | null>(null)
 
-  const getInputBytes = useCallback((): Uint8Array | null => {
-    if (!input.trim()) return null
+  const getInputBytes = useCallback((): { bytes: Uint8Array | null; error: string | null } => {
+    if (!input.trim()) return { bytes: null, error: null }
     try {
       if (inputMode === 'hex') {
-        return hexToBytes(input.trim())
+        return { bytes: hexToBytes(input.trim()), error: null }
       }
-      return new TextEncoder().encode(input)
+      return { bytes: new TextEncoder().encode(input), error: null }
     } catch (e) {
-      setError((e as Error).message)
-      return null
+      return { bytes: null, error: (e as Error).message }
     }
   }, [input, inputMode])
 
@@ -57,19 +67,26 @@ export default function HashToolPage() {
   const [hash160Result, setHash160Result] = useState('')
 
   const compute = useCallback(() => {
-    setError(null)
-    const bytes = getInputBytes()
-    if (!bytes) {
-      if (input.trim()) setError('Invalid input')
+    const { bytes, error: inputError } = getInputBytes()
+    if (inputError) {
+      setError(inputError)
       setSha256Result('')
       setHash256Result('')
       setHash160Result('')
       return
     }
+    if (!bytes) {
+      setError(null)
+      setSha256Result('')
+      setHash256Result('')
+      setHash160Result('')
+      return
+    }
+    setError(null)
     setSha256Result(bytesToHex(hashSHA256(bytes)))
     setHash256Result(bytesToHex(hashHASH256(bytes)))
     setHash160Result(bytesToHex(hashHASH160(bytes)))
-  }, [getInputBytes, input])
+  }, [getInputBytes])
 
   return (
     <DocsLayoutWrapper defaultSidebarCollapsed={true}>

@@ -254,11 +254,11 @@ export const ctaLinks: { href: string; title: string }[] = [
 
 // Docs sidebar - top section (interactive tools)
 export const docsNavLinksTop: { href: string; title: string }[] = [
-  { href: '/tools', title: 'Tools' },
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/terminal', title: 'CLI Terminal' },
   { href: '/stack-lab', title: 'Stack Lab' },
   { href: '/block-visualizer', title: 'Block Visualizer' },
+  { href: '/tools', title: 'Tools' },
 ]
 
 // Docs sidebar - bottom section (site utilities)
@@ -274,7 +274,6 @@ export const horizontalNavLinksBottom: { href: string; title: string }[] = [
   { href: '/block-visualizer', title: 'Block Visualizer' },
   { href: '/whitepaper', title: 'Whitepaper' },
   { href: '/author', title: 'About BitcoinDev' },
-  { href: '/feedback', title: 'Feedback' },
 ]
 
 // Footer - External resources (left side)

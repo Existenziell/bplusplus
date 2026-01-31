@@ -9,7 +9,7 @@ import { useStickyScroll } from '@/app/contexts/StickyScrollContext'
 import { useSearchModal } from '@/app/contexts/SearchModalContext'
 
 const siteTitleClassName =
-  'absolute left-1/2 -translate-x-1/2 pl-11 font-extrabold engraved text-6xl hidden lg:block pointer-events-none'
+  'font-extrabold engraved text-6xl pl-6 hidden lg:block'
 
 export default function Header() {
   const pathname = usePathname()
@@ -32,11 +32,13 @@ export default function Header() {
                 className="opacity-75 dark:invert hover:opacity-100 transition-opacity duration-200"
               />
             </Link>
-            {isHomePage ? (
-              <h1 className={siteTitleClassName}>BitcoinDev</h1>
-            ) : (
-              <span className={siteTitleClassName}>BitcoinDev</span>
-            )}
+            <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+              {isHomePage ? (
+                <h1 className={siteTitleClassName} aria-label="BitcoinDev">BitcoinDev</h1>
+              ) : (
+                <span className={siteTitleClassName} aria-label="BitcoinDev">BitcoinDev</span>
+              )}
+            </div>
             <div className="flex-shrink-0 flex items-center gap-1">
                 <div 
                   className={`transition-all duration-200 will-change-transform ${

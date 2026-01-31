@@ -158,9 +158,6 @@ export const docPages: DocPage[] = [
   { path: '/docs/adoption/stranded-energy', mdFile: 'app/docs/adoption/stranded-energy/stranded-energy.md', title: 'Stranded Energy and Flared Gas', section: 'adoption' },
   { path: '/docs/adoption/rural-communities', mdFile: 'app/docs/adoption/rural-communities/rural-communities.md', title: 'Rural Communities and Financial Inclusion', section: 'adoption' },
   { path: '/docs/adoption/use-cases', mdFile: 'app/docs/adoption/use-cases/use-cases.md', title: 'Bitcoin Use Cases', section: 'adoption' },
-  { path: '/docs/adoption/protocol-evolution', mdFile: 'app/docs/adoption/protocol-evolution/protocol-evolution.md', title: 'Protocol Evolution', section: 'adoption' },
-  { path: '/docs/adoption/layer2-sidechains', mdFile: 'app/docs/adoption/layer2-sidechains/layer2-sidechains.md', title: 'Layer 2 & Sidechains', section: 'adoption' },
-  { path: '/docs/adoption/ecosystem-trends', mdFile: 'app/docs/adoption/ecosystem-trends/ecosystem-trends.md', title: 'Ecosystem Trends', section: 'adoption' },
 
   { path: '/docs/glossary', mdFile: 'app/docs/glossary/terms.md', title: 'Glossary', section: 'glossary' },
 ]

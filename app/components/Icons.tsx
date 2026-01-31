@@ -87,7 +87,7 @@ export function ChevronLeft({ className, ...props }: IconProps) {
 export function PanelExpandIcon({ className, ...props }: IconProps) {
   return (
     <svg
-      className={mergeClassName('w-4 h-4', className)}
+      className={mergeClassName('w-4 h-4 transition-all duration-300 ease-in-out', className)}
       viewBox="3 6 18 12"
       fill="none"
       stroke="currentColor"
@@ -105,7 +105,7 @@ export function PanelExpandIcon({ className, ...props }: IconProps) {
 export function PanelCollapseIcon({ className, ...props }: IconProps) {
   return (
     <svg
-      className={mergeClassName('w-4 h-4', className)}
+      className={mergeClassName('w-4 h-4 transition-all duration-300 ease-in-out', className)}
       viewBox="3 5 18 14"
       fill="none"
       stroke="currentColor"

@@ -442,7 +442,7 @@ export default function StackLabChallenges() {
           <p className="text-sm text-gray-600 dark:text-gray-400">{selectedChallenge.description}</p>
         </StackLabCard>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 items-start">
           <div className="space-y-2">
             <ScriptBuilder
               id="readonly-unlocking"

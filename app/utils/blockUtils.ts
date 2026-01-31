@@ -166,7 +166,7 @@ const MAX_PLAUSIBLE_BTC = 21e6
 /**
  * Normalize value to BTC: if value is impossibly large for BTC, assume it was in satoshis.
  */
-function normalizeValueToBtc(value: number, txid?: string): number {
+function normalizeValueToBtc(value: number, _txid?: string): number {
   if (value <= MAX_PLAUSIBLE_BTC) {
     return value
   }

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { NextRequest } from 'next/server'
 import { POST, GET } from '@/app/api/bitcoin-rpc/route'
-import { validateRpcRequest, ALLOWED_COMMANDS } from '@/app/utils/bitcoinRpcCache'
+import { validateRpcRequest, ALLOWED_COMMANDS as _ALLOWED_COMMANDS } from '@/app/utils/bitcoinRpcCache'
 
 // Mock the bitcoinRpcCache module
 vi.mock('@/app/utils/bitcoinRpcCache', () => ({

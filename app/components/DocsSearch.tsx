@@ -161,7 +161,7 @@ export default function DocsSearch() {
                   )}
                 </div>
                 <ul className="space-y-2">
-                  {sectionResults.map((result, resultIndex) => {
+                  {sectionResults.map((result, _resultIndex) => {
                     // Find the index in the flattened allItems array
                     const globalIndex = allItems.findIndex(item => item.path === result.path && item.title === result.title)
                     const isSelected = globalIndex === selectedIndex

@@ -14,6 +14,8 @@ interface ScriptBuilderProps {
   script: Array<string | StackItem>
   onRemove: (index: number) => void
   onEdit?: (index: number, newValue: string | StackItem) => void
+  /** When true, script is displayed only (no drop, remove, or edit). */
+  readOnly?: boolean
 }
 
 function ScriptItem({ 
@@ -144,9 +146,11 @@ export default function ScriptBuilder({
   script,
   onRemove,
   onEdit,
+  readOnly = false,
 }: ScriptBuilderProps) {
   const { setNodeRef, isOver } = useDroppable({
     id,
+    disabled: readOnly,
   })
 
   const getInfoText = () => {
@@ -167,9 +171,11 @@ export default function ScriptBuilder({
         ref={setNodeRef}
         className={`
           overflow-y-auto h-[250px] p-3 rounded border-2 border-dashed
-          ${isOver
-            ? 'border-btc bg-btc/10'
-            : 'border-gray-300 dark:border-gray-700 bg-gray-100/50 dark:bg-gray-800/30'
+          ${readOnly
+            ? 'border-gray-300 dark:border-gray-700 bg-gray-100/50 dark:bg-gray-800/30 cursor-default'
+            : isOver
+              ? 'border-btc bg-btc/10'
+              : 'border-gray-300 dark:border-gray-700 bg-gray-100/50 dark:bg-gray-800/30'
           }
           transition-colors
         `}
@@ -177,9 +183,28 @@ export default function ScriptBuilder({
         {script.length === 0 ? (
           <div className="flex items-center justify-center h-[200px] text-gray-500 text-sm text-center">
             <div>
-              <div className="mb-2">Drop OP codes here</div>
-              <div className="text-xs">or click &quot;+ Push Data&quot; to add data</div>
+              {readOnly ? (
+                <div className="text-sm">(empty)</div>
+              ) : (
+                <>
+                  <div className="mb-2">Drop OP codes here</div>
+                  <div className="text-xs">or click &quot;+ Push Data&quot; to add data</div>
+                </>
+              )}
             </div>
+          </div>
+        ) : readOnly ? (
+          <div className="space-y-2">
+            {script.map((item, index) => (
+              <div
+                key={index}
+                className="panel-base flex items-center gap-2"
+              >
+                <div className="flex-1 font-mono text-sm text-gray-800 dark:text-gray-200">
+                  {formatStackItem(item)}
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="space-y-2">

@@ -130,7 +130,7 @@ type Row = SearchResult & { rank: number }
  * For example, if we have results for specific people, remove the /docs/history/people overview page.
  */
 function deduplicateResults(rows: Row[]): Row[] {
-  const resultPaths = new Set(rows.map(r => r.path))
+  const _resultPaths = new Set(rows.map(r => r.path))
   const filtered: Row[] = []
   const overviewPagesToCheck = [
     '/docs/history/people',

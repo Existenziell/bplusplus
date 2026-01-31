@@ -26,7 +26,7 @@ export default function Breadcrumbs({ isSticky = false }: BreadcrumbsProps) {
         {breadcrumbs.map((crumb, index) => {
           const isFirst = index === 0
           const isLast = index === breadcrumbs.length - 1
-          const shouldShowLogo = isFirst && showLogoInsteadOfHome
+          const _shouldShowLogo = isFirst && showLogoInsteadOfHome
 
           return (
             <li key={crumb.href} className={`flex items-center flex-shrink-0 ${isFirst ? 'h-[42px] relative' : ''}`}>

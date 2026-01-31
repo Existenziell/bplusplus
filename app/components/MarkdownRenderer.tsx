@@ -235,7 +235,7 @@ const createHeading = (level: number) => {
   const HeadingComponent = ({ children, ...props }: any) => {
     const text = extractText(children)
     const id = generateSlug(text)
-    const { node, ...htmlProps } = props
+    const { node: _node, ...htmlProps } = props
 
     const Tag = `h${level}` as keyof React.JSX.IntrinsicElements
     return (
@@ -265,7 +265,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
   // Memoize components; any ok for react-markdown pass-through
   const components = useMemo<Components>(() => ({
-    div: ({ node, children, ...props }: any) => {
+    div: ({ node: _node, children, ...props }: any) => {
       const mermaidId = props['data-mermaid-id']
       if (mermaidId && mermaidDiagramMap.has(mermaidId)) {
         return <MermaidDiagram source={mermaidDiagramMap.get(mermaidId)!} />

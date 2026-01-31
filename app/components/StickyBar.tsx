@@ -9,7 +9,7 @@ import { useSearchModal } from '@/app/contexts/SearchModalContext'
 
 export default function StickyBar() {
   const pathname = usePathname()
-  const { isSticky, scrollDirection } = useStickyScroll()
+  const { isSticky, scrollDirection: _scrollDirection } = useStickyScroll()
   const { openSearch } = useSearchModal()
   const showBreadcrumbs = Boolean(pathname && pathname !== '/')
   

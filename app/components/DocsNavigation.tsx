@@ -180,7 +180,7 @@ export default function DocsNavigation({
                     )}
                     <Link
                       href={item.href}
-                      onClick={(e) => {
+                      onClick={(_e) => {
                         if (hasChildren && !expanded) {
                           toggleSection(item.href)
                         }

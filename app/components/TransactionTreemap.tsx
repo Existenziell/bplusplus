@@ -218,7 +218,7 @@ export default function TransactionTreemap({
   }, [sizeMetric])
 
   // Get label for selected metric
-  const getMetricLabel = (): string => {
+  const _getMetricLabel = (): string => {
     switch (sizeMetric) {
       case 'vbytes':
         return 'Transaction vBytes'

@@ -55,7 +55,7 @@ export default function BlockVisualizer() {
   const [blockData, setBlockData] = useState<ProcessedBlock | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [_isRefreshing, setIsRefreshing] = useState(false)
   const [previousBlocks, setPreviousBlocks] = useState<BlockSnapshot[]>([])
   const [isLoadingBlockHistory, setIsLoadingBlockHistory] = useState(false)
   const [blockHistorySettled, setBlockHistorySettled] = useState(false)

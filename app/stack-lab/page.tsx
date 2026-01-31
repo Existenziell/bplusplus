@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef, Suspense, type ReactNode } from 'react'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { DndContext, DragEndEvent, DragOverlay, closestCenter } from '@dnd-kit/core'
 import { useMobileWarning } from '@/app/hooks/useMobileWarning'
 import StackVisualization from '@/app/components/stack-lab/StackVisualization'
@@ -10,10 +11,77 @@ import ExecutionControls from '@/app/components/stack-lab/ExecutionControls'
 import ExecutionLog from '@/app/components/stack-lab/ExecutionLog'
 import ScriptTemplates from '@/app/components/stack-lab/ScriptTemplates'
 import StackLabCard from '@/app/components/stack-lab/StackLabCard'
+import StackLabChallenges from '@/app/components/stack-lab/StackLabChallenges'
 import { ScriptInterpreter, type StackItem, type ExecutionStep } from '@/app/utils/stackLabInterpreter'
 import { parseStackItem } from '@/app/utils/stackLabFormatters'
 import { ChevronDown } from '@/app/components/Icons'
-import MarkdownRenderer from '@/app/components/MarkdownRenderer'
+
+function StackLabTabsAndContent({ children }: { children: ReactNode }) {
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const router = useRouter()
+  const modeParam = searchParams.get('mode')
+  const activeTab: 'sandbox' | 'challenges' =
+    modeParam === 'challenges' ? 'challenges' : 'sandbox'
+
+  const handleTabChange = useCallback(
+    (tab: 'sandbox' | 'challenges') => {
+      router.replace(`${pathname}?mode=${tab}`, { scroll: false })
+    },
+    [pathname, router]
+  )
+
+  useEffect(() => {
+    if (modeParam === null) {
+      router.replace(`${pathname}?mode=sandbox`, { scroll: false })
+    }
+  }, [modeParam, pathname, router])
+
+  return (
+    <>
+      {/* Main tab bar: pill / segmented style */}
+      <div className="flex justify-center mb-6">
+        <div
+          className="inline-flex rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-200/60 dark:bg-gray-800/60 p-1"
+          role="tablist"
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'sandbox'}
+            onClick={() => handleTabChange('sandbox')}
+            className={`px-5 py-2.5 text-sm font-semibold rounded-md transition-colors ${
+              activeTab === 'sandbox'
+                ? 'bg-btc text-gray-900 shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+            }`}
+          >
+            Sandbox
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'challenges'}
+            onClick={() => handleTabChange('challenges')}
+            className={`px-5 py-2.5 text-sm font-semibold rounded-md transition-colors ${
+              activeTab === 'challenges'
+                ? 'bg-btc text-gray-900 shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+            }`}
+          >
+            Challenges
+          </button>
+        </div>
+      </div>
+
+      {activeTab === 'challenges' ? (
+        <StackLabChallenges />
+      ) : (
+        children
+      )}
+    </>
+  )
+}
 
 export default function StackLabPage() {
   const [isMounted, setIsMounted] = useState(false)
@@ -217,10 +285,8 @@ export default function StackLabPage() {
       <h1 className="heading-page text-center">
         Stack Lab
       </h1>
-      <p className="text-secondary text-center mb-8 max-w-2xl mx-auto">
-        Interactive Bitcoin Script Playground
-      </p>
-
+      <Suspense fallback={<div className="text-center text-secondary py-8">Loading...</div>}>
+        <StackLabTabsAndContent>
       <DndContext
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
@@ -228,6 +294,9 @@ export default function StackLabPage() {
         modifiers={[]}
         
       >
+        <p className="text-secondary text-center mb-4 max-w-2xl mx-auto">
+          Interactive Bitcoin Script Playground
+        </p>
         <div className="space-y-2 pb-12">
           {/* Flow Explanation */}
           <StackLabCard>
@@ -338,6 +407,8 @@ export default function StackLabPage() {
           </DragOverlay>
         </div>
       </DndContext>
+        </StackLabTabsAndContent>
+      </Suspense>
 
       {/* Mobile Warning Modal */}
       {showMobileWarning && !mobileWarningDismissed && (

@@ -158,9 +158,9 @@ export const docPages: DocPage[] = [
   { path: '/docs/adoption/stranded-energy', mdFile: 'app/docs/adoption/stranded-energy/stranded-energy.md', title: 'Stranded Energy and Flared Gas', section: 'adoption' },
   { path: '/docs/adoption/rural-communities', mdFile: 'app/docs/adoption/rural-communities/rural-communities.md', title: 'Rural Communities and Financial Inclusion', section: 'adoption' },
   { path: '/docs/adoption/use-cases', mdFile: 'app/docs/adoption/use-cases/use-cases.md', title: 'Bitcoin Use Cases', section: 'adoption' },
-
-  { path: '/docs/learning-resources', mdFile: 'app/docs/learning-resources/overview.md', title: 'Learning Resources', section: 'resources' },
-  { path: '/docs/community', mdFile: 'app/docs/community/overview.md', title: 'Community', section: 'resources' },
+  { path: '/docs/adoption/protocol-evolution', mdFile: 'app/docs/adoption/protocol-evolution/protocol-evolution.md', title: 'Protocol Evolution', section: 'adoption' },
+  { path: '/docs/adoption/layer2-sidechains', mdFile: 'app/docs/adoption/layer2-sidechains/layer2-sidechains.md', title: 'Layer 2 & Sidechains', section: 'adoption' },
+  { path: '/docs/adoption/ecosystem-trends', mdFile: 'app/docs/adoption/ecosystem-trends/ecosystem-trends.md', title: 'Ecosystem Trends', section: 'adoption' },
 
   { path: '/docs/glossary', mdFile: 'app/docs/glossary/terms.md', title: 'Glossary', section: 'glossary' },
 ]
@@ -213,11 +213,7 @@ export const sections: Record<string, { title: string; description: string }> = 
   },
   adoption: {
     title: 'Bitcoin Adoption',
-    description: 'Real-world examples of Bitcoin adoption, from stranded energy mining to financial inclusion in rural communities.',
-  },
-  resources: {
-    title: 'Resources & Community',
-    description: 'Learning resources, developer resources, and community links: books, courses, podcasts, conferences, contribution, and jobs.',
+    description: 'Real-world examples of Bitcoin adoption, from stranded energy mining to financial inclusion in rural communities, plus an outlook on the future of Bitcoin.',
   },
   glossary: {
     title: 'Bitcoin Glossary',
@@ -362,11 +358,6 @@ export const navItems: NavSection[] = [
     title: 'Adoption',
     href: '/docs/adoption',
     children: docPages.filter(p => p.section === 'adoption' && p.path !== '/docs/adoption').map(p => ({ title: p.title, href: p.path })),
-  },
-  {
-    title: 'Resources & Community',
-    href: '/docs/learning-resources',
-    children: docPages.filter(p => p.section === 'resources').map(p => ({ title: p.title, href: p.path })),
   },
 ]
 

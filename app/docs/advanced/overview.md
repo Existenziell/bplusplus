@@ -62,3 +62,4 @@ Always verify current implementation status and security considerations before u
 - [Wallets](/docs/wallets) - Privacy techniques and smart contracts
 - [Setup & Infrastructure](/docs/development) - Setup and infrastructure for Bitcoin development
 - [Bitcoin Development](/docs/bitcoin-development) - Practical development tasks
+- [Bitcoin Adoption](/docs/adoption) - Adoption and outlook (protocol evolution, Layer 2, ecosystem trends)

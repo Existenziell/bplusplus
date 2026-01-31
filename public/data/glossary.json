@@ -523,6 +523,10 @@
     "term": "Lightning Network",
     "definition": "A second-layer payment protocol built on top of Bitcoin that enables instant, high-volume, low-cost transactions through a network of payment channels. Instead of recording every payment on the blockchain, Lightning users open channels by locking Bitcoin in 2-of-2 multisig addresses, then exchange..."
   },
+  "liquid": {
+    "term": "Liquid",
+    "definition": "A federated sidechain pegged to Bitcoin that offers faster block times (about 1 minute), confidential transactions, and asset issuance. Liquid is used for exchange settlements, faster transfers between participating entities, and tokenized assets...."
+  },
   "locktime": {
     "term": "Locktime",
     "definition": "A transaction-level field (nLockTime) that prevents the transaction from being valid until a specified block height or Unix timestamp is reached. When set to a block height (values < 500,000,000) or timestamp (values >= 500,000,000), nodes will not relay or mine the transaction until that condition..."

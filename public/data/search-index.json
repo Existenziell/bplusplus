@@ -1024,16 +1024,22 @@
     "body": "Bitcoin Use Cases Bitcoin adoption spans individuals, businesses, and nations. From remittances to corporate treasuries to national adoption, Bitcoin is being used in diverse and innovative ways. Remittances The Global Remittance Market Remittances (money sent by migrant workers to their families) total over $800 billion annually. Traditional remittances face: High fees: Average 6-10%, often much higher for small amounts Slow transfers: Can take days or weeks Limited access: Recipients may need "
   },
   {
-    "path": "/docs/learning-resources",
-    "title": "Learning Resources",
-    "section": "resources",
-    "body": "Learning Resources Books, courses, certifications, and sites for learning Bitcoin and Lightning development. This site’s docs and Tools cover protocol and scripting; the links below point to deeper or structured learning. Notes & Docs Learn Me A Bitcoin – Technical explanations and interactive tools. Bitcoin.org – Developer Documentation – Guides and reference. Bitcoin Optech – Upgrades, scaling, and operator topics. Books Programming Bitcoin – Build Bitcoin tooling from scratch (Python). "
+    "path": "/docs/adoption/protocol-evolution",
+    "title": "Protocol Evolution",
+    "section": "adoption",
+    "body": "Protocol Evolution Bitcoin's rules change slowly and conservatively. Upgrades are proposed as BIPs, debated by the community, and implemented as soft forks when there is broad agreement. Two areas that may shape the next phase of protocol evolution are: Covenants – Proposed opcodes (e.g. OP_CTV, SIGHASH_ANYPREVOUT) that would let users constrain how their bitcoin can be spent in future transactions. This could enable vaults, better Lightning channel security, and more expressive contracts. See "
   },
   {
-    "path": "/docs/community",
-    "title": "Community",
-    "section": "resources",
-    "body": "Community Podcasts, conferences, meetups, discussions, contribution, funding, and jobs in the Bitcoin and Lightning ecosystem. Discussions bitcoin-dev – Mailing list for protocol and development. Lightning-dev – Lightning protocol and implementation. Bitcoin Stack Exchange – Q&A for developers and users. Podcasts Bitcoin Optech – Weekly technical summary. Stephan Livera Podcast – Bitcoin and Lightning interviews and topics. What Bitcoin Did – Interviews and ecosystem coverage. Conferences & "
+    "path": "/docs/adoption/layer2-sidechains",
+    "title": "Layer 2 & Sidechains",
+    "section": "adoption",
+    "body": "Layer 2 & Sidechains Scaling and feature experiments are happening both on Layer 2 and on sidechains: Lightning Network – The main Layer 2 for fast, low-fee payments. Development continues on reliability, liquidity, and usability (e.g. BOLT12, anchor outputs). Ark – A proposed Layer 2 design aimed at fast off-chain transfers with fewer liquidity constraints than traditional channel-based models; still in research/proposal stage. Liquid – A federated sidechain with faster settlements, "
+  },
+  {
+    "path": "/docs/adoption/ecosystem-trends",
+    "title": "Ecosystem Trends",
+    "section": "adoption",
+    "body": "Ecosystem Trends Beyond the protocol and Layer 2, the Bitcoin ecosystem is evolving in several directions: Institutional adoption – More custodians, funds, and companies are integrating Bitcoin. This affects adoption patterns, investment products, and regulatory attention. Developer tooling – Libraries, SDKs, and tools for building on Bitcoin and Lightning are improving. See Libraries & SDKs and Bitcoin Development for practical resources. Education and standards – Certifications and shared "
   },
   {
     "path": "/docs/glossary",
@@ -1863,6 +1869,12 @@
       "ln",
       "lightning"
     ]
+  },
+  {
+    "path": "/docs/glossary#liquid",
+    "title": "Liquid",
+    "section": "glossary",
+    "body": "A federated sidechain pegged to Bitcoin that offers faster block times (about 1 minute), confidential transactions, and asset issuance. Liquid is used for exchange settlements, faster transfers between participating entities, and tokenized assets...."
   },
   {
     "path": "/docs/glossary#locktime",

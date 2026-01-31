@@ -167,7 +167,7 @@ export default function DocsNavigation({
               return (
                 <li key={item.href}>
                   <div className="flex items-center">
-                    {hasChildren && (
+                    {hasChildren ? (
                       <button
                         onClick={() => toggleSection(item.href)}
                         className="mr-1 p-1 text-gray-500 hover:text-btc transition-colors"
@@ -177,6 +177,8 @@ export default function DocsNavigation({
                           className={`w-3 h-3 transition-transform ${expanded ? 'rotate-90' : ''}`}
                         />
                       </button>
+                    ) : (
+                      <span className="w-5 shrink-0" aria-hidden />
                     )}
                     <Link
                       href={item.href}

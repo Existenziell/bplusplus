@@ -4385,50 +4385,9 @@
       "slug": "related-topics"
     }
   ],
-  "/docs/learning-resources": [
-    {
-      "title": "Notes & Docs",
-      "slug": "notes-docs"
-    },
-    {
-      "title": "Books",
-      "slug": "books"
-    },
-    {
-      "title": "Courses & Training",
-      "slug": "courses-training"
-    },
-    {
-      "title": "Certifications",
-      "slug": "certifications"
-    },
-    {
-      "title": "More",
-      "slug": "more"
-    }
-  ],
-  "/docs/community": [
-    {
-      "title": "Discussions",
-      "slug": "discussions"
-    },
-    {
-      "title": "Podcasts",
-      "slug": "podcasts"
-    },
-    {
-      "title": "Conferences & Meetups",
-      "slug": "conferences-meetups"
-    },
-    {
-      "title": "Contribution",
-      "slug": "contribution"
-    },
-    {
-      "title": "Funding & Jobs",
-      "slug": "funding-jobs"
-    }
-  ],
+  "/docs/adoption/protocol-evolution": [],
+  "/docs/adoption/layer2-sidechains": [],
+  "/docs/adoption/ecosystem-trends": [],
   "/docs/glossary": [
     {
       "title": "0-9",

@@ -14,13 +14,7 @@ Taproot is a major Bitcoin protocol upgrade activated in November 2021 (block 70
 
 ### 1. Schnorr Signatures (BIP 340)
 
-Schnorr signatures replace ECDSA for Taproot outputs:
-
-**Benefits**:
-- **Linear**: Enables signature aggregation ([MuSig](https://github.com/bitcoin/bips/blob/master/bip-0327.mediawiki): multiple signers produce a single Schnorr signature for a combined key; see BIP 327 for MuSig2)
-- **Smaller**: 64 bytes vs 71-72 bytes for ECDSA
-- **Batch verification**: Verify multiple signatures faster
-- **Proven security**: Simpler mathematics, better understood
+Taproot uses Schnorr for all P2TR signatures: 64-byte fixed size, signature aggregation ([MuSig](/docs/glossary#musig) / MuSig2), and batch verification. See [Schnorr Signatures](/docs/bitcoin/cryptography#schnorr-signatures) for the full treatment.
 
 ### 2. MAST (Merkle Abstract Syntax Trees)
 
@@ -392,7 +386,7 @@ After Taproot (key path):
 
 ## MuSig (Multi-Signature Aggregation)
 
-Taproot enables MuSig, where multiple signatures are combined into one:
+Taproot enables MuSig, where multiple signatures are combined into one. The underlying [Schnorr](/docs/bitcoin/cryptography#schnorr-signatures) scheme makes this aggregation possible.
 
 ```text
 Traditional Multisig:

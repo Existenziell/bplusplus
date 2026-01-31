@@ -671,6 +671,10 @@
       "slug": "hash-functions"
     },
     {
+      "title": "Merkle Trees",
+      "slug": "merkle-trees"
+    },
+    {
       "title": "Elliptic Curve Cryptography",
       "slug": "elliptic-curve-cryptography"
     },
@@ -679,8 +683,12 @@
       "slug": "digital-signatures"
     },
     {
-      "title": "Merkle Trees",
-      "slug": "merkle-trees"
+      "title": "ECDSA",
+      "slug": "ecdsa"
+    },
+    {
+      "title": "Schnorr Signatures",
+      "slug": "schnorr-signatures"
     },
     {
       "title": "Address Encoding",

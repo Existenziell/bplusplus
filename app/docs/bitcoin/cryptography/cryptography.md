@@ -334,560 +334,6 @@ console.log(`Hash160: ${hash160(publicKey).toString('hex')}`);
 
 ---
 
-## Elliptic Curve Cryptography
-
-![Elliptic Curve Cryptography](/images/docs/ECC.webp)
-
-**Elliptic Curve Cryptography (ECC)** is a public-key cryptography system based on the algebraic structure of elliptic curves over finite fields.
-
-**Why Bitcoin uses ECC:**
-- Smaller key sizes than RSA (256-bit vs 3072-bit for equivalent security)
-- Faster computation
-- Lower bandwidth and storage requirements
-
-### The secp256k1 Curve
-
-Bitcoin uses the **secp256k1** elliptic curve (see [ECDSA](/docs/glossary#ecdsa-elliptic-curve-digital-signature-algorithm)), defined by the equation:
-
-```
-y² = x³ + 7 (mod p)
-```
-
-**Parameters:**
-- **p** (prime): 2²⁵⁶ - 2³² - 977
-- **Order (n)**: Number of points on the curve
-- **Generator point (G)**: Fixed starting point for key generation
-
-**Why secp256k1?**
-- Chosen by Satoshi (not the most common curve at the time)
-- Efficiently computable
-- No known weaknesses
-- Parameters are "nothing up my sleeve" numbers (verifiably random)
-
-### Key Generation
-
-**Private Key:**
-- Random 256-bit number (1 to n-1)
-- Must be kept secret
-- Generated from cryptographically secure random source
-
-**Public Key:**
-- Derived from private key: `Public Key = Private Key × G`
-- Point multiplication on the elliptic curve
-- Cannot reverse to find private key (discrete logarithm problem)
-- Can be shared publicly
-
-**Key Relationship:**
-```
-Random Number → Private Key → Public Key → Bitcoin Address
-     (256 bits)    (256 bits)   (512 bits)   (160 bits)
-```
-
-### Code: Key Generation
-
-:::code-group
-```rust
-// In Cargo.toml: hex = "0.4"
-use hex;
-use secp256k1::{Secp256k1, SecretKey, PublicKey};
-use secp256k1::rand::rngs::OsRng;
-
-fn main() {
-    let secp = Secp256k1::new();
-    
-    // Generate random private key
-    let (secret_key, public_key) = secp.generate_keypair(&mut OsRng);
-    
-    // Serialize keys
-    let private_key_bytes = secret_key.secret_bytes();
-    let public_key_compressed = public_key.serialize();                  // 33 bytes
-    let public_key_uncompressed = public_key.serialize_uncompressed();   // 65 bytes
-    
-    println!("Private Key: {}", hex::encode(private_key_bytes));
-    println!("Public Key (compressed): {}", hex::encode(public_key_compressed));
-    println!("Public Key (uncompressed): {}", hex::encode(public_key_uncompressed));
-}
-```
-
-```python
-import secrets
-from secp256k1 import PrivateKey
-
-# Generate random private key (32 bytes)
-private_key_bytes = secrets.token_bytes(32)
-private_key = PrivateKey(private_key_bytes)
-
-# Derive public key
-public_key_compressed = private_key.pubkey.serialize()           # 33 bytes
-public_key_uncompressed = private_key.pubkey.serialize(False)    # 65 bytes
-
-print(f"Private Key: {private_key_bytes.hex()}")
-print(f"Public Key (compressed): {public_key_compressed.hex()}")
-print(f"Public Key (uncompressed): {public_key_uncompressed.hex()}")
-```
-
-```cpp
-#include <secp256k1.h>
-#include <random>
-
-int main() {
-    // Create context
-    secp256k1_context* ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
-    
-    // Generate random private key (use proper CSPRNG in production)
-    unsigned char private_key[32];
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 255);
-    for (int i = 0; i < 32; i++) {
-        private_key[i] = dis(gen);
-    }
-    
-    // Verify private key is valid
-    while (!secp256k1_ec_seckey_verify(ctx, private_key)) {
-        for (int i = 0; i < 32; i++) private_key[i] = dis(gen);
-    }
-    
-    // Derive public key
-    secp256k1_pubkey pubkey;
-    secp256k1_ec_pubkey_create(ctx, &pubkey, private_key);
-    
-    // Serialize public key (compressed)
-    unsigned char public_key_compressed[33];
-    size_t len = 33;
-    secp256k1_ec_pubkey_serialize(ctx, public_key_compressed, &len, 
-                                   &pubkey, SECP256K1_EC_COMPRESSED);
-    
-    secp256k1_context_destroy(ctx);
-}
-```
-
-```go
-package main
-
-import (
-	"crypto/rand"
-	"encoding/hex"
-	"fmt"
-
-	"github.com/btcsuite/btcd/btcec/v2"
-)
-
-func main() {
-	// Generate random private key
-	privateKey, err := btcec.NewPrivateKey()
-	if err != nil {
-		panic(err)
-	}
-
-	// Serialize keys
-	privateKeyBytes := privateKey.Serialize()
-	publicKey := privateKey.PubKey()
-	publicKeyCompressed := publicKey.SerializeCompressed()     // 33 bytes
-	publicKeyUncompressed := publicKey.SerializeUncompressed()  // 65 bytes
-
-	fmt.Printf("Private Key: %s\n", hex.EncodeToString(privateKeyBytes))
-	fmt.Printf("Public Key (compressed): %s\n", hex.EncodeToString(publicKeyCompressed))
-	fmt.Printf("Public Key (uncompressed): %s\n", hex.EncodeToString(publicKeyUncompressed))
-}
-```
-
-```javascript
-const { randomBytes } = require('crypto');
-const secp256k1 = require('secp256k1');
-
-// Generate random private key
-let privateKey;
-do {
-  privateKey = randomBytes(32);
-} while (!secp256k1.privateKeyVerify(privateKey));
-
-// Derive public key
-const publicKeyCompressed = secp256k1.publicKeyCreate(privateKey, true);    // 33 bytes
-const publicKeyUncompressed = secp256k1.publicKeyCreate(privateKey, false); // 65 bytes
-
-console.log(`Private Key: ${privateKey.toString('hex')}`);
-console.log(`Public Key (compressed): ${Buffer.from(publicKeyCompressed).toString('hex')}`);
-console.log(`Public Key (uncompressed): ${Buffer.from(publicKeyUncompressed).toString('hex')}`);
-```
-:::
-
-### The Discrete Logarithm Problem
-
-**Why can't you derive the private key from the public key?**
-
-Given `Q = k × G` where:
-- `Q` is the public key (known)
-- `G` is the generator point (known)
-- `k` is the private key (unknown)
-
-Finding `k` requires solving the **Elliptic Curve Discrete Logarithm Problem (ECDLP)**, which is computationally infeasible for sufficiently large numbers.
-
-**Security Level:**
-- 256-bit private key = ~128 bits of security
-- Would take billions of years with current technology
-- Quantum computers could theoretically break this (see future considerations)
-
----
-
-## Digital Signatures
-
-A **digital signature** proves:
-1. **Authenticity**: Message came from the claimed sender
-2. **Integrity**: Message hasn't been altered
-3. **Non-repudiation**: Sender cannot deny sending
-
-### ECDSA (Elliptic Curve Digital Signature Algorithm)
-
-Bitcoin originally used **ECDSA** for all signatures.
-
-**Signing Process:**
-1. Hash the message: `z = SHA256(message)`
-2. Generate random number `k` (nonce)
-3. Calculate point `R = k × G`
-4. Calculate signature: `s = k⁻¹(z + r × privateKey) mod n`
-5. Signature is the pair `(r, s)`
-
-**Verification Process:**
-1. Hash the message: `z = SHA256(message)`
-2. Calculate: `u1 = z × s⁻¹ mod n`
-3. Calculate: `u2 = r × s⁻¹ mod n`
-4. Calculate point: `P = u1 × G + u2 × PublicKey`
-5. Signature valid if `P.x = r`
-
-**ECDSA Characteristics:**
-- Signature size: 70-72 bytes (DER encoded)
-- Requires secure random nonce `k`
-- Reusing `k` exposes private key!
-
-### Code: ECDSA Signing and Verification
-
-:::code-group
-```rust
-// In Cargo.toml: hex = "0.4"
-use hex;
-use secp256k1::{Secp256k1, SecretKey, Message};
-use sha2::{Sha256, Digest};
-
-fn main() {
-    let secp = Secp256k1::new();
-    
-    // Private key
-    let private_key = SecretKey::from_slice(
-        &hex::decode("e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35").unwrap()
-    ).unwrap();
-    
-    // Message to sign
-    let message = b"Hello, Bitcoin!";
-    let message_hash = Sha256::digest(message);
-    let msg = Message::from_digest_slice(&message_hash).unwrap();
-    
-    // Sign
-    let signature = secp.sign_ecdsa(&msg, &private_key);
-    println!("Message Hash: {}", hex::encode(message_hash));
-    println!("Signature: {}", hex::encode(signature.serialize_compact()));
-    
-    // Verify
-    let public_key = private_key.public_key(&secp);
-    let is_valid = secp.verify_ecdsa(&msg, &signature, &public_key).is_ok();
-    println!("Signature valid: {}", is_valid);
-}
-```
-
-```python
-import hashlib
-from secp256k1 import PrivateKey
-
-# Private key (use secrets.token_bytes(32) for real applications)
-private_key = PrivateKey(bytes.fromhex(
-    "e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35"
-))
-
-# Message to sign
-message = b"Hello, Bitcoin!"
-message_hash = hashlib.sha256(message).digest()
-
-# Sign
-signature = private_key.ecdsa_sign(message_hash)
-signature_der = private_key.ecdsa_serialize(signature)
-
-print(f"Message Hash: {message_hash.hex()}")
-print(f"Signature (DER): {signature_der.hex()}")
-
-# Verify
-is_valid = private_key.pubkey.ecdsa_verify(message_hash, signature)
-print(f"Signature valid: {is_valid}")
-```
-
-```cpp
-#include <secp256k1.h>
-#include <openssl/sha.h>
-#include <cstring>
-
-int main() {
-    secp256k1_context* ctx = secp256k1_context_create(
-        SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY
-    );
-    
-    // Private key (initialize from hex in production)
-    unsigned char private_key[32];
-    // hex: "e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35"
-    
-    // Message hash
-    const char* message = "Hello, Bitcoin!";
-    unsigned char message_hash[SHA256_DIGEST_LENGTH];
-    SHA256((unsigned char*)message, strlen(message), message_hash);
-    
-    // Sign
-    secp256k1_ecdsa_signature signature;
-    secp256k1_ecdsa_sign(ctx, &signature, message_hash, private_key, NULL, NULL);
-    
-    // Serialize signature
-    unsigned char sig_serialized[64];
-    secp256k1_ecdsa_signature_serialize_compact(ctx, sig_serialized, &signature);
-    
-    // Get public key and verify
-    secp256k1_pubkey pubkey;
-    secp256k1_ec_pubkey_create(ctx, &pubkey, private_key);
-    int is_valid = secp256k1_ecdsa_verify(ctx, &signature, message_hash, &pubkey);
-    
-    secp256k1_context_destroy(ctx);
-    return 0;
-}
-```
-
-```go
-package main
-
-import (
-	"crypto/sha256"
-	"encoding/hex"
-	"fmt"
-
-	"github.com/btcsuite/btcd/btcec/v2"
-	"github.com/btcsuite/btcd/btcec/v2/ecdsa"
-)
-
-func main() {
-	// Private key
-	privateKeyBytes, _ := hex.DecodeString("e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35")
-	privateKey, _ := btcec.PrivKeyFromBytes(privateKeyBytes)
-
-	// Message to sign
-	message := []byte("Hello, Bitcoin!")
-	messageHash := sha256.Sum256(message)
-
-	// Sign
-	signature := ecdsa.Sign(privateKey, messageHash[:])
-	signatureBytes := signature.Serialize()
-
-	fmt.Printf("Message Hash: %s\n", hex.EncodeToString(messageHash[:]))
-	fmt.Printf("Signature: %s\n", hex.EncodeToString(signatureBytes))
-
-	// Verify
-	publicKey := privateKey.PubKey()
-	isValid := signature.Verify(messageHash[:], publicKey)
-	fmt.Printf("Signature valid: %v\n", isValid)
-}
-```
-
-```javascript
-const crypto = require('crypto');
-const secp256k1 = require('secp256k1');
-
-// Private key
-const privateKey = Buffer.from(
-  'e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35', 'hex'
-);
-
-// Message to sign
-const message = Buffer.from('Hello, Bitcoin!');
-const messageHash = crypto.createHash('sha256').update(message).digest();
-
-// Sign
-const sigObj = secp256k1.ecdsaSign(messageHash, privateKey);
-console.log(`Message Hash: ${messageHash.toString('hex')}`);
-console.log(`Signature: ${Buffer.from(sigObj.signature).toString('hex')}`);
-
-// Verify
-const publicKey = secp256k1.publicKeyCreate(privateKey);
-const isValid = secp256k1.ecdsaVerify(sigObj.signature, messageHash, publicKey);
-console.log(`Signature valid: ${isValid}`);
-```
-:::
-
-### [Schnorr Signatures](/docs/glossary#schnorr-signature)
-
-![Schnorr Signature Equations](/images/docs/schnorr-equations.png)
-
-**Schnorr signatures** were introduced with the [Taproot](/docs/glossary#taproot) upgrade (2021).
-
-**Advantages over ECDSA:**
-- **Simpler**: Mathematically cleaner
-- **Smaller**: Fixed 64-byte signatures
-- **Linearity**: Enables key and signature aggregation
-- **Provably secure**: Better security proofs
-- **Batch verification**: Faster validation of multiple signatures
-
-**Signature Aggregation:**
-Multiple signatures can be combined into one, enabling:
-- **[MuSig](/docs/glossary#musig)**: Multi-signature schemes that look like single signatures
-- **Privacy**: Multi-party transactions appear as single-party
-- **Efficiency**: Reduced transaction size and fees
-
-### Code: BIP-340 Schnorr Tagged Hash
-
-:::code-group
-```rust
-// In Cargo.toml: hex = "0.4"
-use hex;
-use sha2::{Sha256, Digest};
-
-fn tagged_hash(tag: &str, msg: &[u8]) -> [u8; 32] {
-    let tag_hash = Sha256::digest(tag.as_bytes());
-    let mut hasher = Sha256::new();
-    hasher.update(&tag_hash);
-    hasher.update(&tag_hash);
-    hasher.update(msg);
-    hasher.finalize().into()
-}
-
-fn main() {
-    let challenge = tagged_hash("BIP0340/challenge", b"some data");
-    println!("Challenge hash: {}", hex::encode(challenge));
-}
-```
-
-```python
-import hashlib
-
-def tagged_hash(tag: str, msg: bytes) -> bytes:
-    """BIP-340 tagged hash for domain separation"""
-    tag_hash = hashlib.sha256(tag.encode()).digest()
-    return hashlib.sha256(tag_hash + tag_hash + msg).digest()
-
-# Example tags used in Bitcoin
-challenge = tagged_hash("BIP0340/challenge", b"some data")
-aux = tagged_hash("BIP0340/aux", b"random auxiliary data")
-nonce = tagged_hash("BIP0340/nonce", b"nonce derivation input")
-
-print(f"Challenge hash: {challenge.hex()}")
-```
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <array>
-#include <string>
-#include <openssl/sha.h>
-
-using Hash256 = std::array<uint8_t, 32>;
-
-Hash256 sha256(const std::vector<uint8_t>& data) {
-    Hash256 hash;
-    SHA256(data.data(), data.size(), hash.data());
-    return hash;
-}
-
-Hash256 tagged_hash(const std::string& tag, const std::vector<uint8_t>& msg) {
-    // Hash the tag
-    std::vector<uint8_t> tag_bytes(tag.begin(), tag.end());
-    Hash256 tag_hash = sha256(tag_bytes);
-    
-    // Concatenate: tag_hash || tag_hash || msg
-    std::vector<uint8_t> data;
-    data.insert(data.end(), tag_hash.begin(), tag_hash.end());
-    data.insert(data.end(), tag_hash.begin(), tag_hash.end());
-    data.insert(data.end(), msg.begin(), msg.end());
-    
-    return sha256(data);
-}
-
-std::string to_hex(const Hash256& hash) {
-    std::string result;
-    for (uint8_t byte : hash) {
-        char buf[3];
-        snprintf(buf, sizeof(buf), "%02x", byte);
-        result += buf;
-    }
-    return result;
-}
-
-int main() {
-    std::vector<uint8_t> msg = {'s', 'o', 'm', 'e', ' ', 'd', 'a', 't', 'a'};
-    Hash256 challenge = tagged_hash("BIP0340/challenge", msg);
-    std::cout << "Challenge hash: " << to_hex(challenge) << std::endl;
-    return 0;
-}
-```
-
-```go
-package main
-
-import (
-	"crypto/sha256"
-	"encoding/hex"
-	"fmt"
-)
-
-func TaggedHash(tag string, msg []byte) [32]byte {
-	tagHash := sha256.Sum256([]byte(tag))
-	
-	// Concatenate: tag_hash || tag_hash || msg
-	data := make([]byte, 0, len(tagHash)*2+len(msg))
-	data = append(data, tagHash[:]...)
-	data = append(data, tagHash[:]...)
-	data = append(data, msg...)
-	
-	return sha256.Sum256(data)
-}
-
-func main() {
-	// Example tags used in Bitcoin
-	challenge := TaggedHash("BIP0340/challenge", []byte("some data"))
-	aux := TaggedHash("BIP0340/aux", []byte("random auxiliary data"))
-	nonce := TaggedHash("BIP0340/nonce", []byte("nonce derivation input"))
-	
-	fmt.Printf("Challenge hash: %s\n", hex.EncodeToString(challenge[:]))
-	fmt.Printf("Aux hash: %s\n", hex.EncodeToString(aux[:]))
-	fmt.Printf("Nonce hash: %s\n", hex.EncodeToString(nonce[:]))
-}
-```
-
-```javascript
-const crypto = require('crypto');
-
-function taggedHash(tag, msg) {
-    const tagHash = crypto.createHash('sha256').update(tag).digest();
-    return crypto.createHash('sha256')
-        .update(tagHash)
-        .update(tagHash)
-        .update(msg)
-        .digest();
-}
-
-// Example tags used in Bitcoin
-const challenge = taggedHash('BIP0340/challenge', Buffer.from('some data'));
-const aux = taggedHash('BIP0340/aux', Buffer.from('random auxiliary data'));
-const nonce = taggedHash('BIP0340/nonce', Buffer.from('nonce derivation input'));
-
-console.log(`Challenge hash: ${challenge.toString('hex')}`);
-```
-:::
-
-### Signing a Bitcoin Transaction
-
-When you spend bitcoin:
-
-1. **Construct transaction** with [inputs](/docs/glossary#input) and [outputs](/docs/glossary#output)
-2. **Create signature hash** (sighash) of transaction data
-3. **Sign** the sighash with your private key
-4. **Include signature** in transaction's [witness](/docs/glossary#witness)/[scriptSig](/docs/glossary#scriptsig)
-5. **Broadcast** transaction to network
-6. **Nodes verify** signature matches public key and transaction
-
----
-
 ## Merkle Trees
 
 A **Merkle tree** (or hash tree) is a data structure that efficiently summarizes and verifies large datasets.
@@ -1168,7 +614,7 @@ function merkleRoot(hashes) {
 function verifyMerkleProof(txHash, proof, root, index) {
     let current = txHash;
     for (const sibling of proof) {
-        if (index % 2 === 0) {
+        if (index % 2 == 0) {
             current = doubleSha256(Buffer.concat([current, sibling]));
         } else {
             current = doubleSha256(Buffer.concat([sibling, current]));
@@ -1186,6 +632,603 @@ const root = merkleRoot(txHashes);
 console.log(`Merkle Root: ${root.toString('hex')}`);
 ```
 :::
+
+---
+
+## Elliptic Curve Cryptography
+
+![Elliptic Curve Cryptography](/images/docs/ECC.webp)
+
+**Elliptic Curve Cryptography (ECC)** is a public-key cryptography system based on the algebraic structure of elliptic curves over finite fields.
+
+**Why Bitcoin uses ECC:**
+- Smaller key sizes than RSA (256-bit vs 3072-bit for equivalent security)
+- Faster computation
+- Lower bandwidth and storage requirements
+
+### The secp256k1 Curve
+
+Bitcoin uses the **secp256k1** elliptic curve (used by both [ECDSA](#ecdsa) and [Schnorr](#schnorr-signatures) for signatures), defined by the equation:
+
+```
+y² = x³ + 7 (mod p)
+```
+
+**Parameters:**
+- **p** (prime): 2²⁵⁶ - 2³² - 977
+- **Order (n)**: Number of points on the curve
+- **Generator point (G)**: Fixed starting point for key generation
+
+**Why secp256k1?**
+- Chosen by Satoshi (not the most common curve at the time)
+- Efficiently computable
+- No known weaknesses
+- Parameters are "nothing up my sleeve" numbers (verifiably random)
+
+### Key Generation
+
+**Private Key:**
+- Random 256-bit number (1 to n-1)
+- Must be kept secret
+- Generated from cryptographically secure random source
+
+**Public Key:**
+- Derived from private key: `Public Key = Private Key × G`
+- Point multiplication on the elliptic curve
+- Cannot reverse to find private key (discrete logarithm problem)
+- Can be shared publicly
+
+**Key Relationship:**
+```
+Random Number → Private Key → Public Key → Bitcoin Address
+     (256 bits)    (256 bits)   (512 bits)   (160 bits)
+```
+
+### Code: Key Generation
+
+:::code-group
+```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
+use secp256k1::{Secp256k1, SecretKey, PublicKey};
+use secp256k1::rand::rngs::OsRng;
+
+fn main() {
+    let secp = Secp256k1::new();
+    
+    // Generate random private key
+    let (secret_key, public_key) = secp.generate_keypair(&mut OsRng);
+    
+    // Serialize keys
+    let private_key_bytes = secret_key.secret_bytes();
+    let public_key_compressed = public_key.serialize();                  // 33 bytes
+    let public_key_uncompressed = public_key.serialize_uncompressed();   // 65 bytes
+    
+    println!("Private Key: {}", hex::encode(private_key_bytes));
+    println!("Public Key (compressed): {}", hex::encode(public_key_compressed));
+    println!("Public Key (uncompressed): {}", hex::encode(public_key_uncompressed));
+}
+```
+
+```python
+import secrets
+from secp256k1 import PrivateKey
+
+# Generate random private key (32 bytes)
+private_key_bytes = secrets.token_bytes(32)
+private_key = PrivateKey(private_key_bytes)
+
+# Derive public key
+public_key_compressed = private_key.pubkey.serialize()           # 33 bytes
+public_key_uncompressed = private_key.pubkey.serialize(False)    # 65 bytes
+
+print(f"Private Key: {private_key_bytes.hex()}")
+print(f"Public Key (compressed): {public_key_compressed.hex()}")
+print(f"Public Key (uncompressed): {public_key_uncompressed.hex()}")
+```
+
+```cpp
+#include <secp256k1.h>
+#include <random>
+
+int main() {
+    // Create context
+    secp256k1_context* ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
+    
+    // Generate random private key (use proper CSPRNG in production)
+    unsigned char private_key[32];
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 255);
+    for (int i = 0; i < 32; i++) {
+        private_key[i] = dis(gen);
+    }
+    
+    // Verify private key is valid
+    while (!secp256k1_ec_seckey_verify(ctx, private_key)) {
+        for (int i = 0; i < 32; i++) private_key[i] = dis(gen);
+    }
+    
+    // Derive public key
+    secp256k1_pubkey pubkey;
+    secp256k1_ec_pubkey_create(ctx, &pubkey, private_key);
+    
+    // Serialize public key (compressed)
+    unsigned char public_key_compressed[33];
+    size_t len = 33;
+    secp256k1_ec_pubkey_serialize(ctx, public_key_compressed, &len, 
+                                   &pubkey, SECP256K1_EC_COMPRESSED);
+    
+    secp256k1_context_destroy(ctx);
+}
+```
+
+```go
+package main
+
+import (
+	"crypto/rand"
+	"encoding/hex"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+)
+
+func main() {
+	// Generate random private key
+	privateKey, err := btcec.NewPrivateKey()
+	if err != nil {
+		panic(err)
+	}
+
+	// Serialize keys
+	privateKeyBytes := privateKey.Serialize()
+	publicKey := privateKey.PubKey()
+	publicKeyCompressed := publicKey.SerializeCompressed()     // 33 bytes
+	publicKeyUncompressed := publicKey.SerializeUncompressed()  // 65 bytes
+
+	fmt.Printf("Private Key: %s\n", hex.EncodeToString(privateKeyBytes))
+	fmt.Printf("Public Key (compressed): %s\n", hex.EncodeToString(publicKeyCompressed))
+	fmt.Printf("Public Key (uncompressed): %s\n", hex.EncodeToString(publicKeyUncompressed))
+}
+```
+
+```javascript
+const { randomBytes } = require('crypto');
+const secp256k1 = require('secp256k1');
+
+// Generate random private key
+let privateKey;
+do {
+  privateKey = randomBytes(32);
+} while (!secp256k1.privateKeyVerify(privateKey));
+
+// Derive public key
+const publicKeyCompressed = secp256k1.publicKeyCreate(privateKey, true);    // 33 bytes
+const publicKeyUncompressed = secp256k1.publicKeyCreate(privateKey, false); // 65 bytes
+
+console.log(`Private Key: ${privateKey.toString('hex')}`);
+console.log(`Public Key (compressed): ${Buffer.from(publicKeyCompressed).toString('hex')}`);
+console.log(`Public Key (uncompressed): ${Buffer.from(publicKeyUncompressed).toString('hex')}`);
+```
+:::
+
+### The Discrete Logarithm Problem
+
+**Why can't you derive the private key from the public key?**
+
+Given `Q = k × G` where:
+- `Q` is the public key (known)
+- `G` is the generator point (known)
+- `k` is the private key (unknown)
+
+Finding `k` requires solving the **Elliptic Curve Discrete Logarithm Problem (ECDLP)**, which is computationally infeasible for sufficiently large numbers.
+
+**Security Level:**
+- 256-bit private key = ~128 bits of security
+- Would take billions of years with current technology
+- Quantum computers could theoretically break this (see future considerations)
+
+### ECC and Signature Schemes
+
+**Elliptic Curve Cryptography (ECC)** provides the curve (secp256k1), key generation, and the underlying math—it answers *how you get a public key from a private key*. **Signature schemes** such as [ECDSA](#ecdsa) and [Schnorr](#schnorr-signatures) are different algorithms built on top of ECC that use those key pairs to *sign* and *verify* messages. Bitcoin uses the same curve for both; ECC is the foundation, ECDSA and Schnorr are the signature algorithms.
+
+---
+
+## Digital Signatures
+
+A **digital signature** proves:
+1. **Authenticity**: Message came from the claimed sender
+2. **Integrity**: Message hasn't been altered
+3. **Non-repudiation**: Sender cannot deny sending
+
+**Signature types in Bitcoin:**
+- **[ECDSA](#ecdsa)**: Used for legacy outputs (P2PKH, P2SH, pre-Taproot SegWit).
+- **[Schnorr](#schnorr-signatures)** (BIP 340): Used for [Taproot](/docs/glossary#taproot) (P2TR) outputs; enables smaller signatures and aggregation.
+
+### Signing a Bitcoin Transaction
+
+When you spend bitcoin:
+
+1. **Construct transaction** with [inputs](/docs/glossary#input) and [outputs](/docs/glossary#output)
+2. **Create signature hash** (sighash) of transaction data
+3. **Sign** the sighash with your private key
+4. **Include signature** in transaction's [witness](/docs/glossary#witness)/[scriptSig](/docs/glossary#scriptsig)
+5. **Broadcast** transaction to network
+6. **Nodes verify** signature matches public key and transaction
+
+---
+
+## ECDSA
+
+**ECDSA** (Elliptic Curve Digital Signature Algorithm) was Bitcoin's original signature scheme. Bitcoin used it for all signatures until [Taproot](/docs/glossary#taproot) introduced [Schnorr](#schnorr-signatures).
+
+**Signing Process:**
+1. Hash the message: `z = SHA256(message)`
+2. Generate random number `k` (nonce)
+3. Calculate point `R = k × G`
+4. Calculate signature: `s = k⁻¹(z + r × privateKey) mod n`
+5. Signature is the pair `(r, s)`
+
+**Verification Process:**
+1. Hash the message: `z = SHA256(message)`
+2. Calculate: `u1 = z × s⁻¹ mod n`
+3. Calculate: `u2 = r × s⁻¹ mod n`
+4. Calculate point: `P = u1 × G + u2 × PublicKey`
+5. Signature valid if `P.x = r`
+
+**ECDSA Characteristics:**
+- Signature size: 70-72 bytes (DER encoded)
+- Requires secure random nonce `k`
+- Reusing `k` exposes private key!
+
+### Code: ECDSA Signing and Verification
+
+:::code-group
+```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
+use secp256k1::{Secp256k1, SecretKey, Message};
+use sha2::{Sha256, Digest};
+
+fn main() {
+    let secp = Secp256k1::new();
+    
+    // Private key
+    let private_key = SecretKey::from_slice(
+        &hex::decode("e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35").unwrap()
+    ).unwrap();
+    
+    // Message to sign
+    let message = b"Hello, Bitcoin!";
+    let message_hash = Sha256::digest(message);
+    let msg = Message::from_digest_slice(&message_hash).unwrap();
+    
+    // Sign
+    let signature = secp.sign_ecdsa(&msg, &private_key);
+    println!("Message Hash: {}", hex::encode(message_hash));
+    println!("Signature: {}", hex::encode(signature.serialize_compact()));
+    
+    // Verify
+    let public_key = private_key.public_key(&secp);
+    let is_valid = secp.verify_ecdsa(&msg, &signature, &public_key).is_ok();
+    println!("Signature valid: {}", is_valid);
+}
+```
+
+```python
+import hashlib
+from secp256k1 import PrivateKey
+
+# Private key (use secrets.token_bytes(32) for real applications)
+private_key = PrivateKey(bytes.fromhex(
+    "e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35"
+))
+
+# Message to sign
+message = b"Hello, Bitcoin!"
+message_hash = hashlib.sha256(message).digest()
+
+# Sign
+signature = private_key.ecdsa_sign(message_hash)
+signature_der = private_key.ecdsa_serialize(signature)
+
+print(f"Message Hash: {message_hash.hex()}")
+print(f"Signature (DER): {signature_der.hex()}")
+
+# Verify
+is_valid = private_key.pubkey.ecdsa_verify(message_hash, signature)
+print(f"Signature valid: {is_valid}")
+```
+
+```cpp
+#include <secp256k1.h>
+#include <openssl/sha.h>
+#include <cstring>
+
+int main() {
+    secp256k1_context* ctx = secp256k1_context_create(
+        SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY
+    );
+    
+    // Private key (initialize from hex in production)
+    unsigned char private_key[32];
+    // hex: "e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35"
+    
+    // Message hash
+    const char* message = "Hello, Bitcoin!";
+    unsigned char message_hash[SHA256_DIGEST_LENGTH];
+    SHA256((unsigned char*)message, strlen(message), message_hash);
+    
+    // Sign
+    secp256k1_ecdsa_signature signature;
+    secp256k1_ecdsa_sign(ctx, &signature, message_hash, private_key, NULL, NULL);
+    
+    // Serialize signature
+    unsigned char sig_serialized[64];
+    secp256k1_ecdsa_signature_serialize_compact(ctx, sig_serialized, &signature);
+    
+    // Get public key and verify
+    secp256k1_pubkey pubkey;
+    secp256k1_ec_pubkey_create(ctx, &pubkey, private_key);
+    int is_valid = secp256k1_ecdsa_verify(ctx, &signature, message_hash, &pubkey);
+    
+    secp256k1_context_destroy(ctx);
+    return 0;
+}
+```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2/ecdsa"
+)
+
+func main() {
+	// Private key
+	privateKeyBytes, _ := hex.DecodeString("e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35")
+	privateKey, _ := btcec.PrivKeyFromBytes(privateKeyBytes)
+
+	// Message to sign
+	message := []byte("Hello, Bitcoin!")
+	messageHash := sha256.Sum256(message)
+
+	// Sign
+	signature := ecdsa.Sign(privateKey, messageHash[:])
+	signatureBytes := signature.Serialize()
+
+	fmt.Printf("Message Hash: %s\n", hex.EncodeToString(messageHash[:]))
+	fmt.Printf("Signature: %s\n", hex.EncodeToString(signatureBytes))
+
+	// Verify
+	publicKey := privateKey.PubKey()
+	isValid := signature.Verify(messageHash[:], publicKey)
+	fmt.Printf("Signature valid: %v\n", isValid)
+}
+```
+
+```javascript
+const crypto = require('crypto');
+const secp256k1 = require('secp256k1');
+
+// Private key
+const privateKey = Buffer.from(
+  'e8f32e723decf4051aefac8e2c93c9c5b214313817cdb01a1494b917c8436b35', 'hex'
+);
+
+// Message to sign
+const message = Buffer.from('Hello, Bitcoin!');
+const messageHash = crypto.createHash('sha256').update(message).digest();
+
+// Sign
+const sigObj = secp256k1.ecdsaSign(messageHash, privateKey);
+console.log(`Message Hash: ${messageHash.toString('hex')}`);
+console.log(`Signature: ${Buffer.from(sigObj.signature).toString('hex')}`);
+
+// Verify
+const publicKey = secp256k1.publicKeyCreate(privateKey);
+const isValid = secp256k1.ecdsaVerify(sigObj.signature, messageHash, publicKey);
+console.log(`Signature valid: ${isValid}`);
+```
+:::
+
+---
+
+## Schnorr Signatures
+
+**Schnorr signatures** (BIP 340) are Bitcoin's signature scheme for [Taproot](/docs/glossary#taproot) (P2TR) outputs, activated in November 2021 (block 709,632). [Pieter Wuille](/docs/history/people#pieter-wuille) was a key designer of BIP 340.
+
+### Why Schnorr in Bitcoin?
+
+Schnorr offers simpler mathematics, stronger security proofs under standard assumptions, and **linearity**—the property that enables key and signature aggregation. Fixed 64-byte signatures reduce size and cost compared to variable-length ECDSA.
+
+### Schnorr vs ECDSA
+
+| Property | ECDSA | Schnorr (BIP 340) |
+|----------|-------|-------------------|
+| **Signature size** | 70–72 bytes (DER) | 64 bytes (fixed) |
+| **Encoding** | Variable (DER) | Fixed `r\|\|s` |
+| **Nonce** | Must be secret, unique; reuse leaks key | Derived (e.g. BIP 340 nonce); safer |
+| **Aggregation** | No | Yes (e.g. [MuSig](/docs/glossary#musig)) |
+| **Batch verification** | Per-signature | Faster batch mode |
+| **Security proofs** | More complex | Simpler, well-understood |
+
+### BIP 340 Format
+
+- **Signature**: 64 bytes = 32-byte `r` (x-coordinate of ephemeral point) concatenated with 32-byte `s` (scalar).
+- **Public key**: 32-byte **x-only** public key (y-coordinate omitted; implied by curve and x). No encoding variability.
+- **Tagged hashes**: BIP 340 uses domain-separated hashes (e.g. `BIP0340/challenge`, `BIP0340/aux`, `BIP0340/nonce`) to avoid cross-protocol misuse.
+
+### Schnorr in Bitcoin (BIP 340)
+
+![Schnorr Signature Equations](/images/docs/schnorr-equations.png)
+
+Schnorr signatures in Bitcoin follow BIP 340: they use the secp256k1 curve, x-only public keys, and tagged hashes for all hashing steps (signing, nonce derivation, challenge computation).
+
+### Code: BIP-340 Schnorr Tagged Hash
+
+:::code-group
+```rust
+// In Cargo.toml: hex = "0.4"
+use hex;
+use sha2::{Sha256, Digest};
+
+fn tagged_hash(tag: &str, msg: &[u8]) -> [u8; 32] {
+    let tag_hash = Sha256::digest(tag.as_bytes());
+    let mut hasher = Sha256::new();
+    hasher.update(&tag_hash);
+    hasher.update(&tag_hash);
+    hasher.update(msg);
+    hasher.finalize().into()
+}
+
+fn main() {
+    let challenge = tagged_hash("BIP0340/challenge", b"some data");
+    println!("Challenge hash: {}", hex::encode(challenge));
+}
+```
+
+```python
+import hashlib
+
+def tagged_hash(tag: str, msg: bytes) -> bytes:
+    """BIP-340 tagged hash for domain separation"""
+    tag_hash = hashlib.sha256(tag.encode()).digest()
+    return hashlib.sha256(tag_hash + tag_hash + msg).digest()
+
+# Example tags used in Bitcoin
+challenge = tagged_hash("BIP0340/challenge", b"some data")
+aux = tagged_hash("BIP0340/aux", b"random auxiliary data")
+nonce = tagged_hash("BIP0340/nonce", b"nonce derivation input")
+
+print(f"Challenge hash: {challenge.hex()}")
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <array>
+#include <string>
+#include <openssl/sha.h>
+
+using Hash256 = std::array<uint8_t, 32>;
+
+Hash256 sha256(const std::vector<uint8_t>& data) {
+    Hash256 hash;
+    SHA256(data.data(), data.size(), hash.data());
+    return hash;
+}
+
+Hash256 tagged_hash(const std::string& tag, const std::vector<uint8_t>& msg) {
+    // Hash the tag
+    std::vector<uint8_t> tag_bytes(tag.begin(), tag.end());
+    Hash256 tag_hash = sha256(tag_bytes);
+    
+    // Concatenate: tag_hash || tag_hash || msg
+    std::vector<uint8_t> data;
+    data.insert(data.end(), tag_hash.begin(), tag_hash.end());
+    data.insert(data.end(), tag_hash.begin(), tag_hash.end());
+    data.insert(data.end(), msg.begin(), msg.end());
+    
+    return sha256(data);
+}
+
+std::string to_hex(const Hash256& hash) {
+    std::string result;
+    for (uint8_t byte : hash) {
+        char buf[3];
+        snprintf(buf, sizeof(buf), "%02x", byte);
+        result += buf;
+    }
+    return result;
+}
+
+int main() {
+    std::vector<uint8_t> msg = {'s', 'o', 'm', 'e', ' ', 'd', 'a', 't', 'a'};
+    Hash256 challenge = tagged_hash("BIP0340/challenge", msg);
+    std::cout << "Challenge hash: " << to_hex(challenge) << std::endl;
+    return 0;
+}
+```
+
+```go
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+)
+
+func TaggedHash(tag string, msg []byte) [32]byte {
+	tagHash := sha256.Sum256([]byte(tag))
+	
+	// Concatenate: tag_hash || tag_hash || msg
+	data := make([]byte, 0, len(tagHash)*2+len(msg))
+	data = append(data, tagHash[:]...)
+	data = append(data, tagHash[:]...)
+	data = append(data, msg...)
+	
+	return sha256.Sum256(data)
+}
+
+func main() {
+	// Example tags used in Bitcoin
+	challenge := TaggedHash("BIP0340/challenge", []byte("some data"))
+	aux := TaggedHash("BIP0340/aux", []byte("random auxiliary data"))
+	nonce := TaggedHash("BIP0340/nonce", []byte("nonce derivation input"))
+	
+	fmt.Printf("Challenge hash: %s\n", hex.EncodeToString(challenge[:]))
+	fmt.Printf("Aux hash: %s\n", hex.EncodeToString(aux[:]))
+	fmt.Printf("Nonce hash: %s\n", hex.EncodeToString(nonce[:]))
+}
+```
+
+```javascript
+const crypto = require('crypto');
+
+function taggedHash(tag, msg) {
+    const tagHash = crypto.createHash('sha256').update(tag).digest();
+    return crypto.createHash('sha256')
+        .update(tagHash)
+        .update(tagHash)
+        .update(msg)
+        .digest();
+}
+
+// Example tags used in Bitcoin
+const challenge = taggedHash('BIP0340/challenge', Buffer.from('some data'));
+const aux = taggedHash('BIP0340/aux', Buffer.from('random auxiliary data'));
+const nonce = taggedHash('BIP0340/nonce', Buffer.from('nonce derivation input'));
+
+console.log(`Challenge hash: ${challenge.toString('hex')}`);
+```
+:::
+
+### Signature Aggregation
+
+Schnorr's linearity allows multiple signatures to be combined into one. **[MuSig](/docs/glossary#musig)** and **MuSig2** (BIP 327) let multiple signers produce a single Schnorr signature for a combined public key. Benefits:
+
+- **Privacy**: Multi-party spends look like single-signature spends on-chain.
+- **Efficiency**: One 64-byte signature instead of many; lower fees.
+- **Compatibility**: Aggregated output is a normal Taproot key-path spend.
+
+For how Taproot uses Schnorr and MuSig in practice, see [Taproot](/docs/bitcoin/taproot).
+
+### Relation to Taproot
+
+Taproot (BIPs 341, 342) uses Schnorr for all P2TR signatures. Key-path spends need only one Schnorr signature; script-path spends reveal one branch of a Merkle tree and still use Schnorr in [Tapscript](/docs/glossary#tapscript). That way, complex contracts can look identical to simple single-sig payments. For MAST, script paths, and address format, see [Taproot](/docs/bitcoin/taproot).
+
+### Resources
+
+- **[BIP 340: Schnorr Signatures](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)** — Signature specification
+- **[BIP 327: MuSig2](https://github.com/bitcoin/bips/blob/master/bip-0327.mediawiki)** — Multi-signature aggregation
 
 ---
 

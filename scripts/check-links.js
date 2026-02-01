@@ -216,20 +216,39 @@ async function runChecks() {
   // Check external links if requested
   let brokenExternalLinks = []
   if (checkExternal && externalLinks.size > 0) {
-    console.log(`Checking ${externalLinks.size} external link(s)...`)
     const uniqueUrls = [...externalLinks.keys()]
-    
+    console.log(`Checking ${uniqueUrls.length} external link(s)...\n`)
+
     // Check URLs with a small delay between each to be respectful
     for (let i = 0; i < uniqueUrls.length; i++) {
       const url = uniqueUrls[i]
+      const current = i + 1
+      const total = uniqueUrls.length
+      const occurrences = externalLinks.get(url)
+      const source = occurrences[0]
+      const sourceInfo = `${path.relative(process.cwd(), source.file)}:${source.lineNum}`
+
+      process.stdout.write(`[${current}/${total}] ${url}\n  -> ${sourceInfo} ... `)
       const result = await checkExternalUrl(url)
-      if (!result.success) {
-        brokenExternalLinks.push({ url, result, occurrences: externalLinks.get(url) })
+
+      if (result.success) {
+        const statusInfo = result.statusCode != null ? `HTTP ${result.statusCode}` : 'OK'
+        console.log(`\x1b[32m${statusInfo}\x1b[0m`)
+      } else {
+        const failInfo = result.statusCode != null
+          ? `HTTP ${result.statusCode}`
+          : (result.error || 'failed')
+        console.log(`\x1b[31mFAIL: ${failInfo}\x1b[0m`)
+        brokenExternalLinks.push({ url, result, occurrences })
       }
+
       // Small delay between checks (except for the last one)
       if (i < uniqueUrls.length - 1) {
         await new Promise(resolve => setTimeout(resolve, 100))
       }
+    }
+    if (uniqueUrls.length > 0) {
+      console.log('')
     }
   }
 

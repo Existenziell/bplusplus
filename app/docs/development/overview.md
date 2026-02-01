@@ -434,22 +434,7 @@ Start small, use testnet, and build incrementally. The Bitcoin development commu
 
 ## Related Topics
 
-### Infrastructure Topics (This Section)
-
-- [Installing Bitcoin](/docs/development/install-bitcoin) - Setup and installation guide
-- [Testing & Debugging](/docs/development/testing) - Testing strategies and debugging tools
-- [Test Networks](/docs/development/testnets) - Testnet, signet, and regtest
-- [Libraries & SDKs](/docs/development/libraries) - Language-specific Bitcoin libraries
-- [Node Types & Architecture](/docs/development/node-types) - Understanding different node configurations
-- [Bitcoin Core Internals](/docs/development/bitcoin-core-internals) - Reference implementation architecture
-
-### Practical Development
-
 - [Bitcoin Development](/docs/bitcoin-development) - Practical development tasks including PSBT, transaction construction, address generation, key management, blockchain monitoring, and more
-
-### Protocol & Other Topics
-
-- [RPC Guide](/docs/bitcoin/rpc) - Bitcoin Core RPC commands
 - [Wallet Development](/docs/wallets) - Building Bitcoin wallets
 - [Bitcoin Protocol](/docs/bitcoin) - Deep technical protocol documentation
 

@@ -145,11 +145,8 @@ The best memes lead to understanding. They're hooks that draw people in, but the
 
 ## Related Topics
 
-- [Bitcoin Fundamentals](/docs/fundamentals) - Core concepts that make Bitcoin memetic
 - [Cypherpunk Philosophy](/docs/fundamentals/cypherpunk-philosophy) - The philosophical foundation behind Bitcoin
-- [Monetary Properties](/docs/fundamentals/monetary-properties) - Why Bitcoin has value
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin enables trustless transactions
 - [Game Theory](/docs/fundamentals/game-theory) - How strategic decision-making secures Bitcoin
 - [Bitcoin Adoption](/docs/adoption) - Real-world examples of Bitcoin adoption
 - [Problems Bitcoin Solved](/docs/fundamentals/problems) - The fundamental challenges Bitcoin addresses
-- [Decentralization](/docs/fundamentals/decentralization) - Why Bitcoin can't be stopped

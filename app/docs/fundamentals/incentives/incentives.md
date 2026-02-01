@@ -301,5 +301,3 @@ Understanding incentives is essential for understanding Bitcoin because **incent
 - [Trust Model](/docs/fundamentals/trust-model) - How incentives minimize trust requirements
 - [Consensus Mechanism](/docs/bitcoin/consensus) - How incentives enable decentralized consensus
 - [Mining Economics](/docs/mining/economics) - Detailed analysis of miner incentives
-- [Problems Bitcoin Solved](/docs/fundamentals/problems) - How incentive alignment solves coordination problems
-- [Decentralization](/docs/fundamentals/decentralization) - How incentives maintain decentralization

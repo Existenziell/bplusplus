@@ -223,5 +223,4 @@ Understanding game theory is essential for understanding Bitcoin because it expl
 - [Consensus Mechanism](/docs/bitcoin/consensus) - How game theory enables decentralized consensus
 - [Mining Attacks](/docs/mining/attacks) - Game-theoretic analysis of attack scenarios
 - [Problems Bitcoin Solved](/docs/fundamentals/problems) - How game theory solves coordination problems
-- [Decentralization](/docs/fundamentals/decentralization) - How game theory maintains decentralization
 - [Bitcoin, the Meme](/docs/fundamentals/bitcoin-meme) - How game theory and memetic spread interact to drive adoption

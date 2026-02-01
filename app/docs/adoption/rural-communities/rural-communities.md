@@ -219,7 +219,6 @@ As Bitcoin infrastructure improves and adoption grows, more communities will gai
 - [Monetary Properties](/docs/fundamentals/monetary-properties) - Why Bitcoin has value
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin enables trustless transactions
 - [Wallets](/docs/wallets) - How to use Bitcoin wallets
-- [Decentralization](/docs/fundamentals/decentralization) - Why Bitcoin can't be stopped
 
 ---
 

@@ -292,7 +292,7 @@ Bitcoin is not just a technology; it's the practical implementation of a decades
 
 ---
 
-## Further Reading
+## Related Topics
 
 - [People in Bitcoin](/docs/history/people) - Learn about the cypherpunk figures who influenced Bitcoin
 - [Trust Model](/docs/fundamentals/trust-model) - How Bitcoin implements "trust code, not people"

@@ -21,6 +21,84 @@
       "slug": "explore-bitcoin-fundamentals"
     }
   ],
+  "/docs/fundamentals/faq": [
+    {
+      "title": "What is Bitcoin?",
+      "slug": "what-is-bitcoin"
+    },
+    {
+      "title": "Who created Bitcoin and why?",
+      "slug": "who-created-bitcoin-and-why"
+    },
+    {
+      "title": "Are there physical Bitcoins?",
+      "slug": "are-there-physical-bitcoins"
+    },
+    {
+      "title": "What does \"digital gold\" mean?",
+      "slug": "what-does-digital-gold-mean"
+    },
+    {
+      "title": "Where do bitcoins come from? How are new ones created?",
+      "slug": "where-do-bitcoins-come-from-how-are-new-ones-created"
+    },
+    {
+      "title": "Why is there a limit of 21 million Bitcoins?",
+      "slug": "why-is-there-a-limit-of-21-million-bitcoins"
+    },
+    {
+      "title": "What gives Bitcoin its value?",
+      "slug": "what-gives-bitcoin-its-value"
+    },
+    {
+      "title": "What is the blockchain?",
+      "slug": "what-is-the-blockchain"
+    },
+    {
+      "title": "What is mining?",
+      "slug": "what-is-mining"
+    },
+    {
+      "title": "Why is it called proof of work?",
+      "slug": "why-is-it-called-proof-of-work"
+    },
+    {
+      "title": "What does \"HODL\" mean?",
+      "slug": "what-does-hodl-mean"
+    },
+    {
+      "title": "What is a wallet?",
+      "slug": "what-is-a-wallet"
+    },
+    {
+      "title": "Does my wallet hold Bitcoin?",
+      "slug": "does-my-wallet-hold-bitcoin"
+    },
+    {
+      "title": "Is Bitcoin anonymous?",
+      "slug": "is-bitcoin-anonymous"
+    },
+    {
+      "title": "Can Bitcoin be hacked?",
+      "slug": "can-bitcoin-be-hacked"
+    },
+    {
+      "title": "Why does Bitcoin use so much energy?",
+      "slug": "why-does-bitcoin-use-so-much-energy"
+    },
+    {
+      "title": "What's the difference between Bitcoin (BTC) and Bitcoin Cash (BCH)?",
+      "slug": "whats-the-difference-between-bitcoin-btc-and-bitcoin-cash-bch"
+    },
+    {
+      "title": "How is Bitcoin different than \"crypto\"?",
+      "slug": "how-is-bitcoin-different-than-crypto"
+    },
+    {
+      "title": "I hear about \"Web3\" and \"DeFi\", is that the same as Bitcoin?",
+      "slug": "i-hear-about-web3-and-defi-is-that-the-same-as-bitcoin"
+    }
+  ],
   "/docs/fundamentals/problems": [
     {
       "title": "The Core Challenges",

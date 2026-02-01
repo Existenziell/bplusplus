@@ -1,10 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useMemo } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { sections } from '@/app/utils/navigation'
-import { SearchIcon, DocumentIcon } from '@/app/components/Icons'
+import { SearchIcon } from '@/app/components/Icons'
+import { SearchResultItem } from '@/app/components/SearchResultItem'
+import { SearchResultsStatus } from '@/app/components/SearchResultsStatus'
 import { MIN_QUERY_LEN, type SearchResult } from '@/app/utils/searchLogic'
 import { useSearch } from '@/app/hooks/useSearch'
 import { useKeyboardNavigation } from '@/app/hooks/useKeyboardNavigation'
@@ -137,15 +138,20 @@ export default function DocsSearch() {
       </div>
 
       {/* Search Results */}
-      {loading && (
-        <div className="py-12 text-center text-secondary text-sm">Searching…</div>
-      )}
-      {!loading && hasQuery && results.length === 0 && (
-        <div className="py-12 text-center">
-          <p className="text-secondary text-sm mb-2">No results found.</p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">Try different keywords.</p>
-        </div>
-      )}
+      {(() => {
+        const status = (
+          <SearchResultsStatus
+            loading={loading}
+            queryLength={query.trim().length}
+            resultsLength={results.length}
+            noResultsMessage="No results found."
+            noResultsSubtitle="Try different keywords."
+            className="py-12 text-center"
+          />
+        )
+        if (status != null && (loading || hasQuery)) return status
+        return null
+      })()}
       {!loading && hasQuery && results.length > 0 && (
         <div className="space-y-6">
           {Object.entries(groupedResults).map(([sectionId, sectionResults]) => {
@@ -161,43 +167,30 @@ export default function DocsSearch() {
                   )}
                 </div>
                 <ul className="space-y-2">
-                  {sectionResults.map((result, _resultIndex) => {
-                    // Find the index in the flattened allItems array
+                  {sectionResults.map((result) => {
                     const globalIndex = allItems.findIndex(item => item.path === result.path && item.title === result.title)
                     const isSelected = globalIndex === selectedIndex
                     return (
-                      <li key={result.path}>
-                        <Link
-                          ref={isSelected ? (selectedItemRef as React.RefObject<HTMLAnchorElement>) : null}
-                          href={result.path}
-                          onMouseEnter={() => setSelectedIndex(globalIndex)}
-                          className={`block p-3 rounded-lg border transition-colors group no-underline hover:no-underline ${
-                            isSelected
-                              ? 'bg-btc/20 dark:bg-btc/25 border-btc'
-                              : 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-btc'
-                          }`}
-                        >
-                          <div className="flex items-start gap-3">
-                            <DocumentIcon className={`flex-shrink-0 w-5 h-5 mt-0.5 transition-colors ${
-                              isSelected
-                                ? 'text-btc'
-                                : 'text-gray-400 dark:text-gray-500 group-hover:text-btc'
-                            }`} />
-                            <div className="min-w-0 flex-1">
-                              <div className={`font-medium transition-colors ${
-                                isSelected
-                                  ? 'text-btc'
-                                  : 'text-gray-900 dark:text-gray-200 group-hover:text-btc'
-                              }`}>
-                                {result.title}
-                              </div>
-                              <div className="text-sm text-secondary mt-1 line-clamp-2">
-                                {result.snippet}
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      </li>
+                      <SearchResultItem
+                        key={result.path}
+                        result={result}
+                        isSelected={isSelected}
+                        selectedItemRef={selectedItemRef as React.RefObject<HTMLAnchorElement>}
+                        onMouseEnter={() => setSelectedIndex(globalIndex)}
+                        refTarget="a"
+                        linkClassName={`block p-3 rounded-lg border transition-colors group no-underline hover:no-underline ${
+                          isSelected
+                            ? 'bg-btc/20 dark:bg-btc/25 border-btc'
+                            : 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-btc'
+                        }`}
+                        iconClassName={`flex-shrink-0 w-5 h-5 transition-colors ${
+                          isSelected ? 'text-btc' : 'text-gray-400 dark:text-gray-500 group-hover:text-btc'
+                        }`}
+                        snippetClassName="line-clamp-2"
+                        titleClassName={`transition-colors ${
+                          isSelected ? 'text-btc' : 'text-gray-900 dark:text-gray-200 group-hover:text-btc'
+                        }`}
+                      />
                     )
                   })}
                 </ul>
@@ -225,42 +218,29 @@ export default function DocsSearch() {
                 </div>
                 <ul className="space-y-2">
                   {sectionTopics.map((topic) => {
-                    // Find the index in the flattened allItems array
                     const globalIndex = allItems.findIndex(item => item.path === topic.path && item.title === topic.title)
                     const isSelected = globalIndex === selectedIndex
                     return (
-                      <li key={topic.path}>
-                        <Link
-                          ref={isSelected ? (selectedItemRef as React.RefObject<HTMLAnchorElement>) : null}
-                          href={topic.path}
-                          onMouseEnter={() => setSelectedIndex(globalIndex)}
-                          className={`block p-3 rounded-lg border transition-colors group no-underline hover:no-underline ${
-                            isSelected
-                              ? 'bg-btc/20 dark:bg-btc/25 border-btc'
-                              : 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-btc'
-                          }`}
-                        >
-                          <div className="flex items-start gap-3">
-                            <DocumentIcon className={`flex-shrink-0 w-5 h-5 mt-0.5 transition-colors ${
-                              isSelected
-                                ? 'text-btc'
-                                : 'text-gray-400 dark:text-gray-500 group-hover:text-btc'
-                            }`} />
-                            <div className="min-w-0 flex-1">
-                              <div className={`font-medium transition-colors ${
-                                isSelected
-                                  ? 'text-btc'
-                                  : 'text-gray-900 dark:text-gray-200 group-hover:text-btc'
-                              }`}>
-                                {topic.title}
-                              </div>
-                              <div className="text-sm text-secondary mt-1 line-clamp-2">
-                                {topic.snippet}
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      </li>
+                      <SearchResultItem
+                        key={topic.path}
+                        result={topic}
+                        isSelected={isSelected}
+                        selectedItemRef={selectedItemRef as React.RefObject<HTMLAnchorElement>}
+                        onMouseEnter={() => setSelectedIndex(globalIndex)}
+                        refTarget="a"
+                        linkClassName={`block p-3 rounded-lg border transition-colors group no-underline hover:no-underline ${
+                          isSelected
+                            ? 'bg-btc/20 dark:bg-btc/25 border-btc'
+                            : 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-btc'
+                        }`}
+                        iconClassName={`flex-shrink-0 w-5 h-5 transition-colors ${
+                          isSelected ? 'text-btc' : 'text-gray-400 dark:text-gray-500 group-hover:text-btc'
+                        }`}
+                        snippetClassName="line-clamp-2"
+                        titleClassName={`transition-colors ${
+                          isSelected ? 'text-btc' : 'text-gray-900 dark:text-gray-200 group-hover:text-btc'
+                        }`}
+                      />
                     )
                   })}
                 </ul>

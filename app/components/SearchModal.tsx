@@ -3,19 +3,11 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
-import {
-  SearchIcon,
-  XIcon,
-  DocumentIcon,
-  BookOpenIcon,
-  UserIcon,
-  TerminalIcon,
-  StackLabIcon,
-  BlockVisualizerIcon,
-  HashIcon,
-  CalculatorIcon,
-} from '@/app/components/Icons'
+import { SearchIcon, XIcon, BookOpenIcon } from '@/app/components/Icons'
+import { SearchResultItem } from '@/app/components/SearchResultItem'
+import { SearchResultsStatus } from '@/app/components/SearchResultsStatus'
 import { sections } from '@/app/utils/navigation'
+import { getSearchResultSectionLabel } from '@/app/utils/searchResultIcon'
 import { MIN_QUERY_LEN } from '@/app/utils/searchLogic'
 import { useSearch } from '@/app/hooks/useSearch'
 import { useKeyboardNavigation } from '@/app/hooks/useKeyboardNavigation'
@@ -70,24 +62,6 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   const sectionTitle = (id: string) => sections[id as keyof typeof sections]?.title ?? id
 
-  const toolPaths = new Set([
-    '/terminal',
-    '/stack-lab',
-    '/block-visualizer',
-    '/tools/hash',
-    '/docs/fundamentals/denominations',
-  ])
-  const isTool = (path: string) => toolPaths.has(path)
-
-  const toolIconByPath: Record<string, React.ComponentType<{ className?: string }>> = {
-    '/terminal': TerminalIcon,
-    '/stack-lab': StackLabIcon,
-    '/block-visualizer': BlockVisualizerIcon,
-    '/tools/hash': HashIcon,
-    '/docs/fundamentals/denominations': CalculatorIcon,
-  }
-  const ToolIcon = (path: string) => toolIconByPath[path]
-
   return (
     <div
       className="modal-overlay flex items-start justify-center pt-[12vh] px-4"
@@ -122,7 +96,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             autoCorrect="off"
             aria-label="Search"
           />
-          <code className="code-inline px-3">
+          <code className="code-inline py-0 hidden md:inline">
             <span className="text-lg inline-block align-middle">⌘</span> + K
           </code>
           <button
@@ -135,65 +109,39 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           </button>
         </div>
         <div className="max-h-[min(60vh,400px)] overflow-y-auto">
-          {loading && (
-            <div className="py-8 text-center text-secondary text-sm">Searching…</div>
-          )}
-          {!loading && query.length >= MIN_QUERY_LEN && results.length === 0 && (
-            <div className="py-8 text-center text-secondary text-sm">No results.</div>
-          )}
-          {!loading && query.length > 0 && query.length < MIN_QUERY_LEN && (
-            <div className="py-6 text-center text-secondary text-sm">
-              Type at least {MIN_QUERY_LEN} characters.
-            </div>
-          )}
-          {!loading && results.length > 0 && (
+          {loading ||
+          (query.length > 0 && query.length < MIN_QUERY_LEN) ||
+          (query.length >= MIN_QUERY_LEN && results.length === 0) ? (
+            <SearchResultsStatus
+              loading={loading}
+              queryLength={query.length}
+              resultsLength={results.length}
+              showMinChars
+              className="py-8 text-center text-secondary text-sm"
+            />
+          ) : results.length > 0 ? (
             <ul className="py-2" role="listbox">
               {results.map((r, i) => (
-                <li
+                <SearchResultItem
                   key={r.path + r.title}
-                  ref={i === selectedIndex ? (selectedItemRef as React.RefObject<HTMLLIElement>) : null}
-                  role="option"
-                  aria-selected={i === selectedIndex}
+                  result={r}
+                  isSelected={i === selectedIndex}
+                  selectedItemRef={selectedItemRef as React.RefObject<HTMLLIElement>}
                   onMouseEnter={() => setSelectedIndex(i)}
-                >
-                  <Link
-                    href={r.path}
-                    onClick={onClose}
-                    className={`flex gap-3 px-4 py-2.5 text-left transition-colors no-underline hover:no-underline ${
-                      i === selectedIndex
-                        ? 'bg-btc/20 dark:bg-btc/25 text-gray-900 dark:text-gray-200'
-                        : 'text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    }`}
-                  >
-                    <span
-                      className="flex-shrink-0 text-gray-500 dark:text-gray-400 mt-1"
-                      aria-hidden
-                    >
-                      {r.path.startsWith('/docs/glossary#') ? (
-                        <BookOpenIcon className="w-4 h-4" />
-                      ) : r.path.startsWith('/docs/history/people#') ? (
-                        <UserIcon className="w-4 h-4" />
-                      ) : isTool(r.path) ? (
-                        (() => {
-                          const Icon = ToolIcon(r.path)
-                          return Icon ? <Icon className="w-4 h-4" /> : <DocumentIcon className="w-4 h-4" />
-                        })()
-                      ) : (
-                        <DocumentIcon className="w-4 h-4" />
-                      )}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="font-medium">{r.title}</div>
-                      <div className="text-sm text-secondary truncate">{r.snippet}</div>
-                      <div className="text-xs text-gray-500 dark:text-gray-500 mt-0.5">
-                        {r.path.startsWith('/docs/history/people#') ? 'People' : isTool(r.path) ? 'Tool' : sectionTitle(r.section)}
-                      </div>
-                    </div>
-                  </Link>
-                </li>
+                  onClick={onClose}
+                  refTarget="li"
+                  linkClassName={`flex gap-3 px-4 py-2.5 text-left transition-colors no-underline hover:no-underline ${
+                    i === selectedIndex
+                      ? 'bg-btc/20 dark:bg-btc/25 text-gray-900 dark:text-gray-200'
+                      : 'text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  }`}
+                  iconClassName="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  sectionLabel={getSearchResultSectionLabel(r.path, r.section, sectionTitle)}
+                  snippetClassName="truncate"
+                />
               ))}
             </ul>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

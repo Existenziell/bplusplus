@@ -147,7 +147,7 @@ These BIPs define standards for wallets, key derivation, and seed phrases.
 - **Status**: Proposed (widely adopted)
 - **Year**: 2014
 - **Description**: Defines the [derivation path](/docs/glossary#derivation-path) structure for HD wallets: `m/purpose'/coin_type'/account'/change/address_index`
-- **Path Example**: `m/44'/0'/0'/0/0` for first Bitcoin [address](/docs/glossary#address).
+- **Path**: `m/44'/0'/0'/0/0` for first Bitcoin [address](/docs/glossary#address).
 
 ### BIP 49 - Derivation Scheme for P2WPKH-nested-in-P2SH Addresses
 

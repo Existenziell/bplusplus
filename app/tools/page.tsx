@@ -39,7 +39,7 @@ const tools = [
   {
     href: '/docs/fundamentals/denominations',
     title: 'Denomination Calculator',
-    description: 'Convert between satoshis, BTC, and other units. Available on the Denominations doc page.',
+    description: 'Convert between satoshis, BTC, and other units. The Denominations calculator helps visualize the size of different units.',
   },
 ]
 

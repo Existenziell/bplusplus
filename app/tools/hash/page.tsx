@@ -91,12 +91,6 @@ export default function HashToolPage() {
   return (
     <DocsLayoutWrapper defaultSidebarCollapsed={true}>
       <div className="mb-8">
-        <p className="text-secondary text-center mb-4">
-          <Link href="/tools" className="text-btc hover:underline">
-            Tools
-          </Link>
-          {' / Hash'}
-        </p>
         <h1 className="heading-page text-center">Hash Tool</h1>
         <p className="text-secondary text-center max-w-2xl mx-auto">
           Compute SHA-256, HASH256 (double SHA-256), and HASH160 (RIPEMD-160 of SHA-256). Used in
@@ -173,18 +167,6 @@ export default function HashToolPage() {
             </output>
           </div>
         </div>
-
-        <p className="text-secondary text-sm">
-          Used in Bitcoin: Script (OP_SHA256, OP_HASH256, OP_HASH160), block hashes, TXID, addresses.{' '}
-          <Link href="/docs/bitcoin/script" className="text-btc hover:underline">
-            Script
-          </Link>
-          ,{' '}
-          <Link href="/docs/bitcoin/blocks" className="text-btc hover:underline">
-            Blocks
-          </Link>
-          .
-        </p>
       </div>
     </DocsLayoutWrapper>
   )

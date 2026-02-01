@@ -3,7 +3,18 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
-import { SearchIcon, XIcon, DocumentIcon, BookOpenIcon, UserIcon } from '@/app/components/Icons'
+import {
+  SearchIcon,
+  XIcon,
+  DocumentIcon,
+  BookOpenIcon,
+  UserIcon,
+  TerminalIcon,
+  StackLabIcon,
+  BlockVisualizerIcon,
+  HashIcon,
+  CalculatorIcon,
+} from '@/app/components/Icons'
 import { sections } from '@/app/utils/navigation'
 import { MIN_QUERY_LEN } from '@/app/utils/searchLogic'
 import { useSearch } from '@/app/hooks/useSearch'
@@ -58,6 +69,24 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   if (!isOpen) return null
 
   const sectionTitle = (id: string) => sections[id as keyof typeof sections]?.title ?? id
+
+  const toolPaths = new Set([
+    '/terminal',
+    '/stack-lab',
+    '/block-visualizer',
+    '/tools/hash',
+    '/docs/fundamentals/denominations',
+  ])
+  const isTool = (path: string) => toolPaths.has(path)
+
+  const toolIconByPath: Record<string, React.ComponentType<{ className?: string }>> = {
+    '/terminal': TerminalIcon,
+    '/stack-lab': StackLabIcon,
+    '/block-visualizer': BlockVisualizerIcon,
+    '/tools/hash': HashIcon,
+    '/docs/fundamentals/denominations': CalculatorIcon,
+  }
+  const ToolIcon = (path: string) => toolIconByPath[path]
 
   return (
     <div
@@ -137,13 +166,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     }`}
                   >
                     <span
-                      className="flex-shrink-0 text-gray-500 dark:text-gray-400 mt-0.5"
+                      className="flex-shrink-0 text-gray-500 dark:text-gray-400 mt-1"
                       aria-hidden
                     >
                       {r.path.startsWith('/docs/glossary#') ? (
                         <BookOpenIcon className="w-4 h-4" />
                       ) : r.path.startsWith('/docs/history/people#') ? (
                         <UserIcon className="w-4 h-4" />
+                      ) : isTool(r.path) ? (
+                        (() => {
+                          const Icon = ToolIcon(r.path)
+                          return Icon ? <Icon className="w-4 h-4" /> : <DocumentIcon className="w-4 h-4" />
+                        })()
                       ) : (
                         <DocumentIcon className="w-4 h-4" />
                       )}
@@ -152,7 +186,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       <div className="font-medium">{r.title}</div>
                       <div className="text-sm text-secondary truncate">{r.snippet}</div>
                       <div className="text-xs text-gray-500 dark:text-gray-500 mt-0.5">
-                        {r.path.startsWith('/docs/history/people#') ? 'People' : sectionTitle(r.section)}
+                        {r.path.startsWith('/docs/history/people#') ? 'People' : isTool(r.path) ? 'Tool' : sectionTitle(r.section)}
                       </div>
                     </div>
                   </Link>

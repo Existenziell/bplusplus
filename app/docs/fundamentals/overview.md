@@ -65,18 +65,6 @@ At a high level: you hold [private keys](/docs/glossary#private-key) that contro
 
 ---
 
-## First steps
-
-**Choosing a wallet:** Pick a [wallet](/docs/wallets) that fits your use case (mobile, desktop, or hardware). Non-custodial wallets give you full control; custodial options (e.g. exchanges) hold keys for you and are easier to start with but less secure. See [Trust Model](/docs/fundamentals/trust-model) for the trade-offs.
-
-**Getting bitcoin:** You can buy bitcoin on [exchanges](/docs/glossary#exchange) (often after identity checks) or at some ATMs. Withdraw to your own wallet for self-custody.
-
-**Sending a transaction:** Create a payment in your wallet (recipient address and amount). The wallet estimates [fees](/docs/bitcoin/transaction-fees); higher fees usually mean faster inclusion. After you broadcast, the transaction receives confirmations as new blocks are mined. See [Transaction Lifecycle](/docs/bitcoin/transaction-lifecycle) and [Denominations](/docs/fundamentals/denominations) for amounts and units.
-
-**Security basics:** Back up your [seed phrase](/docs/glossary#seed-phrase) or private keys and keep backups offline and private. Prefer self-custody when you can; if you use an exchange, withdraw to your own wallet for larger amounts. Beware of phishing and fake sites. For more, see [Wallet Security & Self-Custody](/docs/investment/wallet-security).
-
----
-
 ## Technical Innovation
 
 ### Proof-of-Work

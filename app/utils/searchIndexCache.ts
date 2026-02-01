@@ -39,7 +39,11 @@ export function loadSearchIndex(): Promise<IndexEntry[]> {
   // Start loading
   cache.loading = true
   cache.error = null
-  cache.promise = fetch(withBuildId('/data/search-index.json'))
+  const indexUrl =
+    process.env.NODE_ENV === 'development'
+      ? '/data/search-index.json?dev=' + Date.now()
+      : withBuildId('/data/search-index.json')
+  cache.promise = fetch(indexUrl)
     .then((res) => {
       if (!res.ok) throw new Error('Failed to load search index')
       return res.json()

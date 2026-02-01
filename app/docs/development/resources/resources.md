@@ -22,7 +22,3 @@ Curated links to Bitcoin development tools, node software, hardware, explorers, 
 
 - **[BitcoinDev Tools](/tools)** – CLI terminal, Stack Lab, Block Visualizer, Hash tool.
 - **[Learn Me A Bitcoin – Tools](https://learnmeabitcoin.com/tools)** – Hashing, keys, transaction builder, and more.
-
-## Further Curation
-
-For a larger directory of Bitcoin and Lightning resources (by category and language), see [BitcoinDev.org](https://bitcoindev.org).

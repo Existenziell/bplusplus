@@ -9,10 +9,6 @@
       "slug": "how-bitcoin-works"
     },
     {
-      "title": "First steps",
-      "slug": "first-steps"
-    },
-    {
       "title": "Technical Innovation",
       "slug": "technical-innovation"
     },
@@ -2921,10 +2917,6 @@
     {
       "title": "Utilities",
       "slug": "utilities"
-    },
-    {
-      "title": "Further Curation",
-      "slug": "further-curation"
     }
   ],
   "/docs/bitcoin-development": [

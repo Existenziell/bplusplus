@@ -19,7 +19,10 @@
       "terminal",
       "bitcoin core",
       "getblock",
-      "getblockchaininfo"
+      "getblockchaininfo",
+      "getblockhash",
+      "getrawtransaction",
+      "bitcoin cli"
     ]
   },
   {
@@ -33,7 +36,12 @@
       "opcode",
       "stack",
       "script builder",
-      "interpreter"
+      "interpreter",
+      "stacklab",
+      "stack lab",
+      "script lab",
+      "playground",
+      "bitcoin script"
     ]
   },
   {
@@ -49,7 +57,31 @@
       "blockchain visualization",
       "transaction treemap",
       "block explorer",
-      "block data"
+      "blockexplorer",
+      "block data",
+      "blocks"
+    ]
+  },
+  {
+    "path": "/tools/hash",
+    "title": "Hash Tool",
+    "section": "tools",
+    "body": "Hash Tool. Compute SHA-256, HASH256 (double SHA-256), and HASH160 in the browser. Used in Bitcoin for block hashes, TXIDs, addresses, and script. No installation required.",
+    "keywords": [
+      "hash",
+      "sha256",
+      "sha-256",
+      "hash256",
+      "hash160",
+      "ripemd160",
+      "double sha256",
+      "txid",
+      "address",
+      "calculator",
+      "hash calculator",
+      "sha256 calculator",
+      "hash256 calculator",
+      "hash160 calculator"
     ]
   },
   {
@@ -268,7 +300,18 @@
     "path": "/docs/fundamentals/denominations",
     "title": "Denominations",
     "section": "fundamentals",
-    "body": "Denominations Bitcoin is highly divisible: one bitcoin (BTC) equals 100 million of the smallest on-chain unit, the satoshi (sat). This design supports both large transfers and tiny amounts, and it scales as the nominal value of each unit changes over time. Common units include satoshis for small amounts, bits (µBTC, or one millionth of a BTC) for everyday thinking, and millibits (mBTC) or whole BTC for larger sums. Understanding how these units relate helps when reading fees, block rewards, and "
+    "body": "Denominations Bitcoin is highly divisible: one bitcoin (BTC) equals 100 million of the smallest on-chain unit, the satoshi (sat). This design supports both large transfers and tiny amounts, and it scales as the nominal value of each unit changes over time. Common units include satoshis for small amounts, bits (µBTC, or one millionth of a BTC) for everyday thinking, and millibits (mBTC) or whole BTC for larger sums. Understanding how these units relate helps when reading fees, block rewards, and ",
+    "keywords": [
+      "calculator",
+      "denomination calculator",
+      "convert",
+      "sats",
+      "satoshis",
+      "btc",
+      "units",
+      "satoshi",
+      "denominations"
+    ]
   },
   {
     "path": "/docs/fundamentals/incentives",

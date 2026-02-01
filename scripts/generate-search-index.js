@@ -108,6 +108,7 @@ const pathKeywords = {
   '/docs/bitcoin-development/psbt': ['psbt', 'partially signed bitcoin transaction', 'partially signed bitcoin transactions'],
   '/docs/history/bips': ['bip', 'bips', 'bitcoin improvement proposal', 'bitcoin improvement proposals'],
   '/docs/development/testnets': ['testnet', 'test net', 'testnet3', 'regtest', 'signet'],
+  '/docs/fundamentals/denominations': ['calculator', 'denomination calculator', 'convert', 'sats', 'satoshis', 'btc', 'units', 'satoshi', 'denominations'],
 }
 
 // Optional keywords per glossary term: alternative spellings and synonyms
@@ -162,7 +163,7 @@ const staticPages = [
     section: 'terminal',
     body:
       'Bitcoin CLI Terminal. Run Bitcoin RPC commands in the browser. getblockchaininfo, getblockcount, getblock, getblockhash, getrawtransaction, getmempoolinfo, getnetworkinfo, help. Connected to a public Bitcoin node. No node setup required.',
-    keywords: ['rpc', 'cli', 'terminal', 'bitcoin core', 'getblock', 'getblockchaininfo'],
+    keywords: ['rpc', 'cli', 'terminal', 'bitcoin core', 'getblock', 'getblockchaininfo', 'getblockhash', 'getrawtransaction', 'bitcoin cli'],
   },
   {
     path: '/stack-lab',
@@ -170,7 +171,7 @@ const staticPages = [
     section: 'stack-lab',
     body:
       'Stack Lab. Interactive Bitcoin Script playground. Build and execute locking and unlocking scripts. Drag and drop OP codes. Learn Bitcoin Script, P2PKH, multisig, hash locks. Script interpreter, stack visualization.',
-    keywords: ['script', 'op codes', 'opcode', 'stack', 'script builder', 'interpreter'],
+    keywords: ['script', 'op codes', 'opcode', 'stack', 'script builder', 'interpreter', 'stacklab', 'stack lab', 'script lab', 'playground', 'bitcoin script'],
   },
   {
     path: '/block-visualizer',
@@ -178,7 +179,15 @@ const staticPages = [
     section: 'block-visualizer',
     body:
       'Block Visualizer. Live Bitcoin blockchain visualization showing the latest block with transaction treemap. Explore transactions, fee rates, and block data in real-time. Interactive transaction treemap. Each rectangle represents a transaction, sized by vBytes, value, or fee. Click on transactions to view inputs and outputs.',
-    keywords: ['visualizer', 'visualiser', 'block visualizer', 'block visualiser', 'blockchain visualization', 'transaction treemap', 'block explorer', 'block data'],
+    keywords: ['visualizer', 'visualiser', 'block visualizer', 'block visualiser', 'blockchain visualization', 'transaction treemap', 'block explorer', 'blockexplorer', 'block data', 'blocks'],
+  },
+  {
+    path: '/tools/hash',
+    title: 'Hash Tool',
+    section: 'tools',
+    body:
+      'Hash Tool. Compute SHA-256, HASH256 (double SHA-256), and HASH160 in the browser. Used in Bitcoin for block hashes, TXIDs, addresses, and script. No installation required.',
+    keywords: ['hash', 'sha256', 'sha-256', 'hash256', 'hash160', 'ripemd160', 'double sha256', 'txid', 'address', 'calculator', 'hash calculator', 'sha256 calculator', 'hash256 calculator', 'hash160 calculator'],
   },
   {
     path: '/author',

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import DocsLayoutWrapper from '@/app/components/DocsLayoutWrapper'
 import { SITE_URL } from '@/app/utils/metadata'
-import { TerminalIcon, StackLabIcon } from '@/app/components/Icons'
+import { TerminalIcon, StackLabIcon, BlockVisualizerIcon, HashIcon, CalculatorIcon } from '@/app/components/Icons'
 
 export const metadata: Metadata = {
   title: 'Tools | BitcoinDev',
@@ -63,6 +63,9 @@ export default function ToolsPage() {
               <div className="flex items-center gap-3 mb-2">
                 {tool.href === '/terminal' && <TerminalIcon className="w-6 h-6 shrink-0 text-btc" />}
                 {tool.href === '/stack-lab' && <StackLabIcon className="w-6 h-6 shrink-0 text-btc" />}
+                {tool.href === '/block-visualizer' && <BlockVisualizerIcon className="w-6 h-6 shrink-0 text-btc" />}
+                {tool.href === '/tools/hash' && <HashIcon className="w-6 h-6 shrink-0 text-btc" />}
+                {tool.href === '/docs/fundamentals/denominations' && <CalculatorIcon className="w-6 h-6 shrink-0 text-btc" />}
                 <h2 className="text-lg font-semibold">{tool.title}</h2>
               </div>
               <p className="text-secondary text-sm">{tool.description}</p>
